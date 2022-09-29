@@ -6,7 +6,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center top-heading">
-                    <h2>Add  Area of Expertise</h2>
+                    <h2>Edit  Area of Expertise</h2>
                 </div>
             </div>
             <div class="row">
@@ -18,12 +18,12 @@
                             @csrf
                             <div class="tile-body">
                                 <div class="form-group">
-                                    <label class="control-label" for="degree">Degree <span class="m-l-5 text-danger">
+                                    <label class="control-label" for="degree">Speciality <span class="m-l-5 text-danger">
                                             *</span></label>
                                             <select class="form-control" name="speciality_id">
                                                 <option value="" hidden selected>Select...</option>
                                                 @foreach ($speciality as $index => $item)
-                                                    <option value="{{ $item->id }}"{{ ($expertise->speciality_id==$item->id) ? 'selected' : '' }}>{{ $item->name }}</option>
+                                                    <option value="{{ $item->id }}"{{ ($expertise->speciality_id==$item->id) ? 'selected' : '' }}>{{ ucwords($item->name) }}</option>
                                                 @endforeach
                                         </select>
 

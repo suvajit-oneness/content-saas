@@ -1,3 +1,4 @@
+
 <?php
 
 namespace App\Providers;
@@ -63,6 +64,14 @@ use App\Contracts\CertificationContract;
 use App\Repositories\CertificationRepository;
 use App\Contracts\TestimonialContract;
 use App\Repositories\TestimonialRepository;
+use App\Contracts\SupportContract;
+use App\Repositories\SupportRepository;
+use App\Contracts\SupportWidgetContract;
+use App\Repositories\SupportWidgetRepository;
+use App\Contracts\SupportFaqCategoryContract;
+use App\Repositories\SupportFaqCategoryRepository;
+use App\Contracts\SupportFaqContract;
+use App\Repositories\SupportFaqRepository;
 class RepositoryServiceProvider extends ServiceProvider
 {
     protected $repositories = [
@@ -96,6 +105,10 @@ class RepositoryServiceProvider extends ServiceProvider
         ClientContract::class                    =>            ClientRepository::class,
         CertificationContract::class             =>            CertificationRepository::class,
         TestimonialContract::class               =>            TestimonialRepository::class,
+        SupportContract::class                   =>            SupportRepository::class,
+        SupportWidgetContract::class             =>            SupportWidgetRepository::class,
+        SupportFaqCategoryContract::class        =>            SupportFaqCategoryRepository::class,
+        SupportFaqContract::class                =>            SupportFaqRepository::class,
 
     ];
 

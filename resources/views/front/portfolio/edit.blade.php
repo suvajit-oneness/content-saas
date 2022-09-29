@@ -174,7 +174,6 @@
                                 </tr>
                                 <tr>
                                     <td>Institution Name</td>
-
                                     <td>{{ $item->college_name }}</td>
                                     <td></td>
                                 </tr>

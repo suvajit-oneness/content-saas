@@ -367,7 +367,7 @@ Route::group(['prefix' => 'admin'], function () {
             Route::post('/update', 'Admin\SupportFaqController@update')->name('admin.support.faq.update');
             Route::get('/{id}/delete', 'Admin\SupportFaqController@delete')->name('admin.support.faq.delete');
             Route::post('updateStatus', 'Admin\SupportFaqController@updateStatus')->name('admin.support.faq.updateStatus');
-            Route::get('/{id}/details', 'Admin\SupportFaqController@details')->name('admin.support.faq.etails');
+            Route::get('/{id}/details', 'Admin\SupportFaqController@details')->name('admin.support.faq.details');
             Route::post('/csv-store', 'Admin\SupportFaqController@csvStore')->name('admin.support.data.csv.store');
             Route::get('/export', 'Admin\SupportFaqController@export')->name('admin.support.data.csv.export');
         });
