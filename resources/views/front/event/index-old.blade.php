@@ -14,11 +14,11 @@
             </div>
         </div>
     </div>
-
+    
     <div class="container mb-2 mb-sm-5">
         <div class="row">
             <div class="col">
-                <ul class="toolsFilter Event_toolsFilter">
+                <ul class="toolsFilter">
                     @foreach($cat as $key=> $data)
                     <li>
                         <label>
@@ -36,15 +36,14 @@
             </div>--}}
         </div>
     </div>
-   
+    @foreach($cat as $eventCategorykey => $event)
+    @php
+        if($event->eventDetails->count() == 0) { continue; }
+    @endphp
     <div class="container">
         <div class="row">
-        @foreach($cat as $eventCategorykey => $event)
-        @php
-            if($event->eventDetails->count() == 0) { continue; }
-        @endphp
             @foreach($event->eventDetails as $eventProductkey => $data)
-            <div class="col-12 col-lg-4 col-md-6 mb-3 blog_list eventlist eventlist_{{ $data->event_type }}">
+            <div class="col-12 col-lg-6 col-md-6 mb-3 blog_list eventlist eventlist_{{ $data->event_type }}">
                 <a href="">
                     <div class="card">
                         <img src="{{URL::to('/').'/events/'}}{{$data->image}}" class="card-img-top" alt="Blog Picture">
@@ -61,7 +60,10 @@
                                     <span class="year">
                                         {{ date('Y', strtotime($data->created_at)) }}
                                     </span>
-                                </div>
+                                        {{-- <span class="date">{{$blog->created_at->format('d')}}</span>
+                                        <span class="month">{{$blog->created_at->format('M')}}</span>
+                                        <span class="year">{{$blog->created_at->format('Y')}}</span> --}}
+                        </div>
                             </div>
                              <a href="{{ route('front.event.details',$data->slug) }}" class="location_btn"><h5 class="card-title">{{ $data->title }}</h5></a>
                         </div>
@@ -69,13 +71,11 @@
                 </a>
             </div>
             @endforeach
-            @endforeach
         </div>
     </div>
-    
+    @endforeach
     {{--  <div class="container text-center mt-4 mt-lg-5">
         <a href="#" class="load_more">Load more tools..</a>
     </div>--}}
 </section>
 @endsection
-

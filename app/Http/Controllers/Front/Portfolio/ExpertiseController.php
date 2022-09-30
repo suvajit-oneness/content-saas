@@ -68,6 +68,13 @@ class ExpertiseController extends BaseController
      */
     public function edit($id)
     {
+        /*
+        $expertise = $this->ExpertiseRepository->findExpertiseById($id);
+        $expertise=Speciality::orderby('name')->get();
+        $this->setPageTitle('Expertise', 'Edit Expertise : ' . $expertise->occupation);
+        return view('front.portfolio.expertise.edit', compact('expertise','speciality'));
+        */
+
         $expertise = $this->ExpertiseRepository->findExpertiseById($id);
         $speciality=Speciality::orderby('name')->get();
         $this->setPageTitle('Expertise', 'Edit Expertise : ');

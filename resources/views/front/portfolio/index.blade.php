@@ -3,14 +3,14 @@
 @section('title', $data->user->first_name.' '.$data->user->last_name.' Portfolio')
 
 @section('section')
-<section class="portfolio-v4-banner" style="linear-gradient({{$data->user->color_scheme}}, #d9d9d900), url({{ asset('uploads/user/'.$data->user->banner_image) }})"></section>
+<section class="portfolio-v4-banner" style="background: linear-gradient({{$data->user->color_scheme}}, #d9d9d900), url({{ asset($data->user->banner_image) }}) no-repeat;background-size: cover;"></section>
 
 <section class="portfolio-v4-info">
     <div class="container">
         <div class="row">
             <div class="col-12 col-lg-2 col-md-12 mb-4 mb-md-0 portfolio-v4-info-left">
                 <div class="img">
-                    <img src="{{ asset('uploads/user/'.$data->user->image) }}" alt="" />
+                    <img src="{{ asset($data->user->image) }}" alt="" />
                 </div>
             </div>
 
@@ -79,10 +79,10 @@
 
         <div class="row mt-1 gx-3 gy-5">
             @forelse ($data->portfolios as $portfolio)
-            <div class="col-12 col-lg-4 col-md-6 portfolio-links-item" id="portfolio">
+            <div class="col-12 col-lg-4 col-md-6 portfolio-links-item active" id="portfolio">
                 <div class="market-research-content">
                     <div class="img">
-                        <a href="{{ $portfolio->link }}" class="research-link"><img src="{{ asset('uploads/portfolio/'.$portfolio->image) }}" alt="" /></a>
+                        <a href="{{ $portfolio->link }}" class="research-link"><img src="{{ asset($portfolio->image) }}" alt="" /></a>
                     </div>
                     <div class="market-research-date">
                         <div class="market-research-badge">
@@ -118,7 +118,8 @@
                     </div>
                     <div class="marker-research-info">
                         <a href="" class="research-link">{{ ucwords($speciality->specialityDetails->name) }}</a>
-                        <p>{{$speciality->specialityDetails->short_desc}}</p>
+                        <p>{{$speciality->description}}</p>
+                        {{-- <p>{{$speciality->specialityDetails->short_desc}}</p> --}}
                     </div>
                 </div>
             </div>
@@ -315,7 +316,7 @@
                             <h4>{{ $item->title }}</h4>
                             <p>{{ $item->description }}</p>
                         </div>
-
+                        PORT
                         @endforeach
                     </div>
 

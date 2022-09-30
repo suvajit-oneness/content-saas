@@ -6,7 +6,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center top-heading">
-                    <h2>Add  Basic Details</h2>
+                    <h2>Add Basic Details</h2>
                 </div>
             </div>
             <div class="row">
@@ -18,20 +18,16 @@
                             @csrf
                             <div class="tile-body">
                                 <div class="form-group">
-                                    <label class="control-label" for="first_name">First Name <span class="m-l-5 text-danger">
-                                            *</span></label>
-                                    <input class="form-control @error('first_name') is-invalid @enderror" type="text" name="first_name"
-                                        id="first_name" value="{{ old('first_name',Auth::guard('web')->user()->first_name) }}" disabled/>
+                                    <label class="control-label" for="first_name">First Name <span class="m-l-5 text-danger">*</span></label>
+                                    <input class="form-control @error('first_name') is-invalid @enderror" type="text" name="first_name" id="first_name" value="{{ old('first_name',Auth::guard('web')->user()->first_name) }}"/>
                                         <input type="hidden" name="id" value="{{Auth::guard('web')->user()->id }}">
                                     @error('first_name')
                                         <p class="small text-danger">{{ $message }}</p>
                                     @enderror
                                 </div><br>
                                 <div class="form-group">
-                                    <label class="control-label" for="last_name">Last Name <span class="m-l-5 text-danger">
-                                            *</span></label>
-                                    <input class="form-control @error('last_name') is-invalid @enderror" type="text" name="last_name"
-                                        id="last_name" value="{{ old('last_name',Auth::guard('web')->user()->last_name) }}" disabled/>
+                                    <label class="control-label" for="last_name">Last Name <span class="m-l-5 text-danger">*</span></label>
+                                    <input class="form-control @error('last_name') is-invalid @enderror" type="text" name="last_name" id="last_name" value="{{ old('last_name',Auth::guard('web')->user()->last_name) }}"/>
                                     @error('last_name')
                                         <p class="small text-danger">{{ $message }}</p>
                                     @enderror

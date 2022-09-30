@@ -40,15 +40,20 @@ class ProfileController extends BaseController
     {
         $this->setPageTitle('Basic Details', 'Create Basic Details');
         $data = (object)[];
-        $data->user = User::where('slug', $request->slug)->first();
-        $languages = UserLanguage::where('user_id', $data->user->id)->with('languageDetails')->get();
-       // dd($languages);
-        $language = Language::orderby('name')->get();
-        $media = SocialMedia::all();
-        $country = DB::table('countries')->orderby('country_name')->get();
-        return view('front.portfolio.profile.create',compact('data','media','country','language','languages'));
-    }
 
+        $data->user = User::where('slug', $request->slug)->first();
+        $country = DB::table('countries')->orderby('country_name')->get();
+
+        // language
+        $allLanguage = Language::orderby('name')->get();
+        $userLanguages = UserLanguage::where('user_id', $data->user->id)->with('languageDetails')->get()->toArray();
+
+        // social media
+        $allSocialMedia = SocialMedia::all();
+        $userSocialMedia = UserSocialMedia::where('user_id', $data->user->id)->get()->toArray();
+
+        return view('front.portfolio.profile.create',compact('data', 'allSocialMedia', 'country', 'allLanguage', 'userLanguages', 'userSocialMedia'));
+    }
 
 
     /**
@@ -58,8 +63,25 @@ class ProfileController extends BaseController
      */
     public function update(Request $request)
     {
-        $this->validate($request, [
+        // dd($request->all());
+
+        $request->validate([
+            'id'            => 'required|integer',
+            'first_name'    => 'required|string',
+            'last_name'     => 'required|string',
+            'mobile'        => 'required|integer',
+            'country'       => 'required|string',
+            'occupation'    => 'required|string',
+            'short_desc'    => 'required|string',
+            'language_id'   => 'required|array',
+            'quote'         => 'nullable|string',
+            'quote_by'      => 'nullable|string',
+            'link'          => 'nullable|array',
+            'color_scheme'  => 'nullable|string',
+            'worked_for'    => 'required|string',
+            'categories'    => 'required|string',
         ]);
+
         $params = $request->except('_token');
         $profile = $this->ProfileRepository->updateProfile($params);
 

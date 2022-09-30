@@ -47,36 +47,65 @@ class ProfileRepository extends BaseRepository implements ProfileContract
         $user->quote_by = $collection['quote_by'] ?? '';
         $user->quote = $collection['quote'] ?? '';
         $user->color_scheme = $collection['color_scheme'] ?? '';
-        if(!empty($params['image'])){
-            $profile_image = $collection['image'] ?? '';
-            $imageName = time().".".$profile_image->getClientOriginalName();
-            $profile_image->move("uploads/user/",$imageName);
-            $uploadedImage = $imageName;
-            $user->image = $uploadedImage;
-            }
-        if(!empty($params['banner_image'])){
-            $profile_image = $collection['banner_image'] ?? '';
-            $imageName = time().".".$profile_image->getClientOriginalName();
-            $profile_image->move("uploads/user/",$imageName);
-            $uploadedImage = $imageName;
-            $user->banner_image = $uploadedImage;
-            }
-        $user->save();
-        foreach ($params['link'] as $value) {
-           // foreach ($params['social_media_id'] as $data) {
-        $usersociallink=new UserSocialMedia();
-        $usersociallink->user_id = Auth::guard('web')->user()->id ?? '';
-        $usersociallink->social_media_id = $collection['social_media_id'] ?? '';
-        $usersociallink->link =  $value ?? '';
-        $usersociallink->save();
+        $user->worked_for = $collection['worked_for'] ?? '';
+        $user->categories = $collection['categories'] ?? '';
+
+        if(!empty($params['image'])) {
+            // image, folder name only
+            $user->image = imageUpload($params['image'], 'user');
+
+            // $profile_image = $collection['image'] ?? '';
+            // $imageName = mt_rand().'-'.time().".".$profile_image->getClientOriginalExtension();
+            // $profile_image->move("uploads/user/",$imageName);
+            // $uploadedImage = $imageName;
+            // $user->image = $uploadedImage;
         }
-      // }
-        foreach ($params['language_id'] as $value) {
-            $userlanguage=new UserLanguage();
-            $userlanguage->user_id = Auth::guard('web')->user()->id ?? '';
-            $userlanguage->language_id = $value ?? '';
-            $userlanguage->save();
+
+        if(!empty($params['banner_image'])){
+            // image, folder name only
+            $user->banner_image = imageUpload($params['banner_image'], 'user-banner');
+
+            // $profile_image = $collection['banner_image'] ?? '';
+            // $imageName = mt_rand().'-'.time().".".$profile_image->getClientOriginalExtension();
+            // $profile_image->move("uploads/user/",$imageName);
+            // $uploadedImage = $imageName;
+            // $user->banner_image = $uploadedImage;
+        }
+
+        $user->save();
+
+        // if social media link found
+        if ( isset($params['link']) && count($params['link']) > 0) {
+            $chk = UserSocialMedia::where('user_id', Auth::guard('web')->user()->id)->delete();
+
+            foreach($params['social_media_id'] as $key => $media) {
+                if (!empty($params['link'][$key])) {
+                    $userlanguage = new UserSocialMedia();
+                    $userlanguage->user_id = Auth::guard('web')->user()->id;
+                    $userlanguage->social_media_id = $media;
+                    $userlanguage->link = $params['link'][$key];
+                    $userlanguage->save();
+                }
             }
+        }
+
+        // if languages found
+        if ( isset($params['language_id']) && count($params['language_id']) > 0) {
+            $chk = UserLanguage::where('user_id', Auth::guard('web')->user()->id)->delete();
+
+            foreach ($params['language_id'] as $value) {
+                $userlanguage = new UserLanguage();
+                $userlanguage->user_id = Auth::guard('web')->user()->id;
+                $userlanguage->language_id = $value;
+                $userlanguage->save();
+            }
+        }
+
+        // if no languages selected
+        if ( empty($params['language_id'])) {
+            $chk = UserLanguage::where('user_id', Auth::guard('web')->user()->id)->delete();
+        }
+
         return $user;
     }
 

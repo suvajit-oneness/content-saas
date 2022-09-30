@@ -12755,7 +12755,7 @@ be a descendant of the grid when it is being dragged.
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 230px;
+    width: 250px;
   }
   .app-header__logo img{
         filter: brightness(0) invert(1);

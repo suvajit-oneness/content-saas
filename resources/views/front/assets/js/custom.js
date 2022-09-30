@@ -279,7 +279,7 @@ courseAccorContents.forEach(item => {
   })
 
   accorTopLeft.addEventListener('click', (e) => {
-   console.log('ff')
+    console.log('ff')
 
     courseAccorContents.forEach(item2 => {
       if (item2 != item) {
@@ -288,8 +288,8 @@ courseAccorContents.forEach(item => {
       }
     })
 
-  // const angleIcon = e.target.previousElementSibling
-  //  console.log(angleIcon)
+    // const angleIcon = e.target.previousElementSibling
+    //  console.log(angleIcon)
     item.classList.toggle('active')
     // angleIcon.classList.remove('fa-angle-down')
     // angleIcon.classList.add('fa-angle-up')
@@ -345,13 +345,24 @@ portTabs.forEach((portTab) => {
     console.log(portData);
 
     portItemLinks.forEach((portItemLink) => {
-      // portItemLink.classList.remove('active')
+      portItemLink.classList.remove('active')
       portItemLink.classList.add("hide");
 
-      if (portItemLink.getAttribute("id") == portData || portData == "all") {
+      if (portItemLink.getAttribute("id") == portData || portData == "portfolio") {
         portItemLink.classList.remove("hide");
         //   portItemLink.classList.add('active')
       }
+      else {
+        portItemLink.classList.remove('hide')
+      }
+      // const portItemData = portItemLink.getAttribute('id')
+
+      // if (portData === portItemData) {
+      //   portItemLink.classList.add('active')
+      // }
+      // else {
+      //   portItemLink.classList.remove('active')
+      // }
     });
   });
 });

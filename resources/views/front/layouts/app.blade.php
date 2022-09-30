@@ -49,10 +49,12 @@
                             <a class="nav-link {{ request()->is('support*') ? 'active' : '' }}" href="{{route('front.support.index')}}">Support</a>
                         </li>
                         @if(Auth::guard('web')->check())
-                            <a type="button" class="nav-link" href="{{ route('front.dashboard.index') }}">
-                                <!-- <span><img src="{{ asset('site/images/login-icon.png ')}}"></span> -->
-                                <span>{{Auth::guard('web')->user()->first_name}}</span>
-                            </a>
+                            <li class="nav-item">
+                                <a type="button" class="nav-link" href="{{ route('front.dashboard.index') }}">
+                                    {{-- <span><img src="{{ asset('site/images/login-icon.png ')}}"></span> --}}
+                                    {{Auth::guard('web')->user()->first_name ? Auth::guard('web')->user()->first_name : 'Profile'}}
+                                </a>
+                            </li>
                         @else
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->is('user/login*') ? 'active' : '' }}" href="{{ route('front.user.login') }}">Login</a>

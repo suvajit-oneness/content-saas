@@ -358,8 +358,9 @@ Route::group(['prefix' => 'admin'], function () {
             Route::post('/csv-store', 'Admin\SupportFaqCategoryController@csvStore')->name('admin.support.faq.category.data.csv.store');
             Route::get('/export', 'Admin\SupportFaqCategoryController@export')->name('admin.support.faq.category.data.csv.export');
         });
-         //**  support management  **//
-         Route::group(['prefix'  =>   'support/faq'], function () {
+
+        //**  support management  **//
+        Route::group(['prefix'  =>   'support/faq'], function () {
             Route::get('/', 'Admin\SupportFaqController@index')->name('admin.support.faq.index');
             Route::get('/create', 'Admin\SupportFaqController@create')->name('admin.support.faq.create');
             Route::post('/store', 'Admin\SupportFaqController@store')->name('admin.support.faq.store');
@@ -367,7 +368,7 @@ Route::group(['prefix' => 'admin'], function () {
             Route::post('/update', 'Admin\SupportFaqController@update')->name('admin.support.faq.update');
             Route::get('/{id}/delete', 'Admin\SupportFaqController@delete')->name('admin.support.faq.delete');
             Route::post('updateStatus', 'Admin\SupportFaqController@updateStatus')->name('admin.support.faq.updateStatus');
-            Route::get('/{id}/details', 'Admin\SupportFaqController@details')->name('admin.support.faq.details');
+            Route::get('/{id}/details', 'Admin\SupportFaqController@details')->name('admin.support.faq.etails');
             Route::post('/csv-store', 'Admin\SupportFaqController@csvStore')->name('admin.support.data.csv.store');
             Route::get('/export', 'Admin\SupportFaqController@export')->name('admin.support.data.csv.export');
         });

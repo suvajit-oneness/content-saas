@@ -172,7 +172,7 @@
                 <i class="app-menu__icon fa fa-chevron-down"></i>
             </a>
         </li>
-        <div id="collapseFive" class="collapse @if(request()->is('admin/support*') || request()->is('admin/support/widget*') || request()->is('admin/support/faq/category*') || request()->is('admin/support/faq')) {{ 'show' }} @endif" aria-labelledby="headingOne" data-parent="#accordion">
+        <div id="collapseFive" class="collapse @if(request()->is('admin/support*') || request()->is('admin/support/widget*') || request()->is('admin/support/faq/category*') || request()->is('admin/support/faq*')) {{ 'show' }} @endif" aria-labelledby="headingOne" data-parent="#accordion">
                 <!--- Category management --->
             <li>
                 <a class="app-menu__item {{ request()->is('admin/support*') ? 'active' : '' }} {{ sidebar_open(['admin.support']) }}"
@@ -199,7 +199,7 @@
             </li>
             <!---  Faq management ---->
             <li>
-                <a class="app-menu__item {{ request()->is('admin/support/faq') ? 'active' : '' }} {{ sidebar_open(['admin.support.faq']) }}"
+                <a class="app-menu__item {{ request()->is('admin/support/faq*') ? 'active' : '' }} {{ sidebar_open(['admin.support.faq']) }}"
                         href="{{ route('admin.support.faq.index') }}">
                         <i class="app-menu__icon fa fa-file"></i>
                         <span class="app-menu__label">Faq Management</span>

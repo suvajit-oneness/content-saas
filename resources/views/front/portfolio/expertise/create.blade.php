@@ -18,12 +18,12 @@
                             @csrf
                             <div class="tile-body">
                                 <div class="form-group">
-                                    <label class="control-label" for="degree">Speciality <span class="m-l-5 text-danger">
+                                    <label class="control-label" for="degree">Degree <span class="m-l-5 text-danger">
                                             *</span></label>
                                             <select class="form-control" name="speciality_id">
                                                 <option value="" hidden selected>Select...</option>
                                                 @foreach ($expertise as $index => $item)
-                                                    <option value="{{ $item->id }}">{{ ucwords($item->name) }}</option>
+                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
                                                 @endforeach
                                         </select>
 

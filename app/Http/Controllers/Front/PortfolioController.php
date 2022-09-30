@@ -51,20 +51,26 @@ class PortfolioController extends Controller
         return view('front.portfolio.index', compact('data'));
     }
 
-    public function edit(Request $request,$slug) {
+    public function edit(Request $request) {
+        // dd('here');
         $data = (object)[];
-        $data->user = User::where('slug', $slug)->first();
-        $data->socialMedias = UserSocialMedia::where('user_id', $data->user->id)->with('socialMediaDetails')->get();
-        $data->languages = UserLanguage::where('user_id', $data->user->id)->with('languageDetails')->get();
-        $data->specialities = UserSpeciality::where('user_id', $data->user->id)->with('specialityDetails')->get();
-        $data->portfolios = Portfolio::where('user_id', $data->user->id)->get();
-        $data->employments = Employment::where('user_id', $data->user->id)->get();
-        $data->clients = Client::where('user_id', $data->user->id)->get();
-        $data->educations = Education::where('user_id', $data->user->id)->orderBy('position')->get();
-        $data->testimonials = Testimonial::where('user_id', $data->user->id)->get();
-        $data->certificates = Certificate::where('user_id', $data->user->id)->get();
+
+        // $slug = auth()->guard('web')->user()->slug;
+        // $data->user = User::where('slug', $slug)->first();
+        $user_id = auth()->guard('web')->user()->id;
+
+        $data->socialMedias = UserSocialMedia::where('user_id', $user_id)->with('socialMediaDetails')->get();
+        $data->languages = UserLanguage::where('user_id', $user_id)->with('languageDetails')->get();
+        $data->specialities = UserSpeciality::where('user_id', $user_id)->with('specialityDetails')->get();
+        $data->portfolios = Portfolio::where('user_id', $user_id)->get();
+        $data->employments = Employment::where('user_id', $user_id)->get();
+        $data->clients = Client::where('user_id', $user_id)->get();
+        $data->educations = Education::where('user_id', $user_id)->orderBy('position')->get();
+        $data->testimonials = Testimonial::where('user_id', $user_id)->get();
+        $data->certificates = Certificate::where('user_id', $user_id)->get();
         return view('front.portfolio.edit',compact(('data')));
     }
+
     public function basicprofile(Request $request,$slug) {
         $data = (object)[];
         $data->user = User::where('slug', $slug)->first();

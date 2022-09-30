@@ -31,13 +31,15 @@
                 <div class="dashboard-lists">
                     <ul class="list-unstyled p-0 m-0">
                         <li>
-                            <a href="" class="active"><i class="fa-solid fa-house"></i> home</a>
+                            <a href="{{ route('front.dashboard.index') }}" class="{{ request()->is('dashboard*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> home</a>
                         </li>
                         <li>
                             <a href="{{ route('front.portfolio.index', auth()->guard('web')->user()->slug) }}"><i class="fa-solid fa-house"></i> Portfolio</a>
                         </li>
                         <li>
-                            <a href="{{ route('front.portfolio.edit',auth()->guard('web')->user()->slug) }}"><i class="fa-solid fa-house"></i> Manage Portfolio</a>
+                            <a href="{{ route('front.user.portfolio.manage') }}" class="{{ request()->is('user/portfolio*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Manage Portfolio</a>
+
+                            {{-- <a href="{{ route('front.portfolio.edit', auth()->guard('web')->user()->slug) }}" class="{{ request()->is('user/portfolio/manage*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Manage Portfolio</a> --}}
                         </li>
                         <li>
                             <a href="{{ route('front.user.logout') }}" class="logout-bg"><i class="fas fa-sign-out-alt"></i>LOGOUT</a>
@@ -115,9 +117,64 @@
     <script type="text/javascript" src="{{ asset('frontend/js/aos.js')}}"></script>
     <script type="text/javascript" src="{{ asset('frontend/js/jquery.sticky.js')}}"></script>
     <script type="text/javascript" src="{{ asset('frontend/js/custom.js')}}"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-        feather.replace();
+        feather.replace()
+    </script>
+
+    <script>
+        // sweetalert fires | type = success, error, warning, info, question
+        function toastFire(type, title, body = '') {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                showCloseButton: true,
+                timer: 2000,
+                timerProgressBar: false,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast.fire({
+                icon: type,
+                title: title,
+                // text: body
+            })
+        }
+
+        // on session toast fires
+        @if (Session::has("success"))
+            toastFire("success", "{{ Session::get('success')[0] }}");
+        @elseif (Session::has("failure"))
+            toastFire("warning", "{{ Session::get('failure')[0] }}");
+        @endif
+
+        $('.storeCatgoryList a' ).on( 'click', function(e){
+            var href = $(this).attr( 'href' );
+            $('html, body').animate({
+                scrollTop: $( href ).offset().top - 140
+            });
+            e.preventDefault();
+            $(this).parent().addClass("current");
+            $(this).parent().siblings().removeClass("current");
+        });
+
+        $("document").ready(function(){
+            $('.jQueryEqualHeight').jQueryEqualHeight('.store_card');
+        })
+
+        function onlyNumberKey(evt) {
+            // Only ASCII character in that range allowed
+            var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+            if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+                return false;
+            return true;
+        }
+        // click to read notification
     </script>
 </body>
 
