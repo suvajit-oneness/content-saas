@@ -332,8 +332,8 @@ Route::group(['prefix' => 'admin'], function () {
             Route::post('/csv-store', 'Admin\SupportController@csvStore')->name('admin.support.data.csv.store');
             Route::get('/export', 'Admin\SupportController@export')->name('admin.support.data.csv.export');
         });
-         //**  support management  **//
-         Route::group(['prefix'  =>   'support/widget'], function () {
+        //**  support management  **//
+        Route::group(['prefix'  =>   'support/widget'], function () {
             Route::get('/', 'Admin\SupportWidgetController@index')->name('admin.support.widget.index');
             Route::get('/create', 'Admin\SupportWidgetController@create')->name('admin.support.widget.create');
             Route::post('/store', 'Admin\SupportWidgetController@store')->name('admin.support.widget.store');

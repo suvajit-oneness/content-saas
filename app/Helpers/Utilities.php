@@ -1,5 +1,6 @@
 <?php
 // use App\Models\Notification;
+use Illuminate\Support\Str;
 
 if (!function_exists('sidebar_open')) {
     function sidebar_open($routes = []) {
@@ -94,6 +95,15 @@ if (!function_exists('userSocialMediaLink')) {
         } else {
             return false;
         }
+    }
+}
+
+if (!function_exists('slugGenerate')) {
+    function slugGenerate($title, $table) {
+        $slug = Str::slug($title, '-');
+        $slugExistCount = DB::table($table)->where('title', $title)->count();
+        if ($slugExistCount > 0) $slug = $slug . '-' . ($slugExistCount + 1);
+        return $slug;
     }
 }
 

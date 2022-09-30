@@ -52,31 +52,21 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($data as $key => $blog)
+                            @foreach($data as $key => $topic)
                                 <tr>
                                     <td>{{ $key+1 }}</td>
                                     <td>
-                                        @if($blog->image!='')
-                                        <img style="width: 100px;height: 100px;" src="{{URL::to('/').'/Blogs/'}}{{$blog->image}}">
-                                        @endif
+                                        <img style="height: 100px;" src="{{ asset($topic->image) }}">
                                     </td>
-                                    <td>{{ $blog->title }}</td>
-                                    <td>@php
-                                        $desc = strip_tags($blog['content']);
-                                        $length = strlen($desc);
-                                        if($length>50)
-                                        {
-                                            $desc = substr($desc,0,50)."...";
-                                        }else{
-                                            $desc = substr($desc,0,50);
-                                        }
-                                    @endphp
-                                    {!! $desc !!}</td>
+                                    <td>{{ $topic->title }}</td>
+                                    <td>
+                                        {!! $topic->description !!}
+                                    </td>
                                     <td class="text-center">
                                         <div class="toggle-button-cover margin-auto">
                                             <div class="button-cover">
                                                 <div class="button-togglr b2" id="button-11">
-                                                    <input id="toggle-block" type="checkbox" name="status" class="checkbox" data-blog_id="{{ $blog['id'] }}" {{ $blog['status'] == 1 ? 'checked' : '' }}>
+                                                    <input id="toggle-block" type="checkbox" name="status" class="checkbox" data-blog_id="{{ $topic['id'] }}" {{ $topic['status'] == 1 ? 'checked' : '' }}>
                                                     <div class="knobs"><span>Pending</span></div>
                                                     <div class="layer"></div>
                                                 </div>
@@ -85,9 +75,9 @@
                                     </td>
                                     <td class="text-center">
                                         <div class="btn-group" role="group" aria-label="Second group">
-                                            <a href="{{ route('admin.topic.edit', $blog['id']) }}" class="btn btn-sm btn-primary edit-btn"><i class="fa fa-edit"></i></a>
-                                            <a href="{{ route('admin.topic.details', $blog['id']) }}" class="btn btn-sm btn-primary edit-btn"><i class="fa fa-eye"></i></a>
-                                            <a href="#" data-id="{{$blog['id']}}" class="sa-remove btn btn-sm btn-danger edit-btn"><i class="fa fa-trash"></i></a>
+                                            <a href="{{ route('admin.topic.edit', $topic['id']) }}" class="btn btn-sm btn-primary edit-btn"><i class="fa fa-edit"></i></a>
+                                            <a href="{{ route('admin.topic.details', $topic['id']) }}" class="btn btn-sm btn-primary edit-btn"><i class="fa fa-eye"></i></a>
+                                            <a href="#" data-id="{{$topic['id']}}" class="sa-remove btn btn-sm btn-danger edit-btn"><i class="fa fa-trash"></i></a>
                                         </div>
                                     </td>
                                 </tr>
@@ -188,7 +178,7 @@
           $.ajax({
                 type:'POST',
                 dataType:'JSON',
-                url:"{{route('admin.articleStatus.updateStatus')}}",
+                url:"{{route('admin.topic.updateStatus')}}",
                 data:{ _token: CSRF_TOKEN, id:blog_id, check_status:check_status},
                 success:function(response)
                 {

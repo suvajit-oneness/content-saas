@@ -6842,23 +6842,3 @@ tbody, td, tfoot, th, thead, tr {
   background: #ffffff !important;
   --bs-table-accent-bg: #fff;
 }
-
-.event_meta {
-  display: flex;
-  align-items: center;
-}
-
-.event_meta figure {
-  margin-right: 15px;
-}
-
-.event_meta h5 {
-  text-transform: uppercase;
-  font-size: 14px;
-  color: #898989;
-}
-
-.event_meta h3 {
-  font-size: 24px;
-  margin-bottom: 20px;
-}

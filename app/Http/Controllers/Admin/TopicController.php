@@ -7,62 +7,28 @@ use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 use App\Models\Topic;
 
-// use App\Contracts\CourseContract;
-// use Illuminate\Http\Request;
-// use App\Models\Course;
-// use App\Http\Controllers\BaseController;
-// use Auth;
-// use Illuminate\Support\Str;
-// use Session;
-// use Maatwebsite\Excel\Facades\Excel;
-// use App\Exports\CourseExport;
-// use App\Models\CourseCategory;
-// use App\Models\courseType;
-// use DB;
-// use Illuminate\Support\Facades\Session as FacadesSession;
-
 class TopicController extends BaseController
 {
-    // protected $CourseRepository;
-    // public function __construct(CourseContract $CourseRepository)
-    // {
-    //     $this->CourseRepository = $CourseRepository;
-    // }
-
-
     public function index(Request $request)
     {
         $this->setPageTitle('Topic', 'Topics list');
-        $data = Topic::latest('id')->paginate(25);
+
+        if (!empty($request->term)) {
+            $data = Topic::where('title', 'like', "$request->term%")->latest('id')->paginate(25);
+        } else {
+            $data = Topic::latest('id')->paginate(25);
+        }
 
         return view('admin.topic.index', compact('data'));
-
-
-
-
-        // if (isset($request->category) || isset($request->keyword) ||isset($request->author) || isset($request->type)) {
-        //     $category = !empty($request->category) ? $request->category : '';
-        //     $keyword = !empty($request->keyword) ? $request->keyword : '';
-        //     $author = !empty($request->author) ? $request->author : '';
-        //     $type = !empty($request->type) ? $request->type : '';
-        //     $course = $this->CourseRepository->searchCoursesData($category,$author,$type,$keyword);
-        // }else{
-        //     $course = Course::orderby('course_name')->paginate(25);
-        // }
-        // $categories = $this->CourseRepository->listCategory();
-        // $this->setPageTitle('course', 'List of all course');
-        // return view('admin.course.course.index', compact('course','categories'));
     }
+
 
     public function create()
     {
         $this->setPageTitle('Create new Topic', 'Create topic');
         return view('admin.topic.create');
-
-        // $categories = $this->CourseRepository->listCategory();
-        // $this->setPageTitle('course', 'Create course');
-        // return view('admin.course.course.create', compact('categories'));
     }
+
 
     public function store(Request $request)
     {
@@ -75,103 +41,95 @@ class TopicController extends BaseController
         $topic = new Topic();
         $topic->title = $request->title;
 
+        // slug
+        $topic->slug = slugGenerate($request->title, 'topics');
+
         // image
         if(!empty($request->image)){
-            $profile_image = $request->image;
-            $imageName = mt_rand().'-'.time().".".$profile_image->getClientOriginalExtension();
-            $profile_image->move("uploads/topic/", $imageName);
-            $uploadedImage = $imageName;
-            $topic->image = $uploadedImage;
+            $topic->image = imageUpload($request->image, 'topic');
         }
 
         $topic->description = $request->description;
         $topic->save();
 
-        // $params = $request->except('_token');
-        // $course = $this->CourseRepository->createCourse($params);
-
-        if (!$course) {
-            return $this->responseRedirectBack('Error occurred while creating course.', 'error', true, true);
+        if (!$topic) {
+            return $this->responseRedirectBack('Error occurred while creating topic.', 'error', true, true);
         }
-        return $this->responseRedirect('admin.course.index', 'course has been added successfully' ,'success',false, false);
+        return $this->responseRedirect('admin.topic.index', 'topic has been added successfully' ,'success',false, false);
     }
 
-    /**
-     * @param $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
+
     public function edit($id)
     {
-        $targetcourse = $this->CourseRepository->findCourseById($id);
-        $categories = $this->CourseRepository->listCategory();
-        $this->setPageTitle('course', 'Edit course : '.$targetcourse->title);
-        return view('admin.course.course.edit', compact('targetcourse','categories'));
+        $topic = Topic::findOrFail($id);
+        $this->setPageTitle('topic', 'Edit topic : '.$topic->title);
+        return view('admin.topic.edit', compact('topic'));
     }
 
-    /**
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Validation\ValidationException
-     */
+
     public function update(Request $request)
     {
         $this->validate($request, [
-            'course_name' =>  'required|max:191',
+            'id' => 'required|min:1',
+            'title' => 'required|min:2|max:255',
+            'image' => 'nullable|image|max:100000|mimes:jpg,jpeg,png',
+            'description' => 'required|min:2'
         ]);
 
-        $params = $request->except('_token');
+        $topic = Topic::findOrFail($request->id);
 
-        $course = $this->CourseRepository->updateCourse($params);
-
-        if (!$course) {
-            return $this->responseRedirectBack('Error occurred while updating course.', 'error', true, true);
+        // slug
+        if ($request->title != $topic->title) {
+            $topic->slug = slugGenerate($request->title, 'topics');
         }
-        return $this->responseRedirectBack('course has been updated successfully' ,'success',false, false);
+
+        // image
+        if(!empty($request->image)){
+            $topic->image = imageUpload($request->image, 'topic');
+        }
+
+        $topic->title = $request->title;
+        $topic->description = $request->description;
+        $topic->save();
+
+        if (!$topic) {
+            return $this->responseRedirectBack('Error occurred while updating topic.', 'error', true, true);
+        }
+        return $this->responseRedirectBack('topic has been updated successfully' ,'success',false, false);
     }
 
-    /**
-     * @param $id
-     * @return \Illuminate\Http\RedirectResponse
-     */
+
     public function delete($id)
     {
-        $course = $this->CourseRepository->deleteCourse($id);
+        $topic = Topic::findOrFail($id);
+        $topic->delete();
 
-        if (!$course) {
-            return $this->responseRedirectBack('Error occurred while deleting course.', 'error', true, true);
+        if (!$topic) {
+            return $this->responseRedirectBack('Error occurred while deleting topic.', 'error', true, true);
         }
-        return $this->responseRedirect('admin.course.index', 'course has been deleted successfully' ,'success',false, false);
+        return $this->responseRedirect('admin.topic.index', 'topic has been deleted successfully' ,'success',false, false);
     }
 
-    /**
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Validation\ValidationException
-     */
+
     public function updateStatus(Request $request){
-
-        $params = $request->except('_token');
-
-        $course = $this->CourseRepository->updateCourseStatus($params);
-
-        if ($course) {
+        $topic = Topic::findOrFail($request->id);
+        $topic->status = $request->check_status;
+        $topic->save();
+        if ($topic) {
             return response()->json(array('message'=>'course status has been successfully updated'));
         }
     }
 
-    /**
-     * @param $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
+
     public function details($id)
     {
-        $course = $this->CourseRepository->detailsCourse($id);
-        $course = $course[0];
+        $topic = Topic::findOrFail($id);
 
-        $this->setPageTitle('course', 'course Details : '.$course->title);
-        return view('admin.course.course.details', compact('course'));
+        $this->setPageTitle('topic', 'topic Details : '.$topic->title);
+        return view('admin.topic.details', compact('topic'));
     }
 
+/*
     public function csvStore(Request $request)
     {
         if (!empty($request->file)) {
@@ -303,10 +261,10 @@ class TopicController extends BaseController
         }
         return redirect()->route('admin.course.index');
     }
-    // csv upload
 
     public function export()
     {
         return Excel::download(new CourseExport, 'course.xlsx');
     }
+*/
 }

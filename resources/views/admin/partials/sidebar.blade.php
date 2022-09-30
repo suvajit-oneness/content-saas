@@ -57,7 +57,7 @@
                 </a>
             </li>
             <li>
-                <a class="app-menu__item {{ request()->is('admin/topic') ? 'active' : '' }}" href="{{ route('admin.topic.index') }}">
+                <a class="app-menu__item {{ request()->is('admin/course/topic*') ? 'active' : '' }}" href="{{ route('admin.topic.index') }}">
                     <i class="app-menu__icon fa fa-folder"></i>
                     <span class="app-menu__label">Topic</span>
                 </a>
