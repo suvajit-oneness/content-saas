@@ -53,7 +53,13 @@
             <li>
                 <a class="app-menu__item {{ request()->is('admin/course') ? 'active' : '' }}" href="{{ route('admin.course.index') }}">
                     <i class="app-menu__icon fa fa-folder"></i>
-                    <span class="app-menu__label">Management</span>
+                    <span class="app-menu__label">Course</span>
+                </a>
+            </li>
+            <li>
+                <a class="app-menu__item {{ request()->is('admin/course/lesson*') ? 'active' : '' }}" href="{{ route('admin.lesson.index') }}">
+                    <i class="app-menu__icon fa fa-folder"></i>
+                    <span class="app-menu__label">Lesson</span>
                 </a>
             </li>
             <li>
@@ -68,12 +74,6 @@
                     <span class="app-menu__label">Module</span>
                 </a>
             </li> --}}
-            <li>
-                <a class="app-menu__item {{ request()->is('admin/lesson') ? 'active' : '' }}" href="{{ route('admin.lesson.index') }}">
-                    <i class="app-menu__icon fa fa-folder"></i>
-                    <span class="app-menu__label">Lesson</span>
-                </a>
-            </li>
 
             <li>
                 <a class="app-menu__item {{ request()->is('admin/quiz') ? 'active' : '' }}" href="{{ route('admin.quiz.index') }}">

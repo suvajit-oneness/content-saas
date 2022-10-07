@@ -30,6 +30,7 @@
     <script src="{{ asset('backend/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('backend/js/main.js') }}"></script>
     <script src="{{ asset('backend/js/plugins/pace.min.js') }}"></script>
+    {{-- <script src="{{ asset('frontend/js/jquery.dd.js') }}"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.9.5/tinymce.min.js"></script>
 

@@ -158,6 +158,9 @@ Route::group(['prefix' => 'admin'], function () {
             Route::post('/store', 'Admin\LessonController@store')->name('admin.lesson.store');
             Route::get('/{id}/edit', 'Admin\LessonController@edit')->name('admin.lesson.edit');
             Route::post('/update', 'Admin\LessonController@update')->name('admin.lesson.update');
+
+            Route::post('/update/{id}/topic/', 'Admin\LessonController@updateLessonTopic')->name('admin.lesson.updateLessonTopic');
+
             Route::get('/{id}/delete', 'Admin\LessonController@delete')->name('admin.lesson.delete');
             Route::post('updateStatus', 'Admin\LessonController@updateStatus')->name('admin.lesson.updateStatus');
             Route::get('/{id}/details', 'Admin\LessonController@details')->name('admin.lesson.details');

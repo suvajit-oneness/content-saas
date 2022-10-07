@@ -12,59 +12,62 @@ use Illuminate\Support\Str;
 use Session;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\CourseExport;
+use App\Exports\Lesson as ExportsLesson;
+use App\Models\Category;
 use App\Models\CourseCategory;
 use App\Models\courseType;
+use App\Models\Lesson;
+use App\Models\LessonTopic;
+use App\Models\Topic;
 use DB;
+use Illuminate\Support\Facades\DB as FacadesDB;
 use Illuminate\Support\Facades\Session as FacadesSession;
 
 class LessonController extends BaseController
 {
-    // protected $CourseRepository;
-    // public function __construct(CourseContract $CourseRepository)
-    // {
-    //     $this->CourseRepository = $CourseRepository;
-    // }
-
-
     public function index(Request $request)
     {
-        if (isset($request->category) || isset($request->keyword) ||isset($request->author) || isset($request->type)) {
-            $category = !empty($request->category) ? $request->category : '';
-            $keyword = !empty($request->keyword) ? $request->keyword : '';
-            $author = !empty($request->author) ? $request->author : '';
-            $type = !empty($request->type) ? $request->type : '';
-            $course = $this->CourseRepository->searchCoursesData($category,$author,$type,$keyword);
-        }else{
-            $course = Course::orderby('course_name')->paginate(25);
-        }
-        $categories = $this->CourseRepository->listCategory();
-        $this->setPageTitle('course', 'List of all course');
-        return view('admin.course.course.index', compact('course','categories'));
+        $pageTitle = "Lessons";
+        if(!empty($request->term))
+            $lessons = Lesson::where('title','like','%'.$request->term.'%')->paginate(25);
+        else
+            $lessons = Lesson::paginate(25);
+        return view('admin.lesson.index', compact('lessons','pageTitle'));
     }
 
     public function create()
     {
-        $categories = $this->CourseRepository->listCategory();
-        $this->setPageTitle('course', 'Create course');
-        return view('admin.course.course.create', compact('categories'));
+        $categories = CourseCategory::latest('title')->get();
+        $this->setPageTitle('Lessons', 'Create lessons');
+        return view('admin.lesson.create', compact('categories'));
     }
 
     public function store(Request $request)
     {
         $this->validate($request, [
-            'course_name'      =>  'required|max:191',
-            'author_name'      =>  'required|max:191',
-            'image'     =>  'required|mimes:jpg,jpeg,png|max:1000',
+            'lesson_title'      =>  'required|max:191',
+            'lesson_image'      =>  'required|file|mimes:png,jpg',
         ]);
 
         $params = $request->except('_token');
 
-        $course = $this->CourseRepository->createCourse($params);
+        $lesson = new Lesson();
+        $lesson->title = $params['lesson_title'];
 
-        if (!$course) {
-            return $this->responseRedirectBack('Error occurred while creating course.', 'error', true, true);
+        // slug
+        $lesson->slug = slugGenerate($params['lesson_title'], 'lessons');
+
+        // image
+        $lesson->image = imageUpload($params['lesson_image'], 'lessons');
+
+        $lesson->description = $params['short_description'];
+        $lesson->save();
+
+        if (!$lesson) {
+            return $this->responseRedirectBack('Error occurred while creating Lesson.', 'error', true, true);
         }
-        return $this->responseRedirect('admin.course.index', 'course has been added successfully' ,'success',false, false);
+
+        return $this->responseRedirect('admin.lesson.index', 'Lesson has been added successfully' ,'success',false, false);
     }
 
     /**
@@ -73,10 +76,10 @@ class LessonController extends BaseController
      */
     public function edit($id)
     {
-        $targetcourse = $this->CourseRepository->findCourseById($id);
-        $categories = $this->CourseRepository->listCategory();
-        $this->setPageTitle('course', 'Edit course : '.$targetcourse->title);
-        return view('admin.course.course.edit', compact('targetcourse','categories'));
+        $lesson = Lesson::find($id);
+        $topics = Topic::all();
+        $this->setPageTitle('Lesson', 'Lesson Edit : '.$lesson->title);
+        return view('admin.lesson.edit', compact('lesson','topics'));
     }
 
     /**
@@ -87,17 +90,36 @@ class LessonController extends BaseController
     public function update(Request $request)
     {
         $this->validate($request, [
-            'course_name' =>  'required|max:191',
+            'title' =>  'required|max:191',
+            'description' => 'required| min:2',
+            'image' => 'nullable|file|mimes:jpeg,png'
         ]);
 
-        $params = $request->except('_token');
+        $lesson = Lesson::find($request->id);
 
-        $course = $this->CourseRepository->updateCourse($params);
-
-        if (!$course) {
-            return $this->responseRedirectBack('Error occurred while updating course.', 'error', true, true);
+        if($lesson->title != $request->title){
+            $lesson->title = $request->title;
+            $lesson->slug = slugGenerate($request->title, 'lessons');
         }
-        return $this->responseRedirectBack('course has been updated successfully' ,'success',false, false);
+
+        $lesson->description = $request->description;
+
+        if(!empty($request->image))
+            $lesson->image = imageUpload($request->image, 'lessons');
+
+        if (!$lesson->save()) {
+            return $this->responseRedirectBack('Error occurred while updating.', 'error', true, true);
+        }
+        return $this->responseRedirectBack('Lesson has been updated successfully' ,'success',false, false);
+    }
+
+    public function updateLessonTopic($id, Request $request)
+    {
+        // dd($request->all());
+        foreach ($request->topics as $value) {
+            LessonTopic::insert(['lesson_id'=>$id, 'topic_id'=>$value]);
+        }
+        return $this->responseRedirectBack('Lesson Topics updated successfully' ,'success',false, false);
     }
 
     /**
@@ -106,12 +128,12 @@ class LessonController extends BaseController
      */
     public function delete($id)
     {
-        $course = $this->CourseRepository->deleteCourse($id);
+        $deleted = Lesson::find($id)->delete();
 
-        if (!$course) {
+        if (!$deleted) {
             return $this->responseRedirectBack('Error occurred while deleting course.', 'error', true, true);
         }
-        return $this->responseRedirect('admin.course.index', 'course has been deleted successfully' ,'success',false, false);
+        return $this->responseRedirect('admin.lesson.index', 'Lesson has been deleted successfully' ,'success',false, false);
     }
 
     /**
@@ -121,12 +143,13 @@ class LessonController extends BaseController
      */
     public function updateStatus(Request $request){
 
-        $params = $request->except('_token');
+        // dd($request->all());
 
-        $course = $this->CourseRepository->updateCourseStatus($params);
+        $lesson = Lesson::find($request->id);
+        $lesson->status = $request->check_status;
 
-        if ($course) {
-            return response()->json(array('message'=>'course status has been successfully updated'));
+        if ($lesson->save()) {
+            return response()->json(array('message'=>'Lesson status has been successfully updated'));
         }
     }
 
@@ -136,11 +159,10 @@ class LessonController extends BaseController
      */
     public function details($id)
     {
-        $course = $this->CourseRepository->detailsCourse($id);
-        $course = $course[0];
+        $lesson = Lesson::find($id);
 
-        $this->setPageTitle('course', 'course Details : '.$course->title);
-        return view('admin.course.course.details', compact('course'));
+        $this->setPageTitle('Lesson', 'Lesson Details : '.$lesson->title);
+        return view('admin.lesson.details', compact('lesson'));
     }
 
     public function csvStore(Request $request)
@@ -196,21 +218,6 @@ class LessonController extends BaseController
                     foreach ($importData_arr as $importData) {
 
                         $commaSeperatedCats = '';
-
-                            $catExistCheck = CourseCategory::where('title', $importData[3])->first();
-                            if ($catExistCheck) {
-                                $insertDirCatId = $catExistCheck->id;
-                                $commaSeperatedCats .= $insertDirCatId . ',';
-                            } else {
-                                $dirCat = new CourseCategory();
-                                $dirCat->title = $importData[3];
-                                $dirCat->slug = null;
-                                $dirCat->save();
-                                $insertDirCatId = $dirCat->id;
-
-                                $commaSeperatedCats .= $insertDirCatId . ',';
-                            }
-
                         $count = 0;
                         $commaSeperatedSubCats = '';
                          $count = $total = 0;
@@ -227,31 +234,20 @@ class LessonController extends BaseController
                             foreach ($titleArr as $titleKey => $titleValue) {
                                 // slug generate
                                 $slug = Str::slug($titleValue, '-');
-                                $slugExistCount = DB::table('courses')->where('course_name', $titleValue)->count();
+                                $slugExistCount = FacadesDB::table('lessons')->where('title', $titleValue)->count();
                                 if ($slugExistCount > 0) $slug = $slug . '-' . ($slugExistCount + 1);
 
                                 $insertData = array(
-                                    "course_name" => $titleValue,
-                                    "short_description" => isset($importData[1]) ? $importData[1] : null,
-                                    "description" => isset($importData[2]) ? $importData[2] : null,
-                                    "category_id" => isset($commaSeperatedCats) ? $commaSeperatedCats : null,
-                                    "slug" => $slug,
-                                    "company_name" => isset($importData[4]) ? $importData[4] : null,
-                                    "company_description" => isset($importData[5]) ? $importData[5] : null,
-                                    "author_name" => isset($importData[6]) ? $importData[6] : null,
-                                    "author_description" => isset($importData[7]) ? $importData[7] : null,
-                                    "target" => isset($importData[8]) ? $importData[8] : null,
-                                    "requirements" => isset($importData[9]) ? $importData[9] : null,
-                                    "language" => isset($importData[10]) ? $importData[10] : null,
-                                    "type" => isset($importData[11]) ? $importData[11] : null,
-                                    "price" => isset($importData[12]) ? $importData[12] : null,
-
+                                    "title" => isset($importData[0]) ? $importData[0] : null,
+                                    "description" => isset($importData[1]) ? $importData[1] : null,
+                                    "image" => isset($importData[2]) ? $importData[2] : null,
+                                    "slug" => $slug
                                 );
 
-                                $resp =Course::insertData($insertData, $count,$successArr,$failureArr);
-                                $count = $resp['count'];
-                                $successArr = $resp['successArr'];
-                                $failureArr = $resp['failureArr'];
+                                $resp =Lesson::insert($insertData);
+                                $count = $count + 1;
+                                // $successArr = $resp['successArr'];
+                                // $failureArr = $resp['failureArr'];
                                 $total++;
                             }
                         }
@@ -272,12 +268,12 @@ class LessonController extends BaseController
         } else {
             FacadesSession::flash('message', 'No file found.');
         }
-        return redirect()->route('admin.course.index');
+        return redirect()->route('admin.lesson.index');
     }
     // csv upload
 
     public function export()
     {
-        return Excel::download(new CourseExport, 'course.xlsx');
+        return Excel::download(new ExportsLesson, 'lesson.xlsx');
     }
 }
