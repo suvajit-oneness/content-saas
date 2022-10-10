@@ -151,7 +151,7 @@
                     </div><br>
                     <div class="tile-footer">
                         <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save
-                            Course</button>
+                            Lesson</button>
                         &nbsp;&nbsp;&nbsp;
                         <a class="btn btn-secondary" href="{{ route('admin.course.index') }}"><i
                                 class="fa fa-fw fa-lg fa-times-circle"></i>Back</a>

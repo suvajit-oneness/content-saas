@@ -70,8 +70,10 @@
             <div class="card-body">
                 <div class="row row-eq-height">
                     <div class="col-sm-5 pt-2" style="border: 1px solid black;" data-dd="source">
+                        <h3 data-dd-status="fixed" class="m-2">All Topics</h3>
+                        <hr>
                         @foreach ($topics as $topic)
-                            <div><input type="checkbox" checked value="{{ $topic->id }}" name="topics[]" class="d-none">{{ $topic->title }}</div>
+                            <div onclick="moveToTarget(this)"><input type="checkbox" checked value="{{ $topic->id }}" name="topics[]" class="d-none">{{ $topic->title }}</div>
                         @endforeach
                     </div>
                     <div class="col-sm-2 d-flex align-items-center justify-content-center">
@@ -79,9 +81,16 @@
                     </div>
                     <form action="{{ route('admin.lesson.updateLessonTopic', $lesson->id) }}" method="POST" class="col-sm-5" style="border: 1px solid black;">
                         @csrf
-                        <div style="height: 100%" id="relatedtopics" data-dd="target" data-dd-reordable="true">
+                        <div class="d-flex justify-content-between m-2">
+                            <h3 data-dd-status="fixed">Selected Topics</h3>
+                            <button type="submit" id="setTopic" class="d-none btn btn-primary btn-sm" style="float: right;">Set topics</button>
                         </div>
-                        <button type="submit" id="setTopic" class="d-none btn btn-primary btn-sm" style="float: right;">Set topics</button>
+                        <hr>
+                        <div style="height: 100%" id="relatedtopics" data-dd="target" data-dd-reordable="true">
+                            @foreach ($lesson_topics as $topic)
+                                <div><input type="checkbox" checked value="{{ $topic->id }}" name="topics[]" class="d-none">{{ $topic->title }} <span class="text-danger text-bold" style="cursor: pointer;" onclick="deleteLessonTopic('{{$topic->topic_id}}','{{$topic->lesson_id}}')">X</span></div>
+                            @endforeach
+                        </div>
                     </form>
                 </div>
 
@@ -117,10 +126,39 @@
 @push('scripts')
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script>
+    function moveToTarget(x) {
+        // console.log($(x).html());
+        var source_content = '<div onclick="moveToSource(this)">' + $(x).html() + '</div>';
+        $('div[data-dd="target"]').append(source_content);
+        $(x).remove();
+
+        if($('div[data-dd="target"]').children().length > 0){
+            $('#setTopic').removeClass('d-none');
+            $('#setTopic').css('margin', '3px');
+        }
+    }
+
+    function moveToSource(x) {
+        var source_content = '<div onclick="moveToTarget(this)">' + $(x).html() + '</div>';
+        $('div[data-dd="source"]').append(source_content);
+        $(x).remove();
+
+        if($('div[data-dd="target"]').children().length > 0){
+            $('#setTopic').removeClass('d-none');
+            $('#setTopic').css('margin', '3px');
+        }else{
+            $('#setTopic').addClass('d-none');
+        }
+    }
+
+    function deleteLessonTopic(x,y){
+        window.location.href = '{{url("/")}}'+'/admin/course/lesson/delete/lesson/' + y + '/topic/' + x;
+    }
+</script>
+<script>
     if($('#relatedtopics').children().length > 0){
         $('#setTopic').removeClass('d-none');
-        $('#setTopic').css('margin', '3px -17px;');
-        $('.card-body').css('padding-bottom','36px');
+        $('#setTopic').css('margin', '3px');
     }
 
 </script>
@@ -171,12 +209,12 @@
                             var data = ev.dataTransfer.getData('text');
                             var $data = $(data);
                             $data.removeAttr("opacity");
-                            $(this).append($data);
+                            var source_content = '<div onclick="moveToSource(this)">' + $data.html() + '</div>';
+                            $(this).append(source_content);
                             $("#" + ev.dataTransfer.getData("source")).remove();
                             if($('#dd-target-0').children().length > 0){
                                 $('#setTopic').removeClass('d-none');
-                                $('#setTopic').css('margin', '3px -17px;');
-                                $('.card-body').css('padding-bottom','36px');
+                                $('#setTopic').css('margin', '3px');
                             }
                         }
                         $(this).animate({

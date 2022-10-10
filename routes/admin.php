@@ -144,6 +144,10 @@ Route::group(['prefix' => 'admin'], function () {
             Route::post('/store', 'Admin\CourseController@store')->name('admin.course.store');
             Route::get('/{id}/edit', 'Admin\CourseController@edit')->name('admin.course.edit');
             Route::post('/update', 'Admin\CourseController@update')->name('admin.course.update');
+
+            Route::post('/update/{id}/lesson/', 'Admin\CourseController@updateCourseLesson')->name('admin.course.updateCourseLesson');
+            Route::get('/{cid}/delete/lesson/{lid}', 'Admin\CourseController@deleteCourseLesson')->name('admin.course.deleteCourseLesson');
+
             Route::get('/{id}/delete', 'Admin\CourseController@delete')->name('admin.course.delete');
             Route::post('updateStatus', 'Admin\CourseController@updateStatus')->name('admin.course.updateStatus');
             Route::get('/{id}/details', 'Admin\CourseController@details')->name('admin.course.details');
@@ -160,6 +164,7 @@ Route::group(['prefix' => 'admin'], function () {
             Route::post('/update', 'Admin\LessonController@update')->name('admin.lesson.update');
 
             Route::post('/update/{id}/topic/', 'Admin\LessonController@updateLessonTopic')->name('admin.lesson.updateLessonTopic');
+            Route::get('/delete/lesson/{lid}/topic/{tid}', 'Admin\LessonController@deleteLessonTopic')->name('admin.lesson.deleteLessonTopic');
 
             Route::get('/{id}/delete', 'Admin\LessonController@delete')->name('admin.lesson.delete');
             Route::post('updateStatus', 'Admin\LessonController@updateStatus')->name('admin.lesson.updateStatus');
@@ -265,7 +270,7 @@ Route::group(['prefix' => 'admin'], function () {
             Route::post('/csv-store', 'Admin\CourseTestimonialController@csvStore')->name('admin.course.testimonial.data.csv.store');
             Route::get('/export', 'Admin\CourseTestimonialController@export')->name('admin.course.testimonial.data.csv.export');
         });
-    // });
+        // });
 
         //**  market management  **/
         Route::group(['prefix'  =>   'market'], function () {
@@ -348,8 +353,8 @@ Route::group(['prefix' => 'admin'], function () {
             Route::post('/csv-store', 'Admin\SupportWidgetController@csvStore')->name('admin.support.widget.data.csv.store');
             Route::get('/export', 'Admin\SupportWidgetController@export')->name('admin.support.widget.data.csv.export');
         });
-         //**  support management  **//
-         Route::group(['prefix'  =>   'support/faq/category'], function () {
+        //**  support management  **//
+        Route::group(['prefix'  =>   'support/faq/category'], function () {
             Route::get('/', 'Admin\SupportFaqCategoryController@index')->name('admin.support.faq.category.index');
             Route::get('/create', 'Admin\SupportFaqCategoryController@create')->name('admin.support.faq.category.create');
             Route::post('/store', 'Admin\SupportFaqCategoryController@store')->name('admin.support.faq.category.store');

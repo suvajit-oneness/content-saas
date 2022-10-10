@@ -39,7 +39,8 @@ class AuthController extends BaseController
         $credentials = $request->only('email', 'password');
 
         if (Auth::guard('web')->attempt($credentials)) {
-			return redirect()->route('front.dashboard.index')->with('success', 'Login Successful');
+            return $this->responseRedirect('front.dashboard.index','Login Successful','success',false,false);
+			// return redirect()->route('front.dashboard.index')->with('success', 'Login Successful');
         } else {
             //return redirect()->back()->with(['message' => 'Wrong password!']);
 			return redirect()->back()->with('failure', 'Wrong Password');

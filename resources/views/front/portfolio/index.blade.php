@@ -1,4 +1,4 @@
-@extends('front.layouts.app')
+@extends('front.layouts.appprofile')
 
 @section('title', $data->user->first_name.' '.$data->user->last_name.' Portfolio')
 

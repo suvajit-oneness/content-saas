@@ -1,5 +1,7 @@
 @extends('admin.app')
-@section('title') {{ $pageTitle }} @endsection
+@section('title')
+    {{ $pageTitle }}
+@endsection
 
 @section('content')
     <div class="app-title">
@@ -27,6 +29,14 @@
                         <tr>
                             <td>Description</td>
                             <td>{!! $lesson->description !!}</td>
+                        </tr>
+                        <tr>
+                            <td>Related topics:</td>
+                            <td>
+                                @foreach ($lesson_topics as $item)
+                                    <li style="list-style: decimal;"><a href="{{ route('admin.topic.details', $item->topic_id) }}">{{ $item->title }}</a></li>
+                                @endforeach
+                            </td>
                         </tr>
                     </tbody>
                 </table>

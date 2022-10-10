@@ -28,11 +28,11 @@ class LessonController extends BaseController
     public function index(Request $request)
     {
         $pageTitle = "Lessons";
-        if(!empty($request->term))
-            $lessons = Lesson::where('title','like','%'.$request->term.'%')->paginate(25);
+        if (!empty($request->term))
+            $lessons = Lesson::where('title', 'like', '%' . $request->term . '%')->paginate(25);
         else
             $lessons = Lesson::paginate(25);
-        return view('admin.lesson.index', compact('lessons','pageTitle'));
+        return view('admin.lesson.index', compact('lessons', 'pageTitle'));
     }
 
     public function create()
@@ -67,7 +67,7 @@ class LessonController extends BaseController
             return $this->responseRedirectBack('Error occurred while creating Lesson.', 'error', true, true);
         }
 
-        return $this->responseRedirect('admin.lesson.index', 'Lesson has been added successfully' ,'success',false, false);
+        return $this->responseRedirect('admin.lesson.index', 'Lesson has been added successfully', 'success', false, false);
     }
 
     /**
@@ -77,9 +77,20 @@ class LessonController extends BaseController
     public function edit($id)
     {
         $lesson = Lesson::find($id);
-        $topics = Topic::all();
-        $this->setPageTitle('Lesson', 'Lesson Edit : '.$lesson->title);
-        return view('admin.lesson.edit', compact('lesson','topics'));
+        $this->setPageTitle('Lesson', 'Lesson Edit : ' . $lesson->title);
+
+        $lesson_topics = LessonTopic::where('lesson_id', $id)->join('topics as t', 't.id', '=', 'topic_id')->get();
+        $selected_topic_ids = [];
+        foreach ($lesson_topics as $value) {
+            array_push($selected_topic_ids, $value->topic_id);
+        }
+        // dd($selected_topic_ids);
+
+        $topics = Topic::whereNotIn('id', $selected_topic_ids)->get();
+
+        // dd($lesson_topics);
+
+        return view('admin.lesson.edit', compact('lesson', 'topics', 'lesson_topics'));
     }
 
     /**
@@ -97,29 +108,36 @@ class LessonController extends BaseController
 
         $lesson = Lesson::find($request->id);
 
-        if($lesson->title != $request->title){
+        if ($lesson->title != $request->title) {
             $lesson->title = $request->title;
             $lesson->slug = slugGenerate($request->title, 'lessons');
         }
 
         $lesson->description = $request->description;
 
-        if(!empty($request->image))
+        if (!empty($request->image))
             $lesson->image = imageUpload($request->image, 'lessons');
 
         if (!$lesson->save()) {
             return $this->responseRedirectBack('Error occurred while updating.', 'error', true, true);
         }
-        return $this->responseRedirectBack('Lesson has been updated successfully' ,'success',false, false);
+        return $this->responseRedirectBack('Lesson has been updated successfully', 'success', false, false);
     }
 
     public function updateLessonTopic($id, Request $request)
     {
         // dd($request->all());
         foreach ($request->topics as $value) {
-            LessonTopic::insert(['lesson_id'=>$id, 'topic_id'=>$value]);
+            if (LessonTopic::where('lesson_id', $id)->where('topic_id', $value)->count() <= 0)
+                LessonTopic::insert(['lesson_id' => $id, 'topic_id' => $value]);
         }
-        return $this->responseRedirectBack('Lesson Topics updated successfully' ,'success',false, false);
+        return $this->responseRedirectBack('Lesson Topics updated successfully', 'success', false, false);
+    }
+
+    public function deleteLessonTopic($lid, $tid)
+    {
+        LessonTopic::where('lesson_id', $lid)->where('topic_id', $tid)->delete();
+        return $this->responseRedirectBack('Lesson Topics deleted successfully', 'success', false, false);
     }
 
     /**
@@ -133,7 +151,7 @@ class LessonController extends BaseController
         if (!$deleted) {
             return $this->responseRedirectBack('Error occurred while deleting course.', 'error', true, true);
         }
-        return $this->responseRedirect('admin.lesson.index', 'Lesson has been deleted successfully' ,'success',false, false);
+        return $this->responseRedirect('admin.lesson.index', 'Lesson has been deleted successfully', 'success', false, false);
     }
 
     /**
@@ -141,7 +159,8 @@ class LessonController extends BaseController
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function updateStatus(Request $request){
+    public function updateStatus(Request $request)
+    {
 
         // dd($request->all());
 
@@ -149,7 +168,7 @@ class LessonController extends BaseController
         $lesson->status = $request->check_status;
 
         if ($lesson->save()) {
-            return response()->json(array('message'=>'Lesson status has been successfully updated'));
+            return response()->json(array('message' => 'Lesson status has been successfully updated'));
         }
     }
 
@@ -160,9 +179,10 @@ class LessonController extends BaseController
     public function details($id)
     {
         $lesson = Lesson::find($id);
+        $lesson_topics = LessonTopic::where('lesson_id', $id)->join('topics as t', 't.id', '=', 'topic_id')->get();
 
-        $this->setPageTitle('Lesson', 'Lesson Details : '.$lesson->title);
-        return view('admin.lesson.details', compact('lesson'));
+        $this->setPageTitle('Lesson', 'Lesson Details : ' . $lesson->title);
+        return view('admin.lesson.details', compact('lesson', 'lesson_topics'));
     }
 
     public function csvStore(Request $request)
@@ -220,7 +240,7 @@ class LessonController extends BaseController
                         $commaSeperatedCats = '';
                         $count = 0;
                         $commaSeperatedSubCats = '';
-                         $count = $total = 0;
+                        $count = $total = 0;
                         $successArr = $failureArr = [];
 
 
@@ -244,7 +264,7 @@ class LessonController extends BaseController
                                     "slug" => $slug
                                 );
 
-                                $resp =Lesson::insert($insertData);
+                                $resp = Lesson::insert($insertData);
                                 $count = $count + 1;
                                 // $successArr = $resp['successArr'];
                                 // $failureArr = $resp['failureArr'];
@@ -253,12 +273,11 @@ class LessonController extends BaseController
                         }
                     }
                     //Session::flash('message', 'Import Successful.');
-                        if($count==0){
-                            FacadesSession::flash('csv', 'Already Uploaded. ');
-                        }
-                        else{
-                             FacadesSession::flash('csv', 'Import Successful. '.$count.' Data Uploaded');
-                        }
+                    if ($count == 0) {
+                        FacadesSession::flash('csv', 'Already Uploaded. ');
+                    } else {
+                        FacadesSession::flash('csv', 'Import Successful. ' . $count . ' Data Uploaded');
+                    }
                 } else {
                     FacadesSession::flash('message', 'File too large. File must be less than 50MB.');
                 }

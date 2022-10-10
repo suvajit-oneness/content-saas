@@ -68,11 +68,37 @@
                 <h3>Select Lesson</h3>
             </div>
             <div class="card-body">
-                <ul>
-                    @foreach ($lessons as $lesson)
-                        <li>{{ $lesson->title }}</li>
+                <div class="row row-eq-height">
+                    <div class="col-sm-5 pt-2" style="border: 1px solid black;" data-dd="source">
+                        <h3 data-dd-status="fixed" class="m-2">All Lesson</h3>
+                        <hr>
+                        @foreach ($lessons as $lesson)
+                            <div onclick="moveToTarget(this)"><input type="checkbox" checked value="{{ $lesson->id }}" name="lesson[]" class="d-none">{{ $lesson->title }}</div>
+                        @endforeach
+                    </div>
+                    <div class="col-sm-2 d-flex align-items-center justify-content-center">
+                        <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                    </div>
+                    <form action="{{ route('admin.course.updateCourseLesson', $course->id) }}" method="POST" class="col-sm-5" style="border: 1px solid black;">
+                        @csrf
+                        <div class="d-flex justify-content-between m-2">
+                            <h3 data-dd-status="fixed">Selected Topics</h3>
+                            <button type="submit" id="setTopic" class="d-none btn btn-primary btn-sm" style="float: right;">Set topics</button>
+                        </div>
+                        <hr>
+                        <div style="height: 100%" id="relatedtopics" data-dd="target" data-dd-reordable="true">
+                            @foreach ($course_lessons as $lesson)
+                                <div><input type="checkbox" checked value="{{ $lesson->id }}" name="lesson[]" class="d-none">{{ $lesson->title }} <span class="text-danger text-bold" style="cursor: pointer;" onclick="deleteLessonTopic('{{$lesson->lesson_id}}','{{$lesson->course_id}}')">X</span></div>
+                            @endforeach
+                        </div>
+                    </form>
+                </div>
+
+                {{-- <ul>
+                    @foreach ($topics as $topic)
+                        <li>{{ $topic->title }}</li>
                     @endforeach
-                </ul>
+                </ul> --}}
             </div>
         </div>
     </div>
@@ -97,3 +123,122 @@
         </div>
     </div> --}}
 @endsection
+@push('scripts')
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+    function moveToTarget(x) {
+        // console.log($(x).html());
+        var source_content = '<div onclick="moveToSource(this)">' + $(x).html() + '</div>';
+        $('div[data-dd="target"]').append(source_content);
+        $(x).remove();
+
+        if($('div[data-dd="target"]').children().length > 0){
+            $('#setTopic').removeClass('d-none');
+            $('#setTopic').css('margin', '3px');
+        }
+    }
+
+    function moveToSource(x) {
+        var source_content = '<div onclick="moveToTarget(this)">' + $(x).html() + '</div>';
+        $('div[data-dd="source"]').append(source_content);
+        $(x).remove();
+
+        if($('div[data-dd="target"]').children().length > 0){
+            $('#setTopic').removeClass('d-none');
+            $('#setTopic').css('margin', '3px');
+        }else{
+            $('#setTopic').addClass('d-none');
+        }
+    }
+
+    function deleteLessonTopic(x,y){
+        window.location.href = '{{url("/")}}'+'/admin/course/' + y + '/delete/lesson/' + x;
+    }
+</script>
+<script>
+    if($('#relatedtopics').children().length > 0){
+        $('#setTopic').removeClass('d-none');
+        $('#setTopic').css('margin', '3px');
+    }
+
+</script>
+<script>
+    $.event.props.push('dataTransfer');
+    $(function() {
+        var $sources = $('div[data-dd="source"]');
+        var $targets = $('div[data-dd="target"]');
+        var i, $origin;
+        if($sources.length > 0) {
+            $sources.find('*').each(function(idx, item) {
+                var $element = $(item);
+                $element.attr("unselectable", "on"); // IE
+                $element.attr("id", "dd-source-" + idx);
+                if(($element.attr("data-dd-status") && $element.attr("data-dd-status") == 'draggable') || !$element.attr("data-dd-status")) {
+                    $element.prop("draggable", true);
+                }
+                $element.on({
+                    dragstart: function(ev) {
+                        i = $(this).index;
+                        $(this).css({ 'opacity': '0.65' });
+                        $origin = $(this);
+                        ev.dataTransfer.setData('text', $element[0].outerHTML);
+                        ev.dataTransfer.setData('source', $element.attr("id"));
+                    }
+                });
+            });
+            $targets.each(function(idx, item) {
+                var $element = $(item);
+                $element.attr("id", "dd-target-" + idx);
+                $element.on({
+                    dragenter: function(ev) {
+                        $(this).animate({
+                            'box-shadow': '2px 2px 4px #aaf'
+                        }, 'fast');
+                        ev.preventDefault();
+                    },
+                    dragleave: function(ev) {
+                        $(this).animate({
+                            'box-shadow': 'initial'
+                        }, 'fast');
+                    },
+                    dragover: function(ev) {
+                        ev.preventDefault();
+                    },
+                    drop: function(ev) {
+                        if(i !== $(this).index()) {
+                            var data = ev.dataTransfer.getData('text');
+                            var $data = $(data);
+                            $data.removeAttr("opacity");
+                            var source_content = '<div onclick="moveToSource(this)">' + $data.html() + '</div>';
+                            $(this).append(source_content);
+                            $("#" + ev.dataTransfer.getData("source")).remove();
+                            if($('#dd-target-0').children().length > 0){
+                                $('#setTopic').removeClass('d-none');
+                                $('#setTopic').css('margin', '3px');
+                            }
+                        }
+                        $(this).animate({
+                            'box-shadow': 'initial'
+                        }, 'fast');
+                    },
+                    dragend: function(ev) {
+                        $(this).css({ 'opacity': '1.0' });
+                    }
+                });
+            });
+        }
+        $("[draggable]").each(function(idx, item) {
+            var $element = $(item);
+            if(($element.attr("data-dd-reordable") && $element.attr("data-dd-reordable") == 'true')) {
+                $element.on({
+                    drop: function(ev) {
+                        if(i !== $(this).index()) {
+
+                        }
+                    }
+                });
+            }
+        });
+    });
+</script>
+@endpush
