@@ -7,7 +7,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12 text-center">
-                <h2>Free Online Courses</h2>
+                <h2>Online Courses</h2>
             </div>
         </div>
 
@@ -49,10 +49,10 @@
                     </div>
                     <div class="courses-info">
                         <div class="courses-badge">
-                            <span><img src="{{URL::to('/').'/coursecategories/'}}{{$data->category->image}}" alt=""> {{ $data->category->title }}</span>
+                            {{-- <span><img src="{{URL::to('/').'/coursecategories/'}}{{$data->category->image}}" alt=""> {{ $data->category->title }}</span> --}}
                         </div>
                         <div class="courses-heading">
-                            <h4>{{ $data->course_name }}</h4>
+                            <h4>{{ $data->title }}</h4>
                             <div class="courses-lession-time">
                                 <ul class="list-unstyled p-0 m-0">
                                     <li>

@@ -38,8 +38,9 @@ class CourseController extends BaseController
 
     public function create()
     {
+        $course_category = CourseCategory::orderBy('title')->get();
         $this->setPageTitle('Course', 'Create Course');
-        return view('admin.course.create');
+        return view('admin.course.create',compact('course_category'));
     }
 
     public function store(Request $request)

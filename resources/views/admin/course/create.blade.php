@@ -23,19 +23,19 @@
                     enctype="multipart/form-data">
                     @csrf
                     <div class="tile-body">
-                        {{-- <div class="form-group">
+                        <div class="form-group">
                             <label class="control-label" for="category_id"> Category <span class="m-l-5 text-danger">
                                     *</span></label>
                             <select class="form-control" name="category_id">
                                 <option value="" hidden selected>Select Categoy...</option>
-                                @foreach ($categories as $index => $item)
+                                @foreach ($course_category as $index => $item)
                                     <option value="{{ $item->id }}">{{ $item->title }}</option>
                                 @endforeach
                             </select>
                             @error('category_id')
                                 <p class="small text-danger">{{ $message }}</p>
                             @enderror
-                        </div> --}}
+                        </div>
                         <div class="form-group">
                             <label class="control-label" for="title">Course Name <span class="m-l-5 text-danger">
                                     *</span></label>
@@ -59,6 +59,71 @@
                                 <p class="small text-danger">{{ $message }}</p>
                             @enderror
                         </div>
+
+                        <h4>Additional Course description</h4>
+                        <hr>
+
+                        <div class="form-group">
+                            <label class="control-label" for="certificate">Course certification</label>
+                            <input type="checkbox" name="certificate" id="certificate" class="form-control">
+                            @error('certificate')
+                                <p class="small text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="price">Price ($)</label>
+                            <input type="number" name="price" id="price" class="form-control">
+                            @error('price')
+                                <p class="small text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="preview_video">Preview Video</label>
+                            <input type="file" name="preview_video" id="preview_video" class="form-control">
+                            @error('preview_video')
+                                <p class="small text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="course_content">Course Content</label>
+                            <textarea name="course_content" id="course_content" class="form-control"></textarea>
+                            @error('course_content')
+                                <p class="small text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="requirements">Requirments</label>
+                            <input type="text" name="requirements" id="requirements" class="form-control">
+                            @error('requirements')
+                                <p class="small text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="target">Target Audience</label>
+                            <input type="text" name="target" id="target" class="form-control">
+                            @error('target')
+                                <p class="small text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="company_name">Company Name</label>
+                            <input type="text" name="company_name" id="company_name" class="form-control">
+                            @error('company_name')
+                                <p class="small text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="language">Language</label>
+                            <select name="language" id="language" class="form-control">
+                                <option value="English">English</option>
+                            </select>
+                            @error('language')
+                                <p class="small text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        
+
+
                     </div><br>
                     <div class="tile-footer">
                         <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save
