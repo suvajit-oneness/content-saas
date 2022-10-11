@@ -268,353 +268,300 @@
 
                             <tbody class="tbody-content tbody-content-edit" id="employment-history">
                                 <tr>
-                                    <td></td>
-                                    <td></td>
                                     <td>
                                         <div class="action">
-                                            <a type="button" href="{{ route('front.portfolio.work-experience.create') }}" class="btn btn-primary"  title="Create">Create</a>
+                                            <a type="button" href="{{ route('front.portfolio.work-experience.create') }}" class="add-btn-edit d-inline-block"  title="Create">Create <i class="fa-solid fa-plus-circle"></i></a>
                                         </div>
+                                        @foreach($data->employments as $key=> $item)
+                                            <div class="employmentBox">
+                                                <div class="action">
+                                                    <a href="{{ route('front.portfolio.work-experience.edit', $item->id) }}" title="Edit Profile"><i class="fa-solid fa-pen edit table-icon"></i></a>
+                                                    <a href="{{ route('front.portfolio.work-experience.delete', $item->id) }}" title="Delete"><i class="fa-solid fa-trash-can trash table-icon"></i></a>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <div class="col-3">
+                                                        <label>Designation</label>
+                                                        <p>{{ $item->occupation }}</p>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <label>Company Name</label>
+                                                        <p>{{ $item->company_title }}</p>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <label>Duration</label>
+                                                        <p>{{ $item->year_from.' - '.$item->year_to }}</p>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <label>Contact</label>
+                                                        <p>{{ $item->phone_number }}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <div class="col-3">
+                                                        <label>Email</label>
+                                                        <p>{{ $item->email_id }}</p>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <label>Owner Name</label>
+                                                        <p>{{ $item->owner_name }}</p>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <label>Manager Name</label>
+                                                        <p>{{ $item->manager_name }}</p>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <label>Url</label>
+                                                        <p>{{ $item->link }}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-12">
+                                                        <div class="box">
+                                                            <h4>Short Description</h4>
+                                                            <p>{{ $item->short_desc }}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-12">
+                                                        <div class="box">
+                                                            <h4>Long Description</h4>
+                                                            <p>{{ $item->short_desc }}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach   
                                     </td>
                                 </tr>
-                                @foreach($data->employments as $key=> $item)
-                                    <tr>
-                                        <td>Designation</td>
-                                        <td>{{ $item->occupation }}</td>
-                                        <td rowspan="4">
-                                            <div class="action">
-
-                                                <a href="{{ route('front.portfolio.work-experience.edit', $item->id) }}" title="Edit Profile"><i class="fa-solid fa-pen edit table-icon"></i></a>
-                                                <a href="{{ route('front.portfolio.work-experience.delete', $item->id) }}" title="Delete"><i class="fa-solid fa-trash-can trash table-icon"></i>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Company Name</td>
-
-                                        <td>{{ $item->company_title }}</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Duration</td>
-
-                                        <td>{{ $item->year_from.' - '.$item->year_to }}</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Contact</td>
-
-                                        <td>{{ $item->phone_number }}</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Email</td>
-
-                                        <td>{{ $item->email_id }}</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Owner Name</td>
-
-                                        <td>{{ $item->owner_name }}</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Manager Name</td>
-
-                                        <td>{{ $item->manager_name }}</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Url</td>
-
-                                        <td>{{ $item->link }}</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Short Description</td>
-
-                                        <td>{{ $item->short_desc }}</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="border-bottom">Long Description</td>
-
-                                        <td class="border-bottom">{{ $item->short_desc }}</td>
-                                        <td></td>
-                                    </tr>
-                                @endforeach
                             </tbody>
 
 
 
                             <tbody class="tbody-content tbody-content-edit" id="client">
                                 <tr>
-                                    <td></td>
-                                    <td></td>
                                     <td>
                                         <div class="action">
-                                            <a type="button" href="{{ route('front.portfolio.client.create') }}" class="btn btn-primary"  title="Create">Create</a>
+                                            <a type="button" href="{{ route('front.portfolio.client.create') }}" class="add-btn-edit d-inline-block"  title="Create">Create <i class="fa-solid fa-plus-circle"></i></a>
                                         </div>
+                                        @foreach($data->clients as $key=> $item)
+                                            <div class="employmentBox">
+                                                <div class="action">
+                                                    <a href="{{ route('front.portfolio.client.edit', $item->id) }}" title="Edit Profile"><i class="fa-solid fa-pen edit table-icon"></i></a>
+                                                    <a href="{{ route('front.portfolio.client.delete', $item->id) }}" title="Delete"><i class="fa-solid fa-trash-can trash table-icon"></i></a>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-3 mb-3">
+                                                    @if($item->image)
+                                                    <img src="{{ asset('uploads/client/'.$item->image) }}" id="articleImage" class="img-fluid" alt="" width="100" height="100">
+                                                    @else
+                                                    <span></span>
+                                                    @endif
+                                                    </div>
+                                                    <div class="col-3 mb-3">
+                                                        <label>Client Name</label>
+                                                        <p>{{ $item->client_name }}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    
+                                                    <div class="col-3 mb-3">
+                                                        <label>Designation</label>
+                                                        <p>{{ $item->occupation }}</p>
+                                                    </div>
+                                                    <div class="col-3 mb-3">
+                                                        <label>Email</label>
+                                                        <p>{{ $item->email_id }}</p>
+                                                    </div>
+                                                    <div class="col-3 mb-3">
+                                                        <label>Contact</label>
+                                                        <p>{{ $item->phone_number }}</p>
+                                                    </div>
+                                                    <div class="col-3 mb-3">
+                                                        <label>Url</label>
+                                                        <p>{{ $item->link }}</p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-12">
+                                                        <div class="box">
+                                                            <h4>Short Description</h4>
+                                                            <p>{{ $item->short_desc }}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-12">
+                                                        <div class="box">
+                                                            <h4>Long Description</h4>
+                                                            <p>{{ $item->long_desc }}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach    
                                     </td>
                                 </tr>
-                                @foreach($data->clients as $key=> $item)
-                                    <tr>
-                                        <td>Client Name</td>
-                                        <td>{{ $item->client_name }}</td>
-                                        <td rowspan="4">
-                                            <div class="action">
-                                                <a href="{{ route('front.portfolio.client.edit', $item->id) }}" title="Edit Profile"><i class="fa-solid fa-pen edit table-icon"></i></a>
-                                                <a href="{{ route('front.portfolio.client.delete', $item->id) }}" title="Delete"><i class="fa-solid fa-trash-can trash table-icon"></i>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Designation</td>
-
-                                        <td>{{ $item->occupation }}</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Contact</td>
-
-                                        <td>{{ $item->phone_number }}</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Email</td>
-
-                                        <td>{{ $item->email_id }}</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Url</td>
-
-                                        <td>{{ $item->link }}</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Description</td>
-
-                                        <td>{{ $item->short_desc }}</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Long Description</td>
-
-                                        <td>{{ $item->long_desc }}</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="border-bottom">Image</td>
-                                        @if($item->image)
-                                        <td  class="border-bottom"> <img src="{{ asset('uploads/client/'.$item->image) }}" id="articleImage" class="img-fluid" alt="" width="100" height="100">
-                                        </td>
-                                        @else
-                                        <td></td>
-                                        @endif
-                                        <td></td>
-                                    </tr>
-                                @endforeach
                             </tbody>
 
 
 
                             <tbody class="tbody-content tbody-content-edit" id="education">
                                 <tr>
-                                    <td></td>
-                                    <td></td>
                                     <td>
                                         <div class="action">
-                                            <a type="button" href="{{ route('front.portfolio.education.create') }}" class="btn btn-primary"  title="Create">Create</a>
+                                            <a type="button" href="{{ route('front.portfolio.education.create') }}" class="add-btn-edit d-inline-block"  title="Create">Create <i class="fa-solid fa-plus-circle"></i></a>
                                         </div>
+                                        @foreach($data->educations as $key=> $item)
+                                        <div class="employmentBox">
+                                            <div class="action">
+                                                <a href="{{ route('front.portfolio.education.edit', $item->id) }}" title="Edit Profile"><i class="fa-solid fa-pen edit table-icon"></i></a>
+                                                <a href="{{ route('front.portfolio.education.delete', $item->id) }}" title="Delete"><i class="fa-solid fa-trash-can trash table-icon"></i></a>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-4 mb-3">
+                                                    <label>Degree</label>
+                                                    <p>{{ $item->degree }}</p>
+                                                </div>
+                                                <div class="col-4 mb-3">
+                                                    <label>Institution Name</label>
+                                                    <p>{{ $item->college_name }}</p>
+                                                </div>
+                                                <div class="col-4 mb-3">
+                                                    <label>
+                                                        Duration
+                                                    </label>
+                                                    <p>{{ $item->year_from.' - '.$item->year_to }}</p>
+                                                </div>
+                                                <div class="col-6 mb-3">
+                                                    <label>Percentage</label>
+                                                    <p>{{ $item->score }}</p>
+                                                </div>
+                                                <div class="col-6 mb-3">
+                                                    <label>Url</label>
+                                                    <p>{{ $item->link }}</p>
+                                                </div>
+                                            
+                                                <div class="col-lg-6 col-12 mb-3">
+                                                    <label>Short Description</label>
+                                                    <p>{{ $item->short_desc }}</p>
+                                                </div>
+                                                <div class="col-lg-6 col-12 mb-3">
+                                                    <label>Long Description</label>
+                                                    <p>{{ $item->long_desc }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @endforeach
+                                
                                     </td>
                                 </tr>
-                                @foreach($data->educations as $key=> $item)
-                                    <tr>
-                                        <td>Degree</td>
-                                        <td>{{ $item->degree }}</td>
-                                        <td rowspan="4">
-                                            <div class="action">
-
-                                                <a href="{{ route('front.portfolio.education.edit', $item->id) }}" title="Edit Profile"><i class="fa-solid fa-pen edit table-icon"></i></a>
-                                                <a href="{{ route('front.portfolio.education.delete', $item->id) }}" title="Delete"><i class="fa-solid fa-trash-can trash table-icon"></i>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Institution Name</td>
-
-                                        <td>{{ $item->college_name }}</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Duration</td>
-
-                                        <td>{{ $item->year_from.' - '.$item->year_to }}</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Percentage</td>
-
-                                        <td>{{ $item->score }}</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Short Description</td>
-
-                                        <td>{{ $item->short_desc }}</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Long Description</td>
-
-                                        <td>{{ $item->long_desc }}</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="border-bottom">Url</td>
-
-                                        <td class="border-bottom">{{ $item->link }}</td>
-                                        <td></td>
-                                    </tr>
-                                @endforeach
                             </tbody>
 
 
 
                             <tbody class="tbody-content tbody-content-edit" id="testimonial">
                                 <tr>
-                                    <td></td>
-                                    <td></td>
                                     <td>
                                         <div class="action">
-                                            <a type="button" href="{{ route('front.portfolio.testimonial.create') }}" class="btn btn-primary"  title="Create">Create</a>
+                                            <a type="button" href="{{ route('front.portfolio.testimonial.create') }}" class="add-btn-edit d-inline-block"  title="Create">Create <i class="fa-solid fa-plus-circle"></i></a>
                                         </div>
+                                        @foreach($data->testimonials as $key=> $item)
+                                        <div class="employmentBox">
+                                            <div class="action">
+                                                <a href="{{ route('front.portfolio.testimonial.edit', $item->id) }}" title="Edit Profile"><i class="fa-solid fa-pen edit table-icon"></i></a>
+                                                <a href="{{ route('front.portfolio.testimonial.delete', $item->id) }}" title="Delete"><i class="fa-solid fa-trash-can trash table-icon"></i></a>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-6 mb-3">
+                                                    <label>Image</label>
+                                                    @if($item->file)
+                                                    <img src="{{ asset('uploads/testimonial/'.$item->image) }}" id="articleImage" class="img-fluid" alt="">
+                                                    @else
+                                                    <span></span>
+                                                    @endif
+                                                </div>
+                                                <div class="col-6 mb-3">
+                                                    <label>Client Name</label>
+                                                    <p>{{ $item->client_name }}</p>
+                                                </div>
+                                                <div class="col-3 mb-3">
+                                                    <label>Designation</label>
+                                                    <p>{{ $item->occupation }}</p>
+                                                </div>
+                                                <div class="col-3 mb-3">
+                                                    <label>Contact</label>
+                                                    <p>{{ $item->phone_number }}</p>
+                                                </div>
+                                                <div class="col-3 mb-3">
+                                                    <label>Email</label>
+                                                    <p>{{ $item->email_id }}</p>
+                                                </div>
+                                                <div class="col-3 mb-3">
+                                                    <label>Url</label>
+                                                    <p>{{ $item->link }}</p>
+                                                </div>
+                                                <div class="col-lg-6 col-12 mb-3">
+                                                    <label>Short Description</label>
+                                                    <p>{{ $item->short_desc }}</p>
+                                                </div>
+                                                <div class="col-lg-6 col-12 mb-3">
+                                                    <label>Long Description</label>
+                                                    <p>{{ $item->long_desc }}</p>
+                                                </div>
+                                            </div>
+                                        </div>  
+                                        @endforeach
                                     </td>
                                 </tr>
-                                @foreach($data->testimonials as $key=> $item)
-                                    <tr>
-                                        <td>Client Name</td>
-                                        <td>{{ $item->client_name }}</td>
-                                        <td rowspan="4">
-                                            <div class="action">
-
-                                                <a href="{{ route('front.portfolio.testimonial.edit', $item->id) }}" title="Edit Profile"><i class="fa-solid fa-pen edit table-icon"></i></a>
-                                                <a href="{{ route('front.portfolio.testimonial.delete', $item->id) }}" title="Delete"><i class="fa-solid fa-trash-can trash table-icon"></i>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Designation</td>
-
-                                        <td>{{ $item->occupation }}</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Contact</td>
-
-                                        <td>{{ $item->phone_number }}</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Email</td>
-
-                                        <td>{{ $item->email_id }}</td>
-
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Url</td>
-
-                                        <td>{{ $item->link }}</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Short Description</td>
-
-                                        <td>{{ $item->short_desc }}</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Long Description</td>
-
-                                        <td>{{ $item->long_desc }}</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="border-bottom">Image</td>
-
-                                        <td class="border-bottom">
-                                            @if($item->file)
-                                            <td> <img src="{{ asset('uploads/testimonial/'.$item->image) }}" id="articleImage" class="img-fluid" alt="">
-                                            </td>
-                                            @else
-                                            <td></td>
-                                            @endif</td>
-                                    </tr>
-                                @endforeach
                             </tbody>
 
 
 
                             <tbody class="tbody-content tbody-content-edit" id="certificate">
                                 <tr>
-                                    <td></td>
-                                    <td></td>
                                     <td>
                                         <div class="action">
-                                            <a type="button" href="{{ route('front.portfolio.certification.create') }}" class="btn btn-primary"  title="Create">Create</a>
+                                            <a type="button" href="{{ route('front.portfolio.certification.create') }}" class="add-btn-edit d-inline-block"  title="Create">Create <i class="fa-solid fa-plus-circle"></i></a>
                                         </div>
+                                        @foreach($data->certificates as $key=> $item)
+                                            <div class="employmentBox">
+                                                <div class="action">
+                                                    <a href="{{ route('front.portfolio.certification.edit', $item->id) }}" title="Edit Profile"><i class="fa-solid fa-pen edit table-icon"></i></a>
+                                                    <a href="{{ route('front.portfolio.certification.delete', $item->id) }}" title="Delete"><i class="fa-solid fa-trash-can trash table-icon"></i></a>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-3 mb-3">
+                                                        <label>Title</label>
+                                                        <p>{{ $item->certificate_title }}</p>
+                                                    </div>
+                                                    <div class="col-3 mb-3">
+                                                        <label>Type</label>
+                                                        <p>{{ $item->certificate_type }}</p>
+                                                    </div>
+                                                    <div class="col-3 mb-3">
+                                                        <label>Url</label>
+                                                        <p>{{ $item->link }}</p>
+                                                    </div>
+                                                    <div class="col-12 mb-3">
+                                                        <label>Certificate</label>
+                                                        @if($item->file)
+                                                        <img src="{{ asset('uploads/certificate/'.$item->file) }}" id="articleImage" class="img-fluid" alt="">
+                                                        @else
+                                                        <span></span>
+                                                        @endif
+                                                    </div>
+                                                    <div class="col-6 mb-3">
+                                                        <label>Short Description</label>
+                                                        <p>{{ $item->short_desc }}</p>
+                                                    </div>
+                                                    <div class="col-6 mb-3">
+                                                        <label>Long Description</label>
+                                                        <p>{{ $item->long_desc }}</p>
+                                                    </div>
+                                                </div>
+                                            </div>                                            
+                                        @endforeach
                                     </td>
                                 </tr>
-                                @foreach($data->certificates as $key=> $item)
-                                    <tr>
-                                        <td>Title</td>
-                                        <td>{{ $item->certificate_title }}</td>
-                                        <td rowspan="4">
-                                            <div class="action">
-
-                                                <a href="{{ route('front.portfolio.certification.edit', $item->id) }}" title="Edit Profile"><i class="fa-solid fa-pen edit table-icon"></i></a>
-                                                <a href="{{ route('front.portfolio.certification.delete', $item->id) }}" title="Delete"><i class="fa-solid fa-trash-can trash table-icon"></i>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Type</td>
-
-                                        <td>{{ $item->certificate_type }}</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Url</td>
-
-                                        <td>{{ $item->link }}</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Short Description</td>
-
-                                        <td>{{ $item->short_desc }}</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Long Description</td>
-
-                                        <td>{{ $item->long_desc }}</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="border-bottom">Certificate</td>
-
-                                        <td class="border-bottom">
-                                            @if($item->file)
-                                            <td> <img src="{{ asset('uploads/certificate/'.$item->file) }}" id="articleImage" class="img-fluid" alt="">
-                                            </td>
-                                            @else
-                                            <td></td>
-                                            @endif</td>
-                                    </tr>
-                                @endforeach
                             </tbody>
                             
                         </table>
