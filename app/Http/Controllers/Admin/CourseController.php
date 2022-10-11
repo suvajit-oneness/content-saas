@@ -45,30 +45,55 @@ class CourseController extends BaseController
 
     public function store(Request $request)
     {
+        // dd($request->all());
         $this->validate($request, [
-            'title'      =>  'required|max:191',
-            'image'      =>  'required|file|mimes:png,jpg',
+            'category_id' => 'required',
+            'title' => 'required|max:191',
+            'image' => 'required|file|mimes:png,jpg',
+            'short_description' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'preview_video' => 'required|file|mimes:mp4',
+            'course_content' => 'required',
+            'requirements' => 'required',
+            'target' => 'required',
+            'company_name' => 'required',
+            'language' => 'required',
         ]);
 
         $params = $request->except('_token');
 
-        $lesson = new Course();
-        $lesson->title = $params['title'];
+        $course = new Course();
+        $course->title = $params['title'];
+
+        $course->category_id = $params['category_id'];
 
         // slug
-        $lesson->slug = slugGenerate($params['title'], 'courses');
+        $course->slug = slugGenerate($params['title'], 'courses');
 
         // image
-        $lesson->image = imageUpload($params['image'], 'courses');
+        $course->image = imageUpload($params['image'], 'courses');
+        $course->preview_video = imageUpload($params['preview_video'], 'courses/video');
 
-        $lesson->description = $params['short_description'];
-        $lesson->save();
+        $course->short_description = $params['short_description'];
+        $course->description = $params['description'];
+        
+        $course->price = $params['price'];
+        $course->course_content = $params['course_content'];
+        $course->requirements = $params['requirements'];
+        $course->target = $params['target'];
+        $course->company_name = $params['company_name'];
+        $course->language = $params['language'];
 
-        if (!$lesson) {
-            return $this->responseRedirectBack('Error occurred while creating Lesson.', 'error', true, true);
+        $course->certificate = isset($request->certificate) ? 1 : 0;
+
+        $course->save();
+
+        if (!$course) {
+            return $this->responseRedirectBack('Error occurred while creating course.', 'error', true, true);
         }
 
-        return $this->responseRedirect('admin.course.index', 'Lesson has been added successfully', 'success', false, false);
+        return $this->responseRedirect('admin.course.index', 'Course has been added successfully', 'success', false, false);
     }
 
     /**
@@ -89,7 +114,10 @@ class CourseController extends BaseController
         // dd($course_lessons);
 
         $lessons = Lesson::whereNotIn('id', $selected_lesson_ids)->get();
-        return view('admin.course.edit', compact('course', 'lessons', 'course_lessons'));
+
+        $course_category = CourseCategory::orderBy('title')->get();
+
+        return view('admin.course.edit', compact('course', 'lessons', 'course_lessons', 'course_category'));
     }
 
     /**
@@ -100,12 +128,23 @@ class CourseController extends BaseController
     public function update(Request $request)
     {
         $this->validate($request, [
-            'title' =>  'required|max:191',
-            'description' => 'required| min:2',
-            'image' => 'nullable|file|mimes:jpeg,png'
+            'category_id' => 'required',
+            'title' => 'required|max:191',
+            'image' => 'nullable|file|mimes:png,jpg',
+            'short_description' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'preview_video' => 'nullable|file|mimes:mp4',
+            'course_content' => 'required',
+            'requirements' => 'required',
+            'target' => 'required',
+            'company_name' => 'required',
+            'language' => 'required',
         ]);
 
         $course = Course::find($request->id);
+
+        $course->category_id = $request->category_id;
 
         if ($course->title != $request->title) {
             $course->title = $request->title;
@@ -114,12 +153,27 @@ class CourseController extends BaseController
 
         $course->description = $request->description;
 
+        $course->short_description = $request->short_description;
+        $course->price = $request->price;
+        $course->course_content = $request->course_content;
+        $course->requirements = $request->requirements;
+        $course->target = $request->target;
+        $course->company_name = $request->company_name;
+        $course->language = $request->language;
+
+        $course->certificate = isset($request->certificate) ? 1 : 0;
+
+
         if (!empty($request->image))
             $course->image = imageUpload($request->image, 'courses');
+
+        if (!empty($request->preview_video))
+            $course->preview_video = imageUpload($request->preview_video, 'courses/video');
 
         if (!$course->save()) {
             return $this->responseRedirectBack('Error occurred while updating.', 'error', true, true);
         }
+
         return $this->responseRedirectBack('Course has been updated successfully', 'success', false, false);
     }
 

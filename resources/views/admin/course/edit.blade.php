@@ -24,6 +24,20 @@
                 <form action="{{ route('admin.course.update') }}" method="POST" role="form" enctype="multipart/form-data">@csrf
                     <div class="tile-body">
                         <div class="form-group">
+                            <label class="control-label" for="category_id"> Category <span class="m-l-5 text-danger">
+                                    *</span></label>
+                            <select class="form-control" name="category_id">
+                                <option value="" hidden selected>Select Categoy...</option>
+                                @foreach ($course_category as $index => $item)
+                                    <option {{$course->category_id == $item->id ? 'selected' : ''}} value="{{ $item->id }}">{{ $item->title }}</option>
+                                @endforeach
+                            </select>
+                            @error('category_id')
+                                <p class="small text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
                             <label class="control-label" for="name">Title <span class="m-l-5 text-danger"> *</span></label>
                             <input class="form-control @error('title') is-invalid @enderror" type="text" name="title" id="title" value="{{ old('title') ? old('title') : $course->title }}" />
 
@@ -40,15 +54,89 @@
                                     <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image"/>
                                 </div>
                             </div>
-
                             @error('image')<p class="small text-danger">{{ $message }}</p>@enderror
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label" for="name">Description <span class="m-l-5 text-danger"> *</span></label>
-                            <textarea name="description" id="description" class="summernote form-control @error('title') is-invalid @enderror">{{ old('description') ? old('description') : $course->description }}</textarea>
+                            <label class="control-label" for="name">Short description <span class="m-l-5 text-danger"> *</span></label>
+                            <textarea name="short_description" id="short_description" class="form-control @error('title') is-invalid @enderror">{{ old('short_description') ?? $course->short_description }}</textarea>
 
-                            @error('description')<p class="small text-danger">{{ $message }}</p>@enderror
+                            @error('short_description')<p class="small text-danger">{{ $message }}</p>@enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label" for="description">Description</label>
+                            <textarea type="text" class="form-control" rows="4" name="description" id="description">{{ old('description') ?? $course->description }}</textarea>
+                            @error('description')
+                                <p class="small text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <h4>Additional Course description</h4>
+                        <hr>
+
+                        <div class="form-group">
+                            <label class="control-label" for="certificate">Course certification</label>
+                            <input type="checkbox" {{$course->certificate == 1 ? 'checked' : ''}} name="certificate" id="certificate" class="form-control">
+                            @error('certificate')
+                                <p class="small text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="price">Price ($)</label>
+                            <input type="number" name="price" id="price" value="{{old('price') ?? $course->price }}" class="form-control">
+                            @error('price')
+                                <p class="small text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <video src="{{ asset($course->preview_video) }}" alt="" width="150px" height="150px" controls></video>
+                                </div>
+                                <div class="col-md-8">
+                                    <label class="control-label">Preview Video</label>
+                                    <input class="form-control @error('preview_video') is-invalid @enderror" type="file" id="preview_video" name="preview_video"/>
+                                </div>
+                            </div>
+                            @error('preview_video')<p class="small text-danger">{{ $message }}</p>@enderror
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="course_content">Course Content</label>
+                            <textarea name="course_content" id="course_content" class="form-control">{{old('course_content') ?? $course->course_content}}</textarea>
+                            @error('course_content')
+                                <p class="small text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="requirements">Requirments</label>
+                            <input type="text" name="requirements" id="requirements" value="{{old('requirements') ?? $course->requirements}}" class="form-control">
+                            @error('requirements')
+                                <p class="small text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="target">Target Audience</label>
+                            <input type="text" name="target" id="target" value="{{old('target') ?? $course->target}}" class="form-control">
+                            @error('target')
+                                <p class="small text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="company_name">Company Name</label>
+                            <input type="text" name="company_name" id="company_name" value="{{old('company_name') ?? $course->company_name}}" class="form-control">
+                            @error('company_name')
+                                <p class="small text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="language">Language</label>
+                            <select name="language" id="language" class="form-control" value="{{old('language')}}">
+                                <option value="English">English</option>
+                            </select>
+                            @error('language')
+                                <p class="small text-danger">{{ $message }}</p>
+                            @enderror
                         </div>
 
                         <div class="tile-footer">

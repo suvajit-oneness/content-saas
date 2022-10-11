@@ -10,7 +10,7 @@
                     <div class="theiaStickySidebar">
                         <div class="course-details-left-content">
                             <div class="course-details-main-info">
-                                <h2>{{ $course->course_name ?? '' }}</h2>
+                                <h2>{{ $course->title ?? '' }}</h2>
                                 <p>{!! $course->description ?? '' !!}</p>
                             </div>
 
@@ -19,7 +19,7 @@
                                 <div class="row g-2">
                                     <div class="col-12 col-md-6">
                                         <span><i class="fa-solid fa-check"></i>
-                                            {!! $course->target !!}
+                                            {!! $course->course_content !!}
                                         </span>
                                     </div>
                                 </div>
@@ -28,8 +28,8 @@
                             <div class="course-content">
                                 <h5>Course content : </h5>
                                 <ul class="list-unstyled p-0 m-0 course-content-details">
-                                    <li>{{ count($topic) }} sections</li>
-                                    <li>{{ count($topic) }} lectures</li>
+                                    <li>{{ count((array)$topic) }} sections</li>
+                                    <li>{{ count((array)$topic) }} lectures</li>
                                     <li>14h 20m total length</li>
                                 </ul>
 
@@ -74,25 +74,11 @@
                             </div>
 
                             <div class="course-certification">
-                                <h5>Course Certification : </h5>
-                                <form action="">
-                                    <div class="form-group">
-                                        <input type="radio" id="yes" name="certification" checked>
-                                        <label for="yes">Yes</label>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="radio" id="no" name="certification">
-                                        <label for="no">No</label>
-                                    </div>
-                                </form>
+                                <h5>Course Certification : @if($course->certificate == 1) <span class="text-success"> &#x2611; Yes </span> @else <span class="text-warning"> &#8594; No </span> @endif </h5>
                             </div>
 
                             <div class="course-languages">
-                                <h5>Language : </h5>
-                                <select name="" id="">
-                                    <option value="">{{ $course->language }}</option>
-
-                                </select>
+                                <h5>Language : &#x2611;{{ $course->language }}</h5>
                             </div>
 
                             <div class="about-company">
@@ -113,13 +99,14 @@
                     <div class="course-details-right-content">
                         <div class="course-details-video" data-bs-toggle="modal" data-bs-target="#exampleModal">
                             <div class="course-details-video-img">
-                                <img src="{{ asset('frontend/img/course-video.jpg') }}" alt="">
+                                <video src="{{asset($course->preview_video)}}" controls></video>
+                                {{-- <img src="{{ asset('frontend/img/course-video.jpg') }}" alt=""> --}}
                             </div>
-                            <span><i class="fa-solid fa-play"></i></span>
-                            <small>Preview Course</small>
+                            {{-- <span onclick=""><i class="fa-solid fa-play"></i></span>
+                            <small>Preview Course</small> --}}
                         </div>
                         <h3 class="course-price">
-                            <span>&#8377;</span>{{ $course->price }}
+                            <span>$</span>{{ $course->price }}
                         </h3>
                        
 

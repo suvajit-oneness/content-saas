@@ -59,6 +59,13 @@
                                 <p class="small text-danger">{{ $message }}</p>
                             @enderror
                         </div>
+                        <div class="form-group">
+                            <label class="control-label" for="description">Description</label>
+                            <textarea type="text" class="form-control" rows="4" name="description" id="description">{{ old('description') }}</textarea>
+                            @error('description')
+                                <p class="small text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
 
                         <h4>Additional Course description</h4>
                         <hr>
@@ -72,58 +79,55 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="price">Price ($)</label>
-                            <input type="number" name="price" id="price" class="form-control">
+                            <input type="number" name="price" id="price" value="{{old('price')}}" class="form-control">
                             @error('price')
                                 <p class="small text-danger">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="preview_video">Preview Video</label>
-                            <input type="file" name="preview_video" id="preview_video" class="form-control">
+                            <label class="control-label">Preview Video</label>
+                            <input class="form-control @error('preview_video') is-invalid @enderror" type="file" id="preview_video" name="preview_video"/>
                             @error('preview_video')
                                 <p class="small text-danger">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="course_content">Course Content</label>
-                            <textarea name="course_content" id="course_content" class="form-control"></textarea>
+                            <textarea name="course_content" id="course_content" class="form-control">{{old('course_content')}}</textarea>
                             @error('course_content')
                                 <p class="small text-danger">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="requirements">Requirments</label>
-                            <input type="text" name="requirements" id="requirements" class="form-control">
+                            <input type="text" name="requirements" id="requirements" value="{{old('requirements')}}" class="form-control">
                             @error('requirements')
                                 <p class="small text-danger">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="target">Target Audience</label>
-                            <input type="text" name="target" id="target" class="form-control">
+                            <input type="text" name="target" id="target" value="{{old('target')}}" class="form-control">
                             @error('target')
                                 <p class="small text-danger">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="company_name">Company Name</label>
-                            <input type="text" name="company_name" id="company_name" class="form-control">
+                            <input type="text" name="company_name" id="company_name" value="{{old('company_name')}}" class="form-control">
                             @error('company_name')
                                 <p class="small text-danger">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="language">Language</label>
-                            <select name="language" id="language" class="form-control">
+                            <select name="language" id="language" class="form-control" value="{{old('language')}}">
                                 <option value="English">English</option>
                             </select>
                             @error('language')
                                 <p class="small text-danger">{{ $message }}</p>
                             @enderror
                         </div>
-                        
-
-
                     </div><br>
                     <div class="tile-footer">
                         <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save

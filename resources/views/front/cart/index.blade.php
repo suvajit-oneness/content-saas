@@ -79,7 +79,7 @@
                 
                 <div class="cart-item item-price">
                     <div class="cart-text">Amount</div>
-                    <h4>&#8377;{{$cartValue->price * $cartValue->qty}}</h4>
+                    <h4>${{$cartValue->price * $cartValue->qty}}</h4>
                 </div>
                 <div class="cart-item item-remove">
                     <a href="{{route('front.cart.delete', $cartValue->id)}}"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg><!--<span>Remove</span>--></a>
@@ -109,7 +109,7 @@
                                 Subtotal
                             </div>
                             <div class="cart-total-value">
-                                &#8377;<span id="subTotalAmount">{{$subTotal}}</span>
+                                $<span id="subTotalAmount">{{$subTotal}}</span>
                             </div>
                         </div>
                         <div class="cart-total">
@@ -117,7 +117,7 @@
                                 Tax
                             </div>
                             <div class="cart-total-value">
-                                &#8377;{{$shippingCharges}}
+                                ${{$shippingCharges}}
                             </div>
                         </div>
                         {{-- <div class="cart-total">
@@ -134,7 +134,7 @@
                             </div>
                             <div class="cart-total-value">
                                 <input type="hidden" value="{{$grandTotalWithoutCoupon}}" name="grandTotalWithoutCoupon">
-                                &#8377;<span id="displayGrandTotal">{{$grandTotal}}</span>
+                                $<span id="displayGrandTotal">{{$grandTotal}}</span>
                             </div>
                         </div>
                     </div>

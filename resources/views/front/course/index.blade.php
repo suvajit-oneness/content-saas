@@ -49,7 +49,11 @@
                     </div>
                     <div class="courses-info">
                         <div class="courses-badge">
-                            {{-- <span><img src="{{URL::to('/').'/coursecategories/'}}{{$data->category->image}}" alt=""> {{ $data->category->title }}</span> --}}
+                            @if($data->category)
+                                <span><img src="{{URL::to('/').'/coursecategories/'}}{{$data->category->image}}" alt=""> {{ $data->category->title }}</span>
+                            @else
+                            <span>No Category</span>
+                            @endif
                         </div>
                         <div class="courses-heading">
                             <h4>{{ $data->title }}</h4>
@@ -59,13 +63,26 @@
                                         <i class="fa-solid fa-list"></i>
                                         {{ $data->language }}
                                     </li>
+                                    @php
+                                        $totalhrs = 0;
+                                        // echo $data->id;
+                                        $lessons = App\Models\CourseLesson::where('course_id', $data->id)->get();
+                                        foreach($lessons as $l){
+                                            // echo $l->id;
+                                            $eachtopic = App\Models\LessonTopic::where('lesson_id', $l->id)->get();
+                                            foreach ($eachtopic as $key => $value) {
+                                                $top = App\Models\Topic::find($value->topic_id);
+                                                $totalhrs += $top->video_length;  
+                                            } 
+                                        }   
+                                    @endphp
                                     <li>
                                         <i class="fa-solid fa-clock"></i>
-                                        3 hours
+                                        {{$totalhrs}} hours
                                     </li>
                                 </ul>
                                 <p style="bold">
-                                    <span>&#8377;</span>{{ $data->price }}
+                                    <span>$</span>{{ $data->price }}
                                 </p>
                             </div>
                         </div>
