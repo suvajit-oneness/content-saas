@@ -59,13 +59,18 @@ class PortfolioRepository extends BaseRepository implements PortfolioContract
             $portfolio->short_desc = $collection['short_desc'] ?? '';
             $portfolio->long_desc = $collection['long_desc'] ?? '';
             $portfolio->link = $collection['link'] ?? '';
+
             if(!empty($params['image'])){
-                $profile_image = $collection['image'];
-                $imageName = time().".".$profile_image->getClientOriginalName();
-                $profile_image->move("uploads/portfolio/",$imageName);
-                $uploadedImage = $imageName;
-                $portfolio->image = $uploadedImage;
-                }
+                // image, folder name only
+                $portfolio->image = imageUpload($params['image'], 'portfolio');
+    
+                // $profile_image = $collection['image'];
+                // $imageName = time().".".$profile_image->getClientOriginalName();
+                // $profile_image->move("uploads/portfolio/",$imageName);
+                // $uploadedImage = $imageName;
+                // $portfolio->image = $uploadedImage;
+            }
+
             $portfolio->save();
 
             return $portfolio;
@@ -90,13 +95,18 @@ class PortfolioRepository extends BaseRepository implements PortfolioContract
         $portfolio->short_desc = $collection['short_desc'] ?? '';
         $portfolio->long_desc = $collection['long_desc'] ?? '';
         $portfolio->link = $collection['link'] ?? '';
+
         if(!empty($params['image'])){
-            $profile_image = $collection['image'];
-            $imageName = time().".".$profile_image->getClientOriginalName();
-            $profile_image->move("uploads/portfolio/",$imageName);
-            $uploadedImage = $imageName;
-            $portfolio->image = $uploadedImage;
-            }
+            // image, folder name only
+            $portfolio->image = imageUpload($params['image'], 'portfolio');
+
+            // $profile_image = $collection['image'];
+            // $imageName = time().".".$profile_image->getClientOriginalName();
+            // $profile_image->move("uploads/portfolio/",$imageName);
+            // $uploadedImage = $imageName;
+            // $portfolio->image = $uploadedImage;
+        }
+
         $portfolio->save();
 
         return $portfolio;

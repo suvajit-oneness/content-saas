@@ -10,11 +10,11 @@ use Illuminate\Support\Facades\Route;
 
 // Auth::routes();
 
-Route::get('command', function () {
-	/* php artisan migrate */
-    \Artisan::call('migrate:fresh --seed');
-    dd("Migration Done");
-});
+// Route::get('command', function () {
+// 	/* php artisan migrate */
+//     \Artisan::call('migrate:fresh --seed');
+//     dd("Migration Done");
+// });
 
 // Route::get('/', function() {
 //     return view('frontend.index');
@@ -25,4 +25,3 @@ Route::get('command', function () {
 require 'admin.php';
 require 'site.php';
 require 'api.php';
-

@@ -1,4 +1,4 @@
-@extends('front.layouts.appprofile')
+@extends('front.layouts.app')
 
 @section('title', $data->user->first_name.' '.$data->user->last_name.' Portfolio')
 
@@ -82,7 +82,7 @@
             <div class="col-12 col-lg-4 col-md-6 portfolio-links-item active" id="portfolio">
                 <div class="market-research-content">
                     <div class="img">
-                        <a href="{{ $portfolio->link }}" class="research-link"><img src="{{ asset($portfolio->image) }}" alt="" /></a>
+                        <a href="{{ $portfolio->link }}" class="research-link" target="_blank"><img src="{{ asset($portfolio->image) }}" alt="" /></a>
                     </div>
                     <div class="market-research-date">
                         <div class="market-research-badge">

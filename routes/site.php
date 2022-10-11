@@ -68,25 +68,25 @@ Route::name('front.')->group(function() {
     Route::get('/portfolio/{slug}', 'Front\PortfolioController@index')->name('portfolio.index');
 
     // portfolio in user management
-    Route::name('user.portfolio.')->group(function() {
+    Route::prefix('user')->name('user.portfolio.')->group(function() {
         Route::get('portfolio-manage', 'Front\PortfolioController@edit')->name('manage');
 
         Route::get('basic-details/{slug}', 'Front\Portfolio\ProfileController@create')->name('manage.basic-details.edit');
     });
 
     // Route::get('/user/portfolio/manage/{slug}', 'Front\PortfolioController@edit')->name('portfolio.edit');
-    Route::name('portfolio.')->group(function () {
+    Route::prefix('user')->name('portfolio.')->group(function () {
         Route::name('profile.')->group(function () {
             Route::get('/basic-detail/create/{slug}', 'Front\Portfolio\ProfileController@create')->name('create');
             Route::post('/basic-detail/update', 'Front\Portfolio\ProfileController@update')->name('update');
         });
 
         Route::name('expertise.')->group(function () {
-            Route::get('/expertise/add', 'Front\Portfolio\ExpertiseController@create')->name('create');
-            Route::post('/expertise/store', 'Front\Portfolio\ExpertiseController@store')->name('store');
-            Route::get('/expertise/edit/{id}', 'Front\Portfolio\ExpertiseController@edit')->name('edit');
-            Route::post('/expertise/update', 'Front\Portfolio\ExpertiseController@update')->name('update');
-            Route::get('/expertise/delete/{id}', 'Front\Portfolio\ExpertiseController@delete')->name('delete');
+            Route::get('/speciality/add', 'Front\Portfolio\ExpertiseController@create')->name('create');
+            Route::post('/speciality/store', 'Front\Portfolio\ExpertiseController@store')->name('store');
+            Route::get('/speciality/edit/{id}', 'Front\Portfolio\ExpertiseController@edit')->name('edit');
+            Route::post('/speciality/update', 'Front\Portfolio\ExpertiseController@update')->name('update');
+            Route::get('/speciality/delete/{id}', 'Front\Portfolio\ExpertiseController@delete')->name('delete');
         });
 
         Route::name('education.')->group(function () {

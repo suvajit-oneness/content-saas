@@ -78,10 +78,11 @@
                                     @enderror
                                 </div><br>
                             <div class="tile-footer">
-                                <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save
-                                    </button>
+                                <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save</button>
 
-                                &nbsp;&nbsp;&nbsp;
+                                <a href="{{ route('front.user.portfolio.manage') }}" class="btn btn-primary"><i class="fa fa-fw fa-lg fa-chevron-left"></i> Go Back</a>
+
+                                {{-- &nbsp;&nbsp;&nbsp; --}}
                             </div>
                         </form>
                     </div>

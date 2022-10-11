@@ -46,6 +46,8 @@ class PortfolioController extends BaseController
      */
     public function store(Request $request)
     {
+        // dd($request->all());
+
         $this->validate($request, [
             'title' => 'required',
             'category' => 'required',
