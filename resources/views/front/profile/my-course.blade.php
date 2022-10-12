@@ -17,7 +17,7 @@
                 <div class="accor-top">
                     <div class="accor-top-left">
                         <i class="fa-solid fa-angle-down"></i>
-                        <span>{!! $o->order_no !!}</span>
+                        <span>ORD ID: {!! $o->order_no !!}</span>
                     </div>
                     <div class="accor-top-right">
                         <div class="duraton">

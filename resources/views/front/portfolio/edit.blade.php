@@ -43,6 +43,7 @@
                                     <td>
                                         <div class="row mt-2">
                                             <div class="col-12 text-end">
+                                                <a href="{{ route('front.portfolio.index', auth()->guard('web')->user()->slug) }}" class="add-btn-edit d-inline-block">View Public Portfolio <i class="fa-solid fa-eye"></i></a>
                                                 <a href="{{ route('front.user.portfolio.manage.basic-details.edit', auth()->guard('web')->user()->slug) }}" class="add-btn-edit d-inline-block">Edit <i class="fa-solid fa-edit"></i></a>
                                             </div>
                                         </div>

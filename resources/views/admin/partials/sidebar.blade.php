@@ -44,12 +44,12 @@
             </a>
         </li>
         <div id="collapseTwo" class="collapse @if(request()->is('admin/course*')) {{ 'show' }} @endif" aria-labelledby="headingOne" data-parent="#accordion">
-            {{-- <li>
+            <li>
                 <a class="app-menu__item {{ request()->is('admin/course/category*') ? 'active' : '' }}" href="{{ route('admin.course-category.index') }}">
                     <i class="app-menu__icon fa fa-archive"></i>
                     <span class="app-menu__label">Category</span>
                 </a>
-            </li> --}}
+            </li>
             <li>
                 <a class="app-menu__item {{ request()->is('admin/course') ? 'active' : '' }}" href="{{ route('admin.course.index') }}">
                     <i class="app-menu__icon fa fa-folder"></i>
