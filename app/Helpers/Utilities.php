@@ -1,5 +1,8 @@
 <?php
 // use App\Models\Notification;
+
+use App\Models\Course;
+use App\Models\Order;
 use Illuminate\Support\Str;
 
 if (!function_exists('sidebar_open')) {
@@ -121,3 +124,63 @@ function sendNotification($sender, $receiver, $type, $route, $title, $body='')
     $noti->save();
 }
 */
+
+function countTotalHours($courseid)
+{
+    $totalhrs = 0;
+    $lessons = App\Models\CourseLesson::where('course_id', $courseid)->get();
+    foreach($lessons as $l){
+        $eachtopic = App\Models\LessonTopic::where('lesson_id', $l->id)->get();
+        foreach ($eachtopic as $key => $value) {
+            $top = App\Models\Topic::find($value->topic_id);
+            $totalhrs += $top->video_length;  
+        } 
+    }
+    return $totalhrs . ' hours';
+}
+
+function totalLessonsAndTopics($courseid)
+{
+    $lessons= App\Models\CourseLesson::where('course_id', $courseid)->with('lesson')->get();
+    $all_topics = [];
+    $total_downloadable_contents = 0;
+    $topic_count = 0;
+    $each_lesson_length = [];
+    foreach ($lessons as $l) {
+        $topic = App\Models\LessonTopic::where('lesson_id', $l->id)->with('topic')->get();
+        array_push($all_topics, $topic);
+        $topic_count += count($topic);
+        foreach($topic as $t){
+            if($t->topic->video_downloadable == 1){
+                $total_downloadable_contents += 1;
+            }
+        }
+    }
+    $data['lesson_count'] = count($lessons);
+    $data['lessons'] = $lessons;
+    $data['topic_count'] = $topic_count;
+    $data['topics'] = $all_topics;
+    $data['total_downloadable_contents'] = $total_downloadable_contents;
+    
+    return (object)$data;
+}
+
+function getProductSlug($id)
+{
+    return Course::find($id);
+}
+
+function CheckIfUserBoughtTheCourse($courseid, $user_id){
+    $orders = Order::where('user_id', $user_id)->with('orderProducts')->get();
+    $my_courses = [];
+    foreach ($orders as $o){
+        foreach($o->orderProducts as $op){
+            array_push($my_courses, $op->course_id);
+        }
+    }
+
+    if(in_array($courseid, $my_courses))
+        return true;
+    else
+        return false;
+}

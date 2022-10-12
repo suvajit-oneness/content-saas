@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Traits\UploadAble;
 use Illuminate\Http\UploadedFile;
 use App\Contracts\CheckoutContract;
+use App\Models\OrderProduct;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Doctrine\Instantiator\Exception\InvalidArgumentException;
@@ -42,8 +43,10 @@ class CheckoutRepository extends BaseRepository implements CheckoutContract
 
         try {
             // 1 order
-            $order_no = "Copywriter".mt_rand();
-            $newEntry = new Order;
+            $order_no = "CSP".mt_rand();
+
+
+            $newEntry = new Order();
             $newEntry->order_no = $order_no;
             $newEntry->user_id = Auth::guard('web')->user()->id ?? 0;
             $newEntry->ip = $this->ip;
@@ -52,26 +55,30 @@ class CheckoutRepository extends BaseRepository implements CheckoutContract
             $newEntry->fname = $collectedData['fname'];
             $newEntry->lname = $collectedData['lname'];
            
-            // dd($shippingSameAsBilling);
-            // fetch cart details
             $cartData = Cart::where('ip', $this->ip)->get();
             $subtotal = 0;
             foreach($cartData as $cartValue) {
-                $subtotal += $cartValue->price * $cartValue->qty;
+
+                $newOrderProduct = new OrderProduct();
+                $newOrderProduct->order_id = $order_no;
+                $newOrderProduct->course_id = $cartValue->course_id;
+                $newOrderProduct->price = $cartValue->price;
+                $newOrderProduct->save();
+
+                $subtotal += ($cartValue->price * $cartValue->qty);
             }
+
             $newEntry->amount = $subtotal;
             $newEntry->shipping_charges = 0;
             $newEntry->tax_amount = 0;
-            // $newEntry->discount_amount = 0;
-            // $newEntry->coupon_code_id = 0;
             $total = (int) $subtotal;
             $newEntry->final_amount = $total;
-            $newEntry->course_id = $cartValue->course_id;
             $newEntry->save();
 
-           
-            // 4 remove cart data
+
+            // Remove cart data
             $emptyCart = Cart::where('ip', $this->ip)->delete();
+
             return $order_no;
         } catch (\Throwable $th) {
             // throw $th;

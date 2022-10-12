@@ -63,26 +63,13 @@
                                         <i class="fa-solid fa-list"></i>
                                         {{ $data->language }}
                                     </li>
-                                    @php
-                                        $totalhrs = 0;
-                                        // echo $data->id;
-                                        $lessons = App\Models\CourseLesson::where('course_id', $data->id)->get();
-                                        foreach($lessons as $l){
-                                            // echo $l->id;
-                                            $eachtopic = App\Models\LessonTopic::where('lesson_id', $l->id)->get();
-                                            foreach ($eachtopic as $key => $value) {
-                                                $top = App\Models\Topic::find($value->topic_id);
-                                                $totalhrs += $top->video_length;  
-                                            } 
-                                        }   
-                                    @endphp
                                     <li>
                                         <i class="fa-solid fa-clock"></i>
-                                        {{$totalhrs}} hours
+                                        {{ countTotalHours($data->id) }}
                                     </li>
                                 </ul>
                                 <p style="bold">
-                                    <span>$</span>{{ $data->price }}
+                                    {{ $data->price == 0 ? 'Free' : '$ '.$data->price }}
                                 </p>
                             </div>
                         </div>

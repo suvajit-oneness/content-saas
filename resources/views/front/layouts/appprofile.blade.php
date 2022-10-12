@@ -34,7 +34,8 @@
                             <a href="{{ route('front.dashboard.index') }}" class="{{ request()->is('dashboard*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> home</a>
                         </li>
                         <li>
-                            <a href="{{ route('front.portfolio.index', auth()->guard('web')->user()->slug) }}"><i class="fa-solid fa-house"></i> Portfolio</a>
+                            <a href="{{ route('front.user.courses')}}"  class="{{ request()->is('user/my-courses') ? 'active' : '' }}"><i class="fa-solid fa-house"></i>My Courses</a>
+                            {{-- <a href="{{ route('front.portfolio.index', auth()->guard('web')->user()->slug) }}"><i class="fa-solid fa-house"></i> Portfolio</a> --}}
                         </li>
                         <li>
                             <a href="{{ route('front.user.portfolio.manage') }}" class="{{ request()->is('user/portfolio*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Manage Portfolio</a>

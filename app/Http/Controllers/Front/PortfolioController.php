@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Contracts\UserContract;
 use App\Feedback;
 use App\Models\Language;
+use App\Models\Order;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 class PortfolioController extends Controller
@@ -98,4 +99,10 @@ class PortfolioController extends Controller
     return back()->with('Profile has been updated successfully', 'success', false, false);
     }
 
+    public function showMyCourses()
+    {
+        $orders = Order::where('user_id',auth()->guard('web')->user()->id)->with('orderProducts')->get();
+
+        return view('front.profile.my-course',compact('orders'));
+    }
 }

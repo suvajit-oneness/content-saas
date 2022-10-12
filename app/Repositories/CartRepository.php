@@ -44,20 +44,23 @@ public function addToCart(array $data)
             // return $cartExists;
         } else {*/
             $newEntry = new Cart;
+            
             if (Auth::guard('web')->user()) {
-            $newEntry->user_id = Auth::guard('web')->user()->id;
-             }
+                $newEntry->user_id = Auth::guard('web')->user()->id;
+            }
+            
             $newEntry->course_id = $collectedData['course_id'];
             $newEntry->course_name = $collectedData['course_name'];
-             if(!empty($params['course_image'])){
-                $profile_image = $collection['course_image'];
-                $imageName = time().".".$profile_image->getClientOriginalName();
-                $profile_image->move("course/",$imageName);
-                $uploadedImage = $imageName;
-                $newEntry->course_image = $uploadedImage;
-                }
-             $newEntry->course_slug = $collectedData['course_slug'];
-             $newEntry->author_name = $collectedData['author_name'];
+            //  if(!empty($params['course_image'])){
+            //     $profile_image = $collectedData['course_image'];
+            //     $imageName = time().".".$profile_image->getClientOriginalName();
+            //     $profile_image->move("course/",$imageName);
+            //     $uploadedImage = $imageName;
+            //     $newEntry->course_image = $uploadedImage;
+            //     }
+            $newEntry->course_image = $collectedData['course_image'];
+            $newEntry->course_slug = $collectedData['course_slug'];
+            $newEntry->author_name = $collectedData['author_name'];
             $newEntry->price = $collectedData['price'];
             $newEntry->ip = $this->ip;
             $newEntry->save();

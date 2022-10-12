@@ -33,19 +33,22 @@ class CheckoutController extends Controller
     {
          //dd($request->all());
 
-       /* $request->validate([
+        $request->validate([
             'email' => 'required|email|max:255',
             'mobile' => 'required|integer|digits:10',
             'fname' => 'required|string|max:255',
             'lname' => 'required|string|max:255',
-        ]);*/
+        ]);
 
         $order_no = $this->checkoutRepository->create($request->except('_token'));
-       //dd($order_no);
+        
+        //dd($order_no);
+        // $order_no = 'CSP87655490';
         if ($order_no) {
-            return redirect()->route('front.course')->with('success', 'Course Added');
+            // dd("hi");
+            return redirect()->route('front.checkout.complete')->with('success', 'Product purchased successfully ('.$order_no.')!');
+            // return view('front.checkout.complete')->with('success', 'Product purchased successfully ('.$order_no.')!');
         } else {
-           
             return redirect()->back()->with('failure', 'Something happened. Try again.')->withInput($request->all());
         }
     }

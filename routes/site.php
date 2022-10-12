@@ -34,6 +34,8 @@ Route::name('front.')->group(function() {
     Route::post('/store', 'Front\CheckoutController@store')->name('checkout.store');
     Route::view('/complete', 'front.checkout.complete')->name('checkout.complete');
 
+
+
     //market
     Route::name('market.')->group(function () {
         Route::get('/market', 'Front\MarketController@index')->name('index');
@@ -73,6 +75,11 @@ Route::name('front.')->group(function() {
 
         Route::get('basic-details/{slug}', 'Front\Portfolio\ProfileController@create')->name('manage.basic-details.edit');
     });
+
+    Route::prefix('user')->name('user.courses')->group(function() {
+        Route::get('/my-courses', 'Front\PortfolioController@showMyCourses');
+    });
+
 
     // Route::get('/user/portfolio/manage/{slug}', 'Front\PortfolioController@edit')->name('portfolio.edit');
     Route::prefix('user')->name('portfolio.')->group(function () {

@@ -33,7 +33,7 @@
                         @foreach ($cartData as $cartKey => $cartValue)
                         <li>
                             <figure>
-                                <img src="{{$cartValue->product_image}}" />
+                                <img src="{{$cartValue->course_image}}" />
                             </figure>
                             <figcaption>
                                 <div class="cart-info">
@@ -90,10 +90,10 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-auto col-md-6 mt-3 mt-sm-0">
-                        <a href="{{route('front.cart')}}" class="return_cart">Return to Cart</a>
+                        <a href="{{route('front.cart')}}" class="btn checkout-btn button">Return to Cart</a>
                     </div>
                     <div class="col-sm-auto col-md-6 text-sm-end">
-                        <button type="submit" class="btn checkout-btn button">Complete Order</button>
+                        <button type="submit" class="btn checkout-btn button m-2">Complete Order</button>
                     </div>
                 </div>
             </div>

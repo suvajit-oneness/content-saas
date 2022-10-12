@@ -50,7 +50,7 @@
                 <div class="cart-item item-thumb">Image</div>
                 <div class="cart-item item-title">Name</div>
                 <div class="cart-item item-attr">Author</div>
-                <div class="cart-item item-color">Total Lecture</div>
+                <div class="cart-item item-color">Course Contents</div>
                 <div class="cart-item item-price">Price</div>
                 <div class="cart-item item-remove">Action</div>
             </div>
@@ -63,7 +63,7 @@
             <div class="cart-row">
                 <div class="cart-item item-thumb">
                     <figure>
-                       <img style="width: 100px;height: 100px;" src="{{URL::to('/').'/course/'}}{{$cartValue->course->image}}">
+                       <img style="width: 100px;height: 100px;" src="{{asset($cartValue->course_image)}}">
                     </figure>
                 </div>
                 <div class="cart-item item-title">
@@ -74,7 +74,8 @@
                     <h6>By {{$cartValue->author_name}}</h6>
                 </div>
                  <div class="cart-item item-author">
-                    <h6>{{$cartValue->course->key_module}}</h6>
+                    <h6><li>{{totalLessonsAndTopics($cartValue->course_id)->lesson_count}} Lessons</li></h6>
+                    <h6><li>{{totalLessonsAndTopics($cartValue->course_id)->topic_count}} Topics</li></h6>
                 </div>
                 
                 <div class="cart-item item-price">

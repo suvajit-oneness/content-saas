@@ -4229,6 +4229,9 @@ tbody, td, tfoot, th, thead, tr {
 .course-content-accor.active .accor-content {
   display: block;
 }
+.course-content-accor.active .accor-top i{
+  transform: rotate(180deg);
+}
 
 .course-content-accor.active .accor-content ul li p {
   margin-bottom: 0;

@@ -16,42 +16,55 @@
 
                             <div class="learn">
                                 <h5>What you'll learn : </h5>
-                                <div class="row g-2">
-                                    <div class="col-12 col-md-6">
-                                        <span><i class="fa-solid fa-check"></i>
-                                            {!! $course->course_content !!}
-                                        </span>
+                                @foreach (explode(',',$course->course_content) as $item)
+                                    <div class="row g-2">
+                                        <div class="col-12 col-md-6">
+                                            <span><i class="fa-solid fa-check"></i>
+                                                {{ $item }}
+                                            </span>
+                                        </div>
                                     </div>
-                                </div>
+                                @endforeach
                             </div>
 
                             <div class="course-content">
                                 <h5>Course content : </h5>
+                                @php
+                                    $totalLessonsAndTopics = totalLessonsAndTopics($course->id);
+                                @endphp
                                 <ul class="list-unstyled p-0 m-0 course-content-details">
-                                    <li>{{ count((array)$topic) }} sections</li>
-                                    <li>{{ count((array)$topic) }} lectures</li>
-                                    <li>14h 20m total length</li>
+                                    <li>{{ $totalLessonsAndTopics->lesson_count }} Lessons</li>
+                                    <li>{{ $totalLessonsAndTopics->topic_count }} Topics</li>
+                                    <li>{{ countTotalHours($course->id)}} total length</li>
                                 </ul>
 
                                 <div class="course-content-accordions">
                                     <div class="course-content-accordions">
-                                    @foreach($module as $categoryKey => $categoryValue)
+                                    @foreach($totalLessonsAndTopics->lessons as $key => $lesson)
                                         <div class="course-content-accor">
                                             <div class="accor-top">
                                                 <div class="accor-top-left">
                                                     <i class="fa-solid fa-angle-down"></i>
-                                                    <span>{!! $categoryValue->title !!}</span>
+                                                    <span>{!! $lesson->lesson->title !!}</span>
                                                 </div>
-                                                <div class="accor-top-right">
+                                                {{-- <div class="accor-top-right">
                                                     <div class="duraton">
-                                                        <span>{{$categoryValue->duration}}</span>
+                                                        <span></span>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                             <div class="accor-content">
                                                 <ul class="list-unstyled p-0 m-0">
-                                                @foreach($categoryValue->topic as $key => $data)
-                                                    <li><a href=""><div class="d-flex align-items-center"><i class="fa-solid fa-circle-play"></i>{!! $data->topic !!}</div> <span>Preview</span></a></li>
+                                                @foreach($totalLessonsAndTopics->topics[$key] as $data)
+                                                    @if(Auth::guard('web')->check())
+                                                        @if(CheckIfUserBoughtTheCourse($course->id, Auth::guard('web')->user()->id))
+                                                            <li><a href=""><div class="d-flex align-items-center"><i class="fa-solid fa-circle-play"></i>{!! $data->topic->title  !!} ({{ number_format((float)$data->topic->video_length, 2, ':', '') }} hours)</div><span onclick="playVideo('{{$data->topic->video}}')">Watch Full video <i class="fa-solid fa-circle-play"></i></span></a></li>
+                                                        @else
+                                                            <li><a href=""><div class="d-flex align-items-center"><i class="fa-solid fa-circle-play"></i>{!! $data->topic->title  !!} ({{ number_format((float)$data->topic->video_length, 2, ':', '') }} hours)</div><span onclick="playVideo('{{$data->topic->preview_video}}')">Preview <i class="fa-solid fa-circle-play"></i></span></a></li>
+                                                        @endif
+                                                    @else
+                                                        <li><a href=""><div class="d-flex align-items-center"><i class="fa-solid fa-circle-play"></i>{!! $data->topic->title  !!} ({{ number_format((float)$data->topic->video_length, 2, ':', '') }} hours)</div><span onclick="playVideo('{{$data->topic->preview_video}}')">Preview <i class="fa-solid fa-circle-play"></i></span></a></li>
+                                                    @endif
                                                 @endforeach
                                                 </ul>
                                             </div>
@@ -64,7 +77,9 @@
                             <div class="requirements">
                                 <h5>Course Requirements : </h5>
                                 <ul class="list-unstyled p-0 m-0">
-                                    <li>{{ $course->requirements }}</li>
+                                    @foreach (explode(',',$course->requirements) as $item)
+                                        <li>{{ $item }}</li>
+                                    @endforeach
                                 </ul>
                             </div>
 
@@ -74,11 +89,17 @@
                             </div>
 
                             <div class="course-certification">
-                                <h5>Course Certification : @if($course->certificate == 1) <span class="text-success"> &#x2611; Yes </span> @else <span class="text-warning"> &#8594; No </span> @endif </h5>
+                                <h5>Course Certification : </h5>
+                                @if($course->certificate == 1) 
+                                    <p> &#x2611; Yes </p> 
+                                @else 
+                                    <p> &#8594; No </p> 
+                                @endif
                             </div>
 
                             <div class="course-languages">
-                                <h5>Language : &#x2611;{{ $course->language }}</h5>
+                                <h5>Language : </h5>
+                                <p>&#x2611; {{ $course->language }}</p>
                             </div>
 
                             <div class="about-company">
@@ -94,16 +115,31 @@
                 </div>
             </div>
 
+            {{-- Modal to open video --}}
+            <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="videoModal" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <p class="close btn btn-success" style="float:right" onclick="$('#videoModal').modal('hide')">&times;</p>
+                            <div>
+                                <video id="videoplace" autoplay controls width="100%" height="350" src=""></video>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{-- Video Modal Ends --}}
+
             <div class="col-12 col-lg-4 col-md-12 sidebar">
                 <div class="theiaStickySidebar">
                     <div class="course-details-right-content">
                         <div class="course-details-video" data-bs-toggle="modal" data-bs-target="#exampleModal">
                             <div class="course-details-video-img">
-                                <video src="{{asset($course->preview_video)}}" controls></video>
-                                {{-- <img src="{{ asset('frontend/img/course-video.jpg') }}" alt=""> --}}
+                                {{-- <video src="{{asset($course->preview_video)}}"></video> --}}
+                                <img src="{{asset($course->image)}}" alt="">
                             </div>
-                            {{-- <span onclick=""><i class="fa-solid fa-play"></i></span>
-                            <small>Preview Course</small> --}}
+                            <span onclick="playVideo('{{$course->preview_video}}')"><i class="fa-solid fa-play"></i></span>
+                            <small>Preview Course</small>
                         </div>
                         <h3 class="course-price">
                             <span>$</span>{{ $course->price }}
@@ -115,32 +151,34 @@
                             <ul class="list-unstyled p-0 m-0">
                                 <li>
                                     <img src="{{ asset('frontend/img/on-demand.png') }}" alt="">
-                                    14 hours on-demand video
+                                    {{ countTotalHours($course->id)}} on-demand video
                                 </li>
                                 <li>
                                     <img src="{{ asset('frontend/img/course-file.png') }}" alt="">
-                                    1 article
+                                    {{ $totalLessonsAndTopics->lesson_count }} Lessons {{ $totalLessonsAndTopics->topic_count }} Topics
                                 </li>
                                 <li>
                                     <img src="{{ asset('frontend/img/download.png') }}" alt="">
-                                    3 downloadable resources
+                                    {{ $totalLessonsAndTopics->total_downloadable_contents }} downloadable resources
                                 </li>
                                 <li>
                                     <img src="{{ asset('frontend/img/infinity-access.png') }}" alt="">
                                     Full lifetime access
                                 </li>
+                                @if($course->certificate == 1)
                                 <li>
                                     <img src="{{ asset('frontend/img/trophy.png') }}" alt="">
                                     Certificate of completion
                                 </li>
+                                @endif
                             </ul>
                         </div>
                         <div class="course-details-right-btn">
                             <form method="POST" action="{{route('front.cart.add')}}" class="d-flex" id="addToCartForm">@csrf
                                 <input type="hidden" name="course_id" value="{{$course->id}}">
-                                <input type="hidden" name="course_name" value="{{$course->course_name}}">
+                                <input type="hidden" name="course_name" value="{{$course->title}}">
                                 <input type="hidden" name="course_image" value="{{asset($course->image)}}">
-                                <input type="hidden" name="author_name" value="{{$course->author_name}}">
+                                <input type="hidden" name="author_name" value="{{$course->company_name}}">
                                 <input type="hidden" name="course_slug" value="{{$course->slug}}">
                                 <input type="hidden" name="price" value="{{$course->price}}">
                                 <button type="submit" id="addToCart__btn" class="course-deails-btn">Add to Cart</button>
@@ -155,6 +193,15 @@
 </section>
 @endsection
 @push('scripts')
+
+<script>
+    function playVideo(x) {
+        event.preventDefault();
+        $('#videoModal').modal('show');
+        $('#videoplace').attr('src', window.location.origin + '/' + x); 
+    }
+</script>
+
 <script>
     // add to cart ajax
 	$('#addToCartForm').on('submit', function(e) {
