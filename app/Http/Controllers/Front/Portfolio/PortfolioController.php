@@ -91,7 +91,8 @@ class PortfolioController extends BaseController
         if (!$portfolio) {
             return $this->responseRedirectBack('Error occurred while updating Portfolio.', 'error', true, true);
         }
-        return $this->responseRedirectBack('Portfolio has been updated successfully', 'success', false, false);
+        // return $this->responseRedirectBack('Portfolio has been updated successfully', 'success', false, false);
+        return redirect()->back()->with('success', 'Portfolio has been updated successfully', 'success', false, false);
     }
 
     /**

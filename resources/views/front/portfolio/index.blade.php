@@ -2,6 +2,11 @@
 
 @section('title', $data->user->first_name.' '.$data->user->last_name.' Portfolio')
 
+@section('style')
+    <link rel="stylesheet" href="{{ asset('frontend/dist/assets/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/dist/assets/owl.theme.default.min.css') }}">
+@endsection
+
 @section('section')
 <section class="portfolio-v4-banner" style="background: linear-gradient({{$data->user->color_scheme}}, #d9d9d900), url({{ asset($data->user->banner_image) }}) no-repeat;background-size: cover;"></section>
 
@@ -316,7 +321,6 @@
                             <h4>{{ $item->title }}</h4>
                             <p>{{ $item->description }}</p>
                         </div>
-                        PORT
                         @endforeach
                     </div>
 
@@ -347,7 +351,7 @@
                                     @foreach ($data->testimonials as $testimonial)
                                     <div class="item">
                                         <div class="port-v4-testi-content">
-                                            <img src="{{ asset('uploads/testimonial/'.$testimonial->image) }}" alt="">
+                                            <img src="{{ asset($testimonial->image) }}" alt="">
                                             <h4>{{$testimonial->client_name}}</h4>
                                             <span>-{{$testimonial->occupation}}</span>
                                             <p>{{$testimonial->short_testimonial}}</p>
@@ -659,4 +663,8 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('script')
+    <script src="{{ asset('frontend/dist/owl.carousel.min.js') }}"></script>
 @endsection

@@ -90,7 +90,8 @@ class ClientController extends BaseController
         if (!$client) {
             return $this->responseRedirectBack('Error occurred while updating client.', 'error', true, true);
         }
-        return $this->responseRedirectBack('client has been updated successfully', 'success', false, false);
+        // return $this->responseRedirectBack('client has been updated successfully', 'success', false, false);
+        return redirect()->back()->with('success', 'Client has been updated successfully', 'success', false, false);
     }
 
     /**

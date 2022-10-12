@@ -31,7 +31,7 @@
                                             *</span></label>
                                     <input class="form-control @error('occupation') is-invalid @enderror" type="text" name="occupation"
                                         id="occupation" value="{{ old('occupation',$testimonial->occupation) }}" />
-                                        <input type="hidden" name="id" value="{{Auth::guard('web')->user()->id }}">
+                                        <input type="hidden" name="id" value="{{$testimonial->id }}">
                                     @error('occupation')
                                         <p class="small text-danger">{{ $message }}</p>
                                     @enderror
@@ -79,7 +79,7 @@
                                         <div class="col-md-2">
                                             @if ($testimonial->image != null)
                                                 <figure class="mt-2" style="width: 80px; height: auto;">
-                                                    <img src="{{ asset('uploads/testimonial/'.$testimonial->image) }}" id="articleImage" class="img-fluid" alt="">
+                                                    <img src="{{ asset($testimonial->image) }}" id="articleImage" class="img-fluid" alt="">
                                                 </figure>
                                             @endif
                                         </div>

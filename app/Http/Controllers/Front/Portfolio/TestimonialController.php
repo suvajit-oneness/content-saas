@@ -48,6 +48,7 @@ class TestimonialController extends BaseController
         $this->validate($request, [
             'client_name' => 'required',
             'occupation' => 'required',
+            'image' => 'required|image'
         ]);
         $params = $request->except('_token');
 
@@ -78,9 +79,12 @@ class TestimonialController extends BaseController
      */
     public function update(Request $request)
     {
+        // dd($request->all());
+
         $this->validate($request, [
             'client_name' => 'required',
             'occupation' => 'required',
+            'image' => 'nullable|image',
         ]);
         $params = $request->except('_token');
         $testimonial = $this->TestimonialRepository->updateTestimonial($params);
@@ -88,7 +92,8 @@ class TestimonialController extends BaseController
         if (!$testimonial) {
             return $this->responseRedirectBack('Error occurred while updating Testimonial.', 'error', true, true);
         }
-        return $this->responseRedirectBack('Testimonial has been updated successfully', 'success', false, false);
+        // return $this->responseRedirectBack('Testimonial has been updated successfully', 'success', false, false);
+        return redirect()->back()->with('success', 'Testimonial has been updated successfully', 'success', false, false);
     }
 
     /**

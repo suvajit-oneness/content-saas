@@ -60,13 +60,20 @@ class TestimonialRepository extends BaseRepository implements TestimonialContrac
             $testimonial->link = $collection['link'] ?? '';
             $testimonial->short_testimonial = $collection['short_testimonial'] ?? '';
             $testimonial->long_testimonial = $collection['long_testimonial'] ?? '';
+
             if(!empty($params['image'])){
-                $profile_image = $collection['image'];
-                $imageName = time().".".$profile_image->getClientOriginalName();
-                $profile_image->move("uploads/testimonial/",$imageName);
-                $uploadedImage = $imageName;
-                $testimonial->image = $uploadedImage;
-                }
+                // image, folder name only
+                $testimonial->image = imageUpload($params['image'], 'testimonial');
+            }
+
+            // if(!empty($params['image'])){
+            //     $profile_image = $collection['image'];
+            //     $imageName = time().".".$profile_image->getClientOriginalName();
+            //     $profile_image->move("uploads/testimonial/",$imageName);
+            //     $uploadedImage = $imageName;
+            //     $testimonial->image = $uploadedImage;
+            //     }
+
             $testimonial->save();
 
             return $testimonial;
@@ -82,6 +89,8 @@ class TestimonialRepository extends BaseRepository implements TestimonialContrac
      */
     public function updateTestimonial(array $params)
     {
+        // dd($params);
+
         $testimonial = $this->findOneOrFail($params['id']);
         $collection = collect($params)->except('_token');
         $testimonial->user_id = Auth::guard('web')->user()->id ?? '';
@@ -92,14 +101,22 @@ class TestimonialRepository extends BaseRepository implements TestimonialContrac
             $testimonial->link = $collection['link'] ?? '';
             $testimonial->short_testimonial = $collection['short_testimonial'] ?? '';
             $testimonial->long_testimonial = $collection['long_testimonial'] ?? '';
+
             if(!empty($params['image'])){
-                $profile_image = $collection['image'];
-                $imageName = time().".".$profile_image->getClientOriginalName();
-                $profile_image->move("uploads/testimonial/",$imageName);
-                $uploadedImage = $imageName;
-                $testimonial->image = $uploadedImage;
-                }
+                // image, folder name only
+                $testimonial->image = imageUpload($params['image'], 'testimonial');
+            }
+
+            // if(!empty($params['image'])){
+            //     $profile_image = $collection['image'];
+            //     $imageName = time().".".$profile_image->getClientOriginalName();
+            //     $profile_image->move("uploads/testimonial/",$imageName);
+            //     $uploadedImage = $imageName;
+            //     $testimonial->image = $uploadedImage;
+            //     }
         $testimonial->save();
+
+        // dd($testimonial);
 
         return $testimonial;
     }

@@ -90,7 +90,8 @@ class EducationController extends BaseController
         if (!$education) {
             return $this->responseRedirectBack('Error occurred while updating Education.', 'error', true, true);
         }
-        return $this->responseRedirectBack('Education has been updated successfully', 'success', false, false);
+        // return $this->responseRedirectBack('Education has been updated successfully', 'success', false, false);
+        return redirect()->back()->with('success', 'Education has been updated successfully', 'success', false, false);
     }
 
     /**
@@ -104,6 +105,6 @@ class EducationController extends BaseController
         if (!$education) {
             return $this->responseRedirectBack('Error occurred while deleting Education.', 'error', true, true);
         }
-        return redirect()->back()->with('success','Education field has been deleted successfully', 'success', false, false);
+        return redirect()->back()->with('success','Education has been deleted successfully', 'success', false, false);
     }
 }

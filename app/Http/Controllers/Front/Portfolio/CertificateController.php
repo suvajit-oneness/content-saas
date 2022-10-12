@@ -48,6 +48,7 @@ class CertificateController extends BaseController
         $this->validate($request, [
             'certificate_title' => 'required',
             'certificate_type' => 'required|string|min:1',
+            'file' => 'required|image'
         ]);
         $params = $request->except('_token');
 
@@ -88,7 +89,8 @@ class CertificateController extends BaseController
         if (!$certificate) {
             return $this->responseRedirectBack('Error occurred while updating Certificate.', 'error', true, true);
         }
-        return $this->responseRedirectBack('Certificate has been updated successfully', 'success', false, false);
+        // return $this->responseRedirectBack('Certificate has been updated successfully', 'success', false, false);
+        return redirect()->back()->with('success', 'Certificate has been updated successfully', 'success', false, false);
     }
 
     /**

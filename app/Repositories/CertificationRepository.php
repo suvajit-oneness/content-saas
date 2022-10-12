@@ -58,6 +58,7 @@ class CertificationRepository extends BaseRepository implements CertificationCon
             $certificate->link = $collection['link'] ?? '';
             $certificate->short_desc = $collection['short_desc'] ?? '';
             $certificate->long_desc = $collection['long_desc'] ?? '';
+
             if(!empty($params['file'])){
                 $profile_image = $collection['file'];
                 $imageName = time().".".$profile_image->getClientOriginalName();
@@ -65,6 +66,7 @@ class CertificationRepository extends BaseRepository implements CertificationCon
                 $uploadedImage = $imageName;
                 $certificate->file = $uploadedImage;
                 }
+
             $certificate->save();
 
             return $certificate;

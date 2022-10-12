@@ -53,9 +53,9 @@ class ExperienceController extends BaseController
         $experience = $this->WorkExperienceRepository->createExperience($params);
 
         if (!$experience) {
-            return $this->responseRedirectBack('Error occurred while creating experience.', 'error', true, true);
+            return $this->responseRedirectBack('Error occurred while creating Employment details.', 'error', true, true);
         }
-        return redirect()->back()->with('success', 'work experience has been created successfully', 'success', false, false);
+        return redirect()->back()->with('success', 'Employment details has been created successfully', 'success', false, false);
     }
 
     /**
@@ -87,9 +87,10 @@ class ExperienceController extends BaseController
         $experience = $this->WorkExperienceRepository->updateExperience($params);
 
         if (!$experience) {
-            return $this->responseRedirectBack('Error occurred while updating work experience.', 'error', true, true);
+            return $this->responseRedirectBack('Error occurred while updating Employment details.', 'error', true, true);
         }
-        return $this->responseRedirectBack('work experience has been updated successfully', 'success', false, false);
+        // return $this->responseRedirectBack('Employment details has been updated successfully', 'success', false, false);
+        return redirect()->back()->with('success', 'Employment details has been updated successfully', 'success', false, false);
     }
 
     /**
@@ -101,9 +102,9 @@ class ExperienceController extends BaseController
         $experience = $this->WorkExperienceRepository->deleteExperience($id);
 
         if (!$experience) {
-            return $this->responseRedirectBack('Error occurred while deleting Experience.', 'error', true, true);
+            return $this->responseRedirectBack('Error occurred while deleting Employment details.', 'error', true, true);
         }
-        return redirect()->back()->with('success','Experience has been deleted successfully', 'success', false, false);
+        return redirect()->back()->with('success', 'Employment details has been deleted successfully', 'success', false, false);
     }
 
 }
