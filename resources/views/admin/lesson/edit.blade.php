@@ -83,7 +83,7 @@
                         @csrf
                         <div class="d-flex justify-content-between m-2">
                             <h3 data-dd-status="fixed">Selected Topics</h3>
-                            <button type="submit" id="setTopic" class="d-none btn btn-primary btn-sm" style="float: right;">Set topics</button>
+                            <button type="submit" id="setTopic" class="d-none btn btn-primary btn-sm" style="float: right;">Save topics</button>
                         </div>
                         <hr>
                         <div style="height: 100%" id="relatedtopics" data-dd="target" data-dd-reordable="true">

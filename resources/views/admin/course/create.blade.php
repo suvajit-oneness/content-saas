@@ -92,7 +92,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="course_content">Course Content</label>
+                            <label class="control-label" for="course_content">What you will learn (comma seperated)</label>
                             <textarea name="course_content" id="course_content" class="form-control">{{old('course_content')}}</textarea>
                             @error('course_content')
                                 <p class="small text-danger">{{ $message }}</p>

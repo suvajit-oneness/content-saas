@@ -102,7 +102,7 @@
                             @error('preview_video')<p class="small text-danger">{{ $message }}</p>@enderror
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="course_content">Course Content</label>
+                            <label class="control-label" for="course_content">What you will learn (comma seperated)</label>
                             <textarea name="course_content" id="course_content" class="form-control">{{old('course_content') ?? $course->course_content}}</textarea>
                             @error('course_content')
                                 <p class="small text-danger">{{ $message }}</p>
@@ -170,8 +170,8 @@
                     <form action="{{ route('admin.course.updateCourseLesson', $course->id) }}" method="POST" class="col-sm-5" style="border: 1px solid black;">
                         @csrf
                         <div class="d-flex justify-content-between m-2">
-                            <h3 data-dd-status="fixed">Selected Topics</h3>
-                            <button type="submit" id="setTopic" class="d-none btn btn-primary btn-sm" style="float: right;">Set topics</button>
+                            <h3 data-dd-status="fixed">Selected Lessons</h3>
+                            <button type="submit" id="setTopic" class="d-none btn btn-primary btn-sm" style="float: right;">Save lessons</button>
                         </div>
                         <hr>
                         <div style="height: 100%" id="relatedtopics" data-dd="target" data-dd-reordable="true">
