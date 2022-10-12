@@ -75,8 +75,7 @@
                         </div>
 
                         <div class="courses-desc">
-                            <p>{!! $data->description !!}</p>
-
+                            <p>{!! $data->short_description !!}</p>
                             <a href="{{ route('front.course.details',$data->slug) }}" class="course-btn">Enroll</a>
                         </div>
                     </div>

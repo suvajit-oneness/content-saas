@@ -11,7 +11,8 @@
                         <div class="course-details-left-content">
                             <div class="course-details-main-info">
                                 <h2>{{ $course->title ?? '' }}</h2>
-                                <p>{!! $course->description ?? '' !!}</p>
+                                <p id="less_text">{!! substr($course->description,0,150) ?? '' !!}...<span style="font-size: 10px"><a onclick="$('#less_text').hide(); $('#all_text').show();" href="javascript:void(0)">See More</a></span></p>
+                                <p id="all_text" style="display: none;">{!! $course->description !!}</p>
                             </div>
 
                             <div class="learn">
@@ -181,7 +182,15 @@
                                 <input type="hidden" name="author_name" value="{{$course->company_name}}">
                                 <input type="hidden" name="course_slug" value="{{$course->slug}}">
                                 <input type="hidden" name="price" value="{{$course->price}}">
-                                <button type="submit" id="addToCart__btn" class="course-deails-btn">Add to Cart</button>
+                                @if(Auth::guard('web')->check())
+                                    @if(!CheckIfUserBoughtTheCourse($course->id, Auth::guard('web')->user()->id))
+                                        <button type="submit" id="addToCart__btn" class="course-deails-btn">Add to Cart</button>
+                                    @else
+                                        <button type="button" class="course-deails-btn disabled">Already Purchased</button>
+                                    @endif
+                                @else
+                                    <a href="{{route('front.user.login')}}" class="course-deails-btn">Login To Purchase</a>
+                                @endif
                             </form>
                             {{-- <a href="" class="course-deails-btn">Add to cart</a> --}}
                         </div>
