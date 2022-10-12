@@ -276,7 +276,7 @@
                                             <div class="employmentBox">
                                                 <div class="action">
                                                     <a href="{{ route('front.portfolio.work-experience.edit', $item->id) }}" title="Edit Profile"><i class="fa-solid fa-pen edit table-icon"></i></a>
-                                                    <a href="{{ route('front.portfolio.work-experience.delete', $item->id) }}" title="Delete"><i class="fa-solid fa-trash-can trash table-icon"></i></a>
+                                                    <a href="{{ route('front.portfolio.work-experience.delete', $item->id) }}" title="Delete" onclick="return confirm('Are you sure ?')"><i class="fa-solid fa-trash-can trash table-icon"></i></a>
                                                 </div>
                                                 <div class="row mb-3">
                                                     <div class="col-3">
@@ -346,7 +346,7 @@
                                             <div class="employmentBox">
                                                 <div class="action">
                                                     <a href="{{ route('front.portfolio.client.edit', $item->id) }}" title="Edit Profile"><i class="fa-solid fa-pen edit table-icon"></i></a>
-                                                    <a href="{{ route('front.portfolio.client.delete', $item->id) }}" title="Delete"><i class="fa-solid fa-trash-can trash table-icon"></i></a>
+                                                    <a href="{{ route('front.portfolio.client.delete', $item->id) }}" title="Delete" onclick="return confirm('Are you sure ?')"><i class="fa-solid fa-trash-can trash table-icon"></i></a>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-3 mb-3">
@@ -413,7 +413,7 @@
                                         <div class="employmentBox">
                                             <div class="action">
                                                 <a href="{{ route('front.portfolio.education.edit', $item->id) }}" title="Edit Profile"><i class="fa-solid fa-pen edit table-icon"></i></a>
-                                                <a href="{{ route('front.portfolio.education.delete', $item->id) }}" title="Delete"><i class="fa-solid fa-trash-can trash table-icon"></i></a>
+                                                <a href="{{ route('front.portfolio.education.delete', $item->id) }}" title="Delete" onclick="return confirm('Are you sure ?')"><i class="fa-solid fa-trash-can trash table-icon"></i></a>
                                             </div>
                                             <div class="row">
                                                 <div class="col-4 mb-3">
@@ -467,17 +467,17 @@
                                         <div class="employmentBox">
                                             <div class="action">
                                                 <a href="{{ route('front.portfolio.testimonial.edit', $item->id) }}" title="Edit Profile"><i class="fa-solid fa-pen edit table-icon"></i></a>
-                                                <a href="{{ route('front.portfolio.testimonial.delete', $item->id) }}" title="Delete"><i class="fa-solid fa-trash-can trash table-icon"></i></a>
+                                                <a href="{{ route('front.portfolio.testimonial.delete', $item->id) }}" title="Delete" onclick="return confirm('Are you sure ?')"><i class="fa-solid fa-trash-can trash table-icon"></i></a>
                                             </div>
 
                                             <div class="row">
                                                 <div class="col-6 mb-3">
                                                     <label>Image</label>
-                                                    @if($item->file)
-                                                    <img src="{{ asset('uploads/testimonial/'.$item->image) }}" id="articleImage" class="img-fluid" alt="">
-                                                    @else
+                                                    {{-- @if($item->file) --}}
+                                                    <img src="{{ asset($item->image) }}" id="articleImage" class="img-fluid" alt="" style="height: 100px">
+                                                    {{-- @else
                                                     <span></span>
-                                                    @endif
+                                                    @endif --}}
                                                 </div>
                                                 <div class="col-6 mb-3">
                                                     <label>Client Name</label>
@@ -526,7 +526,7 @@
                                             <div class="employmentBox">
                                                 <div class="action">
                                                     <a href="{{ route('front.portfolio.certification.edit', $item->id) }}" title="Edit Profile"><i class="fa-solid fa-pen edit table-icon"></i></a>
-                                                    <a href="{{ route('front.portfolio.certification.delete', $item->id) }}" title="Delete"><i class="fa-solid fa-trash-can trash table-icon"></i></a>
+                                                    <a href="{{ route('front.portfolio.certification.delete', $item->id) }}" title="Delete" onclick="return confirm('Are you sure ?')"><i class="fa-solid fa-trash-can trash table-icon"></i></a>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-3 mb-3">

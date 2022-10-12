@@ -148,9 +148,9 @@
 
         // on session toast fires
         @if (Session::has("success"))
-            toastFire("success", "{{ Session::get('success')[0] }}");
+            toastFire("success", "{{ Session::get('success') }}");
         @elseif (Session::has("failure"))
-            toastFire("warning", "{{ Session::get('failure')[0] }}");
+            toastFire("warning", "{{ Session::get('failure') }}");
         @endif
 
         $('.storeCatgoryList a' ).on( 'click', function(e){

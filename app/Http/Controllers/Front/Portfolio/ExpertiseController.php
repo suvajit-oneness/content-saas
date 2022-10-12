@@ -57,9 +57,9 @@ class ExpertiseController extends BaseController
         $expertise = $this->ExpertiseRepository->createExpertise($params);
 
         if (!$expertise) {
-            return $this->responseRedirectBack('Error occurred while creating Expertise.', 'error', true, true);
+            return $this->responseRedirectBack('Error occurred while creating Speciality.', 'error', true, true);
         }
-        return redirect()->back()->with('success', 'Expertise has been created successfully', 'success', false, false);
+        return redirect()->back()->with('success', 'Speciality has been created successfully', 'success', false, false);
     }
 
     /**
@@ -96,9 +96,11 @@ class ExpertiseController extends BaseController
         $expertise = $this->ExpertiseRepository->updateExpertise($params);
 
         if (!$expertise) {
-            return $this->responseRedirectBack('Error occurred while updating Expertise.', 'error', true, true);
+            return $this->responseRedirectBack('Error occurred while updating Speciality.', 'error', true, true);
         }
-        return $this->responseRedirectBack('Expertise has been updated successfully', 'success', false, false);
+        // dd($expertise);
+        // return $this->responseRedirectBack('Speciality has been updated successfully', 'success', false, false);
+        return redirect()->back()->with('success', 'Speciality has been updated successfully', 'success', false, false);
     }
 
     /**
@@ -110,8 +112,8 @@ class ExpertiseController extends BaseController
         $expertise = $this->ExpertiseRepository->deleteExpertise($id);
 
         if (!$expertise) {
-            return $this->responseRedirectBack('Error occurred while deleting Expertise.', 'error', true, true);
+            return $this->responseRedirectBack('Error occurred while deleting Speciality.', 'error', true, true);
         }
-        return redirect()->back()->with('success','Expertise has been deleted successfully', 'success', false, false);
+        return redirect()->back()->with('success', 'Speciality has been deleted successfully', 'success', false, false);
     }
 }

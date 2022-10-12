@@ -1,10 +1,7 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
     <head>
         <meta charset="UTF-8">
-
         <meta name="viewport" content="target-densitydpi=device-dpi, initial-scale=1.0, user-scalable=no" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <!-- <link rel="shortcut icon" href="./img/fav_icon.png"> -->
@@ -16,6 +13,8 @@
         <link href="{{ asset('frontend/css/aos.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('frontend/css/style.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('frontend/css/responsive.css') }}" rel="stylesheet" type="text/css">
+
+        @yield('style')
     </head>
     <body>
 		<nav class="navbar navbar-expand-xl navbar-light fixed-top">
@@ -189,6 +188,8 @@
             }
             // click to read notification
         </script>
+
+        @yield('script')
 
     </body>
 
