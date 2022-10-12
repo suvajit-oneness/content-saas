@@ -122,7 +122,9 @@
                         <div class="form-group">
                             <label class="control-label" for="language">Language</label>
                             <select name="language" id="language" class="form-control" value="{{old('language')}}">
-                                <option value="English">English</option>
+                                @foreach($languages as $l)
+                                    <option value="{{$l->name}}">{{$l->name}}</option>
+                                @endforeach
                             </select>
                             @error('language')
                                 <p class="small text-danger">{{ $message }}</p>

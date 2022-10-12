@@ -18,6 +18,7 @@ use App\Models\Category;
 use App\Models\CourseCategory;
 use App\Models\CourseLesson;
 use App\Models\courseType;
+use App\Models\Language;
 use App\Models\Lesson;
 // use App\Models\Lesson;
 use DB;
@@ -39,8 +40,9 @@ class CourseController extends BaseController
     public function create()
     {
         $course_category = CourseCategory::orderBy('title')->get();
+        $languages = Language::orderBy('name')->get();
         $this->setPageTitle('Course', 'Create Course');
-        return view('admin.course.create',compact('course_category'));
+        return view('admin.course.create',compact('course_category','languages'));
     }
 
     public function store(Request $request)
@@ -86,6 +88,8 @@ class CourseController extends BaseController
         $course->language = $params['language'];
 
         $course->certificate = isset($request->certificate) ? 1 : 0;
+
+        $course->status = 0;
 
         $course->save();
 
