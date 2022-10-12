@@ -35,7 +35,11 @@ class TopicController extends BaseController
         $this->validate($request, [
             'title' => 'required|min:2|max:255',
             'image' => 'required|image|max:100000|mimes:jpg,jpeg,png',
-            'description' => 'required|min:2'
+            'description' => 'required|min:2',
+            'short_description' => 'required|min:2',
+            'preview_video' => 'required|file|mimes:mp4',
+            'video' => 'required|file|mimes:mp4',
+            'video_length' => 'required'
         ]);
 
         $topic = new Topic();
@@ -48,6 +52,12 @@ class TopicController extends BaseController
         if(!empty($request->image)){
             $topic->image = imageUpload($request->image, 'topic');
         }
+
+        $topic->short_description = $request->short_description;
+        $topic->video_length = $request->video_length;
+        $topic->video = imageUpload($request->video , 'topic/video');
+        $topic->preview_video = imageUpload($request->preview_video, 'topic/video');
+        $topic->video_downloadable = isset($request->video_downloadable) ? 1 : 0;
 
         $topic->description = $request->description;
         $topic->save();
@@ -73,7 +83,11 @@ class TopicController extends BaseController
             'id' => 'required|min:1',
             'title' => 'required|min:2|max:255',
             'image' => 'nullable|image|max:100000|mimes:jpg,jpeg,png',
-            'description' => 'required|min:2'
+            'description' => 'required|min:2',
+            'short_description' => 'required|min:2',
+            'preview_video' => 'nullable|file|mimes:mp4',
+            'video' => 'nullable|file|mimes:mp4',
+            'video_length' => 'required'
         ]);
 
         $topic = Topic::findOrFail($request->id);
@@ -87,6 +101,18 @@ class TopicController extends BaseController
         if(!empty($request->image)){
             $topic->image = imageUpload($request->image, 'topic');
         }
+
+        $topic->short_description = $request->short_description;
+
+        if(!empty($request->preview_video)){
+            $topic->preview_video = imageUpload($request->preview_video, 'topic/video');
+        }
+        if(!empty($request->video)){
+            $topic->video = imageUpload($request->video,'topic/video');
+        }
+
+        $topic->video_length = $request->video_length;
+        $topic->video_downloadable = isset($request->video_downloadable) ? 1 : 0;
 
         $topic->title = $request->title;
         $topic->description = $request->description;

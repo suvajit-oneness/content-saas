@@ -45,10 +45,55 @@
                         </div>
 
                         <div class="form-group">
+                            <label class="control-label" for="short_description">Short description <span class="m-l-5 text-danger"> *</span></label>
+                            <textarea name="short_description" id="short_description" class="form-control @error('title') is-invalid @enderror">{{ old('short_description') ?? $topic->short_description }}</textarea>
+                            @error('short_description')<p class="small text-danger">{{ $message }}</p>@enderror
+                        </div>
+
+                        <div class="form-group">
                             <label class="control-label" for="name">Description <span class="m-l-5 text-danger"> *</span></label>
-                            <textarea name="description" id="description" class="summernote form-control @error('title') is-invalid @enderror">{{ old('description') ? old('description') : $topic->description }}</textarea>
+                            <textarea name="description" id="description" class="form-control @error('title') is-invalid @enderror">{{ old('description') ? old('description') : $topic->description }}</textarea>
+                            {{-- <textarea name="description" id="description" class="summernote form-control @error('title') is-invalid @enderror">{{ old('description') ? old('description') : $topic->description }}</textarea> --}}
 
                             @error('description')<p class="small text-danger">{{ $message }}</p>@enderror
+                        </div>
+
+                        <h3>Additional Topic Details</h3>
+                        <hr>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <video src="{{asset($topic->preview_video)}}" controls height="150px" width="150px"></video>
+                                </div>
+                                <div class="col-md-8">
+                                    <label class="control-label" >Preview video</label>
+                                    <input class="form-control @error('preview_video') is-invalid @enderror" type="file" id="image" name="preview_video"/>
+                                </div>
+                            </div>
+                            @error('preview_video')<p class="small text-danger">{{ $message }}</p>@enderror
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <video src="{{asset($topic->video)}}" controls height="150px" width="150px"></video>
+                                </div>
+                                <div class="col-md-8">
+                                    <label class="control-label">Video</label>
+                                    <input class="form-control @error('video') is-invalid @enderror" type="file" id="image" name="video"/>
+                                </div>
+                            </div>
+                            @error('video')<p class="small text-danger">{{ $message }}</p>@enderror
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="name">Topic Video Length(hours*)<span class="m-l-5 text-danger"> *</span></label>
+                            <input class="form-control @error('video_length') is-invalid @enderror" type="float" name="video_length" id="video_length" value="{{ old('video_length') ?? $topic->video_length }}" />
+                            @error('video_length')<p class="small text-danger">{{ $message }}</p>@enderror
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="name"><span class="m-l-5">Is downloadable?</span></label>
+                            <input {{$topic->video_downloadable == 1 ? 'checked' : ''}} class="form-control @error('video_downloadable') is-invalid @enderror" type="checkbox" name="video_downloadable" id="video_downloadable"/>
+                            @error('video_downloadable')<p class="small text-danger">{{ $message }}</p>@enderror
                         </div>
 
                         <div class="tile-footer">

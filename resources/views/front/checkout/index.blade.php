@@ -43,7 +43,7 @@
                                     
                                 </div>
                                 <div class="card-meta">
-                                    <h4>&#8377;{{$cartValue->price}}</h4>
+                                    <h4>${{$cartValue->price}}</h4>
                                 </div>
                             </figcaption>
                         </li>
