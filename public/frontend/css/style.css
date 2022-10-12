@@ -3611,7 +3611,8 @@ tbody, td, tfoot, th, thead, tr {
   width: 100%;
 }
 
-.table-content tbody tr td:nth-child(1) {
+.table-content #basic-details tr td:nth-child(1) {
+
   width: 20%;
 }
 
@@ -6861,4 +6862,43 @@ tbody, td, tfoot, th, thead, tr {
 .event_meta h3 {
   font-size: 24px;
   margin-bottom: 20px;
+}
+
+
+
+/* 1 */
+.employmentBox {
+  padding: 20px;
+  margin-top: 65px;
+  box-shadow: 0 0 15px rgb(0 0 0 / 7%);
+  border-radius: 6px;
+  position: relative;
+}
+.table-content td .employmentBox .action {
+  position: absolute;
+  right: 0;
+  padding: 10px;
+  background: #fff;
+  bottom: calc(100% - 1px);
+  box-shadow: 0 -5px 11px rgb(0 0 0 / 7%);
+  border-radius: 4px 4px 0 0;
+}
+.table-content td .employmentBox .action:after{
+  content: "";
+  height: 10px;
+  width: 100%;
+  background: #fff;
+  bottom: -5px;
+  z-index: 1;
+  position: absolute;
+  left: 0;
+}
+.employmentBox label,
+.employmentBox h4{
+  font-weight: 600;
+  color: #999;
+  display: block;
+  margin-bottom: 8px;
+  line-height: 1.2;
+  font-size: 16px;
 }
