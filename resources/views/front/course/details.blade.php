@@ -59,12 +59,12 @@
                                                 @foreach($totalLessonsAndTopics->topics[$key] as $data)
                                                     @if(Auth::guard('web')->check())
                                                         @if(CheckIfUserBoughtTheCourse($course->id, Auth::guard('web')->user()->id))
-                                                            <li><a href=""><div class="d-flex align-items-center"><i class="fa-solid fa-circle-play"></i>{!! $data->topic->title  !!} ({{ number_format((float)$data->topic->video_length, 2, ':', '') }} hours)</div><span onclick="playVideo('{{$data->topic->video}}')">Watch Full video <i class="fa-solid fa-circle-play"></i></span></a></li>
+                                                            <li><a href=""><div class="d-flex align-items-center"><i class="fa-solid fa-circle-play"></i>{!! $data->topic->title  !!} ({{ number_format((float)$data->topic->video_length, 2, ':', '') }} hours)</div><span onclick="playVideo('{{asset($data->topic->video)}}')">Watch Full video <i class="fa-solid fa-circle-play"></i></span></a></li>
                                                         @else
-                                                            <li><a href=""><div class="d-flex align-items-center"><i class="fa-solid fa-circle-play"></i>{!! $data->topic->title  !!} ({{ number_format((float)$data->topic->video_length, 2, ':', '') }} hours)</div><span onclick="playVideo('{{$data->topic->preview_video}}')">Preview <i class="fa-solid fa-circle-play"></i></span></a></li>
+                                                            <li><a href=""><div class="d-flex align-items-center"><i class="fa-solid fa-circle-play"></i>{!! $data->topic->title  !!} ({{ number_format((float)$data->topic->video_length, 2, ':', '') }} hours)</div><span onclick="playVideo('{{asset($data->topic->preview_video)}}')">Preview <i class="fa-solid fa-circle-play"></i></span></a></li>
                                                         @endif
                                                     @else
-                                                        <li><a href=""><div class="d-flex align-items-center"><i class="fa-solid fa-circle-play"></i>{!! $data->topic->title  !!} ({{ number_format((float)$data->topic->video_length, 2, ':', '') }} hours)</div><span onclick="playVideo('{{$data->topic->preview_video}}')">Preview <i class="fa-solid fa-circle-play"></i></span></a></li>
+                                                        <li><a href=""><div class="d-flex align-items-center"><i class="fa-solid fa-circle-play"></i>{!! $data->topic->title  !!} ({{ number_format((float)$data->topic->video_length, 2, ':', '') }} hours)</div><span onclick="playVideo('{{asset($data->topic->preview_video)}}')">Preview <i class="fa-solid fa-circle-play"></i></span></a></li>
                                                     @endif
                                                 @endforeach
                                                 </ul>
@@ -125,7 +125,7 @@
                             <p class="close btn btn-success" style="float:right" onclick="$('#videoModal').modal('hide')">&times;</p>
                         </div>
                         <div class="modal-body">
-                            <video id="videoplace" autoplay controls width="100%" height="350" src=""></video>
+                            <video id="videoplace" autoplay muted controls width="100%" height="350" src=""></video>
                         </div>
                     </div>
                 </div>
@@ -140,7 +140,7 @@
                                 {{-- <video src="{{asset($course->preview_video)}}"></video> --}}
                                 <img src="{{asset($course->image)}}" alt="">
                             </div>
-                            <span onclick="playVideo('{{$course->preview_video}}')"><i class="fa-solid fa-play"></i></span>
+                            <span onclick="playVideo('{{asset($course->preview_video)}}')"><i class="fa-solid fa-play"></i></span>
                             <small>Preview Course</small>
                         </div>
                         <h3 class="course-price">
@@ -202,17 +202,16 @@
     </div>
 </section>
 @endsection
-@push('scripts')
 
+@push('scripts')
 <script>
-    function playVideo(x) {
+    function playVideo(videoUrl) {
         event.preventDefault();
         $('#videoModal').modal('show');
-        $('#videoplace').attr('src', window.location.origin + '/' + x); 
+        // $('#videoplace').attr('src', window.location.origin + '/' + videoUrl);
+        $('#videoplace').attr('src', videoUrl);
     }
-</script>
 
-<script>
     // add to cart ajax
 	$('#addToCartForm').on('submit', function(e) {
 		e.preventDefault();

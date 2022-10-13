@@ -159,9 +159,9 @@
             }
 
             // on session toast fires
-            @if (Session::get('success'))
+            @if (Session::has('success'))
                 toastFire('success', '{{ Session::get('success') }}');
-            @elseif (Session::get('failure'))
+            @elseif (Session::has('failure'))
                 toastFire('warning', '{{ Session::get('failure') }}');
             @endif
 

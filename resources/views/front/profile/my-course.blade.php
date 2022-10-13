@@ -3,13 +3,13 @@
 
 @section('section')
 <section class="edit-sec edit-basic-detail">
-    <div class="container">
+    {{-- <div class="container">
         <div class="row">
             <div class="col-12 text-center top-heading">
                 <h2>My Purchased Courses</h2>
             </div>
         </div>
-    </div>
+    </div> --}}
     <div class="course-content-accordions">
         <div class="course-content-accordions">
         @foreach($orders as $o)

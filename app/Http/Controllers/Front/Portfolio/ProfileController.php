@@ -88,7 +88,8 @@ class ProfileController extends BaseController
         if (!$profile) {
             return $this->responseRedirectBack('Error occurred while updating Basic Details.', 'error', true, true);
         }
-        return $this->responseRedirectBack('Basic Details has been updated successfully', 'success', false, false);
+        // return $this->responseRedirectBack('Basic Details has been updated successfully', 'success', false, false);
+        return redirect()->back()->with('success', 'Basic Details has been updated successfully', 'success', false, false);
     }
 
 

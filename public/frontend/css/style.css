@@ -3566,7 +3566,7 @@ tbody, td, tfoot, th, thead, tr {
 } */
 .edit-sec {
   padding: 140px 0 60px;
-  padding-top: 60px;
+  padding-top: 10px;
   background: #F4FAE6;
 }
 

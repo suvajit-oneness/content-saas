@@ -62,7 +62,7 @@
                         <div class="dashboard-header">
                             <div class="dashboard-header-left">
                                 <div class="dashboard-page-name">
-                                    <a href="">home</a>
+                                    <a href="">@yield('title')</a>
                                 </div>
                                 {{auth()->guard('web')->user()->name}}
                             </div>
