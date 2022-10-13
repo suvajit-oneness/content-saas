@@ -33,7 +33,7 @@
                         @foreach ($cartData as $cartKey => $cartValue)
                         <li>
                             <figure>
-                                <img src="{{$cartValue->course_image}}" />
+                                <img src="{{$cartValue->course_image}}" class="w-100"/>
                             </figure>
                             <figcaption>
                                 <div class="cart-info">
@@ -61,14 +61,14 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label class="floating-label">First Name</label>
-                                <input type="text" class="form-control" name="fname" id="checkoutFname" value="@auth{{Auth::guard('web')->user()->fname}}@else{{old('fname')}}@endauth" placeholder="First Name">
+                                <input type="text" class="form-control" name="fname" id="checkoutFname" value="@auth{{Auth::guard('web')->user()->first_name}}@else{{old('fname')}}@endauth" placeholder="First Name">
                             </div>
                             @error('fname')<p class="small text-danger mb-0">{{$message}}</p>@enderror
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label class="floating-label">Last Name</label>
-                                <input type="text" class="form-control" name="lname" id="checkoutLname" value="@auth{{Auth::guard('web')->user()->lname}}@else{{old('lname')}}@endauth" placeholder="Last Name">
+                                <input type="text" class="form-control" name="lname" id="checkoutLname" value="@auth{{Auth::guard('web')->user()->last_name}}@else{{old('lname')}}@endauth" placeholder="Last Name">
                             </div>
                             @error('lname')<p class="small text-danger mb-0">{{$message}}</p>@enderror
                         </div>
