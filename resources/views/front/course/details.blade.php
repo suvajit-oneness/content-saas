@@ -120,11 +120,12 @@
             <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="videoModal" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <div class="modal-body">
+                        <div class="modal-header">
+                            <h5>Video</h5>
                             <p class="close btn btn-success" style="float:right" onclick="$('#videoModal').modal('hide')">&times;</p>
-                            <div>
-                                <video id="videoplace" autoplay controls width="100%" height="350" src=""></video>
-                            </div>
+                        </div>
+                        <div class="modal-body">
+                            <video id="videoplace" autoplay controls width="100%" height="350" src=""></video>
                         </div>
                     </div>
                 </div>

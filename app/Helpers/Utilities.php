@@ -130,7 +130,7 @@ function countTotalHours($courseid)
     $totalhrs = 0;
     $lessons = App\Models\CourseLesson::where('course_id', $courseid)->get();
     foreach($lessons as $l){
-        $eachtopic = App\Models\LessonTopic::where('lesson_id', $l->id)->get();
+        $eachtopic = App\Models\LessonTopic::where('lesson_id', $l->lesson_id)->get();
         foreach ($eachtopic as $key => $value) {
             $top = App\Models\Topic::find($value->topic_id);
             $totalhrs += $top->video_length;  
@@ -147,7 +147,7 @@ function totalLessonsAndTopics($courseid)
     $topic_count = 0;
     $each_lesson_length = [];
     foreach ($lessons as $l) {
-        $topic = App\Models\LessonTopic::where('lesson_id', $l->id)->with('topic')->get();
+        $topic = App\Models\LessonTopic::where('lesson_id', $l->lesson_id)->with('topic')->get();
         array_push($all_topics, $topic);
         $topic_count += count($topic);
         foreach($topic as $t){
