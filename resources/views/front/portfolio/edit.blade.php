@@ -26,6 +26,7 @@
                                 <th class="table-tab" data-tab-table="education">Education</th>
                                 <th class="table-tab" data-tab-table="testimonial">Testimonials</th>
                                 <th class="table-tab" data-tab-table="certificate">Certification </th>
+                                <th class="table-tab" data-tab-table="feedback">Feedback </th>
                             </tr>
                         </thead>
                     </table>
@@ -46,14 +47,14 @@
                                 <td>
                                     <div class="row mt-2">
                                         <div class="col-12 text-end">
-                                            <a href="{{ route('front.user.portfolio.manage.basic-details.edit', auth()->guard('web')->user()->slug) }}" class="add-btn-edit d-inline-block">Edit <i class="fa-solid fa-edit"></i></a>
+                                            <a href="{{ route('front.user.portfolio.manage.basic-details.edit') }}" class="add-btn-edit d-inline-block">Edit <i class="fa-solid fa-edit"></i></a>
                                         </div>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Image</td>
-                                <td><img src="{{ asset(auth()->guard('web')->user()->image) }}" alt="image" height="100"></td>
+                                <td><img src="{{ asset(auth()->guard('web')->user()->image) }}" alt="" height="100"></td>
                                 <td></td>
                             </tr>
                             <tr>
@@ -332,7 +333,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    @endforeach   
+                                    @endforeach
                                 </td>
                             </tr>
                         </tbody>
@@ -365,7 +366,7 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                
+
                                                 <div class="col-3 mb-3">
                                                     <label>Designation</label>
                                                     <p>{{ $item->occupation }}</p>
@@ -399,7 +400,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    @endforeach    
+                                    @endforeach
                                 </td>
                             </tr>
                         </tbody>
@@ -441,7 +442,7 @@
                                                 <label>Url</label>
                                                 <p>{{ $item->link }}</p>
                                             </div>
-                                        
+
                                             <div class="col-lg-6 col-12 mb-3">
                                                 <label>Short Description</label>
                                                 <p>{{ $item->short_desc }}</p>
@@ -453,7 +454,7 @@
                                         </div>
                                     </div>
                                     @endforeach
-                            
+
                                 </td>
                             </tr>
                         </tbody>
@@ -511,7 +512,7 @@
                                                 <p>{{ $item->long_desc }}</p>
                                             </div>
                                         </div>
-                                    </div>  
+                                    </div>
                                     @endforeach
                                 </td>
                             </tr>
@@ -561,12 +562,12 @@
                                                     <p>{{ $item->long_desc }}</p>
                                                 </div>
                                             </div>
-                                        </div>                                            
+                                        </div>
                                     @endforeach
                                 </td>
                             </tr>
                         </tbody>
-                        
+
                     </table>
                 </div>
             </div>

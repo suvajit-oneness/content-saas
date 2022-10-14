@@ -71,9 +71,9 @@ Route::name('front.')->group(function() {
 
     // portfolio in user management
     Route::prefix('user')->name('user.portfolio.')->group(function() {
-        Route::get('portfolio-manage', 'Front\PortfolioController@edit')->name('manage');
+        Route::get('portfolio/basic-details', 'Front\PortfolioController@edit')->name('manage');
 
-        Route::get('basic-details/{slug}', 'Front\Portfolio\ProfileController@create')->name('manage.basic-details.edit');
+        Route::get('portfolio/basic-details/create', 'Front\Portfolio\ProfileController@create')->name('manage.basic-details.edit');
     });
 
     Route::prefix('user')->name('user.courses')->group(function() {
@@ -89,47 +89,47 @@ Route::name('front.')->group(function() {
         });
 
         Route::name('expertise.')->group(function () {
-            Route::get('/speciality/add', 'Front\Portfolio\ExpertiseController@create')->name('create');
-            Route::post('/speciality/store', 'Front\Portfolio\ExpertiseController@store')->name('store');
-            Route::get('/speciality/edit/{id}', 'Front\Portfolio\ExpertiseController@edit')->name('edit');
-            Route::post('/speciality/update', 'Front\Portfolio\ExpertiseController@update')->name('update');
-            Route::get('/speciality/delete/{id}', 'Front\Portfolio\ExpertiseController@delete')->name('delete');
+            Route::get('/portfolio/expertise/create', 'Front\Portfolio\ExpertiseController@create')->name('create');
+            Route::post('/portfolio/expertise/store', 'Front\Portfolio\ExpertiseController@store')->name('store');
+            Route::get('/portfolio/expertise/edit/{id}', 'Front\Portfolio\ExpertiseController@edit')->name('edit');
+            Route::post('/portfolio/expertise/update', 'Front\Portfolio\ExpertiseController@update')->name('update');
+            Route::get('/portfolio/expertise/delete/{id}', 'Front\Portfolio\ExpertiseController@delete')->name('delete');
         });
 
         Route::name('education.')->group(function () {
-            Route::get('/education/add', 'Front\Portfolio\EducationController@create')->name('create');
-            Route::post('/education/store', 'Front\Portfolio\EducationController@store')->name('store');
-            Route::get('/education/edit/{id}', 'Front\Portfolio\EducationController@edit')->name('edit');
-            Route::post('/education/update', 'Front\Portfolio\EducationController@update')->name('update');
-            Route::get('/education/delete/{id}', 'Front\Portfolio\EducationController@delete')->name('delete');
+            Route::get('/portfolio/education/create', 'Front\Portfolio\EducationController@create')->name('create');
+            Route::post('/portfolio/education/store', 'Front\Portfolio\EducationController@store')->name('store');
+            Route::get('/portfolio/education/edit/{id}', 'Front\Portfolio\EducationController@edit')->name('edit');
+            Route::post('/portfolio/education/update', 'Front\Portfolio\EducationController@update')->name('update');
+            Route::get('/portfolio/education/delete/{id}', 'Front\Portfolio\EducationController@delete')->name('delete');
         });
 
         Route::name('work-experience.')->group(function () {
-            Route::get('/work-experience/add', 'Front\Portfolio\ExperienceController@create')->name('create');
-            Route::post('/work-experience/store', 'Front\Portfolio\ExperienceController@store')->name('store');
-            Route::get('/work-experience/edit/{id}', 'Front\Portfolio\ExperienceController@edit')->name('edit');
-            Route::post('/work-experience/update', 'Front\Portfolio\ExperienceController@update')->name('update');
-            Route::get('/work-experience/delete/{id}', 'Front\Portfolio\ExperienceController@delete')->name('delete');
+            Route::get('/portfolio/work-experience/create', 'Front\Portfolio\ExperienceController@create')->name('create');
+            Route::post('/portfolio/work-experience/store', 'Front\Portfolio\ExperienceController@store')->name('store');
+            Route::get('/portfolio/work-experience/edit/{id}','Front\Portfolio\ExperienceController@edit')->name('edit');
+            Route::post('/portfolio/work-experience/update','Front\Portfolio\ExperienceController@update')->name('update');
+            Route::get('/portfolio/work-experience/delete/{id}', 'Front\Portfolio\ExperienceController@delete')->name('delete');
         });
 
         Route::name('work-category.')->group(function () {
-            Route::get('/work-category/add', 'Front\Portfolio\WorkCategoryController@create')->name('create');
-            Route::post('/work-category/store', 'Front\Portfolio\WorkCategoryController@store')->name('store');
-            Route::get('/work-category/edit/{id}', 'Front\Portfolio\WorkCategoryController@edit')->name('edit');
-            Route::post('/work-category/update', 'Front\Portfolio\WorkCategoryController@update')->name('update');
-            Route::get('/work-category/delete/{id}', 'Front\Portfolio\WorkCategoryController@delete')->name('delete');
+            Route::get('/portfolio/work-category/create', 'Front\Portfolio\WorkCategoryController@create')->name('create');
+            Route::post('/portfolio/work-category/store', 'Front\Portfolio\WorkCategoryController@store')->name('store');
+            Route::get('/portfolio/work-category/edit/{id}','Front\Portfolio\WorkCategoryController@edit')->name('edit');
+            Route::post('/portfolio/work-category/update','Front\Portfolio\WorkCategoryController@update')->name('update');
+            Route::get('/portfolio/work-category/delete/{id}',    'Front\Portfolio\WorkCategoryController@delete')->name('delete');
         });
 
         Route::name('category.')->group(function () {
-            Route::get('/category/add', 'Front\Portfolio\CategoryController@create')->name('create');
-            Route::post('/category/store', 'Front\Portfolio\CategoryController@store')->name('store');
-            Route::get('/category/edit/{id}', 'Front\Portfolio\CategoryController@edit')->name('edit');
-            Route::post('/category/update', 'Front\Portfolio\CategoryController@update')->name('update');
-            Route::get('/category/delete/{id}', 'Front\Portfolio\CategoryController@delete')->name('delete');
+            Route::get('/portfolio/category/create', 'Front\Portfolio\CategoryController@create')->name('create');
+            Route::post('/portfolio/category/store', 'Front\Portfolio\CategoryController@store')->name('store');
+            Route::get('/portfolio/category/edit/{id}', 'Front\Portfolio\CategoryController@edit')->name('edit');
+            Route::post('/portfolio/category/update', 'Front\Portfolio\CategoryController@update')->name('update');
+            Route::get('/portfolio/category/delete/{id}', 'Front\Portfolio\CategoryController@delete')->name('delete');
         });
 
         Route::name('portfolio.')->group(function () {
-            Route::get('/user/portfolio/add', 'Front\Portfolio\PortfolioController@create')->name('create');
+            Route::get('/portfolio/create', 'Front\Portfolio\PortfolioController@create')->name('create');
             Route::post('/portfolio/store', 'Front\Portfolio\PortfolioController@store')->name('store');
             Route::get('/portfolio/edit/{id}', 'Front\Portfolio\PortfolioController@edit')->name('edit');
             Route::post('/portfolio/update', 'Front\Portfolio\PortfolioController@update')->name('update');
@@ -137,27 +137,34 @@ Route::name('front.')->group(function() {
         });
 
         Route::name('client.')->group(function () {
-            Route::get('/client/add', 'Front\Portfolio\ClientController@create')->name('create');
-            Route::post('/client/store', 'Front\Portfolio\ClientController@store')->name('store');
-            Route::get('/client/edit/{id}', 'Front\Portfolio\ClientController@edit')->name('edit');
-            Route::post('/client/update', 'Front\Portfolio\ClientController@update')->name('update');
-            Route::get('/client/delete/{id}', 'Front\Portfolio\ClientController@delete')->name('delete');
+            Route::get('/portfolio/client/add', 'Front\Portfolio\ClientController@create')->name('create');
+            Route::post('/portfolio/client/store', 'Front\Portfolio\ClientController@store')->name('store');
+            Route::get('/portfolio/client/edit/{id}', 'Front\Portfolio\ClientController@edit')->name('edit');
+            Route::post('/portfolio/client/update', 'Front\Portfolio\ClientController@update')->name('update');
+            Route::get('/portfolio/client/delete/{id}', 'Front\Portfolio\ClientController@delete')->name('delete');
         });
 
         Route::name('certification.')->group(function () {
-            Route::get('/certification/add', 'Front\Portfolio\CertificateController@create')->name('create');
-            Route::post('/certification/store', 'Front\Portfolio\CertificateController@store')->name('store');
-            Route::get('/certification/edit/{id}', 'Front\Portfolio\CertificateController@edit')->name('edit');
-            Route::post('/certification/update', 'Front\Portfolio\CertificateController@update')->name('update');
-            Route::get('/certification/delete/{id}', 'Front\Portfolio\CertificateController@delete')->name('delete');
+            Route::get('/portfolio/certification/add', 'Front\Portfolio\CertificateController@create')->name('create');
+            Route::post('/portfolio/certification/store', 'Front\Portfolio\CertificateController@store')->name('store');
+            Route::get('/portfolio/certification/edit/{id}', 'Front\Portfolio\CertificateController@edit')->name('edit');
+            Route::post('/portfolio/certification/update', 'Front\Portfolio\CertificateController@update')->name('update');
+            Route::get('/portfolio/certification/delete/{id}', 'Front\Portfolio\CertificateController@delete')->name('delete');
         });
 
         Route::name('testimonial.')->group(function () {
-            Route::get('/testimonial/add', 'Front\Portfolio\TestimonialController@create')->name('create');
-            Route::post('/testimonial/store', 'Front\Portfolio\TestimonialController@store')->name('store');
-            Route::get('/testimonial/edit/{id}', 'Front\Portfolio\TestimonialController@edit')->name('edit');
-            Route::post('/testimonial/update', 'Front\Portfolio\TestimonialController@update')->name('update');
-            Route::get('/testimonial/delete/{id}', 'Front\Portfolio\TestimonialController@delete')->name('delete');
+            Route::get('/portfolio/testimonial/create', 'Front\Portfolio\TestimonialController@create')->name('create');
+            Route::post('/portfolio/testimonial/store', 'Front\Portfolio\TestimonialController@store')->name('store');
+            Route::get('/portfolio/testimonial/edit/{id}', 'Front\Portfolio\TestimonialController@edit')->name('edit');
+            Route::post('/portfolio/testimonial/update', 'Front\Portfolio\TestimonialController@update')->name('update');
+            Route::get('/portfolio/testimonial/delete/{id}', 'Front\Portfolio\TestimonialController@delete')->name('delete');
+        });
+        Route::name('feedback.')->group(function () {
+            Route::get('/portfolio/feedback/create', 'Front\Portfolio\FeedbackController@create')->name('create');
+            Route::post('/portfolio/feedback/store', 'Front\Portfolio\FeedbackController@store')->name('store');
+            Route::get('/portfolio/feedback/edit/{id}', 'Front\Portfolio\FeedbackController@edit')->name('edit');
+            Route::post('/portfolio/feedback/update', 'Front\Portfolio\FeedbackController@update')->name('update');
+            Route::get('/portfolio/feedback/delete/{id}', 'Front\Portfolio\FeedbackController@delete')->name('delete');
         });
     });
 });

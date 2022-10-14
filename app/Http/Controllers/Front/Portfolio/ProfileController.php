@@ -15,7 +15,7 @@ use App\Models\UserSocialMedia;
 use App\Models\UserLanguage;
 use App\Models\SocialMedia;
 use Illuminate\Support\Facades\Session as FacadesSession;
-
+use Illuminate\Support\Facades\Auth;
 class ProfileController extends BaseController
 {
     /**
@@ -40,8 +40,8 @@ class ProfileController extends BaseController
     {
         $this->setPageTitle('Basic Details', 'Create Basic Details');
         $data = (object)[];
-
-        $data->user = User::where('slug', $request->slug)->first();
+        $id=Auth::user()->id;
+        $data->user = User::where('id', $id)->first();
         $country = DB::table('countries')->orderby('country_name')->get();
 
         // language
@@ -80,6 +80,7 @@ class ProfileController extends BaseController
             'color_scheme'  => 'nullable|string',
             'worked_for'    => 'required|string',
             'categories'    => 'required|string',
+            'image'         => 'required',
         ]);
 
         $params = $request->except('_token');

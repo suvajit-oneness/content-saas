@@ -6,6 +6,10 @@
     <div class="container">
         <div class="row">
             <div class="col-12 text-center top-heading">
+                <div class="text-right" style="
+                text-align: right;">
+                <a class="btn btn-secondary" href="{{ route('front.user.portfolio.manage') }}"><i class="fa fa-fw fa-lg fa-chevron-left"></i>Back</a>
+                </div>
                 <h2>Add  Basic Details</h2>
             </div>
         </div>
