@@ -22,16 +22,9 @@
                             @csrf
                             <div class="tile-body">
                                 <div class="form-group">
-                                    <label class="control-label" for="date_from"> Start Date</label>
+                                    <label class="control-label" for="date_from"> Date</label>
                                     <input type="date" class="form-control" rows="4" name="date_from" id="date_from" value="{{ old('date_from') }}">
                                     @error('date_from')
-                                        <p class="small text-danger">{{ $message }}</p>
-                                    @enderror
-                                </div><br>
-                                <div class="form-group">
-                                    <label class="control-label" for="date_to"> End Date</label>
-                                    <input type="date" class="form-control" rows="4" name="date_to" id="date_to" value="{{ old('date_to') }}">
-                                    @error('date_to')
                                         <p class="small text-danger">{{ $message }}</p>
                                     @enderror
                                 </div><br>
@@ -74,6 +67,13 @@
                                     <label class="control-label" for="review"> Review</label>
                                     <textarea type="text" class="form-control" rows="4" name="review" id="review">{{ old('review') }}</textarea>
                                     @error('review')
+                                        <p class="small text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div><br>
+                                <div class="form-group">
+                                    <label class="control-label" for="review_person"> Review By</label>
+                                    <textarea type="text" class="form-control" rows="4" name="review_person" id="review_person">{{ old('review_person') }}</textarea>
+                                    @error('review_person')
                                         <p class="small text-danger">{{ $message }}</p>
                                     @enderror
                                 </div><br>

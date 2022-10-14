@@ -91,6 +91,7 @@ class FeedbackController extends BaseController
      */
     public function update(Request $request)
     {
+        dd($request->all());
         $this->validate($request, [
             'date_from' => 'required',
             'date_to' => 'required',

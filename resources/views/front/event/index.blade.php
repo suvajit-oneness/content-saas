@@ -36,7 +36,7 @@
             </div>--}}
         </div>
     </div>
-   
+
     <div class="container">
         <div class="row">
         @foreach($cat as $eventCategorykey => $event)
@@ -47,7 +47,7 @@
             <div class="col-12 col-lg-4 col-md-6 mb-3 blog_list eventlist eventlist_{{ $data->event_type }}">
                 <a href="">
                     <div class="card">
-                        <img src="{{URL::to('/').'/events/'}}{{$data->image}}" class="card-img-top" alt="Blog Picture">
+                        <img src="{{URL::to('/').'/uploads/events/'}}{{$data->image}}" class="card-img-top" alt="Blog Picture">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                <span class="subHead_badge">{{ $data->category->title }}</span>
@@ -72,7 +72,7 @@
             @endforeach
         </div>
     </div>
-    
+
     {{--  <div class="container text-center mt-4 mt-lg-5">
         <a href="#" class="load_more">Load more tools..</a>
     </div>--}}

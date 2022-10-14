@@ -11,7 +11,7 @@
         <div class="container-fluid">
             <div class="artiledetails_banner_img">
                 @if($event->image!='')
-                    <img class="w-100" src="{{URL::to('/').'/events/'}}{{$event->image}}" alt="">
+                    <img class="w-100" src="{{URL::to('/').'/uploads/events/'}}{{$event->image}}" alt="">
                 @else
                 <img class="w-100" src="{{URL::to('/').'/Blogs/'}}{{placeholder-image.png}}">
                 @endif
@@ -197,7 +197,7 @@
                             <div class="card eventCart border-0">
                                 <div class="bst_dimg">
                                      @if($event->image)
-                                   <img src="{{URL::to('/').'/events/'}}{{$event->image}}" class="card-img-top" alt="ltItem">
+                                   <img src="{{URL::to('/').'/uploads/events/'}}{{$event->image}}" class="card-img-top" alt="ltItem">
                                      @else
                                     <img class="w-100" src="{{URL::to('/').'/Demo/'}}{{placeholder-image.png}}" class="card-img-top" style="height: 350px;object-fit: cover;">
                                     @endif
