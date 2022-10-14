@@ -63,7 +63,8 @@ use App\Contracts\CertificationContract;
 use App\Repositories\CertificationRepository;
 use App\Contracts\TestimonialContract;
 use App\Repositories\TestimonialRepository;
-
+use App\Contracts\FeedbackContract;
+use App\Repositories\FeedbackRepository;
 class RepositoryServiceProvider extends ServiceProvider
 {
     protected $repositories = [
@@ -97,6 +98,7 @@ class RepositoryServiceProvider extends ServiceProvider
         ClientContract::class                    =>            ClientRepository::class,
         CertificationContract::class             =>            CertificationRepository::class,
         TestimonialContract::class               =>            TestimonialRepository::class,
+        FeedbackContract::class                  =>            FeedbackRepository::class,
     ];
 
     /**

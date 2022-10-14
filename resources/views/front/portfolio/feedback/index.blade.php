@@ -39,7 +39,7 @@
                                     <td>
                                         <div class="row mt-2">
                                             <div class="col-12 text-end">
-                                                <a href="{{ route('front.portfolio.expertise.create') }}" class="add-btn-edit d-inline-block">Add <i class="fa-solid fa-plus-circle"></i></a>
+                                                <a href="{{ route('front.portfolio.feedback.create') }}" class="add-btn-edit d-inline-block">Create <i class="fa-solid fa-plus-circle"></i></a>
                                             </div>
                                         </div>
                                     </td>
@@ -47,19 +47,21 @@
                                 <tr>
                                     <td>
                                         <div class="row g-3 mt-1">
-                                        @foreach($data->specialities as $key=> $item)
+                                        @foreach($data->feedback as $key=> $item)
                                             <div class="col-12 col-lg-6 col-md-12">
                                                 <div class="edit-card">
                                                     <div class="action">
-                                                        <a href="{{ route('front.portfolio.expertise.edit', $item->id) }}"><i class="fa-solid fa-pen edit table-icon"></i></a>
+                                                        <a href="{{ route('front.portfolio.feedback.edit', $item->id) }}"><i class="fa-solid fa-pen edit table-icon"></i></a>
 
-                                                        <a href="{{ route('front.portfolio.expertise.delete', $item->id) }}" onclick="return confirm('Are you sure ?')"><i class="fa-solid fa-trash-can trash table-icon"></i></a>
+                                                        <a href="{{ route('front.portfolio.feedback.delete', $item->id) }}" onclick="return confirm('Are you sure ?')"><i class="fa-solid fa-trash-can trash table-icon"></i></a>
                                                     </div>
                                                     <div class="date">
-                                                        <span>{{ date('j F Y, g:i a', strtotime($item->created_at)) }}</span>
+                                                        <span>{{ date('j F Y, g:i a', strtotime($item->date_from)) }}</span>
                                                     </div>
                                                     <div class="edit-heading">
-                                                        <h4>{{ $item->specialityDetails->name }}</h4>
+                                                        <h4>{{ $item->title }}</h4>
+                                                        <h4>  {!! RatingHtml($item->rating) !!}
+                                                        </h4>
                                                         <p>{{ $item->description }}</p>
                                                     </div>
                                                 </div>

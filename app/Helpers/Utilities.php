@@ -49,7 +49,7 @@ if (!function_exists('imageResizeAndSave')) {
     function imageResizeAndSave($imageUrl, $type = 'categories', $filename)
     {
         if (!empty($imageUrl)) {
-                                                    
+
             //save 60x60 image
             \Storage::disk('public')->makeDirectory($type.'/60x60');
             $path60X60     = storage_path('app/public/'.$type.'/60x60/'.$filename);
@@ -59,12 +59,12 @@ if (!function_exists('imageResizeAndSave')) {
                         $constraint->aspectRatio();
                     });
             $canvas->insert($image, 'center');
-            $canvas->save($path60X60, 70); 
-            
+            $canvas->save($path60X60, 70);
+
             //save 350X350 image
             \Storage::disk('public')->makeDirectory($type.'/350x350');
             $path350X350     = storage_path('app/public/'.$type.'/350x350/'.$filename);
-            $canvas = \Image::canvas(350, 350);        
+            $canvas = \Image::canvas(350, 350);
             $image = \Image::make($imageUrl)->resize(350, 350,
                     function($constraint) {
                         $constraint->aspectRatio();
@@ -133,8 +133,8 @@ function countTotalHours($courseid)
         $eachtopic = App\Models\LessonTopic::where('lesson_id', $l->lesson_id)->get();
         foreach ($eachtopic as $key => $value) {
             $top = App\Models\Topic::find($value->topic_id);
-            $totalhrs += $top->video_length;  
-        } 
+            $totalhrs += $top->video_length;
+        }
     }
     return $totalhrs . ' hours';
 }
@@ -161,7 +161,7 @@ function totalLessonsAndTopics($courseid)
     $data['topic_count'] = $topic_count;
     $data['topics'] = $all_topics;
     $data['total_downloadable_contents'] = $total_downloadable_contents;
-    
+
     return (object)$data;
 }
 
@@ -183,4 +183,113 @@ function CheckIfUserBoughtTheCourse($courseid, $user_id){
         return true;
     else
         return false;
+
+}
+if(!function_exists('RatingHtml')) {
+    function RatingHtml($rating = null) {
+        if ($rating == 0) {
+            $resp = '<p>No ratings available</p>';
+        } elseif ($rating == 1) {
+            $resp = '
+            <p class="review">
+                <span class="fa fa-star checked" style="color:#FFA701"></span>
+                <span class="fa-regular fa-star" style="color:#FFA701"></span>
+                <span class="fa-regular fa-star" style="color:#FFA701"></span>
+                <span class="fa-regular fa-star" style="color:#FFA701"></span>
+                <span class="fa-regular fa-star" style="color:#FFA701"></span>
+                <small>'.$rating.' Rating</small>
+            </p>
+            ';
+        } elseif ($rating > 1 && $rating < 2) {
+            $resp = '
+            <p class="review">
+                <span class="fa fa-star checked" style="color:#FFA701"></span>
+                <span class="fas fa-star-half-alt" style="color:#FFA701"></span>
+                <span class="fa-regular fa-star" style="color:#FFA701"></span>
+                <span class="fa-regular fa-star" style="color:#FFA701"></span>
+                <span class="fa-regular fa-star" style="color:#FFA701"></span>
+                <small>'.$rating.' Ratings</small>
+            </p>
+            ';
+        } elseif ($rating == 2) {
+            $resp = '
+            <p class="review">
+                <span class="fa fa-star checked" style="color:#FFA701"></span>
+                <span class="fa fa-star checked" style="color:#FFA701"></span>
+                <span class="fa-regular fa-star" style="color:#FFA701"></span>
+                <span class="fa-regular fa-star" style="color:#FFA701"></span>
+                <span class="fa-regular fa-star" style="color:#FFA701"></span>
+                <small>'.$rating.' Ratings</small>
+            </p>
+            ';
+        } elseif ($rating > 2 && $rating < 3) {
+            $resp = '
+            <p class="review">
+                <span class="fa fa-star checked" style="color:#FFA701"></span>
+                <span class="fa fa-star checked" style="color:#FFA701"></span>
+                <span class="fas fa-star-half-alt" style="color:#FFA701"></span>
+                <span class="fa-regular fa-star" style="color:#FFA701"></span>
+                <span class="fa-regular fa-star" style="color:#FFA701"></span>
+                <small>'.$rating.' Ratings</small>
+            </p>
+            ';
+        } elseif ($rating == 3) {
+            $resp = '
+            <p class="review">
+                <span class="fa fa-star checked" style="color:#FFA701"></span>
+                <span class="fa fa-star checked" style="color:#FFA701"></span>
+                <span class="fa fa-star checked" style="color:#FFA701"></span>
+                <span class="fa-regular fa-star" style="color:#FFA701"></span>
+                <span class="fa-regular fa-star" style="color:#FFA701"></span>
+                <small>'.$rating.' Ratings</small>
+            </p>
+            ';
+        } elseif ($rating > 3 && $rating < 4) {
+            $resp = '
+            <p class="review">
+                <span class="fa fa-star checked" style="color:#FFA701"></span>
+                <span class="fa fa-star checked" style="color:#FFA701"></span>
+                <span class="fa fa-star checked" style="color:#FFA701"></span>
+                <span class="fa fa-star-half-alt" style="color:#FFA701"></span>
+                <span class="fa-regular fa-star" style="color:#FFA701"></span>
+                <small>'.$rating.' Ratings</small>
+            </p>
+            ';
+        } elseif ($rating == 4) {
+            $resp = '
+            <p class="review">
+                <span class="fa fa-star checked" style="color:#FFA701"></span>
+                <span class="fa fa-star checked" style="color:#FFA701"></span>
+                <span class="fa fa-star checked" style="color:#FFA701"></span>
+                <span class="fa fa-star checked" style="color:#FFA701"></span>
+                <span class="fa-regular fa-star" style="color:#FFA701"></span>
+                <small>'.$rating.' Ratings</small>
+            </p>
+            ';
+        } elseif ($rating > 4 && $rating < 5) {
+            $resp = '
+            <p class="review">
+                <span class="fa fa-star checked" style="color:#FFA701"></span>
+                <span class="fa fa-star checked" style="color:#FFA701"></span>
+                <span class="fa fa-star checked" style="color:#FFA701"></span>
+                <span class="fa fa-star checked" style="color:#FFA701"></span>
+                <span class="fa fa-star-half-alt" style="color:#FFA701"></span>
+                <small>'.$rating.' Ratings</small>
+            </p>
+            ';
+        } else {
+            $resp = '
+            <p class="review">
+                <span class="fa fa-star checked" style="color:#FFA701"></span>
+                <span class="fa fa-star checked" style="color:#FFA701"></span>
+                <span class="fa fa-star checked" style="color:#FFA701"></span>
+                <span class="fa fa-star checked" style="color:#FFA701"></span>
+                <span class="fa fa-star checked" style="color:#FFA701"></span>
+                <small>'.$rating.' Ratings</small>
+            </p>
+            ';
+        }
+
+        return $resp;
+    }
 }

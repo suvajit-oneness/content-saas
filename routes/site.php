@@ -107,12 +107,12 @@ Route::name('front.')->group(function() {
         });
 
         Route::name('work-experience.')->group(function () {
-            Route::get('/portfolio/work-experience', 'Front\Portfolio\ExperienceController@index')->name('index');
-            Route::get('/portfolio/work-experience/create', 'Front\Portfolio\ExperienceController@create')->name('create');
-            Route::post('/portfolio/work-experience/store', 'Front\Portfolio\ExperienceController@store')->name('store');
-            Route::get('/portfolio/work-experience/edit/{id}','Front\Portfolio\ExperienceController@edit')->name('edit');
-            Route::post('/portfolio/work-experience/update','Front\Portfolio\ExperienceController@update')->name('update');
-            Route::get('/portfolio/work-experience/delete/{id}', 'Front\Portfolio\ExperienceController@delete')->name('delete');
+            Route::get('/portfolio/employment', 'Front\Portfolio\ExperienceController@index')->name('index');
+            Route::get('/portfolio/employment/create', 'Front\Portfolio\ExperienceController@create')->name('create');
+            Route::post('/portfolio/employment/store', 'Front\Portfolio\ExperienceController@store')->name('store');
+            Route::get('/portfolio/employment/edit/{id}','Front\Portfolio\ExperienceController@edit')->name('edit');
+            Route::post('/portfolio/employment/update','Front\Portfolio\ExperienceController@update')->name('update');
+            Route::get('/portfolio/employment/delete/{id}', 'Front\Portfolio\ExperienceController@delete')->name('delete');
         });
 
         Route::name('work-category.')->group(function () {

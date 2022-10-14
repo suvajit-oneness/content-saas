@@ -39,7 +39,7 @@
                                     <td>
                                         <div class="row mt-2">
                                             <div class="col-12 text-end">
-                                                <a href="{{ route('front.portfolio.expertise.create') }}" class="add-btn-edit d-inline-block">Add <i class="fa-solid fa-plus-circle"></i></a>
+                                                <a href="{{ route('front.portfolio.expertise.create') }}" class="add-btn-edit d-inline-block">Create <i class="fa-solid fa-plus-circle"></i></a>
                                             </div>
                                         </div>
                                     </td>
