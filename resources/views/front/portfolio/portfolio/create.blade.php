@@ -8,7 +8,7 @@
                 <div class="col-12 text-center top-heading">
                     <div class="text-right" style="
                     text-align: right;">
-                    <a class="btn btn-secondary" href="{{ route('front.user.portfolio.manage') }}"><i class="fa fa-fw fa-lg fa-chevron-left"></i>Back</a>
+                    <a class="btn btn-secondary" href="{{ route('front.portfolio.portfolio.index') }}"><i class="fa fa-fw fa-lg fa-chevron-left"></i>Back</a>
                     </div>
                     <h2>Add Portfolio Details</h2>
                 </div>
@@ -77,7 +77,7 @@
                             <div class="tile-footer">
                                 <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save</button>
 
-                                <a href="{{ route('front.user.portfolio.manage','#portfolio') }}" class="btn btn-secondary"><i class="fa fa-fw fa-lg fa-chevron-left"></i>Back</a>
+                                <a href="{{ route('front.portfolio.portfolio.index') }}" class="btn btn-secondary"><i class="fa fa-fw fa-lg fa-chevron-left"></i>Back</a>
 
                                 {{-- &nbsp;&nbsp;&nbsp; --}}
                             </div>

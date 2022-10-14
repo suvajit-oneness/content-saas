@@ -71,9 +71,9 @@ Route::name('front.')->group(function() {
 
     // portfolio in user management
     Route::prefix('user')->name('user.portfolio.')->group(function() {
-        Route::get('portfolio/basic-details', 'Front\PortfolioController@edit')->name('manage');
+        Route::get('portfolio/basic-details', 'Front\PortfolioController@edit')->name('index');
 
-        Route::get('portfolio/basic-details/create', 'Front\Portfolio\ProfileController@create')->name('manage.basic-details.edit');
+        Route::get('portfolio/basic-details/create', 'Front\Portfolio\ProfileController@create')->name('edit');
     });
 
     Route::prefix('user')->name('user.courses')->group(function() {

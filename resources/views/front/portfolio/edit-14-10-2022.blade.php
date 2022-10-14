@@ -19,15 +19,14 @@
                         <thead>
                             <tr>
                                 <th class="table-tab active" data-tab-table="basic-details">Basic Details</th>
-                                {{-- <th class="table-tab" data-tab-table="portfolio">Portfolio</th> --}}
-                                <th class="table-tab" onclick="location.href='{{ route('front.portfolio.portfolio.index')}}'">Portfolio</th>
-                                <th class="table-tab" onclick="location.href='{{ route('front.portfolio.expertise.index')}}'">Expertise</th>
-                                <th class="table-tab" onclick="location.href='{{ route('front.portfolio.work-experience.index')}}'">Employment History</th>
-                                <th class="table-tab" onclick="location.href='{{ route('front.portfolio.client.index')}}'">Clients</th>
-                                <th class="table-tab" onclick="location.href='{{ route('front.portfolio.education.index')}}'">Education</th>
-                                <th class="table-tab" onclick="location.href='{{ route('front.portfolio.testimonial.index')}}'">Testimonials</th>
-                                <th class="table-tab" onclick="location.href='{{ route('front.portfolio.certification.index')}}'">Certification </th>
-                                <th class="table-tab" onclick="location.href='{{ route('front.portfolio.feedback.index')}}'">Feedback </th>
+                                <th class="table-tab" data-tab-table="portfolio">Portfolio</th>
+                                <th class="table-tab" data-tab-table="speciality">Expertise</th>
+                                <th class="table-tab" data-tab-table="employment-history">Employment History</th>
+                                <th class="table-tab" data-tab-table="client">Clients</th>
+                                <th class="table-tab" data-tab-table="education">Education</th>
+                                <th class="table-tab" data-tab-table="testimonial">Testimonials</th>
+                                <th class="table-tab" data-tab-table="certificate">Certification </th>
+                                <th class="table-tab" data-tab-table="feedback">Feedback </th>
                             </tr>
                         </thead>
                     </table>
@@ -48,7 +47,7 @@
                                 <td>
                                     <div class="row mt-2">
                                         <div class="col-12 text-end">
-                                            <a href="{{ route('front.user.portfolio.edit') }}" class="add-btn-edit d-inline-block">Edit <i class="fa-solid fa-edit"></i></a>
+                                            <a href="{{ route('front.user.portfolio.manage.basic-details.edit') }}" class="add-btn-edit d-inline-block">Edit <i class="fa-solid fa-edit"></i></a>
                                         </div>
                                     </div>
                                 </td>

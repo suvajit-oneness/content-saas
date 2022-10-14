@@ -28,6 +28,15 @@ class PortfolioController extends BaseController
     {
         $this->PortfolioRepository = $PortfolioRepository;
     }
+    public function index(Request $request)
+    {
+        $this->setPageTitle('Portfolio', 'Create Portfolio');
+        $data = (object)[];
+        $user_id = auth()->guard('web')->user()->id;
+        $data->portfolios = Portfolio::where('user_id', $user_id)->get();
+        $category=ArticleCategory::orderby('title')->get();
+        return view('front.portfolio.portfolio.index',compact('category','data'));
+    }
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View

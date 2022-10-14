@@ -28,7 +28,14 @@ class TestimonialController extends BaseController
     {
         $this->TestimonialRepository = $TestimonialRepository;
     }
-
+    public function index(Request $request)
+    {
+        $this->setPageTitle('Testimonial', 'Testimonial');
+        $data = (object)[];
+        $user_id = auth()->guard('web')->user()->id;
+        $data->testimonials = Testimonial::where('user_id', $user_id)->get();
+        return view('front.portfolio.testimonial.index',compact('data'));
+    }
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */

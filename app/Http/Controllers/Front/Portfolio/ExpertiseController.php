@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Employment;
 use App\Http\Controllers\BaseController;
 use App\Models\Speciality;
+use App\Models\UserSpeciality;
 use Illuminate\Support\Str;
 use Session;
 use DB;
@@ -29,7 +30,15 @@ class ExpertiseController extends BaseController
     {
         $this->ExpertiseRepository = $ExpertiseRepository;
     }
-
+    public function index(Request $request)
+    {
+        $this->setPageTitle('Expertise', 'Create Expertise');
+        $data = (object)[];
+        $user_id = auth()->guard('web')->user()->id;
+        $data->specialities = UserSpeciality::where('user_id', $user_id)->with('specialityDetails')->get();
+       // $category=ArticleCategory::orderby('title')->get();
+        return view('front.portfolio.expertise.index',compact('data'));
+    }
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */

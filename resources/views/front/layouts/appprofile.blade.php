@@ -38,7 +38,7 @@
                             {{-- <a href="{{ route('front.portfolio.index', auth()->guard('web')->user()->slug) }}"><i class="fa-solid fa-house"></i> Portfolio</a> --}}
                         </li>
                         <li>
-                            <a href="{{ route('front.user.portfolio.manage') }}" class="{{ request()->is('user/portfolio*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Manage Portfolio</a>
+                            <a href="{{ route('front.user.portfolio.index') }}" class="{{ request()->is('user/portfolio*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Manage Portfolio</a>
 
                             {{-- <a href="{{ route('front.portfolio.edit', auth()->guard('web')->user()->slug) }}" class="{{ request()->is('user/portfolio/manage*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Manage Portfolio</a> --}}
                         </li>
