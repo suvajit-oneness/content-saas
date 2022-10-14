@@ -68,13 +68,6 @@
                                     @enderror
                                 </div><br>
                                 <div class="form-group">
-                                    <label class="control-label" for="long_desc">Long Description</label>
-                                    <textarea type="text" class="form-control" rows="4" name="long_desc" id="long_desc">{{ old('long_desc') }}</textarea>
-                                    @error('long_desc')
-                                        <p class="small text-danger">{{ $message }}</p>
-                                    @enderror
-                                </div><br>
-                                <div class="form-group">
                                     <label class="control-label" for="image">Image</label>
                                     <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image"/>
                                     @error('image')

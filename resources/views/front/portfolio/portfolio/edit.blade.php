@@ -6,6 +6,10 @@
     <div class="container">
         <div class="row">
             <div class="col-12 text-center top-heading">
+                <div class="text-right" style="
+                    text-align: right;">
+                    <a class="btn btn-secondary" href="{{ route('front.user.portfolio.manage') }}"><i class="fa fa-fw fa-lg fa-chevron-left"></i>Back</a>
+                    </div>
                 <h2>Update  Portfolio Details</h2>
             </div>
         </div>
@@ -64,13 +68,6 @@
                                 @enderror
                             </div><br>
                             <div class="form-group">
-                                <label class="control-label" for="long_desc">Long Description</label>
-                                <textarea type="text" class="form-control" rows="4" name="long_desc" id="long_desc">{{ old('long_desc',$portfolio->long_desc) }}</textarea>
-                                @error('long_desc')
-                                    <p class="small text-danger">{{ $message }}</p>
-                                @enderror
-                            </div><br>
-                            <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-2">
                                         @if ($portfolio->image != null)
@@ -93,7 +90,7 @@
                         <div class="tile-footer">
                             <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Update</button>
 
-                            <a href="{{ route('front.user.portfolio.manage') }}" class="btn btn-primary"><i class="fa fa-fw fa-lg fa-chevron-left"></i> Go Back</a>
+                            <a href="{{ route('front.user.portfolio.manage') }}" class="btn btn-secondary"><i class="fa fa-fw fa-lg fa-chevron-left"></i> Back</a>
 
                             {{-- &nbsp;&nbsp;&nbsp; --}}
                         </div>

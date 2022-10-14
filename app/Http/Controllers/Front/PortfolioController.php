@@ -69,6 +69,7 @@ class PortfolioController extends Controller
         $data->educations = Education::where('user_id', $user_id)->orderBy('position')->get();
         $data->testimonials = Testimonial::where('user_id', $user_id)->get();
         $data->certificates = Certificate::where('user_id', $user_id)->get();
+        $data->feedback = Feedback::where('user_id', $user_id)->get();
         return view('front.portfolio.edit',compact(('data')));
     }
 

@@ -20,7 +20,7 @@
                             <tr>
                                 <th class="table-tab active" data-tab-table="basic-details">Basic Details</th>
                                 <th class="table-tab" data-tab-table="portfolio">Portfolio</th>
-                                <th class="table-tab" data-tab-table="speciality">Speciality</th>
+                                <th class="table-tab" data-tab-table="speciality">Expertise</th>
                                 <th class="table-tab" data-tab-table="employment-history">Employment History</th>
                                 <th class="table-tab" data-tab-table="client">Clients</th>
                                 <th class="table-tab" data-tab-table="education">Education</th>
@@ -158,7 +158,6 @@
                                                     <p>Category: <span class="text-dark">{{ $item->category }}</span></p>
                                                     <p>{{ $item->tags }}</p>
                                                     <p>{{ $item->short_desc }}</p>
-                                                    <p>{{ $item->long_desc }}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -560,6 +559,49 @@
                                                 <div class="col-6 mb-3">
                                                     <label>Long Description</label>
                                                     <p>{{ $item->long_desc }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody class="tbody-content tbody-content-edit" id="feedback">
+                            <tr>
+                                <td>
+                                    <div class="action">
+                                        <a type="button" href="{{ route('front.portfolio.feedback.create') }}" class="add-btn-edit d-inline-block"  title="Create">Create <i class="fa-solid fa-plus-circle"></i></a>
+                                    </div>
+                                    @foreach($data->feedback as $key=> $item)
+                                        <div class="employmentBox">
+                                            <div class="action">
+                                                <a href="{{ route('front.portfolio.feedback.edit', $item->id) }}" title="Edit Profile"><i class="fa-solid fa-pen edit table-icon"></i></a>
+                                                <a href="{{ route('front.portfolio.feedback.delete', $item->id) }}" title="Delete" onclick="return confirm('Are you sure ?')"><i class="fa-solid fa-trash-can trash table-icon"></i></a>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-3 mb-3">
+                                                    <label>Start Date</label>
+                                                    <p>{{ $item->date_from }}</p>
+                                                </div>
+                                                <div class="col-3 mb-3">
+                                                    <label>End Date</label>
+                                                    <p>{{ $item->date_to }}</p>
+                                                </div>
+                                                <div class="col-3 mb-3">
+                                                    <label>Title</label>
+                                                    <p>{{ $item->title }}</p>
+                                                </div>
+                                                <div class="col-3 mb-3">
+                                                    <label>Rating</label>
+                                                    <p>{{ $item->rating }}</p>
+                                                </div>
+                                                <div class="col-6 mb-3">
+                                                    <label>Review</label>
+                                                    <p>{{ $item->review }}</p>
+                                                </div>
+                                                <div class="col-6 mb-3">
+                                                    <label>Description</label>
+                                                    <p>{{ $item->description }}</p>
                                                 </div>
                                             </div>
                                         </div>
