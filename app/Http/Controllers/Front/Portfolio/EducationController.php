@@ -7,6 +7,7 @@ use App\Contracts\EducationContract;
 use Illuminate\Http\Request;
 use App\Models\Employment;
 use App\Http\Controllers\BaseController;
+use App\Models\Education;
 use Illuminate\Support\Str;
 use Session;
 use DB;
@@ -28,7 +29,15 @@ class EducationController extends BaseController
     {
         $this->EducationRepository = $EducationRepository;
     }
-
+    public function index(Request $request)
+    {
+        $this->setPageTitle('Education', ' Education');
+        $data = (object)[];
+        $user_id = auth()->guard('web')->user()->id;
+        $data->educations = Education::where('user_id', $user_id)->orderBy('position')->get();
+       // $category=ArticleCategory::orderby('title')->get();
+        return view('front.portfolio.education.index',compact('data'));
+    }
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */

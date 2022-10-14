@@ -32,7 +32,7 @@ class ExpertiseController extends BaseController
     }
     public function index(Request $request)
     {
-        $this->setPageTitle('Expertise', 'Create Expertise');
+        $this->setPageTitle('Expertise', 'Expertise');
         $data = (object)[];
         $user_id = auth()->guard('web')->user()->id;
         $data->specialities = UserSpeciality::where('user_id', $user_id)->with('specialityDetails')->get();

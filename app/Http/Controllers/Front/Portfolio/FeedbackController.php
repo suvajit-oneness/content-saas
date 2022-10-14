@@ -11,10 +11,9 @@ use Illuminate\Support\Str;
 use Session;
 use DB;
 use Illuminate\Support\Facades\Session as FacadesSession;
-
-class ClientController extends BaseController
+class FeedbackController extends BaseController
 {
-     /**
+    /**
      * @var ClientContract
      */
     protected $ClientRepository;

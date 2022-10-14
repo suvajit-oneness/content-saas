@@ -517,9 +517,6 @@
                                 </td>
                             </tr>
                         </tbody>
-
-
-
                         <tbody class="tbody-content tbody-content-edit" id="certificate">
                             <tr>
                                 <td>

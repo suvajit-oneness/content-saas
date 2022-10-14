@@ -27,7 +27,15 @@ class ExperienceController extends BaseController
     {
         $this->WorkExperienceRepository = $WorkExperienceRepository;
     }
-
+    public function index(Request $request)
+    {
+        $this->setPageTitle('Experience', ' Experience');
+        $data = (object)[];
+        $user_id = auth()->guard('web')->user()->id;
+        $data->employments = Employment::where('user_id', $user_id)->get();
+       // $category=ArticleCategory::orderby('title')->get();
+        return view('front.portfolio.experience.index',compact('data'));
+    }
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */

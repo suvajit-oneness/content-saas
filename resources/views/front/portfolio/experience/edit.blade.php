@@ -8,7 +8,7 @@
                 <div class="col-12 text-center top-heading">
                     <div class="text-right" style="
                     text-align: right;">
-                    <a class="btn btn-secondary" href="{{ route('front.user.portfolio.manage') }}"><i class="fa fa-fw fa-lg fa-chevron-left"></i>Back</a>
+                    <a class="btn btn-secondary" href="{{ route('front.portfolio.work-experience.index') }}"><i class="fa fa-fw fa-lg fa-chevron-left"></i>Back</a>
                     </div>
                     <h2>Update  Work Experience Details</h2>
                 </div>
@@ -121,7 +121,7 @@
                             <div class="tile-footer">
                                 <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Update
                                     </button>
-                                    <a class="btn btn-secondary" href="{{ route('front.user.portfolio.manage') }}"><i class="fa fa-fw fa-lg fa-chevron-left"></i>Back</a>
+                                    <a class="btn btn-secondary" href="{{ route('front.portfolio.work-experience.index') }}"><i class="fa fa-fw fa-lg fa-chevron-left"></i>Back</a>
                                 &nbsp;&nbsp;&nbsp;
                             </div>
                         </form>
