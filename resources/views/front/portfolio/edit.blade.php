@@ -19,7 +19,8 @@
                         <thead>
                             <tr>
                                 <th class="table-tab active" data-tab-table="basic-details">Basic Details</th>
-                                <th class="table-tab" data-tab-table="portfolio">Portfolio</th>
+                                {{-- <th class="table-tab" data-tab-table="portfolio">Portfolio</th> --}}
+                                <th class="table-tab" onclick="location.href='{{ route('front.portfolio.portfolio.index')}}'">Portfolio</th>
                                 <th class="table-tab" data-tab-table="speciality">Expertise</th>
                                 <th class="table-tab" data-tab-table="employment-history">Employment History</th>
                                 <th class="table-tab" data-tab-table="client">Clients</th>

@@ -84,7 +84,7 @@ Route::name('front.')->group(function() {
     // Route::get('/user/portfolio/manage/{slug}', 'Front\PortfolioController@edit')->name('portfolio.edit');
     Route::prefix('user')->name('portfolio.')->group(function () {
         Route::name('profile.')->group(function () {
-            Route::get('/basic-detail/create/{slug}', 'Front\Portfolio\ProfileController@create')->name('create');
+            Route::get('/basic-detail/create', 'Front\Portfolio\ProfileController@create')->name('create');
             Route::post('/basic-detail/update', 'Front\Portfolio\ProfileController@update')->name('update');
         });
 
