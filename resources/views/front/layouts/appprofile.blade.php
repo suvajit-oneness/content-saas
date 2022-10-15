@@ -81,7 +81,7 @@
                                 <ul>
                                 <div class="dashboard-profile">
                                     <a href="">
-                                        <img src="{{ asset('frontend/img/prof.jpeg')}}" alt="" />
+                                        <img src="{{ asset(auth()->guard('web')->user()->image)}}" alt="" />
                                     </a>
                                 </div>
                             </ul>
