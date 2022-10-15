@@ -86,4 +86,5 @@ class AuthController extends BaseController
         Auth::guard('web')->logout();
         return redirect()->route('front.index')->with('success', 'Logout successfull');
     }
+
 }

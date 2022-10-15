@@ -22,6 +22,7 @@
                 <i class="app-menu__icon fa fa-chevron-down"></i>
             </a>
         </li>
+
         <div id="collapseOne" class="collapse @if(request()->is('admin/event*')) {{ 'show' }} @endif" aria-labelledby="headingOne" data-parent="#accordion">
             <li>
                 <a class="app-menu__item {{ request()->is('admin/event/category*') ? 'active' : '' }}" href="{{ route('admin.event-category.index') }}">
@@ -35,6 +36,13 @@
                 </a>
             </li>
         </div>
+
+        {{-- Orders --}}
+        <li>
+            <a class="app-menu__item {{ request()->is('admin/orders*') ? 'active' : '' }} {{ sidebar_open(['admin.order']) }}" href="{{ route('admin.order.index') }}">
+                <span class="app-menu__label">All Orders</span>
+            </a>
+        </li>
 
         <!-- Course Management -->
         <li class="text-light" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">

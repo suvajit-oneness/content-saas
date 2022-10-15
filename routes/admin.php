@@ -123,6 +123,20 @@ Route::group(['prefix' => 'admin'], function () {
             Route::get('/export', 'Admin\EventController@export')->name('admin.event.data.csv.export');
         });
 
+        // ** Order Management routes */
+        Route::group(['prefix'  =>   'orders'], function () {
+            Route::get('/', 'Admin\OrderController@index')->name('admin.order.index');
+            // Route::get('/create', 'Admin\OrderController@create')->name('admin.order.create');
+            // Route::post('/store', 'Admin\OrderController@store')->name('admin.order.store');
+            // Route::get('/{id}/edit', 'Admin\OrderController@edit')->name('admin.order.edit');
+            // Route::post('/update', 'Admin\OrderController@update')->name('admin.order.update');
+            // Route::get('/{id}/delete', 'Admin\OrderController@delete')->name('admin.order.delete');
+            Route::post('updateStatus', 'Admin\OrderController@updateStatus')->name('admin.order.updateStatus');
+            Route::get('/{id}/details', 'Admin\OrderController@details')->name('admin.order.details');
+            // Route::post('/csv-store', 'Admin\OrderController@csvStore')->name('admin.order.data.csv.store');
+            // Route::get('/export', 'Admin\OrderController@export')->name('admin.order.data.csv.export');
+        });
+
         //** course category management   **/
         Route::group(['prefix' => 'course/category'], function () {
             Route::get('/', 'Admin\CourseCategoryController@index')->name('admin.course-category.index');

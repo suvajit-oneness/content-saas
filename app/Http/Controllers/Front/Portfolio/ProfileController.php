@@ -80,7 +80,7 @@ class ProfileController extends BaseController
             'color_scheme'  => 'nullable|string',
             'worked_for'    => 'required|string',
             'categories'    => 'required|string',
-            'image'         => 'required',
+            'image'         => 'nullable',
         ]);
 
         $params = $request->except('_token');

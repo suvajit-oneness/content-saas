@@ -1,5 +1,7 @@
 @extends('admin.app')
-@section('title') {{ $pageTitle }} @endsection
+@section('title')
+    {{ $pageTitle }}
+@endsection
 @section('content')
     <div class="app-title">
         <div>
@@ -15,27 +17,27 @@
                     <tbody>
                         <tr>
                             <td>Name</td>
-                            <td>{{ empty($user['name'])? null:$user['name'] }}</td>
+                            <td>{{ $user['first_name'] . ' ' . $user['last_name'] }}</td>
                         </tr>
                         <tr>
                             <td>Email Id</td>
-                            <td>{{ empty($user['email'])? null:$user['email'] }}</td>
+                            <td>{{ empty($user['email']) ? null : $user['email'] }}</td>
                         </tr>
                         <tr>
                             <td>Mobile No</td>
-                            <td>{{ empty($user['mobile'])? null:$user['mobile'] }}</td>
+                            <td>{{ empty($user['mobile']) ? null : $user['mobile'] }}</td>
                         </tr>
                         <tr>
                             <td>Address</td>
-                            <td>{{ empty($user['address'])? null:$user['address'] }}</td>
+                            <td>{{ empty($user['address']) ? null : $user['address'] }}</td>
                         </tr>
                         <tr>
                             <td>City</td>
-                            <td>{{ empty($user['city'])? null:$user['city'] }}</td>
+                            <td>{{ empty($user['city']) ? null : $user['city'] }}</td>
                         </tr>
                         <tr>
                             <td>Country</td>
-                            <td>{{ empty($user['country'])? null:$user['country'] }}</td>
+                            <td>{{ empty($user['country']) ? null : $user['country'] }}</td>
                         </tr>
 
                     </tbody>
@@ -45,7 +47,7 @@
         </div>
     </div>
 
-     <div class="row">
+    {{-- <div class="row">
         <div class="col-md-12">
             <div class="tile">
                 <div class="tile-body">
@@ -61,7 +63,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($course as $key => $data)
+                            @foreach ($course as $key => $data)
                                 <tr>
                                     <td>{{ $key+1 }}</td>
                                     <td>{{ $data->course->course_name }}</td>
@@ -75,5 +77,5 @@
                 </div>
             </div>
         </div>
-    </div> 
+    </div>  --}}
 @endsection

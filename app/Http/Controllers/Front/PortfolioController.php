@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Front;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -17,11 +18,14 @@ use App\Models\Certificate;
 use Illuminate\Support\Facades\Auth;
 use App\Contracts\UserContract;
 use App\Feedback;
+use App\Http\Controllers\BaseController;
 use App\Models\Language;
 use App\Models\Order;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
-class PortfolioController extends Controller
+use Illuminate\Support\Facades\Hash;
+
+class PortfolioController extends BaseController
 {
     protected $UserRepository;
 
@@ -35,7 +39,8 @@ class PortfolioController extends Controller
         $this->UserRepository = $UserRepository;
     }
 
-    public function index(Request $request, $slug) {
+    public function index(Request $request, $slug)
+    {
         $data = (object)[];
         $data->user = User::where('slug', $slug)->first();
         $data->socialMedias = UserSocialMedia::where('user_id', $data->user->id)->with('socialMediaDetails')->get();
@@ -52,7 +57,8 @@ class PortfolioController extends Controller
         return view('front.portfolio.index', compact('data'));
     }
 
-    public function edit(Request $request) {
+    public function edit(Request $request)
+    {
         // dd('here');
         $data = (object)[];
 
@@ -70,40 +76,68 @@ class PortfolioController extends Controller
         $data->testimonials = Testimonial::where('user_id', $user_id)->get();
         $data->certificates = Certificate::where('user_id', $user_id)->get();
         $data->feedback = Feedback::where('user_id', $user_id)->get();
-        return view('front.portfolio.edit',compact(('data')));
+        return view('front.portfolio.edit', compact(('data')));
     }
 
-    public function basicprofile(Request $request,$slug) {
+    public function basicprofile(Request $request, $slug)
+    {
         $data = (object)[];
         $data->user = User::where('slug', $slug)->first();
         $languages = UserLanguage::where('user_id', $data->user->id)->with('languageDetails')->get();
-       // dd($languages);
+        // dd($languages);
         $language = Language::orderby('name')->get();
         $media = SocialMedia::all();
         $country = DB::table('countries')->orderby('country_name')->get();
-        return view('front.portfolio.basic-details',compact('data','media','country','language','languages'));
+        return view('front.portfolio.basic-details', compact('data', 'media', 'country', 'language', 'languages'));
     }
 
     public function update(Request $request)
     {
-       //dd($request->all());
-       $request->validate([
-        'first_name' => 'required|string|min:1',
-    ]);
-     $params = $request->except('_token');
+        //dd($request->all());
+        $request->validate([
+            'first_name' => 'required|string|min:1',
+        ]);
+        $params = $request->except('_token');
 
-     $targetprofile = $this->UserRepository->userprofile($params);
+        $targetprofile = $this->UserRepository->userprofile($params);
 
-    if (!$targetprofile) {
-        return back()->with('Error occurred while updating Profile.', 'error', true, true);
-    }
-    return back()->with('Profile has been updated successfully', 'success', false, false);
+        if (!$targetprofile) {
+            return back()->with('Error occurred while updating Profile.', 'error', true, true);
+        }
+        return back()->with('Profile has been updated successfully', 'success', false, false);
     }
 
     public function showMyCourses()
     {
-        $orders = Order::where('user_id',auth()->guard('web')->user()->id)->with('orderProducts')->get();
+        $orders = Order::where('user_id', auth()->guard('web')->user()->id)->with('orderProducts')->get();
 
-        return view('front.profile.my-course',compact('orders'));
+        return view('front.profile.my-course', compact('orders'));
+    }
+
+    public function changePassword()
+    {
+        return view('front.portfolio.profile.changePassword');
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+            'old_password' => 'required',
+            'new_password' => 'required',
+            'confirm_new_password' => 'required|same:new_password',
+        ]);
+
+        $check_old_pass = Auth::attempt(['email' => auth()->guard('web')->user()->email, 'password' => $request->old_password]);
+
+        if (!$check_old_pass) {
+            return redirect()->back()->with('success', 'Old Password is not correct', 'error', true, true);
+        }
+
+        $new_pass = Hash::make($request->new_password);
+
+        User::where('email', auth()->guard('web')->user()->email)->update(['password' => $new_pass]);
+
+        Auth::guard('web')->logout();
+        return redirect()->back();
     }
 }
