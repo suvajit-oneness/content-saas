@@ -1,5 +1,6 @@
 @extends('front.layouts.app')
 @section('title',' Event')
+
 @section('section')
 <section class="tools_wrapper">
     <div class="container">
@@ -23,7 +24,7 @@
                     <li>
                         <label>
                             <input type="radio" name="blogcategory" value="eventlist_{{ $data->id }}" {{ ($key == 0) ? 'checked' : '' }}>
-                            <span>{{  $data->title }}</span>
+                            <span>{{ ucwords($data->title) }}</span>
                         </label>
                     </li>
                     @endforeach
@@ -45,9 +46,11 @@
         @endphp
             @foreach($event->eventDetails as $eventProductkey => $data)
             <div class="col-12 col-lg-4 col-md-6 mb-3 blog_list eventlist eventlist_{{ $data->event_type }}">
-                <a href="">
+                {{-- <a href=""> --}}
                     <div class="card">
-                        <img src="{{URL::to('/').'/uploads/events/'}}{{$data->image}}" class="card-img-top" alt="Blog Picture">
+                        <a href="{{ route('front.event.details',$data->slug) }}">
+                            <img src="{{URL::to('/').'/uploads/events/'}}{{$data->image}}" class="card-img-top" alt="Blog Picture">
+                        </a>
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                <span class="subHead_badge">{{ $data->category->title }}</span>
@@ -63,10 +66,10 @@
                                     </span>
                                 </div>
                             </div>
-                             <a href="{{ route('front.event.details',$data->slug) }}" class="location_btn"><h5 class="card-title">{{ $data->title }}</h5></a>
+                            <a href="{{ route('front.event.details',$data->slug) }}" class="location_btn"><h5 class="card-title">{{ $data->title }}</h5></a>
                         </div>
                     </div>
-                </a>
+                {{-- </a> --}}
             </div>
             @endforeach
             @endforeach

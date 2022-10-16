@@ -10,10 +10,16 @@ class EventController extends Controller
 {
     public function event(Request $request)
     {
-        $cat=EventType::where('status',1)->orderby('title')->get();
-        $event=Event::where('status',1)->orderby('title')->get();
-        return view('front.event.index',compact('cat','event'));
+        if (auth()->guard('web')->check()) {
+            $cat=EventType::where('status',1)->orderby('title')->get();
+            $event=Event::where('status',1)->orderby('title')->get();
+
+            return view('front.event.index',compact('cat','event'));
+        } else {
+            return redirect()->route('front.user.login');
+        }
     }
+
     public function eventdetails(Request $request,$slug)
     {
         $cat=EventType::where('status',1)->orderby('title')->get();

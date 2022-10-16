@@ -15,11 +15,16 @@ class CourseController extends Controller
 {
     public function course(Request $request)
     {
-        $cat=CourseCategory::where('status',1)->orderby('title')->get();
-        $course=Course::where('status',1)->orderby('title')->get();
+        if (auth()->guard('web')->check()) {
+            $cat=CourseCategory::where('status',1)->orderby('title')->get();
+            $course=Course::where('status',1)->orderby('title')->get();
 
-        return view('front.course.index',compact('cat','course'));
+            return view('front.course.index',compact('cat','course'));
+        } else {
+            return redirect()->route('front.user.login');
+        }
     }
+
     public function coursedetails(Request $request,$slug)
     {
         $cat=CourseCategory::where('status',1)->orderby('title')->get();
