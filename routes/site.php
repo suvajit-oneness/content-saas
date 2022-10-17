@@ -73,14 +73,19 @@ Route::name('front.')->group(function () {
         // portfolio in user management
         Route::prefix('user')->name('user.portfolio.')->group(function () {
             Route::get('portfolio/basic-details', 'Front\PortfolioController@edit')->name('index');
-            Route::get('portfolio/password/change', 'Front\PortfolioController@changePassword')->name('changePassword');
-            Route::post('portfolio/password/update', 'Front\PortfolioController@updatePassword')->name('updatePassword');
+            Route::get('change/password', 'Front\PortfolioController@changePassword')->name('changePassword');
+            Route::post('update/password', 'Front\PortfolioController@updatePassword')->name('updatePassword');
             Route::get('portfolio/basic-details/create', 'Front\Portfolio\ProfileController@create')->name('edit');
         });
 
         // User purchased course
         Route::prefix('user')->name('user.courses')->group(function () {
             Route::get('/my-courses','Front\PortfolioController@showMyCourses');
+        });
+        
+        // User purchased course
+        Route::prefix('user')->name('user.profile.edit')->group(function () {
+            Route::get('/update/profile','Front\Portfolio\ProfileController@editProfile');
         });
 
         // dashboard

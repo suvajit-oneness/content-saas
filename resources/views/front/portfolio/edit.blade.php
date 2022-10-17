@@ -52,11 +52,11 @@
                                             <a href="{{ route('front.user.portfolio.edit') }}" class="add-btn-edit d-inline-block">Edit <i class="fa-solid fa-edit"></i></a>
                                         </div>
                                     </div>
-                                    <div class="row mt-2">
+                                    {{-- <div class="row mt-2">
                                         <div class="col-12 text-end">
                                             <a href="{{ route('front.user.portfolio.changePassword') }}" class="add-btn-edit d-inline-block">Change Password <i class="fa-solid fa-edit"></i></a>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </td>
                             </tr>
                             <tr>

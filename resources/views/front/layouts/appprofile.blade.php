@@ -43,6 +43,15 @@
                             {{-- <a href="{{ route('front.portfolio.edit', auth()->guard('web')->user()->slug) }}" class="{{ request()->is('user/portfolio/manage*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Manage Portfolio</a> --}}
                         </li>
                         <li>
+                            <a href="{{ route('front.user.profile.edit') }}" class="{{ request()->is('user/update/profile') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Profile</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('front.user.portfolio.changePassword') }}" class="{{ request()->is('user/change/password') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Change Password</a>
+                        </li>
+
+
+
+                        <li>
                             <a href="{{ route('front.user.logout') }}" class="logout-bg"><i class="fas fa-sign-out-alt"></i>LOGOUT</a>
                         </li>
                     </ul>

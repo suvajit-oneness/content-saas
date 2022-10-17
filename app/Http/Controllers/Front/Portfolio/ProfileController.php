@@ -61,25 +61,33 @@ class ProfileController extends BaseController
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Validation\ValidationException
      */
+
+    public function editProfile()
+    {
+        $country = DB::table('countries')->orderby('country_name')->get();
+        return view('front.profile.profile',compact('country'));
+    }
+
+    
     public function update(Request $request)
     {
         // dd($request->all());
 
         $request->validate([
             'id'            => 'required|integer',
-            'first_name'    => 'required|string',
-            'last_name'     => 'required|string',
-            'mobile'        => 'required|integer',
-            'country'       => 'required|string',
-            'occupation'    => 'required|string',
-            'short_desc'    => 'required|string',
-            'language_id'   => 'required|array',
+            'first_name'    => 'nullable|string',
+            'last_name'     => 'nullable|string',
+            'mobile'        => 'nullable|integer',
+            'country'       => 'nullable|string',
+            'occupation'    => 'nullable|string',
+            'short_desc'    => 'nullable|string',
+            'language_id'   => 'nullable|array',
             'quote'         => 'nullable|string',
             'quote_by'      => 'nullable|string',
             'link'          => 'nullable|array',
             'color_scheme'  => 'nullable|string',
-            'worked_for'    => 'required|string',
-            'categories'    => 'required|string',
+            'worked_for'    => 'nullable|string',
+            'categories'    => 'nullable|string',
             'image'         => 'nullable',
         ]);
 
