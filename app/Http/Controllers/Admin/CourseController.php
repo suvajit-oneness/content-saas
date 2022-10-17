@@ -121,7 +121,9 @@ class CourseController extends BaseController
 
         $course_category = CourseCategory::orderBy('title')->get();
 
-        return view('admin.course.edit', compact('course', 'lessons', 'course_lessons', 'course_category'));
+        $languages = Language::orderBy('name')->get();
+
+        return view('admin.course.edit', compact('course', 'lessons', 'course_lessons', 'course_category', 'languages'));
     }
 
     /**
