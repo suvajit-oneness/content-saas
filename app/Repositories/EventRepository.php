@@ -89,6 +89,7 @@ class EventRepository extends BaseRepository implements EventContract
             $event->contact_phone = $collection['contact_phone'] ?? '';
             $event->is_paid = $collection['is_paid'] ?? '';
             $event->is_recurring = $collection['is_recurring'] ?? '';
+            $event->skim = $collection['skim'] ?? '';
             $event->no_of_followers = 0;
             if(!empty($params['image'])){
             $profile_image = $collection['image'];

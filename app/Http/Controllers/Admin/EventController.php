@@ -70,8 +70,19 @@ class EventController extends BaseController
      */
     public function store(Request $request)
     {
+        //dd($request->all());
         $this->validate($request, [
-            'title'      =>  'required|max:191',
+            'title'      =>  'required',
+            'event_type' =>  'required',
+            'event_host' =>  'required',
+            'start_date' =>  'required',
+            'start_time' =>  'required',
+            'end_date' =>  'required',
+            'end_time' =>  'required',
+            'content_type' =>  'required',
+            'event_link' =>  'required',
+            'event_cost' =>  'required',
+            'location' =>  'required',
             'image'     =>  'required|mimes:jpg,jpeg,png|max:1000',
         ]);
 

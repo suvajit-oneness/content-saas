@@ -8,6 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/css/main.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/css/font-awesome/4.7.0/css/font-awesome.min.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('backend/full-calendar/css/fullcalendar.css') }}" />
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 
     @yield('styles')
@@ -30,6 +31,7 @@
     <script src="{{ asset('backend/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('backend/js/main.js') }}"></script>
     <script src="{{ asset('backend/js/plugins/pace.min.js') }}"></script>
+    <script src="{{ asset('backend/full-calendar/js/fullcalendar.js') }}"></script>
     {{-- <script src="{{ asset('frontend/js/jquery.dd.js') }}"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.9.5/tinymce.min.js"></script>

@@ -20,7 +20,7 @@
                         <tr>
                             <td>Event Image</td>
                             <td>@if($event->image!='')
-                                <img style="width: 150px;height: 100px;" src="{{URL::to('/').'/events/'}}{{$event->image}}">
+                                <img style="width: 150px;height: 100px;" src="{{URL::to('/').'/uploads/events/'}}{{$event->image}}">
                                 @endif</td>
                         </tr>
                         <tr>

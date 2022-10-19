@@ -36,14 +36,6 @@
                 </a>
             </li>
         </div>
-
-        {{-- Orders --}}
-        <li>
-            <a class="app-menu__item {{ request()->is('admin/orders*') ? 'active' : '' }} {{ sidebar_open(['admin.order']) }}" href="{{ route('admin.order.index') }}">
-                <span class="app-menu__label">All Orders</span>
-            </a>
-        </li>
-
         <!-- Course Management -->
         <li class="text-light" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
             <a href="#" class="app-menu__item @if(request()->is('admin/course-category*') || request()->is('admin/course*')) {{ 'active' }} @endif">
@@ -211,6 +203,22 @@
                         href="{{ route('admin.support.faq.index') }}">
                         <i class="app-menu__icon fa fa-file"></i>
                         <span class="app-menu__label">Faq Management</span>
+                </a>
+            </li>
+        </div>
+        <!-- Event Management -->
+        <li class="text-light" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
+            <a href="#" class="app-menu__item @if(request()->is('admin/orders*')) {{ 'active' }} @endif">
+                <span class="app-menu__label">Order Master</span>
+                <i class="app-menu__icon fa fa-chevron-down"></i>
+            </a>
+        </li>
+
+        <div id="collapseSix" class="collapse @if(request()->is('admin/orders*')) {{ 'show' }} @endif" aria-labelledby="headingSix" data-parent="#accordion">
+            {{-- Orders --}}
+            <li>
+                <a class="app-menu__item {{ request()->is('admin/orders*') ? 'active' : '' }} {{ sidebar_open(['admin.order']) }}" href="{{ route('admin.order.index') }}">
+                    <span class="app-menu__label">Orders</span>
                 </a>
             </li>
         </div>
