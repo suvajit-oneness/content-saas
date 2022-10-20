@@ -14,31 +14,43 @@
                 <table class="table table-hover custom-data-table-style table-striped table-col-width" id="sampleTable">
                     <tbody>
                         <tr>
-                            <td>Event Title</td>
+                            <td>Title</td>
                             <td>{{ empty($event['title'])? null:$event['title'] }}</td>
                         </tr>
                         <tr>
-                            <td>Event Image</td>
+                            <td>Category</td>
+                            <td>{{ empty($event->eventCategory->title)? null:($event->eventCategory->title) }}</td>
+                        </tr>
+                        <tr>
+                            <td>Image</td>
                             <td>@if($event->image!='')
-                                <img style="width: 150px;height: 100px;" src="{{URL::to('/').'/uploads/events/'}}{{$event->image}}">
+                                <img style="width: 150px;height: 100px;" src="{{asset($event->image)}}">
                                 @endif</td>
                         </tr>
                         <tr>
-                            <td>Event Type</td>
-                            <td>{{ empty($event->category['title'])? null:($event->category['title']) }}</td>
+                            <td>Host</td>
+                            <td>{{ empty($event['host'])? null:($event['host']) }}</td>
                         </tr>
                         <tr>
-                            <td>Location</td>
-                            <td>{{ empty($event['location'])? null:($event['location']) }}</td>
+                            <td>Type</td>
+                            <td>{{ empty($event['type'])? null:($event['type']) }}
+                            </td>
                         </tr>
+                        @if($event->type =='online')
                         <tr>
-                            <td>Event Host</td>
-                            <td>{{ empty($event['event_host'])? null:($event['event_host']) }}</td>
-                        </tr>
-                        <tr>
-                            <td>Event Link</td>
+                            <td>Link</td>
                             <td>{{ empty($event['event_link'])? null:($event['event_link']) }}</td>
                         </tr>
+                        @else
+                        <tr>
+                            <td>Address</td>
+                            <td>{{ empty($event['address'])? null:($event['address']) }}</td>
+                        </tr>
+                        <tr>
+                            <td>Postcode</td>
+                            <td>{{ empty($event['pin'])? null:($event['pin']) }}</td>
+                        </tr>
+                        @endif
                         <tr>
                             <td>Start Date</td>
                             <td>{{ empty($event['start_date'])? null:(date("d-M-Y",strtotime($event['start_date']))) }}</td>
@@ -59,19 +71,28 @@
                             <td>Description</td>
                             <td>{!! empty($event['description'])? null:($event['description']) !!}</td>
                         </tr>
+                        @if($event->cost=='')
                         <tr>
-                            <td>Content Type</td>
-                            <td>{{ empty($event->content_type==2)?  'Online' : 'In-Person' }}
-                            </td>
+                            <td>Cost</td>
+                            <td>Free</td>
                         </tr>
+                        @else
                         <tr>
-                            <td>Paid Event?</td>
-                            <td>{{ empty($event->is_paid==0)? 'Paid':'Non Paid' }}</td>
-                        </tr>
-                        <tr>
-                            <td>Event Cost</td>
+                            <td>Cost</td>
                             <td>{{ empty($event['event_cost'])? null:($event['event_cost']) }}</td>
                         </tr>
+                        @endif
+                        @if($event->cost=='')
+                        <tr>
+                            <td>Recurring</td>
+                            <td>No</td>
+                        </tr>
+                        @else
+                        <tr>
+                            <td>Recurring</td>
+                            <td>{{ empty($event['recurring'])? null:($event['recurring']) }}</td>
+                        </tr>
+                        @endif
                     </tbody>
                 </table>
                 <a href="{{ route('admin.event.index') }}" class="btn btn-primary"><i class="fa fa-left-arrow"></i>Back</a>

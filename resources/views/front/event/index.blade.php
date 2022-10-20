@@ -15,7 +15,78 @@
             </div>
         </div>
     </div>
+    <form action="{{ route('front.event') }}">
+    <div class="row">
 
+    <div class="col-3">
+
+            <input type="search" name="code" placeholder="Enter here to search tools">
+
+    </div>
+    <div class="col-3">
+
+            <input type="search" name="keyword" placeholder="Enter here to search tools">
+
+    </div>
+    <div class="col-3">
+
+            <input type="search" name="price" placeholder="Enter here to search tools">
+
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-6">
+
+            <input type="search" name="type" placeholder="Enter here to search tools">
+
+    </div>
+    <div class="col-3">
+        <input type="search" name="address" placeholder="Enter here to search tools">
+</div>
+    <div class="col-6">
+
+        <div class="mt-3 text-right">
+            <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i>Search </button>
+            <a type="button" href="{{ url()->current() }}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Remove filter"><i class="fa fa-times"></i>
+            </a>
+        </div>
+
+    </div>
+
+</div>
+</form>
+<div class="container">
+        <div class="row">
+     @foreach($event as $eventProductkey => $data)
+            <div class="col-12 col-lg-4 col-md-6 mb-3 blog_list eventlist eventlist_{{ $data->category }}">
+                {{-- <a href=""> --}}
+                    <div class="card">
+                        <a href="{{ route('front.event.details',$data->slug) }}">
+                            <img src="{{asset($data->image)}}" class="card-img-top">
+                        </a>
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                               <span class="subHead_badge">{{ $data->eventCategory->title }}</span>
+                                <div class="dateBox blog_date">
+                                    <span class="date">
+                                        {{ date('d', strtotime($data->created_at)) }}
+                                    </span>
+                                    <span class="month">
+                                        {{ date('M', strtotime($data->created_at)) }}
+                                    </span>
+                                    <span class="year">
+                                        {{ date('Y', strtotime($data->created_at)) }}
+                                    </span>
+                                </div>
+                            </div>
+                            <a href="{{ route('front.event.details',$data->slug) }}" class="location_btn"><h5 class="card-title">{{ $data->title }}</h5></a>
+                        </div>
+                    </div>
+                {{-- </a> --}}
+            </div>
+            @endforeach
+        </div>
+    </div>
     <div class="container mb-2 mb-sm-5">
         <div class="row">
             <div class="col">
@@ -30,11 +101,6 @@
                     @endforeach
                 </ul>
             </div>
-            {{--  <div class="col-sm-auto">
-                <form class="toolSearch">
-                    <input type="search" placeholder="Enter here to search tools">
-                </form>
-            </div>--}}
         </div>
     </div>
 
@@ -45,15 +111,15 @@
             if($event->eventDetails->count() == 0) { continue; }
         @endphp
             @foreach($event->eventDetails as $eventProductkey => $data)
-            <div class="col-12 col-lg-4 col-md-6 mb-3 blog_list eventlist eventlist_{{ $data->event_type }}">
+            <div class="col-12 col-lg-4 col-md-6 mb-3 blog_list eventlist eventlist_{{ $data->category }}">
                 {{-- <a href=""> --}}
                     <div class="card">
                         <a href="{{ route('front.event.details',$data->slug) }}">
-                            <img src="{{URL::to('/').'/uploads/events/'}}{{$data->image}}" class="card-img-top" alt="Blog Picture">
+                            <img src="{{asset($data->image)}}" class="card-img-top" alt="Blog Picture">
                         </a>
                         <div class="card-body">
                             <div class="d-flex align-items-center">
-                               <span class="subHead_badge">{{ $data->category->title }}</span>
+                               <span class="subHead_badge">{{ $data->eventCategory->title }}</span>
                                 <div class="dateBox blog_date">
                                     <span class="date">
                                         {{ date('d', strtotime($data->created_at)) }}

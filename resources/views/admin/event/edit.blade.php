@@ -34,47 +34,42 @@
             <div class="tile">
                 <h3 class="tile-title">{{ $subTitle }}
                     <span class="top-form-btn">
-                        <a class="btn btn-secondary" href="{{ route('admin.event.index') }}"><i
-                                class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
+                        <a class="btn btn-secondary" href="{{ route('admin.event.index') }}"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
                     </span>
                 </h3>
                 <hr>
                 <form action="{{ route('admin.event.update') }}" method="POST" role="form" enctype="multipart/form-data">
                     @csrf
-                    <input type="hidden" name="id" value="{{ $targetEvent->id }}">
+
                     <div class="tile-body">
                         <div class="form-group">
-                            <label class="control-label" for="event_type">Category <span class="m-l-5 text-danger">
-                                    *</span></label>
-                            <select name="event_type" id="event_type"
-                                class="form-control @error('event_type') is-invalid @enderror">
-                                <option value="">Select a Category</option>
+                            <label class="control-label" for="category">Category <span class="m-l-5 text-danger">*</span></label>
+                            <select name="category" id="category" class="form-control @error('category') is-invalid @enderror">
+                                <option value="" disabled>Select a Category</option>
                                 @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}" {{ ($category->id == $targetEvent->event_type) ? 'selected' : '' }}>{{ $category->title }}</option>
+                                    <option value="{{ $category->id }}" {{ ( $category->id == $targetEvent->id ) ? 'selected' : '' }}>{{ $category->title }}</option>
                                 @endforeach
                             </select>
-                            @error('event_type') <p class="small text-danger">{{ $message }}</p> @enderror
+                            @error('category') <p class="small text-danger">{{ $message }}</p> @enderror
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="name">Title <span class="m-l-5 text-danger">
-                                    *</span></label>
-                            <input class="form-control @error('title') is-invalid @enderror" type="text" name="title"
-                                id="title" value="{{ old('title',$targetEvent->title) }}" />
-                                @error('title') <p class="small text-danger">{{ $message }}</p> @enderror
+                            <label class="control-label" for="name">Title <span class="m-l-5 text-danger">*</span></label>
+                            <input class="form-control @error('title') is-invalid @enderror" type="text" name="title" id="title" value="{{ old('title',$targetEvent->title) }}" />
+                            <input type="hidden"  name="id" value="{{$targetEvent->id}}">
+                            @error('title') <p class="small text-danger">{{ $message }}</p> @enderror
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="description">Description</label>
                             <textarea class="form-control" rows="4" name="description" id="description">{{ old('description',$targetEvent->description) }}</textarea>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="event_host">Event Host <span class="m-l-5 text-danger">
+                            <label class="control-label" for="host">Event Host <span class="m-l-5 text-danger">
                             *</span></label><br>
-                            @error('event_host') <p class="small text-danger">{{ $message }}</p> @enderror
+                            @error('host') <p class="small text-danger">{{ $message }}</p> @enderror
                             <div class="row">
                                 <div class="col-4">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" onClick="hostCheck();"
-                                        name="event_host" id="yesCheck" value="ContentSaas" checked>
+                                        <input class="form-check-input" type="radio" name="host" onClick="hostCheck();" id="yesCheck" value="Content Saas" {{ old('host') ? (( $targetEvent->host == "Content Saas" ) ? 'checked' : '') : 'checked' }}>
                                         <label class="form-check-label" for="yesCheck">
                                             Content Saas
                                         </label>
@@ -82,8 +77,7 @@
                                 </div>
                                 <div class="col-8">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="event_host" onClick="hostCheck();"
-                                             id="noCheck">
+                                        <input class="form-check-input" type="radio" name="host" onClick="hostCheck();" id="noCheck" value="Other" {{ old('host') ? (( $targetEvent->host != "Content Saas" ) ? 'checked' : '') : '' }}>
                                         <label class="form-check-label" for="noCheck">
                                             Other
                                         </label>
@@ -93,16 +87,16 @@
                         </div>
                         <div id="ifYes">
                             <div class="form-group">
-                                <input id="no" name="event_host" rows="3" placeholder="Host Name"
-                                    class="form-control h-auto" value="{{ old('event_host',$targetEvent->event_host) }}">
-                                    @error('event_host') <p class="small text-danger">{{ $message }}</p> @enderror
+                                <input id="no" name="host" rows="3" placeholder="Host Name"
+                                class="form-control h-auto" value="{{ old('host',$targetEvent->host) }}">
+                                @error('host') <p class="small text-danger">{{ $message }}</p> @enderror
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="content_type">Event Type <span class="m-l-5 text-danger">
+                            <label class="control-label" for="type">Event Type <span class="m-l-5 text-danger">
                             *</span></label>
-                            <br>@error('content_type') <p class="small text-danger">{{ $message }}</p> @enderror
-                            {{-- <select name="content_type" id="content_type" class="form-control @error('content_type') is-invalid @enderror">
+                            <br>@error('type') <p class="small text-danger">{{ $message }}</p> @enderror
+                            {{-- <select name="type" id="type" class="form-control @error('type') is-invalid @enderror">
                                 <option value="">Select an option</option>
                                 <option value="1">online</option>
                                 <option value="2">in-person</option>
@@ -110,41 +104,47 @@
                             <div class="row">
                                 <div class="col-4">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" onClick="eventtypeCheck();"
-                                             id="online" name="content_type" value="1"
-                                            checked>
+                                        <input class="form-check-input" type="radio" onClick="eventtypeCheck();" id="online" name="type" value="online" {{ old('type') ? (( $targetEvent->type == "online" ) ? 'checked' : '') : 'checked' }}>
                                         <label class="form-check-label" for="online">
-                                            online
+                                            Online
                                         </label>
                                     </div>
                                 </div>
                                 <div class="col-8">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" onClick="eventtypeCheck();"
-                                             id="person" name="content_type" value="2">
+                                        <input class="form-check-input" type="radio" onClick="eventtypeCheck();" id="person" name="type" value="in person" {{ old('type') ? (( $targetEvent->type != "online" ) ? 'checked' : '') : '' }}>
                                         <label class="form-check-label" for="person">
-                                            in-person
+                                            In-Person
                                         </label>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        {{-- <div id="typePerson">
+                            <div class="form-group">
+                                <label class="control-label" for="location">Location <span class="m-l-5 text-danger">*</span> (Google map URL)</label>
+                                <input class="form-control @error('location') is-invalid @enderror" type="text" name="location" id="location" value="{{ old('location') }}" />
+                                @error('location') <p class="small text-danger">{{ $message }}</p> @enderror
+                            </div>
+                        </div>--}}
                         <div id="typePerson">
                             <div class="form-group">
-                                <label class="control-label" for="location">Location <span class="m-l-5 text-danger">
-                                        *</span></label>
-                                <input class="form-control @error('location') is-invalid @enderror" type="text"
-                                    name="location" id="location" value="{{ old('location',$targetEvent->location) }}" />
-                                    @error('location') <p class="small text-danger">{{ $message }}</p> @enderror
+                                <label class="control-label" for="address">Address <span class="m-l-5 text-danger">*</span></label>
+                                <input class="form-control @error('address') is-invalid @enderror" type="text" name="address" id="address" value="{{ old('address',$targetEvent->address) }}" />
+                                @error('address') <p class="small text-danger">{{ $message }}</p> @enderror
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="pin">Postcode <span class="m-l-5 text-danger">*</span></label>
+                                <input class="form-control @error('pin') is-invalid @enderror" type="text" name="pin" id="pin" value="{{ old('pin',$targetEvent->pin) }}" />
+                                @error('pin') <p class="small text-danger">{{ $message }}</p> @enderror
                             </div>
                         </div>
                         <div id="typeOnline">
                             <div class="form-group">
-                                <label class="control-label" for="event_link">Event Link <span class="m-l-5 text-danger">
-                                        *</span></label>
-                                <input class="form-control @error('event_link') is-invalid @enderror" type="text"
-                                    name="event_link" id="event_link" value="{{ old('event_link',$targetEvent->event_link) }}" />
-                                    @error('event_link') <p class="small text-danger">{{ $message }}</p> @enderror
+                                <label class="control-label" for="link">Event Link (optional)</label>
+                                <input class="form-control @error('link') is-invalid @enderror" type="text"
+                                    name="link" id="link" value="{{ old('link',$targetEvent->link) }}" />
+                                    @error('link') <p class="small text-danger">{{ $message }}</p> @enderror
                                 </div>
                         </div>
                         <div class="row">
@@ -190,21 +190,11 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="name">Event Cost <span class="m-l-5 text-danger">
-                            *</span></label>
-                            @error('event_cost') <p class="small text-danger">{{ $message }}</p> @enderror
-                            {{-- <select name="is_paid" id="is_paid"
-                                class="form-control @error('is_paid') is-invalid @enderror">
-                                <option value="">Select an option</option>
-                                <option value="1">Yes</option>
-                                <option value="0">No</option>
-                            </select> --}}
+                            <label class="control-label" for="name">Event Cost <span class="m-l-5 text-danger">*</span></label>
                             <div class="row">
                                 <div class="col-4">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" onClick="CostCheck();"
-                                        id="free" name="is_paid" value="0"
-                                        checked="checked">
+                                        <input class="form-check-input" type="radio" onClick="CostCheck();" id="free" name="is_paid" value="0" {{ old('is_paid') ? (( $targetEvent->event_cost == "" ) ? 'checked' : '') : 'checked' }}>
                                         <label class="form-check-label" for="free">
                                             Free
                                         </label>
@@ -212,8 +202,7 @@
                                 </div>
                                 <div class="col-8">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" onClick="CostCheck();"
-                                        id="premium" name="is_paid" value="1">
+                                        <input class="form-check-input" type="radio" onClick="CostCheck();" id="premium" name="is_paid" value="1" {{ old('is_paid') ? (( $targetEvent->event_cost != "" ) ? 'checked' : '') : '' }}>
                                         <label class="form-check-label" for="premium">
                                             Paid
                                         </label>
@@ -223,26 +212,19 @@
                         </div>
                         <div id="cost">
                             <div class="form-group">
-                                <input class="form-control @error('event_cost') is-invalid @enderror" type="text"
-                                    name="event_cost" id="event_cost" value="{{ old('event_cost',$targetEvent->event_cost) }}"
-                                    placeholder="Eneter Amount" />
-                                    @error('event_cost') <p class="small text-danger">{{ $message }}</p> @enderror
+                                <input class="form-control @error('event_cost') is-invalid @enderror" type="number"
+                                name="event_cost" id="event_cost" value="{{ old('event_cost',$targetEvent->event_cost) }}"
+                                placeholder="Enter Cost" />
+                                @error('event_cost') <p class="small text-danger">{{ $message }}</p> @enderror
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="is_recurring">Recurring Event</label>
-                            {{-- <select name="is_recurring" id="is_recurring"
-                                class="form-control @error('is_recurring') is-invalid @enderror">
-                                <option value="">Select an option</option>
-                                <option value="1">Yes</option>
-                                <option value="0">No</option>
-                            </select> --}}
+                            <label class="control-label" for="recurring">Recurring Event</label>
                             <div class="row">
                                 <div class="col-4">
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" onClick="recurringCheck();"
-                                        id="recurring" name="is_recurring" value="1"
-                                        checked>
+                                        id="recurring" name="recurring" value="yes" {{ old('recurring') ? (( old('recurring') == "yes" ) ? 'checked' : '') : '' }}>
                                         <label class="form-check-label" for="recurring">
                                             Yes
                                         </label>
@@ -251,90 +233,66 @@
                                 <div class="col-8">
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" onClick="recurringCheck();"
-                                             id="no_recurring" name="is_recurring" value="0">
-                                        <label class="form-check-label" for="no_recurring">
+                                        id="norecurr" name="recurring" value="no" {{ old('recurring') ? (( old('recurring') != "yes" ) ? 'checked' : '') : 'checked' }}>
+                                        <label class="form-check-label" for="norecurr">
                                             No
                                         </label>
                                     </div>
                                 </div>
                             </div>
-
-                            {{-- <div class="row">
-                                <div class="col-4">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                            id="free" name="is_recurring" value="1" checked>
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            daily
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-4">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                            id="free" name="is_recurring" value="2">
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            weekly
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-4">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                            id="free" name="is_recurring" value="3">
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            monthly
-                                        </label>
-                                    </div>
-                                </div>
-                            </div> --}}
                             <br>
                             <div id="yes">
                                 <div class="form-group">
-                                    <select name="is_recurring" id="skim"
+                                    <select name="recurring" id="skim"
                                         class="form-control @error('skim') is-invalid @enderror">
                                         <option value="">Select an option</option>
-                                        <option value="1">Daily</option>
-                                        <option value="2">Weekly</option>
-                                        <option value="3">Monthly</option>
-                                        <option value="4">Yearly</option>
+                                        <option value="daily" {{ $targetEvent->recurring == 'daily' ? 'checked' : '' }}>Daily</option>
+                                        <option value="weekly" {{ $targetEvent->recurring == 'daily' ? 'weekly' : '' }}>Weekly</option>
+                                        <option value="monthly" {{ $targetEvent->recurring == 'monthly' ? 'checked' : '' }}>Monthly</option>
+                                        <option value="yearly" {{ $targetEvent->recurring == 'yearly' ? 'checked' : '' }}>Yearly</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="contact_phone">Contact Person Mobile</label>
-                            <input class="form-control @error('contact_phone') is-invalid @enderror" type="text" name="contact_phone"
-                                id="contact_phone" value="{{ old('contact_phone',$targetEvent->contact_phone) }}" />
-                                @error('contact_phone') <p class="small text-danger">{{ $message }}</p> @enderror
+                            <input class="form-control @error('contact_phone') is-invalid @enderror" type="text" name="contact_phone" id="contact_phone" value="{{ old('contact_phone',$targetEvent->contact_phone) }}" />
+                            @error('contact_phone') <p class="small text-danger">{{ $message }}</p> @enderror
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="contact_email">Contact Person Email</label>
+                            <input class="form-control @error('contact_email') is-invalid @enderror" type="text" name="contact_email" id="contact_email" value="{{ old('contact_email',$targetEvent->contact_email) }}" />
+                            @error('contact_email') <p class="small text-danger">{{ $message }}</p> @enderror
                         </div>
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-2">
                                     @if ($targetEvent->image != null)
                                         <figure class="mt-2" style="width: 80px; height: auto;">
-                                            <img src="{{ asset('uploads/events/'.$targetEvent->image) }}" id="blogImage" class="img-fluid" alt="img">
+                                            <img src="{{ asset($targetEvent->image) }}" id="blogImage" class="img-fluid" alt="img">
                                         </figure>
                                     @endif
                                 </div>
                         <div class="form-group">
-                            <label class="control-label" for="name">Event Image <span class="m-l-5 text-danger">
-                                    *</span></label>
-                            <input class="form-control @error('image') is-invalid @enderror" type="file"
-                                id="image" name="image" />
-                                @error('image') <p class="small text-danger">{{ $message }}</p> @enderror
+                            <label class="control-label" for="name">Event Image <span class="m-l-5 text-danger">*</span></label>
+                            <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image" />
+                            @error('image') <p class="small text-danger">{{ $message }}</p> @enderror
                         </div>
                     </div>
-                </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save Event</button>
+                            <a class="btn btn-secondary" href="{{ route('admin.event.index') }}"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="tile-footer">
+            {{-- <div class="tile-footer">
                 <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save
                     Event</button>
                 &nbsp;&nbsp;&nbsp;
                 <a class="btn btn-secondary" href="{{ route('admin.event.index') }}"><i
                         class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
-            </div>
-            </form>
+            </div> --}}
         </div>
     </div>
     </div>
@@ -358,6 +316,7 @@
             }
         });
 
+        @if(old('host')) hostCheck(); @endif
         function hostCheck() {
             if (document.getElementById('noCheck').checked) {
                 document.getElementById('ifYes').style.display = 'block';
@@ -365,13 +324,7 @@
 
         }
 
-        function CostCheck() {
-            if (document.getElementById('premium').checked) {
-                document.getElementById('cost').style.display = 'block';
-            } else document.getElementById('cost').style.display = 'none';
-
-        }
-
+        eventtypeCheck();
         function eventtypeCheck() {
             if (document.getElementById('online').checked) {
                 document.getElementById('typeOnline').style.display = 'block';
@@ -380,9 +333,20 @@
                 document.getElementById('typeOnline').style.display = 'none';
                 document.getElementById('typePerson').style.display = 'block';
             }
-
         }
 
+        @if(old('is_paid')) CostCheck(); @endif
+        function CostCheck() {
+            if (document.getElementById('premium').checked) {
+                document.getElementById('cost').style.display = 'block';
+                document.getElementById('event_cost').setAttribute('value', '');
+            } else {
+                document.getElementById('cost').style.display = 'none';
+                document.getElementById('event_cost').setAttribute('value', 0);
+            }
+        }
+
+        recurringCheck();
         function recurringCheck() {
             if (document.getElementById('recurring').checked) {
                 document.getElementById('yes').style.display = 'block';

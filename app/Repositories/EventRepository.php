@@ -67,41 +67,34 @@ class EventRepository extends BaseRepository implements EventContract
         try {
 
             $collection = collect($params);
-
             $event = new Event;
             $event->category = $collection['category'] ?? '';
             $event->title = $collection['title'] ?? '';
-
-            // $slug = Str::slug($collection['title'], '-');
-            // $slugExistCount = Event::where('slug', $slug)->count();
-            // if ($slugExistCount > 0) $slug = $slug.'-'.($slugExistCount+1);
-            // $event->slug = $slug;
-
             // slug
             $event->slug = slugGenerate($collection['title'], 'events');
-
+            if($params['host'] == 'Other'){
+            $event->host = $collection['other_host_name'] ?? '';
+            }
+            else{
             $event->host = $collection['host'] ?? '';
+            }
             $event->type = $collection['type'] ?? '';
-            $event->start_date = $collection['start_date'] ?? '';
-            $event->start_time = $collection['start_time'] ?? '';
-            $event->end_date = $collection['end_date'] ?? '';
-            $event->end_time = $collection['end_time'] ?? '';
-            $event->online_link = $collection['online_link'] ?? '';
-            $event->description = $collection['description'] ?? '';
-            $event->event_link = $collection['event_link'] ?? '';
-            $event->event_cost = $collection['event_cost'] ?? '';
-            $event->location = $collection['location'] ?? '';
-            $event->contact_phone = $collection['contact_phone'] ?? '';
-            $event->is_paid = $collection['is_paid'] ?? '';
-            $event->is_recurring = $collection['is_recurring'] ?? '';
-            $event->skim = $collection['skim'] ?? '';
-            $event->no_of_followers = 0;
-
             if(!empty($params['image'])){
                 // image, folder name only
                 $event->image = imageUpload($params['image'], 'event');
             }
-
+            $event->address = $collection['address'] ?? '';
+            $event->pin = $collection['pin'] ?? '';
+            $event->start_date = $collection['start_date'] ?? '';
+            $event->start_time = $collection['start_time'] ?? '';
+            $event->end_date = $collection['end_date'] ?? '';
+            $event->end_time = $collection['end_time'] ?? '';
+            $event->description = $collection['description'] ?? '';
+            $event->link = $collection['link'] ?? '';
+            $event->contact_phone = $collection['contact_phone'] ?? '';
+            $event->contact_email = $collection['contact_email'] ?? '';
+            $event->cost = $collection['cost'] ?? '';
+            $event->recurring = $collection['recurring'] ?? '';
             /*
             if(!empty($params['image'])){
             $profile_image = $collection['image'];
@@ -111,7 +104,6 @@ class EventRepository extends BaseRepository implements EventContract
             $event->image = $uploadedImage;
             }
             */
-
             $event->save();
             return $event;
 
@@ -128,38 +120,40 @@ class EventRepository extends BaseRepository implements EventContract
     {
         $event = $this->findOneOrFail($params['id']);
         $collection = collect($params)->except('_token');
-
+        $event->category = $collection['category'] ?? '';
         $event->title = $collection['title'] ?? '';
         if($event->title != $collection['title']) {
-            $slug = Str::slug($collection['title'], '-');
+           /* $slug = Str::slug($collection['title'], '-');
             $slugExistCount = Event::where('slug', $slug)->count();
             if ($slugExistCount > 0) $slug = $slug.'-'.($slugExistCount+1);
             $event->slug = $slug;
-            }
-        $event->event_type = $collection['event_type'] ?? '';
-        $event->event_host = $collection['event_host'] ?? '';
-        $event->start_date = $collection['start_date'] ?? '';
-        $event->start_time = $collection['start_time'] ?? '';
-        $event->end_date = $collection['end_date'] ?? '';
-        $event->end_time = $collection['end_time'] ?? '';
-        $event->content_type = $collection['content_type'] ?? '';
-        $event->online_link = $collection['online_link'] ?? '';
-        $event->description = $collection['description'] ?? '';
-        $event->event_link = $collection['event_link'] ?? '';
-        $event->event_cost = $collection['event_cost'] ?? '';
-        $event->location = $collection['location'] ?? '';
-        $event->contact_phone = $collection['contact_phone'] ?? '';
-        $event->is_paid = $collection['is_paid'] ?? '';
-        $event->is_recurring = $collection['is_recurring'] ?? '';
-        $event->no_of_followers = 0;
-        if(!empty($params['image'])){
-        $profile_image = $collection['image'];
-            $imageName = time().".".$profile_image->getClientOriginalName();
-            $profile_image->move("events/",$imageName);
-            $uploadedImage = $imageName;
-            $event->image = $uploadedImage;
+            }*/
+            $event->slug = slugGenerate($collection['title'], 'events');
         }
-        $event->save();
+        if($params['host'] == 'Other'){
+            $event->host = $collection['other_host_name'] ?? '';
+            }
+            else{
+            $event->host = $collection['host'] ?? '';
+            }
+            $event->type = $collection['type'] ?? '';
+            if(!empty($params['image'])){
+                // image, folder name only
+                $event->image = imageUpload($params['image'], 'event');
+            }
+            $event->address = $collection['address'] ?? '';
+            $event->pin = $collection['pin'] ?? '';
+            $event->start_date = $collection['start_date'] ?? '';
+            $event->start_time = $collection['start_time'] ?? '';
+            $event->end_date = $collection['end_date'] ?? '';
+            $event->end_time = $collection['end_time'] ?? '';
+            $event->description = $collection['description'] ?? '';
+            $event->link = $collection['link'] ?? '';
+            $event->contact_phone = $collection['contact_phone'] ?? '';
+            $event->contact_email = $collection['contact_email'] ?? '';
+            $event->cost = $collection['cost'] ?? '';
+            $event->recurring = $collection['recurring'] ?? '';
+            $event->save();
 
         return $event;
     }
@@ -237,5 +231,35 @@ class EventRepository extends BaseRepository implements EventContract
 
         return $events;
     }
+
+    /**
+     * @param $categoryId
+     * @param $keyword
+     * @param $price
+     * @param $type
+     * @param $location
+     * @return mixed
+     */
+    public function searchEventsfrontData($categoryId,$keyword,$price,$type,$location){
+        $events = Event::when($categoryId, function($query) use ($categoryId){
+                        $query->where('category', 'like' , '%' . $categoryId .'%');
+                    })
+                    ->when($keyword, function($query) use ($keyword){
+                        $query->where('title','like' , '%' . $keyword .'%');
+                    })
+                    ->when($price, function($query) use ($price){
+                        $query->where('cost', 'like', '%' . $price .'%');
+                    })
+                    ->when($type, function($query) use ($type){
+                        $query->where('type', 'like', '%' . $type .'%');
+                    })
+                    ->when($location, function($query) use ($location){
+                        $query->where('address', 'like', '%' . $location .'%');
+                    })
+                    ->paginate(15);
+
+    return $events;
+}
+
 
 }

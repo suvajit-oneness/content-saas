@@ -118,11 +118,23 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="typePerson">
+                        {{-- <div id="typePerson">
                             <div class="form-group">
                                 <label class="control-label" for="location">Location <span class="m-l-5 text-danger">*</span> (Google map URL)</label>
                                 <input class="form-control @error('location') is-invalid @enderror" type="text" name="location" id="location" value="{{ old('location') }}" />
                                 @error('location') <p class="small text-danger">{{ $message }}</p> @enderror
+                            </div>
+                        </div>--}}
+                        <div id="typePerson">
+                            <div class="form-group">
+                                <label class="control-label" for="address">Address <span class="m-l-5 text-danger">*</span></label>
+                                <input class="form-control @error('address') is-invalid @enderror" type="text" name="address" id="address" value="{{ old('address') }}" />
+                                @error('address') <p class="small text-danger">{{ $message }}</p> @enderror
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="pin">Postcode <span class="m-l-5 text-danger">*</span></label>
+                                <input class="form-control @error('pin') is-invalid @enderror" type="text" name="pin" id="pin" value="{{ old('pin') }}" />
+                                @error('pin') <p class="small text-danger">{{ $message }}</p> @enderror
                             </div>
                         </div>
                         <div id="typeOnline">
@@ -205,12 +217,12 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="is_recurring">Recurring Event</label>
+                            <label class="control-label" for="recurring">Recurring Event</label>
                             <div class="row">
                                 <div class="col-4">
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" onClick="recurringCheck();"
-                                        id="recurring" name="is_recurring" value="yes" {{ old('is_recurring') ? (( old('is_recurring') == "yes" ) ? 'checked' : '') : '' }}>
+                                        id="recurring" name="recurring" value="yes" {{ old('recurring') ? (( old('recurring') == "yes" ) ? 'checked' : '') : '' }}>
                                         <label class="form-check-label" for="recurring">
                                             Yes
                                         </label>
@@ -219,7 +231,7 @@
                                 <div class="col-8">
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" onClick="recurringCheck();"
-                                        id="norecurr" name="is_recurring" value="no" {{ old('is_recurring') ? (( old('is_recurring') != "yes" ) ? 'checked' : '') : 'checked' }}>
+                                        id="norecurr" name="recurring" value="no" {{ old('recurring') ? (( old('recurring') != "yes" ) ? 'checked' : '') : 'checked' }}>
                                         <label class="form-check-label" for="norecurr">
                                             No
                                         </label>
@@ -229,13 +241,13 @@
                             <br>
                             <div id="yes">
                                 <div class="form-group">
-                                    <select name="is_recurring_yes" id="skim"
+                                    <select name="recurring" id="skim"
                                         class="form-control @error('skim') is-invalid @enderror">
                                         <option value="">Select an option</option>
-                                        <option value="daily" {{ old('is_recurring_yes') == "daily" ? 'checked' : '' }}>Daily</option>
-                                        <option value="weekly" {{ old('is_recurring_yes') == "daily" ? 'weekly' : '' }}>Weekly</option>
-                                        <option value="monthly" {{ old('is_recurring_yes') == "monthly" ? 'checked' : '' }}>Monthly</option>
-                                        <option value="yearly" {{ old('is_recurring_yes') == "yearly" ? 'checked' : '' }}>Yearly</option>
+                                        <option value="daily" {{ old('recurring') == "daily" ? 'checked' : '' }}>Daily</option>
+                                        <option value="weekly" {{ old('recurring') == "daily" ? 'weekly' : '' }}>Weekly</option>
+                                        <option value="monthly" {{ old('recurring') == "monthly" ? 'checked' : '' }}>Monthly</option>
+                                        <option value="yearly" {{ old('recurring') == "yearly" ? 'checked' : '' }}>Yearly</option>
                                     </select>
                                 </div>
                             </div>
@@ -244,6 +256,11 @@
                             <label class="control-label" for="contact_phone">Contact Person Mobile</label>
                             <input class="form-control @error('contact_phone') is-invalid @enderror" type="text" name="contact_phone" id="contact_phone" value="{{ old('contact_phone') }}" />
                             @error('contact_phone') <p class="small text-danger">{{ $message }}</p> @enderror
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="contact_email">Contact Person Email</label>
+                            <input class="form-control @error('contact_email') is-invalid @enderror" type="text" name="contact_email" id="contact_email" value="{{ old('contact_email') }}" />
+                            @error('contact_email') <p class="small text-danger">{{ $message }}</p> @enderror
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="name">Event Image <span class="m-l-5 text-danger">*</span></label>

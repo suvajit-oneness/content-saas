@@ -95,7 +95,7 @@
                                         </td>
                                         <td>
                                             @if($event->image!='')
-                                            <img style="width: 150px;height: 100px;" src="{{URL::to('/').'/uploads/events/'}}{{$event->image}}">
+                                            <img style="width: 150px;height: 100px;" src="{{asset($event->image)}}">
                                             @endif
                                         </td>
                                         <td>{{ date("d-M-Y",strtotime($event->start_date)) }}</td>

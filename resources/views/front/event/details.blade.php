@@ -11,7 +11,7 @@
         <div class="container-fluid">
             <div class="artiledetails_banner_img">
                 @if($event->image!='')
-                    <img class="w-100" src="{{URL::to('/').'/uploads/events/'}}{{$event->image}}" alt="">
+                    <img class="w-100" src="{{asset($event->image)}}" alt="">
                 @else
                 <img class="w-100" src="{{URL::to('/').'/Blogs/'}}{{placeholder-image.png}}">
                 @endif
@@ -30,7 +30,7 @@
                             <li>
                             @endif
                             @php
-                                $cat = $event->event_type ?? '';
+                                $cat = $event->category ?? '';
                                 $displayCategoryName = '';
                                 foreach(explode(',', $cat) as $catKey => $catVal) {
                                     $catDetails = DB::table('event_types')->where('id', $catVal)->first();
@@ -96,8 +96,8 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#95C800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                     </figure>
                     <figcaption>
-                        <h5>Event Host:</h5>
-                        <h3>{!! $event->event_host !!}</h3>
+                        <h5>Host:</h5>
+                        <h3>{!! $event->host !!}</h3>
                     </figcaption>
                 </div>
 		    </div>
@@ -109,7 +109,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#95C800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map-pin"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                     </figure>
                     <figcaption>
-                        <h5>Event Location:</h5>
+                        <h5>Location:</h5>
                         <h3>{!! $event->location !!}</h3>
                     </figcaption>
                 </div>
@@ -141,15 +141,15 @@
                 </div>
 		    </div>
             @endif
-            @if($event->content_type)
+            @if($event->type)
 		     <div class="col-lg-3 mb-4 mb-lg-0">
                 <div class="event_meta">
                     <figure>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#95C800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-credit-card"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
                     </figure>
                     <figcaption>
-                        <h5>Event Type:</h5>
-                        <h3>{{ empty($event->content_type==2)?  'Online' : 'In-Person' }}</h3>
+                        <h5> Type:</h5>
+                        <h3>{{ $event->type }}</h3>
                     </figcaption>
                 </div>
 		    </div>
@@ -160,8 +160,21 @@
                     <figure>
                     </figure>
                     <figcaption>
-                        <h5>Contact Person:</h5>
+                        <h5>Contact Person Mobile:</h5>
                         <h3>{!! $event->contact_phone !!}</h3>
+                    </figcaption>
+                </div>
+
+		    </div>
+            @endif
+            @if($event->contact_email)
+		    <div class="col-lg-3 mb-4 mb-lg-0">
+                <div class="event_meta">
+                    <figure>
+                    </figure>
+                    <figcaption>
+                        <h5>Contact Person Email:</h5>
+                        <h3>{!! $event->contact_email !!}</h3>
                     </figcaption>
                 </div>
 
@@ -197,7 +210,7 @@
                             <div class="card eventCart border-0">
                                 <div class="bst_dimg">
                                      @if($event->image)
-                                   <img src="{{URL::to('/').'/uploads/events/'}}{{$event->image}}" class="card-img-top" alt="ltItem">
+                                   <img src="{{asset($event->image)}}" class="card-img-top" alt="ltItem">
                                      @else
                                     <img class="w-100" src="{{URL::to('/').'/Demo/'}}{{placeholder-image.png}}" class="card-img-top" style="height: 350px;object-fit: cover;">
                                     @endif

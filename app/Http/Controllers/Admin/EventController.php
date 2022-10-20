@@ -70,12 +70,12 @@ class EventController extends BaseController
      */
     public function store(Request $request)
     {
-        dd($request->all());
+       // dd($request->all());
 
         $this->validate($request, [
             'category' =>  'required|integer',
             'title'      =>  'required|string|min:1|max:255',
-            'description' =>  'required|integer',
+            'description' =>  'required|string',
             'host' =>  'required|string|min:1|max:255',
             'other_host_name' =>  'nullable|string|min:1|max:255',
             'type' =>  'required',
@@ -83,7 +83,6 @@ class EventController extends BaseController
             'start_time' =>  'required',
             'end_date' =>  'required',
             'end_time' =>  'required',
-            'is_paid' =>  'required|integer',
             'link' =>  'nullable|url',
             'event_cost' =>  'nullable',
             'location' =>  'nullable|url',
@@ -119,8 +118,22 @@ class EventController extends BaseController
      */
     public function update(Request $request)
     {
+        //dd($request->all());
         $this->validate($request, [
-            'title'      =>  'required|max:191',
+            'category' =>  'required|integer',
+            'title'      =>  'required|string|min:1|max:255',
+            'description' =>  'required|string',
+            'host' =>  'required|string|min:1|max:255',
+            'other_host_name' =>  'nullable|string|min:1|max:255',
+            'type' =>  'required',
+            'start_date' =>  'required',
+            'start_time' =>  'required',
+            'end_date' =>  'required',
+            'end_time' =>  'required',
+          //  'link' =>  'nullable|url',
+            'event_cost' =>  'nullable',
+           // 'location' =>  'nullable|url',
+            //'image'     =>  'nullable|image|mimes:jpg,jpeg,png|max:1000',
         ]);
 
         $params = $request->except('_token');

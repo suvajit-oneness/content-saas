@@ -6,14 +6,43 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\EventType;
 use App\Models\Event;
+use App\Contracts\EventContract;
 class EventController extends Controller
 {
+     /**
+     * @var EventContract
+     */
+    protected $eventRepository;
+
+
+    /**
+     * EventController constructor.
+     * @param EventContract $eventRepository
+     *
+     */
+    public function __construct(EventContract $eventRepository)
+    {
+        $this->eventRepository = $eventRepository;
+    }
     public function event(Request $request)
     {
         if (auth()->guard('web')->check()) {
-            $cat=EventType::where('status',1)->orderby('title')->get();
-            $event=Event::where('status',1)->orderby('title')->get();
+            if (isset($request->code) || isset($request->keyword) || isset($request->price)||isset($request->type) || isset($request->location)){
+            $categoryId = (isset($request->code) && $request->code!='')?$request->code:'';
 
+            $keyword = (isset($request->keyword) && $request->keyword!='')? $request->keyword:'';
+
+            $price = (isset($request->price) && $request->price!='')?$request->price:'';
+
+            $type = (isset($request->type) && $request->type!='')?$request->type:'';
+
+            $location = (isset($request->address) && $request->address!='') ? $request->address : '';
+
+            $event = $this->eventRepository->searchEventsfrontData($categoryId,$keyword,$price,$type,$location);
+            }else{
+                $event=Event::where('status',1)->orderby('title')->paginate(15);
+            }
+            $cat=EventType::where('status',1)->orderby('title')->get();
             return view('front.event.index',compact('cat','event'));
         } else {
             return redirect()->route('front.user.login');

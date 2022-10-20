@@ -63,4 +63,5 @@ interface EventContract
      * @return mixed
      */
     public function searchEventsData($from,$to,$type,$keyword);
+    public function searchEventsfrontData($categoryId,$keyword,$price,$type,$location);
 }
