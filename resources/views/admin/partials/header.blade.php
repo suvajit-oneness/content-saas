@@ -1,5 +1,5 @@
 <header class="app-header">
-    <a class="app-header__logo" href="#">{{ env('APP_NAME', 'Content SAAS') }}</a>
+    <a class="app-header__logo" href="{{ url('/') }}" target="_blank">{{ env('APP_NAME', 'Content SAAS') }}</a>
     {{-- <a class="app-header__logo" href="#"><img src="{{ asset('front/img/main-logo.png')}}" alt=""></a> --}}
     <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
     <ul class="app-nav">

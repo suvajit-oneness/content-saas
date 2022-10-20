@@ -70,20 +70,24 @@ class EventController extends BaseController
      */
     public function store(Request $request)
     {
-        //dd($request->all());
+        dd($request->all());
+
         $this->validate($request, [
-            'title'      =>  'required',
-            'event_type' =>  'required',
-            'event_host' =>  'required',
+            'category' =>  'required|integer',
+            'title'      =>  'required|string|min:1|max:255',
+            'description' =>  'required|integer',
+            'host' =>  'required|string|min:1|max:255',
+            'other_host_name' =>  'nullable|string|min:1|max:255',
+            'type' =>  'required',
             'start_date' =>  'required',
             'start_time' =>  'required',
             'end_date' =>  'required',
             'end_time' =>  'required',
-            'content_type' =>  'required',
-            'event_link' =>  'required',
-            'event_cost' =>  'required',
-            'location' =>  'required',
-            'image'     =>  'required|mimes:jpg,jpeg,png|max:1000',
+            'is_paid' =>  'required|integer',
+            'link' =>  'nullable|url',
+            'event_cost' =>  'nullable',
+            'location' =>  'nullable|url',
+            'image'     =>  'required|image|mimes:jpg,jpeg,png|max:1000',
         ]);
 
         $params = $request->except('_token');

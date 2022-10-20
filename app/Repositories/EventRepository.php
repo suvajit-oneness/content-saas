@@ -69,18 +69,23 @@ class EventRepository extends BaseRepository implements EventContract
             $collection = collect($params);
 
             $event = new Event;
+            $event->category = $collection['category'] ?? '';
             $event->title = $collection['title'] ?? '';
-            $slug = Str::slug($collection['title'], '-');
-            $slugExistCount = Event::where('slug', $slug)->count();
-            if ($slugExistCount > 0) $slug = $slug.'-'.($slugExistCount+1);
-            $event->slug = $slug;
-            $event->event_type = $collection['event_type'] ?? '';
-            $event->event_host = $collection['event_host'] ?? '';
+
+            // $slug = Str::slug($collection['title'], '-');
+            // $slugExistCount = Event::where('slug', $slug)->count();
+            // if ($slugExistCount > 0) $slug = $slug.'-'.($slugExistCount+1);
+            // $event->slug = $slug;
+
+            // slug
+            $event->slug = slugGenerate($collection['title'], 'events');
+
+            $event->host = $collection['host'] ?? '';
+            $event->type = $collection['type'] ?? '';
             $event->start_date = $collection['start_date'] ?? '';
             $event->start_time = $collection['start_time'] ?? '';
             $event->end_date = $collection['end_date'] ?? '';
             $event->end_time = $collection['end_time'] ?? '';
-            $event->content_type = $collection['content_type'] ?? '';
             $event->online_link = $collection['online_link'] ?? '';
             $event->description = $collection['description'] ?? '';
             $event->event_link = $collection['event_link'] ?? '';
@@ -91,6 +96,13 @@ class EventRepository extends BaseRepository implements EventContract
             $event->is_recurring = $collection['is_recurring'] ?? '';
             $event->skim = $collection['skim'] ?? '';
             $event->no_of_followers = 0;
+
+            if(!empty($params['image'])){
+                // image, folder name only
+                $event->image = imageUpload($params['image'], 'event');
+            }
+
+            /*
             if(!empty($params['image'])){
             $profile_image = $collection['image'];
             $imageName = time().".".$profile_image->getClientOriginalName();
@@ -98,6 +110,8 @@ class EventRepository extends BaseRepository implements EventContract
             $uploadedImage = $imageName;
             $event->image = $uploadedImage;
             }
+            */
+
             $event->save();
             return $event;
 

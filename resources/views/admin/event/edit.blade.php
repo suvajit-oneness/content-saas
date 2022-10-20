@@ -68,14 +68,14 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="event_host">Event Host <span class="m-l-5 text-danger">
-                                    *</span></label><br>
-                                    @error('event_host') <p class="small text-danger">{{ $message }}</p> @enderror
+                            *</span></label><br>
+                            @error('event_host') <p class="small text-danger">{{ $message }}</p> @enderror
                             <div class="row">
                                 <div class="col-4">
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" onClick="hostCheck();"
-                                        name="event_host"  id="yesCheck" value="ContentSaas" checked>
-                                        <label class="form-check-label" for="flexRadioDefault1">
+                                        name="event_host" id="yesCheck" value="ContentSaas" checked>
+                                        <label class="form-check-label" for="yesCheck">
                                             Content Saas
                                         </label>
                                     </div>
@@ -84,7 +84,7 @@
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="event_host" onClick="hostCheck();"
                                              id="noCheck">
-                                        <label class="form-check-label" for="flexRadioDefault2">
+                                        <label class="form-check-label" for="noCheck">
                                             Other
                                         </label>
                                     </div>
@@ -100,8 +100,8 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="content_type">Event Type <span class="m-l-5 text-danger">
-                                    *</span></label>
-                                    <br>@error('content_type') <p class="small text-danger">{{ $message }}</p> @enderror
+                            *</span></label>
+                            <br>@error('content_type') <p class="small text-danger">{{ $message }}</p> @enderror
                             {{-- <select name="content_type" id="content_type" class="form-control @error('content_type') is-invalid @enderror">
                                 <option value="">Select an option</option>
                                 <option value="1">online</option>
@@ -113,7 +113,7 @@
                                         <input class="form-check-input" type="radio" onClick="eventtypeCheck();"
                                              id="online" name="content_type" value="1"
                                             checked>
-                                        <label class="form-check-label" for="flexRadioDefault1">
+                                        <label class="form-check-label" for="online">
                                             online
                                         </label>
                                     </div>
@@ -122,7 +122,7 @@
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" onClick="eventtypeCheck();"
                                              id="person" name="content_type" value="2">
-                                        <label class="form-check-label" for="flexRadioDefault2">
+                                        <label class="form-check-label" for="person">
                                             in-person
                                         </label>
                                     </div>
@@ -191,8 +191,8 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="name">Event Cost <span class="m-l-5 text-danger">
-                                    *</span></label>
-                                    @error('event_cost') <p class="small text-danger">{{ $message }}</p> @enderror
+                            *</span></label>
+                            @error('event_cost') <p class="small text-danger">{{ $message }}</p> @enderror
                             {{-- <select name="is_paid" id="is_paid"
                                 class="form-control @error('is_paid') is-invalid @enderror">
                                 <option value="">Select an option</option>
@@ -203,9 +203,9 @@
                                 <div class="col-4">
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" onClick="CostCheck();"
-                                             id="free" name="is_paid" value="0"
-                                            checked="checked">
-                                        <label class="form-check-label" for="flexRadioDefault1">
+                                        id="free" name="is_paid" value="0"
+                                        checked="checked">
+                                        <label class="form-check-label" for="free">
                                             Free
                                         </label>
                                     </div>
@@ -213,8 +213,8 @@
                                 <div class="col-8">
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" onClick="CostCheck();"
-                                             id="premium" name="is_paid" value="1">
-                                        <label class="form-check-label" for="flexRadioDefault2">
+                                        id="premium" name="is_paid" value="1">
+                                        <label class="form-check-label" for="premium">
                                             Paid
                                         </label>
                                     </div>
@@ -241,9 +241,9 @@
                                 <div class="col-4">
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" onClick="recurringCheck();"
-                                             id="recurring" name="is_recurring" value="1"
-                                            checked>
-                                        <label class="form-check-label" for="flexRadioDefault1">
+                                        id="recurring" name="is_recurring" value="1"
+                                        checked>
+                                        <label class="form-check-label" for="recurring">
                                             Yes
                                         </label>
                                     </div>
@@ -251,8 +251,8 @@
                                 <div class="col-8">
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" onClick="recurringCheck();"
-                                             id="premium" name="is_recurring" value="0">
-                                        <label class="form-check-label" for="flexRadioDefault2">
+                                             id="no_recurring" name="is_recurring" value="0">
+                                        <label class="form-check-label" for="no_recurring">
                                             No
                                         </label>
                                     </div>
@@ -294,10 +294,10 @@
                                     <select name="is_recurring" id="skim"
                                         class="form-control @error('skim') is-invalid @enderror">
                                         <option value="">Select an option</option>
-                                        <option value="1">daily</option>
-                                        <option value="2">weekly</option>
-                                        <option value="3">monthly</option>
-                                        <option value="4">yearly</option>
+                                        <option value="1">Daily</option>
+                                        <option value="2">Weekly</option>
+                                        <option value="3">Monthly</option>
+                                        <option value="4">Yearly</option>
                                     </select>
                                 </div>
                             </div>

@@ -31,7 +31,7 @@
                  </a>
             </li>
             <li>
-                <a class="app-menu__item {{ request()->is('admin/event') ? 'active' : '' }}" href="{{ route('admin.event.index') }}"><i class="app-menu__icon fa fa-cogs"></i>
+                <a class="app-menu__item {{ request()->is('admin/event*') ? 'active' : '' }}" href="{{ route('admin.event.index') }}"><i class="app-menu__icon fa fa-cogs"></i>
                     <span class="app-menu__label">Management</span>
                 </a>
             </li>
