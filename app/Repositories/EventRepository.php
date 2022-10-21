@@ -221,10 +221,10 @@ class EventRepository extends BaseRepository implements EventContract
                             $query->where('start_date', 'like' , '%' . $to .'%');
                         })
                         ->when($type, function($query) use ($type){
-                            $query->where('event_type', '=', $type);
+                            $query->where('category', '=', $type);
                         })
                         ->when($keyword, function($query) use ($keyword){
-                            $query->where('title', 'like', '%' . $keyword .'%');
+                            $query->where('title', 'like', '%' . $keyword .'%')->orWhere('host', 'like', '%' . $keyword .'%')->orWhere('type', 'like', '%' . $keyword .'%');
                         })
                         ->orWhereBetween('start_date', [$from, $to])
                         ->paginate(25);

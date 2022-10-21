@@ -26,7 +26,7 @@ class EventController extends Controller
     }
     public function event(Request $request)
     {
-        if (auth()->guard('web')->check()) {
+       // if (auth()->guard('web')->check()) {
             if (isset($request->code) || isset($request->keyword) || isset($request->price)||isset($request->type) || isset($request->location)){
             $categoryId = (isset($request->code) && $request->code!='')?$request->code:'';
 
@@ -39,14 +39,15 @@ class EventController extends Controller
             $location = (isset($request->address) && $request->address!='') ? $request->address : '';
 
             $event = $this->eventRepository->searchEventsfrontData($categoryId,$keyword,$price,$type,$location);
-            }else{
+            }
+            else{
                 $event=Event::where('status',1)->orderby('title')->paginate(15);
             }
             $cat=EventType::where('status',1)->orderby('title')->get();
             return view('front.event.index',compact('cat','event'));
-        } else {
+        /*} else {
             return redirect()->route('front.user.login');
-        }
+        }*/
     }
 
     public function eventdetails(Request $request,$slug)
@@ -54,7 +55,7 @@ class EventController extends Controller
         $cat=EventType::where('status',1)->orderby('title')->get();
         $events=Event::where('slug',$slug)->orderby('title')->get();
         $event=$events[0];
-        $latestevents=Event::where('slug','!=',$slug)->orderby('title')->get();
+        $latestevents=Event::where('slug','!=',$slug)->orderby('title')->paginate(3);
         return view('front.event.details',compact('cat','event','latestevents'));
     }
 }

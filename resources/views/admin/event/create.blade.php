@@ -44,9 +44,9 @@
                         <div class="form-group">
                             <label class="control-label" for="category">Category <span class="m-l-5 text-danger">*</span></label>
                             <select name="category" id="category" class="form-control @error('category') is-invalid @enderror">
-                                <option value="" disabled>Select a Category</option>
+                                <option value=""  hidden selected>Select a Category</option>
                                 @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}" {{ ( old('category') == $category->id ) ? 'selected' : '' }}>{{ $category->title }}</option>
+                                    <option value="{{ $category->id }}" {{ ( old('category') == $category->id ) ? 'selected' : '' }}>{{ucwords($category->title) }}</option>
                                 @endforeach
                             </select>
                             @error('category') <p class="small text-danger">{{ $message }}</p> @enderror
@@ -85,9 +85,9 @@
                         </div>
                         <div id="ifYes">
                             <div class="form-group">
-                                <input id="no" name="other_host_name" rows="3" placeholder="Host Name"
-                                class="form-control h-auto" value="{{ old('other_host_name') }}">
-                                @error('other_host_name') <p class="small text-danger">{{ $message }}</p> @enderror
+                                <input id="no" name="host" rows="3" placeholder="Host Name"
+                                class="form-control h-auto" value="{{ old('host') }}">
+                                @error('host') <p class="small text-danger">{{ $message }}</p> @enderror
                             </div>
                         </div>
                         <div class="form-group">
@@ -210,10 +210,10 @@
                         </div>
                         <div id="cost">
                             <div class="form-group">
-                                <input class="form-control @error('event_cost') is-invalid @enderror" type="number"
-                                name="event_cost" id="event_cost" value="{{ old('event_cost') }}"
+                                <input class="form-control @error('cost') is-invalid @enderror" type="number"
+                                name="cost" id="event_cost" value="{{ old('cost') }}"
                                 placeholder="Enter Cost" />
-                                @error('event_cost') <p class="small text-danger">{{ $message }}</p> @enderror
+                                @error('cost') <p class="small text-danger">{{ $message }}</p> @enderror
                             </div>
                         </div>
                         <div class="form-group">

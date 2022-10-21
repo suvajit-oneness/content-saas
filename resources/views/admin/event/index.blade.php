@@ -19,20 +19,24 @@
               <form action="{{ route('admin.event.index') }}">
             <div class="row">
                 <div class="col-md-3">
+                    <label class="control-label" for="category">Start Date </label>
                     <input type="date" name="from" id="from" class="form-control" placeholder="From.." value="{{app('request')->input('from')}}" autocomplete="off">
                 </div>
                 <div class="col-md-3">
+                    <label class="control-label" for="category">End Date </label>
                     <input type="date" name="to" id="to" class="form-control" placeholder="To.." value="{{app('request')->input('to')}}" autocomplete="off">
                 </div>
                 <div class="col-md-3">
+                    <label class="control-label" for="category">Category </label>
                     <select class="filter_select form-control" name="type">
                         <option value="" hidden selected>Select Category...</option>
                         @foreach ($categories as $index => $item)
-                             <option value="{{$item->title}}" {{ (request()->input('title') == $item->title) ? 'selected' : '' }}>{{ $item->title }}</option>
+                             <option value="{{$item->id}}" {{ (request()->input('title') == $item->title) ? 'selected' : '' }}>{{ ucwords($item->title) }}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="col-md-3">
+                    <label class="control-label" for="category">Keyword </label>
                     <input type="search" name="keyword" id="keyword" class="form-control" placeholder="Keyword.." value="{{app('request')->input('keyword')}}" autocomplete="off">
                 </div>
             </div>
@@ -49,12 +53,12 @@
                         <li>
                         <p class="font-weight : bold">Total Events <span class="count">({{$events->total()}})</span></p>
                         </li>
-                        <li onClick="changeView('list')">
+                        {{-- <li onClick="changeView('list')">
                             <i class="fa fa-list" aria-hidden="true"></i>
                         </li>
                         <li onClick="changeView('cal')">
                             <i class="fa fa-calendar" aria-hidden="true"></i>
-                        </li>
+                        </li> --}}
                     </ul>
                 </div>
             </div>
@@ -197,115 +201,105 @@
         }
     </script>
     <script>
-        $(document).ready(function() {
-            const SITEURL = "localhost::8000";
+        $(document).ready(function () {
 
-            $.ajaxSetup({
-                headers:{
-                    'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+        var SITEURL = "{{ url('/') }}";
 
-            const calendar = $('#calendar').fullCalendar({
-                defaultView: 'month',
-                header: {
-                    left: 'month,agendaWeek,agendaDay',
-                    center: 'title',
-                    right:  'today prev,next'
-                },
-                buttonText : {
-                    today:    'today',
-                    month:    'month',
-                    week:     'week',
-                    day:      'day',
-                    list:     'list'
-                },
-                dayClick  : function(info){
-                        console.log(info);
-                        $('#exampleModal').modal('toggle');
-                        let date = moment(info).format("YYYY-MM-DD");
-                        console.log(date);
-                        $("input[name*='date']").val(date);
-                        $.ajax({
-                            url: 'single/' + date,
-                            success: function(result){
-                                $('#my-table').empty();
-                                let row = '';
-                                console.log(result);
-                                if (result.length > 0) {
-
-                                result.forEach(function(item){
-                                    console.log(item);
-                                    row += '<tr data-id="'+ item.id +'"><td><input type="date" name="date[]" value="'+ item.date + '" disabled class="date"></td><td><input type="time" class="time" name="time[]" value="'+ item.time + '"></td>';
-                                    row += '<td><input type="note" class="note" name="note[]" value="'+ item.note + '"></td>'
-                                    row += '<td><a href="javascript:void(0)" class="text-danger actionbtn remove"><i class="fas fa-times"></i></a></td></tr>';
-                                    row+= '<br>';
-                                })
-                                } else {
-
-                                row += '<tr data-id=""><td><input type="date" name="date[]" value="'+date+'" disabled class="date"></td><td><input type="time"  name="time[]" value="" class="time"></td><td><input type="text" name="note[]" value="" class="note"></td><td><a href="javascript:void(0)" class="actionbtn addNew"><span class="text-success"><i class="fas fa-plus"></i></span></a></td></tr>';
-                                }
-                                $('#my-table').append(row);
-                            }
-                        });
-                },
-                events : [
-                                    ],
-            });
-            $(document).on('click','.addNew',function(){
-                let lastRow = $("#my-table tr:last");
-                let cloneRow = lastRow.clone();
-                lastRow.after(cloneRow);
-            });
-            $(document).on('click','.remove',function(){
-                var whichtr = $(this).closest("tr");
-                let id = whichtr.attr('data-id');
-                console.log(id);
-                swal({
-                    title: 'Are you sure?',
-                    text: 'This record will be permanantly deleted!',
-                    icon: 'warning',
-                    buttons: ["Cancel", "Yes!"],
-                    }).then(function(value) {
-                    if (value) {
-                        whichtr.remove();
-                        swal("Deleted!", "Successful!", "success");
-                        window.location.href = SITEURL +"/teacher/my-slot/delete/" + id;
-                        }
-                    });
-            });
-            //slot-booking
-            $('.add-slot').on('click', function (event) {
-                event.preventDefault();
-                let date = $("input[name='date[]']").map(function () {
-                                return this.value;
-                            }).get();
-                console.log(date);
-                let time = $("input[name='time[]']").map(function () {
-                                return this.value;
-                            }).get();
-                console.log(time);
-                let note = $("input[name='note[]']").map(function () {
-                                return this.value;
-                            }).get();
-                console.log(note);
-                $.ajax({
-                    type:'POST',
-                    url:SITEURL + '/teacher/my-slot/update/' + date[0],
-                    data:{date:date, time: time, note: note},
-                    success:function(data){
-                        $('#exampleModal').modal('toggle');
-                        location.reload();
-                        console.log(data);
-                    }
-                });
-            });
-            //last-column of the last row
-            $("#my-table tr:last-child td:last-child")
-            // disable on submit
-            $('form').submit(function(){
-                $(this).children('button[type=submit]').prop('disabled', true);
-            });
+        $.ajaxSetup({
+            headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
         });
-    </script>
+
+        var calendar = $('#calendar').fullCalendar({
+                            editable: true,
+                            events: SITEURL + "/fullcalender",
+                            displayEventTime: false,
+                            editable: true,
+                            eventRender: function (event, element, view) {
+                                if (event.allDay === 'true') {
+                                        event.allDay = true;
+                                } else {
+                                        event.allDay = false;
+                                }
+                            },
+                            selectable: true,
+                            selectHelper: true,
+                            select: function (start, end, allDay) {
+                                var title = prompt('Event Title:');
+                                if (title) {
+                                    var start = $.fullCalendar.formatDate(start, "Y-MM-DD");
+                                    var end = $.fullCalendar.formatDate(end, "Y-MM-DD");
+                                    $.ajax({
+                                        url: SITEURL + "/fullcalenderAjax",
+                                        data: {
+                                            title: title,
+                                            start: start,
+                                            end: end,
+                                            type: 'add'
+                                        },
+                                        type: "POST",
+                                        success: function (data) {
+                                            displayMessage("Event Created Successfully");
+
+                                            calendar.fullCalendar('renderEvent',
+                                                {
+                                                    id: data.id,
+                                                    title: title,
+                                                    start: start,
+                                                    end: end,
+                                                    allDay: allDay
+                                                },true);
+
+                                            calendar.fullCalendar('unselect');
+                                        }
+                                    });
+                                }
+                            },
+                            eventDrop: function (event, delta) {
+                                var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD");
+                                var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD");
+
+                                $.ajax({
+                                    url: SITEURL + '/fullcalenderAjax',
+                                    data: {
+                                        title: event.title,
+                                        start: start,
+                                        end: end,
+                                        id: event.id,
+                                        type: 'update'
+                                    },
+                                    type: "POST",
+                                    success: function (response) {
+                                        displayMessage("Event Updated Successfully");
+                                    }
+                                });
+                            },
+                            eventClick: function (event) {
+                                var deleteMsg = confirm("Do you really want to delete?");
+                                if (deleteMsg) {
+                                    $.ajax({
+                                        type: "POST",
+                                        url: SITEURL + '/fullcalenderAjax',
+                                        data: {
+                                                id: event.id,
+                                                type: 'delete'
+                                        },
+                                        success: function (response) {
+                                            calendar.fullCalendar('removeEvents', event.id);
+                                            displayMessage("Event Deleted Successfully");
+                                        }
+                                    });
+                                }
+                            }
+
+                        });
+
+        });
+
+        function displayMessage(message) {
+            toastr.success(message, 'Event');
+        }
+
+        </script>
 @endpush

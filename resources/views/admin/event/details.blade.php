@@ -39,7 +39,7 @@
                         @if($event->type =='online')
                         <tr>
                             <td>Link</td>
-                            <td>{{ empty($event['event_link'])? null:($event['event_link']) }}</td>
+                            <td>{{ empty($event['link'])? null:($event['link']) }}</td>
                         </tr>
                         @else
                         <tr>
@@ -79,7 +79,7 @@
                         @else
                         <tr>
                             <td>Cost</td>
-                            <td>{{ empty($event['event_cost'])? null:($event['event_cost']) }}</td>
+                            <td>{{ empty($event['cost'])? null:($event['cost']) }}</td>
                         </tr>
                         @endif
                         @if($event->cost=='')

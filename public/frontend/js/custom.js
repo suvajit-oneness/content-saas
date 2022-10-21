@@ -65,6 +65,14 @@ $(function () {
 
   $(document).ready(function () {
     $('.blog-list-panel').show();
+    $('.toolsFilter li').each(function(){
+        if($(this).find('label input[type="radio"]').prop('checked')==true){
+            var iValue= $(this).find('label input[type="radio"]').attr('value');
+            var targetBox = $("." + iValue);
+            $(".blog-list-panel").not(targetBox).hide();
+            $(targetBox).show();
+        }
+    });
     $('.toolsFilter li label input[type="radio"]').click(function () {
       var inputValue = $(this).attr("value");
       var targetBox = $("." + inputValue);
@@ -72,6 +80,14 @@ $(function () {
       $(targetBox).show();
     });
     $('.eventlist').show();
+    $('.toolsFilter li').each(function(){
+        if($(this).find('label input[type="radio"]').prop('checked')==true){
+            var iValue= $(this).find('label input[type="radio"]').attr('value');
+            var targetBox = $("." + iValue);
+            $(".eventlist").not(targetBox).hide();
+            $(targetBox).show();
+        }
+    });
     $('.toolsFilter li label input[type="radio"]').click(function () {
       var inputValue = $(this).attr("value");
       var targetBox = $("." + inputValue);

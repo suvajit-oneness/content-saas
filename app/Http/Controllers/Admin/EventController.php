@@ -39,8 +39,8 @@ class EventController extends BaseController
 
     public function index(Request $request)
     {
-        if (isset($request->category) || isset($request->from) ||isset($request->to) || isset($request->keyword)) {
-            $type = !empty($request->category) ? $request->category : '';
+        if (isset($request->type) || isset($request->from) ||isset($request->to) || isset($request->keyword)) {
+            $type = !empty($request->type) ? $request->type : '';
             $from = !empty($request->from) ? $request->from : '';
             $to = !empty($request->to) ? $request->to : '';
             $keyword = !empty($request->keyword) ? $request->keyword : '';
@@ -105,10 +105,11 @@ class EventController extends BaseController
      */
     public function edit($id)
     {
-        $targetEvent = $this->eventRepository->findEventById($id);
+        $event = $this->eventRepository->findEventById($id);
+       //dd($event->cost);
         $categories = $this->eventRepository->listCategory();
-        $this->setPageTitle('Event', 'Edit Event : '.$targetEvent->title);
-        return view('admin.event.edit', compact('targetEvent','categories'));
+        $this->setPageTitle('Event', 'Edit Event : '.$event->title);
+        return view('admin.event.edit', compact('event','categories'));
     }
 
     /**
@@ -124,14 +125,15 @@ class EventController extends BaseController
             'title'      =>  'required|string|min:1|max:255',
             'description' =>  'required|string',
             'host' =>  'required|string|min:1|max:255',
-            'other_host_name' =>  'nullable|string|min:1|max:255',
             'type' =>  'required',
             'start_date' =>  'required',
             'start_time' =>  'required',
             'end_date' =>  'required',
             'end_time' =>  'required',
+            'address' =>  'required',
+            'pin' =>  'required',
           //  'link' =>  'nullable|url',
-            'event_cost' =>  'nullable',
+            'cost' =>  'nullable',
            // 'location' =>  'nullable|url',
             //'image'     =>  'nullable|image|mimes:jpg,jpeg,png|max:1000',
         ]);
