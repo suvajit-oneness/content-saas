@@ -17,8 +17,8 @@
                             <table class="table">
                                 <tbody>
                                    <tr>
-                                      <td width="15%" class="text-right text-uppercase"> Category</td>
-                                      <td>{{ $eventType->title ?? ''}}</td>
+                                      <td width="15%" class="text-right text-uppercase"> Category </td>
+                                      <td>{{ $category->title ?? ''}}</td>
                                    </tr>
                                 </tbody>
                             </table>

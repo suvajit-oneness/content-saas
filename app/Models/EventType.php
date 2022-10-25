@@ -29,6 +29,6 @@ class EventType extends Model
         return $resp;
     }
     public function eventDetails() {
-        return $this->hasMany('App\Models\Event', 'event_type', 'id');
+        return $this->hasMany('App\Models\Event', 'category', 'id');
     }
 }

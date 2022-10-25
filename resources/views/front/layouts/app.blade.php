@@ -6,13 +6,14 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <!-- <link rel="shortcut icon" href="./img/fav_icon.png"> -->
 		<title>{{ env('APP_NAME') }} @yield('title')</title>
-    
+
         <link href="{{ asset('frontend/css/bootstrap.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('frontend/css/swiper-bundle.min.css') }}" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link href="{{ asset('frontend/css/aos.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('frontend/css/style.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('frontend/css/responsive.css') }}" rel="stylesheet" type="text/css">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 
         @yield('style')
     </head>
@@ -121,6 +122,7 @@
 
 		<!-- <script type="text/javascript" src="{{ asset('frontend/js/jquery-3.6.0.min.js') }}"></script> -->
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 		<script type="text/javascript" src="{{ asset('frontend/js/popper.min.js') }}"></script>
 		<script type="text/javascript" src="{{ asset('frontend/js/bootstrap.min.js') }}"></script>
 		<script src="https://unpkg.com/feather-icons"></script>
@@ -129,7 +131,10 @@
 		<script type="text/javascript" src="{{ asset('frontend/js/jquery.sticky.js') }}"></script>
 		<script type="text/javascript" src="{{ asset('frontend/js/custom.js') }}"></script>
         <script type="text/javascript" src="{{ asset('frontend/js/theia-sticky-sidebar.min.js') }}"></script>
+
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
 		<script>
 			feather.replace()
@@ -188,7 +193,35 @@
             }
             // click to read notification
         </script>
+    <script>
+        // $('.filter_select').select2({
+        //   width:"100%",
+        // });
 
+
+        $('.filter_select').select2().on('select2:select', function (e) {
+          var data = e.params.data;
+
+      });
+
+
+            $('.filter_select').select2().on('select2:open', (elm) => {
+        const targetLabel = $(elm.target).prev('label');
+        targetLabel.addClass('filled active');
+    }).on('select2:close', (elm) => {
+        const target = $(elm.target);
+        const targetLabel = target.prev('label');
+        const targetOptions = $(elm.target.selectedOptions);
+        if (targetOptions.length === 0) {
+            targetLabel.removeClass('filled active');
+        }
+    });
+
+
+        $(document).on('.filter_selectWrap select2:open', () => {
+          document.querySelector('.select2-search__field').focus();
+        });
+    </script>
         @yield('script')
 
     </body>

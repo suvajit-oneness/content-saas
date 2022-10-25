@@ -78,11 +78,13 @@ class BlogRepository extends BaseRepository implements BlogContract
             if ($slugExistCount > 0) $slug = $slug.'-'.($slugExistCount+1);
             $article->slug = $slug;
             if(!empty($params['image'])){
-            $profile_image = $collection['image'];
+                $article->image = imageUpload($params['image'], 'Blogs');
+           /* $profile_image = $collection['image'];
             $imageName = time().".".$profile_image->getClientOriginalName();
             $profile_image->move("articles/",$imageName);
             $uploadedImage = $imageName;
-            $article->image = $uploadedImage;
+            $article->image = $uploadedImage;*/
+
             }
 
             $article->save();
@@ -120,11 +122,12 @@ class BlogRepository extends BaseRepository implements BlogContract
             $article->slug = $slug;
         }
         if(!empty($params['image'])) {
-            $profile_image = $collection['image'] ?? '';
+            /*$profile_image = $collection['image'] ?? '';
             $imageName = time().".".$profile_image->getClientOriginalName();
             $profile_image->move("articles/",$imageName);
             $uploadedImage = $imageName;
-            $article->image = $uploadedImage;
+            $article->image = $uploadedImage;*/
+            $article->image = imageUpload($params['image'], 'Blogs');
         }
         $article->save();
 

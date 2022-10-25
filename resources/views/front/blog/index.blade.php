@@ -15,8 +15,25 @@
             </div>
         </div>
     </div>
-    
+
     <div class="container mb-2 mb-sm-5">
+        {{-- <form action="{{ route('front.event') }}" class="search_form mb-5">
+            <div class="row">
+                <div class="col-4">
+                    <input type="search" name="code" placeholder="Category">
+                </div>
+                <div class="col-4">
+                    <input type="search" name="keyword" placeholder="Search by keyword">
+                </div>
+                <div class="col-4">
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                        {{-- <a type="button" href="{{ url()->current() }}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Remove filter"><i class="fa fa-times"></i>
+                        </a> --}}
+                   {{--  </div>
+                </div>
+            </div>
+        </form> --}}
         <div class="row">
             <div class="col">
                 <ul class="toolsFilter Blog_toolsFilter">
@@ -42,16 +59,16 @@
     <div class="container">
         <div class="row blog_list">
    @foreach($cat as $blogCategorykey => $blog)
-  
+
     @php
         if($blog->blogDetails->count() == 0) { continue; }
     @endphp
-    
+
            @foreach($blog->blogDetails as $blogProductkey => $data)
             <div class="col-12 col-lg-4 col-md-6 mb-3 blog-list-panel bloglist_{{ $data->article_category_id }}">
                 <a href="">
                     <div class="card">
-                        <img src="{{URL::to('/').'/articles/'}}{{$data->image}}" class="card-img-top" alt="Blog Picture">
+                        <img src="{{ asset($data->image) }}" class="card-img-top" alt="">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                 <span class="subHead_badge">{{ $data->tag }}</span></a>
@@ -76,7 +93,7 @@
                 </a>
             </div>
             @endforeach
-        
+
     @endforeach
     </div>
     </div>

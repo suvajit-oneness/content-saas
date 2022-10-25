@@ -70,7 +70,7 @@
                         <tr>
                             <td>Article Image</td>
                             <td>@if($blog->image!='')
-                                <img style="width: 150px;height: 100px;" src="{{URL::to('/').'/Blogs/'}}{{$blog->image}}">
+                                <img style="width: 150px;height: 100px;" src="{{asset($blog->image)}}">
                                 @endif</td>
                         </tr>
                         <tr>

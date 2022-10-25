@@ -11,7 +11,7 @@
         <div class="container-fluid">
             <div class="artiledetails_banner_img">
                 @if($blog->image)
-                    <img class="w-100" src="{{URL::to('/').'/articles/'}}{{$blog->image}}" alt="">
+                    <img class="w-100" src="{{ asset($blog->image) }}" alt="">
                 @else
                 <img class="w-100" src="{{URL::to('/').'/Blogs/'}}{{placeholder-image.png}}">
                 @endif
@@ -117,7 +117,7 @@
     <section class="py-2 py-sm-4 art-dtls">
         <div class="container">
             <div class="row">
-                <div class="col-lg-7 mb-4 mb-lg-0">
+                <div class="col-lg-7 mb-4 mb-lg-0 eventDesc">
                     {!! $blog->content !!}
                 </div>
             </div>
@@ -147,7 +147,7 @@
                             <div class="card blogCart border-0">
                                 <div class="bst_dimg">
                                      @if($blog->image)
-                                   <img src="{{URL::to('/').'/articles/'}}{{$blog->image}}" class="card-img-top" alt="ltItem">
+                                   <img src="{{ asset($blog->image) }}" class="card-img-top" alt="ltItem">
                                      @else
                                     <img class="w-100" src="{{URL::to('/').'/Demo/'}}{{placeholder-image.png}}" class="card-img-top" style="height: 350px;object-fit: cover;">
                                     @endif

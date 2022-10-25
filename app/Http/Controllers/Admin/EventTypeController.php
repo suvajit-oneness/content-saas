@@ -64,7 +64,7 @@ class EventTypeController extends BaseController
     public function store(Request $request)
     {
         $this->validate($request, [
-            'title'      =>  'required|max:191',
+            'title' => 'required|max:191|unique:event_types,title',
 
         ]);
         $params = $request->except('_token');

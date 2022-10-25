@@ -1063,7 +1063,8 @@ footer p small {
 
 .blog_list .card-title {
   font-weight: 500;
-  font-size: 30px;
+  /* font-size: 30px; */
+  font-size: 1.25rem;
   line-height: 37px;
   color: #000000;
   overflow: hidden;
@@ -1077,6 +1078,7 @@ footer p small {
 
 .blog_list .card:hover .card-title {
   color: #95C800;
+  font-size: 1.25rem;
 }
 
 .blog_list .card-text p {
@@ -6751,7 +6753,7 @@ tbody, td, tfoot, th, thead, tr {
 
 .event_meta {
   display: flex;
-  align-items: center;
+  /* align-items: center; */
 }
 
 .event_meta figure {
@@ -6849,7 +6851,7 @@ tbody, td, tfoot, th, thead, tr {
 
 .event_meta {
   display: flex;
-  align-items: center;
+  /* align-items: center; */
 }
 
 .event_meta figure {
@@ -6904,4 +6906,239 @@ tbody, td, tfoot, th, thead, tr {
   margin-bottom: 8px;
   line-height: 1.2;
   font-size: 16px;
+}
+.some-list-1 .card > a {
+    height: 196px;
+}
+.some-list-1 .card > a img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.eventlist .card > a {
+    height: 196px;
+}
+.eventlist .card > a img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.search_form {
+    display: block;
+    padding: 20px;
+    border-radius: 100px;
+    background: #fff;
+    -webkit-box-shadow: 0px 0px 10px rgb(0 0 0 / 15%);
+    box-shadow: 0px 0px 10px rgb(0 0 0 / 15%);
+}
+.search_form .col-2 {
+    width: 18%;
+}
+.search_form .col-2:last-child {
+    width: 10%;
+}
+.search_form input {
+    width: 100%;
+    background: #f0f0f0;
+    height: 45px;
+    border: none;
+    font-size: 14px;
+    font-weight: 400;
+    color: #000;
+    border-radius: 50px;
+    margin: 0;
+    padding-left: 1rem;
+}
+.search_form select {
+    width: 100%;
+    background: #f0f0f0;
+    height: 45px;
+    border: none;
+    font-size: 14px;
+    font-weight: 400;
+    color: #000;
+    border-radius: 50px;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-size: 16px;
+    background-position: 94% 50%;
+    padding: 0 1rem;
+}
+.search_form button[type=submit] {
+    width: 45px;
+    height: 45px;
+    padding: 0px;
+}
+.text-center {
+    text-align: center;
+}
+.text-right {
+    text-align: right;
+}
+@media only screen and (max-width:991px) {
+    .search_form {
+        border-radius: 30px;
+    }
+    .search_form .col-2,
+    .search_form .col-2:last-child {
+        width: 33.33333333%;
+        margin-bottom: 15px;
+    }
+    .search_form .col-2:nth-child(4),
+    .search_form .col-2:nth-child(5),
+    .search_form .col-2:nth-child(6) {
+        margin-bottom: 0px;
+    }
+}
+@media only screen and (max-width:575px) {
+    .search_form .col-2,
+    .search_form .col-2:last-child {
+        width: 50%;
+    }
+}
+@media only screen and (max-width:479px) {
+    .search_form .col-2,
+    .search_form .col-2:last-child {
+        width: 100%;
+    }
+    .search_form .col-2:nth-child(4),
+    .search_form .col-2:nth-child(5) {
+        margin-bottom: 15px;
+    }
+}
+.filter_selectWrap .select2-container .select2-selection--single {
+    height: 45px;
+    background: #f0f0f0;
+    border: none;
+    letter-spacing: 0.5px;
+}
+
+.filter_selectWrap .select2-container--default .select2-selection--single .select2-selection__rendered {
+    height: 45px;
+    line-height: 45px;
+    padding-left: 16px;
+    font-size: 14px;
+    color: #414141;
+}
+
+.filter_selectWrap2 .select2-container--default .select2-selection--single .select2-selection__rendered {
+    padding-left: 32px;
+}
+
+.filter_selectWrap .select2-container--default .select2-selection--single .select2-selection__rendered:focus-visible,
+.filter_selectWrap .select2-container .select2-selection--single:focus-visible {
+    outline: none;
+}
+
+.filter_selectWrap .select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 45px;
+}
+.select2-container--open .select2-dropdown--above {
+    border-color: #eee;
+    padding: 15px;
+}
+
+.select2-container--open .select2-dropdown--below {
+    border-color: #eee;
+    padding: 15px;
+}
+
+.select2-results__option {
+    font-size: 14px;
+}
+.select-floating .active.filled {
+    opacity: 0.7;
+    top: 5px;
+    transform: scale(0.83);
+}
+
+.form-floating>.form-control:focus,
+.form-floating>.form-control:not(:placeholder-shown),
+.form-floating>.form-select {
+    padding-bottom: 0;
+    padding-top: 19px;
+}
+
+.form-floating {
+    position: relative;
+}
+
+.form-floating>label,
+.select-floating label {
+    position: absolute;
+    top: 12px;
+    left: 16px;
+    height: auto;
+    margin-bottom: 0;
+    pointer-events: none;
+    transform-origin: 0 0;
+    font-size: 14px;
+    transition: all .1s ease-in-out;
+    z-index: 11;
+}
+
+.select-floating label {
+    left: 37px;
+    opacity: 0;
+}
+
+.select-floating .active.filled+select+.select2 .select2-selection__rendered {
+    padding-top: 24px;
+    line-height: 1;
+}
+.Categorysearch .page-search-block .select-floating span.select2-container {
+    width: 100% !important;
+}
+.filterSearchBoxWraper {
+    padding-bottom: 10px !important;
+    position: absolute;
+    width: calc(100% - 30px);
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+}
+
+.filterSearchBox .form-control {
+    margin-bottom: 8px;
+}
+
+.filterSearchBox .select2-container {
+    margin-bottom: 8px;
+}
+
+.filterSearchBox .row {
+    margin-right: -5px;
+    margin-left: -5px;
+}
+
+.filterSearchBox [class*="col"] {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.filterSearchBox .btn-blue {
+    width: 100%;
+    background: #f15e51;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.filterSearchBoxWraper {
+    padding-bottom: 10px !important;
+    position: absolute;
+    width: calc(100% - 30px);
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+}
+.search_form .filter_selectWrap .select2-container .select2-selection--single {
+    border-radius: 50px;
+}
+.search_form .select2-container--default.select2-container--open.select2-container--below .select2-selection--single {
+    border-radius: 50px;
+}
+.eventDesc > div {
+    width: 100% !important;
 }
