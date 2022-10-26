@@ -110,7 +110,7 @@
                                         </div>
                                     </div>
                                     <div class="location_btn">
-                                        <button class="btn btn-success round">Add To Cart</button>
+                                        <a href="{{$data->company_website_link}}" target="_blank" class="btn btn-success round">Add To Cart</a>
                                     </div>
                                 </div>
                             </div>
