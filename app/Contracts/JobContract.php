@@ -51,6 +51,7 @@ interface JobContract
      */
     public function updateJobStatus(array $params);
     public function updateJobfeatureStatus(array $params);
+    public function updateJobbegineerfriendlyStatus(array $params);
     /**
      * @param
      * @return mixed

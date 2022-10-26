@@ -90,7 +90,7 @@ Route::name('front.')->group(function () {
         Route::prefix('user')->name('user.courses')->group(function () {
             Route::get('/my-courses','Front\PortfolioController@showMyCourses');
         });
-        
+
         // User purchased course
         Route::prefix('user')->name('user.profile.edit')->group(function () {
             Route::get('/update/profile','Front\Portfolio\ProfileController@editProfile');
@@ -102,7 +102,9 @@ Route::name('front.')->group(function () {
         });
         Route::name('job.')->group(function () {
             Route::get('/job', 'Front\JobController@index')->name('index');
-          
+            Route::get('/job/{slug}', 'Front\JobController@details')->name('details');
+            Route::post('/save/job', 'Front\JobController@store')->name('save');
+
         });
         Route::prefix('user')->name('portfolio.')->group(function () {
             Route::name('profile.')->group(function () {
@@ -197,7 +199,7 @@ Route::name('front.')->group(function () {
                 Route::post('/portfolio/feedback/update', 'Front\Portfolio\FeedbackController@update')->name('update');
                 Route::get('/portfolio/feedback/delete/{id}', 'Front\Portfolio\FeedbackController@delete')->name('delete');
             });
-           
+
         });
     });
 });

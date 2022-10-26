@@ -8,6 +8,7 @@ use App\Traits\UploadAble;
 use Illuminate\Http\UploadedFile;
 use App\Contracts\JobContract;
 use App\Models\JobCategory;
+use App\Models\JobTag;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Doctrine\Instantiator\Exception\InvalidArgumentException;
@@ -78,11 +79,18 @@ class JobRepository extends BaseRepository implements JobContract
             else{
             $job->employment_type = $collection['employment_type'] ?? '';
             }
-            $job->location = $collection['location'] ?? '';
+            $job->address = $collection['address'] ?? '';
+            $job->postcode = $collection['postcode'] ?? '';
+            $job->city = $collection['city'] ?? '';
+            $job->state = $collection['state'] ?? '';
+            $job->country = $collection['country'] ?? '';
             if(!empty($params['image'])){
                 // image, folder name only
                 $job->image = imageUpload($params['image'], 'job');
             }
+            $job->skill = $collection['skill'] ?? '';
+            $job->experience = $collection['experience'] ?? '';
+            $job->scope = $collection['scope'] ?? '';
             $job->source = $collection['source'] ?? '';
             $job->salary = $collection['salary'] ?? '';
             $job->payment = $collection['payment'] ?? '';
@@ -91,6 +99,16 @@ class JobRepository extends BaseRepository implements JobContract
             $job->description = $collection['description'] ?? '';
             $job->tag = $collection['tag'] ?? '';
             $job->save();
+            foreach (explode(',',$params['tag']) as $value) {
+                $blogTag=new JobTag();
+                $blogTag->job_id = $job->id ?? '';
+                $blogTag->title = $value ?? '';
+                $slug = Str::slug($value, '-');
+                $slugExistCount = JobTag::where('title', $collection['tag'])->count();
+                if ($slugExistCount > 0) $slug = $slug.'-'.($slugExistCount+1);
+                $blogTag->slug = $slug;
+                $blogTag->save();
+                }
             return $job;
 
         } catch (QueryException $exception) {
@@ -116,20 +134,36 @@ class JobRepository extends BaseRepository implements JobContract
         else{
         $job->employment_type = $collection['employment_type'] ?? '';
         }
-        $job->location = $collection['location'] ?? '';
+        $job->address = $collection['address'] ?? '';
+        $job->postcode = $collection['postcode'] ?? '';
+        $job->city = $collection['city'] ?? '';
+        $job->state = $collection['state'] ?? '';
+        $job->country = $collection['country'] ?? '';
         if(!empty($params['image'])){
             // image, folder name only
             $job->image = imageUpload($params['image'], 'job');
         }
+        $job->skill = $collection['skill'] ?? '';
+            $job->experience = $collection['experience'] ?? '';
+            $job->scope = $collection['scope'] ?? '';
         $job->source = $collection['source'] ?? '';
         $job->salary = $collection['salary'] ?? '';
         $job->payment = $collection['payment'] ?? '';
         $job->start_date = $collection['start_date'] ?? '';
         $job->end_date = $collection['end_date'] ?? '';
         $job->description = $collection['description'] ?? '';
-        $job->tag = $collection['tag'] ?? '';
+       // $job->tag = $collection['tag'] ?? '';
             $job->save();
-
+            foreach (explode(',',$params['tag']) as $value) {
+                $blogTag=new JobTag();
+                $blogTag->job_id = $job->id ?? '';
+                $blogTag->title = $value ?? '';
+                $slug = Str::slug($value, '-');
+                $slugExistCount = JobTag::where('title', $collection['tag'])->count();
+                if ($slugExistCount > 0) $slug = $slug.'-'.($slugExistCount+1);
+                $blogTag->slug = $slug;
+                $blogTag->save();
+                }
         return $job;
     }
 
@@ -164,6 +198,14 @@ class JobRepository extends BaseRepository implements JobContract
 
         return $job;
     }
+    public function updateJobbegineerfriendlyStatus(array $params){
+        $job = $this->findOneOrFail($params['id']);
+        $collection = collect($params)->except('_token');
+        $job->beginner_friendly = $collection['check_status'];
+        $job->save();
+
+        return $job;
+    }
 
      /**
      * @param $id
@@ -181,7 +223,7 @@ class JobRepository extends BaseRepository implements JobContract
      */
     public function listCategory(){
         $job= JobCategory::orderby('title')->where('status',1)->get();
-       
+
         return $job;
     }
 
@@ -204,7 +246,7 @@ class JobRepository extends BaseRepository implements JobContract
     public function searchJobData($term){
          return Job::where([['title', 'LIKE', '%' . $term . '%']])->paginate(25);
 
-       
+
     }
 
     /**
