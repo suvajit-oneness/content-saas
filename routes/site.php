@@ -87,7 +87,10 @@ Route::name('front.')->group(function () {
         Route::name('dashboard.')->group(function () {
             Route::get('/dashboard', 'Front\DashboardController@index')->name('index');
         });
-
+        Route::name('job.')->group(function () {
+            Route::get('/job', 'Front\JobController@index')->name('index');
+          
+        });
         Route::prefix('user')->name('portfolio.')->group(function () {
             Route::name('profile.')->group(function () {
                 Route::post('/basic-detail/update', 'Front\Portfolio\ProfileController@update')->name('update');
@@ -181,6 +184,7 @@ Route::name('front.')->group(function () {
                 Route::post('/portfolio/feedback/update', 'Front\Portfolio\FeedbackController@update')->name('update');
                 Route::get('/portfolio/feedback/delete/{id}', 'Front\Portfolio\FeedbackController@delete')->name('delete');
             });
+           
         });
     });
 });

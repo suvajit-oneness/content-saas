@@ -43,6 +43,11 @@
                             {{-- <a href="{{ route('front.portfolio.edit', auth()->guard('web')->user()->slug) }}" class="{{ request()->is('user/portfolio/manage*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Manage Portfolio</a> --}}
                         </li>
                         <li>
+                            <a href="{{ route('front.job.index') }}" class="{{ request()->is('user/job*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Jobs</a>
+
+                            
+                        </li>
+                        <li>
                             <a href="{{ route('front.user.logout') }}" class="logout-bg"><i class="fas fa-sign-out-alt"></i>LOGOUT</a>
                         </li>
                     </ul>

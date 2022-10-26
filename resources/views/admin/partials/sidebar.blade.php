@@ -222,5 +222,26 @@
                 </a>
             </li>
         </div>
+         <!-- Event Management -->
+         <li class="text-light" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+            <a href="#" class="app-menu__item @if(request()->is('admin/job*')) {{ 'active' }} @endif">
+                <span class="app-menu__label">Job Master</span>
+                <i class="app-menu__icon fa fa-chevron-down"></i>
+            </a>
+        </li>
+
+        <div id="collapseSeven" class="collapse @if(request()->is('admin/job*')) {{ 'show' }} @endif" aria-labelledby="headingOne" data-parent="#accordion">
+            <li>
+                <a class="app-menu__item {{ request()->is('admin/job/category*') ? 'active' : '' }}" href="{{ route('admin.job.category.index') }}">
+                    <i class="app-menu__icon fa fa-archive"></i>
+                    <span class="app-menu__label">Category</span>
+                 </a>
+            </li>
+            <li>
+                <a class="app-menu__item {{ request()->is('admin/job*') ? 'active' : '' }}" href="{{ route('admin.job.index') }}"><i class="app-menu__icon fa fa-cogs"></i>
+                    <span class="app-menu__label">Management</span>
+                </a>
+            </li>
+        </div>
     </ul>
 </aside>
