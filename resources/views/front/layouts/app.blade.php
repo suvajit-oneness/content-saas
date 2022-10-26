@@ -43,6 +43,9 @@
                             <a class="nav-link {{ request()->is('event*') ? 'active' : '' }}" href="{{ route('front.event') }}">Event</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link {{ request()->is('deals*') ? 'active' : '' }}" href="{{ route('front.deals.index') }}">Deals</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link {{ request()->is('price*') ? 'active' : '' }}" href="{{route('front.price.index')}}" >Plans & Pricing</a>
                         </li>
                         <li class="nav-item">

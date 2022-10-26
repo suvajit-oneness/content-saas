@@ -36,6 +36,28 @@
                 </a>
             </li>
         </div>
+
+        <li class="text-light" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+            <a href="#" class="app-menu__item @if(request()->is('admin/deals*') || request()->is('admin/deals*')) {{ 'active' }} @endif">
+                <span class="app-menu__label">Deals Master</span>
+                <i class="app-menu__icon fa fa-chevron-down"></i>
+            </a>
+        </li>
+        <div id="collapseTwo" class="collapse @if(request()->is('admin/deals*')) {{ 'show' }} @endif" aria-labelledby="headingOne" data-parent="#accordion">
+            <li>
+                <a class="app-menu__item {{ request()->is('admin/deals/category*') ? 'active' : '' }}" href="{{ route('admin.deals.category.index') }}">
+                    <i class="app-menu__icon fa fa-archive"></i>
+                    <span class="app-menu__label">Deals Category</span>
+                </a>
+            </li>
+            <li>
+                <a class="app-menu__item {{ request()->is('admin/deals') ? 'active' : '' }}" href="{{ route('admin.deals.index') }}">
+                    <i class="app-menu__icon fa fa-folder"></i>
+                    <span class="app-menu__label">All Deals</span>
+                </a>
+            </li>
+        </div>
+
         <!-- Course Management -->
         <li class="text-light" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
             <a href="#" class="app-menu__item @if(request()->is('admin/course-category*') || request()->is('admin/course*')) {{ 'active' }} @endif">

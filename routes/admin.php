@@ -151,6 +151,32 @@ Route::group(['prefix' => 'admin'], function () {
             Route::get('/export', 'Admin\CourseCategoryController@export')->name('admin.course-category.data.csv.export');
         });
 
+        // Admin/deals
+        Route::group(['prefix' => 'deals'], function(){
+            Route::get('/', 'Admin\DealsController@index')->name('admin.deals.index');
+            Route::get('/create', 'Admin\DealsController@create')->name('admin.deals.create');
+            Route::post('/store', 'Admin\DealsController@store')->name('admin.deals.store');
+            Route::get('/{id}/edit', 'Admin\DealsController@edit')->name('admin.deals.edit');
+            Route::post('/update', 'Admin\DealsController@update')->name('admin.deals.update');
+            Route::get('/{id}/delete', 'Admin\DealsController@delete')->name('admin.deals.delete');
+            Route::post('updateStatus', 'Admin\DealsController@updateStatus')->name('admin.deals.updateStatus');
+            Route::get('/{id}/details', 'Admin\DealsController@details')->name('admin.deals.details');
+            Route::post('/csv-store', 'Admin\DealsController@csvStore')->name('admin.deals.data.csv.store');
+            Route::get('/export', 'Admin\DealsController@export')->name('admin.deals.data.csv.export');
+        });
+
+        // Admin/deals/category
+        Route::group(['prefix' => 'deals/category'], function(){
+            Route::get('/', 'Admin\DealsCategoryController@index')->name('admin.deals.category.index');
+            Route::get('/create', 'Admin\DealsCategoryController@create')->name('admin.deals.category.create');
+            Route::post('/store', 'Admin\DealsCategoryController@store')->name('admin.deals.category.store');
+            Route::get('/{id}/edit', 'Admin\DealsCategoryController@edit')->name('admin.deals.category.edit');
+            Route::post('/update', 'Admin\DealsCategoryController@update')->name('admin.deals.category.update');
+            Route::get('/{id}/delete', 'Admin\DealsCategoryController@delete')->name('admin.deals.category.delete');
+            Route::post('updateStatus', 'Admin\DealsCategoryController@updateStatus')->name('admin.deals.category.updateStatus');
+            Route::get('/{id}/details', 'Admin\DealsCategoryController@details')->name('admin.deals.category.details');
+        });
+
         //** course management **/
         Route::group(['prefix' => 'course'], function () {
             Route::get('/', 'Admin\CourseController@index')->name('admin.course.index');

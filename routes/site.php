@@ -23,6 +23,9 @@ Route::name('front.')->group(function () {
     Route::get('/', 'Front\HomeController@index')->name('index');
     Route::get('/article', 'Front\ArticleController@article')->name('article');
     Route::get('/article/{slug}', 'Front\ArticleController@articledetails')->name('article.details');
+    // Route::get('/event',function(){
+    //     dd("hi");
+    // })->name('event');
     Route::get('/event', 'Front\EventController@event')->name('event');
     Route::get('/event/{slug}', 'Front\EventController@eventdetails')->name('event.details');
     Route::get('/course', 'Front\CourseController@course')->name('course');
@@ -41,6 +44,11 @@ Route::name('front.')->group(function () {
     //market
     Route::name('market.')->group(function () {
         Route::get('/market', 'Front\MarketController@index')->name('index');
+    });
+
+    // Deals
+    Route::name('deals.')->group(function () {
+        Route::get('/deals', 'Front\DealController@index')->name('index');
     });
 
     //feature
