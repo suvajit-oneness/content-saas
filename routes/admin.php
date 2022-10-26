@@ -421,5 +421,33 @@ Route::group(['prefix' => 'admin'], function () {
             Route::get('/export', 'Admin\SupportFaqController@export')->name('admin.support.data.csv.export');
         });
     });
+     //**  job category  **//
+     Route::group(['prefix' => 'job/category'], function () {
+        Route::get('/', 'Admin\JobCategoryController@index')->name('admin.job.category.index');
+        Route::get('/create', 'Admin\JobCategoryController@create')->name('admin.job.category.create');
+        Route::post('/store', 'Admin\JobCategoryController@store')->name('admin.job.category.store');
+        Route::get('/{id}/edit', 'Admin\JobCategoryController@edit')->name('admin.job.category.edit');
+        Route::post('/update', 'Admin\JobCategoryController@update')->name('admin.job.category.update');
+        Route::get('/{id}/delete', 'Admin\JobCategoryController@delete')->name('admin.job.category.delete');
+        Route::post('updateStatus', 'Admin\JobCategoryController@updateStatus')->name('admin.job.category.updateStatus');
+        Route::get('/{id}/details', 'Admin\JobCategoryController@details')->name('admin.job.category.details');
+        Route::post('/csv-store', 'Admin\JobCategoryController@csvStore')->name('admin.job.category.data.csv.store');
+        Route::get('/export', 'Admin\JobCategoryController@export')->name('admin.job.category.data.csv.export');
+    });
+
+    //**  job management  **//
+    Route::group(['prefix'  =>   'job'], function () {
+        Route::get('/', 'Admin\JobController@index')->name('admin.job.index');
+        Route::get('/create', 'Admin\JobController@create')->name('admin.job.create');
+        Route::post('/store', 'Admin\JobController@store')->name('admin.job.store');
+        Route::get('/{id}/edit', 'Admin\JobController@edit')->name('admin.job.edit');
+        Route::post('/update', 'Admin\JobController@update')->name('admin.job.update');
+        Route::get('/{id}/delete', 'Admin\JobController@delete')->name('admin.job.delete');
+        Route::post('updateStatus', 'Admin\JobController@updateStatus')->name('admin.job.updateStatus');
+        Route::post('updateFeatureStatus', 'Admin\JobController@updatefeatureStatus')->name('admin.job.updateFeature');
+        Route::get('/{id}/details', 'Admin\JobController@details')->name('admin.job.details');
+        Route::post('/csv-store', 'Admin\JobController@csvStore')->name('admin.job.data.csv.store');
+        Route::get('/export', 'Admin\JobController@export')->name('admin.job.data.csv.export');
+    });
 });
 // });
