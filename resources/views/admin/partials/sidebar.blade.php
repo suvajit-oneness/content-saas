@@ -145,14 +145,33 @@
                 </a>
             </li>
         </div>
+
+        {{-- Market place --}}
+        <li class="text-light" data-toggle="collapse" data-target="#collapsemarketplace" aria-expanded="true" aria-controls="collapsemarketplace">
+            <a href="#" class="app-menu__item @if(request()->is('admin/marketplace/*')) {{ 'active' }} @endif">
+                <span class="app-menu__label">Marketplace Master</span>
+                <i class="app-menu__icon fa fa-chevron-down"></i>
+            </a>
+        </li>
+        <div id="collapsemarketplace" class="collapse @if(request()->is('admin/marketplace*')) {{ 'show' }} @endif" aria-labelledby="headingOne" data-parent="#accordion">
+            <li>
+                <a class="app-menu__item {{ request()->is('admin/marketplace/faq*') ? 'active' : '' }} {{ sidebar_open(['admin.market.faq']) }}"
+                        href="{{ route('admin.marketplace.faq.index') }}">
+                    <i class="app-menu__icon fa fa-file"></i>
+                    <span class="app-menu__label">Faq Management</span>
+                </a>
+            </li>
+        </div>
+
+
         <!-- Market Management -->
         <li class="text-light" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
-            <a href="#" class="app-menu__item @if(request()->is('admin/market*') || request()->is('admin/market/category*') || request()->is('admin/market/banner*') || request()->is('admin/market/faq*')) {{ 'active' }} @endif">
+            <a href="#" class="app-menu__item @if(request()->is('admin/market/*') || request()->is('admin/market/category*') || request()->is('admin/market/banner*') || request()->is('admin/market/faq*')) {{ 'active' }} @endif">
                 <span class="app-menu__label">Market Master</span>
                 <i class="app-menu__icon fa fa-chevron-down"></i>
             </a>
         </li>
-        <div id="collapseFour" class="collapse @if(request()->is('admin/market*') || request()->is('admin/market/category*') || request()->is('admin/market/banner*') || request()->is('admin/market/faq*')) {{ 'show' }} @endif" aria-labelledby="headingOne" data-parent="#accordion">
+        <div id="collapseFour" class="collapse @if(request()->is('admin/market/*') || request()->is('admin/market/category*') || request()->is('admin/market/banner*') || request()->is('admin/market/faq*')) {{ 'show' }} @endif" aria-labelledby="headingOne" data-parent="#accordion">
                 <!--- Category management --->
             <li>
                 <a class="app-menu__item {{ request()->is('admin/market/category*') ? 'active' : '' }} {{ sidebar_open(['admin.market.category']) }}"
@@ -189,7 +208,7 @@
         <!-- support -->
 
         <li class="text-light" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
-            <a href="#" class="app-menu__item @if(request()->is('admin/market*') || request()->is('admin/market/category*') || request()->is('admin/market/banner*') || request()->is('admin/market/faq*')) {{ 'active' }} @endif">
+            <a href="#" class="app-menu__item @if(request()->is('admin/support*') || request()->is('admin/support/category*') || request()->is('admin/market/banner*') || request()->is('admin/market/faq*')) {{ 'active' }} @endif">
                 <span class="app-menu__label">Support Master</span>
                 <i class="app-menu__icon fa fa-chevron-down"></i>
             </a>

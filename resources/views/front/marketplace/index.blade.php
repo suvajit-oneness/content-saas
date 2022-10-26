@@ -17,11 +17,13 @@
 
                     <div class="banner-input">
                         <form action="">
-                            <select name="" id="">
-                                <option value="">Writer </option>
+                            <select name="category" id="category">
+                                @foreach ($master_categories as $item)
+                                   <option value="{{$item}}">{{$item}}</option>
+                                @endforeach    
                             </select>
                             <div class="input">
-                                <input type="text" placeholder="What kind of writer are you looking for?">
+                                <input type="text" placeholder="What are you looking for?" name="name">
                                 <button type="submit">
                                     <img src="{{ asset('frontend/img/freelance-search.png')}}" alt="">
                                 </button>
@@ -46,8 +48,8 @@
         <div class="row align-items-center">
             <div class="col-lg-6 col-md-6 col-12 text-center text-lg-start">
                 <div class="recommended-writers-left">
-                    <h6>Recommended Writers </h6>
-                    <span>120</span>
+                    <h6>Writers </h6>
+                    <span>{{count($all_writers)}}</span>
                 </div>
             </div>
             <div class="col-lg-6 col-md-6 col-12 text-center text-lg-end">
@@ -58,37 +60,48 @@
         </div>
 
         <div class="row mt-4">
-            <div class="col-lg-4 col-md-6 col-12 mb-lg-4 mb-md-4 mb-4">
-                <div class="recommended-writers-content">
-                    <div class="content-top">
-                        <img src="{{ asset('frontend/img/writer1.png')}}" alt="">
-                        <div class="content-top-info">
-                            <h4>Edward Rogers</h4>
-                            <span>Education and curriculum
-                                writer
-                            </span>
+            @foreach ($writers as $data)
+                <div class="col-lg-4 col-md-6 col-12 mb-lg-4 mb-md-4 mb-4">
+                    <div class="recommended-writers-content">
+                        <div class="content-top">
+                            <img src="{{ asset($data->image)}}" height="60px" width="60px" class="rounded" alt="">
+                            <div class="content-top-info">
+                                <h4>{{$data->first_name . ' ' . $data->last_name}}</h4>
+                                <span>{{$data->occupation}}</span>
+                            </div>
+                        </div>
+
+                        <div class="content-mid">
+                            <ul class="list-unstyled p-0 m-0" id="showLessContent">
+                                @for($i=0; $i<count(explode(',',$data->categories)); $i++)
+                                    @if($i<2)
+                                        <li>{{explode(',',$data->categories)[$i]}}</li>
+                                    @endif
+                                @endfor
+                                @if(count(explode(',',$data->categories)) > 2)
+                                    <li id="showMore" style="cursor: pointer;">+ {{count(explode(',',$data->categories)) - 2}} more</li>
+                                @endif
+                            </ul>
+                            <ul class="list-unstyled p-0 m-0 d-none" style="flex-flow: wrap;" id="showMoreContent">
+                                @for($i=0; $i<count(explode(',',$data->categories)); $i++)
+                                    <li class="my-1">{{explode(',',$data->categories)[$i]}}</li>
+                                @endfor
+                            </ul>
+                        </div>
+
+                        <div class="line"></div>
+
+                        <div class="content-btm">
+                            <a href="{{route('front.portfolio.index', $data->slug)}}">
+                                get started now
+                                <img src="{{ asset('frontend/img/arrow-right-freelance.png')}}" alt="">
+                            </a>
                         </div>
                     </div>
-
-                    <div class="content-mid">
-                        <ul class="list-unstyled p-0 m-0">
-                            <li>Copywriting</li>
-                            <li>Social media</li>
-                            <li>+ 10 more</li>
-                        </ul>
-                    </div>
-
-                    <div class="line"></div>
-
-                    <div class="content-btm">
-                        <a href="">
-                            get started now
-                            <img src="{{ asset('frontend/img/arrow-right-freelance.png')}}" alt="">
-                        </a>
-                    </div>
                 </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-12 mb-lg-4 mb-md-4 mb-4">
+            @endforeach
+            <div class="text"></div>
+            {{-- <div class="col-lg-4 col-md-6 col-12 mb-lg-4 mb-md-4 mb-4">
                 <div class="recommended-writers-content">
                     <div class="content-top">
                         <img src="{{ asset('frontend/img/writer2.png')}}" alt="">
@@ -245,7 +258,7 @@
                         </a>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </section>
@@ -911,4 +924,13 @@
     </div>
 </section>
 
+@endsection
+
+@section('script')
+<script>
+    $('#showMore').click(function(){
+        $('#showMoreContent').removeClass('d-none');
+        $('#showLessContent').addClass('d-none');
+    })
+</script>
 @endsection

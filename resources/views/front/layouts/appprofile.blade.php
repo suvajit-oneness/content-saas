@@ -48,7 +48,11 @@
                         <li>
                             <a href="{{ route('front.user.portfolio.changePassword') }}" class="{{ request()->is('user/change/password') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Change Password</a>
                         </li>
+                        <li>
                             <a href="{{ route('front.job.index') }}" class="{{ request()->is('user/job*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Jobs</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('front.user.post-content.index') }}" class="{{ request()->is('user/post-content*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Post Content</a>
                         </li>
                         <li>
                             <a href="{{ route('front.user.logout') }}" class="logout-bg"><i class="fas fa-sign-out-alt"></i>LOGOUT</a>

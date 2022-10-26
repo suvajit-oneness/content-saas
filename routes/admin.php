@@ -367,6 +367,21 @@ Route::group(['prefix' => 'admin'], function () {
             Route::post('/csv-store', 'Admin\MarketFaqController@csvStore')->name('admin.market.faq.data.csv.store');
             Route::get('/export', 'Admin\MarketFaqController@export')->name('admin.market.faq.data.csv.export');
         });
+
+        // Marketplace- FAQ management
+        Route::group(['prefix'  =>   '/marketplace/faq'], function () {
+            Route::get('/', 'Admin\MarketPlaceFaqController@index')->name('admin.marketplace.faq.index');
+            Route::get('/create', 'Admin\MarketPlaceFaqController@create')->name('admin.marketplace.faq.create');
+            Route::post('/store', 'Admin\MarketPlaceFaqController@store')->name('admin.marketplace.faq.store');
+            Route::get('/{id}/edit', 'Admin\MarketPlaceFaqController@edit')->name('admin.marketplace.faq.edit');
+            Route::post('/update', 'Admin\MarketPlaceFaqController@update')->name('admin.marketplace.faq.update');
+            Route::get('/{id}/delete', 'Admin\MarketPlaceFaqController@delete')->name('admin.marketplace.faq.delete');
+            Route::post('updateStatus', 'Admin\MarketPlaceFaqController@updateStatus')->name('admin.marketplace.faq.updateStatus');
+            Route::get('/{id}/details', 'Admin\MarketPlaceFaqController@details')->name('admin.marketplace.faq.details');
+            Route::post('/csv-store', 'Admin\MarketPlaceFaqController@csvStore')->name('admin.marketplace.faq.data.csv.store');
+            Route::get('/export', 'Admin\MarketPlaceFaqController@export')->name('admin.marketplace.faq.data.csv.export');
+        });
+
         //**  support management  **//
         Route::group(['prefix'  =>   'support'], function () {
             Route::get('/', 'Admin\SupportController@index')->name('admin.support.index');

@@ -104,6 +104,16 @@ Route::name('front.')->group(function () {
             Route::get('/job', 'Front\JobController@index')->name('index');
           
         });
+
+        Route::prefix('user/post-content')->name('user.post-content.')->group(function(){
+            Route::get('', 'Front\UserPostController@index')->name('index');
+            Route::get('/create', 'Front\UserPostController@create')->name('create');
+            Route::post('/store', 'Front\UserPostController@store')->name('store');
+            Route::get('/edit/{id}', 'Front\UserPostController@edit')->name('edit');
+            Route::post('/update', 'Front\UserPostController@update')->name('update');
+            Route::get('/delete/{id}', 'Front\UserPostController@delete')->name('delete');
+        });
+
         Route::prefix('user')->name('portfolio.')->group(function () {
             Route::name('profile.')->group(function () {
                 Route::post('/basic-detail/update', 'Front\Portfolio\ProfileController@update')->name('update');
