@@ -37,8 +37,8 @@
                                             <select class="filter_select form-control" name="category">
                                                 <option value="" hidden selected>Select Category...</option>
                                                 @foreach ($deal_category as $index => $item)
-                                                    <option value="{{ $item->title }}"
-                                                        {{ request()->input('category') == $item->title ? 'selected' : '' }}>
+                                                    <option value="{{ $item->slug }}"
+                                                        {{ request()->input('category') == $item->slug ? 'selected' : '' }}>
                                                         {{ $item->title }}</option>
                                                 @endforeach
                                             </select>
@@ -49,7 +49,7 @@
                         </div>
                     </div>
                     <div class="col-5">
-                        <input type="search" name="search" placeholder="Search Title...">
+                        <input type="search" name="search" placeholder="Search Title..." value="{{request()->input('search')}}">
                     </div>
                     {{-- <div class="col-2">
                         <input type="search" name="address" placeholder="Enter Location">
@@ -67,7 +67,7 @@
                 </div>
             </form>
         </div>
-        @if (request()->input('category') || request()->input('search'))
+        {{-- @if (request()->input('category') || request()->input('search')) --}}
             <div class="container">
                 <div class="row justify-content-between">
                     <div class="col">
@@ -92,46 +92,33 @@
                     @foreach ($deal as $dealProductkey => $data)
                         <div class="col-12 col-lg-4 col-md-6 mb-3 some-list-1">
                             <div class="card">
-                                <a href="{{ route('front.event.details', $data->slug) }}">
+                                <a href="#">
                                     <img src="{{ asset($data->company_logo) }}" class="card-img-top">
                                 </a>
                                 <div class="card-body">
                                     <div class="d-flex align-items-center">
                                         <span class="subHead_badge">{{ $data->title }}</span>
-                                        <div class="dateBox blog_date">
-                                            <span class="date">
-                                                {{ date('d', strtotime($data->start_date)) }}
-                                            </span>
-                                            <span class="month">
-                                                {{ date('M', strtotime($data->start_date)) }}
-                                            </span>
-                                            <span class="year">
-                                                {{ date('Y', strtotime($data->start_date)) }}
-                                            </span>
-                                        </div>
-                                        <div class="ms-2">-</div>
-                                        <div class="dateBox blog_date ms-2">
-                                            <span class="date">
-                                                {{ date('d', strtotime($data->end_date)) }}
-                                            </span>
-                                            <span class="month">
-                                                {{ date('M', strtotime($data->end_date)) }}
-                                            </span>
-                                            <span class="year">
-                                                {{ date('Y', strtotime($data->end_date)) }}
-                                            </span>
+                                    </div>
+                                    <div class="location_btn">
+                                        <div class="d-flex align-items-baseline">
+                                            <h5 class="card-title mt-3">{{ $data->description }}</h5>
+                                            <div class="">
+                                                <span class="date mx-3">
+                                                    {{ date('d M Y', strtotime($data->created_at)) }}
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
-                                    <a href="{{ route('front.event.details', $data->slug) }}" class="location_btn">
-                                        <h5 class="card-title mt-3">{{ $data->title }}</h5>
-                                    </a>
+                                    <div class="location_btn">
+                                        <button class="btn btn-success round">Add To Cart</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     @endforeach
                 </div>
             </div>
-        @endif
+        {{-- @endif --}}
         {{-- <div class="container mb-2 mb-sm-5">
             <div class="row">
                 <div class="col">

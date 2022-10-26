@@ -16,7 +16,18 @@ class DealController extends Controller
     public function index(Request $request)
     {
         $deal_category = DealCategory::all();
-        $deal = Deal::all();
+        $deal = Deal::where('status',1);
+        if(!empty($request->category)){
+            $cat_id = DealCategory::where('slug',$request->category)->first()->id;
+            $deal = $deal->where('category',$cat_id);
+        }
+
+        if(!empty($request->search)){
+            $deal = $deal->where('title','like','%'.$request->search.'%');
+        }
+
+        $deal = $deal->get();
+
         return view('front.deals.index',compact('deal_category','deal'));
     }
 }
