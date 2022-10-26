@@ -13,6 +13,13 @@
                                     <h2>{{ $job[0]->title ?? '' }}</h2>
                                     <p>{{ $job[0]->category->title ?? '' }}</p>
                                     <p>Skill : {{ $job[0]->skill ?? '' }}</p>
+                                    <p>Experience : {{ $job[0]->experience ?? '' }}</p>
+                                    <p>Scope : {{ $job[0]->scope ?? '' }}</p>
+                                    <p>Address : {{ $job[0]->address ?? '' }}</p>
+                                    <p>Postcode : {{ $job[0]->postcode ?? '' }}</p>
+                                    <p>City : {{ $job[0]->city ?? '' }}</p>
+                                    <p>State : {{ $job[0]->state ?? '' }}</p>
+                                    <p>Country : {{ $job[0]->country ?? '' }}</p>
                                     <p id="all_text" style="display: none;">{!! $job[0]->description !!}</p>
                                 </div>
                             </div>
