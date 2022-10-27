@@ -4,6 +4,14 @@
     <section class="edit-sec edit-basic-detail">
         <div class="container">
             <div class="row">
+                <div class="col-12 text-center top-heading">
+                    <div class="text-right" style="
+                    text-align: right;">
+                    <a class="btn btn-secondary" href="{{ route('front.job.index') }}"><i class="fa fa-fw fa-lg fa-chevron-left"></i>Back</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-12 col-lg-8 col-md-12 mb-3 mb-lg-0">
                     <div class="course-details-left">
                         <div class="theiaStickySidebar">
@@ -19,7 +27,15 @@
                                     <p>City : {{ $job[0]->city ?? '' }}</p>
                                     <p>State : {{ $job[0]->state ?? '' }}</p>
                                     <p>Country : {{ $job[0]->country ?? '' }}</p>
-                                    <p id="all_text" style="display: none;">{!! $job[0]->description !!}</p>
+                                    <p>Salary : {{ $job[0]->payment ?? '' }} per {{ $job[0]->salary ?? '' }}</p>
+                                    <div><p id="all_text">{!! $job[0]->description !!}</p></div>
+                                    <div class="content-mid">
+                                        <ul class="list-unstyled p-0 m-0">
+                                         @foreach($tag as $tagKey => $tagVal)
+                                          <li>{{ ucwords($tagVal->title) }} </li>
+                                          @endforeach
+                                        </ul>
+                                      </div>
                                 </div>
                             </div>
                         </div>

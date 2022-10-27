@@ -27,7 +27,25 @@ public function __construct(JobContract $JobRepository)
 
     public function index(Request $request)
     {
-        $job=Job::where('featured_flag',1)->orderby('title')->get();
+        if (isset($request->keyword) || isset($request->employment_type) || isset($request->address)||isset($request->salary) || isset($request->source)||isset($request->featured_flag)||isset($request->beginner_friendly)){
+            $keyword = (isset($request->keyword) && $request->keyword!='')?$request->keyword:'';
+
+            $employment_type = (isset($request->employment_type) && $request->employment_type!='')? $request->employment_type:'';
+
+            $address = (isset($request->address) && $request->address!='')?$request->address:'';
+
+            $salary = (isset($request->salary) && $request->salary!='')?$request->salary:'';
+
+            $source = (isset($request->source) && $request->source!='') ? $request->source : '';
+            $featured_flag = (isset($request->featured_flag) && $request->featured_flag!='') ? $request->featured_flag : '';
+            $beginner_friendly = (isset($request->beginner_friendly) && $request->beginner_friendly!='') ? $request->beginner_friendly : '';
+
+            $job = $this->JobRepository->searchJobfrontData($keyword,$employment_type,$address,$salary,$source,$featured_flag,$beginner_friendly);
+
+            }
+            else{
+            $job=Job::where('featured_flag',1)->orderby('title')->get();
+            }
         $category=JobCategory::where('status',1)->orderby('title')->get();
         $tag=JobTag::orderby('title')->get();
         return view('front.job.index',compact('job','category','tag'));

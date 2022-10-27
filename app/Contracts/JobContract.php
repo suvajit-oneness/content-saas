@@ -65,6 +65,6 @@ interface JobContract
      * @return mixed
      */
     public function searchJobData($term);
-    public function searchJobfrontData($categoryId,$keyword,$price,$type,$location);
+    public function searchJobfrontData($keyword,$employment_type,$address,$salary,$source,$featured_flag,$beginner_friendly);
     public function applyjob(array $params);
 }
