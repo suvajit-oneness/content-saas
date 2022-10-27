@@ -258,21 +258,28 @@ class JobRepository extends BaseRepository implements JobContract
      * @param $location
      * @return mixed
      */
-    public function searchJobfrontData($categoryId,$keyword,$location,$type,$salary){
-        $job = Job::when($categoryId, function($query) use ($categoryId){
-                        $query->where('category', 'like' , '%' . $categoryId .'%');
+    //search job in front
+    public function searchJobfrontData($keyword,$employment_type,$address,$salary,$source,$featured_flag,$beginner_friendly){
+        $job = Job::when($keyword, function($query) use ($keyword){
+                        $query->where('title', 'like' , '%' . $keyword .'%');
                     })
-                    ->when($keyword, function($query) use ($keyword){
-                        $query->where('title','like' , '%' . $keyword .'%');
+                    ->when($employment_type, function($query) use ($employment_type){
+                        $query->where('employment_type','like' , '%' . $employment_type .'%');
                     })
-                    ->when($location, function($query) use ($location){
-                        $query->where('location', 'like', '%' . $location .'%');
-                    })
-                    ->when($type, function($query) use ($type){
-                        $query->where('type', 'like', '%' . $type .'%');
+                    ->when($address, function($query) use ($address){
+                        $query->where('address', 'like', '%' . $address .'%');
                     })
                     ->when($salary, function($query) use ($salary){
                         $query->where('salary', 'like', '%' . $salary .'%');
+                    })
+                    ->when($source, function($query) use ($source){
+                        $query->where('source', 'like', '%' . $source .'%');
+                    })
+                    ->when($featured_flag, function($query) use ($featured_flag){
+                        $query->where('featured_flag', 'like', '%' . $featured_flag .'%');
+                    })
+                    ->when($beginner_friendly, function($query) use ($beginner_friendly){
+                        $query->where('beginner_friendly', 'like', '%' . $beginner_friendly .'%');
                     })
                     ->paginate(15);
 
@@ -296,5 +303,8 @@ class JobRepository extends BaseRepository implements JobContract
                 throw new InvalidArgumentException($exception->getMessage());
             }
         }
+
+
+
 
 }
