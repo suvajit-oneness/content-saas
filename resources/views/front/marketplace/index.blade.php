@@ -19,11 +19,11 @@
                         <form action="">
                             <select name="category" id="category">
                                 @foreach ($master_categories as $item)
-                                   <option value="{{$item}}">{{$item}}</option>
+                                   <option value="{{$item}}" {{$item == trim(request()->input('category')) ? 'selected' : ''}}>{{ucwords($item)}}</option>
                                 @endforeach    
                             </select>
                             <div class="input">
-                                <input type="text" placeholder="What are you looking for?" name="name">
+                                <input type="text" placeholder="What are you looking for?" value="{{request()->input('name')}}" name="name">
                                 <button type="submit">
                                     <img src="{{ asset('frontend/img/freelance-search.png')}}" alt="">
                                 </button>
@@ -49,7 +49,7 @@
             <div class="col-lg-6 col-md-6 col-12 text-center text-lg-start">
                 <div class="recommended-writers-left">
                     <h6>Writers </h6>
-                    <span>{{count($all_writers)}}</span>
+                    <span>{{count($writers)}} writer found!</span>
                 </div>
             </div>
             <div class="col-lg-6 col-md-6 col-12 text-center text-lg-end">
@@ -60,7 +60,7 @@
         </div>
 
         <div class="row mt-4">
-            @foreach ($writers as $data)
+            @forelse ($writers as $data)
                 <div class="col-lg-4 col-md-6 col-12 mb-lg-4 mb-md-4 mb-4">
                     <div class="recommended-writers-content">
                         <div class="content-top">
@@ -99,7 +99,9 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                <h3><i class="text-success">Sorry No Such Writer found!</i></h3>
+            @endforelse
             <div class="text"></div>
             {{-- <div class="col-lg-4 col-md-6 col-12 mb-lg-4 mb-md-4 mb-4">
                 <div class="recommended-writers-content">

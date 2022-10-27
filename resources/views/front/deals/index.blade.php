@@ -39,7 +39,7 @@
                                                 @foreach ($deal_category as $index => $item)
                                                     <option value="{{ $item->slug }}"
                                                         {{ request()->input('category') == $item->slug ? 'selected' : '' }}>
-                                                        {{ $item->title }}</option>
+                                                        {{ ucwords($item->title) }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
