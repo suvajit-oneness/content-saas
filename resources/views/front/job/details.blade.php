@@ -1,8 +1,7 @@
-@extends('front.layouts.app')
+@extends('front.layouts.appprofile')
 @section('title', ' Job')
 @section('section')
-
-    <section class="course-details-section">
+    <section class="edit-sec edit-basic-detail">
         <div class="container">
             <div class="row">
                 <div class="col-12 col-lg-8 col-md-12 mb-3 mb-lg-0">
@@ -26,36 +25,40 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-lg-4 col-md-12 mb-3 mb-lg-0">
-                    <form action="{{ route('admin.article-category.store') }}" method="POST" role="form"
+                <div class="col-12 col-lg-4 col-md-12 mb-3 mb-lg-0 border-dark">
+                    <form action="{{ route('front.job.apply') }}" id="helpForm" method="POST" role="form"
                         enctype="multipart/form-data">
                         @csrf
+                        <input type="hidden" name="job_id" value="{{ $job[0]->id }}">
                         <div class="tile-body">
                             <div class="form-group">
                                 <label class="control-label" for="name">Name <span class="m-l-5 text-danger">
                                         *</span></label>
                                 <input class="form-control @error('title') is-invalid @enderror" type="text"
-                                    name="title" id="title" value="{{ old('title',auth()->guard('web')->user()->first_name.' '.auth()->guard('web')->user()->last_name) }}" />
+                                    name="first_name" id="title"
+                                    value="{{ old('title',auth()->guard('web')->user()->first_name .' ' .auth()->guard('web')->user()->last_name) }}" />
                                 @error('title')
                                     {{ $message ?? '' }}
                                 @enderror
                             </div>
-                            <div class="form-group">
+                            <div class="form-group mt-3">
                                 <label class="control-label" for="email">Email<span> </span></label>
-                                <input type="text" class="form-control" rows="4" name="email" id="email" value="{{ old('email',auth()->guard('web')->user()->email) }}">
+                                <input type="text" class="form-control" rows="4" name="email" id="email"
+                                    value="{{ old('email',auth()->guard('web')->user()->email) }}">
                                 @error('email')
                                     <p class="small text-danger">{{ $message }}</p>
                                 @enderror
                             </div>
-                            <div class="form-group">
+                            <div class="form-group mt-3">
                                 <label class="control-label" for="mobile">Mobile<span> </span></label>
-                                <input type="text" class="form-control" rows="4" name="mobile" id="email" value="{{ old('mobile',auth()->guard('web')->user()->mobile) }}">
+                                <input type="text" class="form-control" rows="4" name="mobile" id="email"
+                                    value="{{ old('mobile',auth()->guard('web')->user()->mobile) }}">
                                 @error('email')
                                     <p class="small text-danger">{{ $message }}</p>
                                 @enderror
                             </div>
-                            <div class="form-group">
-                                <label class="control-label"> Resume</label>
+                            <div class="form-group mt-3">
+                                <label class="control-label">Resume</label>
                                 <input class="form-control @error('cv') is-invalid @enderror" type="file"
                                     id="cv" name="cv" />
                                 @error('cv')
@@ -63,24 +66,38 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="course-details-right-btn">
-                            <form method="POST" action="{{ route('front.cart.add') }}" class="d-flex" id="addToCartForm">
-                                @csrf
-                                <input type="hidden" name="course_id" value="">
-                                <input type="hidden" name="course_name" value="">
-                                <input type="hidden" name="course_image" value="">
-                                <input type="hidden" name="author_name" value="">
-                                <input type="hidden" name="course_slug" value="">
-                                <input type="hidden" name="price" value="">
-                                @if (Auth::guard('web')->check())
-                                    <button type="submit" id="addToCart__btn" class="course-deails-btn">Apply</button>
+                        <div class="job_modal_body_right">
+                            <div class="btn_group course-details-right-btn mt-3">
+                                @php
+                                    if (auth()->user()) {
+                                        $collectionExistsCheck = \App\Models\ApplyJob::where('job_id', $job[0]->id)
+                                            ->where(
+                                                'user_id',
+                                                auth()
+                                                    ->guard('web')
+                                                    ->user()->id,
+                                            )
+                                            ->first();
+                                    } else {
+                                        $collectionExistsCheck = \App\Models\ApplyJob::where('job_id', $job[0]->id)
+                                            ->where(
+                                                'user_id',
+                                                auth()
+                                                    ->guard('web')
+                                                    ->user()->id,
+                                            )
+                                            ->first();
+                                    }
+                                @endphp
+                                @if ($collectionExistsCheck != null)
+                                    <button type="button" class="course-deails-btn disabled">Already Applied</button>
                                 @else
-                                    <a href="{{ route('front.user.login') }}" class="course-deails-btn">Login To
-                                        Purchase</a>
+                                    <button type="submit" class="course-deails-btn"  id="saveBtn"
+                                        >Apply Job</button>
                                 @endif
-                            </form>
-                            {{-- <a href="" class="course-deails-btn">Add to cart</a> --}}
+                            </div>
                         </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -142,4 +159,28 @@
                 },
             });
         });
+    </script>
+    <script>
+        function jobApply(collectionId) {
+            $.ajax({
+                url: '{{ route('front.job.store') }}',
+                method: 'post',
+                data: {
+                    '_token': '{{ csrf_token() }}',
+                    id: collectionId,
+                    cv: $('#helpForm input[name="cv"]').val().replace(/C:\\fakepath\\/i, ''),
+                },
+                success: function(result) {
+                    // alert(result);
+                    if (result.type == 'add') {
+                        toastr.success(result.message);
+                        $('#saveBtn').attr('fill', '#ff0000');
+                    } else {
+                        toastr.error(result.message);
+                        $('#saveBtn').attr('fill', '#000000');
+                    }
+                }
+
+            });
+        }
     </script>

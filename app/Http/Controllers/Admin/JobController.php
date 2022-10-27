@@ -12,6 +12,7 @@ use Session;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\JobExport;
+use App\Models\ApplyJob;
 use App\Models\JobCategory;
 use DB;
 use Illuminate\Support\Facades\Session as FacadesSession;
@@ -173,7 +174,7 @@ class JobController extends BaseController
 
         $params = $request->except('_token');
 
-        $Job = $this->JobRepository->updatejobtatus($params);
+        $Job = $this->JobRepository->updateJobStatus($params);
 
         if ($Job) {
             return response()->json(array('message'=>'Job status has been successfully updated'));
@@ -221,6 +222,16 @@ class JobController extends BaseController
 
         $this->setPageTitle('Job', 'Job Details : '.$Job->title);
         return view('admin.job.details', compact('Job'));
+    }
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function application($id)
+    {
+        $job = ApplyJob::where('job_id',$id)->get();
+        $this->setPageTitle('Job', 'Job Details : '.$job[0]->job->title);
+        return view('admin.job.application', compact('job'));
     }
 
     public function csvStore(Request $request)

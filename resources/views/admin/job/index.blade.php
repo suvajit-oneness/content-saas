@@ -51,6 +51,7 @@
                                     <th> Status </th>
                                     <th> Featured Status </th>
                                     <th> Beginner Friendly </th>
+                                    <th> Application </th>
                                     <th style="width:100px; min-width:100px;" class="text-center">Action</th>
                                 </tr>
                             </thead>
@@ -77,7 +78,7 @@
                                         <div class="toggle-button-cover margin-auto">
                                             <div class="button-cover">
                                                 <div class="button-togglr b2" id="button-11">
-                                                    <input id="toggle-block" type="checkbox" name="status" class="checkbox" data-data_id="{{ $data['id'] }}" {{ $data['status'] == 1 ? 'checked' : '' }}>
+                                                    <input id="toggle-block" type="checkbox" name="status" class="checkbox" data-job_id="{{ $data['id'] }}" {{ $data['status'] == 1 ? 'checked' : '' }}>
                                                     <div class="knobs"><span>Inactive</span></div>
                                                     <div class="layer"></div>
                                                 </div>
@@ -88,7 +89,7 @@
                                     <div class="toggle-button-cover margin-auto">
                                             <div class="button-cover">
                                                 <div class="button-togglr b2" id="button-11">
-                                                    <input id="toggle-block" type="checkbox" name="featured_flag" class="checkbox" data-feature_id="{{ $data['id'] }}" {{ $data['featured_flag'] == 1 ? 'checked' : '' }}>
+                                                    <input id="toggle-block" type="checkbox" name="featured_flag" class="checkbox" data-job_id="{{ $data['id'] }}" {{ $data['featured_flag'] == 1 ? 'checked' : '' }}>
                                                     <div class="knobs"><span>Pending</span></div>
                                                     <div class="layer"></div>
                                                 </div>
@@ -99,13 +100,18 @@
                                         <div class="toggle-button-cover margin-auto">
                                                 <div class="button-cover">
                                                     <div class="button-togglr b2" id="button-11">
-                                                        <input id="toggle-block" type="checkbox" name="beginner_friendly" class="checkbox" data-beginner_friendly="{{ $data['id'] }}" {{ $data['beginner_friendly'] == 1 ? 'checked' : '' }}>
-                                                        <div class="knobs"><span>No</span></div>
+                                                        <input id="toggle-block" type="checkbox" name="beginner_friendly" class="checkbox" data-job_id="{{ $data['id'] }}" {{ $data['beginner_friendly'] == 1 ? 'checked' : '' }}>
+                                                        <div class="knobs"><span>Inactive</span></div>
                                                         <div class="layer"></div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </td>
+                                        @php
+                                        $application = \App\Models\ApplyJob::where('job_id',$data->id)->with('job')->get();
+                                        $item=$application->count();
+                                      @endphp
+                                        <td><a href="{{ route('admin.job.application',$data->id) }}">{{ $item }}</a></td>
                                     <td class="text-center">
                                         <div class="btn-group" role="group" aria-label="Second group">
                                             <a href="{{ route('admin.job.edit', $data['id']) }}" class="btn btn-sm btn-primary edit-btn"><i class="fa fa-edit"></i></a>
@@ -156,7 +162,7 @@
     });
     <script type="text/javascript">
         $('input[id="toggle-block"]').change(function() {
-            var data_id = $(this).data('data_id');
+            var job_id = $(this).data('job_id');
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             var check_status = 0;
           if($(this).is(":checked")){
@@ -168,7 +174,7 @@
                 type:'POST',
                 dataType:'JSON',
                 url:"{{route('admin.job.updateStatus')}}",
-                data:{ _token: CSRF_TOKEN, id:data_id, check_status:check_status},
+                data:{ _token: CSRF_TOKEN, id:job_id, check_status:check_status},
                 success:function(response)
                 {
                   swal("Success!", response.message, "success");
@@ -183,7 +189,7 @@
     </script>
     <script type="text/javascript">
         $('input[id="toggle-block"]').change(function() {
-            var feature_id = $(this).data('feature_id');
+            var feature_id = $(this).data('job_id');
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             var check_status = 0;
           if($(this).is(":checked")){
@@ -194,7 +200,7 @@
           $.ajax({
                 type:'POST',
                 dataType:'JSON',
-                url:"{{route('admin.job.updateFeature')}}",
+                url:"{{route('admin.job.updateFeatureStatus')}}",
                 data:{ _token: CSRF_TOKEN, id:feature_id, check_status:check_status},
                 success:function(response)
                 {
@@ -211,7 +217,7 @@
 
     <script type="text/javascript">
         $('input[id="toggle-block"]').change(function() {
-            var beginner_friendly = $(this).data('beginner_friendly');
+            var beginner_friendly = $(this).data('job_id');
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             var check_status = 0;
           if($(this).is(":checked")){

@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use App\Traits\UploadAble;
 use Illuminate\Http\UploadedFile;
 use App\Contracts\JobContract;
+use App\Models\ApplyJob;
 use App\Models\JobCategory;
 use App\Models\JobTag;
 use Illuminate\Database\QueryException;
@@ -277,6 +278,23 @@ class JobRepository extends BaseRepository implements JobContract
 
     return $job;
 }
+        public function applyjob(array $params){
+            try {
 
+                $collection = collect($params);
+
+                $item = new ApplyJob();
+                $item->user_id = auth()->guard('web')->user()->id;
+                $item->job_id = $collection['job_id'];
+                if(!empty($params['cv'])){
+                    $item->cv = imageUpload($params['cv'], 'jobresume');
+                    }
+               // $item->cv = $collection['cv'];
+                $item->save();
+                return $item;
+            } catch (QueryException $exception) {
+                throw new InvalidArgumentException($exception->getMessage());
+            }
+        }
 
 }

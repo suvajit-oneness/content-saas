@@ -104,6 +104,8 @@ Route::name('front.')->group(function () {
             Route::get('/job', 'Front\JobController@index')->name('index');
             Route::get('/job/{slug}', 'Front\JobController@details')->name('details');
             Route::post('/save/job', 'Front\JobController@store')->name('save');
+            Route::post('/apply/job', 'Front\JobController@jobapply')->name('apply');
+            Route::post('/apply/job/store', 'Front\JobController@jobapplystore')->name('store');
 
         });
 

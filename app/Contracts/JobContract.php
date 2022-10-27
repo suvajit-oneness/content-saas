@@ -66,4 +66,5 @@ interface JobContract
      */
     public function searchJobData($term);
     public function searchJobfrontData($categoryId,$keyword,$price,$type,$location);
+    public function applyjob(array $params);
 }
