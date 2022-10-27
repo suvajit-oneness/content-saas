@@ -47,10 +47,10 @@
                                     <th>#</th>
                                     <th> Title </th>
                                     <th> Description </th>
-                                    <th> Image </th>
                                     <th> Start Date </th>
                                     <th> Status </th>
                                     <th> Featured Status </th>
+                                    <th> Beginner Friendly </th>
                                     <th style="width:100px; min-width:100px;" class="text-center">Action</th>
                                 </tr>
                             </thead>
@@ -71,11 +71,6 @@
                                                 }
                                             @endphp
                                             {!! $desc !!}
-                                        </td>
-                                        <td>
-                                            @if($data->image!='')
-                                            <img style="width: 150px;height: 100px;" src="{{asset($data->image)}}">
-                                            @endif
                                         </td>
                                         <td>{{ date("d-M-Y",strtotime($data->start_date)) }}</td>
                                         <td class="text-center">
@@ -100,6 +95,17 @@
                                             </div>
                                         </div>
                                     </td>
+                                    <td class="text-center">
+                                        <div class="toggle-button-cover margin-auto">
+                                                <div class="button-cover">
+                                                    <div class="button-togglr b2" id="button-11">
+                                                        <input id="toggle-block" type="checkbox" name="beginner_friendly" class="checkbox" data-beginner_friendly="{{ $data['id'] }}" {{ $data['beginner_friendly'] == 1 ? 'checked' : '' }}>
+                                                        <div class="knobs"><span>No</span></div>
+                                                        <div class="layer"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
                                     <td class="text-center">
                                         <div class="btn-group" role="group" aria-label="Second group">
                                             <a href="{{ route('admin.job.edit', $data['id']) }}" class="btn btn-sm btn-primary edit-btn"><i class="fa fa-edit"></i></a>
@@ -202,7 +208,33 @@
               });
         });
     </script>
-    
-   
-        
+
+    <script type="text/javascript">
+        $('input[id="toggle-block"]').change(function() {
+            var beginner_friendly = $(this).data('beginner_friendly');
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            var check_status = 0;
+          if($(this).is(":checked")){
+              check_status = 1;
+          }else{
+            check_status = 0;
+          }
+          $.ajax({
+                type:'POST',
+                dataType:'JSON',
+                url:"{{route('admin.job.updateBeginnerstatus')}}",
+                data:{ _token: CSRF_TOKEN, id:beginner_friendly, check_status:check_status},
+                success:function(response)
+                {
+                  swal("Success!", response.message, "success");
+                },
+                error: function(response)
+                {
+
+                  swal("Error!", response.message, "error");
+                }
+              });
+        });
+    </script>
+
 @endpush

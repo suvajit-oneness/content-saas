@@ -460,6 +460,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/{id}/delete', 'Admin\JobController@delete')->name('admin.job.delete');
         Route::post('updateStatus', 'Admin\JobController@updateStatus')->name('admin.job.updateStatus');
         Route::post('updateFeatureStatus', 'Admin\JobController@updatefeatureStatus')->name('admin.job.updateFeature');
+        Route::post('updateBeginnerStatus', 'Admin\JobController@updatebeginnerStatus')->name('admin.job.updateBeginnerstatus');
         Route::get('/{id}/details', 'Admin\JobController@details')->name('admin.job.details');
         Route::post('/csv-store', 'Admin\JobController@csvStore')->name('admin.job.data.csv.store');
         Route::get('/export', 'Admin\JobController@export')->name('admin.job.data.csv.export');

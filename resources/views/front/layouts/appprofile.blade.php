@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="{{ asset('frontend/css/style.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('frontend/css/responsive.css')}}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
 
 <body>
@@ -49,7 +50,7 @@
                             <a href="{{ route('front.user.portfolio.changePassword') }}" class="{{ request()->is('user/change/password') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Change Password</a>
                         </li>
                         <li>
-                            <a href="{{ route('front.job.index') }}" class="{{ request()->is('user/job*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Jobs</a>
+                            <a href="{{ route('front.job.index') }}" class="{{ request()->is('job*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Jobs</a>
                         </li>
                         <li>
                             <a href="{{ route('front.user.post-content.index') }}" class="{{ request()->is('user/post-content*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Post Content</a>
@@ -131,6 +132,7 @@
     <script type="text/javascript" src="{{ asset('frontend/js/jquery.sticky.js')}}"></script>
     <script type="text/javascript" src="{{ asset('frontend/js/custom.js')}}"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     <script>
         feather.replace()
@@ -189,6 +191,29 @@
         }
         // click to read notification
     </script>
+    <script>
+        // job bookmark/ save/ wishlist
+        function jobBookmark(collectionId) {
+            $.ajax({
+                url: '{{ route('front.job.save') }}',
+                method: 'post',
+                data: {
+                    '_token': '{{ csrf_token() }}',
+                    id: collectionId,
+                },
+                success: function(result) {
+                    // alert(result);
+                    if (result.type == 'add') {
+                        toastr.success(result.message);
+                        $('#saveBtn').attr('fill', '#fff');
+                    } else {
+                        toastr.error(result.message);
+                        $('#saveBtn').attr('fill', 'none');
+                    }
+                }
+            });
+        }
+        </script>
 </body>
 
 </html>

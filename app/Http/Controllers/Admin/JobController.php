@@ -45,7 +45,7 @@ class JobController extends BaseController
             $job = Job::orderby('title')->paginate(25);
         }
         $categories = $this->JobRepository->listCategory();
-      
+
         $this->setPageTitle('Job', 'List of all Job');
         return view('admin.job.index', compact('job','categories'));
     }
@@ -56,9 +56,9 @@ class JobController extends BaseController
     public function create()
     {
         $categories = $this->JobRepository->listCategory();
-       
+        $country=DB::table('countries')->orderby('country_name')->get();
         $this->setPageTitle('Job', 'Create Job');
-        return view('admin.job.create', compact('categories'));
+        return view('admin.job.create', compact('categories','country'));
     }
 
     /**
@@ -75,7 +75,14 @@ class JobController extends BaseController
             'title'      =>  'required',
             'description' =>  'required',
             'employment_type' =>  'required',
-            'location' =>  'required',
+            'address' =>  'required',
+            'postcode' =>  'required',
+            'city' =>  'required',
+            'state' =>  'required',
+            'country' =>  'required',
+            'skill' =>  'required',
+            'experience' =>  'required',
+            'scope' =>  'required',
             'start_date' =>  'required',
             'end_date' =>  'required',
             'salary' =>  'nullable',
@@ -98,10 +105,10 @@ class JobController extends BaseController
     public function edit($id)
     {
         $Job = $this->JobRepository->findJobById($id);
-       //dd($Job->cost);
+        $country=DB::table('countries')->orderby('country_name')->get();
         $categories = $this->JobRepository->listCategory();
         $this->setPageTitle('Job', 'Edit Job : '.$Job->title);
-        return view('admin.job.edit', compact('Job','categories'));
+        return view('admin.job.edit', compact('Job','categories','country'));
     }
 
     /**
@@ -117,11 +124,17 @@ class JobController extends BaseController
             'title'      =>  'required',
             'description' =>  'required',
             'employment_type' =>  'required',
-            'location' =>  'required',
+            'address' =>  'required',
+            'postcode' =>  'required',
+            'city' =>  'required',
+            'state' =>  'required',
+            'country' =>  'required',
             'start_date' =>  'required',
             'end_date' =>  'required',
             'salary' =>  'nullable',
-           
+            'skill' =>  'required',
+            'experience' =>  'required',
+            'scope' =>  'required',
           //  'link' =>  'nullable|url',
            // 'location' =>  'nullable|url',
             //'image'     =>  'nullable|image|mimes:jpg,jpeg,png|max:1000',
@@ -176,6 +189,21 @@ class JobController extends BaseController
         $params = $request->except('_token');
 
         $Job = $this->JobRepository->updateJobfeatureStatus($params);
+
+        if ($Job) {
+            return response()->json(array('message'=>'Job status has been successfully updated'));
+        }
+    }
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function updatebeginnerStatus(Request $request){
+
+        $params = $request->except('_token');
+
+        $Job = $this->JobRepository->updateJobbegineerfriendlyStatus($params);
 
         if ($Job) {
             return response()->json(array('message'=>'Job status has been successfully updated'));

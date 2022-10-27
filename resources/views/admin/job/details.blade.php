@@ -22,28 +22,62 @@
                             <td>{{ empty($Job->category->title)? null:($Job->category->title) }}</td>
                         </tr>
                         <tr>
-                            <td>Image</td>
-                            <td>@if($Job->image!='')
-                                <img style="width: 150px;height: 100px;" src="{{asset($Job->image)}}">
-                                @endif</td>
-                        </tr>
-                        <tr>
                             <td>Employment Type </td>
                             <td>{{ empty($Job['employment_type'])? null:($Job['employment_type']) }}</td>
                         </tr>
                         <tr>
-                            <td>Location</td>
-                            <td>{{ empty($Job['location'])? null:($Job['location']) }}
+                            <td>Address</td>
+                            <td>{{ empty($Job['address'])? null:($Job['address']) }}
                             </td>
                         </tr>
                         <tr>
-                            <td>Salary</td>
+                            <td>Postcode</td>
+                            <td>{{ empty($Job['postcode'])? null:($Job['postcode']) }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>City</td>
+                            <td>{{ empty($Job['city'])? null:($Job['city']) }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>State</td>
+                            <td>{{ empty($Job['state'])? null:($Job['state']) }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Country</td>
+                            <td>{{ empty($Job['country'])? null:($Job['country']) }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Salary Per</td>
                             <td>{{ empty($Job['salary'])? null:($Job['salary']) }}
                             </td>
                         </tr>
                         <tr>
-                            <td>Location</td>
-                            <td>{{ empty($Job['location'])? null:($Job['location']) }}
+                            <td>Amount</td>
+                            <td>{{ empty($Job['payment'])? null:($Job['payment']) }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Skill</td>
+                            <td>{{ empty($Job['skill'])? null:($Job['skill']) }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Experience</td>
+                            <td>{{ empty($Job['experience'])? null:($Job['experience']) }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Scope</td>
+                            <td>{{ empty($Job['scope'])? null:($Job['scope']) }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Description</td>
+                            <td>{!! empty($Job['description'])? null:($Job['description']) !!}
                             </td>
                         </tr>
                     </tbody>
