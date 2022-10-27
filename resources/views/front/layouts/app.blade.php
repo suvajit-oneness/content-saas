@@ -34,7 +34,7 @@
                             <a class="nav-link {{ request()->is('market/*') ? 'active' : '' }}" href="{{route('front.market.index')}}">Markets</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ request()->is('market-place/*') ? 'active' : '' }}" href="{{route('front.marketplace.index')}}">Freelancers marketplace</a>
+                            <a class="nav-link {{ request()->is('market-place/*') ? 'active' : '' }}" href="{{route('front.marketplace.index')}}">Marketplace</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is('course*') ? 'active' : '' }}" href="{{ route('front.course') }}">Course</a>
