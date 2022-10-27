@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Models\MarketPlaceFaq;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -31,6 +32,10 @@ class MarketPlaceController extends Controller
         
         $writers = $writers->paginate(9);
 
-        return view('front.marketplace.index',compact('writers','master_categories', 'all_writers'));
+        $marketplacefaq = MarketPlaceFaq::where('status',1)->get();
+
+        // $marketplacefaqheaders = MarketPlaceFaq::where('status', 1)->get();
+
+        return view('front.marketplace.index',compact('writers','master_categories', 'all_writers', 'marketplacefaq'));
     }
 }

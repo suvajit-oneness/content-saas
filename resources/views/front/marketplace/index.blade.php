@@ -422,11 +422,14 @@
             <div class="col-lg-3 col-md-3 mb-4 mb-md-0">
                 <div class="faq-tabs">
                     <ul class="p-0 m-0">
-                        <li class="faq-tab active" data-tab="free-trial">free trial <div class="fac-tab-check">
-                                <img src="{{ asset('frontend/img/check-normal.png')}}" alt="">
-                            </div>
-                        </li>
-                        <li class="faq-tab " data-tab="payments">Payments <div class="fac-tab-check">
+                        @foreach ($marketplacefaq as $key => $item)
+                            <li class="faq-tab {{$key == 0 ? 'active' : ''}}" data-tab="data_tab{{$item->id}}">{{$item->header}} 
+                                <div class="fac-tab-check">
+                                    <img src="{{ asset('frontend/img/check-normal.png')}}" alt="">
+                                </div>
+                            </li>
+                        @endforeach
+                        {{-- <li class="faq-tab " data-tab="payments">Payments <div class="fac-tab-check">
                                 <img src="{{ asset('frontend/img/check-normal.png')}}" alt="">
                             </div>
                         </li>
@@ -441,109 +444,111 @@
                         <li class="faq-tab " data-tab="general">General <div class="fac-tab-check">
                                 <img src="{{ asset('frontend/img/check-normal.png')}}" alt="">
                             </div>
-                        </li>
+                        </li> --}}
                     </ul>
                 </div>
             </div>
 
             <div class="col-md-9">
-                <div class="faq-content active" id="free-trial">
-                    <div class="faq-content-badge">
-                        <span>Free Trial</span>
+                @foreach ($marketplacefaq as $key => $item)
+                    <div class="faq-content {{$key == 0 ? 'active' : ''}}" id="data_tab{{$item->id}}">
+                        <div class="faq-content-badge">
+                            <span>{{$item->header}}</span>
+                        </div>
+                        <div class="accordion" id="accordionExample">
+                            @for ($i = 0; $i < count(explode(',',$item->question)); $i++)
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingOne">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapsible{{$i}}" aria-expanded="false" aria-controls="collapsible{{$i}}">
+                                            {{ explode(',',$item->question)[$i] ?? ''}}
+                                        </button>
+                                    </h2>
+                                    <div id="collapsible{{$i}}" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                                        data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <p>{!! explode(',',$item->answer)[$i] ?? '' !!}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endfor
+                            {{-- <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        Which features can I use during the trial?
+                                    </button>
+                                </h2>
+                                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                                    data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis unde,
+                                            illo saepe ipsam dignissimos architecto quia non voluptate corrupti ut,
+                                            quidem tempore, reiciendis molestias iste veritatis necessitatibus corporis
+                                            est nam.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingThree">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseThree" aria-expanded="false"
+                                        aria-controls="collapseThree">
+                                        Which features can I use during the trial?
+                                    </button>
+                                </h2>
+                                <div id="collapseThree" class="accordion-collapse collapse"
+                                    aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis unde,
+                                            illo saepe ipsam dignissimos architecto quia non voluptate corrupti ut,
+                                            quidem tempore, reiciendis molestias iste veritatis necessitatibus corporis
+                                            est nam.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingFour">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseFour" aria-expanded="false"
+                                        aria-controls="collapseFour">
+                                        Do I need a credit card to sign up?
+                                    </button>
+                                </h2>
+                                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+                                    data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis unde,
+                                            illo saepe ipsam dignissimos architecto quia non voluptate corrupti ut,
+                                            quidem tempore, reiciendis molestias iste veritatis necessitatibus corporis
+                                            est nam.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingFive">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseFive" aria-expanded="false"
+                                        aria-controls="collapseFive">
+                                        How do I import my existing emails
+                                        to my Hiver shared inbox?
+                                    </button>
+                                </h2>
+                                <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
+                                    data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis unde,
+                                            illo saepe ipsam dignissimos architecto quia non voluptate corrupti ut,
+                                            quidem tempore, reiciendis molestias iste veritatis necessitatibus corporis
+                                            est nam.</p>
+                                    </div>
+                                </div>
+                            </div> --}}
+                        </div>
+                    
                     </div>
-                    <div class="accordion" id="accordionExample">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingOne">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                    How does the 7-day free trial work?
-                                </button>
-                            </h2>
-                            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
-                                data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis unde,
-                                        illo saepe ipsam dignissimos architecto quia non voluptate corrupti ut,
-                                        quidem tempore, reiciendis molestias iste veritatis necessitatibus corporis
-                                        est nam.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingTwo">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    Which features can I use during the trial?
-                                </button>
-                            </h2>
-                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                                data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis unde,
-                                        illo saepe ipsam dignissimos architecto quia non voluptate corrupti ut,
-                                        quidem tempore, reiciendis molestias iste veritatis necessitatibus corporis
-                                        est nam.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingThree">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseThree" aria-expanded="false"
-                                    aria-controls="collapseThree">
-                                    Which features can I use during the trial?
-                                </button>
-                            </h2>
-                            <div id="collapseThree" class="accordion-collapse collapse"
-                                aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis unde,
-                                        illo saepe ipsam dignissimos architecto quia non voluptate corrupti ut,
-                                        quidem tempore, reiciendis molestias iste veritatis necessitatibus corporis
-                                        est nam.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingFour">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseFour" aria-expanded="false"
-                                    aria-controls="collapseFour">
-                                    Do I need a credit card to sign up?
-                                </button>
-                            </h2>
-                            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
-                                data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis unde,
-                                        illo saepe ipsam dignissimos architecto quia non voluptate corrupti ut,
-                                        quidem tempore, reiciendis molestias iste veritatis necessitatibus corporis
-                                        est nam.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingFive">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseFive" aria-expanded="false"
-                                    aria-controls="collapseFive">
-                                    How do I import my existing emails
-                                    to my Hiver shared inbox?
-                                </button>
-                            </h2>
-                            <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
-                                data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis unde,
-                                        illo saepe ipsam dignissimos architecto quia non voluptate corrupti ut,
-                                        quidem tempore, reiciendis molestias iste veritatis necessitatibus corporis
-                                        est nam.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="faq-content" id="payments">
+                @endforeach
+                {{-- <div class="faq-content" id="payments">
                     <div class="faq-content-badge">
                         <span>Payments</span>
                     </div>
@@ -918,7 +923,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

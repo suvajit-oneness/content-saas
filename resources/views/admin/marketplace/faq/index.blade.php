@@ -120,7 +120,7 @@
         },
         function(isConfirm){
           if (isConfirm) {
-            window.location.href = "/marketplace-faq/"+faqid+"/delete";
+            window.location.href = "/admin/marketplace/faq/"+faqid+"/delete";
             } else {
               swal("Cancelled", "Record is safe", "error");
             }

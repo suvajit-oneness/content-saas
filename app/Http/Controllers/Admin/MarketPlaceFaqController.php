@@ -111,6 +111,7 @@ class MarketPlaceFaqController extends BaseController
         $marketplacefaq->answer = $params['answer'];
 
 
+
         if (!$marketplacefaq->save()) {
             return $this->responseRedirectBack('Error occurred while updating Market faq.', 'error', true, true);
         }
@@ -128,7 +129,7 @@ class MarketPlaceFaqController extends BaseController
         if (!$faq) {
             return $this->responseRedirectBack('Error occurred while deleting Market faq.', 'error', true, true);
         }
-        return $this->responseRedirect('admin.market.faq.index', 'Market faq has been deleted successfully', 'success', false, false);
+        return $this->responseRedirect('admin.marketplace.faq.index', 'Market faq has been deleted successfully', 'success', false, false);
     }
 
     /**
@@ -141,10 +142,10 @@ class MarketPlaceFaqController extends BaseController
 
         $params = $request->except('_token');
 
-        $faq = $this->MarketFaqRepository->updateMarketfaqStatus($params);
+        $faq = MarketPlaceFaq::where('id',$request->id)->update(['status'=>$request->check_status]);
 
         if ($faq) {
-            return response()->json(array('message' => 'Market faq status has been successfully updated'));
+            return response()->json(array('message' => 'Marketplace faq status has been successfully updated'));
         }
     }
 
@@ -154,10 +155,9 @@ class MarketPlaceFaqController extends BaseController
      */
     public function details($id)
     {
-        $categories = $this->MarketFaqRepository->detailsMarketfaq($id);
-        $faq = $categories[0];
+        $faq = MarketPlaceFaq::find($id);
 
-        $this->setPageTitle('Market faq Details', 'Market faq Details : ' . $faq->title);
-        return view('admin.marketplace..faq.details', compact('faq'));
+        $this->setPageTitle('Market faq Details', 'Marketplace faq Details : ' . $faq->title);
+        return view('admin.marketplace.faq.details', compact('faq'));
     }
 }
