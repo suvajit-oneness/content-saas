@@ -24,29 +24,21 @@
                             <input class="form-control @error('content_heading') is-invalid @enderror" type="text" name="content_heading" id="content_heading" value="{{ old('content_heading') }}"/>
                             @error('content_heading') {{ $message ?? '' }} @enderror
                         </div>
-                    </div>
-                    <div class="tile-body">
                         <div class="form-group">
                             <label class="control-label" for="content">Banner Content <span class="m-l-5 text-danger"> *</span></label>
                             <textarea type="text" class="form-control" rows="4" name="content" id="content">{{ old('content') }}</textarea>
                             @error('content') {{ $message ?? '' }} @enderror
                         </div>
-                    </div>
-                    <div class="tile-body">
                         <div class="form-group">
                             <label class="control-label" for="content_btn">Banner Button <span class="m-l-5 text-danger"> *</span></label>
                             <input class="form-control @error('content_btn') is-invalid @enderror" type="text" name="content_btn" id="content_btn" value="{{ old('content_btn') }}"/>
                             @error('content_btn') {{ $message ?? '' }} @enderror
                         </div>
-                    </div>
-                    <div class="tile-body">
                         <div class="form-group">
                             <label class="control-label" for="content_btn_link">Banner Button Link <span class="m-l-5 text-danger"> *</span></label>
                             <input class="form-control @error('content_btn_link') is-invalid @enderror" type="text" name="content_btn_link" id="content_btn_link" value="{{ old('content_btn_link') }}"/>
                             @error('content_btn_link') {{ $message ?? '' }} @enderror
                         </div>
-                    </div>
-                    <div class="tile-body">
                         <div class="form-group">
                             <label class="control-label">Banner  Image</label>
                             <input class="form-control @error('image') is-invalid @enderror" type="file"
@@ -66,3 +58,12 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+    <script type="text/javascript">
+        $('#content').summernote({
+            height: 400
+        });
+    </script>
+@endpush

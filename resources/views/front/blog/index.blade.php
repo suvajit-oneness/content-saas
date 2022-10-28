@@ -71,7 +71,7 @@
                         <img src="{{ asset($data->image) }}" class="card-img-top" alt="">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
-                                <span class="subHead_badge">{{ $data->tag }}</span></a>
+                                <span class="subHead_badge">{{ $data->category->title }}</span></a>
                                 <div class="dateBox blog_date">
                                     <span class="date">
                                         {{ date('d', strtotime($data->created_at)) }}

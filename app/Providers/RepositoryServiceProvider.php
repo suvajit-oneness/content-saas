@@ -47,6 +47,16 @@ use App\Contracts\MarketContract;
 use App\Repositories\MarketRepository;
 use App\Contracts\MarketBannerContract;
 use App\Repositories\MarketBannerRepository;
+use App\Contracts\MarketFaqContract;
+use App\Repositories\MarketFaqRepository;
+use App\Contracts\SupportContract;
+use App\Repositories\SupportRepository;
+use App\Contracts\SupportFaqContract;
+use App\Repositories\SupportFaqRepository;
+use App\Contracts\SupportFaqCategoryContract;
+use App\Repositories\SupportFaqCategoryRepository;
+use App\Contracts\SupportWidgetContract;
+use App\Repositories\SupportWidgetRepository;
 use App\Contracts\ProfileContract;
 use App\Repositories\ProfileRepository;
 use App\Contracts\ExpertiseContract;
@@ -105,6 +115,11 @@ class RepositoryServiceProvider extends ServiceProvider
         FeedbackContract::class                  =>            FeedbackRepository::class,
         JobCategoryContract::class               =>            JobCategoryRepository::class,
         JobContract::class                       =>            JobRepository::class,
+        SupportContract::class                   =>            SupportRepository::class,
+        SupportFaqCategoryContract::class        =>            SupportFaqCategoryRepository::class,
+        SupportFaqContract::class                =>            SupportFaqRepository::class,
+        SupportWidgetContract::class             =>            SupportWidgetRepository::class,
+
     ];
 
     /**

@@ -34,9 +34,6 @@
                             <a class="nav-link {{ request()->is('market/*') ? 'active' : '' }}" href="{{route('front.market.index')}}">Markets</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ request()->is('market-place/*') ? 'active' : '' }}" href="{{route('front.marketplace.index')}}">Marketplace</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link {{ request()->is('course*') ? 'active' : '' }}" href="{{ route('front.course') }}">Course</a>
                         </li>
                         <li class="nav-item">
@@ -111,7 +108,10 @@
                             <li><a href="javascript:void(0);">Privacy Policy</a></li>
                             <li><a href="javascript:void(0);">Terms & Conditions</a></li>
                             <li><a class="nav-link" href="{{ route('front.feature.index') }}">Tools & Features</a></li>
-                            <li><a class="nav-link" href="{{route('front.marketplace.index')}}">Freelancers Marketplace</a></li>
+                            {{-- <li><a class="nav-link" href="{{route('front.marketplace.index')}}">Freelancers Marketplace</a></li> --}}
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->is('market-place/*') ? 'active' : '' }}" href="{{route('front.marketplace.index')}}">Freelancers Marketplace</a>
+                            </li>
                         </ul>
 					</div>
 					<div class="col-12 col-sm-7 text-center text-sm-end">

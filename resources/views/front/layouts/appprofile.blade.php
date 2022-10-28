@@ -52,9 +52,9 @@
                         <li>
                             <a href="{{ route('front.job.index') }}" class="{{ request()->is('job*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Jobs</a>
                         </li>
-                        <li>
+                        {{-- <li>
                             <a href="{{ route('front.user.post-content.index') }}" class="{{ request()->is('user/post-content*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Post Content</a>
-                        </li>
+                        </li> --}}
                         <li>
                             <a href="{{ route('front.user.logout') }}" class="logout-bg"><i class="fas fa-sign-out-alt"></i>LOGOUT</a>
                         </li>

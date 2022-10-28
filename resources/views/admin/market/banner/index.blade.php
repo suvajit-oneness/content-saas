@@ -8,7 +8,7 @@
                 <p></p>
             </div>
             <div class="col-md-6 text-right">
-                <a href="{{ route('admin.market.banner.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add New</a>
+                {{-- <a href="{{ route('admin.market.banner.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add New</a> --}}
                {{--   <a href="#csvUploadModal" data-toggle="modal" class="btn btn-primary "><i class="fa fa-cloud-upload"></i> CSV Upload</a>
                 <a href="{{ route('admin.market.banner.data.csv.export') }}" class="btn btn-primary "><i class="fa fa-cloud-download"></i> CSV Export</a>--}}
             </div>
@@ -57,11 +57,11 @@
                                     <td>{{ $key+1 }}</td>
                                     <td>
                                         @if($banner->image!='')
-                                        <img style="width: 100px;height: 100px;" class="text-right text-uppercase" src="{{URL::to('/').'/uploads/marketbanner/'}}{{$banner->image}}">
+                                        <img style="width: 100px;height: 100px;" class="text-right text-uppercase" src="{{asset($banner->image)}}">
                                         @endif
                                     </td>
                                     <td>{{ $banner->content_heading }}</td>
-                                    <td>{{ $banner->content }}</td>
+                                    <td>{!! $banner->content !!}</td>
                                     <td>{{ $banner->content_btn }}</td>
                                     <td>{{ $banner->content_btn_link }}</td>
                                     <td class="text-center">
@@ -79,7 +79,7 @@
                                     <div class="btn-group" role="group" aria-label="Second group">
                                         <a href="{{ route('admin.market.banner.edit', $banner['id']) }}" class="btn btn-sm btn-primary edit-btn"><i class="fa fa-edit"></i></a>
                                         <a href="{{ route('admin.market.banner.details', $banner['id']) }}" class="btn btn-sm btn-primary edit-btn"><i class="fa fa-eye"></i></a>
-                                        <a href="#" data-id="{{$banner['id']}}" class="sa-remove btn btn-sm btn-danger edit-btn"><i class="fa fa-trash"></i></a>
+                                        {{-- <a href="#" data-id="{{$banner['id']}}" class="sa-remove btn btn-sm btn-danger edit-btn"><i class="fa fa-trash"></i></a> --}}
                                     </div>
                                 </td>
                                 </tr>

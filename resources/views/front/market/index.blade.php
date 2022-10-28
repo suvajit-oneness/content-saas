@@ -78,7 +78,7 @@
     <div class="row g-0 active" id="{{ $categoryValue->id }}">
         <div class="col-lg-6 col-md-6 col-12 mb-4">
             <div class="market-content-inner">
-                <img src="{{URL::to('/').'/uploads/marketcategories/'}}{{$categoryValue->category_description_image}}" alt="" class="img-fluid">
+                <img src="{{asset($categoryValue->category_description_image)}}" alt="" class="img-fluid">
             </div>
         </div>
         <div class="col-lg-6 col-md-6 col-12">
@@ -93,69 +93,53 @@
     </div>
     @endforeach
 </section>
-@foreach($banner as $key => $data)
 <section class="market-content-audience">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6 col-md-6 col-12 mb-4">
-                <h2>{!! $data->content_heading !!}</h2>
+                <h2>{!! $banner[0]->content_heading !!}</h2>
                 <div class="para">
-                    <p>{!! $data->content !!}</p>
+                    <p>{!!  $banner[0]->content !!}</p>
 
                 </div>
-                <a href="{{ $data->content_btn_link }}" class="button">{{ $data->content_btn }}</a>
+                <a href="{{  $banner[0]->content_btn_link }}" class="button">{{  $banner[0]->content_btn }}</a>
             </div>
 
             <div class="col-lg-6 col-md-6 col-12">
-                <img src="{{URL::to('/').'/uploads/marketbanner/'}}{{$data->image}}" alt="" class="img-fluid">
+                <img src="{{ asset($banner[0]->image)}}" alt="" class="img-fluid">
             </div>
         </div>
     </div>
 </section>
-@endforeach
 
 <section class="market-content-info market-content-audience">
     <div class="container">
         <div class="row align-items-center">
-
-
             <div class="col-lg-6 col-md-6 col-12 mb-4">
-                <img src="{{ asset('frontend/img/market-content-info-img.png')}}" alt="" class="img-fluid">
+                <img src="{{ asset($banner[1]->image)}}" alt="" class="img-fluid">
             </div>
             <div class="col-lg-6 col-md-6 col-12">
-                <h2>Curabitur <span>purus veu</span> fermentum interdum</h2>
+                <h2>{!! $banner[1]->content_heading !!}</h2>
                 <div class="para">
-                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have
-                        suffered alteration in some form, by humour. There are many variations of passages of Lorem
-                        available.</p>
-                    <p>Curabitur convallis mi eget placerat hendrerit. Morbi auctor ornare nulla. Suspendisse a eros
-                        lorem. Duis sed risus ac nunc iaculis convallis eu sed magna. Curabitur in mi dolor. Nam
-                        semper enim sit amet velit pulvinar venenatis. Mauris semper id quam vel euismod.</p>
+                    <p>{!!  $banner[1]->content !!}</p>
                 </div>
-                <a href="javascript:void(0);" class="button">Learn More</a>
+                <a href="{{  $banner[1]->content_btn_link }}" class="button">{{  $banner[1]->content_btn }}</a>
             </div>
         </div>
     </div>
 </section>
-
-
 <section class="market-content-info2 market-content-audience">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6 col-md-6 col-12 mb-4">
-                <h2>Content <span>Reaches your</span> audience’s audience.</h2>
+                <h2>{!! $banner[2]->content_heading !!}</h2>
                 <div class="para">
-                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have
-                        suffered alteration in some form, by humour. There are many variations of passages of Lorem
-                        available.</p>
-                    <p>Curabitur convallis mi eget placerat hendrerit. Morbi auctor ornare nulla. Suspendisse a eros
-                        lorem. Duis sed risus ac nunc iaculis convallis eu sed magna. Curabitur in mi dolor. Nam
-                        semper enim sit amet velit pulvinar venenatis. Mauris semper id quam vel euismod.</p>
+                    <p>{!!  $banner[2]->content !!}</p>
                 </div>
-                <a href="javascript:void(0);" class="button">Learn More</a>
+                <a href="{{  $banner[2]->content_btn_link }}" class="button">{{  $banner[2]->content_btn }}</a>
             </div>
             <div class="col-lg-6 col-md-6 ">
-                <img src="{{ asset('frontend/img/market-content-info-img2.png')}}" alt="" class="img-fluid">
+                <img src="{{ asset($banner[2]->image)}}" alt="" class="img-fluid">
             </div>
         </div>
     </div>

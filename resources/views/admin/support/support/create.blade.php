@@ -21,8 +21,6 @@
                             <input class="form-control @error('title') is-invalid @enderror" type="text" name="title" id="title" value="{{ old('title') }}"/>
                             @error('title') {{ $message ?? '' }} @enderror
                         </div>
-                    </div>
-                    <div class="tile-body">
                         <div class="form-group">
                             <label class="control-label" for="description">Description <span class="m-l-5 text-danger"> *</span></label>
                             <input class="form-control @error('description') is-invalid @enderror" type="text" name="description" id="description" value="{{ old('description') }}"/>

@@ -374,7 +374,23 @@ courseAccorContents.forEach(item => {
 const marketTabs = document.querySelectorAll(".market-tab");
 const marketContents = document.querySelectorAll(".market-content .row");
 
+
+document.addEventListener('DOMContentLoaded', () => {
+    marketTabs.forEach(marketTab => {
+        const tabData = marketTab.getAttribute("data-tab-market");
+        marketContents.forEach((marketContent) => {
+            const faqContentData = marketContent.getAttribute("id");
+            console.log(faqContentData);
+            if (tabData === faqContentData) {
+              marketContent.classList.add("active");
+            } else {
+              marketContent.classList.remove("active");
+            }
+          });
+    })
+})
 marketTabs.forEach((marketTab) => {
+    $('.market-tab').show();
   marketTab.addEventListener("click", (e) => {
     marketTab.classList.add("active");
 

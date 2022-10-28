@@ -18,39 +18,39 @@
                                 <tbody>
                                     <tr>
                                         <td width="15%" class="text-right text-uppercase"> Tag</td>
-                                        <td>{{ $category->tag ?? ''}}</td>
+                                        <td>{{ $market->tag ?? ''}}</td>
                                      </tr>
                                    <tr>
                                       <td width="15%" class="text-right text-uppercase"> Title</td>
-                                      <td>{{ $category->title ?? ''}}</td>
+                                      <td>{{ $market->title ?? ''}}</td>
                                    </tr>
                                    <tr>
                                       <td width="15%" class="text-right text-uppercase">Image</td>
-                                      <td><img src="{{ asset('/uploads/marketcategories/'.$category->image) }}" width="150" height="150"></td>
+                                      <td><img src="{{ asset('/uploads/marketcategories/'.$market->image) }}" width="150" height="150"></td>
                                    </tr>
                                    <tr>
                                       <td width="15%" class="text-right text-uppercase">Short Description</td>
-                                      <td>{!! $category->short_description ?? '' !!}</td>
+                                      <td>{!! $market->short_description ?? '' !!}</td>
                                    </tr>
                                    <tr>
                                     <td width="15%" class="text-right text-uppercase">Button</td>
-                                    <td>{!! $category->market_btn ?? '' !!}</td>
+                                    <td>{!! $market->market_btn ?? '' !!}</td>
                                  </tr>
                                  <tr>
                                     <td width="15%" class="text-right text-uppercase">Button Link</td>
-                                    <td>{!! $category->market_btn_link ?? '' !!}</td>
+                                    <td>{!! $market->market_btn_link ?? '' !!}</td>
                                  </tr>
                                  <tr>
                                     <td width="15%" class="text-right text-uppercase">Short Content Heading</td>
-                                    <td>{!! $category->short_content_heading ?? '' !!}</td>
+                                    <td>{!! $market->short_content_heading ?? '' !!}</td>
                                  </tr>
                                  <tr>
                                     <td width="15%" class="text-right text-uppercase">Short Content Heading</td>
-                                    <td>{!! $category->short_content_heading ?? '' !!}</td>
+                                    <td>{!! $market->short_content_heading ?? '' !!}</td>
                                  </tr>
                                  <tr>
                                     <td width="15%" class="text-right text-uppercase">Image</td>
-                                    <td><img src="{{ asset('/uploads/marketcategories/'.$category->category_description_image) }}" width="150" height="150"></td>
+                                    <td><img src="{{ asset('/uploads/marketcategories/'.$market->market_description_image) }}" width="150" height="150"></td>
                                  </tr>
                                 </tbody>
                             </table>

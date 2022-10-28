@@ -85,11 +85,7 @@ class MarketRepository extends BaseRepository implements MarketContract
             $category->faq_short = $collection['faq_short'];
             $category->blog_heading = $collection['blog_heading'];
             if(!empty($params['image'])){
-            $profile_image = $collection['image'];
-            $imageName = time().".".$profile_image->getClientOriginalName();
-            $profile_image->move("uploads/market/",$imageName);
-            $uploadedImage = $imageName;
-            $category->image = $uploadedImage;
+                $category->image = imageUpload($params['image'], 'market');
             }
             if(!empty($params['faq_banner_image'])){
                 $profile_image = $collection['faq_banner_image'];
@@ -134,18 +130,10 @@ class MarketRepository extends BaseRepository implements MarketContract
             $category->faq_short = $collection['faq_short'];
             $category->blog_heading = $collection['blog_heading'];
             if(!empty($params['image'])){
-            $profile_image = $collection['image'];
-            $imageName = time().".".$profile_image->getClientOriginalName();
-            $profile_image->move("uploads/market/",$imageName);
-            $uploadedImage = $imageName;
-            $category->image = $uploadedImage;
+                $category->image = imageUpload($params['image'], 'market');
             }
             if(!empty($params['faq_banner_image'])){
-                $profile_image = $collection['faq_banner_image'];
-                $imageName = time().".".$profile_image->getClientOriginalName();
-                $profile_image->move("uploads/market/",$imageName);
-                $uploadedImage = $imageName;
-                $category->faq_banner_image = $uploadedImage;
+                $category->image = imageUpload($params['image'], 'marketbanner');
                 }
         $category->save();
 

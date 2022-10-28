@@ -327,7 +327,7 @@ Route::group(['prefix' => 'admin'], function () {
         });
 
         //**  market category management  **/
-        Route::group(['prefix'  =>   'category'], function () {
+        Route::group(['prefix'  =>   'market/category'], function () {
             Route::get('/', 'Admin\MarketCategoryController@index')->name('admin.market.category.index');
             Route::get('/create', 'Admin\MarketCategoryController@create')->name('admin.market.category.create');
             Route::post('/store', 'Admin\MarketCategoryController@store')->name('admin.market.category.store');
@@ -341,7 +341,7 @@ Route::group(['prefix' => 'admin'], function () {
         });
 
         //**  market banner management  **//
-        Route::group(['prefix'  =>   'banner'], function () {
+        Route::group(['prefix'  =>   'market/banner'], function () {
             Route::get('/', 'Admin\MarketBannerController@index')->name('admin.market.banner.index');
             Route::get('/create', 'Admin\MarketBannerController@create')->name('admin.market.banner.create');
             Route::post('/store', 'Admin\MarketBannerController@store')->name('admin.market.banner.store');
@@ -355,7 +355,7 @@ Route::group(['prefix' => 'admin'], function () {
         });
 
         //**  market faq management  **//
-        Route::group(['prefix'  =>   'faq'], function () {
+        Route::group(['prefix'  =>   'market/faq'], function () {
             Route::get('/', 'Admin\MarketFaqController@index')->name('admin.market.faq.index');
             Route::get('/create', 'Admin\MarketFaqController@create')->name('admin.market.faq.create');
             Route::post('/store', 'Admin\MarketFaqController@store')->name('admin.market.faq.store');

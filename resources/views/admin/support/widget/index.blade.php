@@ -8,7 +8,7 @@
                 <p></p>
             </div>
             <div class="col-md-6 text-right">
-                <a href="{{ route('admin.market.faq.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add New</a>
+                <a href="{{ route('admin.support.widget.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add New</a>
                {{--   <a href="#csvUploadModal" data-toggle="modal" class="btn btn-primary "><i class="fa fa-cloud-upload"></i> CSV Upload</a>
                 <a href="{{ route('admin.market.faq.data.csv.export') }}" class="btn btn-primary "><i class="fa fa-cloud-download"></i> CSV Export</a>--}}
             </div>
@@ -21,7 +21,7 @@
                 <div class="col">
                 </div>
                 <div class="col-auto">
-                    <form action="{{ route('admin.market.faq.index') }}">
+                    <form action="{{ route('admin.support.widget.index') }}">
                     <div class="row g-3 align-items-center">
                         <div class="col-auto">
                         <input type="search" name="term" id="term" class="form-control" placeholder="Search here.." value="{{app('request')->input('term')}}" autocomplete="off">
@@ -49,9 +49,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($categories as $key => $faq)
+                            @foreach($support as $key => $faq)
                                 <tr>
-                                    <td>{{ ($categories->firstItem()) + $key }}</td>
+                                    <td>{{ ($support->firstItem()) + $key }}</td>
                                     <td>{{ $faq->question }}</td>
                                     <td>{!! $faq->answer !!}</td>
                                     <td class="text-center">
@@ -67,8 +67,8 @@
                                 </td>
                                 <td class="text-center">
                                     <div class="btn-group" role="group" aria-label="Second group">
-                                        <a href="{{ route('admin.market.faq.edit', $faq['id']) }}" class="btn btn-sm btn-primary edit-btn"><i class="fa fa-edit"></i></a>
-                                        <a href="{{ route('admin.market.faq.details', $faq['id']) }}" class="btn btn-sm btn-primary edit-btn"><i class="fa fa-eye"></i></a>
+                                        <a href="{{ route('admin.support.widget.edit', $faq['id']) }}" class="btn btn-sm btn-primary edit-btn"><i class="fa fa-edit"></i></a>
+                                        <a href="{{ route('admin.support.widget.details', $faq['id']) }}" class="btn btn-sm btn-primary edit-btn"><i class="fa fa-eye"></i></a>
                                         <a href="#" data-id="{{$faq['id']}}" class="sa-remove btn btn-sm btn-danger edit-btn"><i class="fa fa-trash"></i></a>
                                     </div>
                                 </td>
@@ -76,7 +76,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                    {!! $categories->appends($_GET)->links() !!}
+                    {!! $support->appends($_GET)->links() !!}
                 </div>
             </div>
         </div>
@@ -122,7 +122,7 @@
         },
         function(isConfirm){
           if (isConfirm) {
-            window.location.href = "https://demo91.co.in/laravel-only/ContentSaas/public/admin/market/faq/"+faqid+"/delete";
+            window.location.href = "https://demo91.co.in/laravel-only/ContentSaas/public/admin/support/widget/"+faqid+"/delete";
             } else {
               swal("Cancelled", "Record is safe", "error");
             }
@@ -142,7 +142,7 @@
           $.ajax({
                 type:'POST',
                 dataType:'JSON',
-                url:"{{route('admin.market.faq.updateStatus')}}",
+                url:"{{route('admin.support.widget.updateStatus')}}",
                 data:{ _token: CSRF_TOKEN, id:faq_id, check_status:check_status},
                 success:function(response)
                 {

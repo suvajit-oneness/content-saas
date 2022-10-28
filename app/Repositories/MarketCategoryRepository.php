@@ -76,18 +76,10 @@ class MarketCategoryRepository extends BaseRepository implements MarketCategoryC
             if ($slugExistCount > 0) $slug = $slug.'-'.($slugExistCount+1);
             $category->slug = $slug;
             if(!empty($params['image'])){
-            $profile_image = $collection['image'];
-            $imageName = time().".".$profile_image->getClientOriginalName();
-            $profile_image->move("uploads/marketcategories/",$imageName);
-            $uploadedImage = $imageName;
-            $category->image = $uploadedImage;
+                $category->image = imageUpload($params['image'], 'marketcategories');
             }
             if(!empty($params['category_description_image'])){
-                $profile_image = $collection['category_description_image'];
-                $imageName = time().".".$profile_image->getClientOriginalName();
-                $profile_image->move("uploads/marketcategories/",$imageName);
-                $uploadedImage = $imageName;
-                $category->category_description_image = $uploadedImage;
+                $category->image = imageUpload($params['image'], 'marketcategoriescontent');
                 }
             $category->save();
 
@@ -119,18 +111,10 @@ class MarketCategoryRepository extends BaseRepository implements MarketCategoryC
         $category->slug = $slug;
         }
         if(!empty($params['image'])){
-        $profile_image = $collection['image'];
-        $imageName = time().".".$profile_image->getClientOriginalName();
-        $profile_image->move("categories/",$imageName);
-        $uploadedImage = $imageName;
-        $category->image = $uploadedImage;
+            $category->image = imageUpload($params['image'], 'marketcategories');
         }
         if(!empty($params['category_description_image'])){
-            $profile_image = $collection['category_description_image'];
-            $imageName = time().".".$profile_image->getClientOriginalName();
-            $profile_image->move("uploads/marketcategories/",$imageName);
-            $uploadedImage = $imageName;
-            $category->category_description_image = $uploadedImage;
+            $category->image = imageUpload($params['image'], 'marketcategoriescontent');
             }
         $category->save();
 

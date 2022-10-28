@@ -38,7 +38,7 @@ class SupportWidgetController extends BaseController
         if (!empty($request->term)) {
             $support = $this->SupportWidgetRepository->getSearchSupportFaqCategory($request->term);
         } else {
-            $support = SupportWidget::orderby('title')->get();
+            $support = SupportWidget::orderby('title')->paginate(25);
         }
         $this->setPageTitle('Support Widget', 'List of all Support widget');
         return view('admin.support.widget.index', compact('support'));

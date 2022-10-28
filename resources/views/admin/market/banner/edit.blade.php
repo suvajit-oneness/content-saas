@@ -20,23 +20,17 @@
                             <input type="hidden" name="id" value="{{ $targetbanner->id }}">
                             @error('content_heading') {{ $message ?? '' }} @enderror
                         </div>
-                    </div>
-                    <div class="tile-body">
                         <div class="form-group">
                             <label class="control-label" for="content">Banner Content <span class="m-l-5 text-danger"> *</span></label>
                             <textarea type="text" class="form-control" rows="4" name="content" id="content">{{ old('content', $targetbanner->content) }}</textarea>
                             <input type="hidden" name="id" value="{{ $targetbanner->id }}">
                             @error('content') {{ $message ?? '' }} @enderror
                         </div>
-                    </div>
-                    <div class="tile-body">
                         <div class="form-group">
                             <label class="control-label" for="content_btn">Banner Button <span class="m-l-5 text-danger"> *</span></label>
                             <input class="form-control @error('content_btn') is-invalid @enderror" type="text" name="content_btn" id="content_btn" value="{{ old('content_btn',$targetbanner->content_btn) }}"/>
                             @error('content_btn') {{ $message ?? '' }} @enderror
                         </div>
-                    </div>
-                    <div class="tile-body">
                         <div class="form-group">
                             <label class="control-label" for="content_btn_link">Banner Button Link <span class="m-l-5 text-danger"> *</span></label>
                             <input class="form-control @error('content_btn_link') is-invalid @enderror" type="text" name="content_btn_link" id="content_btn_link" value="{{ old('content_btn_link',$targetbanner->content_btn_link) }}"/>
@@ -48,7 +42,7 @@
                             <div class="col-md-2">
                                 @if ($targetbanner->image != null)
                                     <figure class="mt-2" style="width: 80px; height: auto;">
-                                        <img src="{{ asset('/uploads/marketbanner/'.$targetbanner->image) }}" id="blogImage" class="img-fluid" alt="img">
+                                        <img src="{{ asset($targetbanner->image) }}" id="blogImage" class="img-fluid" alt="img">
                                     </figure>
                                 @endif
                             </div>
@@ -69,3 +63,12 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+    <script type="text/javascript">
+        $('#content').summernote({
+            height: 400
+        });
+    </script>
+@endpush

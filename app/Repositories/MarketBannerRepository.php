@@ -71,11 +71,7 @@ class MarketBannerRepository extends BaseRepository implements MarketBannerContr
             $category->content_btn = $collection['content_btn'];
             $category->content_btn_link = $collection['content_btn_link'];
             if(!empty($params['image'])){
-            $profile_image = $collection['image'];
-            $imageName = time().".".$profile_image->getClientOriginalName();
-            $profile_image->move("uploads/marketbanner/",$imageName);
-            $uploadedImage = $imageName;
-            $category->image = $uploadedImage;
+                $category->image = imageUpload($params['image'], 'marketbanner');
             }
             $category->save();
 
@@ -99,11 +95,7 @@ class MarketBannerRepository extends BaseRepository implements MarketBannerContr
         $category->content_btn = $collection['content_btn'];
         $category->content_btn_link = $collection['content_btn_link'];
         if(!empty($params['image'])){
-        $profile_image = $collection['image'];
-        $imageName = time().".".$profile_image->getClientOriginalName();
-        $profile_image->move("uploads/marketbanner/",$imageName);
-        $uploadedImage = $imageName;
-        $category->image = $uploadedImage;
+            $category->image = imageUpload($params['image'], 'marketbanner');
         }
         $category->save();
 

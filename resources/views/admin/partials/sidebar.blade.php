@@ -208,7 +208,7 @@
         <!-- support -->
 
         <li class="text-light" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
-            <a href="#" class="app-menu__item @if(request()->is('admin/support*') || request()->is('admin/support/category*') || request()->is('admin/market/banner*') || request()->is('admin/market/faq*')) {{ 'active' }} @endif">
+            <a href="#" class="app-menu__item @if(request()->is('admin/support*') || request()->is('admin/support/category*') || request()->is('admin/support/banner*') || request()->is('admin/support/faq*')) {{ 'active' }} @endif">
                 <span class="app-menu__label">Support Master</span>
                 <i class="app-menu__icon fa fa-chevron-down"></i>
             </a>
