@@ -52,6 +52,9 @@
                         <li>
                             <a href="{{ route('front.job.index') }}" class="{{ request()->is('job*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Jobs</a>
                         </li>
+                        <li>
+                            <a href="{{ route('front.template.index') }}" class="{{ request()->is('template') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Template</a>
+                        </li>
                         {{-- <li>
                             <a href="{{ route('front.user.post-content.index') }}" class="{{ request()->is('user/post-content*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Post Content</a>
                         </li> --}}
@@ -133,6 +136,7 @@
     <script type="text/javascript" src="{{ asset('frontend/js/custom.js')}}"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
     <script>
         feather.replace()
@@ -213,6 +217,35 @@
                 }
             });
         }
+        </script>
+         <script>
+            // $('.filter_select').select2({
+            //   width:"100%",
+            // });
+
+
+            $('.filter_select').select2().on('select2:select', function(e) {
+                var data = e.params.data;
+
+            });
+
+
+            $('.filter_select').select2().on('select2:open', (elm) => {
+                const targetLabel = $(elm.target).prev('label');
+                targetLabel.addClass('filled active');
+            }).on('select2:close', (elm) => {
+                const target = $(elm.target);
+                const targetLabel = target.prev('label');
+                const targetOptions = $(elm.target.selectedOptions);
+                if (targetOptions.length === 0) {
+                    targetLabel.removeClass('filled active');
+                }
+            });
+
+
+            $(document).on('.filter_selectWrap select2:open', () => {
+                document.querySelector('.select2-search__field').focus();
+            });
         </script>
 </body>
 

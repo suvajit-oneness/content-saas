@@ -43,7 +43,7 @@ class CourseCategoryController extends BaseController
             $categories = CourseCategory::orderby('title')->paginate(25);
         }
         $this->setPageTitle('Category', 'List of all categories');
-        return view('admin.coursecategory.index', compact('categories'));
+        return view('admin.course.category.index', compact('categories'));
     }
 
     /**
@@ -52,7 +52,7 @@ class CourseCategoryController extends BaseController
     public function create()
     {
         $this->setPageTitle('Category', 'Create category');
-        return view('admin.coursecategory.create');
+        return view('admin.course.category.create');
     }
 
     /**
@@ -90,7 +90,7 @@ class CourseCategoryController extends BaseController
     {
         $targetCategory = $this->CourseCategoryRepository->findCategoryById($id);
         $this->setPageTitle('Category', 'Edit Category : '.$targetCategory->title);
-        return view('admin.coursecategory.edit', compact('targetCategory'));
+        return view('admin.course.category.edit', compact('targetCategory'));
     }
 
     /**
@@ -151,7 +151,7 @@ class CourseCategoryController extends BaseController
         $categories = $this->CourseCategoryRepository->detailsCategory($id);
         $category = $categories[0];
         $this->setPageTitle('Category', 'Category Details : '.$category->title);
-        return view('admin.coursecategory.details', compact('category'));
+        return view('admin.course.category.details', compact('category'));
     }
 
 

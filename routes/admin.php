@@ -431,7 +431,7 @@ Route::group(['prefix' => 'admin'], function () {
             Route::post('/update', 'Admin\SupportFaqController@update')->name('admin.support.faq.update');
             Route::get('/{id}/delete', 'Admin\SupportFaqController@delete')->name('admin.support.faq.delete');
             Route::post('updateStatus', 'Admin\SupportFaqController@updateStatus')->name('admin.support.faq.updateStatus');
-            Route::get('/{id}/details', 'Admin\SupportFaqController@details')->name('admin.support.faq.etails');
+            Route::get('/{id}/details', 'Admin\SupportFaqController@details')->name('admin.support.faq.details');
             Route::post('/csv-store', 'Admin\SupportFaqController@csvStore')->name('admin.support.data.csv.store');
             Route::get('/export', 'Admin\SupportFaqController@export')->name('admin.support.data.csv.export');
         });
@@ -466,5 +466,60 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/export', 'Admin\JobController@export')->name('admin.job.data.csv.export');
         Route::get('/job/application/{id}', 'Admin\JobController@application')->name('admin.job.application');
     });
+      //template management
+            //** Category management **/
+            Route::group(['prefix' => 'template/category'], function () {
+                Route::get('/', 'Admin\TemplateCategoryController@index')->name('admin.template.category.index');
+                Route::get('/create', 'Admin\TemplateCategoryController@create')->name('admin.template.category.create');
+                Route::post('/store', 'Admin\TemplateCategoryController@store')->name('admin.template.category.store');
+                Route::get('/{id}/edit', 'Admin\TemplateCategoryController@edit')->name('admin.template.category.edit');
+                Route::post('/update', 'Admin\TemplateCategoryController@update')->name('admin.template.category.update');
+                Route::get('/{id}/delete', 'Admin\TemplateCategoryController@delete')->name('admin.template.category.delete');
+                Route::post('updateStatus', 'Admin\TemplateCategoryController@updateStatus')->name('admin.template.category.updateStatus');
+                Route::get('/{id}/details', 'Admin\TemplateCategoryController@details')->name('admin.template.category.details');
+                Route::post('/csv-store', 'Admin\TemplateCategoryController@csvStore')->name('admin.template.category.data.csv.store');
+                Route::get('/export', 'Admin\TemplateCategoryController@export')->name('admin.template.category.data.csv.export');
+            });
+
+            //** Sub category management **/
+            Route::group(['prefix' => 'template/subcategory'], function () {
+                Route::get('/', 'Admin\TemplateSubCategoryController@index')->name('admin.template.subcategory.index');
+                Route::get('/create', 'Admin\TemplateSubCategoryController@create')->name('admin.template.subcategory.create');
+                Route::post('/store', 'Admin\TemplateSubCategoryController@store')->name('admin.template.subcategory.store');
+                Route::get('/{id}/edit', 'Admin\TemplateSubCategoryController@edit')->name('admin.template.subcategory.edit');
+                Route::post('/update', 'Admin\TemplateSubCategoryController@update')->name('admin.template.subcategory.update');
+                Route::get('/{id}/delete', 'Admin\TemplateSubCategoryController@delete')->name('admin.template.subcategory.delete');
+                Route::post('updateStatus', 'Admin\TemplateSubCategoryController@updateStatus')->name('admin.template.subcategory.updateStatus');
+                Route::get('/{id}/details', 'Admin\TemplateSubCategoryController@details')->name('admin.template.subcategory.details');
+                Route::post('/csv-store', 'Admin\TemplateSubCategoryController@csvStore')->name('admin.template.subcategory.data.csv.store');
+                Route::get('/export', 'Admin\TemplateSubCategoryController@export')->name('admin.template.subcategory.data.csv.export');
+            });
+
+            //**  type management  **/
+            Route::group(['prefix' => 'template/type'], function () {
+                Route::get('/', 'Admin\TemplateTypeController@index')->name('admin.template.type.index');
+                Route::get('/create', 'Admin\TemplateTypeController@create')->name('admin.template.type.create');
+                Route::post('/store', 'Admin\TemplateTypeController@store')->name('admin.template.type.store');
+                Route::get('/{id}/edit', 'Admin\TemplateTypeController@edit')->name('admin.template.type.edit');
+                Route::post('/update', 'Admin\TemplateTypeController@update')->name('admin.template.type.update');
+                Route::get('/{id}/delete', 'Admin\TemplateTypeController@delete')->name('admin.template.type.delete');
+                Route::post('updateStatus', 'Admin\TemplateTypeController@updateStatus')->name('admin.template.type.updateStatus');
+                Route::get('/{id}/details', 'Admin\TemplateTypeController@details')->name('admin.template.type.details');
+                Route::post('/csv-store', 'Admin\TemplateTypeController@csvStore')->name('admin.template.type.data.csv.store');
+                Route::get('/export', 'Admin\TemplateTypeController@export')->name('admin.template.type.data.csv.export');
+            });
+
+            //**  template management  **/
+            Route::group(['prefix'  =>   'template'], function () {
+                Route::get('/', 'Admin\TemplateController@index')->name('admin.template.index');
+                Route::get('/create', 'Admin\TemplateController@create')->name('admin.template.create');
+                Route::post('/store', 'Admin\TemplateController@store')->name('admin.template.store');
+                Route::get('/{id}/edit', 'Admin\TemplateController@edit')->name('admin.template.edit');
+                Route::post('/update', 'Admin\TemplateController@update')->name('admin.template.update');
+                Route::get('/{id}/delete', 'Admin\TemplateController@delete')->name('admin.template.delete');
+                Route::post('updateStatus', 'Admin\TemplateController@updateStatus')->name('admin.template.updateStatus');
+                Route::get('/{id}/details', 'Admin\TemplateController@details')->name('admin.template.details');
+                Route::post('/csv-store', 'Admin\TemplateController@csvStore')->name('admin.template.data.csv.store');
+                Route::get('/export', 'Admin\TemplateController@export')->name('admin.template.data.csv.export');
+            });
 });
-// });

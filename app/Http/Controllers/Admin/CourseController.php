@@ -34,7 +34,7 @@ class CourseController extends BaseController
             $courses = Course::where('title', 'like', '%' . $request->term . '%')->paginate(25);
         else
             $courses = Course::paginate(25);
-        return view('admin.course.index', compact('courses', 'pageTitle'));
+        return view('admin.course.course.index', compact('courses', 'pageTitle'));
     }
 
     public function create()
@@ -42,7 +42,7 @@ class CourseController extends BaseController
         $course_category = CourseCategory::orderBy('title')->get();
         $languages = Language::orderBy('name')->get();
         $this->setPageTitle('Course', 'Create Course');
-        return view('admin.course.create',compact('course_category','languages'));
+        return view('admin.course.course.create',compact('course_category','languages'));
     }
 
     public function store(Request $request)
@@ -79,7 +79,7 @@ class CourseController extends BaseController
 
         $course->short_description = $params['short_description'];
         $course->description = $params['description'];
-        
+
         $course->price = $params['price'];
         $course->course_content = $params['course_content'];
         $course->requirements = $params['requirements'];
@@ -123,7 +123,7 @@ class CourseController extends BaseController
 
         $languages = Language::orderBy('name')->get();
 
-        return view('admin.course.edit', compact('course', 'lessons', 'course_lessons', 'course_category', 'languages'));
+        return view('admin.course.course.edit', compact('course', 'lessons', 'course_lessons', 'course_category', 'languages'));
     }
 
     /**
@@ -241,7 +241,7 @@ class CourseController extends BaseController
         $courses = Course::find($id);
         $course_lessons = CourseLesson::where('course_id', $id)->join('lessons as l', 'l.id', '=', 'lesson_id')->get();
         $this->setPageTitle('Course', 'Course Details : ' . $courses->title);
-        return view('admin.course.details', compact('courses', 'course_lessons'));
+        return view('admin.course.course.details', compact('courses', 'course_lessons'));
     }
 
     public function csvStore(Request $request)

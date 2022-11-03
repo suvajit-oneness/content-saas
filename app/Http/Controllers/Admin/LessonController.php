@@ -32,14 +32,14 @@ class LessonController extends BaseController
             $lessons = Lesson::where('title', 'like', '%' . $request->term . '%')->paginate(25);
         else
             $lessons = Lesson::paginate(25);
-        return view('admin.lesson.index', compact('lessons', 'pageTitle'));
+        return view('admin.course.lesson.index', compact('lessons', 'pageTitle'));
     }
 
     public function create()
     {
         $categories = CourseCategory::latest('title')->get();
         $this->setPageTitle('Lessons', 'Create lessons');
-        return view('admin.lesson.create', compact('categories'));
+        return view('admin.course.lesson.create', compact('categories'));
     }
 
     public function store(Request $request)
@@ -90,7 +90,7 @@ class LessonController extends BaseController
 
         // dd($lesson_topics);
 
-        return view('admin.lesson.edit', compact('lesson', 'topics', 'lesson_topics'));
+        return view('admin.course.lesson.edit', compact('lesson', 'topics', 'lesson_topics'));
     }
 
     /**
@@ -182,7 +182,7 @@ class LessonController extends BaseController
         $lesson_topics = LessonTopic::where('lesson_id', $id)->join('topics as t', 't.id', '=', 'topic_id')->get();
 
         $this->setPageTitle('Lesson', 'Lesson Details : ' . $lesson->title);
-        return view('admin.lesson.details', compact('lesson', 'lesson_topics'));
+        return view('admin.course.lesson.details', compact('lesson', 'lesson_topics'));
     }
 
     public function csvStore(Request $request)

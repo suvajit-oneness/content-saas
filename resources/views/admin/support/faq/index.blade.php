@@ -52,7 +52,7 @@
                             @foreach($faq as $key => $item)
                                 <tr>
                                     <td>{{ ($faq->firstItem()) + $key }}</td>
-                                    <td>{{ $item->question }}</td>
+                                    <td>{!! $item->question !!}</td>
                                     <td>{!! $item->answer !!}</td>
                                     <td class="text-center">
                                     <div class="toggle-button-cover margin-auto">

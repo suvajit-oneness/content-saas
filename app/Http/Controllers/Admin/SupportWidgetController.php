@@ -118,7 +118,7 @@ class SupportWidgetController extends BaseController
         if (!$support) {
             return $this->responseRedirectBack('Error occurred while deleting Support widget.', 'error', true, true);
         }
-        return $this->responseRedirect('admin.widget.index', 'Support  widget has been deleted successfully', 'success', false, false);
+        return $this->responseRedirect('admin.support.widget.index', 'Support  widget has been deleted successfully', 'success', false, false);
     }
 
     /**

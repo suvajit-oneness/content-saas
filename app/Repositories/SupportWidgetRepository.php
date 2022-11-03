@@ -66,6 +66,11 @@ class SupportWidgetRepository extends BaseRepository implements SupportWidgetCon
             $collection = collect($params);
             $supportWidget = new SupportWidget();
             $supportWidget->title = $collection['title'];
+            $supportWidget->description = $collection['description'];
+            if(!empty($params['image'])){
+                // image, folder name only
+                $supportWidget->image = imageUpload($params['image'], 'supportwidgeticon');
+            }
             $supportWidget->save();
             return $supportWidget;
 
@@ -83,6 +88,11 @@ class SupportWidgetRepository extends BaseRepository implements SupportWidgetCon
         $supportWidget = $this->findOneOrFail($params['id']);
         $collection = collect($params)->except('_token');
         $supportWidget->title = $collection['title'];
+        $supportWidget->description = $collection['description'];
+        if(!empty($params['image'])){
+            // image, folder name only
+            $supportWidget->image = imageUpload($params['image'], 'supportwidgeticon');
+        }
         $supportWidget->save();
 
         return $supportWidget;
@@ -124,6 +134,6 @@ class SupportWidgetRepository extends BaseRepository implements SupportWidgetCon
 
     public function getSearchSupportFaqCategory(string $term)
     {
-        return SupportWidget::where([['title', 'LIKE', '%' . $term . '%']])->get();
+        return SupportWidget::where([['title', 'LIKE', '%' . $term . '%']])->paginate(25);
     }
 }

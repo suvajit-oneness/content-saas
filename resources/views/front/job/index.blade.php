@@ -9,7 +9,7 @@
                     <form action="{{ route('front.job.index') }}">
                         <div class="jobs-filter-heading">
                             <h6>filter</h6>
-                            <span class="clear-filter">clear filter</span>
+                            <a href="{{ url()->current() }}"><span class="clear-filter">clear filter</span></a>
                         </div>
                         <div class="jobs-filter-keywords">
                             <h4>keywords</h4>
@@ -18,43 +18,43 @@
                         <div class="jobs-filter-checkbox jobs-filter-employment">
                             <h4>employment type</h4>
                             <div class="checkbox-content">
-                                <input type="checkbox" name="employment_type" id="fulltime" value="fulltime" />
+                                <input type="checkbox" name="employment_type[]" id="fulltime" value="fulltime" {{ request()->input('employment_type') == 'fulltime' ? 'checked' : '' }} multiple/>
                                 <label for="fulltime">full time</label>
                             </div>
                             <div class="checkbox-content">
-                                <input type="checkbox" id="remote" name="employment_type" value="remote" />
+                                <input type="checkbox" id="remote" name="employment_type[]" value="remote"{{ request()->input('employment_type') == 'remote' ? 'checked' : '' }} multiple/>
                                 <label for="remote">remote</label>
                             </div>
                             <div class="checkbox-content">
-                                <input type="checkbox" id="freelance" name="employment_type" value="freelance" />
+                                <input type="checkbox" id="freelance" name="employment_type[]" value="freelance" {{ request()->input('employment_type') == 'freelance' ? 'checked' : '' }}multiple/>
                                 <label for="freelance">freelance</label>
                             </div>
                             <div class="checkbox-content">
-                                <input type="checkbox" id="contract" name="employment_type" value="contract" />
+                                <input type="checkbox" id="contract" name="employment_type[]" value="contract" {{ request()->input('employment_type') == 'contract' ? 'checked' : '' }} multiple/>
                                 <label for="contract">contract</label>
                             </div>
                             <div class="checkbox-content">
-                                <input type="checkbox" id="parttime" name="employment_type" value="parttime" />
+                                <input type="checkbox" id="parttime" name="employment_type[]" value="parttime" {{ request()->input('employment_type') == 'parttime' ? 'checked' : '' }} multiple/>
                                 <label for="parttime">part time</label>
                             </div>
                             <div class="checkbox-content">
-                                <input type="checkbox" id="telecomute" name="employment_type" value="telecomute" />
+                                <input type="checkbox" id="telecomute" name="employment_type[]" value="telecomute" {{ request()->input('employment_type') == 'telecomute' ? 'checked' : '' }} multiple/>
                                 <label for="telecomute">telecommute</label>
                             </div>
                             <div class="checkbox-content">
-                                <input type="checkbox" id="temporary" name="employment_type" value="temporary" />
+                                <input type="checkbox" id="temporary" name="employment_type[]" value="temporary" {{ request()->input('employment_type') == 'temporary' ? 'checked' : '' }} multiple/>
                                 <label for="temporary">temporary</label>
                             </div>
                             <div class="checkbox-content">
-                                <input type="checkbox" id="internship" name="employment_type" value="internship" />
+                                <input type="checkbox" id="internship" name="employment_type[]" value="internship" {{ request()->input('employment_type') == 'internship' ? 'checked' : '' }} multiple/>
                                 <label for="internship">internship</label>
                             </div>
                             <div class="checkbox-content">
-                                <input type="checkbox" id="unpaid" name="employment_type" value="unpaid" />
+                                <input type="checkbox" id="unpaid" name="employment_type[]" value="unpaid" {{ request()->input('employment_type') == 'unpaid' ? 'checked' : '' }} multiple/>
                                 <label for="unpaid">unpaid</label>
                             </div>
                             <div class="checkbox-content">
-                                <input type="checkbox" id="unpaid" name="employment_type" value="other" />
+                                <input type="checkbox" id="unpaid" name="employment_type[]" value="other" {{ request()->input('employment_type') == 'other' ? 'checked' : '' }} multiple/>
                                 <label for="unpaid">other</label>
                             </div>
                         </div>
@@ -73,23 +73,23 @@
                         <div class="jobs-filter-checkbox job-filter-salary">
                             <h4>Salary per</h4>
                             <div class="checkbox-content">
-                                <input type="radio" id="year" class="year" name="salary" value="year" />
+                                <input type="radio" id="year" class="year" name="salary" value="year" {{ request()->input('salary') == 'year' ? 'checked' : '' }}/>
                                 <label for="year">year</label>
                             </div>
                             <div class="checkbox-content">
-                                <input type="radio" id="hour" class="hour" name="salary" value="hour" />
+                                <input type="radio" id="hour" class="hour" name="salary" value="hour" {{ request()->input('salary') == 'hour' ? 'checked' : '' }}/>
                                 <label for="hour">hour</label>
                             </div>
                             <div class="checkbox-content">
-                                <input type="radio" id="month" class="month" name="salary" value="month" />
+                                <input type="radio" id="month" class="month" name="salary" value="month" {{ request()->input('salary') == 'month' ? 'checked' : '' }}/>
                                 <label for="month">month</label>
                             </div>
                             <div class="checkbox-content">
-                                <input type="radio" id="article" class="article" name="salary" value="article" />
+                                <input type="radio" id="article" class="article" name="salary" value="article" {{ request()->input('salary') == 'article' ? 'checked' : '' }}/>
                                 <label for="article">article</label>
                             </div>
                             <div class="checkbox-content">
-                                <input type="radio" id="word" class="word" name="salary" value="word" />
+                                <input type="radio" id="word" class="word" name="salary" value="word" {{ request()->input('salary') == 'word' ? 'checked' : '' }}/>
                                 <label for="word">word</label>
                             </div>
                         </div>
@@ -167,7 +167,7 @@
                                     {{ request()->input('keyword') ? 'keyword "' . request()->input('keyword') . '"' : '' }}
                                     {{ !empty(request()->input('keyword')) && !empty(request()->input('employment_type')) && !empty(request()->input('address')) ? ' & ' : '' }}
                                     {{ request()->input('address') ? 'location "' . request()->input('address') . '"' : '' }}
-                                    {{ request()->input('employment_type') ? 'type "' . request()->input('type') . '"' : '' }}
+                                    {{ request()->input('employment_type[]') ? 'type "' . request()->input('employment_type[]') . '"' : '' }}
                                     {{ request()->input('salary') ? 'salary "' . request()->input('price') . '"' : '' }}
                                     {{ request()->input('source') ? 'source "' . request()->input('source') . '"' : '' }}
                                 @else

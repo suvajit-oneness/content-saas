@@ -32,8 +32,18 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="widget_description">Widget Description <span class="m-l-5 text-danger"> *</span></label>
-                            <input class="form-control @error('widget_description') is-invalid @enderror" type="text" name="widget_description" id="widget_description" value="{{ old('widget_description',$targetsupport->widget_description) }}"/>
+                            <textarea class="form-control @error('widget_description') is-invalid @enderror" type="text" name="widget_description" id="widget_description" value="{{ old('widget_description',$targetsupport->widget_description) }}"></textarea>
                             @error('widget_description') {{ $message ?? '' }} @enderror
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="faq_title">Faq Title <span class="m-l-5 text-danger"> *</span></label>
+                            <input class="form-control @error('faq_title') is-invalid @enderror" type="text" name="faq_title" id="faq_title" value="{{ old('faq_title',$targetsupport->faq_title) }}"/>
+                            @error('faq_title') {{ $message ?? '' }} @enderror
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="faq_description">Faq Description <span class="m-l-5 text-danger"> *</span></label>
+                            <textarea class="form-control @error('faq_description') is-invalid @enderror" type="text" name="faq_description" id="faq_description" value="{{ old('faq_description',$targetsupport->faq_description) }}"></textarea>
+                            @error('faq_description') {{ $message ?? '' }} @enderror
                         </div>
                     </div>
 
@@ -56,6 +66,9 @@
             height: 400
         });
         $('#widget_description').summernote({
+            height: 400
+        });
+        $('#faq_description').summernote({
             height: 400
         });
     </script>

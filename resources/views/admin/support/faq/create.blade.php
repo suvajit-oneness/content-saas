@@ -26,15 +26,11 @@
                             </select>
                             @error('cat_id') {{ $message ?? '' }} @enderror
                         </div>
-                    </div>
-                    <div class="tile-body">
                         <div class="form-group">
                             <label class="control-label" for="question">Question <span class="m-l-5 text-danger"> *</span></label>
                             <textarea class="form-control @error('question') is-invalid @enderror" type="text" name="question" id="question" value="{{ old('question') }}"></textarea>
                             @error('question') {{ $message ?? '' }} @enderror
                         </div>
-                    </div>
-                    <div class="tile-body">
                         <div class="form-group">
                             <label class="control-label" for="answer">Answer <span class="m-l-5 text-danger"> *</span></label>
                             <textarea class="form-control @error('answer') is-invalid @enderror" type="text" name="answer" id="answer" value="{{ old('answer') }}"></textarea>

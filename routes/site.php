@@ -21,8 +21,8 @@ Route::middleware([AuthenticateOnlyIfNotLoggedIn::class])->group(function () {
 Route::name('front.')->group(function () {
     // homepage
     Route::get('/', 'Front\HomeController@index')->name('index');
-    Route::get('/article', 'Front\ArticleController@article')->name('article');
-    Route::get('/article/{slug}', 'Front\ArticleController@articledetails')->name('article.details');
+    Route::get('/blog', 'Front\ArticleController@article')->name('article');
+    Route::get('/blog/{slug}', 'Front\ArticleController@articledetails')->name('article.details');
     // Route::get('/event',function(){
     //     dd("hi");
     // })->name('event');
@@ -53,12 +53,12 @@ Route::name('front.')->group(function () {
 
     //feature
     Route::name('feature.')->group(function () {
-        Route::get('/feature', 'Front\FeatureController@index')->name('index');
+        Route::get('/tools-feature', 'Front\FeatureController@index')->name('index');
     });
 
     //price
     Route::name('price.')->group(function () {
-        Route::get('/price', 'Front\PriceController@index')->name('index');
+        Route::get('/plans-price', 'Front\PriceController@index')->name('index');
     });
 
     //support
@@ -107,6 +107,12 @@ Route::name('front.')->group(function () {
             Route::post('/apply/job', 'Front\JobController@jobapply')->name('apply');
             Route::post('/apply/job/store', 'Front\JobController@jobapplystore')->name('store');
 
+        });
+        //show template
+        Route::name('template.')->group(function () {
+            Route::get('/template', 'Front\TemplateController@index')->name('index');
+            Route::get('/template/{slug}', 'Front\TemplateController@details')->name('details');
+            Route::post('/save/template', 'Front\TemplateController@store')->name('save');
         });
 
         Route::prefix('user/post-content')->name('user.post-content.')->group(function(){

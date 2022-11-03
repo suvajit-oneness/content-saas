@@ -89,6 +89,8 @@ class SupportRepository extends BaseRepository implements SupportContract
         $support->description = $collection['description'];
         $support->widget_title = $collection['widget_title'];
         $support->widget_description = $collection['widget_description'];
+        $support->faq_title = $collection['faq_title'];
+        $support->faq_description = $collection['faq_description'];
         $support->save();
 
         return $support;

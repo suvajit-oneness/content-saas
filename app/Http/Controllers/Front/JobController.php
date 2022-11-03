@@ -27,10 +27,16 @@ public function __construct(JobContract $JobRepository)
 
     public function index(Request $request)
     {
+
         if (isset($request->keyword) || isset($request->employment_type) || isset($request->address)||isset($request->salary) || isset($request->source)||isset($request->featured_flag)||isset($request->beginner_friendly)){
+
+                   //dd($request->employment_type);
             $keyword = (isset($request->keyword) && $request->keyword!='')?$request->keyword:'';
 
-            $employment_type = (isset($request->employment_type) && $request->employment_type!='')? $request->employment_type:'';
+            foreach ($request->employment_type as $value) {
+
+            $employment_type = (isset($request->employment_type) && $request->employment_type!='')? $value:'';
+            }
 
             $address = (isset($request->address) && $request->address!='')?$request->address:'';
 
@@ -42,7 +48,8 @@ public function __construct(JobContract $JobRepository)
 
             $job = $this->JobRepository->searchJobfrontData($keyword,$employment_type,$address,$salary,$source,$featured_flag,$beginner_friendly);
 
-            }
+
+        }
             else{
             $job=Job::where('featured_flag',1)->orderby('title')->get();
             }

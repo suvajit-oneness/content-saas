@@ -17,17 +17,24 @@
                             <table class="table">
                                 <tbody>
                                    <tr>
-                                      <td width="15%" class="text-right text-uppercase">Question</td>
-                                      <td>{{ $faq->question ?? ''}}</td>
+                                      <td width="15%" class="text-right text-uppercase">Title</td>
+                                      <td>{{ $support->title ?? ''}}</td>
                                    </tr>
                                    <tr>
-                                      <td width="15%" class="text-right text-uppercase">Answer</td>
-                                      <td>{!! $faq->answer ?? '' !!}</td>
+                                      <td width="15%" class="text-right text-uppercase">Description</td>
+                                      <td>{!! $support->description ?? '' !!}</td>
                                    </tr>
+                                   <tr>
+                                    <td width="15%" class="text-right text-uppercase">Icon</td>
+                                    <td>@if($support->image!='')
+                                        <img style="width: 100px;height: 100px;" src="{{asset($support->image)}}">
+                                        @endif</td>
+                                 </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
+                    <a type="button" class="btn btn-primary" href="{{ route('admin.support.widget.index') }}">Back</a>
                 </div>
             </div>
         </div>

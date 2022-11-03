@@ -79,6 +79,14 @@ use App\Contracts\JobCategoryContract;
 use App\Repositories\JobCategoryRepository;
 use App\Contracts\JobContract;
 use App\Repositories\JobRepository;
+use App\Contracts\TemplateCategoryContract;
+use App\Repositories\TemplateCategoryRepository;
+use App\Contracts\TemplateSubCategoryContract;
+use App\Repositories\TemplateSubCategoryRepository;
+use App\Contracts\TemplateTypeContract;
+use App\Repositories\TemplateTypeRepository;
+use App\Contracts\TemplateContract;
+use App\Repositories\TemplateRepository;
 class RepositoryServiceProvider extends ServiceProvider
 {
     protected $repositories = [
@@ -87,7 +95,7 @@ class RepositoryServiceProvider extends ServiceProvider
         ArticleCategoryContract::class           =>            ArticleCategoryRepository::class,
         ArticleSubCategoryContract::class        =>            ArticleSubCategoryRepository::class,
         ArticleTertiaryCategoryContract::class   =>            ArticleTertiaryCategoryRepository::class,
-        ArticleContract::class                   =>            DealRepository::class,
+        ArticleContract::class                   =>            ArticleRepository::class,
         EventTypeContract::class                 =>            EventTypeRepository::class,
         EventContract::class                     =>            EventRepository::class,
         CourseContract::class                    =>            CourseRepository::class,
@@ -119,7 +127,11 @@ class RepositoryServiceProvider extends ServiceProvider
         SupportFaqCategoryContract::class        =>            SupportFaqCategoryRepository::class,
         SupportFaqContract::class                =>            SupportFaqRepository::class,
         SupportWidgetContract::class             =>            SupportWidgetRepository::class,
-
+        TemplateCategoryContract::class          =>            TemplateCategoryRepository::class,
+        TemplateSubCategoryContract::class       =>            TemplateSubCategoryRepository::class,
+        TemplateTypeContract::class              =>            TemplateTypeRepository::class,
+        TemplateContract::class                  =>            TemplateRepository::class,
+        DealContract::class                      =>            DealRepository::class,
     ];
 
     /**

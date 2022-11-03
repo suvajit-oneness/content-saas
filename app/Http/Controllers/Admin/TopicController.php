@@ -19,14 +19,14 @@ class TopicController extends BaseController
             $data = Topic::latest('id')->paginate(25);
         }
 
-        return view('admin.topic.index', compact('data'));
+        return view('admin.course.topic.index', compact('data'));
     }
 
 
     public function create()
     {
         $this->setPageTitle('Create new Topic', 'Create topic');
-        return view('admin.topic.create');
+        return view('admin.course.topic.create');
     }
 
 
@@ -73,7 +73,7 @@ class TopicController extends BaseController
     {
         $topic = Topic::findOrFail($id);
         $this->setPageTitle('topic', 'Edit topic : '.$topic->title);
-        return view('admin.topic.edit', compact('topic'));
+        return view('admin.course.topic.edit', compact('topic'));
     }
 
 
@@ -152,7 +152,7 @@ class TopicController extends BaseController
         $topic = Topic::findOrFail($id);
 
         $this->setPageTitle('topic', 'topic Details : '.$topic->title);
-        return view('admin.topic.details', compact('topic'));
+        return view('admin.course.topic.details', compact('topic'));
     }
 
 /*

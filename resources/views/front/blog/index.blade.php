@@ -1,5 +1,5 @@
 @extends('front.layouts.app')
-@section('title',' Article')
+@section('title',' Blog')
 @section('section')
 
 <section class="tools_wrapper">

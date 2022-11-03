@@ -15,8 +15,18 @@
                     @csrf
                     <div class="tile-body">
                         <div class="form-group">
+                            <label class="control-label" for="cat_id">Category <span class="m-l-5 text-danger"> *</span></label>
+                            <select class="form-control" name="cat_id">
+                                <option hidden selected>Select Category...</option>
+                                @foreach ($categories as $index => $item)
+                                <option value="{{$item->id}}" {{ ($item->id==$targetfaq->cat_id) ? 'selected' : ''}}>{{ $item->title }}</option>
+                            @endforeach
+                            </select>
+                            @error('cat_id') {{ $message ?? '' }} @enderror
+                        </div>
+                        <div class="form-group">
                             <label class="control-label" for="question">Question <span class="m-l-5 text-danger"> *</span></label>
-                            <textarea class="form-control @error('question') is-invalid @enderror" type="text" name="question" id="question" value="{{ old('question', $targetfaq->question) }}"></textarea>
+                            <textarea class="form-control @error('question') is-invalid @enderror" type="text" name="question" id="question">{{ old('question', $targetfaq->question) }}</textarea>
                             <input type="hidden" name="id" value="{{ $targetfaq->id }}">
                             @error('question') {{ $message }} @enderror
                         </div>
@@ -24,14 +34,14 @@
                     <div class="tile-body">
                         <div class="form-group">
                             <label class="control-label" for="answer">Answer<span class="m-l-5 text-danger"> *</span></label>
-                            <textarea class="form-control @error('answer') is-invalid @enderror" type="text" name="answer" id="answer" value="{{ old('answer', $targetfaq->answer) }}"></textarea>
+                            <textarea class="form-control @error('answer') is-invalid @enderror" type="text" name="answer" id="answer">{{ old('answer', $targetfaq->answer) }}</textarea>
                             @error('answer') {{ $message ?? '' }} @enderror
                         </div>
                     </div>
                     <div class="tile-footer">
                         <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Update faq</button>
                         &nbsp;&nbsp;&nbsp;
-                        <a class="btn btn-secondary" href="{{ route('admin.market.faq.index') }}"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
+                        <a class="btn btn-secondary" href="{{ route('admin.support.faq.index') }}"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
                     </div>
                 </form>
             </div>

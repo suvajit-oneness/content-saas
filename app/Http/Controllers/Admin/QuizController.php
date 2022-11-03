@@ -48,7 +48,7 @@ class QuizController extends BaseController
             $type = !empty($request->type) ? $request->type : '';
             $course = $this->CourseRepository->searchCoursesData($category,$author,$type,$keyword);
         }else{
-            $course = Course::orderby('course_name')->paginate(25);
+            $course = Course::orderby('title')->paginate(25);
         }
         $categories = $this->CourseRepository->listCategory();
         $this->setPageTitle('course', 'List of all course');
