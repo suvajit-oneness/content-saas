@@ -194,8 +194,7 @@
             return true;
         }
         // click to read notification
-    </script>
-    <script>
+
         // job bookmark/ save/ wishlist
         function jobBookmark(jobId) {
             $.ajax({
@@ -219,36 +218,34 @@
                 }
             });
         }
-        </script>
-         <script>
-            // $('.filter_select').select2({
-            //   width:"100%",
-            // });
 
+        // $('.filter_select').select2({
+        //   width:"100%",
+        // });
 
-            $('.filter_select').select2().on('select2:select', function(e) {
-                var data = e.params.data;
+        $('.filter_select').select2().on('select2:select', function(e) {
+            var data = e.params.data;
+        });
 
-            });
+        $('.filter_select').select2().on('select2:open', (elm) => {
+            const targetLabel = $(elm.target).prev('label');
+            targetLabel.addClass('filled active');
+        }).on('select2:close', (elm) => {
+            const target = $(elm.target);
+            const targetLabel = target.prev('label');
+            const targetOptions = $(elm.target.selectedOptions);
+            if (targetOptions.length === 0) {
+                targetLabel.removeClass('filled active');
+            }
+        });
 
+        $(document).on('.filter_selectWrap select2:open', () => {
+            document.querySelector('.select2-search__field').focus();
+        });
 
-            $('.filter_select').select2().on('select2:open', (elm) => {
-                const targetLabel = $(elm.target).prev('label');
-                targetLabel.addClass('filled active');
-            }).on('select2:close', (elm) => {
-                const target = $(elm.target);
-                const targetLabel = target.prev('label');
-                const targetOptions = $(elm.target.selectedOptions);
-                if (targetOptions.length === 0) {
-                    targetLabel.removeClass('filled active');
-                }
-            });
+    </script>
 
-
-            $(document).on('.filter_selectWrap select2:open', () => {
-                document.querySelector('.select2-search__field').focus();
-            });
-        </script>
+    @yield('script')
 </body>
 
 </html>

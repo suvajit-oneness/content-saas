@@ -9,7 +9,7 @@ use App\Models\Project;
 use App\Models\ProjectStatus;
 use App\Models\ProjectTask;
 
-class ProjectController extends Controller
+class ProjectTaskController extends Controller
 {
     public function index(Request $request)
     {
@@ -21,10 +21,12 @@ class ProjectController extends Controller
         }
     }
 
-    public function create(Request $request)
+    public function create(Request $request, $projectId)
     {
+        $project = Project::findOrFail($projectId);
         $status = ProjectStatus::orderBy('position', 'asc')->get();
-        return view('front.project.create', compact('status'));
+
+        return view('front.project-task.create', compact('status', 'project'));
     }
 
     public function detail(Request $request, $slug)
