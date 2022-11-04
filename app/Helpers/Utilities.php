@@ -3,6 +3,7 @@
 
 use App\Models\Course;
 use App\Models\Order;
+use App\Models\JobUser;
 use Illuminate\Support\Str;
 
 if (!function_exists('sidebar_open')) {
@@ -27,7 +28,7 @@ if (!function_exists('sidebar_open')) {
     }
 }
 
-if (!function_exists('imageUpload')) {
+if (!function_exists('randomGenerator')) {
     function randomGenerator() {
         return uniqid().''.date('y-m-d-h-i-s');
     }
@@ -39,9 +40,34 @@ if (!function_exists('imageUpload')) {
         $imageExtension = $image->getClientOriginalExtension();
         $uploadPath = 'uploads/'.$folder.'/';
 
-        $image->move($uploadPath, $imageName.'.'.$imageExtension);
+        $image->move(public_path($uploadPath), $imageName.'.'.$imageExtension);
         $imagePath = $uploadPath.$imageName.'.'.$imageExtension;
         return $imagePath;
+    }
+}
+
+if (!function_exists('jobTagsHtml')) {
+    function jobTagsHtml($job_id) {
+        $tags = \App\Models\JobTag::where('job_id', $job_id)->orderby('title')->get();
+
+        if (count($tags) > 0) {
+            $content = '
+            <div class="content-mid">
+                <ul class="list-unstyled p-0 m-0">';
+
+                foreach($tags as $tag) {
+                    $content .= '<li>'.ucwords($tag->title).'</li>';
+                }
+                    // @foreach ($tag as $tagKey => $tagVal)
+                    //     <li>{{ ucwords($tagVal->title) }} </li>
+                    // @endforeach
+                $content .= '</ul>
+            </div>';
+
+            return $content;
+        } else {
+            return false;
+        }
     }
 }
 
@@ -185,6 +211,23 @@ function CheckIfUserBoughtTheCourse($courseid, $user_id){
         return false;
 
 }
+
+// show saved jobs only
+if(!function_exists('savedJobs')) {
+    function savedJobs($job_id) {
+        $jobUser = JobUser::where('user_id', auth()->guard('web')->user()->id)
+        ->where('job_id', $job_id)
+        ->first();
+
+        if (!empty($jobUser)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+// do not remove - used in portfolio feedback
 if(!function_exists('RatingHtml')) {
     function RatingHtml($rating = null) {
         if ($rating == 0) {
@@ -278,18 +321,7 @@ if(!function_exists('RatingHtml')) {
             </p>
             ';
         } else {
-            $resp = '
-            <p class="review">
-                <span class="fa fa-star checked" style="color:#FFA701"></span>
-                <span class="fa fa-star checked" style="color:#FFA701"></span>
-                <span class="fa fa-star checked" style="color:#FFA701"></span>
-                <span class="fa fa-star checked" style="color:#FFA701"></span>
-                <span class="fa fa-star checked" style="color:#FFA701"></span>
-                <small>'.$rating.' Ratings</small>
-            </p>
-            ';
+            return false;
         }
-
-        return $resp;
     }
 }

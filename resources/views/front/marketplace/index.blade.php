@@ -1,5 +1,6 @@
 @extends('front.layouts.app')
 @section('title',' Freelancers Marketplace')
+
 @section('section')
 <section class="freelance-market-banner">
     <div class="container">
@@ -9,16 +10,14 @@
                     <div class="market-badge">
                         <span>Best job seekers in the world</span>
                     </div>
-                    <h1>Find and become
-                        a <span>professional</span> with
-                        passion</h1>
-                    <p>Job search platform worldwide. We connect freelancers and
-                        startups in an easy way and good collaboration</p>
+
+                    <h1>Find and become a <span>professional</span> with passion</h1>
+                    <p>Job search platform worldwide. We connect freelancers and startups in an easy way and good collaboration</p>
 
                     <div class="banner-input">
                         <form action="">
                             <select name="category" id="category">
-                                @foreach ($master_categories as $item)
+                                @foreach($master_categories as $item)
                                    <option value="{{$item}}" {{$item == trim(request()->input('category')) ? 'selected' : ''}}>{{ucwords($item)}}</option>
                                 @endforeach    
                             </select>
@@ -54,7 +53,7 @@
             </div>
             <div class="col-lg-6 col-md-6 col-12 text-center text-lg-end">
                 <div class="recommended-writers-right">
-                    <a href="" class="browse-writers">browse all writers</a>
+                    <a href="{{ route('front.marketplace.index') }}" class="browse-writers">browse all writers</a>
                 </div>
             </div>
         </div>

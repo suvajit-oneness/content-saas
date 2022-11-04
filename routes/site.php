@@ -53,12 +53,12 @@ Route::name('front.')->group(function () {
 
     //feature
     Route::name('feature.')->group(function () {
-        Route::get('/tools-feature', 'Front\FeatureController@index')->name('index');
+        Route::get('/tool', 'Front\FeatureController@index')->name('index');
     });
 
     //price
     Route::name('price.')->group(function () {
-        Route::get('/plans-price', 'Front\PriceController@index')->name('index');
+        Route::get('/pricing', 'Front\PriceController@index')->name('index');
     });
 
     //support
@@ -100,19 +100,32 @@ Route::name('front.')->group(function () {
         Route::name('dashboard.')->group(function () {
             Route::get('/dashboard', 'Front\DashboardController@index')->name('index');
         });
+
+        // job
         Route::name('job.')->group(function () {
             Route::get('/job', 'Front\JobController@index')->name('index');
             Route::get('/job/{slug}', 'Front\JobController@details')->name('details');
             Route::post('/save/job', 'Front\JobController@store')->name('save');
             Route::post('/apply/job', 'Front\JobController@jobapply')->name('apply');
-            Route::post('/apply/job/store', 'Front\JobController@jobapplystore')->name('store');
-
+            // Route::post('/apply/job/store', 'Front\JobController@jobapplystore')->name('store');
         });
-        //show template
+
+        // template
         Route::name('template.')->group(function () {
             Route::get('/template', 'Front\TemplateController@index')->name('index');
             Route::get('/template/{slug}', 'Front\TemplateController@details')->name('details');
             Route::post('/save/template', 'Front\TemplateController@store')->name('save');
+        });
+
+        // project
+        Route::name('project.')->group(function () {
+            Route::get('/project', 'Front\ProjectController@index')->name('index');
+            Route::get('/project/create', 'Front\ProjectController@create')->name('create');
+            Route::post('/project/store', 'Front\ProjectController@store')->name('store');
+            Route::get('/project/{slug}', 'Front\ProjectController@detail')->name('detail');
+            Route::get('/project/delete/{id}', 'Front\ProjectController@delete')->name('delete');
+            Route::get('/project/edit/{id}', 'Front\ProjectController@edit')->name('edit');
+            Route::post('/project/update/{id}', 'Front\ProjectController@update')->name('update');
         });
 
         Route::prefix('user/post-content')->name('user.post-content.')->group(function(){

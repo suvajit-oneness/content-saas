@@ -49,9 +49,9 @@
                                     <th> Description </th>
                                     <th> Start Date </th>
                                     <th> Status </th>
-                                    <th> Featured Status </th>
+                                    <th> Featured </th>
                                     <th> Beginner Friendly </th>
-                                    <th> Application </th>
+                                    <th> Applicant </th>
                                     <th style="width:100px; min-width:100px;" class="text-center">Action</th>
                                 </tr>
                             </thead>

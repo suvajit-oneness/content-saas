@@ -63,21 +63,24 @@ class JobCategoryRepository extends BaseRepository implements JobCategoryContrac
     public function createCategory(array $params)
     {
         try {
-
             $collection = collect($params);
 
             $category = new JobCategory;
             $category->title = $collection['title'];
             $category->description = $collection['description'];
-            $slug = Str::slug($collection['title'], '-');
-            $slugExistCount = JobCategory::where('slug', $slug)->count();
-            if ($slugExistCount > 0) $slug = $slug.'-'.($slugExistCount+1);
-            $category->slug = $slug;
+
+            // $slug = Str::slug($collection['title'], '-');
+            // $slugExistCount = JobCategory::where('slug', $slug)->count();
+            // if ($slugExistCount > 0) $slug = $slug.'-'.($slugExistCount+1);
+            $category->slug = slugGenerate($collection['title'], 'job_categories');
+
             if(!empty($params['image'])){
                 // image, folder name only
                 $category->image = imageUpload($params['image'], 'jobcategory');
             }
+            $category->status = 1;
             $category->save();
+            // dd($category);
 
             return $category;
 

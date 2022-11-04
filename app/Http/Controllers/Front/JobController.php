@@ -11,22 +11,81 @@ use App\Models\JobUser;
 use App\Models\JobTag;
 use App\Contracts\JobContract;
 use Illuminate\Support\Facades\Validator;
-class JobController extends Controller{
+use Illuminate\Support\Facades\DB;
 
-protected $JobRepository;
+class JobController extends Controller {
 
-/**
- * StateManagementController constructor.
- * @param PincodeRepository $StateRepository
- */
+    protected $JobRepository;
 
-public function __construct(JobContract $JobRepository)
-{
-    $this->JobRepository = $JobRepository;
-}
+    public function __construct(JobContract $JobRepository)
+    {
+        $this->JobRepository = $JobRepository;
+    }
 
     public function index(Request $request)
     {
+        if (!empty($request->filter)) {
+            $keyword = $request->keyword;
+            $employment_type = $request->employment_type;
+            $salary = $request->salary;
+            $source = $request->source;
+            $featured = $request->featured_flag;
+            $beginner_friendly = $request->beginner_friendly;
+
+            DB::enableQueryLog();
+
+            $job = Job::where('status', 1)
+            ->when($keyword, function ($query, $keyword) {
+                return $query->where('title', 'like', '%'.$keyword.'%');
+            })
+            ->when($salary, function($query, $salary) {
+                return $query->where('salary', $salary);
+            })
+            ->when($source, function($query, $source) {
+                return $query->where('source', $source);
+            })
+            ->when($featured, function($query, $featured) {
+                return $query->where('featured_flag', $featured);
+            })
+            ->when($beginner_friendly, function($query, $beginner_friendly) {
+                return $query->where('beginner_friendly', $beginner_friendly);
+            })
+            ->when($employment_type, function($query, $employment_type) {
+                if (count($employment_type) > 1) {
+                    foreach($employment_type as $key => $employment) {
+                        if ($key == 0) {
+                            $queryUpdt = $query->where('employment_type', $employment);
+                        } else {
+                            $queryUpdt = $query->orWhere('employment_type', $employment);
+                        }
+                    }
+                    return $queryUpdt;
+                } else {
+                    return $query->where('employment_type', $employment_type[0]);
+                }
+            })
+            ->latest('id')
+            ->paginate(10);
+
+            // dd(DB::getQueryLog());
+
+            // dd($request->all(), $job);
+        } else {
+            $job = Job::where('status', 1)->orWhere('featured_flag', 1)->latest('id')->paginate(10);
+        }
+
+        $category = JobCategory::where('status',1)->orderby('title')->get();
+        $tag = JobTag::orderby('title')->get();
+
+        return view('front.job.index',compact('job','category','tag'));
+
+
+
+
+
+
+
+        /*
 
         if (isset($request->keyword) || isset($request->employment_type) || isset($request->address)||isset($request->salary) || isset($request->source)||isset($request->featured_flag)||isset($request->beginner_friendly)){
 
@@ -56,14 +115,34 @@ public function __construct(JobContract $JobRepository)
         $category=JobCategory::where('status',1)->orderby('title')->get();
         $tag=JobTag::orderby('title')->get();
         return view('front.job.index',compact('job','category','tag'));
+
+        */
     }
+
     public function details(Request $request,$slug)
     {
-        $job=Job::where('slug',$slug)->get();
-        $category=JobCategory::where('status',1)->orderby('title')->get();
-        $tag=JobTag::orderby('title')->get();
-        return view('front.job.details',compact('job','category','tag'));
+        $job = Job::where('slug',$slug)->get();
+        $category = JobCategory::where('status',1)->orderby('title')->get();
+        $tag = JobTag::orderby('title')->get();
+
+        // check if job is already applied
+        if (auth()->guard('web')->user()->id) {
+            $jobApplied = ApplyJob::where('job_id', $job[0]->id)->where('user_id', auth()->guard('web')->user()->id,)->first();
+        }
+        // else {
+        //     $collectionExistsCheck = \App\Models\ApplyJob::where('job_id', $job[0]->id)
+        //         ->where(
+        //             'user_id',
+        //             auth()
+        //                 ->guard('web')
+        //                 ->user()->id,
+        //         )
+        //         ->first();
+        // }
+
+        return view('front.job.details',compact('job', 'category', 'tag', 'jobApplied'));
     }
+
     public function store(Request $request){
 	    // check if collection already exists
         if(auth()->guard('user')->check()) {
@@ -74,7 +153,7 @@ public function __construct(JobContract $JobRepository)
         if($collectionExistsCheck != null) {
             // if found
             $data = JobUser::destroy($collectionExistsCheck->id);
-            return response()->json(['status' => 200, 'type' => 'remove', 'message' => 'Job removed from saved']);
+            return response()->json(['status' => 200, 'type' => 'remove', 'message' => 'Job removed from savelist']);
         } else {
             // if not found
             $data = new JobUser();
@@ -84,64 +163,57 @@ public function __construct(JobContract $JobRepository)
             return response()->json(['status' => 200, 'type' => 'add', 'message' => 'Job saved']);
         }
 	}
+
     public function jobapply(Request $request){
-        //dd($request->all());
+        // dd($request->all());
+
         $request->validate([
-            'cv'      =>  'required',
-
+            'job_id' => 'required|integer|min:1',
+            'name' => 'required|string|min:2|max:255',
+            'email' => 'required|email|min:2|max:255',
+            'mobile' => 'required|integer',
+            'cv' => 'required'
         ]);
-             $params = $request->except('_token');
-             $data = $this->JobRepository->applyjob($params);
-            // if not found
-           /* $data = new ApplyJob();
-            $data->user_id = auth()->guard('web')->user() ? auth()->guard('web')->user()->id : 0;
-            $data->job_id = $request->id;
-            $data->cv = $request->cv;
-            $data->save();*/
-            if ($data) {
-                return redirect()->back()->with('success','Job Applied');
-                } else {
-                    return redirect()->back()->with('failure','Something happened');
-                }
 
-           // return response()->json(['status' => 200, 'type' => 'add', 'message' => 'Job Applied']);
+        $params = $request->except('_token');
+        $data = $this->JobRepository->applyjob($params);
+
+        if ($data) {
+            return redirect()->back()->with('success', 'Successfully Applied for this Job');
+        } else {
+            return redirect()->back()->with('failure', 'Something happened');
         }
-        public function jobapplystore(Request $request){
-       // dd($request->all());
-            $validator = Validator::make($request->all(), [
-                 'cv'      =>  'required',
-             ]);
-             if (!$validator->fails()) {
+    }
 
-                $params = array(
-                    'user_id' => auth()->guard('web')->user()->id ?? '',
-                    'job_id' => $request->job_id ?? '',
-                    'cv'    => $request->cv ?? ''
-                );
+    /*
+    public function jobapplystore(Request $request) {
+        // dd($request->all());
 
-              /*  $data = new ApplyJob();
-                $data->user_id = auth()->guard('web')->user() ? auth()->guard('web')->user()->id : 0;
-                $data->job_id = $request->id;
-               // $data->cv = $request->cv;
-               if(!empty($params['cv'])){
-                // image, folder name only
-                $profile_image = $params['cv'];
-                $imageName = time().".".$profile_image->getClientOriginalName();
-                $profile_image->move("jobresume/",$imageName);
-                $uploadedImage = $imageName;
-                $data->cv = $uploadedImage;
-             }
-                 $data->save();*/
-                 $data = $this->JobRepository->applyjob($params);
-                if ($data) {
-                    return response()->json(['error' => false, 'message' => 'Job Applied']);
-                } else {
-                    return response()->json(['error' => true, 'message' => 'Something happened']);
-                }
+        $validator = Validator::make($request->all(), [
+            'job_id' => 'required|integer|min:1',
+            'name' => 'required|string|min:2|max:255',
+            'email' => 'required|email|min:2|max:255',
+            'mobile' => 'required|integer',
+            'cv' => 'required'
+        ]);
 
+        if (!$validator->fails()) {
+            $params = array(
+                'user_id' => auth()->guard('web')->user()->id ?? '',
+                'job_id' => $request->job_id ?? '',
+                'cv' => $request->cv ?? ''
+            );
+
+            $data = $this->JobRepository->applyjob($params);
+
+            if ($data) {
+                return response()->json(['error' => false, 'message' => 'Successfully Applied for this Job']);
+            } else {
+                return response()->json(['error' => true, 'message' => 'Something happened']);
+            }
         } else {
             return response()->json(['error' => true, 'message' => $validator->errors()->first()]);
         }
-
-}
+    }
+    */
 }

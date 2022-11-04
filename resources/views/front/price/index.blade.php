@@ -16,8 +16,11 @@
                         </small>
                         <div class="select">
                             <select>
-                                <option value="">united state doller($)</option>
-
+                                {{-- <option value="">united state ($)</option> --}}
+                                <option value="">$ (USD)</option>
+                                <option value="">£ (GBP)</option>
+                                <option value="">AU$ (AUD)</option>
+                                <option value="">€ (EUR)</option>
                             </select>
                         </div>
                     </div>
@@ -80,7 +83,7 @@
                             <p>Power-up your business.</p>
                             <a href="" class="button">Start Free Today</a>
                             <div class="limited-access">
-                                <span>$60</span> / <small>for limited access</small>
+                                <span>$20</span> / <small>per month</small>
                             </div>
 
                             <ul class="offers p-0 m-0 mt-4">

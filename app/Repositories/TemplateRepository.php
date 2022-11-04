@@ -12,6 +12,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Doctrine\Instantiator\Exception\InvalidArgumentException;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class TemplateRepository
@@ -80,7 +81,7 @@ class TemplateRepository extends BaseRepository implements TemplateContract
             }
             if(!empty($params['image'])){
                 // file, folder name only
-            $template->image = imageUpload($params['image'], 'template');
+                $template->image = imageUpload($params['image'], 'template');
             }
             $template->save();
             return $template;
@@ -103,11 +104,11 @@ class TemplateRepository extends BaseRepository implements TemplateContract
         $template->type = $collection['type'];
         if(!empty($params['file'])){
             // file, folder name only
-        $template->file = imageUpload($params['file'], 'template');
+            $template->file = imageUpload($params['file'], 'template');
         }
         if(!empty($params['image'])){
             // file, folder name only
-        $template->image = imageUpload($params['image'], 'template');
+            $template->image = imageUpload($params['image'], 'template');
         }
         $template->save();
         return $template;
@@ -180,13 +181,17 @@ class TemplateRepository extends BaseRepository implements TemplateContract
      */
     public function getSearchTemplate(string $term)
     {
-        return Template::where([['title', 'LIKE', '%' . $term . '%']])
-
-        ->paginate(35);
+        return Template::where([['title', 'LIKE', '%' . $term . '%']])->paginate(35);
     }
-    public function searchTemplatefrontData($category,$subcategory,$type,$templateData){
+
+    public function searchTemplatefrontData($keyword, $category, $subcategory, $type) {
+        DB::enableQueryLog();
+
         $template = Template::when($category, function($query) use ($category){
             $query->where('cat_id', 'like' , '%' . $category .'%');
+        })
+        ->when($keyword, function($query) use ($keyword){
+            $query->where('title', 'like', '%' . $keyword .'%');
         })
         ->when($subcategory, function($query) use ($subcategory){
             $query->where('sub_cat_id','like' , '%' . $subcategory .'%');
@@ -194,10 +199,10 @@ class TemplateRepository extends BaseRepository implements TemplateContract
         ->when($type, function($query) use ($type){
             $query->where('type', 'like', '%' . $type .'%');
         })
-        ->when($templateData, function($query) use ($templateData){
-            $query->where('title', 'like', '%' . $templateData .'%');
-        })
-        ->paginate(15);
-      return $template;
+        ->paginate(10);
+
+        // dd(DB::getQueryLog());
+
+        return $template;
     }
 }

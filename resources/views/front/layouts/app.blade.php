@@ -42,24 +42,24 @@
                             href="{{ route('front.market.index') }}">Markets</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->is('feature') ? 'active' : '' }}"
+                        <a class="nav-link {{ request()->is('tool*') ? 'active' : '' }}"
                             href="{{ route('front.feature.index') }}">Tools & Features</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->is('support') ? 'active' : '' }}"
+                        <a class="nav-link {{ request()->is('support*') ? 'active' : '' }}"
                             href="{{ route('front.support.index') }}">Support</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->is('blog') ? 'active' : '' }}"
+                        <a class="nav-link {{ request()->is('blog*') ? 'active' : '' }}"
                             href="{{ route('front.article') }}">Blog</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->is('plans-price') ? 'active' : '' }}"
+                        <a class="nav-link {{ request()->is('pricing*') ? 'active' : '' }}"
                             href="{{ route('front.price.index') }}">Plans & Pricing</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->is('marketplace') ? 'active' : '' }}"
+                        <a class="nav-link {{ request()->is('marketplace*') ? 'active' : '' }}"
                             href="{{ route('front.marketplace.index') }}">Freelancers Marketplace</a>
                     </li>
 

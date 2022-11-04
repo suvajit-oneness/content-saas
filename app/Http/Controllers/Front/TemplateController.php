@@ -10,6 +10,7 @@ use App\Models\TemplateType;
 use App\Models\Template;
 use App\Contracts\TemplateContract;
 use Illuminate\Support\Facades\Validator;
+
 class TemplateController extends Controller
 {
     protected $TemplateRepository;
@@ -25,22 +26,23 @@ class TemplateController extends Controller
     }
     public function index(Request $request)
     {
-        if (isset($request->cat_id) || isset($request->sub_cat_id) || isset($request->type)||isset($request->file)){
-            $category = (isset($request->cat_id) && $request->cat_id!='')?$request->cat_id:'';
+        if (!empty($request->filter)) {
+            // dd($request->all());
 
-            $subcategory = (isset($request->sub_cat_id) && $request->sub_cat_id!='')? $request->sub_cat_id:'';
+            $keyword = !empty($request->keyword) ? $request->keyword : '';
+            $category = (!empty($request->cat_id) && $request->cat_id!='')?$request->cat_id:'';
+            $subcategory = (!empty($request->sub_cat_id) && $request->sub_cat_id!='')? $request->sub_cat_id:'';
+            $type = (!empty($request->type) && $request->type!='')?$request->type:'';
 
-            $type = (isset($request->type) && $request->type!='')?$request->type:'';
+            $template = $this->TemplateRepository->searchTemplatefrontData($keyword, $category, $subcategory, $type);
+        } else{
+            $template = Template::where('status',1)->orderby('title')->paginate(10);
+        }
 
-            $templateData = (isset($request->file) && $request->file!='')?$request->file:'';
-            $template = $this->TemplateRepository->searchTemplatefrontData($category,$subcategory,$type,$templateData);
-            }
-            else{
-            $template=Template::where('status',1)->orderby('title')->get();
-            }
         $category=TemplateCategory::where('status',1)->orderby('title')->get();
         $subcategory=TemplateSubCategory::where('status',1)->orderby('title')->get();
         $type=TemplateType::orderby('title')->get();
-        return view('front.template.index',compact('template','category','subcategory','type'));
+
+        return view('front.template.index',compact('template', 'category', 'subcategory', 'type'));
     }
 }

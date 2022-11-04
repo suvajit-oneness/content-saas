@@ -73,8 +73,12 @@
                             @enderror
                         </div>
                         <div class="form-group">
+                            <label class="control-label" for="short_description">Short Description</label>
+                            <textarea class="form-control" rows="4" name="short_description" id="short_description">{{ old('short_description') ?? $Job->short_description }}</textarea>
+                        </div>
+                        <div class="form-group">
                             <label class="control-label" for="description">Description</label>
-                            <textarea class="form-control" rows="4" name="description" id="description">{{ old('description', $Job->description) }}</textarea>
+                            <textarea class="form-control" rows="4" name="description" id="description">{{ old('description') ?? $Job->description }}</textarea>
                         </div>
                         <div class="form-group">
                             <div class="select-floating-admin">

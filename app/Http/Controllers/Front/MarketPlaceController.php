@@ -15,12 +15,16 @@ class MarketPlaceController extends Controller
         $master_categories = [];
         $all_writers = User::all();
         foreach ($all_writers as $key => $value) {
-            foreach (explode(',',$value->categories) as $key => $data) {
+            foreach (explode(', ',$value->categories) as $key => $data) {
                 if(!in_array($data,$master_categories)){
-                    array_push($master_categories,$data);
+                    array_push($master_categories, $data);
                 }
             }
         }
+
+        // $master_categories = sort($master_categories);
+
+        // dd($master_categories);
 
         if(!empty($request->category)){
             $writers = $writers->where('categories','like','%'.$request->category.'%');
@@ -36,6 +40,6 @@ class MarketPlaceController extends Controller
 
         // $marketplacefaqheaders = MarketPlaceFaq::where('status', 1)->get();
 
-        return view('front.marketplace.index',compact('writers','master_categories', 'all_writers', 'marketplacefaq'));
+        return view('front.marketplace.index',compact('writers', 'master_categories', 'all_writers', 'marketplacefaq'));
     }
 }

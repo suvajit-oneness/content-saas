@@ -35,19 +35,10 @@
                             <a href="{{ route('front.dashboard.index') }}" class="{{ request()->is('dashboard*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> home</a>
                         </li>
                         <li>
-                            <a href="{{ route('front.user.courses')}}"  class="{{ request()->is('user/my-courses') ? 'active' : '' }}"><i class="fa-solid fa-house"></i>My Courses</a>
-                            {{-- <a href="{{ route('front.portfolio.index', auth()->guard('web')->user()->slug) }}"><i class="fa-solid fa-house"></i> Portfolio</a> --}}
+                            <a href="{{ route('front.user.courses')}}"  class="{{ request()->is('user/my-courses') ? 'active' : '' }}"><i class="fa-solid fa-house"></i>Courses</a>
                         </li>
                         <li>
-                            <a href="{{ route('front.user.portfolio.index') }}" class="{{ request()->is('user/portfolio*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Manage Portfolio</a>
-
-                            {{-- <a href="{{ route('front.portfolio.edit', auth()->guard('web')->user()->slug) }}" class="{{ request()->is('user/portfolio/manage*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Manage Portfolio</a> --}}
-                        </li>
-                        <li>
-                            <a href="{{ route('front.user.profile.edit') }}" class="{{ request()->is('user/update/profile') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Profile</a>
-                        </li>
-                        <li>
-                            <a href="{{ route('front.user.portfolio.changePassword') }}" class="{{ request()->is('user/change/password') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Change Password</a>
+                            <a href="{{ route('front.user.portfolio.index') }}" class="{{ request()->is('user/portfolio*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Portfolio</a>
                         </li>
                         <li>
                             <a href="{{ route('front.job.index') }}" class="{{ request()->is('job*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Jobs</a>
@@ -55,9 +46,18 @@
                         <li>
                             <a href="{{ route('front.template.index') }}" class="{{ request()->is('template') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Template</a>
                         </li>
+                        <li>
+                            <a href="{{ route('front.project.index') }}" class="{{ request()->is('project*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Project</a>
+                        </li>
                         {{-- <li>
                             <a href="{{ route('front.user.post-content.index') }}" class="{{ request()->is('user/post-content*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Post Content</a>
                         </li> --}}
+                        <li>
+                            <a href="{{ route('front.user.profile.edit') }}" class="{{ request()->is('user/update/profile') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Profile</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('front.user.portfolio.changePassword') }}" class="{{ request()->is('user/change/password') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Change Password</a>
+                        </li>
                         <li>
                             <a href="{{ route('front.user.logout') }}" class="logout-bg"><i class="fas fa-sign-out-alt"></i>LOGOUT</a>
                         </li>
@@ -135,7 +135,7 @@
     <script type="text/javascript" src="{{ asset('frontend/js/jquery.sticky.js')}}"></script>
     <script type="text/javascript" src="{{ asset('frontend/js/custom.js')}}"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script> --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
     <script>
@@ -197,22 +197,24 @@
     </script>
     <script>
         // job bookmark/ save/ wishlist
-        function jobBookmark(collectionId) {
+        function jobBookmark(jobId) {
             $.ajax({
                 url: '{{ route('front.job.save') }}',
                 method: 'post',
                 data: {
                     '_token': '{{ csrf_token() }}',
-                    id: collectionId,
+                    id: jobId,
                 },
                 success: function(result) {
                     // alert(result);
                     if (result.type == 'add') {
-                        toastr.success(result.message);
-                        $('#saveBtn').attr('fill', '#fff');
+                        // toastr.success(result.message);
+                        toastFire("success", result.message);
+                        $('#saveBtn_'+jobId).attr('fill', '#cae47f');
                     } else {
-                        toastr.error(result.message);
-                        $('#saveBtn').attr('fill', 'none');
+                        toastFire("warning", result.message);
+                        // toastr.error(result.message);
+                        $('#saveBtn_'+jobId).attr('fill', '#fff');
                     }
                 }
             });

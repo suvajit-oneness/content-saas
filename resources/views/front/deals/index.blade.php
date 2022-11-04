@@ -92,7 +92,7 @@
                     @foreach ($deal as $dealProductkey => $data)
                         <div class="col-12 col-lg-4 col-md-6 mb-3 some-list-1">
                             <div class="card">
-                                <a href="#">
+                                <a href="{{$data->company_website_link}}" target="_blank">
                                     <img src="{{ asset($data->company_logo) }}" class="card-img-top">
                                 </a>
                                 <div class="card-body">
@@ -109,9 +109,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="location_btn">
-                                        <a href="{{$data->company_website_link}}" target="_blank" class="btn btn-success round">Add To Cart</a>
-                                    </div>
+                                    {{-- <div class="location_btn">
+                                        <a href="{{$data->company_website_link}}" target="_blank" class="btn btn-success round">Visit</a>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>

@@ -73,8 +73,12 @@
                             @enderror
                         </div>
                         <div class="form-group">
+                            <label class="control-label" for="short_description">Short Description</label>
+                            <textarea class="form-control" rows="4" name="short_description" id="short_description">{{ old('short_description') }}</textarea>
+                        </div>
+                        <div class="form-group">
                             <label class="control-label" for="description">Description</label>
-                            <textarea class="form-control" rows="4" name="description" id="description">{{ old('description') }}</textarea>
+                            <textarea class="form-control summernote" rows="4" name="description" id="description">{{ old('description') }}</textarea>
                         </div>
                         <div class="form-group">
                             <div class="select-floating-admin">
@@ -133,6 +137,7 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="location">Skill <span class="m-l-5 text-danger">*</span>
+                                (Comma separated)
                             </label>
                             <input class="form-control @error('skill') is-invalid @enderror" type="text" name="skill"
                                 id="skill" value="{{ old('skill') }}" />
@@ -143,6 +148,7 @@
                         <div class="form-group">
                             <label class="control-label" for="experience">Experience <span
                                     class="m-l-5 text-danger">*</span>
+                                (eg: 1-2 years/ 6 months minimum)
                             </label>
                             <input class="form-control @error('experience') is-invalid @enderror" type="text"
                                 name="experience" id="experience" value="{{ old('experience') }}" />
@@ -328,7 +334,7 @@
                         <div class="form-group">
                             <label class="control-label" for="tag">Tag <span
                                     class="m-l-5 text-danger"></span></label>
-                            <p class="small text-danger mb-2">(comma ,separated)</p>
+                            <p class="small text-danger mb-2">(comma separated)</p>
                             <input class="form-control @error('tag') is-invalid @enderror" type="text" name="tag"
                                 id="tag" value="{{ old('tag') }}" />
                             @error('tag')
@@ -356,13 +362,13 @@
     </div>
 @endsection
 @push('scripts')
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+    {{-- <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
     <script type="text/javascript">
         $('#description').summernote({
             height: 400
         });
-    </script>
+    </script> --}}
     <script>
         $(".help-box").hide();
         $("#item").click(function() {

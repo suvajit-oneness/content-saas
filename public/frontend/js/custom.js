@@ -57,21 +57,21 @@ $(function () {
 
   $(window).on("scroll", function () {
     if ($(window).scrollTop() > 104) {
-      $("nav").addClass("top");
+      $(".navbar").addClass("top");
     } else {
-      $("nav").removeClass("top");
+      $(".navbar").removeClass("top");
     }
   });
 
   $(document).ready(function () {
     $('.blog-list-panel').show();
-    $('.toolsFilter li').each(function(){
-        if($(this).find('label input[type="radio"]').prop('checked')==true){
-            var iValue= $(this).find('label input[type="radio"]').attr('value');
-            var targetBox = $("." + iValue);
-            $(".blog-list-panel").not(targetBox).hide();
-            $(targetBox).show();
-        }
+    $('.toolsFilter li').each(function () {
+      if ($(this).find('label input[type="radio"]').prop('checked') == true) {
+        var iValue = $(this).find('label input[type="radio"]').attr('value');
+        var targetBox = $("." + iValue);
+        $(".blog-list-panel").not(targetBox).hide();
+        $(targetBox).show();
+      }
     });
     $('.toolsFilter li label input[type="radio"]').click(function () {
       var inputValue = $(this).attr("value");
@@ -80,13 +80,13 @@ $(function () {
       $(targetBox).show();
     });
     $('.eventlist').show();
-    $('.toolsFilter li').each(function(){
-        if($(this).find('label input[type="radio"]').prop('checked')==true){
-            var iValue= $(this).find('label input[type="radio"]').attr('value');
-            var targetBox = $("." + iValue);
-            $(".eventlist").not(targetBox).hide();
-            $(targetBox).show();
-        }
+    $('.toolsFilter li').each(function () {
+      if ($(this).find('label input[type="radio"]').prop('checked') == true) {
+        var iValue = $(this).find('label input[type="radio"]').attr('value');
+        var targetBox = $("." + iValue);
+        $(".eventlist").not(targetBox).hide();
+        $(targetBox).show();
+      }
     });
     $('.toolsFilter li label input[type="radio"]').click(function () {
       var inputValue = $(this).attr("value");
@@ -376,21 +376,21 @@ const marketContents = document.querySelectorAll(".market-content .row");
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    marketTabs.forEach(marketTab => {
-        const tabData = marketTab.getAttribute("data-tab-market");
-        marketContents.forEach((marketContent) => {
-            const faqContentData = marketContent.getAttribute("id");
-            console.log(faqContentData);
-            if (tabData === faqContentData) {
-              marketContent.classList.add("active");
-            } else {
-              marketContent.classList.remove("active");
-            }
-          });
-    })
+  marketTabs.forEach(marketTab => {
+    const tabData = marketTab.getAttribute("data-tab-market");
+    marketContents.forEach((marketContent) => {
+      const faqContentData = marketContent.getAttribute("id");
+      console.log(faqContentData);
+      if (tabData === faqContentData) {
+        marketContent.classList.add("active");
+      } else {
+        marketContent.classList.remove("active");
+      }
+    });
+  })
 })
 marketTabs.forEach((marketTab) => {
-    $('.market-tab').show();
+  $('.market-tab').show();
   marketTab.addEventListener("click", (e) => {
     marketTab.classList.add("active");
 
@@ -560,7 +560,7 @@ const checkboxContentInputs = document.querySelectorAll(
   ".checkbox-content input"
 );
 
-filterKeywordsInput.focus();
+// filterKeywordsInput.focus();
 
 clearFilter.addEventListener("click", (e) => {
   if (filterKeywordsInput.value) {

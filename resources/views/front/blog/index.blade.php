@@ -58,12 +58,10 @@
 
     <div class="container">
         <div class="row blog_list">
-   @foreach($cat as $blogCategorykey => $blog)
-
-    @php
-        if($blog->blogDetails->count() == 0) { continue; }
-    @endphp
-
+        @foreach($cat as $blogCategorykey => $blog)
+            @php
+                if($blog->blogDetails->count() == 0) { continue; }
+            @endphp
            @foreach($blog->blogDetails as $blogProductkey => $data)
             <div class="col-12 col-lg-4 col-md-6 mb-3 blog-list-panel bloglist_{{ $data->article_category_id }}">
                 <a href="">
@@ -93,9 +91,8 @@
                 </a>
             </div>
             @endforeach
-
-    @endforeach
-    </div>
+        @endforeach
+        </div>
     </div>
     {{--  <div class="container text-center mt-4 mt-lg-5">
         <a href="#" class="load_more">Load more tools..</a>

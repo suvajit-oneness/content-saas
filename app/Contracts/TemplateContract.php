@@ -73,5 +73,5 @@ interface TemplateContract
      * @return mixed
      */
     public function getSearchTemplate(string $term);
-    public function searchTemplatefrontData($category,$subcategory,$type,$templateData);
+    public function searchTemplatefrontData($keyword, $category, $subcategory, $type);
 }

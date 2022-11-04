@@ -97,9 +97,11 @@ class JobRepository extends BaseRepository implements JobContract
             $job->payment = $collection['payment'] ?? '';
             $job->start_date = $collection['start_date'] ?? '';
             $job->end_date = $collection['end_date'] ?? '';
+            $job->short_description = $collection['short_description'] ?? '';
             $job->description = $collection['description'] ?? '';
-            $job->tag = $collection['tag'] ?? '';
+            // $job->tag = $collection['tag'] ?? '';
             $job->save();
+
             foreach (explode(',',$params['tag']) as $value) {
                 $blogTag=new JobTag();
                 $blogTag->job_id = $job->id ?? '';
@@ -152,6 +154,7 @@ class JobRepository extends BaseRepository implements JobContract
         $job->payment = $collection['payment'] ?? '';
         $job->start_date = $collection['start_date'] ?? '';
         $job->end_date = $collection['end_date'] ?? '';
+        $job->short_description = $collection['short_description'] ?? '';
         $job->description = $collection['description'] ?? '';
        // $job->tag = $collection['tag'] ?? '';
             $job->save();
@@ -285,26 +288,28 @@ class JobRepository extends BaseRepository implements JobContract
 
     return $job;
 }
-        public function applyjob(array $params){
-            try {
 
-                $collection = collect($params);
+    public function applyjob(array $params){
+        try {
+            $collection = collect($params);
 
-                $item = new ApplyJob();
-                $item->user_id = auth()->guard('web')->user()->id;
-                $item->job_id = $collection['job_id'];
-                if(!empty($params['cv'])){
-                    $item->cv = imageUpload($params['cv'], 'jobresume');
-                    }
-               // $item->cv = $collection['cv'];
-                $item->save();
-                return $item;
-            } catch (QueryException $exception) {
-                throw new InvalidArgumentException($exception->getMessage());
+            $item = new ApplyJob();
+
+            $item->job_id = $collection['job_id'];
+            $item->user_id = auth()->guard('web')->user()->id;
+            $item->name = $collection['name'];
+            $item->email = $collection['email'];
+            $item->mobile = $collection['mobile'];
+
+            if(!empty($params['cv'])){
+                $item->cv = imageUpload($params['cv'], 'resume');
             }
+            $item->save();
+
+            return $item;
+        } catch (QueryException $exception) {
+            throw new InvalidArgumentException($exception->getMessage());
         }
-
-
-
+    }
 
 }
