@@ -27,9 +27,9 @@
                             <label class="control-label" for="category"> Category <span class="m-l-5 text-danger">
                                     *</span></label>
                             <select class="form-control" name="category">
-                                <option value="" hidden selected>Select Categoy...</option>
+                                <option value="" selected >Select Categoy...</option>
                                 @foreach ($deal_category as $index => $item)
-                                    <option value="{{ $item->id }}">{{ $item->title }}</option>
+                                    <option value="{{ $item->id }}" {{old('category') == $item->id ? 'selected' : ''}}>{{ $item->title }}</option>
                                 @endforeach
                             </select>
                             @error('category')
@@ -37,8 +37,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="title">Deal title <span class="m-l-5 text-danger">
-                                    *</span></label>
+                            <label class="control-label" for="title">Deal title <span class="m-l-5 text-danger">*</span></label>
                             <input class="form-control @error('title') is-invalid @enderror" type="text" name="title"
                                 id="title" value="{{ old('title') }}" />
                             @error('title')
@@ -46,7 +45,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="description">Deal Description</label>
+                            <label class="control-label" for="description">Deal Description <span class="m-l-5 text-danger">*</span></label>
                             <textarea type="text" class="form-control" rows="4" name="description" id="description">{{ old('description') }}</textarea>
                             @error('description')
                                 <p class="small text-danger">{{ $message }}</p>
@@ -54,50 +53,47 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label" for="discount_amount">Deal discount</label>
-                            <input type="number" name="discount_amount" id="discount_amount" class="form-control">
+                            <label class="control-label" for="discount_amount">Deal discount <span class="m-l-5 text-danger">*</span></label>
+                            <input type="number" name="discount_amount" id="discount_amount" value="{{ old('discount_amount') }}" class="form-control">
                             @error('discount_amount')
                             <p class="small text-danger">{{ $message }}</p>
                             @enderror
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label" for="discount_type">Deal discount</label>
+                            <label class="control-label" for="discount_type">Deal discount <span class="m-l-5 text-danger">*</span></label>
                             <select name="discount_type" class="form-control"  id="discount_type">
-                                <option value="percentage">Percentage(%)</option>
-                                <option value="flat">Flat($)</option>
+                                <option value="percentage" {{old('discount_type') == 'percentage' ? 'selected' : ''}}>Percentage(%)</option>
+                                <option value="flat" {{old('discount_type') == 'flat' ? 'selected' : ''}}>Flat($)</option>
                             </select>
                             @error('discount_type')
                             <p class="small text-danger">{{ $message }}</p>
                             @enderror
                         </div>
-                        
-                        <h4>Additional Deal details</h4>
-                        <hr>
                         <div class="form-group">
-                            <label class="control-label" for="company_name">Company Name</label>
+                            <label class="control-label" for="company_name">Company Name <span class="m-l-5 text-danger">*</span></label>
                             <input type="text" name="company_name" id="company_name" value="{{old('company_name')}}" class="form-control">
                             @error('company_name')
                             <p class="small text-danger">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="company_description">Company description</label>
-                            <input type="text" name="company_description" id="company_description" class="form-control">
+                            <label class="control-label" for="company_description">Company description <span class="m-l-5 text-danger">*</span></label>
+                            <input type="text" name="company_description" value="{{old('company_description')}}" id="company_description" class="form-control">
                             @error('company_description')
                             <p class="small text-danger">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="company_website_link">Company website link</label>
-                            <input type="text" name="company_website_link" id="company_website_link" class="form-control">
+                            <label class="control-label" for="company_website_link">Company website link <span class="m-l-5 text-danger">*</span></label>
+                            <input type="text" name="company_website_link" id="company_website_link" value="{{old('company_website_link')}}" class="form-control">
                             @error('company_website_link')
                             <p class="small text-danger">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label class="control-label">Company logo</label>
-                            <input class="form-control @error('company_logo') is-invalid @enderror" type="file" id="company_logo" name="company_logo"/>
+                            <label class="control-label">Company logo <span class="m-l-5 text-danger">*</span></label>
+                            <input class="form-control @error('company_logo') is-invalid @enderror" value="{{old('company_logo')}}" type="file" id="company_logo" name="company_logo"/>
                             @error('company_logo')
                                 <p class="small text-danger">{{ $message }}</p>
                             @enderror

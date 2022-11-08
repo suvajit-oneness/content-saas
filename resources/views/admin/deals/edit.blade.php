@@ -25,8 +25,7 @@
                     <input type="hidden" name="id" value="{{$deal->id}}">
                     <div class="tile-body">
                         <div class="form-group">
-                            <label class="control-label" for="category"> Category <span class="m-l-5 text-danger">
-                                    *</span></label>
+                            <label class="control-label" for="category"> Category <span class="m-l-5 text-danger">*</span></label>
                             <select class="form-control" name="category">
                                 <option value="" hidden selected>Select Categoy...</option>
                                 @foreach ($deal_category as $index => $item)
@@ -47,7 +46,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="description">Deal Description</label>
+                            <label class="control-label" for="description">Deal Description <span class="m-l-5 text-danger">*</span></label>
                             <textarea type="text" class="form-control" rows="4" name="description" id="description">{{ old('description') ?? $deal->description }}</textarea>
                             @error('description')
                                 <p class="small text-danger">{{ $message }}</p>
@@ -55,7 +54,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label" for="discount_amount">Deal discount</label>
+                            <label class="control-label" for="discount_amount">Deal discount <span class="m-l-5 text-danger">*</span></label>
                             <input type="number" name="discount_amount" id="discount_amount" value="{{ old('discount_amount') ?? $deal->discount_amount }}" class="form-control">
                             @error('discount_amount')
                             <p class="small text-danger">{{ $message }}</p>
@@ -63,7 +62,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label" for="discount_type">Deal discount</label>
+                            <label class="control-label" for="discount_type">Deal discount <span class="m-l-5 text-danger">*</span></label>
                             <select name="discount_type" class="form-control" id="discount_type">
                                 <option value="flat" {{ old('discount_type') ?? $deal->discount_type ==  'flat' ? 'selected' : ''}}>Flat($)</option>
                                 <option value="percentage" {{ old('discount_type') ?? $deal->discount_type ==  'percentage' ? 'selected' : ''}}>Percentage(%)</option>
@@ -72,25 +71,22 @@
                             <p class="small text-danger">{{ $message }}</p>
                             @enderror
                         </div>
-                        
-                        <h4>Additional Deal details</h4>
-                        <hr>
                         <div class="form-group">
-                            <label class="control-label" for="company_name">Company Name</label>
+                            <label class="control-label" for="company_name">Company Name <span class="m-l-5 text-danger">*</span></label>
                             <input type="text" name="company_name" id="company_name" value="{{old('company_name') ?? $deal->company_name}}" class="form-control">
                             @error('company_name')
                             <p class="small text-danger">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="company_description">Company description</label>
+                            <label class="control-label" for="company_description">Company description <span class="m-l-5 text-danger">*</span></label>
                             <input type="text" name="company_description" value="{{old('company_description') ?? $deal->company_description}}" id="company_description" class="form-control">
                             @error('company_description')
                             <p class="small text-danger">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="company_website_link">Company website link</label>
+                            <label class="control-label" for="company_website_link">Company website link <span class="m-l-5 text-danger">*</span></label>
                             <input type="text" name="company_website_link" value="{{old('company_website_link') ?? $deal->company_website_link}}" id="company_website_link" class="form-control">
                             @error('company_website_link')
                             <p class="small text-danger">{{ $message }}</p>
@@ -101,7 +97,7 @@
                                 <img src="{{ asset($deal->company_logo) }}" alt="" class="w-100 mt-2">
                             </div>
                             <div class="col-md-10">
-                                <label class="control-label">Company logo</label>
+                                <label class="control-label">Company logo <span class="m-l-5 text-danger">*</span></label>
                                 <input class="form-control @error('company_logo') is-invalid @enderror" type="file" id="company_logo" name="company_logo"/>
                                 @error('company_logo')
                                     <p class="small text-danger">{{ $message }}</p>

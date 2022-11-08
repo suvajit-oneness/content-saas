@@ -12,18 +12,18 @@ class DealsController extends BaseController
 {
     public function index(Request $request)
     {
-        $pageTitle = "All Deals";
+        $this->setPageTitle('Deals Master', 'All deals!');
         if (!empty($request->term))
             $deals = Deal::where('title', 'like', '%' . $request->term . '%')->paginate(25);
         else
             $deals = Deal::paginate(25);
-        return view('admin.deals.index', compact('deals', 'pageTitle'));
+        return view('admin.deals.index', compact('deals'));
     }
 
     public function create()
     {
         $deal_category = DealCategory::orderBy('title')->get();
-        $this->setPageTitle('Course', 'Create new deal!');
+        $this->setPageTitle('Deals Master', 'Create new deal!');
         return view('admin.deals.create',compact('deal_category'));
     }
 
@@ -86,7 +86,7 @@ class DealsController extends BaseController
         $deal = Deal::find($id);
         $deal_category = DealCategory::orderBy('title')->get();
 
-        $this->setPageTitle('Edit Deal', 'Edit deal: '.$deal->title . '('.$deal->slug.')');
+        $this->setPageTitle('Deals Master', 'Edit deal: '.$deal->title . '('.$deal->slug.')');
 
         return view('admin.deals.edit', compact('deal_category', 'deal'));
     }
