@@ -16,24 +16,38 @@
                     <div class="tile-body">
                         <div class="form-group">
                             <label class="control-label" for="question">Header <span class="m-l-5 text-danger"> *</span></label>
-                            <input class="form-control @error('header') is-invalid @enderror" type="text" name="header" id="header" value="{{ old('header', $targetfaq->header) }}"/>
-                            <input type="hidden" name="id" value="{{ $targetfaq->id }}">
+                            <input class="form-control @error('header') is-invalid @enderror" type="text" name="header" id="header" value="{{ old('header', $targetfaq[0]->header) }}"/>
+                            <input type="hidden" name="id" value="{{ $targetfaq[0]->header_id }}">
                             @error('header') {{ $message }} @enderror
                         </div>
                     </div>
-                    <div class="tile-body">
-                        <div class="form-group">
-                            <label class="control-label" for="question">Question <span class="m-l-5 text-danger"> *</span></label>
-                            <input class="form-control @error('question') is-invalid @enderror" type="text" name="question" id="question" value="{{ old('question', $targetfaq->question) }}"/>
-                            @error('question') {{ $message }} @enderror
-                        </div>
+                    <div class="d-flex my-2">
+                        <div class="col-8"></div>
+                        <button type="button" id="addNewQuestion" class="btn btn-success col-4">Add New Question</button>
                     </div>
-                    <div class="tile-body">
-                        <div class="form-group">
-                            <label class="control-label" for="answer">Answer<span class="m-l-5 text-danger"> *</span></label>
-                            <input class="form-control @error('answer') is-invalid @enderror" type="text" name="answer" id="answer" value="{{ old('answer', $targetfaq->answer) }}"/>
-                            @error('answer') {{ $message ?? '' }} @enderror
-                        </div>
+                    <div class="completeSet my-2">
+                        @foreach($targetfaq as $key => $tf)
+                            <div class="eachRow my-1">
+                                <div class="tile-body">
+                                    <div class="form-group">
+                                        <label class="control-label" for="question">Questions <span id="q_no">{{$key+1}}</span> <span class="m-l-5 text-danger">*</span></label>
+                                        <input class="form-control" type="text" name="question[]" value="{{$tf->question}}" id="question"/>
+                                    </div>
+                                </div>
+                                <div class="tile-body">
+                                    <div class="form-group">
+                                        <label class="control-label" for="answer">Answers <span id="a_no">{{$key+1}}</span> <span class="m-l-5 text-danger">*</span></label>
+                                        <input class="form-control" type="text" name="answer[]" value="{{$tf->answer}}" id="answer"/>
+                                    </div>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="col-10"></div>
+                                    <div class="col-2 d-flex justify-content-end">
+                                        <button type="button" onclick="removeRow(this)" class="btn btn-warning btn-sm p-2">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
                     <div class="tile-footer">
                         <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Update faq</button>
@@ -45,3 +59,37 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+    <script>
+        $('#addNewQuestion').on('click',function(){
+            var total_row = $('.eachRow').length;
+            var html_content = 
+            '<div class="eachRow my-3">'+
+                '<div class="tile-body">'+
+                    '<div class="form-group">'+
+                        '<label class="control-label" for="question">Questions <span id="q_no">'+ (total_row+1) +'</span> <span class="m-l-5 text-danger">*</span></label>'+
+                        '<input class="form-control" type="text" name="question[]" id="question"/>'+
+                    '</div>'+
+                '</div>'+
+                '<div class="tile-body">'+
+                    '<div class="form-group">'+
+                        '<label class="control-label" for="answer">Answers <span id="a_no">'+ (total_row+1) +'</span><span class="m-l-5 text-danger">*</span></label>'+
+                        '<input class="form-control" type="text" name="answer[]" id="answer"/>'+
+                    '</div>'+
+                '</div>'+
+                '<div class="d-flex">'+
+                    '<div class="col-10"></div>'+
+                    '<div class="col-2 d-flex justify-content-end">'+
+                        '<button type="button" onclick="removeRow(this)" class="btn btn-warning btn-sm p-2">Delete</button>'+
+                    '</div>'+
+                '</div>'+
+            '</div>';
+
+            $('.completeSet').append(html_content);
+            
+        });
+        function removeRow(x) {
+            $(x).parent().parent().parent().remove();
+        }
+    </script>
+@endpush

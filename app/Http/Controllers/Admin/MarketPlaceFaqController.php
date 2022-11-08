@@ -35,9 +35,9 @@ class MarketPlaceFaqController extends BaseController
     public function index(Request $request)
     {
         if (!empty($request->term)) {
-            $faqs = MarketPlaceFaq::all();
+            $faqs = MarketPlaceFaq::groupBy('header_id')->all();
         } else {
-            $faqs = MarketPlaceFaq::paginate(15);
+            $faqs = MarketPlaceFaq::groupBy('header_id')->paginate(15);
         }
         $this->setPageTitle('Market faq', 'List of all Marketplace Faqs');
         return view('admin.marketplace.faq.index', compact('faqs'));
@@ -64,18 +64,33 @@ class MarketPlaceFaqController extends BaseController
             'question' => 'required',
             'answer' => 'required'
         ]);
-        $params = $request->except('_token');
-        
-        $marketplacefaq = new MarketPlaceFaq();
 
-        $marketplacefaq->header = $params['header'];
-        $marketplacefaq->question = $params['question'];
-        $marketplacefaq->answer = $params['answer'];
-
-
-        if (!$marketplacefaq->save()) {
-            return $this->responseRedirectBack('Error occurred while creating Market faq.', 'error', true, true);
+        if(count($request->question) == count($request->answer)){
+            foreach ($request->question as $key => $q) {
+                if($q != '' && $request->answer[$key] == ''){
+                    return $this->responseRedirectBack('All the questions and answer are not set properly!', 'error', true, true);
+                }
+            }
         }
+        else{
+            return $this->responseRedirectBack('All the questions and answer are not set properly!', 'error', true, true);
+        }
+        
+        $params = $request->except('_token');
+
+        $header = "hdr_" . uniqid();
+
+        for($i=0; $i<count($params['question']); $i++) { 
+            if($params['question'][$i] != ''){
+                $marketplacefaq = new MarketPlaceFaq();
+                $marketplacefaq->header = $params['header'];
+                $marketplacefaq->header_id = $header;
+                $marketplacefaq->question = $params['question'][$i];
+                $marketplacefaq->answer = $params['answer'][$i];
+                $marketplacefaq->save();
+            }
+        }
+
         return $this->responseRedirect('admin.marketplace.faq.index', 'Marketplace faqs has been created successfully', 'success', false, false);
     }
 
@@ -85,9 +100,9 @@ class MarketPlaceFaqController extends BaseController
      */
     public function edit($id)
     {
-        $targetfaq = MarketPlaceFaq::find($id);
+        $targetfaq = MarketPlaceFaq::where('header_id',$id)->get();
 
-        $this->setPageTitle('Market faq', 'Edit Market faq : ' . $targetfaq->header);
+        $this->setPageTitle('Market faq', 'Edit Market faq : ' . $targetfaq[0]->header);
         return view('admin.marketplace.faq.edit', compact('targetfaq'));
     }
 
@@ -103,18 +118,31 @@ class MarketPlaceFaqController extends BaseController
             'question' => 'required',
             'answer' => 'required'
         ]);
-        $params = $request->except('_token');
-        $marketplacefaq = MarketPlaceFaq::find($request->id);
 
-        $marketplacefaq->header = $params['header'];
-        $marketplacefaq->question = $params['question'];
-        $marketplacefaq->answer = $params['answer'];
-
-
-
-        if (!$marketplacefaq->save()) {
-            return $this->responseRedirectBack('Error occurred while updating Market faq.', 'error', true, true);
+        if(count($request->question) == count($request->answer)){
+            foreach ($request->question as $key => $q) {
+                if($q != '' && $request->answer[$key] == ''){
+                    return $this->responseRedirectBack('All the questions and answer are not set properly!', 'error', true, true);
+                }
+            }
         }
+        else{
+            return $this->responseRedirectBack('All the questions and answer are not set properly!', 'error', true, true);
+        }
+        $params = $request->except('_token');
+        $marketplacefaq = MarketPlaceFaq::where('header_id',$request->id)->delete();
+
+        for($i=0; $i<count($params['question']); $i++) { 
+            if($params['question'][$i] != ''){
+                $marketplacefaq = new MarketPlaceFaq();
+                $marketplacefaq->header = $params['header'];
+                $marketplacefaq->header_id = $params['id'];
+                $marketplacefaq->question = $params['question'][$i];
+                $marketplacefaq->answer = $params['answer'][$i];
+                $marketplacefaq->save();
+            }
+        }
+
         return $this->responseRedirectBack('Marketplace faq has been updated successfully', 'success', false, false);
     }
 
@@ -124,7 +152,7 @@ class MarketPlaceFaqController extends BaseController
      */
     public function delete($id)
     {
-        $faq = MarketPlaceFaq::find($id)->delete();
+        $faq = MarketPlaceFaq::where('header_id',$id)->delete();
 
         if (!$faq) {
             return $this->responseRedirectBack('Error occurred while deleting Market faq.', 'error', true, true);
@@ -141,8 +169,8 @@ class MarketPlaceFaqController extends BaseController
     {
 
         $params = $request->except('_token');
+        $faq = MarketPlaceFaq::where('header_id',$request->id)->update(['status'=>$request->check_status]);
 
-        $faq = MarketPlaceFaq::where('id',$request->id)->update(['status'=>$request->check_status]);
 
         if ($faq) {
             return response()->json(array('message' => 'Marketplace faq status has been successfully updated'));
@@ -155,9 +183,10 @@ class MarketPlaceFaqController extends BaseController
      */
     public function details($id)
     {
-        $faq = MarketPlaceFaq::find($id);
+        $faq = MarketPlaceFaq::where('header_id',$id)->get();
 
-        $this->setPageTitle('Market faq Details', 'Marketplace faq Details : ' . $faq->title);
+        $this->setPageTitle('Market faq Details', 'Marketplace faq Details : ' . $faq[0]->header);
+
         return view('admin.marketplace.faq.details', compact('faq'));
     }
 }

@@ -17,7 +17,7 @@
                     <div class="banner-input">
                         <form action="">
                             <select name="category" id="category">
-                                @foreach($master_categories as $item)
+                                @foreach ($master_categories as $item)
                                    <option value="{{$item}}" {{$item == trim(request()->input('category')) ? 'selected' : ''}}>{{ucwords($item)}}</option>
                                 @endforeach    
                             </select>
@@ -424,7 +424,7 @@
                 <div class="faq-tabs">
                     <ul class="p-0 m-0">
                         @foreach ($marketplacefaq as $key => $item)
-                            <li class="faq-tab {{$key == 0 ? 'active' : ''}}" data-tab="data_tab{{$item->id}}">{{$item->header}} 
+                            <li class="faq-tab {{$key == 0 ? 'active' : ''}}" data-tab="data_tab{{$item->header_id}}">{{$item->header}}  
                                 <div class="fac-tab-check">
                                     <img src="{{ asset('frontend/img/check-normal.png')}}" alt="">
                                 </div>
@@ -452,27 +452,27 @@
 
             <div class="col-md-9">
                 @foreach ($marketplacefaq as $key => $item)
-                    <div class="faq-content {{$key == 0 ? 'active' : ''}}" id="data_tab{{$item->id}}">
+                    <div class="faq-content {{$key == 0 ? 'active' : ''}}" id="data_tab{{$item->header_id}}">
                         <div class="faq-content-badge">
                             <span>{{$item->header}}</span>
                         </div>
                         <div class="accordion" id="accordionExample">
-                            @for ($i = 0; $i < count(explode(',',$item->question)); $i++)
+                            @foreach (App\Models\MarketPlaceFaq::where('header_id',$item->header_id)->get() as $i => $mfaq)
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="headingOne">
                                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                             data-bs-target="#collapsible{{$i}}" aria-expanded="false" aria-controls="collapsible{{$i}}">
-                                            {{ explode(',',$item->question)[$i] ?? ''}}
+                                            {{ $mfaq->question }}
                                         </button>
                                     </h2>
                                     <div id="collapsible{{$i}}" class="accordion-collapse collapse" aria-labelledby="headingOne"
                                         data-bs-parent="#accordionExample">
                                         <div class="accordion-body">
-                                            <p>{!! explode(',',$item->answer)[$i] ?? '' !!}</p>
+                                            <p>{!! $mfaq->answer ?? '' !!}</p>
                                         </div>
                                     </div>
                                 </div>
-                            @endfor
+                            @endforeach
                             {{-- <div class="accordion-item">
                                 <h2 class="accordion-header" id="headingTwo">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -546,7 +546,6 @@
                                 </div>
                             </div> --}}
                         </div>
-                    
                     </div>
                 @endforeach
                 {{-- <div class="faq-content" id="payments">

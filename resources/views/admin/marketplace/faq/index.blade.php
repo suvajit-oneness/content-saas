@@ -56,7 +56,7 @@
                                     <div class="toggle-button-cover margin-auto">
                                         <div class="button-cover">
                                             <div class="button-togglr b2" id="button-11">
-                                                <input id="toggle-block" type="checkbox" name="status" class="checkbox" data-faq_id="{{ $faq['id'] }}" {{ $faq['status'] == 1 ? 'checked' : '' }}>
+                                                <input id="toggle-block" type="checkbox" name="status" class="checkbox" data-faq_id="{{ $faq['header_id'] }}" {{ $faq['status'] == 1 ? 'checked' : '' }}>
                                                 <div class="knobs"><span>Pending</span></div>
                                                 <div class="layer"></div>
                                             </div>
@@ -65,9 +65,9 @@
                                 </td>
                                 <td class="text-center">
                                     <div class="btn-group" role="group" aria-label="Second group">
-                                        <a href="{{ route('admin.marketplace.faq.edit', $faq['id']) }}" class="btn btn-sm btn-primary edit-btn"><i class="fa fa-edit"></i></a>
-                                        <a href="{{ route('admin.marketplace.faq.details', $faq['id']) }}" class="btn btn-sm btn-primary edit-btn"><i class="fa fa-eye"></i></a>
-                                        <a href="#" data-id="{{$faq['id']}}" class="sa-remove btn btn-sm btn-danger edit-btn"><i class="fa fa-trash"></i></a>
+                                        <a href="{{ route('admin.marketplace.faq.edit', $faq['header_id']) }}" class="btn btn-sm btn-primary edit-btn"><i class="fa fa-edit"></i></a>
+                                        <a href="{{ route('admin.marketplace.faq.details', $faq['header_id']) }}" class="btn btn-sm btn-primary edit-btn"><i class="fa fa-eye"></i></a>
+                                        <a href="#" data-id="{{$faq['header_id']}}" class="sa-remove btn btn-sm btn-danger edit-btn"><i class="fa fa-trash"></i></a>
                                     </div>
                                 </td>
                                 </tr>

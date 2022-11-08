@@ -9,25 +9,25 @@
     </div>
     @include('admin.partials.flash')
     <div class="row">
-        <div class="col-sm-8">
+        <div class="col-sm-12">
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-10">
+                        <div class="col-md-12">
                             <table class="table">
                                 <tbody>
-                                    <tr>
-                                        <td colspan="2">{{$faq->header}}</td>
+                                    <tr class="text-center">
+                                        <td colspan="2">{{$faq[0]->header}}</td>
                                     </tr>
-                                    @for ($i = 0; $i < count(explode(',',$faq->question)); $i++)
+                                    @for ($i = 0; $i < count($faq); $i++)
                                         <tr>
-                                            <td width="15%" class="text-right text-uppercase">Question</td>
-                                            <td>{{ explode(',',$faq->question)[$i] ?? ''}}</td>
+                                            <td width="15%" class="text-right text-uppercase">Q.{{$i+1}})</td>
+                                            <td>{{ $faq[$i]->question }}</td>
                                         </tr>
                                         <tr>
-                                            <td width="15%" class="text-right text-uppercase">Answer</td>
-                                            <td>{!! explode(',',$faq->answer)[$i] ?? '' !!}</td>
-                                        </tr>    
+                                            <td width="15%" class="text-right text-uppercase">Answer:</td>
+                                            <td>{!! $faq[$i]->answer !!}</td>
+                                        </tr>
                                     @endfor
                                 </tbody>
                             </table>
@@ -36,8 +36,4 @@
                 </div>
             </div>
         </div>
-
-
-
-
 @endsection

@@ -36,9 +36,7 @@ class MarketPlaceController extends Controller
         
         $writers = $writers->paginate(9);
 
-        $marketplacefaq = MarketPlaceFaq::where('status',1)->get();
-
-        // $marketplacefaqheaders = MarketPlaceFaq::where('status', 1)->get();
+        $marketplacefaq = MarketPlaceFaq::groupBy('header_id')->where('status',1)->get();
 
         return view('front.marketplace.index',compact('writers', 'master_categories', 'all_writers', 'marketplacefaq'));
     }
