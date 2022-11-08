@@ -15,12 +15,14 @@
                 <h3 class="tile-title">{{ $subTitle }}</h3>
                 <form action="{{ route('admin.home.update') }}" method="POST" role="form" enctype="multipart/form-data">
                     @csrf
+                   
                     <div class="tile-body">
                         <div class="form-group">
                             <label class="control-label" for="title">Section One Title <span class="m-l-5 text-danger">
                                     *</span></label>
                             <input class="form-control @error('title') is-invalid @enderror" type="text" name="title"
                                 id="title" value="{{ old('title', $home->title) }}" />
+                                <input type="hidden" name="id" value="{{$home->id}}">
                             @error('title')
                                 {{ $message ?? '' }}
                             @enderror
@@ -375,12 +377,12 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label" for="section_four_title">Section Five Tag <span
+                            <label class="control-label" for="section_four_tag">Section Five Tag <span
                                     class="m-l-5 text-danger"> *</span></label>
-                            <input class="form-control @error('section_four_title') is-invalid @enderror" type="text"
-                                name="section_four_title" id="section_four_title"
-                                value="{{ old('section_four_title', $home->section_four_title) }}" />
-                            @error('section_four_title')
+                            <input class="form-control @error('section_four_tag') is-invalid @enderror" type="text"
+                                name="section_four_tag" id="section_four_tag"
+                                value="{{ old('section_four_tag', $home->section_four_tag) }}" />
+                            @error('section_four_tag')
                                 {{ $message ?? '' }}
                             @enderror
                         </div>
@@ -410,7 +412,7 @@
                             <label class="control-label" for="section_four_btn">Section Five Button <span
                                     class="m-l-5 text-danger"> *</span></label>
                             <input class="form-control @error('section_four_btn') is-invalid @enderror" type="text"
-                                name="btn_text" id="section_four_btn"
+                                name="section_four_btn" id="section_four_btn"
                                 value="{{ old('section_four_btn', $home->section_four_btn) }}" />
                             @error('section_four_btn')
                                 {{ $message ?? '' }}
@@ -431,18 +433,18 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-2">
-                                    @if ($home->video_image != null)
+                                    @if ($home->section_four_image != null)
                                         <figure class="mt-2" style="width: 80px; height: auto;">
-                                            <img src="{{ asset($home->video_image) }}" id="blogImage" class="img-fluid"
+                                            <img src="{{ asset($home->section_four_image) }}" id="blogImage" class="img-fluid"
                                                 alt="img">
                                         </figure>
                                     @endif
                                 </div>
                                 <div class="col-md-10">
                                     <label class="control-label"> Section Five Banner Image</label>
-                                    <input class="form-control @error('video_image') is-invalid @enderror" type="file"
-                                        id="video_image" name="video_image" />
-                                    @error('video_image')
+                                    <input class="form-control @error('section_four_image') is-invalid @enderror" type="file"
+                                        id="section_four_image" name="section_four_image" />
+                                    @error('section_four_image')
                                         {{ $message }}
                                     @enderror
                                 </div>
@@ -451,18 +453,18 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-2">
-                                    @if ($home->video_image != null)
+                                    @if ($home->section_five_icon != null)
                                         <figure class="mt-2" style="width: 80px; height: auto;">
-                                            <img src="{{ asset($home->video_image) }}" id="blogImage" class="img-fluid"
+                                            <img src="{{ asset($home->section_five_icon) }}" id="blogImage" class="img-fluid"
                                                 alt="img">
                                         </figure>
                                     @endif
                                 </div>
                                 <div class="col-md-10">
                                     <label class="control-label"> Section Six Icon</label>
-                                    <input class="form-control @error('video_image') is-invalid @enderror" type="file"
-                                        id="video_image" name="video_image" />
-                                    @error('video_image')
+                                    <input class="form-control @error('section_five_icon') is-invalid @enderror" type="file"
+                                        id="section_five_icon" name="section_five_icon" />
+                                    @error('section_five_icon')
                                         {{ $message }}
                                     @enderror
                                 </div>
@@ -470,51 +472,51 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label" for="title">Section Six Tag <span class="m-l-5 text-danger">
+                            <label class="control-label" for="section_five_tag">Section Six Tag <span class="m-l-5 text-danger">
                                     *</span></label>
-                            <input class="form-control @error('title') is-invalid @enderror" type="text"
-                                name="title" id="title" value="{{ old('title', $home->title) }}" />
-                            @error('title')
+                            <input class="form-control @error('section_five_tag') is-invalid @enderror" type="text"
+                                name="section_five_tag" id="section_five_tag" value="{{ old('section_five_tag', $home->section_five_tag) }}" />
+                            @error('section_five_tag')
                                 {{ $message ?? '' }}
                             @enderror
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label" for="title">Section Six Title <span
+                            <label class="control-label" for="section_five_title">Section Six Title <span
                                     class="m-l-5 text-danger"> *</span></label>
-                            <input class="form-control @error('title') is-invalid @enderror" type="text"
-                                name="title" id="title" value="{{ old('title', $home->title) }}" />
-                            @error('title')
+                            <input class="form-control @error('section_five_title') is-invalid @enderror" type="text"
+                                name="section_five_title" id="section_five_title" value="{{ old('section_five_title', $home->section_five_title) }}" />
+                            @error('section_five_title')
                                 {{ $message ?? '' }}
                             @enderror
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label" for="short_desc">Section Six Short Description <span
+                            <label class="control-label" for="section_five_short_desc">Section Six Short Description <span
                                     class="m-l-5 text-danger"> *</span></label>
-                            <textarea class="form-control @error('short_desc') is-invalid @enderror" type="text" name="short_desc"
-                                id="short_desc">{{ old('short_desc', $home->short_desc) }}</textarea>
-                            @error('short_desc')
+                            <textarea class="form-control @error('section_five_short_desc') is-invalid @enderror" type="text" name="section_five_short_desc"
+                                id="section_five_short_desc">{{ old('section_five_short_desc', $home->section_five_short_desc) }}</textarea>
+                            @error('section_five_short_desc')
                                 {{ $message ?? '' }}
                             @enderror
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label" for="btn_text">Section Six Button <span
+                            <label class="control-label" for="section_five_btn">Section Six Button <span
                                     class="m-l-5 text-danger"> *</span></label>
-                            <input class="form-control @error('btn_text') is-invalid @enderror" type="text"
-                                name="btn_text" id="btn_text" value="{{ old('btn_text', $home->btn_text) }}" />
-                            @error('btn_text')
+                            <input class="form-control @error('section_five_btn') is-invalid @enderror" type="text"
+                                name="section_five_btn" id="section_five_btn" value="{{ old('section_five_btn', $home->section_five_btn) }}" />
+                            @error('section_five_btn')
                                 {{ $message ?? '' }}
                             @enderror
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label" for="btn_link">Section Six Button Link <span
+                            <label class="control-label" for="section_five_btn_link">Section Six Button Link <span
                                     class="m-l-5 text-danger"> *</span></label>
-                            <input class="form-control @error('btn_link') is-invalid @enderror" type="text"
-                                name="btn_link" id="btn_link" value="{{ old('btn_link', $home->btn_link) }}" />
-                            @error('btn_link')
+                            <input class="form-control @error('section_five_btn_link') is-invalid @enderror" type="text"
+                                name="section_five_btn_link" id="section_five_btn_link" value="{{ old('section_five_btn_link', $home->section_five_btn_link) }}" />
+                            @error('section_five_btn_link')
                                 {{ $message ?? '' }}
                             @enderror
                         </div>
@@ -522,18 +524,18 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-2">
-                                    @if ($home->video_image != null)
+                                    @if ($home->section_five_image != null)
                                         <figure class="mt-2" style="width: 80px; height: auto;">
-                                            <img src="{{ asset($home->video_image) }}" id="blogImage" class="img-fluid"
+                                            <img src="{{ asset($home->section_five_image) }}" id="blogImage" class="img-fluid"
                                                 alt="img">
                                         </figure>
                                     @endif
                                 </div>
                                 <div class="col-md-10">
                                     <label class="control-label"> Section Six Banner Image</label>
-                                    <input class="form-control @error('video_image') is-invalid @enderror" type="file"
-                                        id="video_image" name="video_image" />
-                                    @error('video_image')
+                                    <input class="form-control @error('section_five_image') is-invalid @enderror" type="file"
+                                        id="section_five_image" name="section_five_image" />
+                                    @error('section_five_image')
                                         {{ $message }}
                                     @enderror
                                 </div>
@@ -541,51 +543,51 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label" for="title">Section Seven Tag <span
+                            <label class="control-label" for="section_six_tag">Section Seven Tag <span
                                     class="m-l-5 text-danger"> *</span></label>
-                            <input class="form-control @error('title') is-invalid @enderror" type="text"
-                                name="title" id="title" value="{{ old('title', $home->title) }}" />
-                            @error('title')
+                            <input class="form-control @error('section_six_tag') is-invalid @enderror" type="text"
+                                name="section_six_tag" id="section_six_tag" value="{{ old('section_six_tag', $home->section_six_tag) }}" />
+                            @error('section_six_tag')
                                 {{ $message ?? '' }}
                             @enderror
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label" for="title">Section Seven Title <span
+                            <label class="control-label" for="section_six_title">Section Seven Title <span
                                     class="m-l-5 text-danger"> *</span></label>
-                            <input class="form-control @error('title') is-invalid @enderror" type="text"
-                                name="title" id="title" value="{{ old('title', $home->title) }}" />
-                            @error('title')
+                            <input class="form-control @error('section_six_title') is-invalid @enderror" type="text"
+                                name="section_six_title" id="section_six_title" value="{{ old('section_six_title', $home->section_six_title) }}" />
+                            @error('section_six_title')
                                 {{ $message ?? '' }}
                             @enderror
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label" for="short_desc">Section Seven Short Description <span
+                            <label class="control-label" for="section_six_short_desc">Section Seven Short Description <span
                                     class="m-l-5 text-danger"> *</span></label>
-                            <textarea class="form-control @error('short_desc') is-invalid @enderror" type="text" name="short_desc"
-                                id="short_desc">{{ old('short_desc', $home->short_desc) }}</textarea>
-                            @error('short_desc')
+                            <textarea class="form-control @error('section_six_short_desc') is-invalid @enderror" type="text" name="section_six_short_desc"
+                                id="section_six_short_desc">{{ old('section_six_short_desc', $home->section_six_short_desc) }}</textarea>
+                            @error('section_six_short_desc')
                                 {{ $message ?? '' }}
                             @enderror
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label" for="btn_text">Section Seven Button <span
+                            <label class="control-label" for="section_six_btn">Section Seven Button <span
                                     class="m-l-5 text-danger"> *</span></label>
-                            <input class="form-control @error('btn_text') is-invalid @enderror" type="text"
-                                name="btn_text" id="btn_text" value="{{ old('btn_text', $home->btn_text) }}" />
-                            @error('btn_text')
+                            <input class="form-control @error('section_six_btn') is-invalid @enderror" type="text"
+                                name="section_six_btn" id="section_six_btn" value="{{ old('section_six_btn', $home->section_six_btn) }}" />
+                            @error('section_six_btn')
                                 {{ $message ?? '' }}
                             @enderror
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label" for="btn_link">Section Seven Button Link <span
+                            <label class="control-label" for="section_six_btn_link">Section Seven Button Link <span
                                     class="m-l-5 text-danger"> *</span></label>
-                            <input class="form-control @error('btn_link') is-invalid @enderror" type="text"
-                                name="btn_link" id="btn_link" value="{{ old('btn_link', $home->btn_link) }}" />
-                            @error('btn_link')
+                            <input class="form-control @error('section_six_btn_link') is-invalid @enderror" type="text"
+                                name="section_six_btn_link" id="section_six_btn_link" value="{{ old('section_six_btn_link', $home->section_six_btn_link) }}" />
+                            @error('section_six_btn_link')
                                 {{ $message ?? '' }}
                             @enderror
                         </div>
@@ -593,18 +595,18 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-2">
-                                    @if ($home->video_image != null)
+                                    @if ($home->section_six_image != null)
                                         <figure class="mt-2" style="width: 80px; height: auto;">
-                                            <img src="{{ asset($home->video_image) }}" id="blogImage" class="img-fluid"
+                                            <img src="{{ asset($home->section_six_image) }}" id="blogImage" class="img-fluid"
                                                 alt="img">
                                         </figure>
                                     @endif
                                 </div>
                                 <div class="col-md-10">
                                     <label class="control-label"> Section Seven Banner Image</label>
-                                    <input class="form-control @error('video_image') is-invalid @enderror" type="file"
-                                        id="video_image" name="video_image" />
-                                    @error('video_image')
+                                    <input class="form-control @error('section_six_image') is-invalid @enderror" type="file"
+                                        id="section_six_image" name="section_six_image" />
+                                    @error('section_six_image')
                                         {{ $message }}
                                     @enderror
                                 </div>
@@ -651,9 +653,7 @@
         $('#section_six_short_desc').summernote({
             height: 400
         });
-        $('#section_six_short_desc').summernote({
-            height: 400
-        });
+       
        
         
        
