@@ -47,11 +47,31 @@
                                             </figure>
                                         @endif
                                     </div>
-                                <div class="col-md-10">
-                                <label class="control-label">Profile Image</label>
-                                <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image"/>
-                                @error('image') {{ $message }} @enderror
-                                </div></div></div><br>
+                                    <div class="col-md-10">
+                                        <label class="control-label">Profile Image</label>
+                                        <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image"/>
+                                        @error('image') {{ $message }} @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        @if (Auth::guard('web')->user()->intro_video != null)
+                                            <figure class="mt-2" style="width: 80px; height: auto;">
+                                                <video src="{{ asset(auth()->guard('web')->user()->intro_video) }}" id="articleImage" class="img-fluid" alt=""></video>
+                                            </figure>
+                                        @endif
+                                    </div>
+                                    <div class="col-md-10">
+                                        <label class="control-label">Short Video</label>
+                                        <input class="form-control @error('intro_video') is-invalid @enderror" type="file" id="intro_video" name="intro_video"/>
+                                        @error('intro_video') {{ $message }} @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
                             <div class="form-group">
                                 <label class="control-label" for="mobile">Mobile<span class="m-l-5 text-danger">
                                         *</span></label>

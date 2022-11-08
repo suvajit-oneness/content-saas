@@ -61,6 +61,11 @@ class ProfileRepository extends BaseRepository implements ProfileContract
             // $user->image = $uploadedImage;
         }
 
+        if(!empty($params['intro_video'])){
+            dd($params['intro_video']);
+            $user->intro_video = imageUpload($params['intro_video'], 'user/video');
+        }
+
         if(!empty($params['banner_image'])){
             // image, folder name only
             $user->banner_image = imageUpload($params['banner_image'], 'user-banner');

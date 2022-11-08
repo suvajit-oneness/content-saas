@@ -141,27 +141,28 @@
      {{-- New Add --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.js"></script>
     <script type="text/javascript">
-    $('.sa-remove').on("click",function(){
-        var dataid = $(this).data('id');
-        swal({
-          title: "Are you sure?",
-          text: "Your will not be able to recover the record!",
-          type: "warning",
-          showCancelButton: true,
-          confirmButtonClass: "btn-danger",
-          confirmButtonText: "Yes, delete it!",
-          closeOnConfirm: false
-        },
-        function(isConfirm){
-          if (isConfirm) {
-            window.location.href = "job/"+dataid+"/delete";
-            } else {
-              swal("Cancelled", "Record is safe", "error");
-            }
+        $('.sa-remove').on("click",function(){
+            var dataid = $(this).data('id');
+            swal({
+            title: "Are you sure?",
+            text: "Your will not be able to recover the record!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonClass: "btn-danger",
+            confirmButtonText: "Yes, delete it!",
+            closeOnConfirm: false
+            },
+            function(isConfirm){
+            if (isConfirm) {
+                window.location.href = "job/"+dataid+"/delete";
+                } else {
+                swal("Cancelled", "Record is safe", "error");
+                }
+            });
         });
-    });
+    </script>
     <script type="text/javascript">
-        $('input[id="toggle-block"]').change(function() {
+        $('input[name="status"]').change(function() {
             var job_id = $(this).data('job_id');
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             var check_status = 0;
@@ -188,7 +189,7 @@
         });
     </script>
     <script type="text/javascript">
-        $('input[id="toggle-block"]').change(function() {
+        $('input[name="featured_flag"]').change(function() {
             var feature_id = $(this).data('job_id');
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             var check_status = 0;
@@ -216,7 +217,7 @@
     </script>
 
     <script type="text/javascript">
-        $('input[id="toggle-block"]').change(function() {
+        $('input[name="beginner_friendly"]').change(function() {
             var beginner_friendly = $(this).data('job_id');
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             var check_status = 0;
