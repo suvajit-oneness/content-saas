@@ -101,7 +101,7 @@
                                     </div>
                                     <div class="location_btn">
                                         <div class="d-flex align-items-baseline">
-                                            <h5 class="card-title mt-3">{{ $data->description }}</h5>
+                                            <h5 class="card-title mt-3">{{ substr($data->description,'0','30') }}...</h5>
                                             <div class="">
                                                 <span class="date mx-3">
                                                     {{ date('d M Y', strtotime($data->created_at)) }}
@@ -109,9 +109,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                    {{-- <div class="location_btn">
-                                        <a href="{{$data->company_website_link}}" target="_blank" class="btn btn-success round">Visit</a>
-                                    </div> --}}
+                                    <div class="location_btn">
+                                        <a href="{{$data->company_website_link}}" target="_blank" class="btn btn-primary">Visit Link</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
