@@ -522,8 +522,14 @@ Route::group(['prefix' => 'admin'], function () {
                 Route::post('/csv-store', 'Admin\TemplateController@csvStore')->name('admin.template.data.csv.store');
                 Route::get('/export', 'Admin\TemplateController@export')->name('admin.template.data.csv.export');
             });
-
-            // -------------------Master Management--------------------
+                //** banner management **/
+                Route::group(['prefix' => 'home'], function () {
+                    Route::get('/', 'Admin\HomeController@index')->name('admin.home.index');
+                    Route::get('/{id}/edit', 'Admin\HomeController@edit')->name('admin.home.edit');
+                    Route::post('/update', 'Admin\HomeController@update')->name('admin.home.update');
+                    Route::get('/{id}/details', 'Admin\HomeController@details')->name('admin.home.details');
+                });
+                            // -------------------Master Management--------------------
             // Social Media master
             Route::group(['prefix' => 'socialmedia/master'], function () {
                 Route::get('/', 'Admin\SocialMediaController@index')->name('admin.socialmedia.master.index');
