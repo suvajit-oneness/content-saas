@@ -522,4 +522,57 @@ Route::group(['prefix' => 'admin'], function () {
                 Route::post('/csv-store', 'Admin\TemplateController@csvStore')->name('admin.template.data.csv.store');
                 Route::get('/export', 'Admin\TemplateController@export')->name('admin.template.data.csv.export');
             });
+             //home management
+            //** banner management **/
+            Route::group(['prefix' => 'home'], function () {
+                Route::get('/', 'Admin\HomeController@index')->name('admin.home.index');
+                Route::get('/{id}/edit', 'Admin\HomeController@edit')->name('admin.home.edit');
+                Route::post('/update', 'Admin\HomeController@update')->name('admin.home.update');
+                Route::get('/{id}/details', 'Admin\HomeController@details')->name('admin.home.details');
+            });
+
+            //** First Section **/
+            Route::group(['prefix' => 'home/firstsection'], function () {
+                Route::get('/', 'Admin\HomeController@index')->name('admin.home.firstsection.index');
+                Route::get('/{id}/edit', 'Admin\HomeController@firstsectionedit')->name('admin.home.firstsection.edit');
+                Route::post('/update', 'Admin\HomeController@firstsectionupdate')->name('admin.home.firstsection.update');
+                Route::get('/{id}/details', 'Admin\HomeController@firstsectiondetails')->name('admin.home.firstsection.details');
+            });
+
+            //**  Second Section  **/
+            Route::group(['prefix' => 'home/secondsection'], function () {
+                Route::get('/', 'Admin\HomeController@secondsectionindex')->name('admin.home.secondsection.index');
+                Route::get('/{id}/edit', 'Admin\HomeController@secondsectionedit')->name('admin.home.secondsection.edit');
+                Route::post('/update', 'Admin\HomeController@secondsectionupdate')->name('admin.home.secondsection.update');
+                Route::get('/{id}/details', 'Admin\HomeController@secondsectiondetails')->name('admin.home.secondsection.details');
+            });
+
+            //**  Third Section  **/
+            Route::group(['prefix'  =>   'home/thirdsection'], function () {
+                Route::get('/', 'Admin\HomeController@index')->name('admin.home.thirdsection.index');
+                Route::get('/{id}/edit', 'Admin\HomeController@edit')->name('admin.home.thirdsection.edit');
+                Route::post('/update', 'Admin\HomeController@update')->name('admin.home.thirdsection.update');
+                Route::get('/{id}/details', 'Admin\HomeController@thirdsectiondetails')->name('admin.home.thirdsection.details');
+            });
+            //**  Fourth Section  **/
+            Route::group(['prefix'  =>   'home/fourthsection'], function () {
+                Route::get('/', 'Admin\HomeController@fourthsectionindex')->name('admin.home.fourthsection.index');
+                Route::get('/{id}/edit', 'Admin\HomeController@fourthsectionedit')->name('admin.home.fourthsection.edit');
+                Route::post('/update', 'Admin\HomeController@fourthsectionupdate')->name('admin.home.fourthsection.update');
+                Route::get('/{id}/details', 'Admin\HomeController@fourthsectiondetails')->name('admin.home.fourthsection.details');
+            });
+             //**  Fifth Section  **/
+             Route::group(['prefix'  =>   'home/fifthsection'], function () {
+                Route::get('/', 'Admin\HomeController@index')->name('admin.home.fifthsection.index');
+                Route::get('/{id}/edit', 'Admin\HomeController@fifthsectionedit')->name('admin.home.fifthsection.edit');
+                Route::post('/update', 'Admin\HomeController@fifthsectionupdate')->name('admin.home.fifthsection.update');
+                Route::get('/{id}/details', 'Admin\HomeController@fifthsectiondetails')->name('admin.home.fifthsection.details');
+            });
+             //**  Sixth Section  **/
+             Route::group(['prefix'  =>   'home/sixthsection'], function () {
+                Route::get('/', 'Admin\HomeController@sixthsectionindex')->name('admin.home.sixthsection.index');
+                Route::get('/{id}/edit', 'Admin\HomeController@sixthsectionedit')->name('admin.home.sixthsection.edit');
+                Route::post('/update', 'Admin\HomeController@sixthsectionupdate')->name('admin.home.sixthsection.update');
+                Route::get('/{id}/details', 'Admin\HomeController@sixthsectiondetails')->name('admin.home.sixthsection.details');
+            });
 });

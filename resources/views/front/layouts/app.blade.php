@@ -80,7 +80,7 @@
                         @php
                             // cart count
                             $ip = $_SERVER['REMOTE_ADDR'];
-                            $cartExists = Schema::hasTable('carts');
+                            $cartExists = DB::table('carts');
                             if ($cartExists) {
                                 $cartCount = DB::table('carts')
                                     ->where('ip', $ip)

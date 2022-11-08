@@ -3,14 +3,15 @@
 @section('title', 'Homepage')
 
 @section('section')
+
     <section class="banner">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-12 col-lg-8 col-md-9 text-center">
-                    <h1>Write your way to the life you want.</h1>
-                    <p>Writers Work is the all-in-one platform for launching your dream job.</p>
-                    <a href="javascript:void(0);" class="button text-white">Get Started Today</a>
-                    <p class="mt-0"><small>Easy set-up • 30 day money-back guarantee</small></p>
+                    <h1>{{$home[0]->title}}</h1>
+                    <p>{!! $home[0]->short_desc !!}</p>
+                    <a href="{{$home[0]->btn_link}}" class="button text-white">{{$home[0]->btn_text}}</a>
+                    <p class="mt-0"><small>{!! $home[0]->btn_desc !!}</small></p>
                 </div>
             </div>
         </div>
@@ -22,27 +23,27 @@
                 <div class="col-auto">
                     <div class="video_dive">
                         <figure>
-                            <img src="{{ asset('frontend/img/video_image.png') }}">
+                            <img src="{{ asset($home[0]->video_image) }}">
                             <a href="javascript:void(0);">
                                 <img src="{{ asset('frontend/img/play.svg') }}">
                             </a>
                         </figure>
                         <p>
-                            Get career training, writing tools, an online portfolio, and more—all for one low monthly price.
+                            {!! $home[0]->video_desc !!}
                         </p>
                     </div>
                 </div>
             </div>
             <div class="row job_part align-items-center">
                 <div class="col-12 col-lg-6 col-md-6">
-                    <img src="{{ asset('frontend/img/portfolio_icon.svg') }}" class="job_icon">
-                    <p class="mb-2"><small>We Have <span>208,000+</span> Live Jobs</small></p>
-                    <h2>Find the job that fits your life</h2>
-                    <p>Type your keyword, then click search to find your perfect job.</p>
-                    <a href="javascript:void(0);" class="button hover-white">Get Started Today</a>
+                    <img src="{{ asset($home[0]->section_one_icon) }}" class="job_icon">
+                    <p class="mb-2"><small>We Have <span>{{$job->count()}}</span> Live Jobs</small></p>
+                    <h2>{{$home[0]->section_one_title}}</h2>
+                    <p>{!! $home[0]->section_one_short_desc !!}</p>
+                    <a href="{{$home[0]->section_one_btn_link}}" class="button hover-white">{{$home[0]->section_one_btn_text}}</a>
                 </div>
                 <div class="col-12 col-lg-6 col-md-6">
-                    <img src="{{ asset('frontend/img/job_bg.png') }}" class="resp_image">
+                    <img src="{{ asset($home[0]->section_one_image) }}" class="resp_image">
                 </div>
             </div>
         </div>
@@ -52,14 +53,14 @@
         <div class="container-fluid">
             <div class="row align-items-end">
                 <div class="col-12 col-lg-6 col-md-6 p-0">
-                    <img src="{{ asset('frontend/img/career_pic.png') }}">
+                    <img src="{{ asset($home[0]->section_two_image) }}">
                 </div>
                 <div class="col-12 col-lg-6 col-md-6 pl-0">
                     <div class="career_block">
-                        <span class="subHead_badge">Career Training Videos</span>
-                        <h3>Your writing career, demystified.</h3>
+                        <span class="subHead_badge">{{$home[0]->section_two_tag}}</span>
+                        <h3>{{$home[0]->section_two_title}}</h3>
                         <p>
-                            How do I find clients? How much should I charge? How do I even start? Our built-in training course will answer all your questions. (No joke: we'll even show you how to do your taxes.)
+                            {!! $home[0]->section_two_short_desc	 !!}
                         </p>
                         <ul>
                             <li>Professional Copywriter </li>
@@ -70,7 +71,7 @@
                             <li>SEO Copywriting</li>
                             <li>Creative Copywriting </li>
                         </ul>
-                        <a href="javascript:void(0);" class="button">Start Training Today</a>
+                        <a href="{{$home[0]->section_two_btn_link}}" class="button">{{$home[0]->section_two_btn}}</a>
                     </div>
                 </div>
             </div>
@@ -81,16 +82,16 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-12 col-lg-8 col-md-8 text-center">
-                    <img src="{{ asset('frontend/img/project_m.svg') }}" width="92px">
-                    <h6>Project <span class="text-green">Management</span></h6>
-                    <h5>Lorem ipsum dolor sit amet</h5>
+                    <img src="{{ asset($home[0]->section_three_icon) }}" width="92px">
+                    <h6>{{$home[0]->section_three_tag}}</h6>
+                    <h5>{{$home[0]->section_three_title}}</h5>
                     <p>
-                        Vivamus vitae nibh quis urna mattis feugiat quis id nisl. Duis sit amet turpis ut ipsum lacinia aliquam. Nullam quis ante a lorem elementum venenatis at quis arcu.
+                        {!! $home[0]->section_three_short_desc	 !!}
                     </p>
                 </div>
                 <div class="col-12 col-lg-9 col-md-9 text-center">
-                    <img src="{{ asset('frontend/img/project_dbimage.png') }}" class="w-100 mt-lg-4 mt-md-4">
-                    <a href="javascript:void(0);" class="button">Get Organized Now</a>
+                    <img src="{{ asset($home[0]->section_three_image) }}" class="w-100 mt-lg-4 mt-md-4">
+                    <a href="{{$home[0]->section_three_btn_link}}" class="button">{{$home[0]->section_three_btn}}</a>
                 </div>
             </div>
         </div>
@@ -100,18 +101,16 @@
         <div class="container-fluid p-lg-0">
             <div class="row justify-content-between">
                 <div class="col-12 col-lg-5 col-md-6 offset-0 offset-lg-1 offset-lg-1 grammer_text">
-                    <span class="subHead_badge">GRAMMAR HELP</span>
-                    <h2>Polish your<br/> <span class="text-green">words</span> to <span class="text-green">blinding</span>
-                        perfection.
-                        </h2>
+                    <span class="subHead_badge">{{$home[0]->section_four_tag}}</span>
+                    <h2>{{$home[0]->section_four_title}}</h2>
                     <p>
-                        Our built-in grammar checker is your new eagle-eyed best friend. Correct typos, un-dangle those modifiers, and write error-free copy that will wow your clients.
+                        {!! $home[0]->section_four_short_desc	 !!}
 
                     </p>
-                    <a href="javascript:void(0);" class="button">Get Polish Today</a>
+                    <a href="{{$home[0]->section_four_btn_link}}" class="button">{{$home[0]->section_four_btn}}</a>
                 </div>
                 <div class="col-12 col-lg-5 col-md-6 p-0">
-                    <img src="{{ asset('frontend/img/grammer_pic.png') }}" class="w-100">
+                    <img src="{{ asset($home[0]->section_four_image) }}" class="w-100">
                 </div>
             </div>
         </div>
@@ -121,16 +120,16 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-12 col-lg-8 col-md-8 text-center">
-                    <img src="{{ asset('frontend/img/submission_icon.svg') }}" width="92px">
-                    <h6>INSTANT<span class="text-green">SUBMISSION</span>FINDER</h6>
-                    <h5>Get published. Get paid.</h5>
+                    <img src="{{ asset($home[0]->section_five_icon) }}" width="92px">
+                    <h6>{{$home[0]->section_five_tag}}</h6>
+                    <h5>{{$home[0]->section_five_title}}</h5>
                     <p>
-                        We make it easy to find sites who will publish your articles—even if you're a first-time writer. Search a database of writers guidelines from paying sites across the web.
+                        {!! $home[0]->section_five_short_desc	 !!}
                     </p>
                 </div>
                 <div class="col-12 col-lg-9 col-md-9 text-center">
-                    <img src="{{ asset('frontend/img/submission_pic2.png') }}" class="w-100 mt-lg-4 mt-md-4 mb-4">
-                    <a href="javascript:void(0);" class="button">Get Organized Now</a>
+                    <img src="{{ asset($home[0]->section_five_image) }}" class="w-100 mt-lg-4 mt-md-4 mb-4">
+                    <a href="{{$home[0]->section_five_btn_link}}" class="button">{{$home[0]->section_five_btn}}</a>
                 </div>
             </div>
         </div>
@@ -140,14 +139,16 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-12 col-lg-5 col-md-5">
-                    <span class="subHead_badge dark">GRAMMAR HELP</span>
-                    <h2>Stand out from the <span class="text-green">pack.</span></h2>
+                    <img src="{{ asset($home[0]->section_six_image) }}" width="92px">
+                    <span class="subHead_badge dark">{{$home[0]->section_six_tag}}</span>
+                    <h2>{{$home[0]->section_six_title}}</span></h2>
                     <p>
-                        Suspendisse ullamcorper risus id libero volutpat, quis consequat lectus gravida. Cras posuere risus hendrerit dolor rutrum fermentum sed at erat.
+                        {!! $home[0]->section_six_short_desc	 !!}
                     </p>
-                    <a href="javascript:void(0);" class="button">Get Share Today</a>
+                    <a href="{{$home[0]->section_six_btn_link}}" class="button">{{$home[0]->section_six_btn}}</a>
                 </div>
             </div>
         </div>
     </section>
+   
 @endsection
