@@ -315,5 +315,25 @@
                 </a>
             </li>
         </div>
+
+        {{-- Master Management --}}
+        <li class="text-light" data-toggle="collapse" data-target="#collapsetwelve" aria-expanded="true" aria-controls="collapsetwelve">
+            <p class="app-menu__item @if(request()->is('admin/socialmedia/master*') || request()->is('admin/language/master*')) {{ 'active' }} @endif">
+                <span class="app-menu__label">Master Management</span>
+                <i class="app-menu__icon fa fa-chevron-down"></i>
+            </p>
+        </li>
+        <div id="collapsetwelve" class="collapse @if(request()->is('admin/socialmedia/master/*') || request()->is('admin/language/master*')) {{ 'show' }} @endif" aria-labelledby="headingOne" data-parent="#accordion">
+            <li>
+                <a class="app-menu__item {{ request()->is('admin/socialmedia/master*') ? 'active' : '' }}" href="{{ route('admin.socialmedia.master.index') }}"><i class="app-menu__icon fa fa-cogs"></i>
+                    <span class="app-menu__label">Social Media Management</span>
+                </a>
+            </li>
+            <li>
+                <a class="app-menu__item {{ request()->is('admin/language/master*') ? 'active' : '' }}" href="{{ route('admin.language.master.index') }}"><i class="app-menu__icon fa fa-cogs"></i>
+                    <span class="app-menu__label">Language Management</span>
+                </a>
+            </li>
+        </div>
     </ul>
 </aside>

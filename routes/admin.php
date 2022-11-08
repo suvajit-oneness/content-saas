@@ -522,4 +522,26 @@ Route::group(['prefix' => 'admin'], function () {
                 Route::post('/csv-store', 'Admin\TemplateController@csvStore')->name('admin.template.data.csv.store');
                 Route::get('/export', 'Admin\TemplateController@export')->name('admin.template.data.csv.export');
             });
+
+            // -------------------Master Management--------------------
+            // Social Media master
+            Route::group(['prefix' => 'socialmedia/master'], function () {
+                Route::get('/', 'Admin\SocialMediaController@index')->name('admin.socialmedia.master.index');
+                Route::get('/create', 'Admin\SocialMediaController@create')->name('admin.socialmedia.master.create');
+                Route::post('/store', 'Admin\SocialMediaController@store')->name('admin.socialmedia.master.store');
+                Route::get('/{id}/edit', 'Admin\SocialMediaController@edit')->name('admin.socialmedia.master.edit');
+                Route::post('/update', 'Admin\SocialMediaController@update')->name('admin.socialmedia.master.update');
+                Route::get('/{id}/delete', 'Admin\SocialMediaController@delete')->name('admin.socialmedia.master.delete');
+                Route::post('updateStatus', 'Admin\SocialMediaController@updateStatus')->name('admin.socialmedia.master.updateStatus');
+            });
+            // Language Master
+            Route::group(['prefix'  =>   'language/master'], function () {
+                Route::get('/', 'Admin\LanguageController@index')->name('admin.language.master.index');
+                Route::get('/create', 'Admin\LanguageController@create')->name('admin.language.master.create');
+                Route::post('/store', 'Admin\LanguageController@store')->name('admin.language.master.store');
+                Route::get('/{id}/edit', 'Admin\LanguageController@edit')->name('admin.language.master.edit');
+                Route::post('/update', 'Admin\LanguageController@update')->name('admin.language.master.update');
+                Route::get('/{id}/delete', 'Admin\LanguageController@delete')->name('admin.language.master.delete');
+                Route::post('updateStatus', 'Admin\LanguageController@updateStatus')->name('admin.language.master.updateStatus');
+            });
 });

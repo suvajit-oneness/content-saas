@@ -37,7 +37,7 @@
                                 <div class="tile-body">
                                     <div class="form-group">
                                         <label class="control-label" for="answer">Answers <span id="a_no">{{$key+1}}</span> <span class="m-l-5 text-danger">*</span></label>
-                                        <input class="form-control" type="text" name="answer[]" value="{{$tf->answer}}" id="answer"/>
+                                        <textarea class="form-control" name="answer[]" id="answer">{{$tf->answer}}</textarea>
                                     </div>
                                 </div>
                                 <div class="d-flex">
@@ -74,7 +74,7 @@
                 '<div class="tile-body">'+
                     '<div class="form-group">'+
                         '<label class="control-label" for="answer">Answers <span id="a_no">'+ (total_row+1) +'</span><span class="m-l-5 text-danger">*</span></label>'+
-                        '<input class="form-control" type="text" name="answer[]" id="answer"/>'+
+                        '<textarea class="form-control" name="answer[]" id="answer"></textarea>'+
                     '</div>'+
                 '</div>'+
                 '<div class="d-flex">'+

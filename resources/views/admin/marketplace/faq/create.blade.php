@@ -40,7 +40,7 @@
                             <div class="tile-body">
                                 <div class="form-group">
                                     <label class="control-label" for="answer">Answers <span id="a_no">1</span> <span class="m-l-5 text-danger">*</span></label>
-                                    <input class="form-control" type="text" name="answer[]" id="answer"/>
+                                    <textarea class="form-control" type="text" name="answer[]" id="answer"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -48,7 +48,7 @@
                     <div class="tile-footer">
                         <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save faq</button>
                         &nbsp;&nbsp;&nbsp;
-                        <a class="btn btn-secondary" href="{{ route('admin.market.faq.index') }}"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
+                        <a class="btn btn-secondary" href="{{ route('admin.marketplace.faq.index') }}"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
                     </div>
                 </form>
 
@@ -71,7 +71,7 @@
                 '<div class="tile-body">'+
                     '<div class="form-group">'+
                         '<label class="control-label" for="answer">Answers <span id="a_no">'+ (total_row+1) +'</span><span class="m-l-5 text-danger">*</span></label>'+
-                        '<input class="form-control" type="text" name="answer[]" id="answer"/>'+
+                        '<textarea class="form-control" type="text" name="answer[]" id="answer"></textarea>'+
                     '</div>'+
                 '</div>'+
                 '<div class="d-flex">'+
