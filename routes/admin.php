@@ -37,9 +37,24 @@ Route::group(['prefix' => 'admin'], function () {
             Route::post('updateStatus', 'Admin\UserManagementController@updateStatus')->name('admin.users.updateStatus');
             Route::get('/{id}/details', 'Admin\UserManagementController@details')->name('admin.users.details');
         });
+        
+        //**  article management  **/
+        Route::group(['prefix'  =>   'article/management'], function () {
+            Route::get('/', 'Admin\BlogController@index')->name('admin.article.index');
+            Route::get('/create', 'Admin\BlogController@create')->name('admin.article.create');
+            Route::post('/store', 'Admin\BlogController@store')->name('admin.article.store');
+            Route::get('/{id}/edit', 'Admin\BlogController@edit')->name('admin.article.edit');
+            Route::post('/update', 'Admin\BlogController@update')->name('admin.article.update');
+            Route::get('/{id}/delete', 'Admin\BlogController@delete')->name('admin.article.delete');
+            Route::post('updateStatus', 'Admin\BlogController@updateStatus')->name('admin.article.updateStatus');
+            Route::post('article/updateStatus', 'Admin\BlogController@blogupdateStatus')->name('admin.articleStatus.updateStatus');
+            Route::get('/{id}/details', 'Admin\BlogController@details')->name('admin.article.details');
+            Route::post('/csv-store', 'Admin\BlogController@csvStore')->name('admin.article.data.csv.store');
+            Route::get('/export', 'Admin\BlogController@export')->name('admin.article.data.csv.export');
+        });
 
         //** Category management **/
-        Route::group(['prefix' => 'article-category'], function () {
+        Route::group(['prefix' => 'article/category'], function () {
             Route::get('/', 'Admin\ArticleCategoryManagementController@index')->name('admin.article-category.index');
             Route::get('/create', 'Admin\ArticleCategoryManagementController@create')->name('admin.article-category.create');
             Route::post('/store', 'Admin\ArticleCategoryManagementController@store')->name('admin.article-category.store');
@@ -53,7 +68,7 @@ Route::group(['prefix' => 'admin'], function () {
         });
 
         //** Sub category management **/
-        Route::group(['prefix' => 'article-subcategory'], function () {
+        Route::group(['prefix' => 'article/subcategory'], function () {
             Route::get('/', 'Admin\ArticleSubCategoryManagementController@index')->name('admin.article-subcategory.index');
             Route::get('/create', 'Admin\ArticleSubCategoryManagementController@create')->name('admin.article-subcategory.create');
             Route::post('/store', 'Admin\ArticleSubCategoryManagementController@store')->name('admin.article-subcategory.store');
@@ -66,7 +81,7 @@ Route::group(['prefix' => 'admin'], function () {
             Route::get('/export', 'Admin\ArticleSubCategoryManagementController@export')->name('admin.article-subcategory.data.csv.export');
         });
 
-        //**  Tertiary Category management  **/
+        //** article  Tertiary Category management  **/
         Route::group(['prefix' => 'tertiary'], function () {
             Route::get('/', 'Admin\ArticleTertiaryCategoryController@index')->name('admin.article-tertiary.index');
             Route::get('/create', 'Admin\ArticleTertiaryCategoryController@create')->name('admin.article-tertiary.create');
@@ -80,20 +95,16 @@ Route::group(['prefix' => 'admin'], function () {
             Route::get('/export', 'Admin\ArticleTertiaryCategoryController@export')->name('admin.article-tertiary.data.csv.export');
         });
 
-        //**  article management  **/
-        Route::group(['prefix'  =>   'article'], function () {
-            Route::get('/', 'Admin\BlogController@index')->name('admin.article.index');
-            Route::get('/create', 'Admin\BlogController@create')->name('admin.article.create');
-            Route::post('/store', 'Admin\BlogController@store')->name('admin.article.store');
-            Route::get('/{id}/edit', 'Admin\BlogController@edit')->name('admin.article.edit');
-            Route::post('/update', 'Admin\BlogController@update')->name('admin.article.update');
-            Route::get('/{id}/delete', 'Admin\BlogController@delete')->name('admin.article.delete');
-            Route::post('updateStatus', 'Admin\BlogController@updateStatus')->name('admin.article.updateStatus');
-            Route::post('article/updateStatus', 'Admin\BlogController@blogupdateStatus')->name('admin.articleStatus.updateStatus');
-            Route::get('/{id}/details', 'Admin\BlogController@details')->name('admin.article.details');
-            Route::post('/csv-store', 'Admin\BlogController@csvStore')->name('admin.article.data.csv.store');
-            Route::get('/export', 'Admin\BlogController@export')->name('admin.article.data.csv.export');
+        //** Blog/Article frontend page master  **/
+        Route::group(['prefix' => 'article/page'], function () {
+            Route::get('/', 'Admin\BlogPageController@index')->name('admin.article.page.index');
+            Route::get('/create', 'Admin\BlogPageController@create')->name('admin.article.page.create');
+            Route::post('/store', 'Admin\BlogPageController@store')->name('admin.article.page.store');
+            Route::get('/{id}/edit', 'Admin\BlogPageController@edit')->name('admin.article.page.edit');
+            Route::post('/update', 'Admin\BlogPageController@update')->name('admin.article.page.update');
+            Route::get('/{id}/details', 'Admin\BlogPageController@details')->name('admin.article.page.details');
         });
+
 
         //**  event type  **//
         Route::group(['prefix' => 'event/category'], function () {
@@ -522,32 +533,40 @@ Route::group(['prefix' => 'admin'], function () {
                 Route::post('/csv-store', 'Admin\TemplateController@csvStore')->name('admin.template.data.csv.store');
                 Route::get('/export', 'Admin\TemplateController@export')->name('admin.template.data.csv.export');
             });
-                //** banner management **/
-                Route::group(['prefix' => 'home'], function () {
-                    Route::get('/', 'Admin\HomeController@index')->name('admin.home.index');
-                    Route::get('/{id}/edit', 'Admin\HomeController@edit')->name('admin.home.edit');
-                    Route::post('/update', 'Admin\HomeController@update')->name('admin.home.update');
-                    Route::get('/{id}/details', 'Admin\HomeController@details')->name('admin.home.details');
+
+            //** Frontend management **/
+            Route::group(['prefix' => 'frontend-management'], function () {
+                // Home-page management
+                Route::group(['prefix' => '/home-page'], function(){
+                    Route::get('/', 'Admin\HomePageController@index')->name('admin.homepagemanagement.index');
+                    Route::get('/{id}/edit', 'Admin\HomePageController@edit')->name('admin.homepagemanagement.edit');
+                    Route::post('/update', 'Admin\HomePageController@update')->name('admin.homepagemanagement.update');
+                    Route::get('/{id}/details', 'Admin\HomePageController@details')->name('admin.homepagemanagement.details');
                 });
-                            // -------------------Master Management--------------------
-            // Social Media master
-            Route::group(['prefix' => 'socialmedia/master'], function () {
-                Route::get('/', 'Admin\SocialMediaController@index')->name('admin.socialmedia.master.index');
-                Route::get('/create', 'Admin\SocialMediaController@create')->name('admin.socialmedia.master.create');
-                Route::post('/store', 'Admin\SocialMediaController@store')->name('admin.socialmedia.master.store');
-                Route::get('/{id}/edit', 'Admin\SocialMediaController@edit')->name('admin.socialmedia.master.edit');
-                Route::post('/update', 'Admin\SocialMediaController@update')->name('admin.socialmedia.master.update');
-                Route::get('/{id}/delete', 'Admin\SocialMediaController@delete')->name('admin.socialmedia.master.delete');
-                Route::post('updateStatus', 'Admin\SocialMediaController@updateStatus')->name('admin.socialmedia.master.updateStatus');
             });
-            // Language Master
-            Route::group(['prefix'  =>   'language/master'], function () {
-                Route::get('/', 'Admin\LanguageController@index')->name('admin.language.master.index');
-                Route::get('/create', 'Admin\LanguageController@create')->name('admin.language.master.create');
-                Route::post('/store', 'Admin\LanguageController@store')->name('admin.language.master.store');
-                Route::get('/{id}/edit', 'Admin\LanguageController@edit')->name('admin.language.master.edit');
-                Route::post('/update', 'Admin\LanguageController@update')->name('admin.language.master.update');
-                Route::get('/{id}/delete', 'Admin\LanguageController@delete')->name('admin.language.master.delete');
-                Route::post('updateStatus', 'Admin\LanguageController@updateStatus')->name('admin.language.master.updateStatus');
+            
+            // -------------------Master Management--------------------
+            Route::group(['prefix'=>'master/'],function(){
+
+                // Social Media master
+                Route::group(['prefix' => 'socialmedia'], function () {
+                    Route::get('/', 'Admin\SocialMediaController@index')->name('admin.socialmedia.master.index');
+                    Route::get('/create', 'Admin\SocialMediaController@create')->name('admin.socialmedia.master.create');
+                    Route::post('/store', 'Admin\SocialMediaController@store')->name('admin.socialmedia.master.store');
+                    Route::get('/{id}/edit', 'Admin\SocialMediaController@edit')->name('admin.socialmedia.master.edit');
+                    Route::post('/update', 'Admin\SocialMediaController@update')->name('admin.socialmedia.master.update');
+                    Route::get('/{id}/delete', 'Admin\SocialMediaController@delete')->name('admin.socialmedia.master.delete');
+                    Route::post('updateStatus', 'Admin\SocialMediaController@updateStatus')->name('admin.socialmedia.master.updateStatus');
+                });
+                // Language Master
+                Route::group(['prefix' => 'language'], function () {
+                    Route::get('/', 'Admin\LanguageController@index')->name('admin.language.master.index');
+                    Route::get('/create', 'Admin\LanguageController@create')->name('admin.language.master.create');
+                    Route::post('/store', 'Admin\LanguageController@store')->name('admin.language.master.store');
+                    Route::get('/{id}/edit', 'Admin\LanguageController@edit')->name('admin.language.master.edit');
+                    Route::post('/update', 'Admin\LanguageController@update')->name('admin.language.master.update');
+                    Route::get('/{id}/delete', 'Admin\LanguageController@delete')->name('admin.language.master.delete');
+                    Route::post('updateStatus', 'Admin\LanguageController@updateStatus')->name('admin.language.master.updateStatus');
+                });
             });
 });

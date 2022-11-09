@@ -10,7 +10,7 @@ use Session;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Home;
-class HomeController extends BaseController
+class HomePageController extends BaseController
 {
     public function index(Request $request){
         $home= Home::all();
