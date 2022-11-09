@@ -46,11 +46,46 @@
                 <a class="app-menu__item {{ request()->is('admin/events/page*') ? 'active' : '' }}"
                     href="{{ route('admin.events.page.index') }}">
                     <i class="app-menu__icon fa fa-folder"></i>
-                    <span class="app-menu__label">Event page</span>
+                    <span class="app-menu__label">Event Page Content</span>
                 </a>
             </li>
         </div>
 
+
+        <li class="text-light" data-toggle="collapse" data-target="#collapsplansandpricing" aria-expanded="true"
+            aria-controls="collapsplansandpricing">
+            <a href="#" class="app-menu__item @if (request()->is('admin/plans-pricing*')) {{ 'active' }} @endif">
+                <span class="app-menu__label">Plans and pricing Master</span>
+                <i class="app-menu__icon fa fa-chevron-down"></i>
+            </a>
+        </li>
+        <div id="collapsplansandpricing" class="collapse @if (request()->is('admin/plans-pricing*')) {{ 'show' }} @endif"
+            aria-labelledby="headingOne" data-parent="#accordion">
+            <li>
+                <a class="app-menu__item {{ request()->is('admin/plans-pricing/category*') ? 'active' : '' }}"
+                    href="{{ route('admin.plans.category.index') }}">
+                    <i class="app-menu__icon fa fa-archive"></i>
+                    <span class="app-menu__label">Plans and pricing Category</span>
+                </a>
+            </li>
+            <li>
+                <a class="app-menu__item {{ request()->is('admin/plans-pricing/management*') ? 'active' : '' }}"
+                    href="{{ route('admin.plans.management.index') }}">
+                    <i class="app-menu__icon fa fa-folder"></i>
+                    <span class="app-menu__label">All Plans and pricing</span>
+                </a>
+            </li>
+            {{-- <li>
+                <a class="app-menu__item {{ request()->is('admin/deals/page*') ? 'active' : '' }}"
+                    href="{{ route('admin.deals.page.index') }}">
+                    <i class="app-menu__icon fa fa-folder"></i>
+                    <span class="app-menu__label">Plans and Pricing Page Content</span>
+                </a>
+            </li> --}}
+        </div>
+
+
+        {{-- Deals --}}
         <li class="text-light" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
             aria-controls="collapseTwo">
             <a href="#" class="app-menu__item @if (request()->is('admin/deals*') || request()->is('admin/deals*')) {{ 'active' }} @endif">
@@ -78,7 +113,7 @@
                 <a class="app-menu__item {{ request()->is('admin/deals/page*') ? 'active' : '' }}"
                     href="{{ route('admin.deals.page.index') }}">
                     <i class="app-menu__icon fa fa-folder"></i>
-                    <span class="app-menu__label">Deals page</span>
+                    <span class="app-menu__label">Deals Page Content</span>
                 </a>
             </li>
         </div>
@@ -182,7 +217,7 @@
                 <a class="app-menu__item {{ request()->is('admin/article/page*') ? 'active' : '' }} {{ sidebar_open(['admin.article']) }}"
                     href="{{ route('admin.article.page.index') }}">
                     <i class="app-menu__icon fa fa-file"></i>
-                    <span class="app-menu__label">Article-page</span>
+                    <span class="app-menu__label">Article Page Content</span>
                 </a>
             </li>
         </div>
@@ -399,7 +434,6 @@
         <li class="text-light" data-toggle="collapse" data-target="#collapseEleven" aria-expanded="true"
             aria-controls="collapseEleven">
             <a href="#" class="app-menu__item @if (request()->is('admin/frontend-management*')) {{ 'active' }} @endif">
-                <i class="app-menu__icon fa fa-file"></i>
                 <span class="app-menu__label">Frontend management</span>
                 <i class="app-menu__icon fa fa-chevron-down"></i>
             </a>
@@ -412,7 +446,7 @@
                 <a class="app-menu__item {{ request()->is('admin/frontend-management/home-page*') ? 'active' : '' }}"
                     href="{{ route('admin.homepagemanagement.index') }}">
                     <i class="app-menu__icon fa fa-archive"></i>
-                    <span class="app-menu__label">Home Page</span>
+                    <span class="app-menu__label">Home Page Content</span>
                 </a>
             </li>
 
