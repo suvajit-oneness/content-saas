@@ -462,6 +462,46 @@
                     </a>
                 </li>
             </div>
+            <!---Tools-Feature management-->
+            <li class="text-light" data-toggle="collapse" data-target="#collapseFifteen" aria-expanded="true"
+                aria-controls="collapseFifteen">
+                <a href="#"
+                    class="app-menu__item @if (request()->is('admin/tools/content') ||
+                        request()->is('admin/tools/areaofInterestcategory') ||
+                        request()->is('admin/tools/areaofInterest')) {{ 'active' }} @endif">
+                    <span class="app-menu__label">Tools & Features</span>
+                    <i class="app-menu__icon fa fa-chevron-down"></i>
+                </a>
+            </li>
+            <div id="collapseFifteen" class="collapse @if (request()->is('admin/tools/content') ||
+                request()->is('admin/tools/areaofInterestcategory') ||
+                request()->is('admin/tools/areaofInterest')) {{ 'show' }} @endif"
+                aria-labelledby="headingOne" data-parent="#accordion">
+                <!--- Content --->
+                <li>
+                    <a class="app-menu__item {{ request()->is('admin/tools/content') ? 'active' : '' }} {{ sidebar_open(['admin.tools.content']) }}"
+                        href="{{ route('admin.tools.content.index') }}">
+                        <i class="app-menu__icon fa fa-archive"></i>
+                        <span class="app-menu__label">Content</span>
+                    </a>
+                </li>
+                <!---  Area of Interest Category ---->
+                <li>
+                    <a class="app-menu__item {{ request()->is('admin/tools/AreaOfInterest/category') ? 'active' : '' }} {{ sidebar_open(['admin.tools.AreaOfInterest.category']) }}"
+                        href="{{ route('admin.tools.AreaOfInterest.category.index') }}">
+                        <i class="app-menu__icon fa fa-file"></i>
+                        <span class="app-menu__label">Area of Interest Category</span>
+                    </a>
+                </li>
+                <!--- Area of Interest --->
+                <li>
+                    <a class="app-menu__item {{ request()->is('admin/tools/AreaOfInterest') ? 'active' : '' }} {{ sidebar_open(['admin.tools.AreaOfInterest']) }}"
+                        href="{{ route('admin.tools.AreaOfInterest.index') }}">
+                        <i class="app-menu__icon fa fa-sitemap"></i>
+                        <span class="app-menu__label">Area of Interest</span>
+                    </a>
+                </li>
+            </div>
             <!-- support -->
 
             <li class="text-light" data-toggle="collapse" data-target="#collapseThirteen" aria-expanded="true"

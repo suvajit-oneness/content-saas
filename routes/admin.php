@@ -466,7 +466,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/export', 'Admin\JobController@export')->name('admin.job.data.csv.export');
         Route::get('/job/application/{id}', 'Admin\JobController@application')->name('admin.job.application');
     });
-      //template management
+          //template management
             //** Category management **/
             Route::group(['prefix' => 'template/category'], function () {
                 Route::get('/', 'Admin\TemplateCategoryController@index')->name('admin.template.category.index');
@@ -549,5 +549,40 @@ Route::group(['prefix' => 'admin'], function () {
                 Route::post('/update', 'Admin\LanguageController@update')->name('admin.language.master.update');
                 Route::get('/{id}/delete', 'Admin\LanguageController@delete')->name('admin.language.master.delete');
                 Route::post('updateStatus', 'Admin\LanguageController@updateStatus')->name('admin.language.master.updateStatus');
+            });
+              //tools-feature management
+            //** Content management **//
+            Route::group(['prefix' => 'tools/content'], function () {
+                Route::get('/', 'Admin\ToolsController@index')->name('admin.tools.content.index');
+                Route::get('/{id}/edit', 'Admin\ToolsController@edit')->name('admin.tools.content.edit');
+                Route::post('/update', 'Admin\ToolsController@update')->name('admin.tools.content.update');
+                Route::get('/{id}/details', 'Admin\ToolsController@details')->name('admin.tools.content.details');
+            });
+
+            //** Area of Interest Category **//
+            Route::group(['prefix' => 'tools/AreaOfInterest/category'], function () {
+                Route::get('/', 'Admin\ToolsInterestCategoryController@index')->name('admin.tools.AreaOfInterest.category.index');
+                Route::get('/create', 'Admin\ToolsInterestCategoryController@create')->name('admin.tools.AreaOfInterest.category.create');
+                Route::post('/store', 'Admin\ToolsInterestCategoryController@store')->name('admin.tools.AreaOfInterest.category.store');
+                Route::get('/{id}/edit', 'Admin\ToolsInterestCategoryController@edit')->name('admin.tools.AreaOfInterest.category.edit');
+                Route::post('/update', 'Admin\ToolsInterestCategoryController@update')->name('admin.tools.AreaOfInterest.category.update');
+                Route::get('/{id}/delete', 'Admin\ToolsInterestCategoryController@delete')->name('admin.tools.AreaOfInterest.category.delete');
+                Route::post('updateStatus', 'Admin\ToolsInterestCategoryController@updateStatus')->name('admin.tools.AreaOfInterest.category.updateStatus');
+                Route::get('/{id}/details', 'Admin\ToolsInterestCategoryController@details')->name('admin.tools.AreaOfInterest.category.details');
+               
+            });
+
+            //**   Area of Interest  **//
+            Route::group(['prefix' => 'tools/AreaOfInterest'], function () {
+                Route::get('/', 'Admin\ToolsInterestController@index')->name('admin.tools.AreaOfInterest.index');
+                Route::get('/create', 'Admin\ToolsInterestController@create')->name('admin.tools.AreaOfInterest.create');
+                Route::post('/store', 'Admin\ToolsInterestController@store')->name('admin.tools.AreaOfInterest.store');
+                Route::get('/{id}/edit', 'Admin\ToolsInterestController@edit')->name('admin.tools.AreaOfInterest.edit');
+                Route::post('/update', 'Admin\ToolsInterestController@update')->name('admin.tools.AreaOfInterest.update');
+                Route::get('/{id}/delete', 'Admin\ToolsInterestController@delete')->name('admin.tools.AreaOfInterest.delete');
+                Route::post('updateStatus', 'Admin\ToolsInterestController@updateStatus')->name('admin.tools.AreaOfInterest.updateStatus');
+                Route::get('/{id}/details', 'Admin\ToolsInterestController@details')->name('admin.tools.AreaOfInterest.details');
+                Route::post('/csv-store', 'Admin\ToolsInterestController@csvStore')->name('admin.tools.AreaOfInterest.data.csv.store');
+                Route::get('/export', 'Admin\ToolsInterestController@export')->name('admin.tools.AreaOfInterest.data.csv.export');
             });
 });

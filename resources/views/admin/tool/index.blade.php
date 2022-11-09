@@ -26,31 +26,24 @@
                     <table class="table table-hover custom-data-table-style table-striped">
                         <thead>
                             <tr>
+                                <th> Tag </th>
                                 <th> Title </th>
-                                <th> Short Description </th>
-                                <th> Button Text </th>
-                                <th><i class="fi fi-br-picture"></i>Video Image</th>
+                                <th> Short Description </th>                            
                                 <th style="width:100px; min-width:100px;" class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($home as $key => $data)
+                            @foreach ($tool as $key => $data)
                                 <tr>
-                                    <td>{{ $data->title }}</td>
+                                    <td>{{ $data->tag }}</td>
+                                    <td>{!! $data->title !!}</td>
                                     <td>{{ $data->short_desc }}</td>
-                                    <td>{{ $data->btn_text }}</td>
-                                    <td>
-                                        @if ($data->image != '')
-                                            <img style="width: 100px;height: 100px;" class="text-right text-uppercase"
-                                                src="{{ asset($data->image) }}">
-                                        @endif
-                                    </td>
 
                                     <td class="text-center">
                                         <div class="btn-group" role="group" aria-label="Second group">
-                                            <a href="{{ route('admin.home.edit', $data['id']) }}"
+                                            <a href="{{ route('admin.tools.content.edit', $data['id']) }}"
                                                 class="btn btn-sm btn-primary edit-btn"><i class="fa fa-edit"></i></a>
-                                            <a href="{{ route('admin.home.details', $data['id']) }}"
+                                            <a href="{{ route('admin.tools.content.details', $data['id']) }}"
                                                 class="btn btn-sm btn-primary edit-btn"><i class="fa fa-eye"></i></a>
                                         </div>
                                     </td>
