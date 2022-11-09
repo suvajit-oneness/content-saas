@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Admin\EventPageController;
+use App\Http\Controllers\Admin\PlansPriceCategoryController;
+use App\Http\Controllers\Admin\PlansPriceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -588,6 +590,29 @@ Route::group(['prefix' => 'admin'], function () {
                     Route::post('/update', 'Admin\LanguageController@update')->name('admin.language.master.update');
                     Route::get('/{id}/delete', 'Admin\LanguageController@delete')->name('admin.language.master.delete');
                     Route::post('updateStatus', 'Admin\LanguageController@updateStatus')->name('admin.language.master.updateStatus');
+                });
+            });
+
+            // -------------------- Plans and Pricing-------------------------
+            Route::group(['prefix'=>'plans-pricing'], function(){
+                // Plans Pricing Category
+                Route::group(['prefix' => '/category'], function () {
+                    Route::get('/', 'Admin\PlansPriceCategoryController@index')->name('admin.plans.category.index');
+                    Route::get('/create', 'Admin\PlansPriceCategoryController@create')->name('admin.plans.category.create');
+                    Route::post('/store', 'Admin\PlansPriceCategoryController@store')->name('admin.plans.category.store');
+                    Route::get('/{id}/edit', 'Admin\PlansPriceCategoryController@edit')->name('admin.plans.category.edit');
+                    Route::post('/update', 'Admin\PlansPriceCategoryController@update')->name('admin.plans.category.update');
+                    Route::get('/{id}/delete', 'Admin\PlansPriceCategoryController@delete')->name('admin.plans.category.delete');
+                });
+                // Plans Pricing Master
+                Route::group(['prefix' => '/management'], function () {
+                    Route::get('/', 'Admin\PlansPriceController@index')->name('admin.plans.management.index');
+                    Route::get('/create', 'Admin\PlansPriceController@create')->name('admin.plans.management.create');
+                    Route::post('/store', 'Admin\PlansPriceController@store')->name('admin.plans.management.store');
+                    Route::get('/{id}/edit', 'Admin\PlansPriceController@edit')->name('admin.plans.management.edit');
+                    Route::post('/update', 'Admin\PlansPriceController@update')->name('admin.plans.management.update');
+                    Route::get('/{id}/delete', 'Admin\PlansPriceController@delete')->name('admin.plans.management.delete');
+                    Route::post('updateStatus', 'Admin\PlansPriceController@updateStatus')->name('admin.plans.management.updateStatus');
                 });
             });
 });
