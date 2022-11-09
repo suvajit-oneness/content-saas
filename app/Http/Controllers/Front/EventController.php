@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\EventType;
 use App\Models\Event;
 use App\Contracts\EventContract;
+use App\Models\EventPage;
+
 class EventController extends Controller
 {
      /**
@@ -44,7 +46,8 @@ class EventController extends Controller
                 $event=Event::where('status',1)->orderby('title')->paginate(15);
             }
             $cat=EventType::where('status',1)->orderby('title')->get();
-            return view('front.event.index',compact('cat','event'));
+            $event_page_content = EventPage::all()[0];
+            return view('front.event.index',compact('cat','event','event_page_content'));
         /*} else {
             return redirect()->route('front.user.login');
         }*/

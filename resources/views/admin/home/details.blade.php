@@ -4,18 +4,18 @@
 @endsection
 @section('content')
     <div class="app-title">
-        <div>
+        <div class="d-flex justify-content-between w-100">
             <h1><i class="fa fa-file"></i> {{ $pageTitle }}</h1>
-            <p></p>
+            <a type="button" class="btn btn-primary" href="{{ route('admin.homepagemanagement.index') }}">Back</a>
         </div>
     </div>
     @include('admin.partials.flash')
     <div class="row">
-        <div class="col-sm-8">
+        <div class="col-sm-12">
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-10">
+                        <div class="col-md-12">
                             <table class="table">
                                 <tbody>
                                     <tr>
@@ -46,8 +46,8 @@
                                     </tr>
                                     <tr>
                                         <td width="15%" class="text-right text-uppercase">Video</td>
-                                        <td><img src="{{ asset($data->video) }}"
-                                                width="150" height="150"></td>
+                                        <td><video src="{{ asset($data->video) }}"
+                                                width="150" height="150" controls></td>
                                     </tr>
                                     <tr>
                                         <td width="15%" class="text-right text-uppercase">Video Description</td>
@@ -228,7 +228,7 @@
                 </div>
             </div><br>
             <div class="row">
-                <a type="button" class="btn btn-primary" href="{{ route('admin.home.index') }}">Back</a>
+                <a type="button" class="btn btn-primary" href="{{ route('admin.homepagemanagement.index') }}">Back</a>
             </div>
         </div>
     @endsection

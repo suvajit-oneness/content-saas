@@ -20,13 +20,13 @@
         <!-- Event Management -->
         <li class="text-light" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
             aria-controls="collapseOne">
-            <a href="#" class="app-menu__item @if (request()->is('admin/event') || request()->is('admin/event/category')) ) {{ 'active' }} @endif">
+            <a href="#" class="app-menu__item @if (request()->is('admin/event*') || request()->is('admin/event/category')) ) {{ 'active' }} @endif">
                 <span class="app-menu__label">Event Master</span>
                 <i class="app-menu__icon fa fa-chevron-down"></i>
             </a>
         </li>
 
-        <div id="collapseOne" class="collapse @if (request()->is('admin/event') || request()->is('admin/event/category')) ) {{ 'show' }} @endif"
+        <div id="collapseOne" class="collapse @if (request()->is('admin/event*') || request()->is('admin/event/category')) ) {{ 'show' }} @endif"
             aria-labelledby="headingOne" data-parent="#accordion">
             <li>
                 <a class="app-menu__item {{ request()->is('admin/event/category') ? 'active' : '' }}"
@@ -39,6 +39,14 @@
                 <a class="app-menu__item {{ request()->is('admin/event') ? 'active' : '' }}"
                     href="{{ route('admin.event.index') }}"><i class="app-menu__icon fa fa-cogs"></i>
                     <span class="app-menu__label">Management</span>
+                </a>
+            </li>
+            {{-- Event page master --}}
+            <li>
+                <a class="app-menu__item {{ request()->is('admin/events/page*') ? 'active' : '' }}"
+                    href="{{ route('admin.events.page.index') }}">
+                    <i class="app-menu__icon fa fa-folder"></i>
+                    <span class="app-menu__label">Event page</span>
                 </a>
             </li>
         </div>
@@ -64,6 +72,13 @@
                     href="{{ route('admin.deals.index') }}">
                     <i class="app-menu__icon fa fa-folder"></i>
                     <span class="app-menu__label">All Deals</span>
+                </a>
+            </li>
+            <li>
+                <a class="app-menu__item {{ request()->is('admin/deals/page*') ? 'active' : '' }}"
+                    href="{{ route('admin.deals.page.index') }}">
+                    <i class="app-menu__icon fa fa-folder"></i>
+                    <span class="app-menu__label">Deals page</span>
                 </a>
             </li>
         </div>
@@ -125,21 +140,15 @@
         <!-- Article Management -->
         <li class="text-light" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true"
             aria-controls="collapseFour">
-            <a href="#" class="app-menu__item @if (request()->is('admin/category') ||
-                request()->is('admin/subcategory') ||
-                request()->is('admin/tertiary') ||
-                request()->is('admin/article')) {{ 'active' }} @endif">
+            <a href="#" class="app-menu__item @if (request()->is('admin/article*')) {{ 'active' }} @endif">
                 <span class="app-menu__label">Article Master</span>
                 <i class="app-menu__icon fa fa-chevron-down"></i>
             </a>
         </li>
-        <div id="collapseFour" class="collapse @if (request()->is('admin/category') ||
-            request()->is('admin/subcategory') ||
-            request()->is('admin/tertiary') ||
-            request()->is('admin/article')) {{ 'show' }} @endif"
+        <div id="collapseFour" class="collapse @if (request()->is('admin/article*')) {{ 'show' }} @endif"
             aria-labelledby="headingOne" data-parent="#accordion">
             <li>
-                <a class="app-menu__item {{ request()->is('admin/article-category') ? 'active' : '' }} {{ sidebar_open(['admin.article-category']) }}"
+                <a class="app-menu__item {{ request()->is('admin/article/category*') ? 'active' : '' }} {{ sidebar_open(['admin.article-category']) }}"
                     href="{{ route('admin.article-category.index') }}">
                     <i class="app-menu__icon fa fa-archive"></i>
                     <span class="app-menu__label">Category Management</span>
@@ -147,7 +156,7 @@
             </li>
             <!--- Sub category management --->
             <li>
-                <a class="app-menu__item {{ request()->is('admin/article-subcategory') ? 'active' : '' }} {{ sidebar_open(['admin.article-subcategory']) }}"
+                <a class="app-menu__item {{ request()->is('admin/article/subcategory*') ? 'active' : '' }} {{ sidebar_open(['admin.article-subcategory']) }}"
                     href="{{ route('admin.article-subcategory.index') }}">
                     <i class="app-menu__icon fa fa-sitemap"></i>
                     <span class="app-menu__label">Sub Category Management</span>
@@ -163,10 +172,17 @@
             </li> --}}
             <!---  Article management ---->
             <li>
-                <a class="app-menu__item {{ request()->is('admin/article') ? 'active' : '' }} {{ sidebar_open(['admin.article']) }}"
+                <a class="app-menu__item {{ request()->is('admin/article/management*') ? 'active' : '' }} {{ sidebar_open(['admin.article']) }}"
                     href="{{ route('admin.article.index') }}">
                     <i class="app-menu__icon fa fa-file"></i>
                     <span class="app-menu__label">Article Management</span>
+                </a>
+            </li>
+            <li>
+                <a class="app-menu__item {{ request()->is('admin/article/page*') ? 'active' : '' }} {{ sidebar_open(['admin.article']) }}"
+                    href="{{ route('admin.article.page.index') }}">
+                    <i class="app-menu__icon fa fa-file"></i>
+                    <span class="app-menu__label">Article-page</span>
                 </a>
             </li>
         </div>
@@ -377,37 +393,26 @@
                 </a>
             </li>
         </div>
+
+
         <!-- frontend management -->
         <li class="text-light" data-toggle="collapse" data-target="#collapseEleven" aria-expanded="true"
             aria-controls="collapseEleven">
-            <a href="#" class="app-menu__item @if (request()->is('admin/home*') ||
-                request()->is('admin/market*') ||
-                request()->is('admin/tools*') ||
-                request()->is('admin/support*') ||
-                request()->is('admin/blog*') ||
-                request()->is('admin/pricing*') ||
-                request()->is('admin/marketplace*')) {{ 'active' }} @endif">
+            <a href="#" class="app-menu__item @if (request()->is('admin/frontend-management*')) {{ 'active' }} @endif">
                 <i class="app-menu__icon fa fa-file"></i>
                 <span class="app-menu__label">Frontend management</span>
                 <i class="app-menu__icon fa fa-chevron-down"></i>
             </a>
         </li>
-        <div id="collapseEleven" class="collapse @if (request()->is('admin/home*') ||
-            request()->is('admin/market*') ||
-            request()->is('admin/tools*') ||
-            request()->is('admin/support*') ||
-            request()->is('admin/blog*') ||
-            request()->is('admin/pricing*') ||
-            request()->is('admin/marketplace*')) {{ 'show' }} @endif"
+        <div id="collapseEleven" class="collapse @if (request()->is('admin/frontend-management*')) {{ 'show' }} @endif"
             aria-labelledby="headingOne" data-parent="#accordion">
+            
             <!---Home Page -->
-
-
             <li>
-                <a class="app-menu__item {{ request()->is('admin/home') ? 'active' : '' }} {{ sidebar_open(['admin.market.category']) }}"
-                    href="{{ route('admin.home.index') }}">
+                <a class="app-menu__item {{ request()->is('admin/frontend-management/home-page*') ? 'active' : '' }}"
+                    href="{{ route('admin.homepagemanagement.index') }}">
                     <i class="app-menu__icon fa fa-archive"></i>
-                    <span class="app-menu__label">Home Banner</span>
+                    <span class="app-menu__label">Home Page</span>
                 </a>
             </li>
 
@@ -554,6 +559,7 @@
                 </li>
             </div>
         </div>
+
         {{-- Master Management --}}
         <li class="text-light" data-toggle="collapse" data-target="#collapseFourteen" aria-expanded="true"
             aria-controls="collapseFourteen">

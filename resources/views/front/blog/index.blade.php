@@ -6,12 +6,10 @@
     <div class="container">
         <div class="row blog_header">
             <div class="col-12 col-lg-7 col-md-7 pe-lg-6">
-                <h3>Get the latest articles from our journal, writing, discuss and share</h3>
+                <h3>{!! $article_page_content->header_left !!}</h3>
             </div>
             <div class="col-12 col-lg-5 col-md-5 ps-lg-4 ps-md-4">
-                <p>
-                    The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.
-                </p>
+                <p> {!! $article_page_content->header_right !!} </p>
             </div>
         </div>
     </div>
