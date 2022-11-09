@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\EventPageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -133,6 +134,16 @@ Route::group(['prefix' => 'admin'], function () {
             Route::post('/csv-store', 'Admin\EventController@csvStore')->name('admin.event.data.csv.store');
             Route::get('/export', 'Admin\EventController@export')->name('admin.event.data.csv.export');
         });
+        
+        //** Deals frontend page master  **/
+        Route::group(['prefix' => 'events/page'], function () {
+            Route::get('/', 'Admin\EventPageController@index')->name('admin.events.page.index');
+            Route::get('/create', 'Admin\EventPageController@create')->name('admin.events.page.create');
+            Route::post('/store', 'Admin\EventPageController@store')->name('admin.events.page.store');
+            Route::get('/{id}/edit', 'Admin\EventPageController@edit')->name('admin.events.page.edit');
+            Route::post('/update', 'Admin\EventPageController@update')->name('admin.events.page.update');
+            Route::get('/{id}/details', 'Admin\EventPageController@details')->name('admin.events.page.details');
+        });
 
         // ** Order Management routes */
         Route::group(['prefix'  =>   'orders'], function () {
@@ -186,6 +197,16 @@ Route::group(['prefix' => 'admin'], function () {
             Route::get('/{id}/delete', 'Admin\DealsCategoryController@delete')->name('admin.deals.category.delete');
             Route::post('updateStatus', 'Admin\DealsCategoryController@updateStatus')->name('admin.deals.category.updateStatus');
             Route::get('/{id}/details', 'Admin\DealsCategoryController@details')->name('admin.deals.category.details');
+        });
+
+        //** Deals frontend page master  **/
+        Route::group(['prefix' => 'deals/page'], function () {
+            Route::get('/', 'Admin\DealPageController@index')->name('admin.deals.page.index');
+            Route::get('/create', 'Admin\DealPageController@create')->name('admin.deals.page.create');
+            Route::post('/store', 'Admin\DealPageController@store')->name('admin.deals.page.store');
+            Route::get('/{id}/edit', 'Admin\DealPageController@edit')->name('admin.deals.page.edit');
+            Route::post('/update', 'Admin\DealPageController@update')->name('admin.deals.page.update');
+            Route::get('/{id}/details', 'Admin\DealPageController@details')->name('admin.deals.page.details');
         });
 
         //** course management **/

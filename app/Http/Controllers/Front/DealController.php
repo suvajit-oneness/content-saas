@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use App\Models\Deal;
 use App\Models\DealCategory;
+use App\Models\DealPage;
 use App\Models\Market;
 use App\Models\MarketBanner;
 use App\Models\MarketCategory;
@@ -28,6 +29,8 @@ class DealController extends Controller
 
         $deal = $deal->get();
 
-        return view('front.deals.index',compact('deal_category','deal'));
+        $deal_page_content = DealPage::all()[0];
+
+        return view('front.deals.index',compact('deal_category','deal','deal_page_content'));
     }
 }

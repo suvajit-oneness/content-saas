@@ -20,13 +20,13 @@
         <!-- Event Management -->
         <li class="text-light" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
             aria-controls="collapseOne">
-            <a href="#" class="app-menu__item @if (request()->is('admin/event') || request()->is('admin/event/category')) ) {{ 'active' }} @endif">
+            <a href="#" class="app-menu__item @if (request()->is('admin/event*') || request()->is('admin/event/category')) ) {{ 'active' }} @endif">
                 <span class="app-menu__label">Event Master</span>
                 <i class="app-menu__icon fa fa-chevron-down"></i>
             </a>
         </li>
 
-        <div id="collapseOne" class="collapse @if (request()->is('admin/event') || request()->is('admin/event/category')) ) {{ 'show' }} @endif"
+        <div id="collapseOne" class="collapse @if (request()->is('admin/event*') || request()->is('admin/event/category')) ) {{ 'show' }} @endif"
             aria-labelledby="headingOne" data-parent="#accordion">
             <li>
                 <a class="app-menu__item {{ request()->is('admin/event/category') ? 'active' : '' }}"
@@ -39,6 +39,14 @@
                 <a class="app-menu__item {{ request()->is('admin/event') ? 'active' : '' }}"
                     href="{{ route('admin.event.index') }}"><i class="app-menu__icon fa fa-cogs"></i>
                     <span class="app-menu__label">Management</span>
+                </a>
+            </li>
+            {{-- Event page master --}}
+            <li>
+                <a class="app-menu__item {{ request()->is('admin/events/page*') ? 'active' : '' }}"
+                    href="{{ route('admin.events.page.index') }}">
+                    <i class="app-menu__icon fa fa-folder"></i>
+                    <span class="app-menu__label">Event page</span>
                 </a>
             </li>
         </div>
@@ -64,6 +72,13 @@
                     href="{{ route('admin.deals.index') }}">
                     <i class="app-menu__icon fa fa-folder"></i>
                     <span class="app-menu__label">All Deals</span>
+                </a>
+            </li>
+            <li>
+                <a class="app-menu__item {{ request()->is('admin/deals/page*') ? 'active' : '' }}"
+                    href="{{ route('admin.deals.page.index') }}">
+                    <i class="app-menu__icon fa fa-folder"></i>
+                    <span class="app-menu__label">Deals page</span>
                 </a>
             </li>
         </div>
