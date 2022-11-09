@@ -41,7 +41,7 @@
                                     <td>{{ $key+1 }}</td>
                                     <td>
                                         @if($category->image!='')
-                                        <img style="width: 100px;height: 100px;" class="text-right text-uppercase" src="{{URL::to('/').'/uploads/market/'}}{{$category->image}}">
+                                        <img style="width: 100px;height: 100px;" class="text-right text-uppercase" src="{{asset($category->image)}}">
                                         @endif
                                     </td>
                                     <td>{{ $category->tag }}</td>
@@ -61,7 +61,6 @@
                                     <div class="btn-group" role="group" aria-label="Second group">
                                         <a href="{{ route('admin.market.edit', $category['id']) }}" class="btn btn-sm btn-primary edit-btn"><i class="fa fa-edit"></i></a>
                                         <a href="{{ route('admin.market.details', $category['id']) }}" class="btn btn-sm btn-primary edit-btn"><i class="fa fa-eye"></i></a>
-                                        <a href="#" data-id="{{$category['id']}}" class="sa-remove btn btn-sm btn-danger edit-btn"><i class="fa fa-trash"></i></a>
                                     </div>
                                 </td>
                                 </tr>

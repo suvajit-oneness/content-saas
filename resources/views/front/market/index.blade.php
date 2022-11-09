@@ -3,7 +3,7 @@
 @section('section')
 
 @foreach($market as $key => $data)
-<section class="markets-banner">
+<section class="markets-banner" style="background-image: url('{{ asset($data->image) }}');">
     <div class="container">
         <div class="row">
             <div class="col-lg-6">
@@ -63,7 +63,7 @@
                 <ul class="p-0 m-0 mt-2 mt-md-5">
                     @foreach($cat as $key => $categoryValue)
                     <li class="market-tab active" data-tab-market="{{ $categoryValue->id }}">
-                        <a href="#{{ $categoryValue->id }}"><img src="{{URL::to('/').'/uploads/marketcategories/'}}{{$categoryValue->image}}" alt="">
+                        <a href="#{{ $categoryValue->id }}"><img src="{{asset($categoryValue->image)}}" alt="">
                             <span>{{ $categoryValue->title}}</span></a>
                     </li>
                     @endforeach
@@ -182,7 +182,7 @@
 
             <div class="col-lg-6 col-md-6 text-center m-auto">
                 <div class="market-faq-img">
-                    <img src="{{URL::to('/').'/uploads/market/'}}{{$data->faq_banner_image}}" alt="" class="img-fluid">
+                    <img src="{{asset($data->faq_banner_image)}}" alt="" class="img-fluid">
                 </div>
             </div>
         </div>

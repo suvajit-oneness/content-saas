@@ -24,12 +24,10 @@
                     <div class="video_dive">
                         <figure>
                             <img src="{{ asset($home[0]->video_image) }}">
-                            <video controls class="video" id="video" preload="metadata" poster="">
-                                <a href="" source src="{{ asset($home[0]->video) }}" type="video/mp4">>
+                            
+                                {{-- <a source src="{{ asset($home[0]->video) }}" type="video/mp4">
                                     <img src="{{ asset('frontend/img/play.svg') }}">
-                                </a>
-                            </video>
-
+                                </a> --}}
                         </figure>
                         <p>
                             {!! $home[0]->video_desc !!}

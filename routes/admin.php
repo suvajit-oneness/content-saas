@@ -42,7 +42,7 @@ Route::group(['prefix' => 'admin'], function () {
         });
         
         //**  article management  **/
-        Route::group(['prefix'  =>   'article/management'], function () {
+        Route::group(['prefix'  =>   'blog/management'], function () {
             Route::get('/', 'Admin\BlogController@index')->name('admin.article.index');
             Route::get('/create', 'Admin\BlogController@create')->name('admin.article.create');
             Route::post('/store', 'Admin\BlogController@store')->name('admin.article.store');
@@ -57,7 +57,7 @@ Route::group(['prefix' => 'admin'], function () {
         });
 
         //** Category management **/
-        Route::group(['prefix' => 'article/category'], function () {
+        Route::group(['prefix' => 'blog/category'], function () {
             Route::get('/', 'Admin\ArticleCategoryManagementController@index')->name('admin.article-category.index');
             Route::get('/create', 'Admin\ArticleCategoryManagementController@create')->name('admin.article-category.create');
             Route::post('/store', 'Admin\ArticleCategoryManagementController@store')->name('admin.article-category.store');
@@ -71,7 +71,7 @@ Route::group(['prefix' => 'admin'], function () {
         });
 
         //** Sub category management **/
-        Route::group(['prefix' => 'article/subcategory'], function () {
+        Route::group(['prefix' => 'blog/subcategory'], function () {
             Route::get('/', 'Admin\ArticleSubCategoryManagementController@index')->name('admin.article-subcategory.index');
             Route::get('/create', 'Admin\ArticleSubCategoryManagementController@create')->name('admin.article-subcategory.create');
             Route::post('/store', 'Admin\ArticleSubCategoryManagementController@store')->name('admin.article-subcategory.store');
@@ -99,7 +99,7 @@ Route::group(['prefix' => 'admin'], function () {
         });
 
         //** Blog/Article frontend page master  **/
-        Route::group(['prefix' => 'article/page'], function () {
+        Route::group(['prefix' => 'blog/page'], function () {
             Route::get('/', 'Admin\BlogPageController@index')->name('admin.article.page.index');
             Route::get('/create', 'Admin\BlogPageController@create')->name('admin.article.page.create');
             Route::post('/store', 'Admin\BlogPageController@store')->name('admin.article.page.store');
