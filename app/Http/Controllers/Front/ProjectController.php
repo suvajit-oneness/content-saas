@@ -30,7 +30,7 @@ class ProjectController extends Controller
     public function detail(Request $request, $slug)
     {
         $data = Project::where('slug', $slug)->first();
-        $tasks = ProjectTask::where('project_id', $data->id)->get();
+        $tasks = ProjectTask::where('project_id', $data->id)->latest('id')->paginate(15);
 
         return view('front.project.detail', compact('data', 'tasks'));
     }
