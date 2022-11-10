@@ -83,7 +83,7 @@
                         <h4>Set Price</h4>
                         <ul>
                             @foreach ($plans_with_price as $item)
-                                <li>{{$item->currencyDet->currency}}({{$item->currencyDet->currency_symbol}}) - {{$item->currencyDet->currency_symbol}}{{$item->price}}/{{$item->price_limit}}</li>
+                                <li>{{$item->currencyDet->currency}}({{$item->currencyDet->currency_symbol}}) - {{$item->currencyDet->currency_symbol}}{{$item->price}}/{{$item->price_limit}} <span><a href="{{route('admin.plans.management.deletePricing',$item->id)}}"><i class="fa fa-times"></i></a></span> </li>
                             @endforeach
                         </ul>
                         <hr>

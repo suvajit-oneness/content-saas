@@ -1,7 +1,12 @@
 @extends('admin.app')
-@section('title') {{ $pageTitle }} @endsection
+@section('title') {{ $pageTitle }}@endsection
 
 @section('content')
+    <style>
+        #button-11 .knobs:after{
+            content: 'High';
+        }
+    </style>
     <div class="app-title">
         <div class="row w-100 mx-0">
             <div class="col-md-6">
@@ -63,7 +68,7 @@
                                             <div class="button-cover">
                                                 <div class="button-togglr b2" id="button-11">
                                                     <input id="toggle-block" type="checkbox" name="status" class="checkbox" data-status_id="{{ $data['id'] }}" {{ $data['recomended'] == 1 ? 'checked' : '' }}>
-                                                    <div class="knobs"><span>Pending</span></div>
+                                                    <div class="knobs"><span>Low</span></div>
                                                     <div class="layer"></div>
                                                 </div>
                                             </div>

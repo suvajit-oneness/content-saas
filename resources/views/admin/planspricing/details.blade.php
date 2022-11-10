@@ -46,7 +46,13 @@
                         </tr>
                         <tr>
                             <td>Pricings</td>
-                            {{-- <td>$ {!! number_format($plans->price) !!}</td> --}}
+                            <td>
+                                <ul>
+                                    @foreach ($plans_with_price as $item)
+                                        <li>{{$item->currencyDet->currency}}({{$item->currencyDet->currency_symbol}}) - {{$item->currencyDet->currency_symbol}}{{$item->price}}/{{$item->price_limit}}</li>
+                                    @endforeach
+                                </ul>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

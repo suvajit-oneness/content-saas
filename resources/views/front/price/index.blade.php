@@ -14,15 +14,17 @@
                         <small>I want to pay every month
                             in
                         </small>
-                        <div class="select">
-                            <select>
-                                {{-- <option value="">united state ($)</option> --}}
-                                <option value="">$ (USD)</option>
+                        <form class="select" action="">
+                            <select id="currency_select" name="currency">
+                                @foreach ($currencies as $item)
+                                    <option value="{{$item->id}}" {{request()->input('currency') == $item->id ? 'selected' : ''}}>{{$item->currency_symbol}}({{$item->currency}})</option>    
+                                @endforeach
+                                {{-- <option value="">$ (USD)</option>
                                 <option value="">£ (GBP)</option>
                                 <option value="">AU$ (AUD)</option>
-                                <option value="">€ (EUR)</option>
+                                <option value="">€ (EUR)</option> --}}
                             </select>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -34,7 +36,7 @@
         <div class="row">
             <div class="col-lg-8 col-md-12 m-auto">
                 <div class="row">
-                    <div class="col-lg-6 col-md-6 mb-5">
+                    {{-- <div class="col-lg-6 col-md-6 mb-5">
                         <div class="pricing-content">
                             <img src="{{ asset('frontend/img/heart.png')}}" alt="">
                             <h4>Free</h4>
@@ -71,49 +73,62 @@
                                 </li>
                             </ul>
                         </div>
-                    </div>
+                    </div> --}}
+                    @forelse ($plans_with_price as $item)
+                        <div class="col-lg-6 col-md-6">
+                            <div class="pricing-content {{$item->planDet->recomended == 1 ? 'pricing-content-prem' : ''}}">
+                                @if($item->planDet->recomended == 1)
+                                    <div class="premium-heading">
+                                        <h6>Recommended</h6>
+                                    </div>
+                                @endif
+                                <img src="{{ asset($item->planDet->icon)}}" alt="">
+                                <h4>{{$item->planDet->name}}</h4>
+                                <p>{{$item->planDet->description}}</p>
+                                <a href="javascript:void(0)" class="button">{{$item->planDet->button_text}}</a>
+                                <div class="limited-access">
+                                    <span>{{$item->currencyDet->currency_symbol . $item->price}}</span> / <small>{{$item->price_limit}}</small>
+                                </div>
 
-                    <div class="col-lg-6 col-md-6">
-                        <div class="pricing-content pricing-content-prem">
-                            <div class="premium-heading">
-                                <h6>Recommended</h6>
+                                <ul class="offers p-0 m-0 mt-4">
+                                    @foreach (explode(',',$item->planDet->benifits) as $b)
+                                    <li>
+                                        <img src="{{ asset('frontend/img/check.png')}}" alt="">
+                                        {{$b}}
+                                    </li>
+                                    @endforeach
+                                    {{-- <li>
+                                        <img src="{{ asset('frontend/img/check.png')}}" alt="">
+                                        All limited links
+                                    </li>
+                                    <li>
+                                        <img src="{{ asset('frontend/img/check.png')}}" alt="">
+                                        Aliquam facilisis neque in lorem
+                                    </li>
+                                    <li>
+                                        <img src="{{ asset('frontend/img/check.png')}}" alt="">
+                                        Vivamus at sem sit amet ante
+                                    </li>
+                                    <li>
+                                        <img src="{{ asset('frontend/img/check.png')}}" alt="">
+                                        Donec vulputate sapien ac cursus
+                                    </li>
+                                    <li>
+                                        <img src="{{ asset('frontend/img/check.png')}}" alt="">
+                                        Curabitur vel nulla vehicula
+                                    </li>
+                                    <li>
+                                        <img src="{{ asset('frontend/img/check.png')}}" alt="">
+                                        Proin bibendum justo ac mattis
+                                    </li> --}}
+                                </ul>
                             </div>
-                            <img src="{{ asset('frontend/img/crown.png')}}" alt="">
-                            <h4>Premium</h4>
-                            <p>Power-up your business.</p>
-                            <a href="" class="button">Start Free Today</a>
-                            <div class="limited-access">
-                                <span>$20</span> / <small>per month</small>
-                            </div>
-
-                            <ul class="offers p-0 m-0 mt-4">
-                                <li>
-                                    <img src="{{ asset('frontend/img/check.png')}}" alt="">
-                                    All limited links
-                                </li>
-                                <li>
-                                    <img src="{{ asset('frontend/img/check.png')}}" alt="">
-                                    Aliquam facilisis neque in lorem
-                                </li>
-                                <li>
-                                    <img src="{{ asset('frontend/img/check.png')}}" alt="">
-                                    Vivamus at sem sit amet ante
-                                </li>
-                                <li>
-                                    <img src="{{ asset('frontend/img/check.png')}}" alt="">
-                                    Donec vulputate sapien ac cursus
-                                </li>
-                                <li>
-                                    <img src="{{ asset('frontend/img/check.png')}}" alt="">
-                                    Curabitur vel nulla vehicula
-                                </li>
-                                <li>
-                                    <img src="{{ asset('frontend/img/check.png')}}" alt="">
-                                    Proin bibendum justo ac mattis
-                                </li>
-                            </ul>
                         </div>
-                    </div>
+                    @empty
+                        <div class="col-lg-6 col-md-6 container">
+                            <h5 class="text-center my-2">Sorry no plans found!</h5>
+                        </div>
+                    @endforelse
                 </div>
             </div>
         </div>
@@ -653,5 +668,12 @@
         </div>
     </div>
 </section>
+@endsection
 
+@section('script')
+    <script>
+        $('#currency_select').on('change',function(){
+            $('.select').submit();
+        });
+    </script>
 @endsection

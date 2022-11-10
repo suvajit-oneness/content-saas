@@ -51,7 +51,8 @@ class PlansPriceController extends BaseController
             return $this->responseRedirectBack('Error occurred while creating course.', 'error', true, true);
         }
 
-        return $this->responseRedirect('admin.plans.management.index', 'Plans added successfully', 'success', false, false);
+        // $route = ('admin.plans.management.edit',$plan->id)
+        return $this->responseRedirect('admin.plans.management.edit', 'Plans added successfully, Add currency!', 'success', false, false, ['id' => $plan->id]);
     }
 
     /**
@@ -112,7 +113,7 @@ class PlansPriceController extends BaseController
         if (!$deleted) {
             return $this->responseRedirectBack('Error occurred while deleting', 'error', true, true);
         }
-        return $this->responseRedirect('admin.plans.category.index', 'Plan has been deleted successfully', 'success', false, false);
+        return $this->responseRedirect('admin.plans.management.index', 'Plan has been deleted successfully', 'success', false, false);
     }
 
     public function details($id)
@@ -150,6 +151,7 @@ class PlansPriceController extends BaseController
                 'price'=>$request->price,
                 'price_limit'=>$request->price_limit,
             ]);
+
             if(!$updated){
                 return $this->responseRedirectBack('Error occoured', 'error', true, true);
             }else{
@@ -168,6 +170,18 @@ class PlansPriceController extends BaseController
             }else{
                 return $this->responseRedirectBack('Error occoured', 'error', true, true);
             }
+        }
+    }
+
+    public function deletePricing($id)
+    {
+        $plan_id = PlansWithPrice::find($id)->plan_id;
+        $delete = PlansWithPrice::find($id)->delete();
+        if($delete){
+            return $this->responseRedirect('admin.plans.management.edit', 'Price Deleted successfully!', 'success', false, false, ['id' => $plan_id]);
+        }
+        else{
+            return $this->responseRedirectBack('Error occoured', 'error', true, true);
         }
     }
 }

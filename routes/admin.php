@@ -647,6 +647,7 @@ Route::group(['prefix' => 'admin'], function () {
                     Route::get('/{id}/edit', 'Admin\PlansPriceController@edit')->name('admin.plans.management.edit');
                     Route::post('/update', 'Admin\PlansPriceController@update')->name('admin.plans.management.update');
                     Route::post('/updatePricing', 'Admin\PlansPriceController@updatePricing')->name('admin.plans.management.updatePricing');
+                    Route::get('{id}/deletePricing', 'Admin\PlansPriceController@deletePricing')->name('admin.plans.management.deletePricing');
                     Route::get('{id}/details', 'Admin\PlansPriceController@details')->name('admin.plans.management.details');
                     Route::get('/{id}/delete', 'Admin\PlansPriceController@delete')->name('admin.plans.management.delete');
                     Route::post('updateStatus', 'Admin\PlansPriceController@updateStatus')->name('admin.plans.management.updateStatus');
