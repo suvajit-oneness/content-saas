@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\BaseController;
+use App\Models\Currency;
 use App\Models\PlansAndPricing;
 use App\Models\PlansPriceCategory;
 use App\Models\PlansWithPrice;
 use Illuminate\Http\Request;
+use PhpOffice\PhpSpreadsheet\Calculation\DateTimeExcel\Current;
 
 class PlansPriceController extends BaseController
 {
@@ -62,7 +64,7 @@ class PlansPriceController extends BaseController
     public function edit($id)
     {
         $plans = PlansAndPricing::find($id);
-        $plans_cat = PlansPriceCategory::orderBy('currency')->get();
+        $plans_cat = Currency::orderBy('currency')->get();
         $plans_with_price = PlansWithPrice::where('plan_id',$id)->with('currencyDet','planDet')->get();
         $this->setPageTitle('Plans and Pricing', 'Edit details');
         return view('admin.planspricing.edit',compact('plans','plans_cat','plans_with_price'));

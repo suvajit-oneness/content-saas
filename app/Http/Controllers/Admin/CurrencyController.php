@@ -3,26 +3,26 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\BaseController;
-use App\Models\PlansPriceCategory;
+use App\Models\Currency;
 use Illuminate\Http\Request;
 
-class PlansPriceCategoryController extends BaseController
+class CurrencyController extends BaseController
 {
     public function index(Request $request)
     {
         if (!empty($request->term))
-            $plans_price_category = PlansPriceCategory::where('currency', 'like', '%' . $request->term . '%')->paginate(25);
+            $plans_price_category = Currency::where('currency', 'like', '%' . $request->term . '%')->paginate(25);
         else
-            $plans_price_category = PlansPriceCategory::paginate(25);
+            $plans_price_category = Currency::paginate(25);
 
-        $this->setPageTitle('Plans and Pricing Currencies', 'All details');
+        $this->setPageTitle('Currencies', 'All details');
 
         return view('admin.planspricingcategory.index', compact('plans_price_category'));
     }
 
     public function create()
     {
-        $this->setPageTitle('Plans and Pricing Currencies', 'Create New');
+        $this->setPageTitle('Currencies', 'Create New');
         return view('admin.planspricingcategory.create');
     }
 
@@ -34,7 +34,7 @@ class PlansPriceCategoryController extends BaseController
             'currency_symbol' => 'required',
         ]);
 
-        $plans_price_category = new PlansPriceCategory();
+        $plans_price_category = new Currency();
         
         $plans_price_category->currency = $request->currency;
         $plans_price_category->currency_symbol = $request->currency_symbol;
@@ -52,8 +52,8 @@ class PlansPriceCategoryController extends BaseController
      */
     public function edit($id)
     {
-        $plans_price_category = PlansPriceCategory::find($id);
-        $this->setPageTitle('Plans and Pricing Currencies', 'Edit details');
+        $plans_price_category = Currency::find($id);
+        $this->setPageTitle('Currencies', 'Edit details');
         return view('admin.planspricingcategory.edit',compact('plans_price_category'));
     }
 
@@ -69,7 +69,7 @@ class PlansPriceCategoryController extends BaseController
             'currency_symbol' => 'required',
         ]);
 
-        $plans_price_category = PlansPriceCategory::find($request->id);
+        $plans_price_category = Currency::find($request->id);
 
         $plans_price_category->currency = $request->currency;
         $plans_price_category->currency_symbol = $request->currency_symbol;
@@ -87,7 +87,7 @@ class PlansPriceCategoryController extends BaseController
      */
     public function delete($id)
     {
-        $deleted = PlansPriceCategory::find($id)->delete();
+        $deleted = Currency::find($id)->delete();
 
         if (!$deleted) {
             return $this->responseRedirectBack('Error occurred while deleting course.', 'error', true, true);

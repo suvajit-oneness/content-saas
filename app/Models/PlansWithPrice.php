@@ -14,6 +14,6 @@ class PlansWithPrice extends Model
     }
     public function currencyDet()
     {
-        return $this->belongsTo(PlansPriceCategory::class, 'currency_id', 'id', '=');
+        return $this->belongsTo(Currency::class, 'currency_id', 'id', '=');
     }
 }

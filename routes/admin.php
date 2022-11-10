@@ -591,6 +591,16 @@ Route::group(['prefix' => 'admin'], function () {
                     Route::get('/{id}/delete', 'Admin\LanguageController@delete')->name('admin.language.master.delete');
                     Route::post('updateStatus', 'Admin\LanguageController@updateStatus')->name('admin.language.master.updateStatus');
                 });
+
+                // Plans Pricing Category
+                Route::group(['prefix' => 'currency'], function () {
+                    Route::get('/', 'Admin\CurrencyController@index')->name('admin.plans.category.index');
+                    Route::get('/create', 'Admin\CurrencyController@create')->name('admin.plans.category.create');
+                    Route::post('/store', 'Admin\CurrencyController@store')->name('admin.plans.category.store');
+                    Route::get('/{id}/edit', 'Admin\CurrencyController@edit')->name('admin.plans.category.edit');
+                    Route::post('/update', 'Admin\CurrencyController@update')->name('admin.plans.category.update');
+                    Route::get('/{id}/delete', 'Admin\CurrencyController@delete')->name('admin.plans.category.delete');
+                });
             });
               //tools-feature management
             //** Content management **//
@@ -630,15 +640,6 @@ Route::group(['prefix' => 'admin'], function () {
 
             // -------------------- Plans and Pricing-------------------------
             Route::group(['prefix'=>'plans-pricing'], function(){
-                // Plans Pricing Category
-                Route::group(['prefix' => '/category'], function () {
-                    Route::get('/', 'Admin\PlansPriceCategoryController@index')->name('admin.plans.category.index');
-                    Route::get('/create', 'Admin\PlansPriceCategoryController@create')->name('admin.plans.category.create');
-                    Route::post('/store', 'Admin\PlansPriceCategoryController@store')->name('admin.plans.category.store');
-                    Route::get('/{id}/edit', 'Admin\PlansPriceCategoryController@edit')->name('admin.plans.category.edit');
-                    Route::post('/update', 'Admin\PlansPriceCategoryController@update')->name('admin.plans.category.update');
-                    Route::get('/{id}/delete', 'Admin\PlansPriceCategoryController@delete')->name('admin.plans.category.delete');
-                });
                 // Plans Pricing Master
                 Route::group(['prefix' => '/management'], function () {
                     Route::get('/', 'Admin\PlansPriceController@index')->name('admin.plans.management.index');
