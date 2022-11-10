@@ -80,7 +80,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="csvUploadModal" data-backdrop="static">
+    {{-- <div class="modal fade" id="csvUploadModal" data-backdrop="static">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -98,7 +98,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection
 @push('scripts')
     <script type="text/javascript" src="{{ asset('backend/js/plugins/jquery.dataTables.min.js') }}"></script>

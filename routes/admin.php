@@ -626,6 +626,7 @@ Route::group(['prefix' => 'admin'], function () {
                 Route::get('/{id}/details', 'Admin\ToolsInterestController@details')->name('admin.tools.AreaOfInterest.details');
                 Route::post('/csv-store', 'Admin\ToolsInterestController@csvStore')->name('admin.tools.AreaOfInterest.data.csv.store');
                 Route::get('/export', 'Admin\ToolsInterestController@export')->name('admin.tools.AreaOfInterest.data.csv.export');
+            });
 
             // -------------------- Plans and Pricing-------------------------
             Route::group(['prefix'=>'plans-pricing'], function(){
@@ -645,9 +646,10 @@ Route::group(['prefix' => 'admin'], function () {
                     Route::post('/store', 'Admin\PlansPriceController@store')->name('admin.plans.management.store');
                     Route::get('/{id}/edit', 'Admin\PlansPriceController@edit')->name('admin.plans.management.edit');
                     Route::post('/update', 'Admin\PlansPriceController@update')->name('admin.plans.management.update');
+                    Route::post('/updatePricing', 'Admin\PlansPriceController@updatePricing')->name('admin.plans.management.updatePricing');
+                    Route::get('{id}/details', 'Admin\PlansPriceController@details')->name('admin.plans.management.details');
                     Route::get('/{id}/delete', 'Admin\PlansPriceController@delete')->name('admin.plans.management.delete');
                     Route::post('updateStatus', 'Admin\PlansPriceController@updateStatus')->name('admin.plans.management.updateStatus');
                 });
             });
-});
 });
