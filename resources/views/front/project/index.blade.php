@@ -37,7 +37,7 @@
                                     <p class="text-muted"><small>{{ $item->short_desc }}</small></p>
                                 </td>
                                 <td>
-                                    <a href="">55</a>
+                                    <a href="{{ route('front.project.detail', $item->slug) }}" class="badge bg-success download-badge">Tasks 55</a>
                                 </td>
                                 <td class="text-center">
                                     @if ($item->document)

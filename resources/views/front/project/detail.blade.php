@@ -23,14 +23,62 @@
             </div>
         </div>
 
-        <div class="row mt-4">
+        <div class="row mt-4 mb-3">
             <div class="col-md-6"><p class="mb-3">Task List</p></div>
 
             <div class="col-md-6 text-end">
                 <a href="{{ route('front.project.task.create', $data->id) }}" class="add-btn-edit d-inline-block">Create new Task <i class="fa-solid fa-plus"></i></a>
             </div>
         </div>
-        <div class="row mt-4">
+
+        @forelse ($tasks as $index => $item)
+            <div class="row mb-3">
+                <div class="col-12">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body">
+                            <p class="text-dark">{{ $index + $tasks->firstItem() }}. {{ $item->title }}</p>
+
+                            <p class="text-muted"><small>{{ $item->short_desc }}</small></p>
+
+                            <div class="download-link mb-3">
+                                @if ($item->document)
+                                    <a href="{{ asset($item->document) }}" class="badge bg-success download-badge d-inline-block" download>
+                                        <i class="fas fa-download"></i>
+                                        Download
+                                    </a>
+                                @endif
+                            </div>
+
+                            <a href="" class="text-success"><u><small>View task details</small></u></a>
+                        </div>
+
+                        <div class="task-update">
+                            <div class="dropdown">
+                                <button class="btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <li><a class="dropdown-item" href="#">Edit</a></li>
+                                    <li><a class="dropdown-item" href="#">Delete</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @empty
+            <div class="row">
+                <div class="col-12 text-center text-muted">No records found</div>
+            </div>
+        @endforelse
+
+        @if (count($tasks) > 0)
+            <div class="pagination-custom">
+                {{ $tasks->appends($_GET)->links() }}
+            </div>
+        @endif
+
+        {{-- <div class="row mt-4">
             <div class="table-responsive table-tabs">
                 <table class="table">
                     <thead>
@@ -38,7 +86,6 @@
                             <th>SR</th>
                             <th>Title</th>
                             <th>Description</th>
-                            <th>Tasks</th>
                             <th>Document</th>
                             <th>Status</th>
                             <th>Action</th>
@@ -52,9 +99,6 @@
                             <td>{{ $item->title }}</td>
                             <td>
                                 <p class="text-muted"><small>{{ $item->short_desc }}</small></p>
-                            </td>
-                            <td>
-                                <a href="">55</a>
                             </td>
                             <td class="text-center">
                                 @if ($item->document)
@@ -90,9 +134,9 @@
             <div class="pagination-custom">
                 {{ $tasks->appends($_GET)->links() }}
             </div>
-                
             @endif
-        </div>
+        </div> --}}
+
     </div>
 </section>
 
