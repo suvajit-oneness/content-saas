@@ -50,7 +50,7 @@
                 <div class="cart-item item-thumb">Image</div>
                 <div class="cart-item item-title">Name</div>
                 <div class="cart-item item-attr">Author</div>
-                <div class="cart-item item-color">Course Contents</div>
+                <div class="cart-item item-color">Contents</div>
                 <div class="cart-item item-price">Price</div>
                 <div class="cart-item item-remove">Action</div>
             </div>
@@ -73,9 +73,13 @@
                 <div class="cart-item item-author">
                     <h6>By {{$cartValue->author_name}}</h6>
                 </div>
-                 <div class="cart-item item-author">
-                    <h6><li>{{totalLessonsAndTopics($cartValue->course_id)->lesson_count}} Lessons</li></h6>
-                    <h6><li>{{totalLessonsAndTopics($cartValue->course_id)->topic_count}} Topics</li></h6>
+                <div class="cart-item item-author">
+                    @if($cartValue->purchase_type != 'subscription')
+                        <h6><li>{{totalLessonsAndTopics($cartValue->course_id)->lesson_count}} Lessons</li></h6>
+                        <h6><li>{{totalLessonsAndTopics($cartValue->course_id)->topic_count}} Topics</li></h6>
+                    @else
+                        <h6>Subscriptions</h6>
+                    @endif
                 </div>
                 
                 <div class="cart-item item-price">

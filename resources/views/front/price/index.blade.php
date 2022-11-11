@@ -84,7 +84,23 @@
                                 <img src="{{ asset($item->planDet->icon)}}" alt="">
                                 <h4>{{$item->planDet->name}}</h4>
                                 <p>{{$item->planDet->description}}</p>
-                                <a href="javascript:void(0)" class="button">{{$item->planDet->button_text}}</a>
+                                <div>
+                                    <form method="POST" action="{{route('front.cart.add')}}" class="d-flex" id="addToCartForm">@csrf
+                                        <input type="hidden" name="course_id" value="{{$item->planDet->id}}">
+                                        <input type="hidden" name="course_name" value="{{$item->planDet->name}}">
+                                        <input type="hidden" name="course_image" value="None">
+                                        <input type="hidden" name="author_name" value="None">
+                                        <input type="hidden" name="course_slug" value="None">
+                                        <input type="hidden" name="purchase_type" value="subscription">
+                                        <input type="hidden" name="price" value="{{$item->price}}">
+                                        @if(Auth::guard('web')->check())
+                                            <button type="submit" id="addToCart__btn" class="button">{{$item->planDet->button_text}}</button>
+                                        @else
+                                            <a href="{{route('front.user.login')}}" class="button">Login To Purchase</a>
+                                        @endif
+                                    </form>
+                                </div>
+                                {{-- <a href="javascript:void(0)" class="button">{{$item->planDet->button_text}}</a> --}}
                                 <div class="limited-access">
                                     <span>{{$item->currencyDet->currency_symbol . $item->price}}</span> / <small>{{$item->price_limit}}</small>
                                 </div>

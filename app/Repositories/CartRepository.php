@@ -62,6 +62,7 @@ public function addToCart(array $data)
             $newEntry->course_slug = $collectedData['course_slug'];
             $newEntry->author_name = $collectedData['author_name'];
             $newEntry->price = $collectedData['price'];
+            $newEntry->purchase_type = $collectedData['purchase_type'] ?? 'course';
             $newEntry->ip = $this->ip;
             $newEntry->save();
 

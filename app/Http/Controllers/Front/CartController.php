@@ -50,9 +50,10 @@ class CartController extends BaseController
         $params = $request->except('_token');
 
         $cartStore = $this->CartRepository->addToCart($params);
+        $type = $request->purchase_type ?? 'course';
 
         if ($cartStore) {
-             return redirect()->back()->with('success', 'Course added to cart successfully');
+             return redirect()->back()->with('success', $type . ' added to cart successfully!');
             
         } else {
         	return redirect()->back()->with('failure', 'Something happened');
