@@ -40,8 +40,8 @@ class PlansFaqController extends BaseController
         } else {
             $faqs = PlansPriceFaq::groupBy('header_id')->paginate(15);
         }
-        $this->setPageTitle('Market faq', 'List of all Marketplace Faqs');
-        return view('admin.marketplace.faq.index', compact('faqs'));
+        $this->setPageTitle('plans faq', 'List of all planspage Faqs');
+        return view('admin.planspricefaq.index', compact('faqs'));
     }
 
     /**
@@ -49,8 +49,8 @@ class PlansFaqController extends BaseController
      */
     public function create()
     {
-        $this->setPageTitle('Marketplace faq', 'Create Marketplace faq');
-        return view('admin.marketplace.faq.create');
+        $this->setPageTitle('planspage faq', 'Create planspage faq');
+        return view('admin.planspricefaq.create');
     }
 
     /**
@@ -83,16 +83,16 @@ class PlansFaqController extends BaseController
 
         for($i=0; $i<count($params['question']); $i++) { 
             if($params['question'][$i] != ''){
-                $marketplacefaq = new PlansPriceFaq();
-                $marketplacefaq->header = $params['header'];
-                $marketplacefaq->header_id = $header;
-                $marketplacefaq->question = $params['question'][$i];
-                $marketplacefaq->answer = $params['answer'][$i];
-                $marketplacefaq->save();
+                $planspagefaq = new PlansPriceFaq();
+                $planspagefaq->header = $params['header'];
+                $planspagefaq->header_id = $header;
+                $planspagefaq->question = $params['question'][$i];
+                $planspagefaq->answer = $params['answer'][$i];
+                $planspagefaq->save();
             }
         }
 
-        return $this->responseRedirect('admin.marketplace.faq.index', 'Marketplace faqs has been created successfully', 'success', false, false);
+        return $this->responseRedirect('admin.plans.faq.index', 'Plans page faqs has been created successfully', 'success', false, false);
     }
 
     /**
@@ -103,8 +103,8 @@ class PlansFaqController extends BaseController
     {
         $targetfaq = PlansPriceFaq::where('header_id',$id)->get();
 
-        $this->setPageTitle('Market faq', 'Edit Market faq : ' . $targetfaq[0]->header);
-        return view('admin.marketplace.faq.edit', compact('targetfaq'));
+        $this->setPageTitle('plans faq', 'Edit plans faq : ' . $targetfaq[0]->header);
+        return view('admin.planspricefaq.edit', compact('targetfaq'));
     }
 
     /**
@@ -131,20 +131,20 @@ class PlansFaqController extends BaseController
             return $this->responseRedirectBack('All the questions and answer are not set properly!', 'error', true, true);
         }
         $params = $request->except('_token');
-        $marketplacefaq = PlansPriceFaq::where('header_id',$request->id)->delete();
+        $planspagefaq = PlansPriceFaq::where('header_id',$request->id)->delete();
 
         for($i=0; $i<count($params['question']); $i++) { 
             if($params['question'][$i] != ''){
-                $marketplacefaq = new PlansPriceFaq();
-                $marketplacefaq->header = $params['header'];
-                $marketplacefaq->header_id = $params['id'];
-                $marketplacefaq->question = $params['question'][$i];
-                $marketplacefaq->answer = $params['answer'][$i];
-                $marketplacefaq->save();
+                $planspagefaq = new PlansPriceFaq();
+                $planspagefaq->header = $params['header'];
+                $planspagefaq->header_id = $params['id'];
+                $planspagefaq->question = $params['question'][$i];
+                $planspagefaq->answer = $params['answer'][$i];
+                $planspagefaq->save();
             }
         }
 
-        return $this->responseRedirectBack('Marketplace faq has been updated successfully', 'success', false, false);
+        return $this->responseRedirectBack('Plans page faq has been updated successfully', 'success', false, false);
     }
 
     /**
@@ -156,9 +156,9 @@ class PlansFaqController extends BaseController
         $faq = PlansPriceFaq::where('header_id',$id)->delete();
 
         if (!$faq) {
-            return $this->responseRedirectBack('Error occurred while deleting Market faq.', 'error', true, true);
+            return $this->responseRedirectBack('Error occurred while deleting plans faq.', 'error', true, true);
         }
-        return $this->responseRedirect('admin.marketplace.faq.index', 'Market faq has been deleted successfully', 'success', false, false);
+        return $this->responseRedirect('admin.plans.faq.index', 'plans faq has been deleted successfully', 'success', false, false);
     }
 
     /**
@@ -174,7 +174,7 @@ class PlansFaqController extends BaseController
 
 
         if ($faq) {
-            return response()->json(array('message' => 'Marketplace faq status has been successfully updated'));
+            return response()->json(array('message' => 'Plans page faq status has been successfully updated'));
         }
     }
 
@@ -186,8 +186,8 @@ class PlansFaqController extends BaseController
     {
         $faq = PlansPriceFaq::where('header_id',$id)->get();
 
-        $this->setPageTitle('Market faq Details', 'Marketplace faq Details : ' . $faq[0]->header);
+        $this->setPageTitle('Plans faq Details', 'Planspage faq Details : ' . $faq[0]->header);
 
-        return view('admin.marketplace.faq.details', compact('faq'));
+        return view('admin.planspricefaq.details', compact('faq'));
     }
 }

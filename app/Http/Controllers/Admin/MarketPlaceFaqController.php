@@ -35,11 +35,11 @@ class MarketPlaceFaqController extends BaseController
     public function index(Request $request)
     {
         if (!empty($request->term)) {
-            $faqs = MarketPlaceFaq::groupBy('header_id')->all();
+            $faqs = MarketPlaceFaq::groupBy('header_id')->where('header',$request->term)->paginate(15);
         } else {
             $faqs = MarketPlaceFaq::groupBy('header_id')->paginate(15);
         }
-        $this->setPageTitle('Market faq', 'List of all Marketplace Faqs');
+        $this->setPageTitle('MarketPlace faq', 'List of all Marketplace Faqs');
         return view('admin.marketplace.faq.index', compact('faqs'));
     }
 
@@ -102,7 +102,7 @@ class MarketPlaceFaqController extends BaseController
     {
         $targetfaq = MarketPlaceFaq::where('header_id',$id)->get();
 
-        $this->setPageTitle('Market faq', 'Edit Market faq : ' . $targetfaq[0]->header);
+        $this->setPageTitle('MarketPlace faq', 'Edit MarketPlace faq : ' . $targetfaq[0]->header);
         return view('admin.marketplace.faq.edit', compact('targetfaq'));
     }
 
@@ -155,9 +155,9 @@ class MarketPlaceFaqController extends BaseController
         $faq = MarketPlaceFaq::where('header_id',$id)->delete();
 
         if (!$faq) {
-            return $this->responseRedirectBack('Error occurred while deleting Market faq.', 'error', true, true);
+            return $this->responseRedirectBack('Error occurred while deleting MarketPlace faq.', 'error', true, true);
         }
-        return $this->responseRedirect('admin.marketplace.faq.index', 'Market faq has been deleted successfully', 'success', false, false);
+        return $this->responseRedirect('admin.marketplace.faq.index', 'MarketPlace faq has been deleted successfully', 'success', false, false);
     }
 
     /**
@@ -185,7 +185,7 @@ class MarketPlaceFaqController extends BaseController
     {
         $faq = MarketPlaceFaq::where('header_id',$id)->get();
 
-        $this->setPageTitle('Market faq Details', 'Marketplace faq Details : ' . $faq[0]->header);
+        $this->setPageTitle('MarketPlace faq Details', 'Marketplace faq Details : ' . $faq[0]->header);
 
         return view('admin.marketplace.faq.details', compact('faq'));
     }
