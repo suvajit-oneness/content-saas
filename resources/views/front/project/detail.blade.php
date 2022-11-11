@@ -1,5 +1,5 @@
 @extends('front.layouts.appprofile')
-@section('title', 'Project: '.$data->title)
+@section('title', 'Project detail')
 
 @section('section')
 <section class="edit-sec">
@@ -15,6 +15,8 @@
 
         <div class="row mt-0">
             <div class="col-md-12">
+                <h5 class="mb-3">{{$data->title}}</h5>
+
                 <p class="text-muted"><small>Project created {{ date('j F Y g:i A', strtotime($data->created_at)) }}</small></p>
 
                 <p class="mb-0 mt-4">Description:</p>
@@ -36,9 +38,13 @@
                 <div class="col-12">
                     <div class="card border-0 shadow-sm">
                         <div class="card-body">
-                            <p class="text-dark">{{ $index + $tasks->firstItem() }}. {{ $item->title }}</p>
+                            <p>
+                                <a href="{{ route('front.project.task.detail', $item->slug) }}" class="text-success">
+                                {{ $index + $tasks->firstItem() }}. {{ ucwords($item->title) }}
+                                </a>
+                            </p>
 
-                            <p class="text-muted"><small>{{ $item->short_desc }}</small></p>
+                            <p class="text-muted short-desc"><small>{{ $item->short_desc }}</small></p>
 
                             <div class="download-link mb-3">
                                 @if ($item->document)
@@ -49,7 +55,7 @@
                                 @endif
                             </div>
 
-                            <a href="" class="text-success"><u><small>View task details</small></u></a>
+                            <a href="{{ route('front.project.task.detail', $item->slug) }}" class="text-success"><u><small>View task details</small></u></a>
                         </div>
 
                         <div class="task-update">
@@ -58,8 +64,8 @@
                                     <i class="fas fa-ellipsis-v"></i>
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                    <li><a class="dropdown-item" href="#">Edit</a></li>
-                                    <li><a class="dropdown-item" href="#">Delete</a></li>
+                                    <li><a class="dropdown-item text-muted" href="{{ route('front.project.task.edit', $item->id) }}">Edit</a></li>
+                                    <li><a class="dropdown-item text-muted" href="{{ route('front.project.task.delete', $item->id) }}" onclick="return confirm('Are you sure ?')">Delete</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -68,7 +74,7 @@
             </div>
         @empty
             <div class="row">
-                <div class="col-12 text-center text-muted">No records found</div>
+                <div class="col-12 text-muted">No records found</div>
             </div>
         @endforelse
 

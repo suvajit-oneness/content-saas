@@ -27,7 +27,6 @@
                                 <th>Action</th>
                             </tr>
                         </thead>
-
                         <tbody>
                             @forelse ($data as $index => $item)
                             <tr>
@@ -37,7 +36,7 @@
                                     <p class="text-muted"><small>{{ $item->short_desc }}</small></p>
                                 </td>
                                 <td>
-                                    <a href="{{ route('front.project.detail', $item->slug) }}" class="badge bg-success download-badge">Tasks 55</a>
+                                    <a href="{{ route('front.project.detail', $item->slug) }}" class="badge bg-success download-badge">{{ $item->taskDetail->count() }} {{ ($item->taskDetail->count() > 1) ? 'Tasks' : 'Task' }}</a>
                                 </td>
                                 <td class="text-center">
                                     @if ($item->document)
@@ -46,7 +45,7 @@
                                             Download
                                         </a>
                                     @else
-                                        <p><i class="fas fa-info-circle text-danger"></i></p>
+                                        <p><i class="fas fa-info-circle text-secondary"></i></p>
                                     @endif
                                 </td>
                                 <td>

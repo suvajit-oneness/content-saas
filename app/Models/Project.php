@@ -12,4 +12,9 @@ class Project extends Model {
     {
         return $this->belongsTo('\App\Models\ProjectStatus', 'status', 'slug');
     }
+
+    public function taskDetail()
+    {
+        return $this->hasMany('\App\Models\ProjectTask', 'project_id', 'id');
+    }
 }
