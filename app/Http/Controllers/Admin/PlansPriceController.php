@@ -110,6 +110,7 @@ class PlansPriceController extends BaseController
      */
     public function delete($id)
     {
+        PlansWithPrice::where('plan_id',$id)->delete();
         $deleted = PlansAndPricing::find($id)->delete();
 
         if (!$deleted) {

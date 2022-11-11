@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\BaseController;
 use App\Models\Currency;
+use App\Models\PlansWithPrice;
 use Illuminate\Http\Request;
 
 class CurrencyController extends BaseController
@@ -88,6 +89,7 @@ class CurrencyController extends BaseController
     public function delete($id)
     {
         $deleted = Currency::find($id)->delete();
+        PlansWithPrice::where('currency_id',$id)->delete();
 
         if (!$deleted) {
             return $this->responseRedirectBack('Error occurred while deleting course.', 'error', true, true);

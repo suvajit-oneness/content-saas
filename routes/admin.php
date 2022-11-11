@@ -653,5 +653,14 @@ Route::group(['prefix' => 'admin'], function () {
                     Route::get('/{id}/delete', 'Admin\PlansPriceController@delete')->name('admin.plans.management.delete');
                     Route::post('updateStatus', 'Admin\PlansPriceController@updateStatus')->name('admin.plans.management.updateStatus');
                 });
+
+                Route::group(['prefix' => '/page'], function () {
+                    Route::get('/', 'Admin\PlansPricePageController@index')->name('admin.plans.page.index');
+                    Route::get('/create', 'Admin\PlansPricePageController@create')->name('admin.plans.page.create');
+                    Route::post('/store', 'Admin\PlansPricePageController@store')->name('admin.plans.page.store');
+                    Route::get('/{id}/edit', 'Admin\PlansPricePageController@edit')->name('admin.plans.page.edit');
+                    Route::post('/update', 'Admin\PlansPricePageController@update')->name('admin.plans.page.update');
+                    Route::get('/{id}/details', 'Admin\PlansPricePageController@details')->name('admin.plans.page.details');
+                });
             });
 });
