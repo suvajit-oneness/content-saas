@@ -49,6 +49,9 @@ class ProfileRepository extends BaseRepository implements ProfileContract
         $user->color_scheme = $collection['color_scheme'] ?? '';
         $user->worked_for = $collection['worked_for'] ?? '';
         $user->categories = $collection['categories'] ?? '';
+        
+        $user->charge = $collection['charge'] ?? '';
+        $user->duration = $collection['duration'] ?? '';
 
         if(!empty($params['image'])) {
             // image, folder name only

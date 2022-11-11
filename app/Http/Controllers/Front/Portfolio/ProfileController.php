@@ -7,6 +7,7 @@ use App\Contracts\ProfileContract;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Controllers\BaseController;
+use App\Models\Currency;
 use Illuminate\Support\Str;
 use Session;
 use Illuminate\Support\Facades\DB;
@@ -65,7 +66,8 @@ class ProfileController extends BaseController
     public function editProfile()
     {
         $country = DB::table('countries')->orderby('country_name')->get();
-        return view('front.profile.profile',compact('country'));
+        $charges_limit = DB::table('charges_limit')->get();
+        return view('front.profile.profile',compact('country','charges_limit'));
     }
 
     
@@ -89,6 +91,8 @@ class ProfileController extends BaseController
             'worked_for'    => 'nullable|string',
             'categories'    => 'nullable|string',
             'image'         => 'nullable',
+            'charge'       => 'nullable',
+            'duration'      => 'nullable',
         ]);
 
         $params = $request->except('_token');
