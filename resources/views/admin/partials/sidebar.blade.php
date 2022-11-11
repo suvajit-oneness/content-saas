@@ -239,18 +239,25 @@
         {{-- Market place --}}
         <li class="text-light" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true"
             aria-controls="collapseFive">
-            <a href="#" class="app-menu__item @if (request()->is('admin/marketplace')) {{ 'active' }} @endif">
+            <a href="#" class="app-menu__item @if (request()->is('admin/marketplace*')) {{ 'active' }} @endif">
                 <span class="app-menu__label">Marketplace Master</span>
                 <i class="app-menu__icon fa fa-chevron-down"></i>
             </a>
         </li>
-        <div id="collapseFive" class="collapse @if (request()->is('admin/marketplace')) {{ 'show' }} @endif"
+        <div id="collapseFive" class="collapse @if (request()->is('admin/marketplace*')) {{ 'show' }} @endif"
             aria-labelledby="headingOne" data-parent="#accordion">
             <li>
-                <a class="app-menu__item {{ request()->is('admin/marketplace/faq') ? 'active' : '' }} {{ sidebar_open(['admin.market.faq']) }}"
+                <a class="app-menu__item {{ request()->is('admin/marketplace/faq*') ? 'active' : '' }} {{ sidebar_open(['admin.market.faq.index']) }}"
                     href="{{ route('admin.marketplace.faq.index') }}">
                     <i class="app-menu__icon fa fa-file"></i>
                     <span class="app-menu__label">Faq Management</span>
+                </a>
+            </li>
+            <li>
+                <a class="app-menu__item {{ request()->is('admin/marketplace/page*') ? 'active' : '' }} {{ sidebar_open(['admin.market.page.index']) }}"
+                    href="{{ route('admin.marketplace.page.index') }}">
+                    <i class="app-menu__icon fa fa-file"></i>
+                    <span class="app-menu__label">Marketplace page content</span>
                 </a>
             </li>
         </div>

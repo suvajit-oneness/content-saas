@@ -67,7 +67,7 @@
                                     <div class="btn-group" role="group" aria-label="Second group">
                                         <a href="{{ route('admin.marketplace.faq.edit', $faq['header_id']) }}" class="btn btn-sm btn-primary edit-btn"><i class="fa fa-edit"></i></a>
                                         <a href="{{ route('admin.marketplace.faq.details', $faq['header_id']) }}" class="btn btn-sm btn-primary edit-btn"><i class="fa fa-eye"></i></a>
-                                        <a href="#" data-id="{{$faq['header_id']}}" class="sa-remove btn btn-sm btn-danger edit-btn"><i class="fa fa-trash"></i></a>
+                                        <a href="javascript:void(0)" data-id="{{$faq['header_id']}}" class="sa-remove btn btn-sm btn-danger edit-btn"><i class="fa fa-trash"></i></a>
                                     </div>
                                 </td>
                                 </tr>
@@ -120,7 +120,7 @@
         },
         function(isConfirm){
           if (isConfirm) {
-            window.location.href = "/admin/marketplace/faq/"+faqid+"/delete";
+            window.location.href += "/"+faqid+"/delete";
             } else {
               swal("Cancelled", "Record is safe", "error");
             }
