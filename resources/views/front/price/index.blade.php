@@ -7,9 +7,8 @@
         <div class="row">
             <div class="col-12 col-lg-8 col-md-10 m-auto">
                 <div class="pricing-banner-content">
-                    <h2>Get <span>Started</span> Today, <br> Pick a Plan Later</h2>
-                    <p>Try free for 7 days and get unrestricted
-                        access to all our products & features</p>
+                    <h2>{!!$plan_page->header_top!!}</h2>
+                    <p>{!!$plan_page->header_bottom!!}</p>
                     <div class="pricing-pay">
                         <small>I want to pay every month
                             in
@@ -136,10 +135,8 @@
         <div class="row">
             <div class="col-12 col-lg-10 col-md-10 m-auto">
                 <div class="payments-content">
-                    <a href=""><img src="{{ asset('frontend/img/payments.png')}}" alt="payments" class="img-fluid"></a>
-                    <p class="">We accept Visa, American Express, Mastercard, Paypal, and Bank Transfers (with
-                        Annual billing accounts
-                        of Pro and above). To set up a Bank Transfer account, please contact support.</p>
+                    <a href=""><img src="{{ asset($plan_page->middle_section_content_image)}}" alt="payments" class="img-fluid"></a>
+                    <p class="">{!!$plan_page->middle_section_content_description!!}</p>
                 </div>
             </div>
         </div>
@@ -159,7 +156,14 @@
             <div class="col-lg-3 col-md-3 mb-4 mb-md-0">
                 <div class="faq-tabs">
                     <ul class="p-0 m-0">
-                        <li class="faq-tab active" data-tab="free-trial">free trial <div class="fac-tab-check">
+                        @foreach ($plan_page_faq as $key => $item)
+                            <li class="faq-tab {{$key == 0 ? 'active' : ''}}" data-tab="data_tab{{$item->header_id}}">{{$item->header}}  
+                                <div class="fac-tab-check">
+                                    <img src="{{ asset('frontend/img/check-normal.png')}}" alt="">
+                                </div>
+                            </li>
+                        @endforeach
+                        {{-- <li class="faq-tab active" data-tab="free-trial">free trial <div class="fac-tab-check">
                                 <img src="{{ asset('frontend/img/check-normal.png')}}" alt="">
                             </div>
                         </li>
@@ -178,13 +182,40 @@
                         <li class="faq-tab " data-tab="general">General <div class="fac-tab-check">
                                 <img src="{{ asset('frontend/img/check-normal.png')}}" alt="">
                             </div>
-                        </li>
+                        </li> --}}
                     </ul>
                 </div>
             </div>
 
             <div class="col-md-9">
-                <div class="faq-content active" id="free-trial">
+
+                @foreach ($plan_page_faq as $key => $item)
+                    <div class="faq-content {{$key == 0 ? 'active' : ''}}" id="data_tab{{$item->header_id}}">
+                        <div class="faq-content-badge">
+                            <span>{{$item->header}}</span>
+                        </div>
+                        <div class="accordion" id="accordionExample">
+                            @foreach (App\Models\PlansPriceFaq::where('header_id',$item->header_id)->get() as $i => $pfaq)
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingOne">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapsible{{$i}}" aria-expanded="false" aria-controls="collapsible{{$i}}">
+                                            {{ $pfaq->question }}
+                                        </button>
+                                    </h2>
+                                    <div id="collapsible{{$i}}" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                                        data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <p>{!! $pfaq->answer ?? '' !!}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                @endforeach
+
+                {{-- <div class="faq-content active" id="free-trial">
                     <div class="faq-content-badge">
                         <span>Free Trial</span>
                     </div>
@@ -663,7 +694,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

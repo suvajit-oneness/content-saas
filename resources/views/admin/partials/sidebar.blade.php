@@ -197,10 +197,12 @@
                 <a class="app-menu__item {{ request()->is('admin/blog/page*') ? 'active' : '' }} {{ sidebar_open(['admin.article']) }}"
                     href="{{ route('admin.article.page.index') }}">
                     <i class="app-menu__icon fa fa-file"></i>
-                    <span class="app-menu__label">Blog Page Content</span>
+                    <span class="app-menu__label">Page Content</span>
                 </a>
             </li>
         </div>
+        
+        {{-- Plans and pricing --}}
         <li class="text-light" data-toggle="collapse" data-target="#collapsplansandpricing" aria-expanded="true"
             aria-controls="collapsplansandpricing">
             <a href="#" class="app-menu__item @if (request()->is('admin/plans-pricing*')) {{ 'active' }} @endif">
@@ -218,7 +220,13 @@
                     <span class="app-menu__label">All Plans and pricing</span>
                 </a>
             </li>
-
+            <li>
+                <a class="app-menu__item {{ request()->is('admin/plans-pricing/page*') ? 'active' : '' }}"
+                    href="{{ route('admin.plans.page.index') }}">
+                    <i class="app-menu__icon fa fa-folder"></i>
+                    <span class="app-menu__label">Page Content</span>
+                </a>
+            </li>
         </div>
 
         {{-- Market place --}}
@@ -271,7 +279,7 @@
                 <a class="app-menu__item {{ request()->is('admin/events/page*') ? 'active' : '' }}"
                     href="{{ route('admin.events.page.index') }}">
                     <i class="app-menu__icon fa fa-folder"></i>
-                    <span class="app-menu__label">Event Page Content</span>
+                    <span class="app-menu__label">Page Content</span>
                 </a>
             </li>
         </div>
@@ -307,7 +315,7 @@
                 <a class="app-menu__item {{ request()->is('admin/deals/page*') ? 'active' : '' }}"
                     href="{{ route('admin.deals.page.index') }}">
                     <i class="app-menu__icon fa fa-folder"></i>
-                    <span class="app-menu__label">Deals Page Content</span>
+                    <span class="app-menu__label">Page Content</span>
                 </a>
             </li>
         </div>
@@ -461,8 +469,6 @@
                 </a>
             </li>
         </div>
-       
-
         {{-- Master Management --}}
         <li class="text-light" data-toggle="collapse" data-target="#collapseFourteen" aria-expanded="true"
             aria-controls="collapseFourteen">
