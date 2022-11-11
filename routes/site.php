@@ -137,7 +137,7 @@ Route::name('front.')->group(function () {
             Route::get('/project/task/{slug}', 'Front\ProjectTaskController@detail')->name('detail');
             Route::get('/project/task/delete/{id}', 'Front\ProjectTaskController@delete')->name('delete');
             Route::get('/project/task/edit/{id}', 'Front\ProjectTaskController@edit')->name('edit');
-            Route::post('/project/update/{id}', 'Front\ProjectTaskController@update')->name('update');
+            Route::post('/project/task/update/{id}', 'Front\ProjectTaskController@update')->name('update');
         });
 
         Route::prefix('user/post-content')->name('user.post-content.')->group(function(){
