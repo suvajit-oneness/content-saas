@@ -17,6 +17,7 @@
     <link href="{{ asset('frontend/css/style.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('frontend/css/responsive.css') }}" rel="stylesheet" type="text/css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css"/>
 
     @yield('style')
 </head>
@@ -116,9 +117,11 @@
             $footer=App\Models\Footer::all();
            
         @endphp
+         
         <div class="container">
             <div class="row justify-content-between">
                 <div class="col-12 col-lg-4 col-md-4">
+                   
                     <img src="{{ asset($footer[0]->footer_logo) }}">
                 </div>
                 <div class="col-12 col-lg-7 col-md-7 mb-3 mb-lg-5 mb-md-4">
@@ -183,9 +186,14 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
     <script>
         feather.replace()
+    </script>
+     <script>
+        $('[data-fancybox]').fancybox({
+            protect: true
+        });
     </script>
 
     <script>

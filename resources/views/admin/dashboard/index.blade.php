@@ -40,7 +40,7 @@ $course = App\Models\Course::where('status','1')->get();
     </div>
     <div class="col-md-6 col-lg-3">
         <div class="widget-small primary coloured-icon">
-            <i class="icon fa fa-files-o fa-3x"></i>
+            <i class="icon fa fa-star fa-3x"></i>
             <div class="info">
                 <h4>Event</h4>
                 <p><b> {{count($event)}} </b></p>
@@ -49,7 +49,7 @@ $course = App\Models\Course::where('status','1')->get();
     </div>
     <div class="col-md-6 col-lg-3">
         <div class="widget-small primary coloured-icon">
-            <i class="icon fa fa-files-o fa-3x"></i>
+            <i class="icon fa fa-star fa-3x"></i>
             <div class="info">
                 <h4>Course</h4>
                 <p><b> {{count($course)}} </b></p>

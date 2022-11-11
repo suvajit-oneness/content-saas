@@ -232,7 +232,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label" for="section_two_category">Section Three Category <span
+                            <label class="control-label" for="section_two_category">Section Three Category (comma ,separated)<span
                                     class="m-l-5 text-danger"> *</span></label>
                             <input class="form-control @error('section_two_category') is-invalid @enderror"
                                 type="text" name="section_two_category" id="section_two_category"

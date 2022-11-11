@@ -55,7 +55,9 @@
                                 <tr>
                                     <td>{{ $key+1 }}</td>
                                     <td>{{ $data->name }}</td>
-                                    <td>{!! $data->icon !!}</td>
+                                    <td><span>
+                                        {!! $data->icon !!}
+                                    </span></td>
                                     <td class="text-center">
                                         <div class="toggle-button-cover margin-auto">
                                             <div class="button-cover">
