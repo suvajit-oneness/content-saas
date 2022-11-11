@@ -112,17 +112,21 @@
     @yield('section')
 
     <footer>
+        @php
+            $footer=App\Models\Footer::all();
+           
+        @endphp
         <div class="container">
             <div class="row justify-content-between">
                 <div class="col-12 col-lg-4 col-md-4">
-                    <img src="{{ asset('frontend/img/footer_logo.png') }}">
+                    <img src="{{ asset($footer[0]->footer_logo) }}">
                 </div>
                 <div class="col-12 col-lg-7 col-md-7 mb-3 mb-lg-5 mb-md-4">
-                    <h3>Launch your writing <span class="text-green">career</span> now.</h3>
-                    <p>Phasellus id ligula pretium, condimentum arcu sit amet, faucibus mauris.</p>
-                    <a href="javascript:void(0);">Get Started Now<img
+                    <h3>{!! $footer[0]->title !!}</h3>
+                    <p>{!! $footer[0]->short_desc !!}</p>
+                    <a href="{{$footer[0]->btn_link}}">{{ $footer[0]->btn_text }}<img
                             src="{{ asset('frontend/img/next_icon.png') }}"></a>
-                    <p class="m-0"><small>Easy set-up • 30 day money-back guarantee</small></p>
+                    <p class="m-0"><small>{{ $footer[0]->btn_desc }}</small></p>
                 </div>
             </div>
             <div class="row justify-content-between bottom_footer">
@@ -152,7 +156,7 @@
             </div>
             <div class="row">
                 <div class="col-12 text-center">
-                    <p>Copyright © 2022 Copyrighter Pvt. Ltd. All Rights Reserved.</p>
+                    <p>{!! $footer[0]->footer_tag !!}</p>
                 </div>
             </div>
         </div>

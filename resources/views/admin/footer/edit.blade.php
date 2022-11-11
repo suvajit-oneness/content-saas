@@ -20,8 +20,8 @@
                         <div class="form-group">
                             <label class="control-label" for="title">Title <span class="m-l-5 text-danger">
                                     *</span></label>
-                            <textarea class="form-control @error('title') is-invalid @enderror" type="text" name="title"
-                                id="title">{{ old('title', $data->title) }}</textarea>
+                            <input class="form-control @error('title') is-invalid @enderror" type="text" name="title"
+                                id="title" value="{{ old('title', $data->title) }}">
                                 <input type="hidden" name="id" value="{{$data->id}}">
                             @error('title')
                                 {{ $message ?? '' }}
@@ -85,7 +85,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <div class="row">
                                 <div class="col-md-2">
                                     @if ($data->footer_background != null)
@@ -104,7 +104,7 @@
                                     @enderror
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="form-group">
                             <label class="control-label" for="footer_tag">Footer Bottom Description <span
                                     class="m-l-5 text-danger"> *</span></label>
@@ -131,7 +131,7 @@
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
     <script type="text/javascript">
-        $('#title').summernote({
+        $('#footer_tag').summernote({
             height: 400
         });
         $('#btn_desc').summernote({

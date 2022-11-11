@@ -41,14 +41,14 @@
                                                 src="{{ asset($item->footer_logo) }}">
                                         @endif
                                     </td>
-                                    <td>{!! $data->title !!}</td>
-                                    <td>{{ $data->short_desc }}</td>
+                                    <td>{!! $item->title !!}</td>
+                                    <td>{{ $item->short_desc }}</td>
 
                                     <td class="text-center">
                                         <div class="btn-group" role="group" aria-label="Second group">
-                                            <a href="{{ route('admin.footer.content.edit', $data['id']) }}"
+                                            <a href="{{ route('admin.footer.content.edit', $item['id']) }}"
                                                 class="btn btn-sm btn-primary edit-btn"><i class="fa fa-edit"></i></a>
-                                            <a href="{{ route('admin.footer.content.details', $data['id']) }}"
+                                            <a href="{{ route('admin.footer.content.details', $item['id']) }}"
                                                 class="btn btn-sm btn-primary edit-btn"><i class="fa fa-eye"></i></a>
                                         </div>
                                     </td>

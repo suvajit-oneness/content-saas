@@ -87,6 +87,8 @@ use App\Contracts\TemplateTypeContract;
 use App\Repositories\TemplateTypeRepository;
 use App\Contracts\TemplateContract;
 use App\Repositories\TemplateRepository;
+use App\Contracts\SettingsContract;
+use App\Repositories\SettingsRepository;
 class RepositoryServiceProvider extends ServiceProvider
 {
     protected $repositories = [
@@ -132,6 +134,7 @@ class RepositoryServiceProvider extends ServiceProvider
         TemplateTypeContract::class              =>            TemplateTypeRepository::class,
         TemplateContract::class                  =>            TemplateRepository::class,
         DealContract::class                      =>            DealRepository::class,
+        SettingsContract::class                  =>           SettingsRepository::class,
     ];
 
     /**

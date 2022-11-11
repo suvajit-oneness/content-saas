@@ -675,10 +675,10 @@ Route::group(['prefix' => 'admin'], function () {
 
             //** Settings Management **/
             Route::group(['prefix' => 'settings'], function () {
-                Route::get('/', 'Admin\SettingsController@index')->name('admin.settings.index');
-                Route::get('/{id}/edit', 'Admin\SettingsController@edit')->name('admin.settings.edit');
-                Route::post('/update', 'Admin\SettingsController@update')->name('admin.settings.update');
-                Route::get('/{id}/details', 'Admin\SettingsController@details')->name('admin.settings.details');
+                Route::get('/', 'Admin\SettingController@index')->name('admin.settings.index');
+                Route::get('/{id}/edit', 'Admin\SettingController@edit')->name('admin.settings.edit');
+                Route::post('/update', 'Admin\SettingController@update')->name('admin.settings.update');
+                Route::get('/{id}/details', 'Admin\SettingController@details')->name('admin.settings.details');
                
             });
 
