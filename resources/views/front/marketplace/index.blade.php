@@ -8,11 +8,12 @@
             <div class="col-lg-6 col-md-6 col-12 mb-4">
                 <div class="markets-banner-content freelance-market-banner-content">
                     <div class="market-badge">
-                        <span>Best job seekers in the world</span>
+                        {{-- <span>Best job seekers in the world</span> --}}
+                        <span>{{$marketplace_page_content->header}}</span>
                     </div>
 
-                    <h1>Find and become a <span>professional</span> with passion</h1>
-                    <p>Job search platform worldwide. We connect freelancers and startups in an easy way and good collaboration</p>
+                    <h1>{{$marketplace_page_content->header_bold}}</h1>
+                    <p>{{$marketplace_page_content->header_short_description}}</p>
 
                     <div class="banner-input">
                         <form action="">
@@ -34,7 +35,7 @@
 
             <div class="col-lg-6 col-md-6 col-12">
                 <div class="freelance-img">
-                    <img src="{{ asset('frontend/img/freelance-marketplace-img.png')}}" alt="" class="img-fluid">
+                    <img src="{{ asset($marketplace_page_content->header_side_image)}}" alt="" class="img-fluid">
                 </div>
             </div>
         </div>

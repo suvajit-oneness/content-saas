@@ -402,6 +402,12 @@ Route::group(['prefix' => 'admin'], function () {
             Route::get('/export', 'Admin\MarketFaqController@export')->name('admin.market.faq.data.csv.export');
         });
 
+        Route::group(['prefix'  =>   '/marketplace/page'], function () {
+            Route::get('/', 'Admin\MarketPlacePageController@index')->name('admin.marketplace.page.index');
+            Route::get('/{id}/edit', 'Admin\MarketPlacePageController@edit')->name('admin.marketplace.page.edit');
+            Route::post('/update', 'Admin\MarketPlacePageController@update')->name('admin.marketplace.page.update');
+            Route::get('/{id}/details', 'Admin\MarketPlacePageController@details')->name('admin.marketplace.page.details');
+        });
         // Marketplace- FAQ management
         Route::group(['prefix'  =>   '/marketplace/faq'], function () {
             Route::get('/', 'Admin\MarketPlaceFaqController@index')->name('admin.marketplace.faq.index');
