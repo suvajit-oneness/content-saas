@@ -12,4 +12,9 @@ class ProjectTask extends Model {
     {
         return $this->belongsTo('\App\Models\ProjectStatus', 'status', 'slug');
     }
+
+    public function projectDetail()
+    {
+        return $this->belongsTo('\App\Models\Project', 'project_id', 'id');
+    }
 }
