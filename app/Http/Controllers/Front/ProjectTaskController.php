@@ -29,13 +29,13 @@ class ProjectTaskController extends Controller
         return view('front.project-task.create', compact('status', 'project'));
     }
 
-    // public function detail(Request $request, $slug)
-    // {
-    //     $data = Project::where('slug', $slug)->first();
-    //     $tasks = ProjectTask::where('project_id', $data->id)->get();
+    public function detail(Request $request, $slug)
+    {
+        $item = ProjectTask::where('slug', $slug)->where('created_by', auth()->guard('web')->user()->id)->first();
+        // $tasks = ProjectTask::where('project_id', $data->id)->get();
 
-    //     return view('front.project.detail', compact('data', 'tasks'));
-    // }
+        return view('front.project-task.detail', compact('item'));
+    }
 
     public function store(Request $request)
     {
@@ -78,7 +78,7 @@ class ProjectTaskController extends Controller
                 }
             }
 
-            $project->external_links = $links;
+            $project->external_links = substr($links, 0, -2);
         } else {
             $project->external_links = '';
         }
@@ -90,51 +90,84 @@ class ProjectTaskController extends Controller
         return redirect()->route('front.project.detail', $request->project_slug)->with('success', 'Task added successfully');
     }
 
-    // public function delete(Request $request, $id)
-    // {
-    //     Project::where('id', $id)->where('created_by', auth()->guard('web')->user()->id)->update([
-    //         'deleted_at' => date('Y-m-d H:i:s')
-    //     ]);
-    //     return redirect()->back()->with('success', 'Project removed successfully');
-    // }
+    public function delete(Request $request, $id)
+    {
+        ProjectTask::where('id', $id)->where('created_by', auth()->guard('web')->user()->id)->update([
+            'deleted_at' => date('Y-m-d H:i:s')
+        ]);
+        return redirect()->back()->with('success', 'Task removed successfully');
+    }
 
-    // public function edit(Request $request, $id)
-    // {
-    //     $data = Project::findOrFail($id);
-    //     $status = ProjectStatus::orderBy('position', 'asc')->get();
+    public function edit(Request $request, $id)
+    {
+        $data = ProjectTask::findOrFail($id);
+        $status = ProjectStatus::orderBy('position', 'asc')->get();
 
-    //     return view('front.project.edit', compact('data', 'status'));
-    // }
+        return view('front.project-task.edit', compact('data', 'status'));
+    }
 
-    // public function update(Request $request, $id)
-    // {
-    //     // dd($request->all());
+    public function update(Request $request, $id)
+    {
+        // dd($request->all());
 
-    //     $request->validate([
-    //         'title' => 'required|string|min:2|max:255',
-    //         'short_desc' => 'nullable|string|min:2',
-    //         'document' => 'nullable'
-    //     ]);
+        $request->validate([
+            // 'project_id' => 'required|integer|min:1',
+            'project_slug' => 'required|string|min:2|max:255',
+            'title' => 'required|string|min:2|max:255',
+            'short_desc' => 'required|string|min:2',
+            'status' => 'required|string|min:2',
+            'deadline' => 'required|string|min:2',
+            'label' => 'required|string|min:2',
+            'recurring' => 'required',
+            'document' => 'nullable',
+            'external_links' => 'nullable|array'
+        ]);
 
-    //     $project = Project::findOrFail($id);
-    //     $project->title = $request->title;
-    //     $project->slug = slugGenerate($request->title, 'projects');
-    //     $project->short_desc = $request->short_desc ?? '';
+        $project = ProjectTask::findOrFail($id);
+        /*
+        $project->title = $request->title;
+        $project->slug = slugGenerate($request->title, 'projects');
+        $project->short_desc = $request->short_desc ?? '';
 
-    //     if (!empty($request->document)) {
-    //         $project->document = imageUpload($request->document, 'project-document');
-    //     } else {
-    //         $project->document = '';
-    //     }
+        if (!empty($request->document)) {
+            $project->document = imageUpload($request->document, 'project-document');
+        } else {
+            $project->document = '';
+        }
 
-    //     if (!empty($request->status)) {
-    //         $project->status = $request->status;
-    //     }
+        if (!empty($request->status)) {
+            $project->status = $request->status;
+        }
+        */
+        $project->title = $request->title;
+        $project->slug = slugGenerate($request->title, 'project_tasks');
+        $project->short_desc = $request->short_desc;
+        $project->deadline = $request->deadline;
+        $project->label = $request->label;
+        $project->recurring = $request->recurring;
 
-    //     // $project->created_by = auth()->guard('web')->user()->id;
+        if (!empty($request->document)) {
+            $project->document = imageUpload($request->document, 'project-task-document');
+        } else {
+            $project->document = '';
+        }
 
-    //     $project->save();
+        if (!empty($request->external_links)) {
+            $links = '';
+            foreach($request->external_links as $ext_link) {
+                if (!empty($ext_link)) {
+                    $links .= $ext_link.', ';
+                }
+            }
 
-    //     return redirect()->route('front.project.index')->with('success', 'Project updated successfully');
-    // }
+            $project->external_links = substr($links, 0, -2);
+        } else {
+            $project->external_links = '';
+        }
+
+        $project->status = $request->status;
+        $project->save();
+
+        return redirect()->route('front.project.detail', $request->project_slug)->with('success', 'Task updated successfully');
+    }
 }

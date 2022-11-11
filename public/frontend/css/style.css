@@ -833,7 +833,7 @@ footer p small {
 
 .toolSearch {
   display: block;
-  vertical-align: top;
+  /* vertical-align: top; */
   width: 100%;
   max-width: 260px;
 }

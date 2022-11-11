@@ -132,14 +132,12 @@ Route::name('front.')->group(function () {
 
         // project task
         Route::name('project.task.')->group(function () {
-            // Route::get('/project/{id}/task', 'Front\ProjectTaskController@index')->name('index');
             Route::get('/project/{projectId}/task/create', 'Front\ProjectTaskController@create')->name('create');
             Route::post('/project/task/store', 'Front\ProjectTaskController@store')->name('store');
-            // Route::post('/project/store', 'Front\ProjectTaskController@store')->name('store');
-            // Route::get('/project/{slug}', 'Front\ProjectTaskController@detail')->name('detail');
-            // Route::get('/project/delete/{id}', 'Front\ProjectTaskController@delete')->name('delete');
-            // Route::get('/project/edit/{id}', 'Front\ProjectTaskController@edit')->name('edit');
-            // Route::post('/project/update/{id}', 'Front\ProjectTaskController@update')->name('update');
+            Route::get('/project/task/{slug}', 'Front\ProjectTaskController@detail')->name('detail');
+            Route::get('/project/task/delete/{id}', 'Front\ProjectTaskController@delete')->name('delete');
+            Route::get('/project/task/edit/{id}', 'Front\ProjectTaskController@edit')->name('edit');
+            Route::post('/project/update/{id}', 'Front\ProjectTaskController@update')->name('update');
         });
 
         Route::prefix('user/post-content')->name('user.post-content.')->group(function(){
