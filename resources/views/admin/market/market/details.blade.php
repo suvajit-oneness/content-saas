@@ -26,7 +26,7 @@
                                    </tr>
                                    <tr>
                                       <td width="15%" class="text-right text-uppercase">Image</td>
-                                      <td><img src="{{ asset('/uploads/marketcategories/'.$market->image) }}" width="150" height="150"></td>
+                                      <td><img src="{{ asset($market->image) }}" width="150" height="150"></td>
                                    </tr>
                                    <tr>
                                       <td width="15%" class="text-right text-uppercase">Short Description</td>
@@ -50,7 +50,7 @@
                                  </tr>
                                  <tr>
                                     <td width="15%" class="text-right text-uppercase">Image</td>
-                                    <td><img src="{{ asset('/uploads/marketcategories/'.$market->market_description_image) }}" width="150" height="150"></td>
+                                    <td><img src="{{ asset($market->market_description_image) }}" width="150" height="150"></td>
                                  </tr>
                                 </tbody>
                             </table>

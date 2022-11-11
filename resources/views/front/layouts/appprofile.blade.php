@@ -84,16 +84,16 @@
                             </div>
                             <div class="dashboard-header-right">
                                 <div class="dashboard-header-search">
-                                    <form action="">
+                                    {{-- <form action="">
                                         <input type="text" placeholder="Search.." />
                                         <button type="submit">
                                             <i class="fa-solid fa-magnifying-glass"></i>
                                         </button>
-                                    </form>
+                                    </form> --}}
                                 </div>
-                                <div class="dashboard-notification">
+                                {{-- <div class="dashboard-notification">
                                     <a href=""><i class="fa-solid fa-bell"></i> <span>0</span></a>
-                                </div>
+                                </div> --}}
                                 <ul>
                                 <div class="dashboard-profile">
                                     <a href="">

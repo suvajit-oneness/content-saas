@@ -44,7 +44,7 @@ class SettingController extends BaseController
      * @param  $id
      *
      */
-     public function show($id)
+     public function details($id)
     {
         $targetstate = $this->SettingsRepository->listById($id);
         $settings = $targetstate[0];

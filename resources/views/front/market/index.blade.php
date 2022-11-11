@@ -164,13 +164,13 @@
                                     <button class="accordion-button collapsed" type="button"
                                         data-bs-toggle="collapse" data-bs-target="#collapse{{ $data->id }}"
                                         aria-expanded="false" aria-controls="collapse{{ $data->id }}">
-                                        {{ $data->question }}
+                                        {!! $data->question !!}
                                     </button>
                                 </h2>
                                 <div id="collapse{{ $data->id }}" class="accordion-collapse collapse"
                                     aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                     <div class="accordion-body">
-                                        <p>{{$data->answer}}</p>
+                                        <p>{!! $data->answer !!}</p>
                                     </div>
                                 </div>
                             </div>
@@ -199,27 +199,33 @@
         </div>
 
         <div class="row mt-4 mt-md-5">
+            @php
+            $cat=DB::select("SELECT * FROM `article_categories` WHERE title LIKE '%Market%'");
+            $blog=App\Models\Article::where('article_category_id',$cat[0]->id)->get();
+            
+            @endphp
+            @foreach($blog as $key => $data)
+            
             <div class="col-12 col-lg-4 col-md-12 mb-4">
                 <div class="market-research-content">
                     <div class="img">
-                        <a href="" class="research-link"><img src="{{ asset('frontend/img/research.png')}}" alt=""></a>
+                        <a href="" class="research-link"><img src="{{ asset($data->image)}}" alt=""></a>
                     </div>
                     <div class="market-research-date">
                         <div class="market-research-badge">
-                            <span>Market Research</span>
+                            <span>{{$data->category->title}}</span>
                         </div>
-                        <h6>14 JAN, 2022</h6>
+                        <h6>  {{ date('d M Y', strtotime($data->created_at)) }}</h6>
                     </div>
 
                     <div class="marker-research-info">
-                        <a href="" class="research-link">Sed semper neque eget urna iaculis
-                            tristique.</a>
-                        <p>Pellentesque ullamcorper lectus non orci fermentum,
-                            tempus dapibus magna fermentum.</p>
+                        <a href="" class="research-link">{{$data->title}}</a>
+                        <p>{!! $data->description !!}</p>
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-lg-4 col-md-12 mb-4">
+            @endforeach
+            {{-- <div class="col-12 col-lg-4 col-md-12 mb-4">
                 <div class="market-research-content">
                     <div class="img">
                         <a href="" class="research-link"><img src="{{ asset('frontend/img/research2.png')}}" alt=""></a>
@@ -258,7 +264,7 @@
                             tempus dapibus magna fermentum.</p>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </section>

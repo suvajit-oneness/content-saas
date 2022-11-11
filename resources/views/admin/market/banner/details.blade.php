@@ -35,7 +35,7 @@
 
                                  <tr>
                                     <td width="15%" class="text-right text-uppercase">Banner Image</td>
-                                    <td><img src="{{ asset('/uploads/marketbanner/'.$banner->image) }}" width="150" height="150"></td>
+                                    <td><img src="{{ asset($banner->image) }}" width="150" height="150"></td>
                                  </tr>
                                 </tbody>
                             </table>

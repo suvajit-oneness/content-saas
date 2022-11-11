@@ -1,6 +1,8 @@
 @extends('admin.app')
 
-@section('page', 'Settings detail')
+@section('title')
+    Settings
+@endsection
 
 @section('content')
     <section>
@@ -19,7 +21,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div><hr>
+                <a href="{{route('admin.settings.index')}}" type="button" class="btn btn-primary">Back</a>
             </div>
 
             <div class="col-sm-4">

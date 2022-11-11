@@ -57,7 +57,7 @@
                                     <td>{{ ($categories->firstItem()) + $key }}</td>
                                     <td>
                                         @if($category->image!='')
-                                        <img style="width: 100px;height: 100px;" class="text-right text-uppercase" src="{{URL::to('/').'/uploads/marketcategories/'}}{{$category->image}}">
+                                        <img style="width: 100px;height: 100px;" class="text-right text-uppercase" src="{{asset($category->image)}}">
                                         @endif
                                     </td>
                                     <td>{{ $category->title }}</td>
@@ -76,7 +76,7 @@
                                     <div class="btn-group" role="group" aria-label="Second group">
                                         <a href="{{ route('admin.market.category.edit', $category['id']) }}" class="btn btn-sm btn-primary edit-btn"><i class="fa fa-edit"></i></a>
                                         <a href="{{ route('admin.market.category.details', $category['id']) }}" class="btn btn-sm btn-primary edit-btn"><i class="fa fa-eye"></i></a>
-                                        <a href="#" data-id="{{$category['id']}}" class="sa-remove btn btn-sm btn-danger edit-btn"><i class="fa fa-trash"></i></a>
+                                        <a href="javascript::void" data-id="{{$category['id']}}" class="sa-remove btn btn-sm btn-danger edit-btn"><i class="fa fa-trash"></i></a>
                                     </div>
                                 </td>
                                 </tr>
@@ -129,7 +129,7 @@
         },
         function(isConfirm){
           if (isConfirm) {
-            window.location.href = "https://demo91.co.in/laravel-only/ContentSaas/public/admin/market/category/"+categoryid+"/delete";
+            window.location.href += "/"+categoryid+"/delete";
             } else {
               swal("Cancelled", "Record is safe", "error");
             }

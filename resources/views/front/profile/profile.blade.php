@@ -79,6 +79,22 @@
                                 @enderror
                             </div><br>
                             <div class="form-group">
+                                <label class="control-label" for="charge">Charge <span class="m-l-5 text-danger">*</span></label>
+                                <input class="form-control @error('charge') is-invalid @enderror" type="text" name="charge"
+                                    id="charge" value="{{ old('charge',Auth::guard('web')->user()->charge) }}">
+                                @error('charge')
+                                    <p class="small text-danger">{{ $message }}</p>
+                                @enderror
+                            </div><br>
+                            <div class="form-group">
+                                <label class="control-label" for="duration">Duration <span class="m-l-5 text-danger">*</span></label>
+                                <input class="form-control @error('duration') is-invalid @enderror" type="text" name="duration"
+                                    id="duration" value="{{ old('duration',Auth::guard('web')->user()->duration) }}">
+                                @error('duration')
+                                    <p class="small text-danger">{{ $message }}</p>
+                                @enderror
+                            </div>
+                            <div class="form-group">
                                 <button type="submit" class="btn btn-success btn-sm">Update profile</button>
                             </div>
                         </div>

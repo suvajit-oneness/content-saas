@@ -25,7 +25,7 @@
                             <div class="col-md-2">
                                 @if ($targetCategory->image != null)
                                     <figure class="mt-2" style="width: 80px; height: auto;">
-                                        <img src="{{ asset('/uploads/marketcategories/'.$targetCategory->image) }}" id="blogImage" class="img-fluid" alt="img">
+                                        <img src="{{ asset($targetCategory->image) }}" id="blogImage" class="img-fluid" alt="img">
                                     </figure>
                                 @endif
                             </div>
@@ -63,7 +63,7 @@
                             <div class="col-md-2">
                                 @if ($targetCategory->category_description_image != null)
                                     <figure class="mt-2" style="width: 80px; height: auto;">
-                                        <img src="{{ asset('/uploads/marketcategories/'.$targetCategory->category_description_image) }}" id="blogImage" class="img-fluid" alt="img">
+                                        <img src="{{ asset($targetCategory->category_description_image) }}" id="blogImage" class="img-fluid" alt="img">
                                     </figure>
                                 @endif
                             </div>

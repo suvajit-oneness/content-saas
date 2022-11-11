@@ -1,48 +1,54 @@
 @extends('front.layouts.appprofile')
-@section('title', 'Login')
+@section('title', 'Dashboard')
 
 @section('section')
+@php
+
+$project = App\Models\Project::where('status','1')->get();
+$job = App\Models\Job::where('status','1')->get();
+$course = App\Models\Course::where('status','1')->get();
+@endphp
 <div class="dashboard-content">
     <div class="dashboard-stats">
-        <div class="top-info">
+        {{-- <div class="top-info">
             <span>today's writing stats</span>
             <a href="" class="show-all">show all</a>
-        </div>
+        </div> --}}
         <div class="row mt-3 gx-3">
             <div class="col-12 col-lg-4 col-md-4 mb-4">
                 <div class="dashboard-stats-content">
                     <div class="typed">
-                        <h4>0</h4>
-                        <span>Characters Typed</span>
+                        <h4>{{count($course)}}</h4>
+                        <span>Course</span>
                     </div>
-                    <div class="line"></div>
+                    {{-- <div class="line"></div>
                     <div class="times">
                         <span><strong class="count">0</strong> per minute</span>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
             <div class="col-12 col-lg-4 col-md-4 mb-4">
                 <div class="dashboard-stats-content dashboard-stats-content2">
                     <div class="typed">
-                        <h4>0</h4>
-                        <span>Characters Typed</span>
+                        <h4>{{count($job)}}</h4>
+                        <span>Job</span>
                     </div>
-                    <div class="line"></div>
+                    {{-- <div class="line"></div>
                     <div class="times">
                         <span><strong class="count">0</strong> per minute</span>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
             <div class="col-12 col-lg-4 col-md-4 mb-4">
                 <div class="dashboard-stats-content dashboard-stats-content3">
                     <div class="typed">
-                        <h4>0</h4>
-                        <span>Characters Typed</span>
+                        <h4>{{count($project)}}</h4>
+                        <span>Project</span>
                     </div>
-                    <div class="line"></div>
+                    {{-- <div class="line"></div>
                     <div class="times">
                         <span><strong class="count">0</strong> per minute</span>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -50,12 +56,12 @@
 
     <div class="dashboard-documents">
         <div class="top-info">
-            <span>recent documents</span>
-            <a href="" class="show-all">show all</a>
+            <span>recent orders</span>
+            <a href="{{route('front.user.courses')}}" class="show-all">show all</a>
         </div>
         <div class="row mt-3">
             <div class="col-12">
-                <ul class="list-unstyled p-0 m-0 recent-documents">
+                {{-- <ul class="list-unstyled p-0 m-0 recent-documents">
                     <li>
                         <h6 class="">
                             <i class="fa-solid fa-folder"></i> Lorem ipsum dolor
@@ -86,12 +92,36 @@
                             <i class="fa-solid fa-ellipsis-vertical"></i>
                         </div>
                     </li>
-                </ul>
+                </ul> --}}
+                <div class="course-content-accordions">
+                  @foreach($orders as $o)
+                      <div class="course-content-accor">
+                          <div class="accor-top">
+                              <div class="accor-top-left">
+                                  <i class="fa-solid fa-angle-down"></i>
+                                  <span>ORD ID: {!! $o->order_no !!}</span>
+                              </div>
+                              <div class="accor-top-right">
+                                  <div class="duraton">
+                                      <span>{{$o->created_at}}</span>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="accor-content">
+                              <ul class="list-unstyled p-0 m-0">
+                              @foreach($o->orderProducts as $op)
+                                  <li><a href="{{route('front.course.details', getProductSlug($op->course_id)->slug)}}">{{getProductSlug($op->course_id)->title}}</a></li>
+                              @endforeach
+                              </ul>
+                          </div>
+                      </div>
+                  @endforeach
+                  </div>
             </div>
         </div>
     </div>
 
-    <div class="dashboard-messages mt-3">
+    {{-- <div class="dashboard-messages mt-3">
         <div class="top-info">
             <span>recent messages</span>
             <a href="" class="show-all">show all</a>
@@ -132,9 +162,9 @@
                 </ul>
             </div>
         </div>
-    </div>
+    </div> --}}
 
-    <div class="dashboard-featured mt-3">
+    {{-- <div class="dashboard-featured mt-3">
         <div class="top-info">
             <span>recent featured jobs</span>
             <a href="" class="show-all">show all</a>
@@ -375,6 +405,6 @@
                   </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 </div>
 @endsection

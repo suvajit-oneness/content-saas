@@ -148,8 +148,8 @@
                 </div>
                 <div class="col-6">
                     <ul class="justify-content-end">
-                        <li><a href="javascript:void(0);">Privacy Policy</a></li>
-                        <li><a href="javascript:void(0);">Terms & Conditions</a></li>
+                        <li><a href="{{ route('front.privacy') }}">Privacy Policy</a></li>
+                        <li><a href="{{ route('front.terms') }}">Terms & Conditions</a></li>
 
                     </ul>
                 </div>

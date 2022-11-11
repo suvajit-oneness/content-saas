@@ -27,6 +27,7 @@
             </div>
 
             <div class="row mt-4 g-3">
+                @if(count($supportWidget)>0)
                 @foreach ($supportWidget as $key => $data)
                     <div class="col-12 col-md-6">
                         <div class="support-getting-started-content">
@@ -40,6 +41,9 @@
                         </div>
                     </div>
                 @endforeach
+                @else
+                <p class="text-center">No data found</p>
+                @endif
             </div>
         </div>
     </section>
@@ -56,7 +60,7 @@
                     <div class="faq-tabs">
                         <ul class="p-0 m-0">
                             @foreach ($faqCat as $key => $data)
-                                <li class="faq-tab active" support-tab="{{ $data->id }}">{{ $data->title }} <div
+                                <li class="faq-tab {{$key == 0 ? 'active' : ''}}" data-tab="{{ $data->id }}">{{ $data->title }} <div
                                         class="fac-tab-check">
                                         <img src="{{ asset('frontend/img/check-normal.png') }}" alt="">
                                     </div>
@@ -68,35 +72,34 @@
                 </div>
                 <div class="col-md-9">
                     @foreach ($faqCat as $key => $data)
-                        <div class="faq-content active" id="{{ $data->id }}">
+                        <div class="faq-content {{ $key == 0 ? 'active' : '' }}" id="{{ $data->id }}">
                             <div class="faq-content-badge">
                                 <span>{{ $data->title }}</span>
                             </div>
                             <div class="accordion" id="accordionExample">
-                                @foreach ($data->faqDetails as $faqProductkey => $item)
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header" id="heading{{ $item->id }}">
-                                            <button class="accordion-button collapsed" type="button"
-                                                support-bs-toggle="collapse"
-                                                support-bs-target="#collapse{{ $item->id }}" aria-expanded="false"
-                                                aria-controls="collapse{{ $item->id }}">
-                                                {!! $item->question !!}
-                                            </button>
-                                        </h2>
-                                        <div id="collapse{{ $item->id }}" class="accordion-collapse collapse"
-                                            aria-labelledby="heading{{ $item->id }}"
-                                            support-bs-parent="#accordionExample">
-                                            <div class="accordion-body">
-                                                <p>{!! $item->answer !!}</p>
-                                            </div>
+                                @foreach($data->faqDetails as $key => $item)
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="heading{{ $item->id }}">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapse{{ $item->id }}"
+                                            aria-expanded="false" aria-controls="collapse{{ $item->id }}">
+                                            {!! $item->question !!}
+                                        </button>
+                                    </h2>
+                                    <div id="collapse{{ $item->id }}" class="accordion-collapse collapse"
+                                        aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <p>{!! $item->answer !!}</p>
                                         </div>
                                     </div>
+                                </div>
                                 @endforeach
                             </div>
                         </div>
                     @endforeach
 
                 </div>
+
             </div>
         </div>
         </div>
