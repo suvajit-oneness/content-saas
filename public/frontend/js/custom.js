@@ -289,12 +289,14 @@ tbodyContents.forEach((item) => {
 });
 */
 
+/*
 document.addEventListener("mouseup", function (event) {
   if (!profileMenuContent.contains(event.target)) {
     profileModal.classList.remove("showModall");
     // input.value = ''
   }
 });
+*/
 
 /* PRICE PAGE TAB */
 const faqTabs = document.querySelectorAll(".faq-tab");
