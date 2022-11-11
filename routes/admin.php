@@ -654,4 +654,24 @@ Route::group(['prefix' => 'admin'], function () {
                     Route::post('updateStatus', 'Admin\PlansPriceController@updateStatus')->name('admin.plans.management.updateStatus');
                 });
             });
+
+            //--------- Footer Management --------------//
+           
+            Route::group(['prefix' => 'footer'], function () {
+                Route::get('/', 'Admin\FooterController@index')->name('admin.footer.content.index');
+                Route::get('/{id}/edit', 'Admin\FooterController@edit')->name('admin.footer.content.edit');
+                Route::post('/update', 'Admin\FooterController@update')->name('admin.footer.content.update');
+                Route::get('/{id}/details', 'Admin\FooterController@details')->name('admin.footer.content.details');
+            });
+
+            //** Settings Management **/
+            Route::group(['prefix' => 'settings'], function () {
+                Route::get('/', 'Admin\SettingsController@index')->name('admin.settings.index');
+                Route::get('/{id}/edit', 'Admin\SettingsController@edit')->name('admin.settings.edit');
+                Route::post('/update', 'Admin\SettingsController@update')->name('admin.settings.update');
+                Route::get('/{id}/details', 'Admin\SettingsController@details')->name('admin.settings.details');
+               
+            });
+
+            
 });
