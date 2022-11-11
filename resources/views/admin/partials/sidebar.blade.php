@@ -247,7 +247,7 @@
                 </a>
             </li>
         </div>
-       
+
 
         <!-- Event Management -->
         <li class="text-light" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
@@ -393,8 +393,8 @@
                 </a>
             </li>
         </div>
-         <!-- User Management -->
-         <li>
+        <!-- User Management -->
+        <li>
             <a class="app-menu__item {{ request()->is('admin/users*') ? 'active' : '' }} {{ sidebar_open(['admin.users']) }}"
                 href="{{ route('admin.users.index') }}">
                 <i class="app-menu__icon fa fa-user"></i>
@@ -470,28 +470,6 @@
             </li>
         </div>
 
-
-        {{-- <!-- frontend management -->
-        <li class="text-light" data-toggle="collapse" data-target="#collapseEleven" aria-expanded="true"
-            aria-controls="collapseEleven">
-            <a href="#" class="app-menu__item @if (request()->is('admin/frontend-management*')) {{ 'active' }} @endif">
-                <span class="app-menu__label">Frontend management</span>
-                <i class="app-menu__icon fa fa-chevron-down"></i>
-            </a>
-        </li>
-        <div id="collapseEleven" class="collapse @if (request()->is('admin/frontend-management*')) {{ 'show' }} @endif"
-            aria-labelledby="headingOne" data-parent="#accordion">
-
-            <!---Home Page -->
-            <li>
-                <a class="app-menu__item {{ request()->is('admin/frontend-management/home-page*') ? 'active' : '' }}"
-                    href="{{ route('admin.homepagemanagement.index') }}">
-                    <i class="app-menu__icon fa fa-archive"></i>
-                    <span class="app-menu__label">Home Page Content</span>
-                </a>
-            </li> --}}
-        {{-- </div> --}}
-
         {{-- Master Management --}}
         <li class="text-light" data-toggle="collapse" data-target="#collapseFourteen" aria-expanded="true"
             aria-controls="collapseFourteen">
@@ -500,7 +478,9 @@
                 <i class="app-menu__icon fa fa-chevron-down"></i>
             </a>
         </li>
-        <div id="collapseFourteen" class="collapse @if (request()->is('admin/master/socialmedia*') || request()->is('admin/master/currency*') || request()->is('admin/master/language*')) {{ 'show' }} @endif"
+        <div id="collapseFourteen" class="collapse @if (request()->is('admin/master/socialmedia*') ||
+            request()->is('admin/master/currency*') ||
+            request()->is('admin/master/language*')) {{ 'show' }} @endif"
             aria-labelledby="headingOne" data-parent="#accordion">
             <li>
                 <a class="app-menu__item {{ request()->is('admin/master/socialmedia*') ? 'active' : '' }}"
@@ -522,5 +502,18 @@
                 </a>
             </li>
         </div>
+        {{-- - footer - --}}
+            <li>
+                <a class="app-menu__item {{ request()->is('admin/footer*') ? 'active' : '' }}"
+                    href="{{ route('admin.footer.content.index') }}"><i class="app-menu__icon fa fa-cogs"></i>
+                    <span class="app-menu__label">Footer Content</span>
+                </a>
+            </li>
+            <li>
+                <a class="app-menu__item {{ request()->is('admin/settings*') ? 'active' : '' }}"
+                    href="{{ route('admin.settings.index') }}"><i class="app-menu__icon fa fa-cogs"></i>
+                    <span class="app-menu__label">Settings</span>
+                </a>
+            </li>
     </ul>
 </aside>

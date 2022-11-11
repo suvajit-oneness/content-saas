@@ -39,7 +39,9 @@ Route::name('front.')->group(function () {
     Route::post('/store', 'Front\CheckoutController@store')->name('checkout.store');
     Route::view('/complete', 'front.checkout.complete')->name('checkout.complete');
 
-
+    //footer
+    Route::get('/privacy-policy', 'Front\FrontController@privacy')->name('privacy');
+    Route::get('/terms-condition', 'Front\FrontController@terms')->name('terms');
 
     //market
     Route::name('market.')->group(function () {
