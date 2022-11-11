@@ -78,8 +78,10 @@
                                     <p class="small text-danger">{{ $message }}</p>
                                 @enderror
                             </div><br>
+                            <h5>SET CHARGES</h5>
+                            <hr>                            
                             <div class="form-group">
-                                <label class="control-label" for="charge">Charge <span class="m-l-5 text-danger">*</span></label>
+                                <label class="control-label" for="charge">Charge (in $USD) <span class="m-l-5 text-danger">*</span></label>
                                 <input class="form-control @error('charge') is-invalid @enderror" type="text" name="charge"
                                     id="charge" value="{{ old('charge',Auth::guard('web')->user()->charge) }}">
                                 @error('charge')
@@ -87,14 +89,17 @@
                                 @enderror
                             </div><br>
                             <div class="form-group">
-                                <label class="control-label" for="duration">Duration <span class="m-l-5 text-danger">*</span></label>
-                                <input class="form-control @error('duration') is-invalid @enderror" type="text" name="duration"
-                                    id="duration" value="{{ old('duration',Auth::guard('web')->user()->duration) }}">
+                                <label class="control-label" for="duration">Per<span class="m-l-5 text-danger">*</span></label>
+                                <select name="duration" class="form-control" id="duration">
+                                    @foreach ($charges_limit as $item)
+                                        <option {{$item->name == old('duration',Auth::guard('web')->user()->duration) ? 'selected' : '' }} value="{{$item->name}}">{{$item->name}}</option>
+                                    @endforeach
+                                </select>
                                 @error('duration')
                                     <p class="small text-danger">{{ $message }}</p>
                                 @enderror
                             </div>
-                            <div class="form-group">
+                            <div class="form-group my-3">
                                 <button type="submit" class="btn btn-success btn-sm">Update profile</button>
                             </div>
                         </div>
