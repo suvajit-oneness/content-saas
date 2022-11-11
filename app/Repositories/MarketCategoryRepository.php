@@ -79,7 +79,7 @@ class MarketCategoryRepository extends BaseRepository implements MarketCategoryC
                 $category->image = imageUpload($params['image'], 'marketcategories');
             }
             if(!empty($params['category_description_image'])){
-                $category->image = imageUpload($params['image'], 'marketcategoriescontent');
+                $category->category_description_image = imageUpload($params['category_description_image'], 'marketcategoriescontent');
                 }
             $category->save();
 
@@ -114,7 +114,7 @@ class MarketCategoryRepository extends BaseRepository implements MarketCategoryC
             $category->image = imageUpload($params['image'], 'marketcategories');
         }
         if(!empty($params['category_description_image'])){
-            $category->image = imageUpload($params['image'], 'marketcategoriescontent');
+            $category->category_description_image = imageUpload($params['category_description_image'], 'marketcategoriescontent');
             }
         $category->save();
 

@@ -46,7 +46,7 @@
                     <a href="{{ $link }}" class="text-success d-block" target="_blank">
                         <u>
                             <i class="fas fa-link"></i>
-                            {{ substr($link, 0, 30) }}
+                            {{ substr($link, 0, 100) }}
                         </u>
                     </a>
                     @endforeach

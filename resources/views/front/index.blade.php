@@ -25,9 +25,12 @@
                         <figure>
                             <img src="{{ asset($home[0]->video_image) }}">
                             
-                                {{-- <a source src="{{ asset($home[0]->video) }}" type="video/mp4">
+                                 <a data-fancybox href="#contentVideo" type="video/mp4">
                                     <img src="{{ asset('frontend/img/play.svg') }}">
-                                </a> --}}
+                                </a> 
+                                <video width="640" height="320" controls id="contentVideo" style="display:none;">
+                                    <source src="{{ asset($home[0]->video) }}" type="video/mp4">
+                                </video>
                         </figure>
                         <p>
                             {!! $home[0]->video_desc !!}

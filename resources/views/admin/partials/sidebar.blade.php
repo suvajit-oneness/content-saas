@@ -7,17 +7,25 @@
                 <span class="app-menu__label">Dashboard</span>
             </a>
         </li>
+        <!-- User Management -->
+        <li>
+            <a class="app-menu__item {{ request()->is('admin/users*') ? 'active' : '' }} {{ sidebar_open(['admin.users']) }}"
+                href="{{ route('admin.users.index') }}">
+                <i class="app-menu__icon fa fa-user"></i>
+                <span class="app-menu__label">User Management</span>
+            </a>
+        </li>
         <li>
             <a class="app-menu__item {{ request()->is('admin/frontend-management/home-page*') ? 'active' : '' }}"
                 href="{{ route('admin.homepagemanagement.index') }}">
                 <i class="app-menu__icon fa fa-archive"></i>
-                <span class="app-menu__label">Home</span>
+                <span class="app-menu__label">Home Page Content</span>
             </a>
         </li>
         <!---Market management-->
         <li class="text-light" data-toggle="collapse" data-target="#collapseTwelve" aria-expanded="true"
             aria-controls="collapseTwelve">
-            <a href="#" class="app-menu__item @if (request()->is('admin/market') ||
+            <a href="#" class="app-menu__item @if (request()->is('admin/market*') ||
                 request()->is('admin/market/category') ||
                 request()->is('admin/market/banner') ||
                 request()->is('admin/market/faq')) {{ 'active' }} @endif">
@@ -25,30 +33,32 @@
                 <i class="app-menu__icon fa fa-chevron-down"></i>
             </a>
         </li>
-        <div id="collapseTwelve" class="collapse @if (request()->is('admin/market') ||
+        <div id="collapseTwelve" class="collapse @if (request()->is('admin/market*') ||
             request()->is('admin/market/category') ||
             request()->is('admin/market/banner') ||
             request()->is('admin/market/faq')) {{ 'show' }} @endif"
             aria-labelledby="headingOne" data-parent="#accordion">
+            
+            <!---  Market management ---->
+            <li>
+                <a class="app-menu__item {{ request()->is('admin/market*') ? 'active' : '' }} {{ sidebar_open(['admin.market']) }}"
+                    href="{{ route('admin.market.index') }}">
+                    <i class="app-menu__icon fa fa-file"></i>
+                    <span class="app-menu__label">Content Management</span>
+                </a>
+            </li>
             <!--- Category management --->
             <li>
-                <a class="app-menu__item {{ request()->is('admin/market/category') ? 'active' : '' }} {{ sidebar_open(['admin.market.category']) }}"
+                <a class="app-menu__item {{ request()->is('admin/market/category*') ? 'active' : '' }} {{ sidebar_open(['admin.market.category']) }}"
                     href="{{ route('admin.market.category.index') }}">
                     <i class="app-menu__icon fa fa-archive"></i>
                     <span class="app-menu__label">Category Management</span>
                 </a>
             </li>
-            <!---  Market management ---->
-            <li>
-                <a class="app-menu__item {{ request()->is('admin/market') ? 'active' : '' }} {{ sidebar_open(['admin.market']) }}"
-                    href="{{ route('admin.market.index') }}">
-                    <i class="app-menu__icon fa fa-file"></i>
-                    <span class="app-menu__label">Market Management</span>
-                </a>
-            </li>
+            
             <!--- Banner management --->
             <li>
-                <a class="app-menu__item {{ request()->is('admin/market/banner') ? 'active' : '' }} {{ sidebar_open(['admin.market.banner']) }}"
+                <a class="app-menu__item {{ request()->is('admin/market/banner*') ? 'active' : '' }} {{ sidebar_open(['admin.market.banner']) }}"
                     href="{{ route('admin.market.banner.index') }}">
                     <i class="app-menu__icon fa fa-sitemap"></i>
                     <span class="app-menu__label">Banner Management</span>
@@ -56,7 +66,7 @@
             </li>
             <!---  Faq management ---->
             <li>
-                <a class="app-menu__item {{ request()->is('admin/market/faq') ? 'active' : '' }} {{ sidebar_open(['admin.market.faq']) }}"
+                <a class="app-menu__item {{ request()->is('admin/market/faq*') ? 'active' : '' }} {{ sidebar_open(['admin.market.faq']) }}"
                     href="{{ route('admin.market.faq.index') }}">
                     <i class="app-menu__icon fa fa-file"></i>
                     <span class="app-menu__label">Faq Management</span>
@@ -66,20 +76,20 @@
         <!---Tools-Feature management-->
         <li class="text-light" data-toggle="collapse" data-target="#collapseFifteen" aria-expanded="true"
             aria-controls="collapseFifteen">
-            <a href="#" class="app-menu__item @if (request()->is('admin/tools/content') ||
+            <a href="#" class="app-menu__item @if (request()->is('admin/tools*') ||
                 request()->is('admin/tools/areaofInterestcategory') ||
                 request()->is('admin/tools/areaofInterest')) {{ 'active' }} @endif">
                 <span class="app-menu__label">Tools & Features</span>
                 <i class="app-menu__icon fa fa-chevron-down"></i>
             </a>
         </li>
-        <div id="collapseFifteen" class="collapse @if (request()->is('admin/tools/content') ||
+        <div id="collapseFifteen" class="collapse @if (request()->is('admin/tools*') ||
             request()->is('admin/tools/areaofInterestcategory') ||
             request()->is('admin/tools/areaofInterest')) {{ 'show' }} @endif"
             aria-labelledby="headingOne" data-parent="#accordion">
             <!--- Content --->
             <li>
-                <a class="app-menu__item {{ request()->is('admin/tools/content') ? 'active' : '' }} {{ sidebar_open(['admin.tools.content']) }}"
+                <a class="app-menu__item {{ request()->is('admin/tools*') ? 'active' : '' }} {{ sidebar_open(['admin.tools.content']) }}"
                     href="{{ route('admin.tools.content.index') }}">
                     <i class="app-menu__icon fa fa-archive"></i>
                     <span class="app-menu__label">Content</span>
@@ -87,7 +97,7 @@
             </li>
             <!---  Area of Interest Category ---->
             <li>
-                <a class="app-menu__item {{ request()->is('admin/tools/AreaOfInterest/category') ? 'active' : '' }} {{ sidebar_open(['admin.tools.AreaOfInterest.category']) }}"
+                <a class="app-menu__item {{ request()->is('admin/tools/AreaOfInterest/category*') ? 'active' : '' }} {{ sidebar_open(['admin.tools.AreaOfInterest.category']) }}"
                     href="{{ route('admin.tools.AreaOfInterest.category.index') }}">
                     <i class="app-menu__icon fa fa-file"></i>
                     <span class="app-menu__label">Area of Interest Category</span>
@@ -95,7 +105,7 @@
             </li>
             <!--- Area of Interest --->
             <li>
-                <a class="app-menu__item {{ request()->is('admin/tools/AreaOfInterest') ? 'active' : '' }} {{ sidebar_open(['admin.tools.AreaOfInterest']) }}"
+                <a class="app-menu__item {{ request()->is('admin/tools/AreaOfInterest*') ? 'active' : '' }} {{ sidebar_open(['admin.tools.AreaOfInterest']) }}"
                     href="{{ route('admin.tools.AreaOfInterest.index') }}">
                     <i class="app-menu__icon fa fa-sitemap"></i>
                     <span class="app-menu__label">Area of Interest</span>
@@ -124,7 +134,7 @@
                 <a class="app-menu__item {{ request()->is('admin/support') ? 'active' : '' }} {{ sidebar_open(['admin.support']) }}"
                     href="{{ route('admin.support.index') }}">
                     <i class="app-menu__icon fa fa-archive"></i>
-                    <span class="app-menu__label"> Management</span>
+                    <span class="app-menu__label">Content Management</span>
                 </a>
             </li>
             <!---  Market management ---->
@@ -379,13 +389,13 @@
                 </a>
             </li> --}}
 
-            <li>
+            {{-- <li>
                 <a class="app-menu__item {{ request()->is('admin/quiz') ? 'active' : '' }}"
                     href="{{ route('admin.quiz.index') }}">
                     <i class="app-menu__icon fa fa-folder"></i>
                     <span class="app-menu__label">Quiz</span>
                 </a>
-            </li>
+            </li> --}}
         </div>
 
         <!-- Order Management -->
@@ -407,14 +417,7 @@
                 </a>
             </li>
         </div>
-        <!-- User Management -->
-        <li>
-            <a class="app-menu__item {{ request()->is('admin/users*') ? 'active' : '' }} {{ sidebar_open(['admin.users']) }}"
-                href="{{ route('admin.users.index') }}">
-                <i class="app-menu__icon fa fa-user"></i>
-                <span class="app-menu__label">User Management</span>
-            </a>
-        </li>
+        
         <!-- Job Management -->
         <li class="text-light" data-toggle="collapse" data-target="#collapseNine" aria-expanded="true"
             aria-controls="collapseNine">
@@ -479,7 +482,7 @@
             <li>
                 <a class="app-menu__item {{ request()->is('admin/template') ? 'active' : '' }}"
                     href="{{ route('admin.template.index') }}"><i class="app-menu__icon fa fa-cogs"></i>
-                    <span class="app-menu__label">Template</span>
+                    <span class="app-menu__label">Management</span>
                 </a>
             </li>
         </div>

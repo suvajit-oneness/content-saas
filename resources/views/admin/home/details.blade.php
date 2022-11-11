@@ -46,8 +46,9 @@
                                     </tr>
                                     <tr>
                                         <td width="15%" class="text-right text-uppercase">Video</td>
-                                        <td><video src="{{ asset($data->video) }}"
-                                                width="150" height="150" controls></td>
+                                        <td> <video width="640" height="320" controls id="contentVideo" style="display:none;">
+                                            <source src="{{ asset($data->video) }}" type="video/mp4">
+                                        </video></td>
                                     </tr>
                                     <tr>
                                         <td width="15%" class="text-right text-uppercase">Video Description</td>

@@ -3,10 +3,10 @@
 
 @section('section')
 @php
-
 $project = App\Models\Project::where('status','1')->get();
 $job = App\Models\Job::where('status','1')->get();
-$course = App\Models\Course::where('status','1')->get();
+$orders = App\Models\Order::where('user_id', auth()->guard('web')->user()->id)->with('orderProducts')->get();
+
 @endphp
 <div class="dashboard-content">
     <div class="dashboard-stats">
@@ -16,30 +16,35 @@ $course = App\Models\Course::where('status','1')->get();
         </div> --}}
         <div class="row mt-3 gx-3">
             <div class="col-12 col-lg-4 col-md-4 mb-4">
+              <a href="{{ route('front.user.courses') }}">
                 <div class="dashboard-stats-content">
                     <div class="typed">
-                        <h4>{{count($course)}}</h4>
-                        <span>Course</span>
+                        <h4>{{count($orders)}}</h4>
+                        <span>Purchased Course</span>
                     </div>
                     {{-- <div class="line"></div>
                     <div class="times">
                         <span><strong class="count">0</strong> per minute</span>
                     </div> --}}
                 </div>
+              </a>
             </div>
             <div class="col-12 col-lg-4 col-md-4 mb-4">
+              <a href="{{ url()->to('job?keyword=&address=&saved_jobs=1&filter=on') }}">
                 <div class="dashboard-stats-content dashboard-stats-content2">
                     <div class="typed">
                         <h4>{{count($job)}}</h4>
-                        <span>Job</span>
+                        <span>Saved Jobs</span>
                     </div>
                     {{-- <div class="line"></div>
                     <div class="times">
                         <span><strong class="count">0</strong> per minute</span>
                     </div> --}}
                 </div>
+              </a>
             </div>
             <div class="col-12 col-lg-4 col-md-4 mb-4">
+              <a href="{{ route('front.project.index') }}">
                 <div class="dashboard-stats-content dashboard-stats-content3">
                     <div class="typed">
                         <h4>{{count($project)}}</h4>
@@ -50,6 +55,7 @@ $course = App\Models\Course::where('status','1')->get();
                         <span><strong class="count">0</strong> per minute</span>
                     </div> --}}
                 </div>
+              </a>
             </div>
         </div>
     </div>

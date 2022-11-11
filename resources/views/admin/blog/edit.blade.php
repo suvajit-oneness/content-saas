@@ -140,7 +140,7 @@
                                 <div class="col-md-2">
                                     @if ($targetblog->image != null)
                                         <figure class="mt-2" style="width: 80px; height: auto;">
-                                            <img src="{{ asset('Blogs/'.$targetblog->image) }}" id="blogImage" class="img-fluid" alt="img">
+                                            <img src="{{ asset($targetblog->image) }}" id="blogImage" class="img-fluid" alt="img">
                                         </figure>
                                     @endif
                                 </div>
