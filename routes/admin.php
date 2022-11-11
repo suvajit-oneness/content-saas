@@ -654,6 +654,7 @@ Route::group(['prefix' => 'admin'], function () {
                     Route::post('updateStatus', 'Admin\PlansPriceController@updateStatus')->name('admin.plans.management.updateStatus');
                 });
 
+                // Plans Pricing frontend page
                 Route::group(['prefix' => '/page'], function () {
                     Route::get('/', 'Admin\PlansPricePageController@index')->name('admin.plans.page.index');
                     Route::get('/create', 'Admin\PlansPricePageController@create')->name('admin.plans.page.create');
@@ -661,6 +662,20 @@ Route::group(['prefix' => 'admin'], function () {
                     Route::get('/{id}/edit', 'Admin\PlansPricePageController@edit')->name('admin.plans.page.edit');
                     Route::post('/update', 'Admin\PlansPricePageController@update')->name('admin.plans.page.update');
                     Route::get('/{id}/details', 'Admin\PlansPricePageController@details')->name('admin.plans.page.details');
+                });
+
+                // Plans pricing faqs
+                Route::group(['prefix'  =>   '/faq'], function () {
+                    Route::get('/', 'Admin\PlansFaqController@index')->name('admin.plans.faq.index');
+                    Route::get('/create', 'Admin\PlansFaqController@create')->name('admin.plans.faq.create');
+                    Route::post('/store', 'Admin\PlansFaqController@store')->name('admin.plans.faq.store');
+                    Route::get('/{id}/edit', 'Admin\PlansFaqController@edit')->name('admin.plans.faq.edit');
+                    Route::post('/update', 'Admin\PlansFaqController@update')->name('admin.plans.faq.update');
+                    Route::get('/{id}/delete', 'Admin\PlansFaqController@delete')->name('admin.plans.faq.delete');
+                    Route::post('updateStatus', 'Admin\PlansFaqController@updateStatus')->name('admin.plans.faq.updateStatus');
+                    Route::get('/{id}/details', 'Admin\PlansFaqController@details')->name('admin.plans.faq.details');
+                    Route::post('/csv-store', 'Admin\PlansFaqController@csvStore')->name('admin.plans.faq.data.csv.store');
+                    Route::get('/export', 'Admin\PlansFaqController@export')->name('admin.plans.faq.data.csv.export');
                 });
             });
 

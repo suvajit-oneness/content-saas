@@ -227,6 +227,13 @@
                     <span class="app-menu__label">Page Content</span>
                 </a>
             </li>
+            <li>
+                <a class="app-menu__item {{ request()->is('admin/plans-pricing/faq*') ? 'active' : '' }}"
+                    href="{{ route('admin.plans.faq.index') }}">
+                    <i class="app-menu__icon fa fa-folder"></i>
+                    <span class="app-menu__label">Faq Management</span>
+                </a>
+            </li>
         </div>
 
         {{-- Market place --}}
@@ -473,14 +480,12 @@
         {{-- Master Management --}}
         <li class="text-light" data-toggle="collapse" data-target="#collapseFourteen" aria-expanded="true"
             aria-controls="collapseFourteen">
-            <a class="app-menu__item @if (request()->is('admin/socialmedia/master*') || request()->is('admin/language/master*')) {{ 'active' }} @endif">
+            <a class="app-menu__item @if (request()->is('admin/master*')) {{ 'active' }} @endif">
                 <span class="app-menu__label">Master Management</span>
                 <i class="app-menu__icon fa fa-chevron-down"></i>
             </a>
         </li>
-        <div id="collapseFourteen" class="collapse @if (request()->is('admin/master/socialmedia*') ||
-            request()->is('admin/master/currency*') ||
-            request()->is('admin/master/language*')) {{ 'show' }} @endif"
+        <div id="collapseFourteen" class="collapse @if (request()->is('admin/master*')) {{ 'show' }} @endif"
             aria-labelledby="headingOne" data-parent="#accordion">
             <li>
                 <a class="app-menu__item {{ request()->is('admin/master/socialmedia*') ? 'active' : '' }}"
