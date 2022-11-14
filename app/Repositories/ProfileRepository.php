@@ -38,20 +38,44 @@ class ProfileRepository extends BaseRepository implements ProfileContract
     {
         $user = $this->findOneOrFail($params['id']);
         $collection = collect($params)->except('_token');
-        $user->first_name = $collection['first_name'] ?? '';
-        $user->last_name = $collection['last_name'] ?? '';
-        $user->mobile = $collection['mobile'] ?? '';
-        $user->country = $collection['country'] ?? '';
-        $user->occupation = $collection['occupation'] ?? '';
-        $user->short_desc = $collection['short_desc'] ?? '';
-        $user->quote_by = $collection['quote_by'] ?? '';
-        $user->quote = $collection['quote'] ?? '';
-        $user->color_scheme = $collection['color_scheme'] ?? '';
-        $user->worked_for = $collection['worked_for'] ?? '';
-        $user->categories = $collection['categories'] ?? '';
+        if(isset($collection['first_name']))
+            $user->first_name = $collection['first_name'] ?? '';
+
+        if(isset($collection['last_name']))
+            $user->last_name = $collection['last_name'] ?? '';
+
+        if(isset($collection['mobile']))
+            $user->mobile = $collection['mobile'] ?? '';
+
+        if(isset($collection['country']))
+            $user->country = $collection['country'] ?? '';
+
+        if(isset($collection['occupation']))
+            $user->occupation = $collection['occupation'] ?? '';
+
+        if(isset($collection['short_desc']))
+            $user->short_desc = $collection['short_desc'] ?? '';
+
+        if((isset($collection['quote_by'])))
+            $user->quote_by = $collection['quote_by'] ?? '';
+
+        if(isset($collection['quote']))
+            $user->quote = $collection['quote'] ?? '';
+
+        if(isset($collection['color_scheme']))
+            $user->color_scheme = $collection['color_scheme'] ?? '';
+
+        if(isset($collection['worked_for']))
+            $user->worked_for = $collection['worked_for'] ?? '';
+
+        if(isset($collection['categories']))
+            $user->categories = $collection['categories'] ?? '';
         
-        $user->charge = $collection['charge'] ?? '';
-        $user->duration = $collection['duration'] ?? '';
+        if(isset($collection['charge']))
+            $user->charge = $collection['charge'] ?? '';
+
+        if(isset($collection['duration']))
+            $user->duration = $collection['duration'] ?? '';
 
         if(!empty($params['image'])) {
             // image, folder name only

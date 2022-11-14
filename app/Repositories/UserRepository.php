@@ -163,7 +163,10 @@ class UserRepository extends BaseRepository implements UserContract
     public function updateUserStatus(array $params){
         $user = $this->findOneOrFail($params['id']);
         $collection = collect($params)->except('_token');
-        $user->status = $collection['check_status'];
+        if($params['change'] == 'status')
+            $user->status = $collection['check_status'];
+        else
+            $user->is_recomended = $collection['check_status'];
         $user->save();
 
         return $user;

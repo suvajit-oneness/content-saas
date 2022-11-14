@@ -69,7 +69,7 @@ class UserManagementController extends BaseController
         $user = $this->UserRepository->updateUserStatus($params);
 
         if ($user) {
-            return response()->json(array('message'=>'User status successfully updated'));
+            return response()->json(array('message'=>'User '. $params['change'] .' successfully updated'));
         }
     }
 

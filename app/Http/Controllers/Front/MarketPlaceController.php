@@ -41,6 +41,8 @@ class MarketPlaceController extends Controller
 
         $marketplace_page_content = MarketPlacePage::all()[0];
 
-        return view('front.marketplace.index',compact('writers', 'master_categories', 'all_writers', 'marketplacefaq','marketplace_page_content'));
+        $recomended_writers = User::where('is_deleted',0)->where('is_recomended',1)->paginate(9);
+
+        return view('front.marketplace.index',compact('writers', 'master_categories', 'all_writers', 'marketplacefaq','marketplace_page_content', 'recomended_writers'));
     }
 }

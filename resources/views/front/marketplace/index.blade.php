@@ -18,9 +18,11 @@
                     <div class="banner-input">
                         <form action="">
                             <select name="category" id="category">
-                                @foreach ($master_categories as $item)
+                                @forelse ($master_categories as $item)
                                    <option value="{{$item}}" {{$item == trim(request()->input('category')) ? 'selected' : ''}}>{{ucwords($item)}}</option>
-                                @endforeach    
+                                @empty
+                                    <option value="">No user have any category!</option>
+                                @endforelse    
                             </select>
                             <div class="input">
                                 <input type="text" placeholder="What are you looking for?" value="{{request()->input('name')}}" name="name">
@@ -271,37 +273,41 @@
         <div class="row align-items-center">
             <div class="col-lg-6 col-md-6 col-12 text-center text-lg-start">
                 <div class="recommended-writers-left">
-                    <h6>Recommended Writers </h6>
-                    <span>120</span>
+                    <h6>Recommended Writers</h6>
+                    <span>{{$recomended_writers->count()}}</span>
                 </div>
             </div>
             <div class="col-lg-6 col-md-6 col-12 text-center text-lg-end">
                 <div class="recommended-writers-right">
-                    <a href="" class="browse-writers">browse all writers</a>
+                    {{-- <a href="" class="browse-writers">browse all writers</a> --}}
                 </div>
             </div>
         </div>
 
         <div class="row mt-5">
-            <div class="col-lg-4 col-md-4 col-12 mb-lg-4 mb-md-4 mb-4 br">
-                <div class="recommended-products-top">
-                    <img src="{{ asset('frontend/img/writer1.png')}}" alt="">
-                    <h6>Shana Tanenbaum</h6>
-                </div>
-                <div class="recommended-products-info">
-                    <h4><a href="">Non porttitor massa pulvinar</a></h4>
-                    <p>Pellentesque ullamcorper lectus non orci fermentum, tempus dapibus magna fermentum.</p>
-                </div>
-                <div class="recommended-products-btm">
-                    <div class="recommended-pro-badge">
-                        <span>up to 7 days</span>
+            @forelse ($recomended_writers as $item)
+                <div class="col-lg-4 col-md-4 col-12 mb-lg-4 mb-md-4 mb-4 br">
+                    <div class="recommended-products-top">
+                        <img src="{{ asset($item->image)}}" alt="">
+                        <h6>{{$item->first_name . ' ' . $item->last_name}}</h6>
                     </div>
-                    <div class="price">
-                        <span> $3000</span>
+                    <div class="recommended-products-info">
+                        <h4><a href="{{route('front.portfolio.index', $item->slug)}}">{{substr($item->short_desc,0,15)}}...</a></h4>
+                        <p>{{$item->categories}}</p>
+                    </div>
+                    <div class="recommended-products-btm">
+                        <div class="recommended-pro-badge">
+                            <span>{{$item->duration}}</span>
+                        </div>
+                        <div class="price">
+                            <span> ${{$item->charge}}</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-12 mb-lg-4 mb-md-4 mb-4 br">
+            @empty
+                <div class="text-center"><h4>No Recomended writers found!</h4></div>
+            @endforelse
+            {{-- <div class="col-lg-4 col-md-4 col-12 mb-lg-4 mb-md-4 mb-4 br">
                 <div class="recommended-products-top">
                     <img src="{{ asset('frontend/img/writer1.png')}}" alt="">
                     <h6>Shana Tanenbaum</h6>
@@ -336,12 +342,12 @@
                         <span> $3000</span>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
 
         <div class="line"></div>
 
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-lg-4 col-md-4 col-12 mb-lg-4 mb-md-4 mb-4 br">
                 <div class="recommended-product-img text-center">
                     <img src="{{ asset('frontend/img/research.png')}}" alt="" class="img-fluid">
@@ -405,7 +411,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 </section>
 

@@ -58,6 +58,7 @@
                                 <th></th>
                                 <th class="text-center"> Phone</th>
                                 <th class="align-center"> Status</th>
+                                <th>Recomendation</th>
                                 <th class="align-center"> Action</th>
                             </tr>
                         </thead>
@@ -76,15 +77,26 @@
                                     </td>
                                     <td class="text-center">{{ (empty($user_detail['mobile']))? "N/A":($user_detail['mobile']) }}</td>
                                     <td class="text-center">
-                                    <div class="toggle-button-cover margin-auto">
-                                        <div class="button-cover">
-                                            <div class="button-togglr b2" id="button-11">
-                                                <input id="toggle-block" type="checkbox" name="status" class="checkbox" data-user_id="{{ $user_detail['id'] }}" {{ $user_detail['status'] == 1 ? 'checked' : '' }}>
-                                                <div class="knobs"><span>Inactive</span></div>
-                                                <div class="layer"></div>
+                                        <div class="toggle-button-cover margin-auto">
+                                            <div class="button-cover">
+                                                <div class="button-togglr b2" id="button-11">
+                                                    <input id="toggle-block" type="checkbox" name="status" class="checkbox" data-user_id="{{ $user_detail['id'] }}" {{ $user_detail['status'] == 1 ? 'checked' : '' }}>
+                                                    <div class="knobs"><span>Inactive</span></div>
+                                                    <div class="layer"></div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="toggle-button-cover margin-auto">
+                                            <div class="button-cover">
+                                                <div class="button-togglr b2" id="button-11">
+                                                    <input id="toggle-block" type="checkbox" name="recomended" class="checkbox" data-user_id="{{ $user_detail['id'] }}" {{ $user_detail['is_recomended'] == 1 ? 'checked' : '' }}>
+                                                    <div class="knobs"><span>Inactive</span></div>
+                                                    <div class="layer"></div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </td>
                                     <td class="align-center">
                                         <div class="btn-group" role="group" aria-label="Second group">
@@ -139,24 +151,26 @@
             var user_id = $(this).data('user_id');
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             var check_status = 0;
-          if($(this).is(":checked")){
-              check_status = 1;
-          }else{
-            check_status = 0;
-          }
-          $.ajax({
+            if($(this).is(":checked")){
+                check_status = 1;
+            }else{
+                check_status = 0;
+            }
+
+            var tochange = $(this).attr('name');
+
+            // console.log(tochange);
+
+            $.ajax({
                 type:'POST',
                 dataType:'JSON',
                 url:"{{route('admin.users.updateStatus')}}",
-                data:{ _token: CSRF_TOKEN, id:user_id, check_status:check_status},
-                success:function(response)
-                {
-                  swal("Success!", response.message, "success");
+                data:{ _token: CSRF_TOKEN, id:user_id, check_status:check_status, change:tochange },
+                success:function(response){
+                    swal("Success!", response.message, "success");
                 },
-                error: function(response)
-                {
-
-                  swal("Error!", response.message, "error");
+                error: function(response){
+                    swal("Error!", response.message, "error");
                 }
               });
         });
