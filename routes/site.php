@@ -97,6 +97,10 @@ Route::name('front.')->group(function () {
             Route::prefix('user')->name('user.events')->group(function () {
             Route::get('/my-events','Front\EventController@showMyEvents');
         });
+        //user orders
+        Route::prefix('user')->name('user.orders')->group(function () {
+            Route::get('/my-orders','Front\OrderController@index');
+        });
 
         // User purchased course
         Route::prefix('user')->name('user.profile.edit')->group(function () {

@@ -62,6 +62,9 @@
                             <a href="{{ route('front.user.events')}}"  class="{{ request()->is('user/my-events') ? 'active' : '' }}"><i class="fa-solid fa-house"></i>My Events</a>
                         </li>
                         <li>
+                            <a href="{{ route('front.user.orders')}}"  class="{{ request()->is('user/my-orders') ? 'active' : '' }}"><i class="fa-solid fa-house"></i>My Orders</a>
+                        </li>
+                        <li>
                             <a href="{{ route('front.user.profile.edit') }}" class="{{ request()->is('user/update/profile') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Profile</a>
                         </li>
                         <li>
