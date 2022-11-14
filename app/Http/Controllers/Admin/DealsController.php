@@ -184,7 +184,8 @@ class DealsController extends BaseController
     public function details($id)
     {
         $deals = Deal::find($id);
-        return view('admin.course.details', compact('deals'));
+        $this->setPageTitle('Deals Master', 'Deal: '.$deals->title . '('.$deals->slug.')');
+        return view('admin.deals.details', compact('deals'));
     }
 
     public function csvStore(Request $request)

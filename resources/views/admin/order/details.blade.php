@@ -42,7 +42,10 @@
                                     @endif
                                     @if($item->type == 4)
                                         <li><a href="{{ route('admin.plans.management.details', $item->course_id) }}">{{getSubscriptionDetails($item->course_id)->name}} Subscription</a> - ${{$item->price}}</li>
-                                    @endif                                
+                                    @endif 
+                                    @if($item->type == 5)
+                                        <li><a href="{{ route('admin.deals.details', $item->course_id) }}">{{getDealDetails($item->course_id)->title}}</a> - ${{$item->price}}</li>
+                                    @endif                                 
                                 @endforeach
                             </td>
                         </tr>
