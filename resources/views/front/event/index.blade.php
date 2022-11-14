@@ -1,5 +1,5 @@
 @extends('front.layouts.app')
-@section('title', ' Event')
+@section('title', ' Events')
 
 @section('section')
     <section class="tools_wrapper">
@@ -26,27 +26,7 @@
                             @endforeach
                         </select>
                     </div> --}}
-                    <div class="col-2">
-                        <div class="page-search-block" style="bottom: -83px;">
-                            <div class="filterSearchBox">
-                                <div class="row">
-                                    <div
-                                        class="mb-sm-0 col col-lg fcontrol position-relative filter_selectWrap filter_selectWrap2">
-                                        <div class="select-floating-admin">
-                                            <select class="filter_select form-control" name="code">
-                                                <option value="" hidden selected>Select Category...</option>
-                                                @foreach ($cat as $index => $item)
-                                                    <option value="{{ $item->title }}"
-                                                        {{ request()->input('code') == $item->title ? 'selected' : '' }}>
-                                                        {{ucwords($item->title) }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
                     <div class="col-2">
                         {{-- <input type="search" name="type" placeholder="Enter type"> --}}
                         <div class="page-search-block" style="bottom: -83px;">
@@ -56,7 +36,7 @@
                                         class="mb-sm-0 col col-lg fcontrol position-relative filter_selectWrap filter_selectWrap2">
                                         <div class="select-floating-admin">
                                             <select class="filter_select form-control" name="type">
-                                                <option value="" hidden selected>Select...</option>
+                                                <option value="" hidden selected>Content Type</option>
                                                 <option value="online"
                                                     {{ request()->input('type') == 'online' ? 'selected' : '' }}>Online
                                                 </option>
@@ -72,6 +52,27 @@
                     </div>
                     <div class="col-2">
                         <input type="search" name="price" placeholder="Enter Price">
+                    </div>
+                    <div class="col-2">
+                        <div class="page-search-block" style="bottom: -83px;">
+                            <div class="filterSearchBox">
+                                <div class="row">
+                                    <div
+                                        class="mb-sm-0 col col-lg fcontrol position-relative filter_selectWrap filter_selectWrap2">
+                                        <div class="select-floating-admin">
+                                            <select class="filter_select form-control" name="code">
+                                                <option value="" hidden selected>Event Type</option>
+                                                @foreach ($cat as $index => $item)
+                                                    <option value="{{ $item->title }}"
+                                                        {{ request()->input('code') == $item->title ? 'selected' : '' }}>
+                                                        {{ucwords($item->title) }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-2">
                         <input type="search" name="address" placeholder="Enter Location">

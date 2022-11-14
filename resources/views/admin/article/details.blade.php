@@ -58,7 +58,7 @@
                         <tr>
                             <td>Article Image</td>
                             <td>@if($article->image!='')
-                                <img style="width: 150px;height: 100px;" src="{{URL::to('/').'/articles/'}}{{$article->image}}">
+                                <img style="width: 150px;height: 100px;" src="{{asset($article->image)}}">
                                 @endif</td>
                         </tr>
                         <tr>

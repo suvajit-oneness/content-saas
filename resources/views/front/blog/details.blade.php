@@ -1,5 +1,5 @@
 @extends('front.layouts.app')
-@section('title','Blog Details')
+@section('title',$blog->title)
 @section('section')
     <style>
         .a2a_svg svg {

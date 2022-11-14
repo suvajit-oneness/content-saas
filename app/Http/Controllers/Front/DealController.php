@@ -16,6 +16,7 @@ class DealController extends Controller
 {
     public function index(Request $request)
     {
+        if (auth()->guard('web')->check()) {
         $deal_category = DealCategory::all();
         $deal = Deal::where('status',1);
         if(!empty($request->category)){
@@ -32,5 +33,8 @@ class DealController extends Controller
         $deal_page_content = DealPage::all()[0];
 
         return view('front.deals.index',compact('deal_category','deal','deal_page_content'));
+    } else {
+        return redirect()->route('front.user.login');
+    }
     }
 }

@@ -27,8 +27,8 @@ class EventController extends Controller
         $this->eventRepository = $eventRepository;
     }
     public function event(Request $request)
-    {
-       // if (auth()->guard('web')->check()) {
+    {  
+         if (auth()->guard('web')->check()) {
             if (isset($request->code) || isset($request->keyword) || isset($request->price)||isset($request->type) || isset($request->location)){
             $categoryId = (isset($request->code) && $request->code!='')?$request->code:'';
 
@@ -48,9 +48,9 @@ class EventController extends Controller
             $cat=EventType::where('status',1)->orderby('title')->get();
             $event_page_content = EventPage::all()[0];
             return view('front.event.index',compact('cat','event','event_page_content'));
-        /*} else {
+        } else {
             return redirect()->route('front.user.login');
-        }*/
+        }
     }
 
     public function eventdetails(Request $request,$slug)

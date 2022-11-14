@@ -49,6 +49,12 @@
                         <li>
                             <a href="{{ route('front.project.index') }}" class="{{ request()->is('project*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Project</a>
                         </li>
+                        <li>
+                            <a href="{{ route('front.event') }}" class="{{ request()->is('event*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Events</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('front.deals.index') }}" class="{{ request()->is('deal*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Deals</a>
+                        </li>
                         {{-- <li>
                             <a href="{{ route('front.user.post-content.index') }}" class="{{ request()->is('user/post-content*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Post Content</a>
                         </li> --}}

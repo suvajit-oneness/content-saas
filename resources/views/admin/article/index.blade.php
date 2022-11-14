@@ -77,7 +77,7 @@
                                             <td>{{ $key+1 }}</td>
                                             <td>
                                                 @if($blog->image!='')
-                                                <img style="width: 100px;height: 100px;" src="{{URL::to('/').'/articles/'}}{{$blog->image}}">
+                                                <img style="width: 100px;height: 100px;" src="{{asset($blog->image)}}">
                                                 @endif
                                             </td>
 

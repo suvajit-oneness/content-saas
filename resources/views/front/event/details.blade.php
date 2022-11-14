@@ -1,5 +1,6 @@
 @extends('front.layouts.app')
-@section('title', 'Event Details')
+@section('title',$event->title)
+
 @section('section')
     <style>
         .a2a_svg svg {

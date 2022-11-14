@@ -28,12 +28,36 @@
                         <div class="tile-body">
                             <div class="form-group">
                                 <label class="control-label" for="article_category_id"> Category <span class="m-l-5 text-danger"> *</span></label>
-                                <select class="form-control" name="article_category_id[]" multiple>
+                                {{-- <select class="form-control" name="article_category_id[]" multiple>
                                     <option hidden selected></option>
                                     @foreach ($articlecat as $index => $item)
                                     <option value="{{$item->id}}" {{ ($item->id == $targetarticle->article_category_id) ? 'selected' : '' }}>{{ $item->title }}</option>
                                     @endforeach
+                                </select> --}}
+                                @if(strpos($targetarticle->article_category_id, ','))
+                                <select class="form-control" name="article_category_id[]" multiple>
+                                    {{-- <option hidden selected></option> --}}
+                                    @foreach ($articlecat as $index => $item)
+                                    @php
+                                        $cat = explode(",", $targetarticle->article_category_id);
+                                        $isSelected = in_array($item->id,$cat) ? "selected='selected'" : "";
+                                    @endphp
+                                    @endphp
+                                    <option  value="{{$item->id}}" {{ (in_array($item->id, $cat)) ? 'selected' : '' }} >{{ $item->title }}</option>
+                                    @endforeach
                                 </select>
+                                @else
+                                <select class="form-control" name="article_category_id[]" multiple>
+                                    {{-- <option hidden selected></option> --}}
+                                    @foreach ($articlecat as $index => $item)
+                                    @php
+                                        $isSelected = ($item->id == $targetarticle->article_category_id) ? "selected='selected'" : "";
+                                    @endphp
+                                    @endphp
+                                    <option  value="{{$item->id}}" {{($item->id == $targetarticle->article_category_id) ? 'selected' : '' }}>{{ $item->title }}</option>
+                                    @endforeach
+                                </select>
+                                @endif
                                 @error('article_category_id') <p class="small text-danger">{{ $message }}</p> @enderror
                             </div>
 
@@ -84,7 +108,7 @@
                                 <div class="col-md-2">
                                     @if ($targetarticle->image != null)
                                         <figure class="mt-2" style="width: 80px; height: auto;">
-                                            <img src="{{ asset('articles/'.$targetarticle->image) }}" id="articleImage" class="img-fluid" alt="img">
+                                            <img src="{{ asset($targetarticle->image) }}" id="articleImage" class="img-fluid" alt="img">
                                         </figure>
                                     @endif
                                 </div>
@@ -235,4 +259,14 @@
         });
     });
     </script>
+     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+     <script type="text/javascript">
+         $('#content').summernote({
+             height: 400
+         });
+         $('#meta_description').summernote({
+             height: 400
+         });
+     </script>
 @endpush
