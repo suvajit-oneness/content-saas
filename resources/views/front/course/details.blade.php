@@ -183,6 +183,7 @@
                                 <input type="hidden" name="author_name" value="{{$course->company_name}}">
                                 <input type="hidden" name="course_slug" value="{{$course->slug}}">
                                 <input type="hidden" name="price" value="{{$course->price}}">
+                                <input type="hidden" name="purchase_type" value="course">
                                 @if(Auth::guard('web')->check())
                                     @if(!CheckIfUserBoughtTheCourse($course->id, Auth::guard('web')->user()->id))
                                         <button type="submit" id="addToCart__btn" class="course-deails-btn">Add to Cart</button>

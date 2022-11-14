@@ -37,7 +37,12 @@
                             <td>Course Purchased</td>
                             <td>
                                 @foreach ($order->orderProducts as $item)
-                                    <li><a href="{{route('admin.course.details',$item->course_id)}}">{{$item->courseName->title}}</a>($ {{$item->courseName->price}}) - bought at $ {{$item->price}}</li>
+                                    @if($item->type == 1)
+                                        <li><a href="{{route('admin.course.details',$item->course_id)}}">{{$item->courseName->title}}</a>(${{$item->courseName->price}}) - bought at ${{$item->price}}</li>
+                                    @endif
+                                    @if($item->type == 4)
+                                        <li><a href="{{ route('admin.plans.management.details', $item->course_id) }}">{{getSubscriptionDetails($item->course_id)->name}} Subscription</a> - ${{$item->price}}</li>
+                                    @endif                                
                                 @endforeach
                             </td>
                         </tr>

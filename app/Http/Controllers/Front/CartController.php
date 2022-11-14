@@ -56,7 +56,7 @@ class CartController extends BaseController
              return redirect()->back()->with('success', $type . ' added to cart successfully!');
             
         } else {
-        	return redirect()->back()->with('failure', 'Something happened');
+        	return redirect()->back()->with('failure', 'Product already added to cart or something went wrong!');
           
         }
     }

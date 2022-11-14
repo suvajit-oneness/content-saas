@@ -67,18 +67,25 @@
                     </figure>
                 </div>
                 <div class="cart-item item-title">
-                    <h4>{{$cartValue->course_name}}</h4>
-                    
+                    @if($cartValue->purchase_type != 'subscription')
+                        <h4>{{$cartValue->course_name}}</h4>
+                    @else
+                        <h4>{{$cartValue->course_name}} Subscription</h4>
+                    @endif
                 </div>
                 <div class="cart-item item-author">
-                    <h6>By {{$cartValue->author_name}}</h6>
+                    @if($cartValue->purchase_type != 'subscription')
+                        <h6>By {{$cartValue->author_name}}</h6>
+                    @else
+                        <h6>-- Subscription --</h6>
+                    @endif
                 </div>
                 <div class="cart-item item-author">
                     @if($cartValue->purchase_type != 'subscription')
                         <h6><li>{{totalLessonsAndTopics($cartValue->course_id)->lesson_count}} Lessons</li></h6>
                         <h6><li>{{totalLessonsAndTopics($cartValue->course_id)->topic_count}} Topics</li></h6>
                     @else
-                        <h6>Subscriptions</h6>
+                        <h6>-- Subscription --</h6>
                     @endif
                 </div>
                 

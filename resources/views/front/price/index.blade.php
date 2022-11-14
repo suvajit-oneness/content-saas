@@ -88,13 +88,17 @@
                                     <form method="POST" action="{{route('front.cart.add')}}" class="d-flex" id="addToCartForm">@csrf
                                         <input type="hidden" name="course_id" value="{{$item->planDet->id}}">
                                         <input type="hidden" name="course_name" value="{{$item->planDet->name}}">
-                                        <input type="hidden" name="course_image" value="None">
+                                        <input type="hidden" name="course_image" value="{{$item->planDet->icon}}">
                                         <input type="hidden" name="author_name" value="None">
                                         <input type="hidden" name="course_slug" value="None">
                                         <input type="hidden" name="purchase_type" value="subscription">
                                         <input type="hidden" name="price" value="{{$item->price}}">
                                         @if(Auth::guard('web')->check())
-                                            <button type="submit" id="addToCart__btn" class="button">{{$item->planDet->button_text}}</button>
+                                            @if(!CheckIfUserBoughtTheSubscription($item->planDet->id, Auth::guard()->user()->id))
+                                                <a href="javascript:void(0)" onclick="$(this).parent().submit()" type="submit" class="button">{{$item->planDet->button_text}}</a>
+                                            @else
+                                                <a href="javascript:void(0)" type="submit" class="button">Already Purchased</a>
+                                            @endif
                                         @else
                                             <a href="{{route('front.user.login')}}" class="button">Login To Purchase</a>
                                         @endif

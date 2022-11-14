@@ -4,6 +4,8 @@
 use App\Models\Course;
 use App\Models\Order;
 use App\Models\JobUser;
+use App\Models\PlansAndPricing;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 if (!function_exists('sidebar_open')) {
@@ -196,17 +198,43 @@ function getProductSlug($id)
     return Course::find($id);
 }
 
+function getSubscriptionDetails($id)
+{
+    return PlansAndPricing::find($id);
+}
+
 function CheckIfUserBoughtTheCourse($courseid, $user_id){
     $orders = Order::where('user_id', $user_id)->with('orderProducts')->get();
     $my_courses = [];
     foreach ($orders as $o){
         foreach($o->orderProducts as $op){
-            array_push($my_courses, $op->course_id);
+            if($op->type == 1){
+                array_push($my_courses, $op->course_id);
+            }
         }
     }
 
     if(in_array($courseid, $my_courses))
         return true;
+    else
+        return false;
+
+}
+
+function CheckIfUserBoughtTheSubscription($courseid, $user_id){
+    $orders = Order::where('user_id', $user_id)->with('orderProducts')->get();
+    $my_courses = [];
+    foreach ($orders as $o){
+        foreach($o->orderProducts as $op){
+            if($op->type == 4){
+                array_push($my_courses, $op->course_id);
+            }
+        }
+    }
+
+    if(in_array($courseid, $my_courses)){
+        return true;
+    }
     else
         return false;
 

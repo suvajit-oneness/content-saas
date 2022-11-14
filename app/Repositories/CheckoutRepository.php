@@ -63,6 +63,7 @@ class CheckoutRepository extends BaseRepository implements CheckoutContract
                 $newOrderProduct->order_id = $order_no;
                 $newOrderProduct->course_id = $cartValue->course_id;
                 $newOrderProduct->price = $cartValue->price;
+                $newOrderProduct->type = ($cartValue->purchase_type == 'subscription') ? '4' : ($cartValue->purchase_type == 'deals' ? '5' : '1');
                 $newOrderProduct->save();
 
                 $subtotal += ($cartValue->price * $cartValue->qty);

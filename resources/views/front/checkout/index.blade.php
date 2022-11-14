@@ -31,16 +31,25 @@
                         @endphp
 
                         @foreach ($cartData as $cartKey => $cartValue)
-                        <li>
-                            <figure>
-                                <img src="{{$cartValue->course_image}}" class="w-100"/>
+                        <li class="d-flex border p-2 m-2">
+                            <figure class="w-25">
+                                @if($cartValue->purchase_type != 'subscription')
+                                    <img src="{{$cartValue->course_image}}" class="w-75"/>
+                                @else
+                                    <img src="{{$cartValue->course_image}}" class="w-75"/>
+                                @endif
                             </figure>
                             <figcaption>
                                 <div class="cart-info">
-                                    <h4>{{$cartValue->course_name}}</h4>
-                                    <h6>By {{$cartValue->author_name}}</h6>
-                                    <p>QTY : {{$cartValue->qty}}
-                                    
+                                    @if($cartValue->purchase_type != 'subscription')
+                                        <h4>{{$cartValue->course_name}}</h4>
+                                        <h6>By {{$cartValue->author_name}}</h6>
+                                        <p class="m-0">QTY : {{$cartValue->qty}}</p>
+                                    @else
+                                        <h4>{{$cartValue->course_name}} Subscription</h4>
+                                        <h6>-- Subscription --</h6>
+                                        <p class="m-0">QTY : {{$cartValue->qty}}</p>
+                                    @endif
                                 </div>
                                 <div class="card-meta">
                                     <h4>${{$cartValue->price}}</h4>
@@ -49,11 +58,47 @@
                         </li>
                             @php
                             // subtotal calculation
-                            $subTotal += (int) $cartValue->offer_price * $cartValue->qty;
-                        @endphp
+                                $subTotal += (int) $cartValue->price * $cartValue->qty;
+                            @endphp
 
                         @endforeach
                     </ul>
+                    <div class="w-100">
+                        <div class="cart-total">
+                            <div class="cart-total-label">
+                                Subtotal
+                            </div>
+                            <div class="cart-total-value">
+                                ₹ {{number_format($subTotal)}}
+                            </div>
+                        </div>
+                        <div class="cart-total">
+                            <div class="cart-total-label mt-3 mb-3">
+                                Shipping Method
+                            </div>
+                        </div>
+                        <ul class="checkout-meta mb-2">
+                            <li>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="shipping_method" id="flexRadioDefault1" value="standard" checked="">
+                                    <label class="form-check-label" for="flexRadioDefault1">Standard</label>
+                                </div>
+                            </li>
+                        </ul>
+                        
+                        <div class="cart-total">
+                            <div class="cart-total-label">Shipping Charges</div>
+                            <div class="cart-total-value">₹0</div>
+                        </div>
+                        <div id="appliedCouponHolder"></div>
+                        <div class="cart-total">
+                            <div class="cart-total-label">Total</div>
+                            <div class="cart-total-value">
+                                <input type="hidden" value="{{$subTotal}}" name="grandTotalWithoutCoupon">
+                                ₹<span id="displayGrandTotal">{{$subTotal}}</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-7 col-lg-7">
                     <h4 class="cart-heading">Contact Information</h4>
@@ -97,7 +142,7 @@
                     </div>
                 </div>
             </div>
-        </form
+        </form>
     </div>
 </section>
 @endsection

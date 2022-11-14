@@ -33,38 +33,32 @@ public function addToCart(array $data)
     {
         $collectedData = collect($data);
 
-
-            /*$cartExists = Cart::where('course_id', $collectedData['course_id'])->where('ip', $this->ip)->first();
-            $productImage = $collectedData['course_image'];
-
-
-        if ($cartExists) {
-           
-            $cartExists->save();
-            // return $cartExists;
-        } else {*/
-            $newEntry = new Cart;
-            
-            if (Auth::guard('web')->user()) {
-                $newEntry->user_id = Auth::guard('web')->user()->id;
+            if($collectedData['purchase_type'] != null){
+                $cartExist = Cart::where('purchase_type',$collectedData['purchase_type'])->where('course_id',$collectedData['course_id'])->where('course_name',$collectedData['course_name'])->get();
             }
+            else{
+                $cartExist = [];
+            }
+
+            if(count($cartExist) <= 0){
+
+                $newEntry = new Cart;
             
-            $newEntry->course_id = $collectedData['course_id'];
-            $newEntry->course_name = $collectedData['course_name'];
-            //  if(!empty($params['course_image'])){
-            //     $profile_image = $collectedData['course_image'];
-            //     $imageName = time().".".$profile_image->getClientOriginalName();
-            //     $profile_image->move("course/",$imageName);
-            //     $uploadedImage = $imageName;
-            //     $newEntry->course_image = $uploadedImage;
-            //     }
-            $newEntry->course_image = $collectedData['course_image'];
-            $newEntry->course_slug = $collectedData['course_slug'];
-            $newEntry->author_name = $collectedData['author_name'];
-            $newEntry->price = $collectedData['price'];
-            $newEntry->purchase_type = $collectedData['purchase_type'] ?? 'course';
-            $newEntry->ip = $this->ip;
-            $newEntry->save();
+                if (Auth::guard('web')->user()) {
+                    $newEntry->user_id = Auth::guard('web')->user()->id;
+                }
+                
+                $newEntry->course_id = $collectedData['course_id'];
+                $newEntry->course_name = $collectedData['course_name'];
+                $newEntry->course_image = $collectedData['course_image'];
+                $newEntry->course_slug = $collectedData['course_slug'];
+                $newEntry->author_name = $collectedData['author_name'];
+                $newEntry->price = $collectedData['price'];
+                $newEntry->purchase_type = $collectedData['purchase_type'] ?? 'course';
+                $newEntry->ip = $this->ip;
+                $newEntry->save();
+            }
+            else return false;
 
 			/* $cartData = Cart::where('ip', $this->ip)->sum('qty');
             return $cartData; */

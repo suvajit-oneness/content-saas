@@ -28,7 +28,11 @@
                 <div class="accor-content">
                     <ul class="list-unstyled p-0 m-0">
                     @foreach($o->orderProducts as $op)
-                        <li><a href="{{route('front.course.details', getProductSlug($op->course_id)->slug)}}">{{getProductSlug($op->course_id)->title}}</a></li>
+                        @if($op->type == 1)
+                            <li><a href="{{route('front.course.details', getProductSlug($op->course_id)->slug)}}">{{getProductSlug($op->course_id)->title}}</a></li>
+                        @else
+                            <li>{{getSubscriptionDetails($op->course_id)->name}} Subscription - {{getSubscriptionDetails($op->course_id)->description}}</li>
+                        @endif
                     @endforeach
                     </ul>
                 </div>
