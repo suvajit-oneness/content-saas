@@ -21,13 +21,14 @@ Route::middleware([AuthenticateOnlyIfNotLoggedIn::class])->group(function () {
 Route::name('front.')->group(function () {
     // homepage
     Route::get('/', 'Front\HomeController@index')->name('index');
-    Route::get('/blog', 'Front\ArticleController@article')->name('article');
-    Route::get('/blog/{slug}', 'Front\ArticleController@articledetails')->name('article.details');
+    Route::get('/blog', 'Front\ArticleController@index')->name('article');
+    Route::get('/blog/{slug}', 'Front\ArticleController@details')->name('article.details');
     // Route::get('/event',function(){
     //     dd("hi");
     // })->name('event');
-    Route::get('/event', 'Front\EventController@event')->name('event');
-    Route::get('/event/{slug}', 'Front\EventController@eventdetails')->name('event.details');
+    Route::get('/event', 'Front\EventController@index')->name('event');
+    Route::get('/event/{slug}', 'Front\EventController@details')->name('event.details');
+    Route::post('/event/calender', 'Front\EventController@calender')->name('event.calender');
     Route::get('/course', 'Front\CourseController@course')->name('course');
     Route::get('/course/{slug}', 'Front\CourseController@coursedetails')->name('course.details');
 
@@ -91,6 +92,10 @@ Route::name('front.')->group(function () {
         // User purchased course
         Route::prefix('user')->name('user.courses')->group(function () {
             Route::get('/my-courses','Front\PortfolioController@showMyCourses');
+        });
+            //user events
+            Route::prefix('user')->name('user.events')->group(function () {
+            Route::get('/my-events','Front\EventController@showMyEvents');
         });
 
         // User purchased course

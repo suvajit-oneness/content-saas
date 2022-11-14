@@ -35,9 +35,6 @@
                             <a href="{{ route('front.dashboard.index') }}" class="{{ request()->is('dashboard*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> home</a>
                         </li>
                         <li>
-                            <a href="{{ route('front.user.courses')}}"  class="{{ request()->is('user/my-courses') ? 'active' : '' }}"><i class="fa-solid fa-house"></i>Courses</a>
-                        </li>
-                        <li>
                             <a href="{{ route('front.user.portfolio.index') }}" class="{{ request()->is('user/portfolio*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Portfolio</a>
                         </li>
                         <li>
@@ -58,6 +55,12 @@
                         {{-- <li>
                             <a href="{{ route('front.user.post-content.index') }}" class="{{ request()->is('user/post-content*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Post Content</a>
                         </li> --}}
+                        <li>
+                            <a href="{{ route('front.user.courses')}}"  class="{{ request()->is('user/my-courses') ? 'active' : '' }}"><i class="fa-solid fa-house"></i>My Courses</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('front.user.events')}}"  class="{{ request()->is('user/my-events') ? 'active' : '' }}"><i class="fa-solid fa-house"></i>My Events</a>
+                        </li>
                         <li>
                             <a href="{{ route('front.user.profile.edit') }}" class="{{ request()->is('user/update/profile') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Profile</a>
                         </li>

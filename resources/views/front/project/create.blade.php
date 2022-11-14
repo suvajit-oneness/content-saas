@@ -2,6 +2,11 @@
 @section('title', 'Create Project')
 
 @section('section')
+<style>
+    #statusChange {
+        display: none;
+    }
+</style>
 <section class="edit-sec">
     <div class="container">
         <div class="row mt-0">
@@ -31,12 +36,23 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                        </div>
-
+                                            <div id="statusChange">
+                                                <div class="col-md-4">
+                                                    <label class="control-label" for="status">Type Status<span
+                                                            class="m-l-5 text-danger"></span></label>
+                                                    <input class="form-control @error('status') is-invalid @enderror" type="text"
+                                                        name="status" value="{{ old('status') }}" />
+                                                    @error('status')
+                                                        <p class="small text-danger">{{ $message }}</p>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        
                                         @error('status')
                                             <p class="small text-danger">{{ $message }}</p>
                                         @enderror
                                     </div>
+                                </div>
 
                                     <br>
 
@@ -95,3 +111,20 @@
 
 @endsection
 
+@section('script')
+<script>
+// $(function() {
+//     alert();
+    //$('#statusChange').hide();
+    $('#status').change(function() {
+        
+        if ($('#status').val() == 'spare') {
+            $('#statusChange').show();
+        } else {
+            $('#statusChange').hide();
+        }
+       
+    });
+// });
+</script>
+@endsection

@@ -3,7 +3,7 @@
 
 @section('section')
 @php
-$project = App\Models\Project::where('status','1')->get();
+$project = App\Models\Project::all();
 $job = App\Models\Job::where('status','1')->get();
 $orders = App\Models\Order::where('user_id', auth()->guard('web')->user()->id)->with('orderProducts')->get();
 
