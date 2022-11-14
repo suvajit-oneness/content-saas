@@ -16,7 +16,7 @@
                     <h2>Your order is complete</h2>
                     <p>{{Session::get('success')}}</p>
                     <p>You will receive an email confirmation shortly.</p>
-                    <a href="{{route('front.user.courses')}}">View all orders</a>
+                    <a href="{{route('front.user.orders')}}">View all orders</a>
                     <a href="{{url('/')}}">Return Home</a>
                 </figcaption>
             </div>

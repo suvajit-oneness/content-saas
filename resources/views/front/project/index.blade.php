@@ -49,7 +49,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <span class="badge text-success" data-toggle="tooltip" title="{{ $item->statusDetail->icon }}">{!! $item->statusDetail->icon.' '.ucwords($item->status) !!}</span>
+                                    <span class="badge text-success" data-toggle="tooltip" title="{{ $item->statusDetail->icon ?? ''}}">{!! $item->statusDetail->icon ?? ''.' '.ucwords($item->status) !!}</span>
                                 </td>
                                 <td class="text-end" width="150">
                                     <a href="{{ route('front.project.detail', $item->slug) }}" class="badge bg-dark"> <i class="fas fa-eye"></i> </a>

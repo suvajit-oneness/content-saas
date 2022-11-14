@@ -1,9 +1,15 @@
 @extends('front.layouts.appprofile')
-@section('title', 'My Courses')
+@section('title', 'My Orders')
 
 @section('section')
 <section class="edit-sec edit-basic-detail">
-    
+    {{-- <div class="container">
+        <div class="row">
+            <div class="col-12 text-center top-heading">
+                <h2>My Purchased Courses</h2>
+            </div>
+        </div>
+    </div> --}}
     <div class="course-content-accordions">
         <div class="course-content-accordions">
         @foreach($orders as $o)
@@ -22,19 +28,11 @@
                 <div class="accor-content">
                     <ul class="list-unstyled p-0 m-0">
                     @foreach($o->orderProducts as $op)
-                    @php
-                    if ($op->type != 1) {
-                        continue;
-                    }
-                    @endphp
                         @if($op->type == 1)
                             <li><a href="{{route('front.course.details', getProductSlug($op->course_id)->slug)}}">{{getProductSlug($op->course_id)->title}}</a></li>
-                        @endif
-                        @if($op->type == 4)
+                        @else
+                        <hr>
                             <li>{{getSubscriptionDetails($op->course_id)->name}} Subscription - {{getSubscriptionDetails($op->course_id)->description}}</li>
-                        @endif
-                        @if($op->type == 5)
-                            <li><a href="{{getDealDetails($op->course_id)->company_website_link}}">{{getDealDetails($op->course_id)->title}}</a> - {{getDealDetails($op->course_id)->description}}</li>
                         @endif
                     @endforeach
                     </ul>
@@ -43,5 +41,5 @@
         @endforeach
         </div>
     </div>
-</section><br>
+</section>
 @endsection

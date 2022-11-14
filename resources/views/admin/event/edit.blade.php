@@ -47,7 +47,7 @@
                             <select name="category" id="category" class="form-control @error('category') is-invalid @enderror">
                                 <option value=""  hidden selected>Select a Category</option>
                                 @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}" {{ ( $category->id == $event->id ) ? 'selected' : '' }}>{{ucwords($category->title) }}</option>
+                                    <option value="{{ $category->id }}" {{ ( $category->id == $event->category ) ? 'selected' : '' }}>{{ucwords($category->title) }}</option>
                                 @endforeach
                             </select>
                             @error('category') <p class="small text-danger">{{ $message }}</p> @enderror
