@@ -52,6 +52,7 @@ Route::name('front.')->group(function () {
     // Deals
     Route::name('deals.')->group(function () {
         Route::get('/deals', 'Front\DealController@index')->name('index');
+        Route::get('/deals/{slug}', 'Front\DealController@details')->name('detail');
     });
 
     //feature

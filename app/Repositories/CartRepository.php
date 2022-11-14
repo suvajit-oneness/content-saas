@@ -29,7 +29,7 @@ class CartRepository  implements CartContract
     }
 
 
-public function addToCart(array $data)
+    public function addToCart(array $data)
     {
         $collectedData = collect($data);
 

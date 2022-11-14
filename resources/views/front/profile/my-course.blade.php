@@ -29,8 +29,12 @@
                     @endphp
                         @if($op->type == 1)
                             <li><a href="{{route('front.course.details', getProductSlug($op->course_id)->slug)}}">{{getProductSlug($op->course_id)->title}}</a></li>
-                        @else
+                        @endif
+                        @if($op->type == 4)
                             <li>{{getSubscriptionDetails($op->course_id)->name}} Subscription - {{getSubscriptionDetails($op->course_id)->description}}</li>
+                        @endif
+                        @if($op->type == 5)
+                            <li><a href="{{getDealDetails($op->course_id)->company_website_link}}">{{getDealDetails($op->course_id)->title}}</a> - {{getDealDetails($op->course_id)->description}}</li>
                         @endif
                     @endforeach
                     </ul>

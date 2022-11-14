@@ -41,13 +41,19 @@
                             </figure>
                             <figcaption>
                                 <div class="cart-info">
-                                    @if($cartValue->purchase_type != 'subscription')
+                                    @if($cartValue->purchase_type == 'course')
                                         <h4>{{$cartValue->course_name}}</h4>
                                         <h6>By {{$cartValue->author_name}}</h6>
                                         <p class="m-0">QTY : {{$cartValue->qty}}</p>
-                                    @else
+                                    @endif
+                                    @if($cartValue->purchase_type == 'subscription')
                                         <h4>{{$cartValue->course_name}} Subscription</h4>
                                         <h6>-- Subscription --</h6>
+                                        <p class="m-0">QTY : {{$cartValue->qty}}</p>
+                                    @endif
+                                    @if($cartValue->purchase_type == 'deal')
+                                        <h4>{{$cartValue->course_name}}</h4>
+                                        <h6>-- Deal --</h6>
                                         <p class="m-0">QTY : {{$cartValue->qty}}</p>
                                     @endif
                                 </div>
