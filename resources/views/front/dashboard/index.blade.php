@@ -117,13 +117,13 @@ $orders = App\Models\Order::where('user_id', auth()->guard('web')->user()->id)->
                               <ul class="list-unstyled p-0 m-0">
                               @foreach($o->orderProducts as $op)
                                 @if($op->type == 1)
-                                    <li><a href="{{route('front.course.details', getProductSlug($op->course_id)->slug)}}">{{getProductSlug($op->course_id)->title}}</a></li>
+                                <li><a href="{{route('front.course.details', getProductSlug($op->course_id)->slug)}}">{{getProductSlug($op->course_id)->title}}</a></li>
                                 @endif
                                 @if($op->type == 4)
                                     <li>{{getSubscriptionDetails($op->course_id)->name}} Subscription - {{getSubscriptionDetails($op->course_id)->description}}</li>
                                 @endif
                                 @if($op->type == 5)
-                                    <li>{{getSubscriptionDetails($op->course_id)->name}} Subscription - {{getSubscriptionDetails($op->course_id)->description}}</li>
+                                    <li>{{getDealDetails($op->course_id)->title}} Subscription - {{getDealDetails($op->course_id)->description}}</li>
                                 @endif
                               @endforeach
                               </ul>

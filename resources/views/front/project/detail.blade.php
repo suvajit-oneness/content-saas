@@ -57,9 +57,11 @@
 
                             <a href="{{ route('front.project.task.detail', $item->slug) }}" class="text-success"><u><small>View task details</small></u></a>
                         </div>
-
                         <div class="task-update">
                             <div class="dropdown">
+                                <a type="button" class="badge bg-success download-badge d-inline-block" data-bs-toggle="modal" data-bs-target="#exampleModal{{$item->id}}">
+                                    Add Comment
+                                </a>
                                 <button class="btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="fas fa-ellipsis-v"></i>
                                 </button>
@@ -67,6 +69,42 @@
                                     <li><a class="dropdown-item text-muted" href="{{ route('front.project.task.edit', $item->id) }}">Edit</a></li>
                                     <li><a class="dropdown-item text-muted" href="{{ route('front.project.task.delete', $item->id) }}" onclick="return confirm('Are you sure ?')">Delete</a></li>
                                 </ul>
+                            </div>
+                        </div>
+                        <div class="modal fade" id="exampleModal{{$item->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Add Comment for {{$item->title}}</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <form action="{{ route('front.project.task.comment.update',$item->id) }}" method="POST" role="form" enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <label class="control-label" for="comment">Comment</label>
+
+                                                <textarea type="text" class="form-control" rows="4" name="comment" id="comment">{{ old('comment') }}</textarea>
+
+                                                @error('comment')
+                                                    <p class="small text-danger">{{ $message }}</p>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="doc">Upload Document</label>
+
+                                                <input type="file" class="form-control" rows="4" name="doc" id="doc" value="{{ old('doc') }}">
+                                                <input type="hidden" name="id" value="{{$item->id}}">
+                                                @error('doc')
+                                                    <p class="small text-danger">{{ $message }}</p>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                        <button type="submit" class="add-btn-edit d-inline-block">Save</button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -83,66 +121,6 @@
                 {{ $tasks->appends($_GET)->links() }}
             </div>
         @endif
-
-        {{-- <div class="row mt-4">
-            <div class="table-responsive table-tabs">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>SR</th>
-                            <th>Title</th>
-                            <th>Description</th>
-                            <th>Document</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        @forelse ($tasks as $index => $item)
-                        <tr>
-                            <td>{{ $index + $tasks->firstItem() }}</td>
-                            <td>{{ $item->title }}</td>
-                            <td>
-                                <p class="text-muted"><small>{{ $item->short_desc }}</small></p>
-                            </td>
-                            <td class="text-center">
-                                @if ($item->document)
-                                    <a href="{{ asset($item->document) }}" class="badge bg-success download-badge" download>
-                                        <i class="fas fa-download"></i>
-                                        Download
-                                    </a>
-                                @else
-                                    <p><i class="fas fa-info-circle text-danger"></i></p>
-                                @endif
-                            </td>
-                            <td>
-                                <span class="badge text-success" data-toggle="tooltip" title="{{ $item->statusDetail->icon }}">{!! $item->statusDetail->icon.' '.ucwords($item->status) !!}</span>
-                            </td>
-                            <td class="text-end" width="150">
-                                <a href="{{ route('front.project.detail', $item->slug) }}" class="badge bg-dark"> <i class="fas fa-eye"></i> </a>
-
-                                <a href="{{ route('front.project.edit', $item->id) }}" class="badge bg-dark"> <i class="fas fa-edit"></i> </a>
-
-                                <a href="{{ route('front.project.delete', $item->id) }}" class="badge bg-danger" onclick="return confirm('Are you sure?')"> <i class="fas fa-trash"></i> </a>
-                            </td>
-                        </tr>
-                        @empty
-                        <tr>
-                            <td colspan="100%" class="text-center text-muted">No records found</td>
-                        </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
-
-            @if (count($tasks) > 0)
-            <div class="pagination-custom">
-                {{ $tasks->appends($_GET)->links() }}
-            </div>
-            @endif
-        </div> --}}
-
     </div>
 </section>
 

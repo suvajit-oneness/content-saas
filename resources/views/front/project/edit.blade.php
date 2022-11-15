@@ -34,23 +34,23 @@
                                                         <select name="status" id="status" class="form-control">
                                                             <option value="" disabled selected>Change Status</option>
                                                             @foreach ($status as $item)
+                                                           
                                                                 <option value="{{ $item->slug }}">{{ $item->title }}
                                                                 </option>
                                                             @endforeach
                                                         </select>
                                                     </div>
-                                                    
                                                 </div>
                                                 
                                                 <div id="statusChange" class="row">
                                                     <div class="offset-8 col-md-4">
                                                         <label class="control-label" for="status">
-                                                            Status<span
+                                                            <span
                                                                 class="m-l-5 text-danger"></span></label>
                                                         <input
                                                             class="form-control @error('status') is-invalid @enderror"
                                                             type="text" name="status"
-                                                            value="{{ old('status') }}" />
+                                                            value="{{ old('status',$data->status) }}" />
                                                         @error('status')
                                                             <p class="small text-danger">{{ $message }}</p>
                                                         @enderror

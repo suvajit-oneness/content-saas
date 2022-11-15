@@ -60,6 +60,13 @@ class ProjectController extends Controller
         $project->created_by = auth()->guard('web')->user()->id;
 
         $project->save();
+        $status = new ProjectStatus();
+        $status->title = $project->status ?? '';
+        $status->slug = slugGenerate($project->status, 'project_statuses');
+        $status->icon = '<i class="fas fa-check"></i>';
+        $status->created_by = auth()->guard('web')->user()->id ?? '';
+        $status->position = count($status->position)+1 ?? '';
+        $status->save();
 
         return redirect()->route('front.project.index')->with('success', 'Project created successfully');
     }
@@ -108,6 +115,13 @@ class ProjectController extends Controller
         // $project->created_by = auth()->guard('web')->user()->id;
 
         $project->save();
+        $status = new ProjectStatus();
+        $status->title = $project->status ?? '';
+        $status->slug = slugGenerate($project->status, 'project_statuses');
+        $status->icon = '<i class="fas fa-check"></i>';
+        $status->created_by = auth()->guard('web')->user()->id ?? '';
+        //$status->position = $status->position ?? '';
+        $status->save();
 
         return redirect()->route('front.project.index')->with('success', 'Project updated successfully');
     }

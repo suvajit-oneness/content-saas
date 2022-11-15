@@ -54,7 +54,14 @@
 
                 <p class="mb-0 mt-4">Description:</p>
                 <p class="text-muted mb-4"><small>{{ $item->short_desc }}</small></p>
-
+                <p class="mb-0 mt-4">Comment:</p>
+                <p class="text-muted mb-4"><small>{{ $item->comment }}</small><br>
+                 @if ($item->doc)
+                    <a href="{{ asset($item->doc) }}" class="badge bg-success download-badge d-inline-block" download>
+                        <i class="fas fa-download"></i>
+                        Download
+                    </a>
+                @endif</p>
                 <hr class="mb-4">
 
                 <a href="{{ route('front.project.task.edit', $item->id) }}" class="add-btn-edit d-inline-block"> <i class="fas fa-edit"></i> Edit this task</a>
