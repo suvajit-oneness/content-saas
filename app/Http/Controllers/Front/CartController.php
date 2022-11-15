@@ -7,6 +7,7 @@ use App\Contracts\CartContract;
 use Illuminate\Http\Request;
 use App\Models\CourseModule;
 use App\Http\Controllers\BaseController;
+use App\Models\Cart;
 use DB;
 class CartController extends BaseController
 {
@@ -53,20 +54,21 @@ class CartController extends BaseController
         $type = $request->purchase_type ?? 'course';
 
         if ($cartStore) {
-             return redirect()->back()->with('success', $type . ' added to cart successfully!');
+             return redirect()->back()->with('success', ucwords($type) . ' added to cart successfully!');
             
         } else {
-        	return redirect()->back()->with('failure', 'Product already added to cart or something went wrong!');
+        	return redirect()->back()->with('failure', ucwords($type) . ' already added to cart!');
           
         }
     }
 
     public function delete($id)
     {
+        $cart = Cart::find($id);
         $data = $this->CartRepository->delete($id);
 
         if ($data) {
-            return redirect()->route('front.cart')->with('success', 'Course removed from cart');
+            return redirect()->route('front.cart')->with('success', ucwords($cart->purchase_type).' removed from cart');
         } else {
             return redirect()->route('front.cart')->with('failure', 'Something happened');
         }

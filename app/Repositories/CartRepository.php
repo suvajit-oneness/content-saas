@@ -33,8 +33,11 @@ class CartRepository  implements CartContract
     {
         $collectedData = collect($data);
 
-            if($collectedData['purchase_type'] != null){
+            if($collectedData['purchase_type'] != 4){
                 $cartExist = Cart::where('purchase_type',$collectedData['purchase_type'])->where('course_id',$collectedData['course_id'])->where('course_name',$collectedData['course_name'])->get();
+            }
+            elseif($collectedData['purchase_type'] == 4){
+                $cartExist = Cart::where('purchase_type',$collectedData['purchase_type'])->get();
             }
             else{
                 $cartExist = [];

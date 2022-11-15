@@ -4,6 +4,9 @@
 
 @section('section')
 <style>
+.cart-item{
+    width: calc(100% / 4) !important;
+}
 .cart-item.item-qty .qty-box a {
     width: 20px;
     height: 20px;
@@ -46,14 +49,14 @@
         @endif --}}
 
         <div class="cart-holder">
-            <div class="cart-row cart-row--header">
+            {{-- <div class="cart-row cart-row--header">
                 <div class="cart-item item-thumb">Image</div>
                 <div class="cart-item item-title">Name</div>
                 <div class="cart-item item-attr">Author</div>
                 <div class="cart-item item-color">Contents</div>
                 <div class="cart-item item-price">Price</div>
                 <div class="cart-item item-remove">Action</div>
-            </div>
+            </div> --}}
 
             @php
                 $subTotal = $grandTotal = $couponCodeDiscount = $shippingCharges = $taxPercent = 0;
@@ -66,43 +69,44 @@
                        <img style="width: 100px;height: 100px;" src="{{asset($cartValue->course_image)}}">
                     </figure>
                 </div>
-                <div class="cart-item item-title">
-                    @if($cartValue->purchase_type != 'subscription')
-                        <h4>{{$cartValue->course_name}}</h4>
-                    @else
-                        <h4>{{$cartValue->course_name}} Subscription</h4>
-                    @endif
-                </div>
-                <div class="cart-item item-author">
-                    @if($cartValue->purchase_type != 'subscription')
-                        @if($cartValue->purchase_type != 'deal')
-                            <h6>By {{$cartValue->author_name}}</h6>
+                <div class="cart-item">
+                    <div class="item-title h5">
+                        @if($cartValue->purchase_type != 'subscription')
+                            <h6>{{$cartValue->course_name}}</h6>
                         @else
-                            <h6>-- Deal --</h6>
+                            <h6>{{$cartValue->course_name}} Subscription</h6>
                         @endif
-                    @else
-                        <h6>-- Subscription --</h6>
-                    @endif
-                </div>
-                <div class="cart-item item-author">
-                    @if($cartValue->purchase_type == 'course')
-                        <h6><li>{{totalLessonsAndTopics($cartValue->course_id)->lesson_count}} Lessons</li></h6>
-                        <h6><li>{{totalLessonsAndTopics($cartValue->course_id)->topic_count}} Topics</li></h6>
-                    @else
-                        @if($cartValue->purchase_type != 'deal')    
-                            <h6>-- Subscription --</h6>
-                        @else
-                            <h6>-- Deal --</h6>
+                    </div>
+                    <div class="item-author text-muted">
+                        @if($cartValue->purchase_type != 'subscription')
+                            @if($cartValue->purchase_type != 'deal')
+                                <small>By {{$cartValue->author_name}}</small>
+                            {{-- @else
+                                <h6>-- Deal --</h6> --}}
+                            @endif
+                        {{-- @else
+                            <h6>-- Subscription --</h6> --}}
                         @endif
-                    @endif
+                    </div>
+                    <div class="item-author text-muted">
+                        @if($cartValue->purchase_type == 'course')
+                            <p><li>{{totalLessonsAndTopics($cartValue->course_id)->lesson_count}} Lessons</li></p>
+                            <p><li>{{totalLessonsAndTopics($cartValue->course_id)->topic_count}} Topics</li></p>
+                        {{-- @else
+                            @if($cartValue->purchase_type != 'deal')    
+                                <h6>-- Subscription --</h6>
+                            @else
+                                <h6>-- Deal --</h6>
+                            @endif --}}
+                        @endif
+                    </div>
                 </div>
                 
                 <div class="cart-item item-price">
-                    <div class="cart-text">Amount</div>
-                    <h4>${{$cartValue->price * $cartValue->qty}}</h4>
+                    <h4>${{$cartValue->price * $cartValue->qty}} (${{$cartValue->price}} x {{$cartValue->qty}})</h4>
                 </div>
                 <div class="cart-item item-remove">
-                    <a href="{{route('front.cart.delete', $cartValue->id)}}"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg><!--<span>Remove</span>--></a>
+                    <a href="javascript:void(0)" data-link="{{route('front.cart.delete', $cartValue->id)}}" class="delete_cart_item"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg><!--<span>Remove</span>--></a>
                 </div>
             </div>
 
@@ -188,4 +192,30 @@
 </section>
 @endif
 
+@endsection
+
+@section('script')
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.js"></script>
+    <script>
+        $('.delete_cart_item').click(function(){
+            var link = $(this).data('link');
+            swal({
+                title: "Are you sure?",
+                text: "Your cart item will be deleted!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Yes, remove the item!",
+                closeOnConfirm: false
+            },
+            function(isConfirm){
+                if (isConfirm) {
+                    window.location.href = link;
+                } else {
+                    swal("Cancelled", "Item not deleted!", "error");
+                }
+            });
+        })
+    </script>
 @endsection
