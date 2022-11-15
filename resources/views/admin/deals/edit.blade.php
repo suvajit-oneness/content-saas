@@ -81,14 +81,14 @@
                         <div class="d-flex">
                             <div class="form-group col-6">
                                 <label class="control-label" for="expiry_date">Deal Expiry Date <span class="m-l-5 text-danger">*</span></label>
-                                <input type="date" name="expiry_date" id="expiry_date" value="{{old('expiry_date') ?? $deal->expiry_date}}" class="form-control">
+                                <input type="date" name="expiry_date" id="expiry_date" value="{{date('Y-m-d', strtotime(old('expiry_date') ?? $deal->expiry_date))}}" class="form-control">
                                 @error('expiry_date')
                                     <p class="small text-danger">{{ $message }}</p>
                                 @enderror
                             </div>
                             <div class="form-group col-6">
                                 <label class="control-label" for="expiry_time">Deal Expiry Time <span class="m-l-5 text-danger">*</span></label>
-                                <input type="time" name="expiry_time" id="expiry_time" value="{{old('expiry_time') ?? $deal->expiry_time}}" class="form-control">
+                                <input type="time" name="expiry_time" id="expiry_time" value="{{date('H:i', strtotime(old('expiry_time') ?? $deal->expiry_time))}}" class="form-control">
                                 @error('expiry_time')
                                     <p class="small text-danger">{{ $message }}</p>
                                 @enderror
