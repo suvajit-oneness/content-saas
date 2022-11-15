@@ -58,7 +58,7 @@
                                     <td>{{ ($categories->firstItem()) + $key }}</td>
                                     <td>
                                         @if($category->image!='')
-                                        <img style="width: 100px;height: 100px;" class="text-right text-uppercase" src="{{URL::to('/').'/coursecategories/'}}{{$category->image}}">
+                                        <img style="width: 100px;height: 100px;" class="text-right text-uppercase" src="{{asset($category->image)}}">
                                         @endif
                                     </td>
                                     <td>{{ $category->title }}</td>

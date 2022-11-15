@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class PlansPage extends Model
 {
-    protected $table = 'marketplace_page';
+    protected $table = 'plans_and_pricing_page';
 }

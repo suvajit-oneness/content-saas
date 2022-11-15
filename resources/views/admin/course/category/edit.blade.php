@@ -31,7 +31,7 @@
                             <div class="col-md-2">
                                 @if ($targetCategory->image != null)
                                     <figure class="mt-2" style="width: 80px; height: auto;">
-                                        <img src="{{ asset('coursecategories/'.$targetCategory->image) }}" id="blogImage" class="img-fluid" alt="img">
+                                        <img src="{{ asset($targetCategory->image) }}" id="blogImage" class="img-fluid" alt="img">
                                     </figure>
                                 @endif
                             </div>
@@ -52,3 +52,13 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+     <script type="text/javascript">
+         $('#content').summernote({
+             height: 400
+         });
+       
+     </script>
+@endpush

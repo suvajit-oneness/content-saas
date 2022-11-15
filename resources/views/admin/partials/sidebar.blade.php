@@ -329,7 +329,7 @@
                 </a>
             </li>
             <li>
-                <a class="app-menu__item {{ request()->is('admin/deals') ? 'active' : '' }}"
+                <a class="app-menu__item {{ request()->is('admin/deals*') ? 'active' : '' }}"
                     href="{{ route('admin.deals.index') }}">
                     <i class="app-menu__icon fa fa-folder"></i>
                     <span class="app-menu__label">All Deals</span>
@@ -362,7 +362,7 @@
                 </a>
             </li>
             <li>
-                <a class="app-menu__item {{ request()->is('admin/course') ? 'active' : '' }}"
+                <a class="app-menu__item {{ request()->is('admin/course*') ? 'active' : '' }}"
                     href="{{ route('admin.course.index') }}">
                     <i class="app-menu__icon fa fa-folder"></i>
                     <span class="app-menu__label">Course</span>

@@ -211,24 +211,7 @@ Route::group(['prefix' => 'admin'], function () {
             Route::get('/{id}/details', 'Admin\DealPageController@details')->name('admin.deals.page.details');
         });
 
-        //** course management **/
-        Route::group(['prefix' => 'course'], function () {
-            Route::get('/', 'Admin\CourseController@index')->name('admin.course.index');
-            Route::get('/create', 'Admin\CourseController@create')->name('admin.course.create');
-            Route::post('/store', 'Admin\CourseController@store')->name('admin.course.store');
-            Route::get('/{id}/edit', 'Admin\CourseController@edit')->name('admin.course.edit');
-            Route::post('/update', 'Admin\CourseController@update')->name('admin.course.update');
-
-            Route::post('/update/{id}/lesson/', 'Admin\CourseController@updateCourseLesson')->name('admin.course.updateCourseLesson');
-            Route::get('/{cid}/delete/lesson/{lid}', 'Admin\CourseController@deleteCourseLesson')->name('admin.course.deleteCourseLesson');
-
-            Route::get('/{id}/delete', 'Admin\CourseController@delete')->name('admin.course.delete');
-            Route::post('updateStatus', 'Admin\CourseController@updateStatus')->name('admin.course.updateStatus');
-            Route::get('/{id}/details', 'Admin\CourseController@details')->name('admin.course.details');
-            Route::post('/csv-store', 'Admin\CourseController@csvStore')->name('admin.course.data.csv.store');
-            Route::get('/export', 'Admin\CourseController@export')->name('admin.course.data.csv.export');
-        });
-
+       
         //** course lesson management **/
         Route::group(['prefix' => 'course/lesson'], function () {
             Route::get('/', 'Admin\LessonController@index')->name('admin.lesson.index');
@@ -702,6 +685,25 @@ Route::group(['prefix' => 'admin'], function () {
                 Route::get('/{id}/details', 'Admin\SettingController@details')->name('admin.settings.details');
                
             });
+
+             //** course management **/
+        Route::group(['prefix' => 'course'], function () {
+            Route::get('/', 'Admin\CourseManagementController@index')->name('admin.course.index');
+            Route::get('/create', 'Admin\CourseManagementController@create')->name('admin.course.create');
+            Route::post('/store', 'Admin\CourseManagementController@store')->name('admin.course.store');
+            Route::get('/{id}/edit', 'Admin\CourseManagementController@edit')->name('admin.course.edit');
+            Route::post('/update', 'Admin\CourseManagementController@update')->name('admin.course.update');
+
+            Route::post('/update/{id}/lesson/', 'Admin\CourseManagementController@updateCourseLesson')->name('admin.course.updateCourseLesson');
+            Route::get('/{cid}/delete/lesson/{lid}', 'Admin\CourseManagementController@deleteCourseLesson')->name('admin.course.deleteCourseLesson');
+
+            Route::get('/{id}/delete', 'Admin\CourseManagementController@delete')->name('admin.course.delete');
+            Route::post('updateStatus', 'Admin\CourseManagementController@updateStatus')->name('admin.course.updateStatus');
+            Route::get('/{id}/details', 'Admin\CourseManagementController@details')->name('admin.course.details');
+            Route::post('/csv-store', 'Admin\CourseManagementController@csvStore')->name('admin.course.data.csv.store');
+            Route::get('/export', 'Admin\CourseManagementController@export')->name('admin.course.data.csv.export');
+        });
+
 
             
 });

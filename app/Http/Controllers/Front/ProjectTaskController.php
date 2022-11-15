@@ -170,4 +170,27 @@ class ProjectTaskController extends Controller
 
         return redirect()->route('front.project.detail', $request->project_slug)->with('success', 'Task updated successfully');
     }
+
+    //task comment add
+    public function updateComment(Request $request, $id)
+    {
+         //dd($request->all());
+
+        $request->validate([
+            
+            'comment' => 'required',
+        ]);
+
+        $project = ProjectTask::findOrFail($id);
+        
+        $project->comment = $request->comment ?? '';
+        if (!empty($request->doc)) {
+            $project->doc = imageUpload($request->doc, 'project-task-document');
+        } else {
+            $project->doc = '';
+        }
+        $project->save();
+
+        return redirect()->back()->with('success', 'Task updated successfully');
+    }
 }

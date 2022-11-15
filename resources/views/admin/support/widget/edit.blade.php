@@ -17,6 +17,8 @@
                         <div class="form-group">
                             <label class="control-label" for="title">Title <span class="m-l-5 text-danger"> *</span></label>
                             <input class="form-control @error('title') is-invalid @enderror" type="text" name="title" id="title" value="{{ old('title',$targetsupport->title) }}"/>
+                            <input type="hidden" name="id" value="{{$targetsupport->id }}">
+                            @error('description') {{ $message ?? '' }} @enderror
                             @error('title') {{ $message ?? '' }} @enderror
                         </div>
                         <div class="form-group">

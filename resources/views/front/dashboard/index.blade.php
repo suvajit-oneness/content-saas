@@ -117,9 +117,13 @@ $orders = App\Models\Order::where('user_id', auth()->guard('web')->user()->id)->
                               <ul class="list-unstyled p-0 m-0">
                               @foreach($o->orderProducts as $op)
                                 @if($op->type == 1)
+<<<<<<< HEAD
+                                <li><a href="{{route('front.course.details', getProductSlug($op->course_id)->slug)}}">{{getProductSlug($op->course_id)->title}}</a></li>
+=======
                                   @if(getProductSlug($op->course_id))
                                     <li><a href="{{route('front.course.details', getProductSlug($op->course_id)->slug)}}">{{getProductSlug($op->course_id)->title}}</a></li>
                                   @endif
+>>>>>>> c2ebea3415ed169c8d41dc22ed3609312a7af4eb
                                 @endif
                                 @if($op->type == 4)
                                   @if(getSubscriptionDetails($op->course_id))
@@ -127,9 +131,13 @@ $orders = App\Models\Order::where('user_id', auth()->guard('web')->user()->id)->
                                   @endif
                                 @endif
                                 @if($op->type == 5)
+<<<<<<< HEAD
+                                    <li>{{getDealDetails($op->course_id)->title}} Subscription - {{getDealDetails($op->course_id)->description}}</li>
+=======
                                   @if(getDealDetails($op->course_id))
                                     <li>{{getDealDetails($op->course_id)->title}} Deals - {{getDealDetails($op->course_id)->description}}</li>
                                   @endif                                          
+>>>>>>> c2ebea3415ed169c8d41dc22ed3609312a7af4eb
                                 @endif
                               @endforeach
                               </ul>

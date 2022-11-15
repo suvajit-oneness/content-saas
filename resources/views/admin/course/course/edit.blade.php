@@ -77,7 +77,27 @@
 
                         <div class="form-group">
                             <label class="control-label" for="certificate">Course certification</label>
-                            <input type="checkbox" {{$course->certificate == 1 ? 'checked' : ''}} name="certificate" id="certificate" class="form-control">
+                            {{-- <input type="checkbox" {{$course->certificate == 1 ? 'checked' : ''}} name="certificate" id="certificate" class="form-control"> --}}
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" onClick="recurringCheck();"
+                                        id="recurring" name="certificate" value="yes" {{ $course->certificate != 1 ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="certificate">
+                                            Yes
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-8">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" onClick="recurringCheck();"
+                                        id="certificate" name="certificate" value="no" {{ $course->certificate == 1 ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="certificate">
+                                            No
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
                             @error('certificate')
                                 <p class="small text-danger">{{ $message }}</p>
                             @enderror
@@ -145,7 +165,7 @@
                             <input type="hidden" name="id" value="{{ $course->id }}">
                             <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Update</button>
 
-                            <a class="btn btn-secondary" href="{{ route('admin.lesson.index') }}"><i class="fa fa-fw fa-lg fa-times-circle"></i>Back</a>
+                            <a class="btn btn-secondary" href="{{ route('admin.course.index') }}"><i class="fa fa-fw fa-lg fa-times-circle"></i>Back</a>
                         </div>
                     </div>
                 </form>
@@ -214,7 +234,18 @@
     </div> --}}
 @endsection
 @push('scripts')
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+     <script type="text/javascript">
+         $('#description').summernote({
+             height: 400
+         });
+         $('#short_description').summernote({
+             height: 400
+         });
+         
+     </script>
 <script>
     function moveToTarget(x) {
         // console.log($(x).html());

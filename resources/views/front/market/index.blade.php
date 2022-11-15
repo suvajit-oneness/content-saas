@@ -201,7 +201,7 @@
         <div class="row mt-4 mt-md-5">
             @php
             $cat=DB::select("SELECT * FROM `article_categories` WHERE title LIKE '%Market%'");
-            $blog=App\Models\Article::where('article_category_id',$cat[0]->id)->get();
+            $blog=App\Models\Article::where('article_category_id',$cat[0]->id)->paginate(3);
             
             @endphp
             @foreach($blog as $key => $data)
