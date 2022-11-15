@@ -16,7 +16,7 @@
                         <form class="select" action="">
                             <select id="currency_select" name="currency">
                                 @foreach ($currencies as $item)
-                                    <option value="{{$item->id}}" {{request()->input('currency') == $item->id ? 'selected' : ''}}>{{$item->currency_symbol}}({{$item->currency}})</option>    
+                                    <option value="{{$item->slug}}" {{request()->input('currency') == $item->slug ? 'selected' : ''}}>{{$item->currency_symbol}}({{$item->currency}})</option>    
                                 @endforeach
                                 {{-- <option value="">$ (USD)</option>
                                 <option value="">£ (GBP)</option>

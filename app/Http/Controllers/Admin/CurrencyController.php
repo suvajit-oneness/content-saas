@@ -39,6 +39,7 @@ class CurrencyController extends BaseController
         
         $plans_price_category->currency = $request->currency;
         $plans_price_category->currency_symbol = $request->currency_symbol;
+        $plans_price_category->slug = slugGenerate($request->currency, 'plans_price_category');
 
         if (!$plans_price_category->save()) {
             return $this->responseRedirectBack('Error occurred while creating course.', 'error', true, true);
@@ -72,7 +73,11 @@ class CurrencyController extends BaseController
 
         $plans_price_category = Currency::find($request->id);
 
-        $plans_price_category->currency = $request->currency;
+        if($plans_price_category->currency != $request->currency){
+            $plans_price_category->currency = $request->currency;
+            $plans_price_category->slug = slugGenerate($request->currency, 'plans_price_category');
+        }
+
         $plans_price_category->currency_symbol = $request->currency_symbol;
         
         if(!$plans_price_category->save()){

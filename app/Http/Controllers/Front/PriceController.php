@@ -9,6 +9,7 @@ use App\Models\PlansPriceCategory;
 use App\Models\PlansPriceFaq;
 use App\Models\PlansWithPrice;
 use Illuminate\Http\Request;
+use PhpOffice\PhpSpreadsheet\Calculation\DateTimeExcel\Current;
 
 class PriceController extends Controller
 {
@@ -19,7 +20,8 @@ class PriceController extends Controller
         $plans_with_price = PlansWithPrice::where('currency_id',$currencies[0]->id)->orderBy('price')->with('planDet','currencyDet')->get();
         
         if(!empty($request->currency)){
-            $plans_with_price = PlansWithPrice::where('currency_id',$request->currency)->orderBy('price')->with('planDet','currencyDet')->get();
+            $cid = Currency::where('slug',$request->currency)->first()->id;
+            $plans_with_price = PlansWithPrice::where('currency_id',$cid)->orderBy('price')->with('planDet','currencyDet')->get();
         }
 
         $plan_page = PlansPage::all()[0];
