@@ -49,7 +49,7 @@ class CourseManagementController extends BaseController
 
     public function store(Request $request)
     {
-        // dd($request->all());
+         //dd($request->all());
         $this->validate($request, [
             'category_id' => 'required',
             'title' => 'required|max:191',
@@ -78,7 +78,8 @@ class CourseManagementController extends BaseController
         // image
         $course->image = imageUpload($params['image'], 'courses');
         $course->preview_video = imageUpload($params['preview_video'], 'courses/video');
-
+        if (!empty($request->author_image))
+        $course->author_image = imageUpload($request->author_image, 'courses');
         $course->short_description = $params['short_description'];
         $course->description = $params['description'];
 
@@ -87,10 +88,20 @@ class CourseManagementController extends BaseController
         $course->requirements = $params['requirements'];
         $course->target = $params['target'];
         $course->company_name = $params['company_name'];
+        if($params['author_name'] == 'other'){
+            $course->author_name = $request->other_author_name;
+        }else{
+            $course->author_name = $request->author_name;
+        }
+        $course->author_description = $request->author_description;
         $course->language = $params['language'];
-
+        if($params['presented_by'] == 'other'){
+            $course->presented_by = $request->other_presented_by ?? '';
+        }else{
+            $course->presented_by = $request->presented_by ?? '';
+        }
         $course->certificate = isset($request->certificate) ? 1 : 0;
-
+        $course->presented_by_logo = $request->presented_by_logo ?? '';
         $course->status = 0;
 
         $course->save();
@@ -135,6 +146,7 @@ class CourseManagementController extends BaseController
      */
     public function update(Request $request)
     {
+        //dd($request->all());
         $this->validate($request, [
             'category_id' => 'required',
             'title' => 'required|max:191',
@@ -167,9 +179,20 @@ class CourseManagementController extends BaseController
         $course->requirements = $request->requirements;
         $course->target = $request->target;
         $course->company_name = $request->company_name;
+        if($request['author_name'] == 'other'){
+            $course->author_name = $request->other_author_name;
+        }else{
+            $course->author_name = $request->author_name;
+        }
+        $course->author_description = $request->author_description;
         $course->language = $request->language;
-
+        if($request['presented_by'] == 'other'){
+            $course->presented_by = $request->other_presented_by ?? '';
+        }else{
+            $course->presented_by = auth()->guard('admin')->user()->name;
+        }
         $course->certificate = isset($request->certificate) ? 1 : 0;
+        $course->presented_by_logo = $request->presented_by_logo ?? '';
 
 
         if (!empty($request->image))
@@ -177,6 +200,8 @@ class CourseManagementController extends BaseController
 
         if (!empty($request->preview_video))
             $course->preview_video = imageUpload($request->preview_video, 'courses/video');
+        if (!empty($request->author_image))
+            $course->author_image = imageUpload($request->author_image, 'courses');
 
         if (!$course->save()) {
             return $this->responseRedirectBack('Error occurred while updating.', 'error', true, true);
