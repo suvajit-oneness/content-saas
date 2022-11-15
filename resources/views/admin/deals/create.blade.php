@@ -45,8 +45,15 @@
                             @enderror
                         </div>
                         <div class="form-group">
+                            <label class="control-label" for="short_description">Deal Short Description <span class="m-l-5 text-danger">*</span></label>
+                            <textarea type="text" class="form-control" rows="4" name="short_description" id="short_description">{{ old('short_description') }}</textarea>
+                            @error('short_description')
+                                <p class="small text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div class="form-group">
                             <label class="control-label" for="description">Deal Description <span class="m-l-5 text-danger">*</span></label>
-                            <textarea type="text" class="form-control" rows="4" name="description" id="description">{{ old('description') }}</textarea>
+                            <textarea type="text" class="form-control summernote" rows="4" name="description" id="description">{{ old('description') }}</textarea>
                             @error('description')
                                 <p class="small text-danger">{{ $message }}</p>
                             @enderror
@@ -58,6 +65,23 @@
                             @error('discount_amount')
                             <p class="small text-danger">{{ $message }}</p>
                             @enderror
+                        </div>
+
+                        <div class="d-flex">
+                            <div class="form-group col-6">
+                                <label class="control-label" for="expiry_date">Deal Expiry Date <span class="m-l-5 text-danger">*</span></label>
+                                <input type="date" name="expiry_date" id="expiry_date" value="{{old('expiry_date')}}" class="form-control">
+                                @error('expiry_date')
+                                    <p class="small text-danger">{{ $message }}</p>
+                                @enderror
+                            </div>
+                            <div class="form-group col-6">
+                                <label class="control-label" for="expiry_time">Deal Expiry Time <span class="m-l-5 text-danger">*</span></label>
+                                <input type="time" name="expiry_time" id="expiry_time" value="{{old('expiry_time')}}" class="form-control">
+                                @error('expiry_time')
+                                    <p class="small text-danger">{{ $message }}</p>
+                                @enderror
+                            </div>
                         </div>
 
                         <div class="form-group">

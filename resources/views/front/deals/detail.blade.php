@@ -7,7 +7,7 @@
         }
     </style>
     <div class="d-flex container artiledetails_banner">
-        <div class="row pb-5">
+        <div class="row pb-1">
             <div class="col-md-7">
                 <section class="">
                     <div class="container-fluid">
@@ -24,34 +24,29 @@
             </div>
             <div class="col-md-5">
                 <section class="py-2 py-sm-4 art-dtls">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="artiledetails_banner_text">
-                                    <h1>{{ $deal->title }}</h1>
-                                    <div class="row">
-                                        <div class="col">
-                                            <ul class="articlecat">
-                                                <li>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                                                    {{ $deal->created_at->format('d M Y') }}
-                                                </li>
-                                                <li>
-                                                    <i class="fa fa-tag"></i>
-                                                    {{ App\Models\DealCategory::find($deal->category)->title }}
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
+                    <div >
+                        <div class="artiledetails_banner_text">
+                            <h1>{{ $deal->title }}</h1>
+                            <div>
+                                <ul class="articlecat">
+                                    <li>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                                        {{ $deal->created_at->format('d M Y') }}
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-tag"></i>
+                                        {{ App\Models\DealCategory::find($deal->category)->title }}
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-7 mb-4 mb-lg-0 eventDesc my-3">
-                                {!! $deal->description !!}
-                            </div>
+                    <div>
+                        <div class="mb-4 mb-lg-0 eventDesc my-3">
+                            {!! $deal->company_description !!}
+                        </div>
+                        <div class="mb-4 mb-lg-0 eventDesc my-3">
+                            {!! $deal->short_description !!}
                         </div>
                     </div>
                     <form method="POST" action="{{route('front.cart.add')}}" class="d-flex" id="addToCartForm">@csrf
@@ -73,6 +68,13 @@
                         @endif
                     </form>
                 </section>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex container">
+        <div class="row pb-5">
+            <div class="col-7">
+                {!! $deal->description !!}
             </div>
         </div>
     </div>

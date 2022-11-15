@@ -28,9 +28,12 @@
                         </tr>
                         <tr>
                             <td>Short Description</td>
+                            <td>{!! $deals->short_description !!}</td>
+                        </tr>
+                        <tr>
+                            <td>Description</td>
                             <td>{!! $deals->description !!}</td>
                         </tr>
-
                         <tr>
                             <td>Price</td>
                             <td>$15</td>

@@ -32,6 +32,7 @@ class DealsController extends BaseController
         $this->validate($request, [
             'category' => 'required',
             'title' => 'required|max:191',
+            'short_description' => 'required|max:60',
             'description' => 'required',
 
             'company_name' => 'required',
@@ -54,6 +55,7 @@ class DealsController extends BaseController
         $deal->slug = slugGenerate($params['title'], 'deals');
         
         $deal->description = $params['description'];
+        $deal->short_description = $params['short_description'];
         
         
         $deal->company_name = $params['company_name'];
@@ -101,6 +103,7 @@ class DealsController extends BaseController
         $this->validate($request, [
             'category' => 'required',
             'title' => 'required|max:191',
+            'short_description' => 'required|max:60',
             'description' => 'required',
 
             'company_name' => 'required',
@@ -124,6 +127,7 @@ class DealsController extends BaseController
             $deal->slug = slugGenerate($params['title'], 'deals');
         }
         
+        $deal->short_description = $params['short_description'];
         $deal->description = $params['description'];
         
         
