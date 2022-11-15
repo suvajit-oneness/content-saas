@@ -5,6 +5,7 @@ use App\Models\Course;
 use App\Models\Deal;
 use App\Models\Order;
 use App\Models\JobUser;
+use App\Models\OrderProduct;
 use App\Models\PlansAndPricing;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -207,6 +208,15 @@ function getSubscriptionDetails($id)
 function getDealDetails($id)
 {
     return Deal::find($id);
+}
+
+function FetchIfOrderContainsCourse($order_id)
+{
+    $order_content = OrderProduct::where('order_id',$order_id)->where('type',1)->get();
+    if(count($order_content) > 0)
+        return $order_content;
+    else
+        return false;
 }
 
 function CheckIfUserBoughtTheCourse($courseid, $user_id){
