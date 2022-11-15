@@ -45,12 +45,12 @@
             <div class="col-12 col-lg-4 col-md-6">
                 <div class="courses-content">
                     <div class="courses-img">
-                        <img src="{{URL::to('/').'/course/'}}{{$data->image}}" alt="" class="img-fluid">
+                        <img src="{{asset($data->image)}}" alt="" class="img-fluid">
                     </div>
                     <div class="courses-info">
                         <div class="courses-badge">
                             @if($data->category)
-                                <span><img src="{{URL::to('/').'/coursecategories/'}}{{$data->category->image}}" alt=""> {{ $data->category->title }}</span>
+                                <span><img src="{{asset($data->category->image)}}" alt=""> {{ $data->category->title }}</span>
                             @else
                             <span>No Category</span>
                             @endif
@@ -66,6 +66,13 @@
                                     <li>
                                         <i class="fa-solid fa-clock"></i>
                                         {{ countTotalHours($data->id) }}
+                                    </li>
+                                    @php
+                                    $totalLessonsAndTopics = totalLessonsAndTopics($data->id);
+                                    @endphp
+                                    <li>
+                                        <i class="fa-solid fa-book"></i>
+                                        {{ $totalLessonsAndTopics->lesson_count }} Lessons
                                     </li>
                                 </ul>
                                 <p style="bold">

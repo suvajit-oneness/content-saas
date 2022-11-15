@@ -85,7 +85,7 @@
                             </div>
 
                             <div class="target-market">
-                                <h5>Who this course is for :</h5>
+                                <h5>Who is this course for :</h5>
                                 <p>{!! $course->target !!}</p>
                             </div>
 

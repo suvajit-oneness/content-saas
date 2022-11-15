@@ -43,7 +43,7 @@
                                 {{ $index + $tasks->firstItem() }}. {{ ucwords($item->title) }}
                                 </a>
                             </p>
-
+                            <p class="text-muted short-desc"><small>status : {{ $item->status }}</small></p>
                             <p class="text-muted short-desc"><small>{{ $item->short_desc }}</small></p>
 
                             <div class="download-link mb-3">

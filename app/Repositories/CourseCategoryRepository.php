@@ -74,11 +74,8 @@ class CourseCategoryRepository extends BaseRepository implements CourseCategoryC
             if ($slugExistCount > 0) $slug = $slug.'-'.($slugExistCount+1);
             $category->slug = $slug;
             if(!empty($params['image'])){
-            $profile_image = $collection['image'];
-            $imageName = time().".".$profile_image->getClientOriginalName();
-            $profile_image->move("coursecategories/",$imageName);
-            $uploadedImage = $imageName;
-            $category->image = $uploadedImage;
+                // image, folder name only
+                $category->image = imageUpload($params['image'], 'coursecategories');
             }
             $category->save();
 
@@ -106,11 +103,8 @@ class CourseCategoryRepository extends BaseRepository implements CourseCategoryC
         $category->slug = $slug;
         }
         if(!empty($params['image'])){
-        $profile_image = $collection['image'];
-        $imageName = time().".".$profile_image->getClientOriginalName();
-        $profile_image->move("coursecategories/",$imageName);
-        $uploadedImage = $imageName;
-        $category->image = $uploadedImage;
+            // image, folder name only
+            $category->image = imageUpload($params['image'], 'coursecategories');
         }
         $category->save();
 

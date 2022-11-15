@@ -18,7 +18,8 @@
                 <h5 class="mb-3">{{ucwords($item->title)}}</h5>
 
                 <p class="text-muted"><small>Task created {{ date('j F Y g:i A', strtotime($item->created_at)) }}</small></p>
-
+                <p class="mb-0 mt-4">Status:</p>
+                <p class="text-muted"><small>{{ strtoupper($item->status) }}</small></p>
                 <p class="mb-0 mt-4">Label:</p>
                 <p class="text-muted"><small>{{ strtoupper($item->label) }}</small></p>
 

@@ -3,6 +3,11 @@
     {{ $pageTitle }}
 @endsection
 @section('content')
+<style>
+    #writer {
+        display: none;
+    }
+</style>
     <div class="app-title">
         <div>
             <h1><i class="fa fa-tags"></i> {{ $pageTitle }}</h1>
@@ -26,7 +31,7 @@
                         <div class="form-group">
                             <label class="control-label" for="category_id"> Category <span class="m-l-5 text-danger">
                                     *</span></label>
-                            <select class="form-control" name="category_id">
+                            <select class="filter_select form-control" name="category_id">
                                 <option value="" hidden selected>Select Categoy...</option>
                                 @foreach ($course_category as $index => $item)
                                     <option value="{{ $item->id }}">{{ $item->title }}</option>
@@ -72,7 +77,27 @@
 
                         <div class="form-group">
                             <label class="control-label" for="certificate">Course certification</label>
-                            <input type="checkbox" name="certificate" id="certificate" class="form-control">
+                            {{-- <input type="checkbox" name="certificate" id="certificate" class="form-control"> --}}
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" onClick="recurringCheck();"
+                                        id="recurring" name="certificate" value="yes" {{ old('certificate') != 1 ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="certificate">
+                                            Yes
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-8">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" onClick="recurringCheck();"
+                                        id="certificate" name="certificate" value="no" {{ old('certificate') == 1 ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="certificate">
+                                            No
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
                             @error('certificate')
                                 <p class="small text-danger">{{ $message }}</p>
                             @enderror
@@ -120,6 +145,37 @@
                             @enderror
                         </div>
                         <div class="form-group">
+                            <label class="control-label" for="category_id"> Writer <span class="m-l-5 text-danger">
+                                    *</span></label>
+                            <select class="filter_select form-control" name="author_name" id="writerName">
+                                <option value="" hidden selected>Select...</option>
+                                @foreach ($writer as $index => $item)
+                                    <option value="{{ $item->first_name.''. $item->last_name }}">{{ $item->first_name.''. $item->last_name}}</option>
+                                @endforeach
+                                <option value="other" {{ old('author_name') == 'other' ? 'selected' : '' }}>Other</option>
+                            </select>
+                            @error('author_name')
+                                <p class="small text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div id="writer">
+                            <div class="form-group">
+                                <input class="form-control @error('author_name') is-invalid @enderror" type="text"
+                                    name="author_name" id="author_name" value="{{ old('author_name') }}"
+                                    placeholder="Type here" />
+                                @error('author_name')
+                                    <p class="small text-danger">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="author_description">Writer Description</label>
+                            <textarea type="text" class="form-control" rows="4" name="author_description" id="author_description">{{ old('author_description') }}</textarea>
+                            @error('author_description')
+                                <p class="small text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div class="form-group">
                             <label class="control-label" for="language">Language</label>
                             <select name="language" id="language" class="form-control" value="{{old('language')}}">
                                 @foreach($languages as $l)
@@ -143,3 +199,27 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+     <script type="text/javascript">
+         $('#description').summernote({
+             height: 400
+         });
+         $('#short_description').summernote({
+             height: 400
+         });$('#author_description').summernote({
+             height: 400
+         });
+         $(function() {
+            $('#writer').hide();
+            $('#writerName').change(function() {
+                if ($('#writerName').val() == 'other') {
+                    $('#writer').show();
+                } else {
+                    $('#writer').hide();
+                }
+            });
+        });
+     </script>
+@endpush

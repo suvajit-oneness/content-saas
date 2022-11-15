@@ -22,7 +22,7 @@
                                    </tr>
                                    <tr>
                                       <td width="15%" class="text-right text-uppercase">Image</td>
-                                      <td><img src="{{ asset('coursecategories/'.$category->image) }}" width="150" height="150"></td>
+                                      <td><img src="{{ asset($category->image) }}" width="150" height="150"></td>
                                    </tr>
                                    <tr>
                                       <td width="15%" class="text-right text-uppercase">Description</td>
