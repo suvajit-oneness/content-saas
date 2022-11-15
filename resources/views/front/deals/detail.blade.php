@@ -6,7 +6,7 @@
             margin-right: 0!important;
         }
     </style>
-    <div class="d-flex container artiledetails_banner">
+    <div class="container artiledetails_banner">
         <div class="row pb-1">
             <div class="col-md-7">
                 <section class="">
