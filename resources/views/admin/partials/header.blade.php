@@ -5,7 +5,7 @@
     <ul class="app-nav">
         <!-- User Menu-->
         <li class="dropdown">
-            <a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i>  <span><i class="treeview-indicator fa fa-angle-down" style="font-size: 15px;"></i></span></a>
+            <a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i> {{Auth::guard('admin')->user()->name}} <span><i class="treeview-indicator fa fa-angle-down" style="font-size: 15px;"></i></span></a>
             <ul class="dropdown-menu settings-menu dropdown-menu-right account-dropdown">
                 <li>
                     <a class="dropdown-item" href="{{ route('admin.profile') }}"><i class="fa fa-user fa-lg"></i> Profile</a>

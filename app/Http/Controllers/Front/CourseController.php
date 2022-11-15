@@ -10,16 +10,43 @@ use App\Models\CourseLesson;
 use App\Models\CourseModule;
 use App\Models\CourseTopic;
 use App\Models\LessonTopic;
-
+use App\Models\Language;
+use DB;
 class CourseController extends Controller
 {
     public function course(Request $request)
     {
         if (auth()->guard('web')->check()) {
-            $cat=CourseCategory::where('status',1)->orderby('title')->get();
+            if (!empty($request->category_id) || !empty($request->language)||!empty($request->is_paid)){
+                $category = $request->category_id;
+                $language = $request->language;
+                $price = $request->is_paid;
+               // dd($price);
+                DB::enableQueryLog();
+    
+                $course = Course::where('status', 1)
+                ->when($category, function ($query, $category) {
+                    return $query->where('category_id', 'like', '%'.$category.'%');
+                })
+                ->when($language, function($query, $language) {
+                    return $query->where('language', $language);
+                })
+                ->when($price, function($query, $price) {
+                    return $query->where('is_paid',$price);
+                })
+                
+                ->paginate(12);
+    
+                // dd(DB::getQueryLog());
+    
+                // dd($request->all(), $job);
+            } else {
+           
             $course=Course::where('status',1)->orderby('title')->get();
-
-            return view('front.course.index',compact('cat','course'));
+            }
+            $cat=CourseCategory::where('status',1)->orderby('title')->get();
+            $languages = Language::orderBy('name')->get();
+            return view('front.course.index',compact('cat','course','languages'));
         } else {
             return redirect()->route('front.user.login');
         }

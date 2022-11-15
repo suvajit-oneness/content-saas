@@ -14,7 +14,7 @@
                                 <p id="less_text">{!! substr($course->description,0,150) ?? '' !!}...<span style="font-size: 10px"><a onclick="$('#less_text').hide(); $('#all_text').show();" href="javascript:void(0)">See More</a></span></p>
                                 <p id="all_text" style="display: none;">{!! $course->description !!}</p>
                             </div>
-
+                          
                             <div class="learn">
                                 <h5>What you'll learn : </h5>
                                 @foreach (explode(',',$course->course_content) as $item)
@@ -27,6 +27,20 @@
                                     </div>
                                 @endforeach
                             </div>
+
+                            {{-- <div style="display: flex;align-items: flex-start;border:1px solid rgb(209, 212, 219);border-radius:10px;padding: 16px 20px 20px;margin-top: 20px;">
+                                <div style="margin-right: 20px;">
+                                    <span style="display: flex;align-items: center;justify-content: center; width:32px;height:32px;border-radius: 50%;background-color: rgb(255, 100, 45);color: #ffffff;">1</span>
+                                </div>
+                                <div style="width: 80%">
+                                    <h4>Introduction - Course Overview and What You’ll Learn</h4>
+                                    <p>In this lesson, you’ll gain a better understanding of GA4 and discover why migrating to Google Analytics’ new website tracking software should be a top priority.</p>
+                                </div>
+                                <div style="margin-left: auto">
+                                    <p>1 video</p>
+                                    <p>4 minues</p>
+                                </div>
+                            </div> --}}
 
                             <div class="course-content">
                                 <h5>Course content : </h5>
@@ -110,6 +124,20 @@
 
                                 <p class="mb-0">Join us on our platform today! </p>
                             </div>
+                            <hr>
+                            @if(!empty($course->author_image))
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div style="border-radius:10px;background-color:rgb(69, 224, 168);overflow:hidden;">
+                                        <img src="{{asset($course->author_image)}}" alt="" style="width:100%;height:100%;object-fit:cover;">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <h4>{{$course->author_name}}</h4>
+                                    <p>{!!$course->author_description !!}</p>
+                                </div>
+                            </div>
+                            @endif
 
                         </div>
                     </div>

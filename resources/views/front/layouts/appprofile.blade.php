@@ -15,6 +15,29 @@
     <link href="{{ asset('frontend/css/style.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('frontend/css/responsive.css')}}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <style>
+        
+        .scroll {
+        border: none;
+        padding: 5px;
+        font: 24px/36px sans-serif;
+        width: 290px;
+        height: 500px;
+        overflow: scroll;
+        }
+        ::-webkit-scrollbar {
+        width: 5px;
+        height: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+        background: yellowgreen;
+        border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+        background: #88ba1c;
+        }
+        </style>
 </head>
 
 <body>
@@ -29,10 +52,10 @@
                         <img src="{{ asset('frontend/img/logo.png')}}" alt="" />
                     </a>
                 </div>
-                <div class="dashboard-lists">
+                <div class="dashboard-lists scroll">
                     <ul class="list-unstyled p-0 m-0">
                         <li>
-                            <a href="{{ route('front.dashboard.index') }}" class="{{ request()->is('dashboard*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> home</a>
+                            <a href="{{ route('front.dashboard.index') }}" class="{{ request()->is('dashboard*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Dashboard</a>
                         </li>
                         <li>
                             <a href="{{ route('front.user.portfolio.index') }}" class="{{ request()->is('user/portfolio*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Portfolio</a>
