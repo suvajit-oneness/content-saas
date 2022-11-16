@@ -164,7 +164,7 @@
                                 {{-- </a> --}}
                             </div>
                         @else
-                            <div class="col-12 col-lg-4 col-md-6 mb-3 some-list-1">
+                            <div class="col-12 col-lg-4 col-md-6 mb-3 some-list-1 ">
                                 {{-- <a href=""> --}}
                                 <div class="card" style="position: relative">
                                     <a href="{{ route('front.event.details', $data->slug) }}">
