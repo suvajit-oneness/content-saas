@@ -436,10 +436,10 @@
                             @endphp
                             @foreach ($item->eventDetails as $eventProductkey => $data)
                             {
-                        title: '{{ $data->title }}',
-                        start: '{{ $data->start_date }}',
-                        end: '{{ $data->end_date }}',
-                        url: '{{ URL::to('event/' . $data->slug) }}'
+                                title: '{{ $data->title }}',
+                                start: '{{ $data->start_date }}',
+                                end: '{{ $data->end_date }}',
+                                url: '{{ URL::to('event/' . $data->slug) }}'
                     },
                 @endforeach
                 @endforeach
