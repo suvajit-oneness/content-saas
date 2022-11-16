@@ -48,6 +48,7 @@
                                 <th> Title </th>
                                 <th> Description </th>
                                 <th> Status </th>
+                                <th> Subscription Status </th>
                                 <th style="width:100px; min-width:100px;" class="text-center">Action</th>
                             </tr>
                         </thead>
@@ -73,11 +74,19 @@
                                             </div>
                                         </div>
                                     </td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic radio toggle button group">
+                                            @foreach($plans as $key => $value)
+                                                <input type="radio" class="btn-check d-none" name="subscription_id{{$data->id}}" id="include_{{$key}}{{$data->id}}" {{$value->id == $data->subscription_status ? 'checked' : ''}}>
+                                                <label onclick="setSubscriptionStatus({{$data->id}}, {{$value->id}}, this, `{{route('admin.deals.updateSubscriptionStatus')}}`)" class="btn btn-outline-primary {{$value->id == $data->subscription_status ? 'active' : ''}} {{$key == 0 ? 'rounded-left border-right-0' : ''}} {{$key ==  (count($plans)-1)? 'rounded-right border-left-0' : ''}}" for="include_{{$key}}{{$data->id}}">{{$value->name}}</label>
+                                            @endforeach
+                                        </div>
+                                    </td>
                                     <td class="text-center">
                                         <div class="btn-group" role="group" aria-label="Second group">
                                             <a href="{{ route('admin.deals.edit', $data['id']) }}" class="btn btn-sm btn-primary edit-btn"><i class="fa fa-edit"></i></a>
                                             <a href="{{ route('admin.deals.details', $data['id']) }}" class="btn btn-sm btn-primary edit-btn"><i class="fa fa-eye"></i></a>
-                                            <a href="#" data-id="{{$data['id']}}" class="sa-remove btn btn-sm btn-danger edit-btn"><i class="fa fa-trash"></i></a>
+                                            <a href="" data-id="{{$data['id']}}" class="sa-remove btn btn-sm btn-danger edit-btn"><i class="fa fa-trash"></i></a>
                                         </div>
                                     </td>
                                 </tr>
@@ -120,7 +129,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.js"></script>
 
     <script type="text/javascript">
-        $('.sa-remove').on("click",function(){
+        $('.sa-remove').on("click",function(e){
+            e.preventDefault();
             var id = $(this).data('id');
             swal({
             title: "Are you sure?",
@@ -133,7 +143,7 @@
             },
             function(isConfirm){
             if (isConfirm) {
-                window.location.href = id+"/delete";
+                window.location.href += '/'+ id+"/delete";
                 } else {
                 swal("Cancelled", "Record is safe", "error");
                 }

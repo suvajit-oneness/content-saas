@@ -8,6 +8,7 @@ use App\Models\JobUser;
 use App\Models\OrderProduct;
 use App\Models\PlansAndPricing;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 if (!function_exists('sidebar_open')) {
@@ -254,6 +255,31 @@ function CheckIfUserBoughtTheSubscription($courseid, $user_id){
     else
         return false;
 
+}
+
+function CheckIfUserBoughtAnySubscription()
+{
+    if(Auth::guard('web')->user()->subscription_id == null){
+        return false;
+    }
+    else {
+        return Auth::guard('web')->user()->subscription_id;
+    }
+}
+
+function CheckIfContentIsUnderSubscription($content_id, $content_table)
+{
+    if(CheckIfUserBoughtAnySubscription() != false){
+        $content = DB::table($content_table)->where('id',$content_id)->where('subscription_status',CheckIfUserBoughtAnySubscription())->get();
+    }else{
+        $content = DB::table($content_table)->where('id',$content_id)->where('subscription_status',0)->get();
+    }
+
+    if(count($content) > 0){
+        return true;
+    }else{
+        return false;
+    }
 }
 
 function CheckIfUserBoughtTheDeal($courseid, $user_id){

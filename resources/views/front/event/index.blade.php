@@ -122,46 +122,90 @@
                 </div>
                 <div class="row">
                     @foreach ($event as $eventProductkey => $data)
-                        <div class="col-12 col-lg-4 col-md-6 mb-3 some-list-1">
-                            {{-- <a href=""> --}}
-                            <div class="card">
-                                <a href="{{ route('front.event.details', $data->slug) }}">
-                                    <img src="{{ asset($data->image) }}" class="card-img-top">
-                                </a>
-                                <div class="card-body">
-                                    <div class="d-flex align-items-center">
-                                        <span class="subHead_badge">{{ $data->eventCategory->title }}</span>
-                                        <div class="dateBox blog_date">
-                                            <span class="date">
-                                                {{ date('d', strtotime($data->start_date)) }}
-                                            </span>
-                                            <span class="month">
-                                                {{ date('M', strtotime($data->start_date)) }}
-                                            </span>
-                                            <span class="year">
-                                                {{ date('Y', strtotime($data->start_date)) }}
-                                            </span>
-                                        </div>
-                                        <div class="ms-2">-</div>
-                                        <div class="dateBox blog_date ms-2">
-                                            <span class="date">
-                                                {{ date('d', strtotime($data->end_date)) }}
-                                            </span>
-                                            <span class="month">
-                                                {{ date('M', strtotime($data->end_date)) }}
-                                            </span>
-                                            <span class="year">
-                                                {{ date('Y', strtotime($data->end_date)) }}
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <a href="{{ route('front.event.details', $data->slug) }}" class="location_btn">
-                                        <h5 class="card-title mt-3">{{ $data->title }}</h5>
+                        @if(CheckIfContentIsUnderSubscription($data->id, 'events'))
+                            <div class="col-12 col-lg-4 col-md-6 mb-3 some-list-1">
+                                {{-- <a href=""> --}}
+                                <div class="card">
+                                    <a href="{{ route('front.event.details', $data->slug) }}">
+                                        <img src="{{ asset($data->image) }}" class="card-img-top">
                                     </a>
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <span class="subHead_badge">{{ $data->eventCategory->title }}</span>
+                                            <div class="dateBox blog_date">
+                                                <span class="date">
+                                                    {{ date('d', strtotime($data->start_date)) }}
+                                                </span>
+                                                <span class="month">
+                                                    {{ date('M', strtotime($data->start_date)) }}
+                                                </span>
+                                                <span class="year">
+                                                    {{ date('Y', strtotime($data->start_date)) }}
+                                                </span>
+                                            </div>
+                                            <div class="ms-2">-</div>
+                                            <div class="dateBox blog_date ms-2">
+                                                <span class="date">
+                                                    {{ date('d', strtotime($data->end_date)) }}
+                                                </span>
+                                                <span class="month">
+                                                    {{ date('M', strtotime($data->end_date)) }}
+                                                </span>
+                                                <span class="year">
+                                                    {{ date('Y', strtotime($data->end_date)) }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <a href="{{ route('front.event.details', $data->slug) }}" class="location_btn">
+                                            <h5 class="card-title mt-3">{{ $data->title }}</h5>
+                                        </a>
+                                    </div>
+                                </div>
+                                {{-- </a> --}}
+                            </div>
+                        @else
+                            <div class="col-12 col-lg-4 col-md-6 mb-3 some-list-1">
+                                {{-- <a href=""> --}}
+                                <div class="card" style="position: relative">
+                                    <a href="{{ route('front.event.details', $data->slug) }}">
+                                        <img src="{{ asset($data->image) }}" class="card-img-top">
+                                    </a>
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <span class="subHead_badge">{{ $data->eventCategory->title }}</span>
+                                            <div class="dateBox blog_date">
+                                                <span class="date">
+                                                    {{ date('d', strtotime($data->start_date)) }}
+                                                </span>
+                                                <span class="month">
+                                                    {{ date('M', strtotime($data->start_date)) }}
+                                                </span>
+                                                <span class="year">
+                                                    {{ date('Y', strtotime($data->start_date)) }}
+                                                </span>
+                                            </div>
+                                            <div class="ms-2">-</div>
+                                            <div class="dateBox blog_date ms-2">
+                                                <span class="date">
+                                                    {{ date('d', strtotime($data->end_date)) }}
+                                                </span>
+                                                <span class="month">
+                                                    {{ date('M', strtotime($data->end_date)) }}
+                                                </span>
+                                                <span class="year">
+                                                    {{ date('Y', strtotime($data->end_date)) }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <a href="{{ route('front.event.details', $data->slug) }}" class="location_btn">
+                                            <h5 class="card-title mt-3">{{ $data->title }}</h5>
+                                        </a>
+                                    </div>
+                                    <div style="position: absolute; width: 100%; height: 100%; background-color: rgba(220,220,220,0.1); backdrop-filter: blur(4px);">
+                                    </div>
                                 </div>
                             </div>
-                            {{-- </a> --}}
-                        </div>
+                        @endif
                     @endforeach
                 </div>
             </div>

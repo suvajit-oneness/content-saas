@@ -13,6 +13,7 @@ use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\EventExport;
 use App\Models\EventType;
+use App\Models\PlansAndPricing;
 use DB;
 use Illuminate\Support\Facades\Session as FacadesSession;
 class EventController extends BaseController
@@ -50,7 +51,9 @@ class EventController extends BaseController
         }
         $categories = $this->eventRepository->listCategory();
         $this->setPageTitle('Event', 'List of all event');
-        return view('admin.event.index', compact('events','categories'));
+
+        $plans = PlansAndPricing::all();
+        return view('admin.event.index', compact('events','categories', 'plans'));
     }
 
     /**
@@ -175,6 +178,17 @@ class EventController extends BaseController
 
         if ($event) {
             return response()->json(array('message'=>'Event status has been successfully updated'));
+        }
+    }
+
+    public function updateSubscriptionStatus(Request $request){
+
+        $params = $request->except('_token');
+
+        $event = Event::where('id',$params['id'])->update(['subscription_status'=>$params['subscription_id']]);
+
+        if ($event) {
+            return response()->json(array('message'=>'Subscription status has been successfully updated'));
         }
     }
 

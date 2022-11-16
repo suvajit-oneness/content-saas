@@ -132,6 +132,7 @@ Route::group(['prefix' => 'admin'], function () {
             Route::post('/update', 'Admin\EventController@update')->name('admin.event.update');
             Route::get('/{id}/delete', 'Admin\EventController@delete')->name('admin.event.delete');
             Route::post('updateStatus', 'Admin\EventController@updateStatus')->name('admin.event.updateStatus');
+            Route::post('updateSubscriptionStatus', 'Admin\EventController@updateSubscriptionStatus')->name('admin.event.updateSubscriptionStatus');
             Route::get('/{id}/details', 'Admin\EventController@details')->name('admin.event.details');
             Route::post('/csv-store', 'Admin\EventController@csvStore')->name('admin.event.data.csv.store');
             Route::get('/export', 'Admin\EventController@export')->name('admin.event.data.csv.export');
@@ -184,6 +185,7 @@ Route::group(['prefix' => 'admin'], function () {
             Route::post('/update', 'Admin\DealsController@update')->name('admin.deals.update');
             Route::get('/{id}/delete', 'Admin\DealsController@delete')->name('admin.deals.delete');
             Route::post('updateStatus', 'Admin\DealsController@updateStatus')->name('admin.deals.updateStatus');
+            Route::post('updateSubscriptionStatus', 'Admin\DealsController@updateSubscriptionStatus')->name('admin.deals.updateSubscriptionStatus');
             Route::get('/{id}/details', 'Admin\DealsController@details')->name('admin.deals.details');
             Route::post('/csv-store', 'Admin\DealsController@csvStore')->name('admin.deals.data.csv.store');
             Route::get('/export', 'Admin\DealsController@export')->name('admin.deals.data.csv.export');

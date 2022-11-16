@@ -87,6 +87,7 @@
                                             <th> Image </th>
                                             <th> Start Date </th>
                                             <th> Status </th>
+                                            <th> Subscription Status</th>
                                             <th style="width:100px; min-width:100px;" class="text-center">Action</th>
                                         </tr>
                                     </thead>
@@ -125,6 +126,14 @@
                                                                 <div class="layer"></div>
                                                             </div>
                                                         </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic radio toggle button group">
+                                                        @foreach($plans as $key => $value)
+                                                            <input type="radio" class="btn-check d-none" name="subscription_id{{$event->id}}" id="include_{{$key}}{{$event->id}}" {{$value->id == $event->subscription_status ? 'checked' : ''}}>
+                                                            <label onclick="setSubscriptionStatus({{$event->id}}, {{$value->id}}, this, `{{route('admin.event.updateSubscriptionStatus')}}`)" class="btn btn-outline-primary {{$value->id == $event->subscription_status ? 'active' : ''}} {{$key == 0 ? 'rounded-left border-right-0' : ''}} {{$key ==  (count($plans)-1)? 'rounded-right border-left-0' : ''}}" for="include_{{$key}}{{$event->id}}">{{$value->name}}</label>
+                                                        @endforeach
                                                     </div>
                                                 </td>
                                                 <td class="text-center">
@@ -186,6 +195,7 @@
                 });
         });
     </script>
+    
     <script type="text/javascript">
         $('input[id="toggle-block"]').change(function() {
             var event_id = $(this).data('event_id');
@@ -209,7 +219,6 @@
                     swal("Success!", response.message, "success");
                 },
                 error: function(response) {
-
                     swal("Error!", response.message, "error");
                 }
             });

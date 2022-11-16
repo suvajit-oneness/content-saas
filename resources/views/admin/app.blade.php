@@ -102,6 +102,30 @@
             }
         });
     </script>
+
+    <script>
+        function setSubscriptionStatus(content_id,subscription_id,thy,url){
+            $(thy).parent().children("label").removeClass("active");
+            $(thy).addClass('active');
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: {
+                    _token: CSRF_TOKEN,
+                    id : content_id,
+                    subscription_id : subscription_id,
+                },
+                success: function(response) {
+                    swal("Success!", response.message, "success");
+                },
+                error: function(response) {
+                    swal("Error!", response.message, "error");
+                }
+            });
+        };
+    </script>
+
     <script>
         $('.filter_select').select2({
             width: "100%",

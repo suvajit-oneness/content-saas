@@ -7,6 +7,7 @@ use App\Traits\UploadAble;
 use Illuminate\Http\UploadedFile;
 use App\Contracts\CheckoutContract;
 use App\Models\OrderProduct;
+use App\Models\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Doctrine\Instantiator\Exception\InvalidArgumentException;
@@ -67,6 +68,10 @@ class CheckoutRepository extends BaseRepository implements CheckoutContract
                 $newOrderProduct->save();
 
                 $subtotal += ($cartValue->price * $cartValue->qty);
+
+                if($cartValue->purchase_type == 'subscription'){
+                    User::where('id', Auth::guard('web')->user()->id)->update(['subscription_id'=>$cartValue->course_id]);
+                }
             }
 
             $newEntry->amount = $subtotal;

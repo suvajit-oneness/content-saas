@@ -6,6 +6,7 @@ use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Controller;
 use App\Models\Deal;
 use App\Models\DealCategory;
+use App\Models\PlansAndPricing;
 use Illuminate\Http\Request;
 
 class DealsController extends BaseController
@@ -17,7 +18,9 @@ class DealsController extends BaseController
             $deals = Deal::where('title', 'like', '%' . $request->term . '%')->paginate(25);
         else
             $deals = Deal::paginate(25);
-        return view('admin.deals.index', compact('deals'));
+
+        $plans = PlansAndPricing::all();
+        return view('admin.deals.index', compact('deals','plans'));
     }
 
     public function create()
@@ -72,6 +75,9 @@ class DealsController extends BaseController
         $deal->discount_type = $params['discount_type'];
 
         $deal->status = 0;
+
+        $subscription_status = PlansAndPricing::where('recomended',1)->first()->id;
+        $deal->subscription_status = $subscription_status;
 
         $deal->save();
 
@@ -183,6 +189,17 @@ class DealsController extends BaseController
 
         if ($deal->save()) {
             return response()->json(array('message' => 'Deal has been successfully updated'));
+        }
+    }
+
+    public function updateSubscriptionStatus(Request $request){
+
+        $params = $request->except('_token');
+
+        $event = Deal::where('id',$params['id'])->update(['subscription_status'=>$params['subscription_id']]);
+
+        if ($event) {
+            return response()->json(array('message'=>'Subscription status has been successfully updated'));
         }
     }
 

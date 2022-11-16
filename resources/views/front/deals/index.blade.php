@@ -89,26 +89,51 @@
                 </div>
                 <div class="row">
                     @foreach ($deal as $dealProductkey => $data)
-                        <div class="col-12 col-lg-4 col-md-6 mb-3 some-list-1">
-                            <div class="card">
-                                <a href="{{$data->company_website_link}}" target="_blank">
-                                    <img src="{{ asset($data->company_logo) }}" class="card-img-top">
-                                </a>
-                                <div class="card-body">
-                                    <div class="d-flex align-items-center">
-                                        <span class="subHead_badge">{{ $data->title }}</span>
-                                    </div>
-                                    <div class="location_btn">
-                                        <div class="d-flex align-items-baseline">
-                                            <h6 class="card-title mt-3">{{ $data->short_description }}</h6>
+                        @if(CheckIfContentIsUnderSubscription($data->id, 'deals'))
+                            <div class="col-12 col-lg-4 col-md-6 mb-3 some-list-1">
+                                <div class="card">
+                                    <a href="{{$data->company_website_link}}" target="_blank">
+                                        <img src="{{ asset($data->company_logo) }}" class="card-img-top">
+                                    </a>
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <span class="subHead_badge">{{ $data->title }}</span>
                                         </div>
-                                    </div>
-                                    <div class="location_btn">
-                                        <a href="{{route('front.deals.detail',$data->slug)}}" class="btn btn-primary btn-sm">Get Coupon</a>
+                                        <div class="location_btn">
+                                            <div class="d-flex align-items-baseline">
+                                                <h6 class="card-title mt-3">{{ $data->short_description }}</h6>
+                                            </div>
+                                        </div>
+                                        <div class="location_btn">
+                                            <a href="{{route('front.deals.detail',$data->slug)}}" class="btn btn-primary btn-sm">Get Coupon</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        @else
+                            <div class="col-12 col-lg-4 col-md-6 mb-3 some-list-1">
+                                <div class="card" style="position: relative">
+                                    <a href="{{$data->company_website_link}}" target="_blank">
+                                        <img src="{{ asset($data->company_logo) }}" class="card-img-top">
+                                    </a>
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <span class="subHead_badge">{{ $data->title }}</span>
+                                        </div>
+                                        <div class="location_btn">
+                                            <div class="d-flex align-items-baseline">
+                                                <h6 class="card-title mt-3">{{ $data->short_description }}</h6>
+                                            </div>
+                                        </div>
+                                        <div class="location_btn">
+                                            <a href="{{route('front.deals.detail',$data->slug)}}" class="btn btn-primary btn-sm">Get Coupon</a>
+                                        </div>
+                                    </div>
+                                    <div style="position: absolute; width: 100%; height: 100%; background-color: rgba(220,220,220,0.1); backdrop-filter: blur(4px);">
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
                     @endforeach
                 </div>
             </div>
