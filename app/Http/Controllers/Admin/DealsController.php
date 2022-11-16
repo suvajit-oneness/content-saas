@@ -56,6 +56,9 @@ class DealsController extends BaseController
         
         $deal->description = $params['description'];
         $deal->short_description = $params['short_description'];
+
+        $deal->expiry_date = $params['expiry_date'];
+        $deal->expiry_time = $params['expiry_time'];
         
         
         $deal->company_name = $params['company_name'];
@@ -129,7 +132,9 @@ class DealsController extends BaseController
         
         $deal->short_description = $params['short_description'];
         $deal->description = $params['description'];
-        
+
+        $deal->expiry_date = $params['expiry_date'];
+        $deal->expiry_time = $params['expiry_time'];
         
         $deal->company_name = $params['company_name'];
         $deal->company_description = $params['company_description'];
