@@ -40,6 +40,9 @@ class DealController extends Controller
     public function details($slug)
     {
         $deal = Deal::where('slug',$slug)->first();
+        if(CheckIfContentIsUnderSubscription($deal->id, 'deals') == false){
+            return redirect()->back();
+        }
         return view('front.deals.detail',compact('deal'));
     }
 }

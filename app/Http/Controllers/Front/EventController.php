@@ -55,9 +55,15 @@ class EventController extends Controller
 
     public function details(Request $request,$slug)
     {
+
         $cat=EventType::where('status',1)->orderby('title')->get();
         $events=Event::where('slug',$slug)->orderby('title')->get();
         $event=$events[0];
+
+        if(CheckIfContentIsUnderSubscription($event->id, 'events') == false){
+            return redirect()->back();
+        }
+
         $latestevents=Event::where('slug','!=',$slug)->orderby('title')->paginate(3);
         return view('front.event.details',compact('cat','event','latestevents'));
     }
