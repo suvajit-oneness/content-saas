@@ -54,6 +54,8 @@ class TopicController extends BaseController
         }
 
         $topic->short_description = $request->short_description;
+        $topic->further_readings = $request->further_readings;
+        $topic->external_links = $request->external_links;
         $topic->video_length = $request->video_length;
         $topic->video = imageUpload($request->video , 'topic/video');
         $topic->preview_video = imageUpload($request->preview_video, 'topic/video');
@@ -79,6 +81,7 @@ class TopicController extends BaseController
 
     public function update(Request $request)
     {
+        //dd($request->all());
         $this->validate($request, [
             'id' => 'required|min:1',
             'title' => 'required|min:2|max:255',
@@ -110,9 +113,10 @@ class TopicController extends BaseController
         if(!empty($request->video)){
             $topic->video = imageUpload($request->video,'topic/video');
         }
-
+        $topic->further_readings = $request->further_readings;
+        $topic->external_links = $request->external_links;
         $topic->video_length = $request->video_length;
-        $topic->video_downloadable = isset($request->video_downloadable) ? 1 : 0;
+        $topic->video_downloadable = $request->video_downloadable ?? '';
 
         $topic->title = $request->title;
         $topic->description = $request->description;

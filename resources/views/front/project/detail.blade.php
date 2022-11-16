@@ -60,7 +60,10 @@
                         <div class="task-update">
                             <div class="dropdown">
                                 <a type="button" class="badge bg-success download-badge d-inline-block" data-bs-toggle="modal" data-bs-target="#exampleModal{{$item->id}}">
-                                    Add Comment
+                                    @php
+                                    $totalComments = totalComments($item->id);
+                                    @endphp
+                                    {{ $totalComments->comment_count }} Comments
                                 </a>
                                 <button class="btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="fas fa-ellipsis-v"></i>
@@ -75,16 +78,44 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Add Comment for {{$item->title}}</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">Notes for {{$item->title}}</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <form action="{{ route('front.project.task.comment.update',$item->id) }}" method="POST" role="form" enctype="multipart/form-data">
                                         @csrf
+                                        <input type="hidden" name="task_id" value="{{$item->id}}">
                                         <div class="modal-body">
                                             <div class="form-group">
-                                                <label class="control-label" for="comment">Comment</label>
-
-                                                <textarea type="text" class="form-control" rows="4" name="comment" id="comment">{{ old('comment') }}</textarea>
+                                                <label class="control-label" for="comment">Notes</label>
+                                                <div class="row">
+                                                    @php
+                                                    $comment= App\Models\TaskComment::where('task_id', $item->id)->where('user_id',Auth::guard('web')->user()->id)->with('task')->get();
+                                                    @endphp
+                                                    @foreach($comment as $key => $data)
+                                                    {{-- {{dd($comment)}} --}}
+                                                    <div class="card mb-4">
+                                                        <div class="card-body">
+                                                          <p>{{$data->comment}}</p>
+                                              
+                                                          <div class="d-flex justify-content-between">
+                                                            <div class="d-flex flex-row align-items-center">
+                                                              <img src="{{asset($data->user->image)}}" alt="avatar" width="25"
+                                                                height="25" />
+                                                              <p class="small mb-0 ms-2">{{$data->user->first_name.' '.$data->user->last_name}}</p>
+                                                            </div>
+                                                            <div class="d-flex flex-row align-items-center">
+                                                              <p class="small text-muted mb-0 ">files</p><b>
+                                                              <a href="{{ asset($data->doc) }}" class="badge bg-success download-badge d-inline-block" download>
+                                                              <i class="fas fa-download" style="margin-top: -0.16rem;"></i>
+                                                              </a>
+                                                              {{-- <p class="small text-muted mb-0">3</p> --}}
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                      @endforeach
+                                                </div>
+                                                <textarea type="text" class="form-control" rows="4" name="comment" id="comment" placeholder="Your notes">{{ old('comment') }}</textarea>
 
                                                 @error('comment')
                                                     <p class="small text-danger">{{ $message }}</p>

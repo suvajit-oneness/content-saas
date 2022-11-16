@@ -21,6 +21,7 @@ use App\Feedback;
 use App\Http\Controllers\BaseController;
 use App\Models\Language;
 use App\Models\Order;
+use App\Models\OrderProduct;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -109,9 +110,9 @@ class PortfolioController extends BaseController
 
     public function showMyCourses()
     {
-        $orders = Order::where('user_id', auth()->guard('web')->user()->id)->with('orderProducts')->get();
-
-        return view('front.profile.my-course', compact('orders'));
+        $course = Order::where('user_id', auth()->guard('web')->user()->id)->with('orderProducts')->get();
+        //dd($course);
+        return view('front.profile.my-course', compact('course'));
     }
 
     public function changePassword()

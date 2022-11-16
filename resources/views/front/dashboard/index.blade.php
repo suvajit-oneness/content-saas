@@ -16,7 +16,7 @@ $orders = App\Models\Order::where('user_id', auth()->guard('web')->user()->id)->
         </div> --}}
         <div class="row mt-3 gx-3">
             <div class="col-12 col-lg-4 col-md-4 mb-4">
-              <a href="{{ route('front.user.courses') }}">
+              <a href="{{ route('front.user.courses.index') }}">
                 <div class="dashboard-stats-content">
                     <div class="typed">
                         <h4>{{count($orders)}}</h4>
@@ -63,7 +63,7 @@ $orders = App\Models\Order::where('user_id', auth()->guard('web')->user()->id)->
     <div class="dashboard-documents">
         <div class="top-info">
             <span>recent orders</span>
-            <a href="{{route('front.user.courses')}}" class="show-all">show all</a>
+            <a href="{{route('front.user.orders')}}" class="show-all">show all</a>
         </div>
         <div class="row mt-3">
             <div class="col-12">

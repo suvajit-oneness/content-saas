@@ -7316,3 +7316,13 @@ a.badge.bg-danger:hover {
   top: 5px;
   right: 5px;
 }
+.media-tabs .nav-item .nav-link {
+  color: #95C800;
+  border: none;
+  background-color: transparent;
+  margin-bottom: 0px;
+}
+.media-tabs .nav-item .nav-link.active {
+  color: #000000;
+  border-bottom: 2px solid #95C800;
+}
