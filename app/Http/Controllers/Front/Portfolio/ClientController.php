@@ -7,9 +7,10 @@ use App\Contracts\ClientContract;
 use Illuminate\Http\Request;
 use App\Models\Client;
 use App\Http\Controllers\BaseController;
+use App\Models\Currency;
 use Illuminate\Support\Str;
 use Session;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session as FacadesSession;
 
 class ClientController extends BaseController
@@ -43,7 +44,9 @@ class ClientController extends BaseController
     public function create()
     {
         $this->setPageTitle('client', 'Create client');
-        return view('front.portfolio.client.create');
+        $currencies = Currency::all();
+        $charges_limit = DB::table('charges_limit')->get();
+        return view('front.portfolio.client.create',compact('currencies','charges_limit'));
     }
 
     /**
@@ -55,8 +58,20 @@ class ClientController extends BaseController
     {
         $this->validate($request, [
             'client_name' => 'required',
-            'occupation' => 'required|string|min:1',
-
+            'phone_number' => 'required|string|min:8',
+            'email_id' => 'required|email',
+            'link' => 'required',
+            'company_name' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'state' => 'required',
+            'zip' => 'required',
+            'country' => 'required',
+            'vat_no' => 'required',
+            'client_group' => 'required',
+            'currency' => 'required',
+            'rate' => 'required',
+            'commercials' => 'required'
         ]);
         $params = $request->except('_token');
 
@@ -75,9 +90,11 @@ class ClientController extends BaseController
     public function edit($id)
     {
         $client = $this->ClientRepository->findClientById($id);
+        $currencies = Currency::all();
+        $charges_limit = DB::table('charges_limit')->get();
 
         $this->setPageTitle('client', 'Edit client : ' . $client->occupation);
-        return view('front.portfolio.client.edit', compact('client'));
+        return view('front.portfolio.client.edit', compact('client','currencies','charges_limit'));
     }
 
     /**
@@ -89,8 +106,20 @@ class ClientController extends BaseController
     {
         $this->validate($request, [
             'client_name' => 'required',
-            'occupation' => 'required|string|min:1',
-
+            'phone_number' => 'required|string|min:8',
+            'email_id' => 'required|email',
+            'link' => 'required',
+            'company_name' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'state' => 'required',
+            'zip' => 'required',
+            'country' => 'required',
+            'vat_no' => 'required',
+            'client_group' => 'required',
+            'currency' => 'required',
+            'rate' => 'required',
+            'commercials' => 'required'
         ]);
         $params = $request->except('_token');
         $client = $this->ClientRepository->updateClient($params);

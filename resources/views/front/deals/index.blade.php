@@ -1,3 +1,6 @@
+@php
+    CheckIfContentIsUnderSubscription(1, 'deals')
+@endphp
 @extends('front.layouts.app')
 @section('title', ' Deals')
 

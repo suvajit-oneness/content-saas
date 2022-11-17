@@ -161,6 +161,19 @@
                 </div>
             </div>
         </div>
+        <div class="modal" id="completeModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <p>Do you want to add this work to invoice the client?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-secondary" id="closeCompleteModal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!--Script-->
@@ -185,7 +198,32 @@
     <script>
         feather.replace()
     </script>
-
+    <script>
+        // x = This; Function to change project and task status
+        function changeProjectAndTaskStatus(url,x,content_id){
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: {
+                    _token : "{{csrf_token()}}",
+                    status : x.value,
+                    id : content_id
+                },
+                success:function(response){
+                    if(x.value == 'completed'){
+                        $('#completeModal').modal('show')
+                    }
+                    toastFire("success", response.message);
+                },
+                error: function(response){
+                    toastFire("warning", response.message);
+                }
+            });
+        }
+        $('#closeCompleteModal').click(function(){
+            $('#completeModal').modal('hide');
+        })
+    </script>
     <script>
         // sweetalert fires | type = success, error, warning, info, question
         function toastFire(type, title, body = '') {

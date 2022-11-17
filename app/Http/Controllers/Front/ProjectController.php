@@ -15,7 +15,8 @@ class ProjectController extends Controller
     {
         if (!empty(auth()->guard()->user()->id)) {
             $data = Project::where('created_by', auth()->guard()->user()->id)->latest('id')->where('deleted_at', null)->paginate(15);
-            return view('front.project.index', compact('data'));
+            $status = ProjectStatus::orderBy('position', 'asc')->get();
+            return view('front.project.index', compact('data','status'));
         } else {
             return redirect()->route('front.user.login');
         }
@@ -32,8 +33,10 @@ class ProjectController extends Controller
         // $data = Project::where('slug', $slug)->first();
         $data = Project::where('slug', $slug)->where('created_by', auth()->guard('web')->user()->id)->first();
         $tasks = ProjectTask::where('project_id', $data->id)->where('deleted_at', null)->latest('id')->paginate(15);
+
+        $status = ProjectStatus::orderBy('position', 'asc')->get();
        
-        return view('front.project.detail', compact('data', 'tasks'));
+        return view('front.project.detail', compact('data', 'tasks', 'status'));
     }
 
     public function store(Request $request)
@@ -133,5 +136,15 @@ class ProjectController extends Controller
         //$status->position = $status->position ?? '';
         $status->save();
         return redirect()->back()->with('success', 'Project updated successfully');
+    }
+
+    public function updateStatus(Request $request)
+    {
+        $update = Project::where('id',$request->id)->update(['status' => $request->status]);
+        if($update){
+            return response()->json(array('message' => 'Project status has been successfully updated'));
+        }else{
+            return response()->json(array('message' => 'Error occoured!'));
+        }
     }
 }

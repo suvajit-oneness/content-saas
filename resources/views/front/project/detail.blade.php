@@ -43,7 +43,7 @@
                                 {{ $index + $tasks->firstItem() }}. {{ ucwords($item->title) }}
                                 </a>
                             </p>
-                            <p class="text-muted short-desc"><small>status : {{ $item->status }}</small></p>
+                            {{-- <p class="text-muted short-desc"><small>status : {{ $item->status }}</small></p> --}}
                             <p class="text-muted short-desc"><small>{{ $item->short_desc }}</small></p>
 
                             <div class="download-link mb-3">
@@ -65,6 +65,12 @@
                                     @endphp
                                     {{ $totalComments->comment_count }} Comments
                                 </a>
+                                <select onchange="changeProjectAndTaskStatus(`{{route('front.project.task.updateStatus')}}`,this,'{{$item->id}}')" name="status" id="status" height="24px" class="badge-sm badge bg-success download-badge d-inline-block">
+                                    <option value="" selected>Change Status</option>
+                                    @foreach ($status as $s)
+                                        <option value="{{$s->slug}}" {{ ($s->slug == $item->status) ? 'selected' : '' }}>{{$s->title}}</option>
+                                    @endforeach
+                                </select>
                                 <button class="btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="fas fa-ellipsis-v"></i>
                                 </button>

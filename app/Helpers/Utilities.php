@@ -7,11 +7,16 @@ use App\Models\Order;
 use App\Models\JobUser;
 use App\Models\OrderProduct;
 use App\Models\PlansAndPricing;
+<<<<<<< HEAD
 use App\Models\NotInterestedJob;
 use App\Models\ReportJob;
+=======
+use App\Models\PlansWithPrice;
+>>>>>>> 453d1e41ac465a2d2f0884a57b61fee47b16a165
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Stripe\Plan;
 
 if (!function_exists('sidebar_open')) {
     function sidebar_open($routes = []) {
@@ -289,9 +294,16 @@ function CheckIfUserBoughtAnySubscription()
 function CheckIfContentIsUnderSubscription($content_id, $content_table)
 {
     if(CheckIfUserBoughtAnySubscription() != false){
-        $content = DB::table($content_table)->where('id',$content_id)->where('subscription_status',CheckIfUserBoughtAnySubscription())->get();
+        $planprice = PlansWithPrice::where('plan_id',CheckIfUserBoughtAnySubscription())->first()->price;
+        $plans_ids = PlansWithPrice::where('price','<=',$planprice)->groupBy('plan_id')->get('plan_id');
+        $plan_ids_arr = [];
+        foreach($plans_ids as $item){
+            array_push($plan_ids_arr,$item->plan_id);
+        }
+        $content = DB::table($content_table)->where('id',$content_id)->whereIn('subscription_status',$plan_ids_arr)->get();
     }else{
-        $content = DB::table($content_table)->where('id',$content_id)->where('subscription_status',0)->get();
+        $plan = PlansAndPricing::where('name','like','%free%')->first()->id;
+        $content = DB::table($content_table)->where('id',$content_id)->where('subscription_status',$plan)->get();
     }
 
     if(count($content) > 0){
