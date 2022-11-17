@@ -89,7 +89,7 @@ class ProjectController extends Controller
 
     public function update(Request $request, $id)
     {
-         //dd($request->other_status);
+         //dd($request->all());
 
         $request->validate([
             'title' => 'required|string|min:2|max:255',
