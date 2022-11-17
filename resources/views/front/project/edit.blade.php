@@ -49,8 +49,8 @@
                                                                 class="m-l-5 text-danger"></span></label>
                                                         <input
                                                             class="form-control @error('status') is-invalid @enderror"
-                                                            type="text" name="status"
-                                                            value="{{ old('status',$data->status) }}" />
+                                                            type="text" name="other_status"
+                                                            value="{{ old('status',$data->other_status) }}" />
                                                         @error('status')
                                                             <p class="small text-danger">{{ $message }}</p>
                                                         @enderror
@@ -127,6 +127,57 @@
                 </div>
             </div>
         </div>
+        {{-- <div class="modal fade @if($data->status === 'completed') show @endif"
+         id="myExampleModal"
+         style="display: @if($data->status === 'completed')
+                 block
+         @else
+                 none
+         @endif;"
+         tabindex="-1"
+         role="dialog"
+         aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal Title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">Modal Content</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                    <button class="btn btn-secondary"
+                            type="button"
+                            wire:click.prevent="doSomething()">Do Something</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Let's also add the backdrop / overlay here -->
+    <div class="modal-backdrop fade show"
+         id="backdrop"
+         ></div>
+</div> --}}
+
+<div class="modal fade @if($data->status === 'completed') show @endif" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
     </section>
 
 @endsection

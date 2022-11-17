@@ -197,7 +197,24 @@ function totalLessonsAndTopics($courseid)
 
     return (object)$data;
 }
+//task comment count
 
+function totalComments($taskid)
+{
+    $comment= App\Models\TaskComment::where('task_id', $taskid)->with('task')->get();
+    $all_topics = [];
+    $data['comment_count'] = count($comment);
+    return (object)$data;
+}
+function taskComments($taskid)
+{
+    $comment= App\Models\TaskComment::where('task_id', $taskid)->with('task')->get();
+    $all_topics = [];
+    $data['comment_count'] = count($comment);
+    $data['comments'] = $comment;
+    return (object)$data;
+   
+}
 function getProductSlug($id)
 {
     return Course::find($id);

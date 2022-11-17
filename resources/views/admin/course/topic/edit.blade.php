@@ -2,6 +2,12 @@
 @section('title') {{ $pageTitle }} @endsection
 
 @section('content')
+<style>
+    #yes {
+        display: none;
+    }
+    
+</style>
     <div class="app-title">
         <div>
             <h1><i class="fa fa-tags"></i> {{ $pageTitle }}</h1>
@@ -57,6 +63,20 @@
 
                             @error('description')<p class="small text-danger">{{ $message }}</p>@enderror
                         </div>
+                        <div class="form-group">
+                            <label class="control-label" for="further_readings">Further Reading <span class="m-l-5 text-danger"> *</span></label>
+                            <textarea name="further_readings" id="further_readings" class="form-control @error('further_readings') is-invalid @enderror">{{ old('further_readings') ? old('further_readings') : $topic->further_readings}}</textarea>
+                            {{-- <textarea name="description" id="description" class="summernote form-control @error('title') is-invalid @enderror">{{ old('description') ? old('description') : $topic->description }}</textarea> --}}
+
+                            @error('further_readings')<p class="small text-danger">{{ $message }}</p>@enderror
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="external_links">External Links (comma , separated)<span class="m-l-5 text-danger"> *</span></label>
+                            <textarea name="external_links" id="external_links" class="form-control @error('external_links') is-invalid @enderror" >{{ old('external_links') ? old('external_links') : $topic->external_links}}</textarea>
+                            {{-- <textarea name="description" id="description" class="summernote form-control @error('title') is-invalid @enderror">{{ old('description') ? old('description') : $topic->description }}</textarea> --}}
+
+                            @error('external_links')<p class="small text-danger">{{ $message }}</p>@enderror
+                        </div>
 
                         <h3>Additional Topic Details</h3>
                         <hr>
@@ -91,8 +111,30 @@
                             @error('video_length')<p class="small text-danger">{{ $message }}</p>@enderror
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="name"><span class="m-l-5">Is downloadable?</span></label>
-                            <input {{$topic->video_downloadable == 1 ? 'checked' : ''}} class="form-control @error('video_downloadable') is-invalid @enderror" type="checkbox" name="video_downloadable" id="video_downloadable"/>
+                            <label class="control-label" for="video_downloadable"><span class="m-l-5">Is downloadable?</span></label>
+                            {{-- <input {{$topic->video_downloadable == 1 ? 'checked' : ''}} class="form-control @error('video_downloadable') is-invalid @enderror" type="checkbox" name="video_downloadable" id="video_downloadable"/> --}}
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" onClick="videodownloadableCheck();"
+                                                id="video_downloadable" name="video_downloadable" value="1"
+                                                {{$topic->video_downloadable == 1 ? 'checked' : ''}}>
+                                            <label class="form-check-label" for="video_downloadable">
+                                                Yes
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-8">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" onClick="videodownloadableCheck();"
+                                                id="video_downloadable" name="video_downloadable" value="0"
+                                                {{$topic->video_downloadable != 1 ? 'checked' : ''}}>
+                                            <label class="form-check-label" for="video_downloadable">
+                                                No
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
                             @error('video_downloadable')<p class="small text-danger">{{ $message }}</p>@enderror
                         </div>
 
@@ -129,3 +171,27 @@
         </div>
     </div> --}}
 @endsection
+@push('scripts')
+    <script>
+        videodownloadableCheck();
+
+    function videodownloadableCheck() {
+        if (document.getElementById('video_downloadable').checked) {
+            document.getElementById('yes').style.display = 'block';
+        } else document.getElementById('yes').style.display = 'none';
+    }
+    </script>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+        <script type="text/javascript">
+            $('#description').summernote({
+                height: 400
+            });
+            $('#short_description').summernote({
+                height: 400
+            });
+            $('#further_readings').summernote({
+                height: 400
+            });
+    </script>
+@endpush

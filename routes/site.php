@@ -91,8 +91,11 @@ Route::name('front.')->group(function () {
         });
 
         // User purchased course
-        Route::prefix('user')->name('user.courses')->group(function () {
-            Route::get('/my-courses','Front\PortfolioController@showMyCourses');
+        Route::prefix('user')->name('user.courses.')->group(function () {
+            Route::get('/my-courses','Front\UserCourseController@index')->name('index');
+            Route::get('/course/{slug}','Front\UserCourseController@details')->name('details');
+            Route::get('/course/{slug}/{Lessonslug}','Front\UserCourseController@lessonDetails')->name('lesson');
+            Route::get('/course/{slug}/{Lessonslug}/{Topicslug}','Front\UserCourseController@topicDetails')->name('topic');
         });
             //user events
             Route::prefix('user')->name('user.events')->group(function () {
@@ -103,7 +106,9 @@ Route::name('front.')->group(function () {
             Route::get('/my-orders','Front\OrderController@index');
         });
 
-        // User purchased course
+       
+
+
         Route::prefix('user')->name('user.profile.edit')->group(function () {
             Route::get('/update/profile','Front\Portfolio\ProfileController@editProfile');
         });

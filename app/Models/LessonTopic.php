@@ -10,4 +10,8 @@ class LessonTopic extends Model
     {
         return $this->belongsTo('App\Models\Topic', 'topic_id', 'id');
     }
+    public function lesson()
+    {
+        return $this->belongsTo('App\Models\Lesson', 'lesson_id', 'id');
+    }
 }

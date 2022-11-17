@@ -219,7 +219,7 @@
                                         <button type="button" class="course-deails-btn disabled">Already Purchased</button>
                                     @endif
                                 @else
-                                    <a href="{{route('front.user.login')}}" class="course-deails-btn">Login To Purchase</a>
+                                    <a href="{{route('front.user.login')}}" class="course-deails-btn">Add to Cart</a>
                                 @endif
                             </form>
                             {{-- <a href="" class="course-deails-btn">Add to cart</a> --}}

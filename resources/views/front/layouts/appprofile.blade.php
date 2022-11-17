@@ -79,7 +79,7 @@
                             <a href="{{ route('front.user.post-content.index') }}" class="{{ request()->is('user/post-content*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Post Content</a>
                         </li> --}}
                         <li>
-                            <a href="{{ route('front.user.courses')}}"  class="{{ request()->is('user/my-courses') ? 'active' : '' }}"><i class="fa-solid fa-house"></i>My Courses</a>
+                            <a href="{{ route('front.user.courses.index')}}"  class="{{ request()->is('user/my-courses') ? 'active' : '' }}"><i class="fa-solid fa-house"></i>My Courses</a>
                         </li>
                         <li>
                             <a href="{{ route('front.user.events')}}"  class="{{ request()->is('user/my-events') ? 'active' : '' }}"><i class="fa-solid fa-house"></i>My Events</a>

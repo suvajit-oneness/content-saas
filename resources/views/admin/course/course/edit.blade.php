@@ -14,7 +14,8 @@
         }
         #Eventcost {
         display: none;
-    }
+        }
+
     </style>
     <div class="app-title">
         <div>
@@ -188,7 +189,7 @@
                             <div class="row">
                                 <div class="col-4">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" onClick="CostCheck();" id="free" name="is_paid" value="0" {{ $course->price == "0" ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="radio" onClick="CostCheck();" id="free" name="is_paid" value="0" {{ $course->price == "" ? 'checked' : '' }}>
                                         <label class="form-check-label" for="free">
                                             Free
                                         </label>
@@ -196,7 +197,7 @@
                                 </div>
                                 <div class="col-8">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" onClick="CostCheck();" id="premium" name="is_paid" value="1" {{ $course->price != "0" ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="radio" onClick="CostCheck();" id="premium" name="is_paid" value="1" {{ $course->price != "" ? 'checked' : '' }}>
                                         <label class="form-check-label" for="premium">
                                             Paid
                                         </label>
@@ -206,10 +207,10 @@
                         </div>
                         <div id="Eventcost">
                             <div class="form-group">
-                                <input class="form-control @error('price') is-invalid @enderror" type="number"
+                                <input class="form-control @error('cost') is-invalid @enderror" type="number"
                                 name="price" id="event_cost" value="{{ old('price',$course->price) }}"
-                                placeholder="Enter Price" />
-                                @error('price') <p class="small text-danger">{{ $message }}</p> @enderror
+                                placeholder="Enter Amount" />
+                                @error('cost') <p class="small text-danger">{{ $message }}</p> @enderror
                             </div>
                         </div>
                         {{-- <div class="form-group">

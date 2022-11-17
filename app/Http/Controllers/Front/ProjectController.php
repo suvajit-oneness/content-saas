@@ -32,7 +32,7 @@ class ProjectController extends Controller
         // $data = Project::where('slug', $slug)->first();
         $data = Project::where('slug', $slug)->where('created_by', auth()->guard('web')->user()->id)->first();
         $tasks = ProjectTask::where('project_id', $data->id)->where('deleted_at', null)->latest('id')->paginate(15);
-
+       
         return view('front.project.detail', compact('data', 'tasks'));
     }
 
@@ -89,7 +89,7 @@ class ProjectController extends Controller
 
     public function update(Request $request, $id)
     {
-        // dd($request->all());
+         //dd($request->all());
 
         $request->validate([
             'title' => 'required|string|min:2|max:255',
@@ -109,20 +109,29 @@ class ProjectController extends Controller
         }
 
         if (!empty($request->status)) {
+            if($request['status'] == 'spare'){
+                $status->title = $request['other_status'] ?? '';
+                }
+            else{
             $project->status = $request->status;
+                }
         }
 
         // $project->created_by = auth()->guard('web')->user()->id;
 
         $project->save();
+        if($request['status'] == 'spare')
         $status = new ProjectStatus();
-        $status->title = $project->status ?? '';
-        $status->slug = slugGenerate($project->status, 'project_statuses');
+        if($request['status'] == 'spare'){
+            $status->title = $request['other_status'] ?? '';
+            }
+           
+        //$status->title = $request->other_status;
+        $status->slug = slugGenerate($request->other_status, 'project_statuses');
         $status->icon = '<i class="fas fa-check"></i>';
         $status->created_by = auth()->guard('web')->user()->id ?? '';
         //$status->position = $status->position ?? '';
         $status->save();
-
-        return redirect()->route('front.project.index')->with('success', 'Project updated successfully');
+        return redirect()->back()->with('success', 'Project updated successfully');
     }
 }

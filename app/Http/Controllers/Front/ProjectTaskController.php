@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Project;
 use App\Models\ProjectStatus;
 use App\Models\ProjectTask;
-
+use App\Models\TaskComment;
+use Auth;
 class ProjectTaskController extends Controller
 {
     // public function index(Request $request)
@@ -175,15 +176,14 @@ class ProjectTaskController extends Controller
     public function updateComment(Request $request, $id)
     {
          //dd($request->all());
-
         $request->validate([
             
             'comment' => 'required',
         ]);
-
-        $project = ProjectTask::findOrFail($id);
-        
+        $project = new TaskComment();
         $project->comment = $request->comment ?? '';
+        $project->user_id = Auth::guard('web')->user()->id;
+        $project->task_id = $request->task_id;
         if (!empty($request->doc)) {
             $project->doc = imageUpload($request->doc, 'project-task-document');
         } else {
