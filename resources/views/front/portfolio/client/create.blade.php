@@ -32,17 +32,6 @@
                                     @enderror
                                 </div><br>
                                 <div class="form-group">
-                                    <label class="control-label" for="occupation">Occupation <span class="m-l-5 text-danger">
-                                            *</span></label>
-                                    <input class="form-control @error('occupation') is-invalid @enderror" type="text" name="occupation"
-                                        id="occupation" value="{{ old('occupation') }}" />
-                                    @error('occupation')
-                                        <p class="small text-danger">{{ $message }}</p>
-                                    @enderror
-                                </div><br>
-
-
-                                <div class="form-group">
                                     <label class="control-label" for="phone_number">Contact </label>
                                     <input class="form-control @error('phone_number') is-invalid @enderror" type="text" name="phone_number"
                                         id="phone_number" value="{{ old('phone_number') }}" />
@@ -60,7 +49,7 @@
                                 </div><br>
 
                                 <div class="form-group">
-                                    <label class="control-label" for="link">Url </label>
+                                    <label class="control-label" for="link">Website </label>
                                     <input class="form-control @error('link') is-invalid @enderror" type="text" name="link"
                                         id="link" value="{{ old('link') }}" />
                                     @error('link')
@@ -68,25 +57,80 @@
                                     @enderror
                                 </div><br>
                                 <div class="form-group">
-                                    <label class="control-label" for="short_desc">Short Description</label>
-                                    <textarea type="text" class="form-control" rows="4" name="short_desc" id="short_desc">{{ old('short_desc') }}</textarea>
-                                    @error('short_desc')
+                                    <label class="control-label" for="company_name">Company Name </label>
+                                    <input class="form-control @error('company_name') is-invalid @enderror" type="text" name="company_name"
+                                        id="company_name" value="{{ old('company_name') }}" />
+                                    @error('company_name')
                                         <p class="small text-danger">{{ $message }}</p>
                                     @enderror
                                 </div><br>
                                 <div class="form-group">
-                                    <label class="control-label" for="long_desc">Long Description</label>
-                                    <textarea type="text" class="form-control" rows="4" name="long_desc" id="long_desc">{{ old('long_desc') }}</textarea>
-                                    @error('long_desc')
+                                    <label class="control-label" for="address">Address </label>
+                                    <input class="form-control @error('address') is-invalid @enderror" type="text" name="address"
+                                        id="address" value="{{ old('address') }}" />
+                                    @error('address')
                                         <p class="small text-danger">{{ $message }}</p>
                                     @enderror
                                 </div><br>
                                 <div class="form-group">
-                                    <label class="control-label" for="image">Image</label>
-                                    <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image"/>
-                                    @error('image')
+                                    <label class="control-label" for="city">City </label>
+                                    <input class="form-control @error('city') is-invalid @enderror" type="text" name="city"
+                                        id="city" value="{{ old('city') }}" />
+                                    @error('city')
                                         <p class="small text-danger">{{ $message }}</p>
                                     @enderror
+                                </div><br>
+                                <div class="form-group">
+                                    <label class="control-label" for="state">State </label>
+                                    <input class="form-control @error('state') is-invalid @enderror" type="text" name="state"
+                                        id="state" value="{{ old('state') }}" />
+                                    @error('state')
+                                        <p class="small text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div><br>
+                                <div class="form-group">
+                                    <label class="control-label" for="zip">Zip code </label>
+                                    <input class="form-control @error('zip') is-invalid @enderror" type="text" name="zip"
+                                        id="zip" value="{{ old('zip') }}" />
+                                    @error('zip')
+                                        <p class="small text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div><br>
+                                <div class="form-group">
+                                    <label class="control-label" for="country">Country </label>
+                                    <input class="form-control @error('country') is-invalid @enderror" type="text" name="country"
+                                        id="country" value="{{ old('country') }}" />
+                                    @error('country')
+                                        <p class="small text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div><br>
+                                <div class="form-group">
+                                    <label class="control-label" for="vat_no">VAT number </label>
+                                    <input class="form-control @error('vat_no') is-invalid @enderror" type="text" name="vat_no"
+                                        id="vat_no" value="{{ old('vat_no') }}" />
+                                    @error('vat_no')
+                                        <p class="small text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div><br>
+                                <div class="form-group">
+                                    <label class="control-label" for="client_group">Client Group </label>
+                                    <input class="form-control @error('client_group') is-invalid @enderror" type="text" name="client_group"
+                                        id="client_group" value="{{ old('client_group') }}" />
+                                    @error('client_group')
+                                        <p class="small text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div><br>
+                                <div class="form-group">
+                                    <label class="control-label" for="link">Commercial</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <label class="btn btn-outline-secondary dropdown-toggle" for="dropdown-menu" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</label>
+                                            <select class="dropdown-menu" id="dropdown-menu">
+                                                <option class="dropdown-item" value="2" href="#">Action</option>
+                                            </select>
+                                        </div>
+                                        <input type="text" class="form-control" aria-label="Text input with dropdown button">
+                                      </div>
                                 </div><br>
                             <div class="tile-footer">
                                 <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save
