@@ -54,11 +54,11 @@
                     <span>{{count($writers)}} writer found!</span>
                 </div>
             </div>
-            <div class="col-lg-6 col-md-6 col-12 text-center text-lg-end">
+            {{-- <div class="col-lg-6 col-md-6 col-12 text-center text-lg-end">
                 <div class="recommended-writers-right">
                     <a href="{{ route('front.marketplace.index') }}" class="browse-writers">browse all writers</a>
                 </div>
-            </div>
+            </div> --}}
         </div>
 
         <div class="row mt-4">

@@ -7,9 +7,11 @@ use App\Models\ApplyJob;
 use Illuminate\Http\Request;
 use App\Models\Job;
 use App\Models\JobCategory;
+use App\Models\ReportJob;
 use App\Models\JobUser;
 use App\Models\JobTag;
 use App\Contracts\JobContract;
+use App\Models\NotInterestedJob;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 
@@ -28,6 +30,7 @@ class JobController extends Controller {
             $keyword = $request->keyword;
             $employment_type = $request->employment_type;
             $salary = $request->salary;
+            $payment = $request->payment;
             $source = $request->source;
             $featured = $request->featured_flag;
             $beginner_friendly = $request->beginner_friendly;
@@ -40,6 +43,9 @@ class JobController extends Controller {
             })
             ->when($salary, function($query, $salary) {
                 return $query->where('salary', $salary);
+            })
+            ->when($payment, function($query, $payment) {
+                return $query->where('payment', $payment);
             })
             ->when($source, function($query, $source) {
                 return $query->where('source', $source);
@@ -184,36 +190,51 @@ class JobController extends Controller {
             return redirect()->back()->with('failure', 'Something happened');
         }
     }
-
-    /*
-    public function jobapplystore(Request $request) {
-        // dd($request->all());
-
-        $validator = Validator::make($request->all(), [
-            'job_id' => 'required|integer|min:1',
-            'name' => 'required|string|min:2|max:255',
-            'email' => 'required|email|min:2|max:255',
-            'mobile' => 'required|integer',
-            'cv' => 'required'
-        ]);
-
-        if (!$validator->fails()) {
-            $params = array(
-                'user_id' => auth()->guard('web')->user()->id ?? '',
-                'job_id' => $request->job_id ?? '',
-                'cv' => $request->cv ?? ''
-            );
-
-            $data = $this->JobRepository->applyjob($params);
-
-            if ($data) {
-                return response()->json(['error' => false, 'message' => 'Successfully Applied for this Job']);
-            } else {
-                return response()->json(['error' => true, 'message' => 'Something happened']);
-            }
+    /* job interest*/
+    public function jobinterest(Request $request,$id){
+	    // check if collection already exists
+        if(auth()->guard('user')->check()) {
+           $collectionExistsCheck = NotInterestedJob::where('job_id', $id)->where('user_id', auth()->guard('web')->user()->id)->first();
         } else {
-            return response()->json(['error' => true, 'message' => $validator->errors()->first()]);
+           $collectionExistsCheck = NotInterestedJob::where('job_id', $id)->first();
+        }
+        if($collectionExistsCheck != null) {
+            // if found
+            $data = NotInterestedJob::destroy($collectionExistsCheck->id);
+            return response()->json(['status' => 200, 'type' => 'remove', 'message' => 'Job removed from savelist']);
+        } else {
+            // if not found
+            $data = new NotInterestedJob();
+            $data->user_id = auth()->guard('web')->user() ? auth()->guard('web')->user()->id : 0;
+            $data->job_id = $id;
+            $data->status = 1;
+            $data->save();
+            
+            return redirect()->back()->with('success','Job Removed');
+        }
+	}
+       /* report job */
+    public function jobreport(Request $request){
+	    // check if collection already exists
+        if(auth()->guard('user')->check()) {
+           $collectionExistsCheck = ReportJob::where('job_id', $request->id)->where('user_id', auth()->guard('web')->user()->id)->first();
+        } else {
+           $collectionExistsCheck = ReportJob::where('job_id', $request->id)->first();
+        }
+        if($collectionExistsCheck != null) {
+            // if found
+            $data = ReportJob::destroy($collectionExistsCheck->id);
+            return response()->json(['status' => 200, 'type' => 'remove', 'message' => 'Job removed']);
+        } else {
+            // if not found
+            $data = new ReportJob();
+            $data->user_id = auth()->guard('web')->user() ? auth()->guard('web')->user()->id : 0;
+            $data->job_id = $request->job_id;
+            $data->comment = $request->comment;
+            $data->save();
+            //dd($data);
+            return redirect()->back()->with('success','Job Reported');
         }
     }
-    */
+
 }

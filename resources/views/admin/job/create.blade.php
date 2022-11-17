@@ -342,6 +342,24 @@
                             @enderror
                         </div>
                         <div class="form-group">
+                            <label class="control-label" for="company_name">Company Name <span
+                                    class="m-l-5 text-danger"></span></label>
+                            <input class="form-control @error('company_name') is-invalid @enderror" type="text" name="company_name"
+                                id="company_name" value="{{ old('company_name') }}" />
+                            @error('company_name')
+                                <p class="small text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="company_desc">Company Description <span
+                                    class="m-l-5 text-danger"></span></label>
+                            <input class="form-control @error('company_desc') is-invalid @enderror" type="text" name="company_desc"
+                                id="company_desc" value="{{ old('company_desc') }}" />
+                            @error('company_desc')
+                                <p class="small text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div class="form-group">
                             <button class="btn btn-primary" type="submit"><i
                                     class="fa fa-fw fa-lg fa-check-circle"></i>Save Job</button>
                             <a class="btn btn-secondary" href="{{ route('admin.job.index') }}"><i

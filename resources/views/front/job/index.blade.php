@@ -71,7 +71,7 @@
                                 <label for="nearMe">near me</label>
                             </div>
                             <div class="checkbox-content">
-                                <input type="text" name="address" id="remote2" class="form-control" placeholder="Enter location" />
+                                <input type="text" name="address" id="remote2" class="form-control" placeholder="Enter location city/state/postcode" />
                             </div>
                         </div>
 
@@ -98,7 +98,12 @@
                                 <label for="word">word</label>
                             </div>
                         </div>
-
+                        <div class="jobs-filter-checkbox job-filter-location">
+                            <h4>Salary Estimate</h4>
+                            <div class="checkbox-content">
+                                <input type="text" name="payment" id="payment" class="form-control" placeholder="$" />
+                            </div>
+                        </div>
                         <div class="jobs-filter-checkbox job-filter-source">
                             <h4>Source</h4>
                             <div class="checkbox-content">
@@ -220,7 +225,12 @@
                                     @continue
                                 @endif
                             @endif
-
+                             @if (interestJobs($data->id))
+                             @continue
+                             @endif
+                             @if (reportJobs($data->id))
+                             @continue
+                             @endif
                             <div class="col-12 col-lg-6 col-md-12">
                                 <div class="recommended-writers-content">
                                     <div class="row">
@@ -233,42 +243,132 @@
                                         </div>
                                         <div class="col-6 text-end">
                                             <div class="featured-jobs-badge wishlish">
-                                                <a href="javascript:void(0)" class="wishlist_button" onclick="jobBookmark({{ $data->id }})">
-                                                    @php
-                                                        if (
-                                                            auth()
-                                                                ->guard('user')
-                                                                ->check()
-                                                        ) {
-                                                            $collectionExistsCheck = \App\Models\JobUser::where('job_id', $data->id)
-                                                                ->where(
-                                                                    'user_id',
-                                                                    auth()
-                                                                        ->guard('web')
-                                                                        ->user()->id,
-                                                                )
-                                                                ->first();
-                                                        } else {
-                                                            $collectionExistsCheck = \App\Models\JobUser::where('job_id', $data->id)
-                                                                ->where(
-                                                                    'user_id',
-                                                                    auth()
-                                                                        ->guard('web')
-                                                                        ->user()->id,
-                                                                )
-                                                                ->first();
-                                                        }
-        
-                                                        if ($collectionExistsCheck != null) {
-                                                            // if found
-                                                            $heartColor = '#cae47f';
-                                                        } else {
-                                                            // if not found
-                                                            $heartColor = '#fff';
-                                                        }
-                                                    @endphp
-                                                    <svg id="saveBtn_{{$data->id}}" fill="{{ $heartColor }}" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 30 30" width="30px" height="30px" stroke="#000000" stroke-width="2px" >    <path d="M23,27l-8-7l-8,7V5c0-1.105,0.895-2,2-2h12c1.105,0,2,0.895,2,2V27z"/></svg>
-                                                </a>
+                                                <button class="btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i class="fas fa-ellipsis-v"></i>
+                                                </button>
+                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                    <li>
+                                                        <a href="javascript:void(0)" class="wishlist_button" onclick="jobBookmark({{ $data->id }})">
+                                                        @php
+                                                            if (
+                                                                auth()
+                                                                    ->guard('user')
+                                                                    ->check()
+                                                            ) {
+                                                                $collectionExistsCheck = \App\Models\JobUser::where('job_id', $data->id)
+                                                                    ->where(
+                                                                        'user_id',
+                                                                        auth()
+                                                                            ->guard('web')
+                                                                            ->user()->id,
+                                                                    )
+                                                                    ->first();
+                                                            } else {
+                                                                $collectionExistsCheck = \App\Models\JobUser::where('job_id', $data->id)
+                                                                    ->where(
+                                                                        'user_id',
+                                                                        auth()
+                                                                            ->guard('web')
+                                                                            ->user()->id,
+                                                                    )
+                                                                    ->first();
+                                                            }
+            
+                                                            if ($collectionExistsCheck != null) {
+                                                                // if found
+                                                                $heartColor = '#cae47f';
+                                                            } else {
+                                                                // if not found
+                                                                $heartColor = '#fff';
+                                                            }
+                                                        @endphp
+                                                        <svg id="saveBtn_{{$data->id}}" fill="{{ $heartColor }}" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 30 30" width="24px" height="24px" stroke="#000000" stroke-width="2px" ><path d="M23,27l-8-7l-8,7V5c0-1.105,0.895-2,2-2h12c1.105,0,2,0.895,2,2V27z"/></svg>
+                                                          Save Job
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        {{-- <a href="javascript:void(0)" class="wishlist_button" onclick="jobInterest({{ $data->id }})"> --}}
+                                                            <form id="form" action="{{route('front.job.interest',$data->id)}}" method="POST">@csrf</form>
+                                                            <a href="javascript:void(0)" onclick="document.getElementById('form').submit()">
+                                                        @php
+                                                            if (
+                                                                auth()
+                                                                    ->guard('user')
+                                                                    ->check()
+                                                            ) {
+                                                                $collectionExistsCheck = \App\Models\NotInterestedJob::where('job_id', $data->id)
+                                                                    ->where(
+                                                                        'user_id',
+                                                                        auth()
+                                                                            ->guard('web')
+                                                                            ->user()->id,
+                                                                    )
+                                                                    ->first();
+                                                            } else {
+                                                                $collectionExistsCheck = \App\Models\NotInterestedJob::where('job_id', $data->id)
+                                                                    ->where(
+                                                                        'user_id',
+                                                                        auth()
+                                                                            ->guard('web')
+                                                                            ->user()->id,
+                                                                    )
+                                                                    ->first();
+                                                            }
+            
+                                                            if ($collectionExistsCheck != null) {
+                                                                // if found
+                                                                $heartColor = '#cae47f';
+                                                                
+                                                            } else {
+                                                                // if not found
+                                                                $heartColor = '#fff';
+                                                            }
+                                                        @endphp
+                                                        <svg id="interestBtn_{{$data->id}}" width="24" height="24" viewBox="0 0 24 24" fill="{{ $heartColor }}" role="presentation" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM4 12C4 7.58 7.58 4 12 4C13.85 4 15.55 4.63 16.9 5.69L5.69 16.9C4.63 15.55 4 13.85 4 12ZM12 20C10.15 20 8.45 19.37 7.1 18.31L18.31 7.1C19.37 8.45 20 10.15 20 12C20 16.42 16.42 20 12 20Z" fill="#2d2d2d"></path></svg>
+                                                           Not interested
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a type="button" class="wishlist_button" data-bs-toggle="modal" data-bs-target="#yourModal{{$data->id}}">
+                                                        @php
+                                                            if (
+                                                                auth()
+                                                                    ->guard('user')
+                                                                    ->check()
+                                                            ) {
+                                                                $collectionExistsCheck = \App\Models\ReportJob::where('job_id', $data->id)
+                                                                    ->where(
+                                                                        'user_id',
+                                                                        auth()
+                                                                            ->guard('web')
+                                                                            ->user()->id,
+                                                                    )
+                                                                    ->first();
+                                                            } else {
+                                                                $collectionExistsCheck = \App\Models\ReportJob::where('job_id', $data->id)
+                                                                    ->where(
+                                                                        'user_id',
+                                                                        auth()
+                                                                            ->guard('web')
+                                                                            ->user()->id,
+                                                                    )
+                                                                    ->first();
+                                                            }
+            
+                                                            if ($collectionExistsCheck != null) {
+                                                                // if found
+                                                                $heartColor = '#cae47f';
+                                                            } else {
+                                                                // if not found
+                                                                $heartColor = '#fff';
+                                                            }
+                                                        @endphp
+                                                       
+                                                            <svg id="reportBtn_{{$data->id}}" width='24' height='24' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M3 3.5a.5.5 0 01.5-.5h9.191a.5.5 0 01.447.276l.724 1.448a.5.5 0 00.447.276H20.5a.5.5 0 01.5.5v10a.5.5 0 01-.5.5h-6.191a.5.5 0 01-.447-.276l-.724-1.448a.5.5 0 00-.447-.276H5v6.5a.5.5 0 01-.5.5h-1a.5.5 0 01-.5-.5v-17z' fill='#2D2D2D'/></svg>
+                                                             Report job
+                                                        </a>
+                                                    </li>
+                                                </ul>
                                             </div>
                                         </div>
                                     </div>
@@ -304,6 +404,36 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="modal fade" id="yourModal{{$data->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header flex-column align-items-start">
+                                            <div class="d-flex align-items-center w-100">
+                                                <h5 class="modal-title" id="exampleModalLabel">{{$data->title}}</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <h6 id="exampleModalLabel">{{$data->company_name}}</h6>
+                                        </div>
+                                        <form action="{{ route('front.job.report',$data->id) }}" method="POST" role="form" enctype="multipart/form-data">
+                                            @csrf
+                                            <input type="hidden" name="job_id" value="{{$data->id}}">
+                                            <div class="modal-body">
+                                                <div class="form-group">
+                                                    
+                                                    <textarea type="text" class="form-control" rows="4" name="comment" id="comment" placeholder="Describe your problem">{{ old('comment') }}</textarea>
+    
+                                                    @error('comment')
+                                                        <p class="small text-danger">{{ $message }}</p>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                            <button type="submit" class="add-btn-edit d-inline-block">Report</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         @endforeach
                     </div>
 
@@ -316,4 +446,11 @@
             </div>
         </div>
     </div>
+   
+@endsection
+@section('script')
+    <script>
+       // job interest
+      
+    </script>
 @endsection

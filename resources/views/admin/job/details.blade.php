@@ -80,6 +80,16 @@
                             <td>{!! empty($Job['description'])? null:($Job['description']) !!}
                             </td>
                         </tr>
+                        <tr>
+                            <td>Company Name</td>
+                            <td>{!! empty($Job['company_name'])? null:($Job['company_name']) !!}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Description</td>
+                            <td>{!! empty($Job['company_desc'])? null:($Job['company_desc']) !!}
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
                 <a href="{{ route('admin.job.index') }}" class="btn btn-primary"><i class="fa fa-left-arrow"></i>Back</a>

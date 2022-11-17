@@ -7,6 +7,8 @@ use App\Models\Order;
 use App\Models\JobUser;
 use App\Models\OrderProduct;
 use App\Models\PlansAndPricing;
+use App\Models\NotInterestedJob;
+use App\Models\ReportJob;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -333,6 +335,35 @@ if(!function_exists('savedJobs')) {
     }
 }
 
+//not interest job
+
+if(!function_exists('interestJobs')) {
+    function interestJobs($job_id) {
+        $jobUser = NotInterestedJob::where('user_id', auth()->guard('web')->user()->id)
+        ->where('job_id', $job_id)
+        ->first();
+
+        if (!empty($jobUser)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+//report job 
+if(!function_exists('reportJobs')) {
+    function reportJobs($job_id) {
+        $jobUser = ReportJob::where('user_id', auth()->guard('web')->user()->id)
+        ->where('job_id', $job_id)
+        ->first();
+
+        if (!empty($jobUser)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
 // do not remove - used in portfolio feedback
 if(!function_exists('RatingHtml')) {
     function RatingHtml($rating = null) {
