@@ -168,11 +168,18 @@
                         <p>Do you want to add this work to invoice the client?</p>
 
                         <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                            <input type="radio" class="btn-check" name="is_commercial" id="btnradio1" autocomplete="off">
+                            <input type="radio" class="btn-check" name="is_commercial" value="yes" id="btnradio1" autocomplete="off">
                             <label class="btn btn-outline-success" for="btnradio1">Yes</label>
 
-                            <input type="radio" class="btn-check" name="is_commercial" id="btnradio2" autocomplete="off" checked>
+                            <input type="radio" class="btn-check" name="is_commercial" value="no" id="btnradio2" autocomplete="off" checked>
                             <label class="btn btn-outline-success" for="btnradio2">No</label>
+                        </div>
+
+                        <div id="question" style="display: none;">
+                            <p>How many words is in the document?</p>
+                            <p>How many articles do you want to add to the invoice?</p>
+                            <p>Retainer breakdown?</p>
+                            <p>How many hours did it take you to complete?</p>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -221,6 +228,13 @@
                     if(x.value == 'completed' || x.value == 'approved'){
                         $('#completeModal').modal('show')
                     }
+                    $('input[name="is_commercial"]').on('click',function(){
+                        if($(this).val() == 'yes'){
+                            $('#question').show();
+                        }else{
+                            $('#question').hide();
+                        }
+                    })
                     toastFire("success", response.message);
                 },
                 error: function(response){
