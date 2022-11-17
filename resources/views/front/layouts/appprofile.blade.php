@@ -166,9 +166,17 @@
                 <div class="modal-content">
                     <div class="modal-body">
                         <p>Do you want to add this work to invoice the client?</p>
+
+                        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                            <input type="radio" class="btn-check" name="is_commercial" id="btnradio1" autocomplete="off">
+                            <label class="btn btn-outline-success" for="btnradio1">Yes</label>
+
+                            <input type="radio" class="btn-check" name="is_commercial" id="btnradio2" autocomplete="off" checked>
+                            <label class="btn btn-outline-success" for="btnradio2">No</label>
+                        </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-success">Save changes</button>
                         <button type="button" class="btn btn-secondary" id="closeCompleteModal">Close</button>
                     </div>
                 </div>
@@ -210,7 +218,7 @@
                     id : content_id
                 },
                 success:function(response){
-                    if(x.value == 'completed'){
+                    if(x.value == 'completed' || x.value == 'approved'){
                         $('#completeModal').modal('show')
                     }
                     toastFire("success", response.message);
