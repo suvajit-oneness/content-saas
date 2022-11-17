@@ -115,7 +115,7 @@
                                 <div class="dashboard-page-name">
                                     <a href="">@yield('title')</a>
                                 </div>
-                                {{auth()->guard('web')->user()->name}}
+                                {{auth()->guard('web')->user()->first_name}} {{auth()->guard('web')->user()->last_name}}
                             </div>
                             <div class="dashboard-header-right">
                                 <div class="dashboard-header-search">
@@ -125,6 +125,15 @@
                                             <i class="fa-solid fa-magnifying-glass"></i>
                                         </button>
                                     </form> --}}
+                                    @if(!CheckIfUserBoughtAnySubscription())
+                                        <div class="alert alert-warning alert-sm">
+                                            No Subscription Purchased! <a href="{{url('/pricing')}}">Click Here to Purchase</a>
+                                        </div>
+                                    {{-- @else
+                                        <div class="alert alert-success alert-sm">
+                                            Subscription Purchased! - {{getSubscriptionDetails(CheckIfUserBoughtAnySubscription())->name}}
+                                        </div> --}}
+                                    @endif
                                 </div>
                                 {{-- <div class="dashboard-notification">
                                     <a href=""><i class="fa-solid fa-bell"></i> <span>0</span></a>

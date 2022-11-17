@@ -21,7 +21,7 @@
                 <div class="login-content">
 
                     <form action="{{ route('front.user.login.check') }}" method="post">@csrf
-
+                        <input type="hidden" name="back_url" value="{{$back_url}}">
                         <div class="input">
 
                             <input type="email" name="email">
@@ -47,7 +47,6 @@
                         </div>
 
                         <div class="login-forgot-password">
-
                             <button type="submit" class="">Login</button>
                             <a href="forgot-password.html" class="forgot-pass">forgot password?</a>
  			    <a href="{{ route('front.user.register') }}" class="forgot-pass">New User? <span>Register</span></a>

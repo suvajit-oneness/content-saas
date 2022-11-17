@@ -24,13 +24,16 @@ class AuthController extends BaseController
     {
         $this->middleware('guest:web')->except('logout');
         $this->userRepository = $userRepository;
+        $this->back_url = '';
     }
 
     public function login(Request $request) {
-        return view('front.auth.login');
+        $back_url = url()->previous();
+        return view('front.auth.login',compact('back_url'));
     }
 
     public function loginCheck(Request $request) {
+        // dd($request->back_url);
         $request->validate([
             // 'email' => 'required|email|exists:users,email',
             'email'   => 'required|email',
@@ -41,7 +44,7 @@ class AuthController extends BaseController
 
         if (Auth::guard('web')->attempt($credentials)) {
             // return $this->responseRedirect('front.dashboard.index','Login Successful','success',false,false);
-			return redirect()->intended()->with('success', 'Login Successful');
+			return redirect()->to($request->back_url)->with('success', 'Login Successful');
         } else {
             //return redirect()->back()->with(['message' => 'Wrong password!']);
 			return redirect()->back()->with('failure', 'Wrong Password');

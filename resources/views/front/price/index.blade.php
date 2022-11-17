@@ -100,7 +100,7 @@
                                                 <a href="javascript:void(0)" type="submit" class="button">Already Purchased</a>
                                             @endif
                                         @else
-                                            <a href="{{route('front.user.login')}}" class="button">Login To Purchase</a>
+                                            <a href="{{route('front.user.login')}}" class="button">{{$item->planDet->button_text}}</a>
                                         @endif
                                     </form>
                                 </div>
