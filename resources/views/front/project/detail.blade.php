@@ -89,26 +89,22 @@
                                                 <label class="control-label" for="comment">Notes</label>
                                                 <div class="row">
                                                     @php
-                                                    $comment= App\Models\TaskComment::where('task_id', $item->id)->where('user_id',Auth::guard('web')->user()->id)->with('task')->get();
+                                                    $comment= App\Models\TaskComment::where('task_id', $item->id)->where('user_id',Auth::guard('web')->user()->id)->with('task')->orderby('id','desc')->get();
                                                     @endphp
                                                     @foreach($comment as $key => $data)
                                                     {{-- {{dd($comment)}} --}}
                                                     <div class="card mb-4">
                                                         <div class="card-body">
                                                           <p>{{$data->comment}}</p>
-                                              
                                                           <div class="d-flex justify-content-between">
-                                                            {{-- <div class="d-flex flex-row align-items-center">
-                                                              <img src="{{asset($data->user->image)}}" alt="avatar" width="25"
-                                                                height="25" />
-                                                              <p class="small mb-0 ms-2">{{$data->user->first_name.' '.$data->user->last_name}}</p>
-                                                            </div> --}}
                                                             <div class="d-flex flex-row align-items-center">
-                                                              <p class="small text-muted mb-0 ">files</p><b>
-                                                              <a href="{{ asset($data->doc) }}" class="badge bg-success download-badge d-inline-block" download>
-                                                              <i class="fas fa-download" style="margin-top: -0.16rem;"></i>
-                                                              </a>
-                                                              {{-- <p class="small text-muted mb-0">3</p> --}}
+                                                              <p class="small text-muted mb-0 "></p><b>
+                                                                @if ($data->doc)
+                                                                <a href="{{ asset($data->doc) }}" class="badge bg-success download-badge" download>
+                                                                    <i class="fas fa-download"></i>
+                                                                    Download
+                                                                </a>
+                                                                @endif
                                                             </div>
                                                           </div>
                                                         </div>
