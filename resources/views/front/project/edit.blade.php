@@ -30,7 +30,7 @@
                                                         </label>
                                                     </div>
 
-                                                    <div class="col-md-4">
+                                                    {{-- <div class="col-md-4">
                                                         <select name="status" id="status" class="form-control">
                                                             <option value="" disabled selected>Change Status</option>
                                                             @foreach ($status as $item)
@@ -39,7 +39,7 @@
                                                                 </option>
                                                             @endforeach
                                                         </select>
-                                                    </div>
+                                                    </div> --}}
                                                 </div>
                                                 
                                                 <div id="statusChange" class="row">

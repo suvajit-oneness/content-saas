@@ -48,8 +48,15 @@
                                         <p><i class="fas fa-info-circle text-secondary"></i></p>
                                     @endif
                                 </td>
-                                <td>
-                                    <span class="badge text-success" data-toggle="tooltip" title="{{ $item->statusDetail->icon ?? ''}}">{!! $item->statusDetail->icon ?? ''.' '.ucwords($item->status) !!}</span>
+                                <td width="155px">
+                                    {{-- <span class="badge text-success" data-toggle="tooltip" title="{{ $item->statusDetail->icon ?? ''}}">{!! $item->statusDetail->icon ?? ''.' '.ucwords($item->status) !!}</span> --}}
+                                    <select onchange="changeProjectAndTaskStatus(`{{route('front.project.updateStatus')}}`,this,'{{$item->id}}')" name="status" id="status" class="form-control">
+                                        <option value="" selected>Change Status</option>
+                                        @foreach ($status as $s)
+                                            <option value="{{ $s->slug }}" {{$item->status == $s->slug ? 'selected' : ''}}>{{ $s->title }}</option>
+                                        @endforeach
+                                    </select>
+                                    <input type="text" name="spare" class="form-control" width="155px" style="display: none">
                                 </td>
                                 <td class="text-end" width="150">
                                     <a href="{{ route('front.project.detail', $item->slug) }}" class="badge bg-dark"> <i class="fas fa-eye"></i> </a>

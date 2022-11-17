@@ -193,4 +193,14 @@ class ProjectTaskController extends Controller
 
         return redirect()->back()->with('success', 'Task updated successfully');
     }
+
+    public function updateStatus(Request $request)
+    {
+        $update = ProjectTask::where('id',$request->id)->update(['status' => $request->status]);
+        if($update){
+            return response()->json(array('message' => 'Task status has been successfully updated'));
+        }else{
+            return response()->json(array('message' => 'Error occoured!'));
+        }
+    }
 }
