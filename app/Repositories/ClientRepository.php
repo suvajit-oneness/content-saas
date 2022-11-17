@@ -54,19 +54,23 @@ class ClientRepository extends BaseRepository implements ClientContract
             $client = new Client();
             $client->user_id = Auth::guard('web')->user()->id ?? '';
             $client->client_name = $collection['client_name'] ?? '';
-            $client->occupation = $collection['occupation'] ?? '';
+            if($params['image']){
+                $client->image = imageUpload($collection['image'],'clients');
+            }
             $client->phone_number = $collection['phone_number'] ?? '';
             $client->email_id = $collection['email_id'] ?? '';
             $client->link = $collection['link'] ?? '';
-            $client->short_desc = $collection['short_desc'] ?? '';
-            $client->long_desc = $collection['long_desc'] ?? '';
-            if(!empty($params['image'])){
-                $profile_image = $collection['image'];
-                $imageName = time().".".$profile_image->getClientOriginalName();
-                $profile_image->move("uploads/client/",$imageName);
-                $uploadedImage = $imageName;
-                $client->image = $uploadedImage;
-                }
+            $client->company_name = $collection['company_name'] ?? '';
+            $client->address = $collection['address'] ?? '';
+            $client->city = $collection['city'] ?? '';
+            $client->state = $collection['state'] ?? '';
+            $client->zip = $collection['zip'] ?? '';
+            $client->country = $collection['country'] ?? '';
+            $client->vat_no = $collection['vat_no'] ?? '';
+            $client->client_group = $collection['client_group'] ?? '';
+            $client->currency = $collection['currency'] ?? '';
+            $client->rate = $collection['rate'] ?? '';
+            $client->commercials = $collection['commercials'] ?? '';
             $client->save();
 
             return $client;
@@ -82,23 +86,27 @@ class ClientRepository extends BaseRepository implements ClientContract
      */
     public function updateClient(array $params)
     {
-        $client = $this->findOneOrFail($params['id']);
         $collection = collect($params)->except('_token');
-        $client->user_id = Auth::guard('web')->user()->id ?? '';
+
+        $client = $this->findOneOrFail($params['id']);
         $client->client_name = $collection['client_name'] ?? '';
-        $client->occupation = $collection['occupation'] ?? '';
+        if($params['image']){
+            $client->image = imageUpload($collection['image'],'clients');
+        }
         $client->phone_number = $collection['phone_number'] ?? '';
         $client->email_id = $collection['email_id'] ?? '';
         $client->link = $collection['link'] ?? '';
-        $client->short_desc = $collection['short_desc'] ?? '';
-        $client->long_desc = $collection['long_desc'] ?? '';
-        if(!empty($params['image'])){
-            $profile_image = $collection['image'];
-            $imageName = time().".".$profile_image->getClientOriginalName();
-            $profile_image->move("uploads/client/",$imageName);
-            $uploadedImage = $imageName;
-            $client->image = $uploadedImage;
-            }
+        $client->company_name = $collection['company_name'] ?? '';
+        $client->address = $collection['address'] ?? '';
+        $client->city = $collection['city'] ?? '';
+        $client->state = $collection['state'] ?? '';
+        $client->zip = $collection['zip'] ?? '';
+        $client->country = $collection['country'] ?? '';
+        $client->vat_no = $collection['vat_no'] ?? '';
+        $client->client_group = $collection['client_group'] ?? '';
+        $client->currency = $collection['currency'] ?? '';
+        $client->rate = $collection['rate'] ?? '';
+        $client->commercials = $collection['commercials'] ?? '';
         $client->save();
 
         return $client;

@@ -32,6 +32,15 @@
                                     @enderror
                                 </div><br>
                                 <div class="form-group">
+                                    <label class="control-label" for="image">Client Image <span class="m-l-5 text-danger">*</span></label>
+                                    <input class="form-control @error('image') is-invalid @enderror" type="file" name="image"
+                                        id="image" value="{{ old('image') }}"/>
+
+                                    @error('image')
+                                        <p class="small text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div><br>
+                                <div class="form-group">
                                     <label class="control-label" for="phone_number">Contact </label>
                                     <input class="form-control @error('phone_number') is-invalid @enderror" type="text" name="phone_number"
                                         id="phone_number" value="{{ old('phone_number') }}" />
@@ -115,7 +124,7 @@
                                 <div class="form-group">
                                     <label class="control-label" for="client_group">Client Group </label>
                                     <input class="form-control @error('client_group') is-invalid @enderror" type="text" name="client_group"
-                                        id="client_group" value="{{ old('client_group') }}" />
+                                        id="client_group" value="{{ old('client_group') }}"/>
                                     @error('client_group')
                                         <p class="small text-danger">{{ $message }}</p>
                                     @enderror
@@ -124,14 +133,23 @@
                                     <label class="control-label" for="link">Commercial</label>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
-                                            <label class="btn btn-outline-secondary dropdown-toggle" for="dropdown-menu" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</label>
-                                            <select class="dropdown-menu" id="dropdown-menu">
-                                                <option class="dropdown-item" value="2" href="#">Action</option>
+                                            <select class="form-control" name="currency">
+                                                @foreach ($currencies as $item)
+                                                    <option value="{{$item->id}}">{{$item->currency_symbol}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
-                                        <input type="text" class="form-control" aria-label="Text input with dropdown button">
-                                      </div>
+                                        <input type="number" class="form-control" name="rate" aria-label="Text input with dropdown button">
+                                        <div class="input-group-append">
+                                            <select class="form-control" name="commercials">
+                                                @foreach ($charges_limit as $item)
+                                                    <option value="{{$item->id}}">{{$item->name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div><br>
+                            </div>
                             <div class="tile-footer">
                                 <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save
                                     </button>

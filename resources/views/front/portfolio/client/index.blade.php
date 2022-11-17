@@ -49,7 +49,7 @@
                                                 <div class="row">
                                                     <div class="col-3 mb-3">
                                                     @if($item->image)
-                                                    <img src="{{ asset('uploads/client/'.$item->image) }}" id="articleImage" class="img-fluid" alt="" width="100" height="100">
+                                                    <img src="{{ asset($item->image) }}" id="articleImage" class="img-fluid" alt="" width="100" height="100">
                                                     @else
                                                     <span></span>
                                                     @endif
@@ -61,10 +61,10 @@
                                                 </div>
                                                 <div class="row">
 
-                                                    <div class="col-3 mb-3">
+                                                    {{-- <div class="col-3 mb-3">
                                                         <label>Designation</label>
                                                         <p>{{ $item->occupation }}</p>
-                                                    </div>
+                                                    </div> --}}
                                                     <div class="col-3 mb-3">
                                                         <label>Email</label>
                                                         <p>{{ $item->email_id }}</p>
@@ -82,14 +82,14 @@
                                                 <div class="row">
                                                     <div class="col-lg-6 col-12">
                                                         <div class="box">
-                                                            <h4>Short Description</h4>
-                                                            <p>{{ $item->short_desc }}</p>
+                                                            <h4>Company Name</h4>
+                                                            <p>{{ $item->company_name }}</p>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6 col-12">
                                                         <div class="box">
-                                                            <h4>Long Description</h4>
-                                                            <p>{{ $item->long_desc }}</p>
+                                                            <h4>Company Address</h4>
+                                                            <p>{{ $item->address }}, {{ $item->city }}, {{ $item->state }},{{ $item->country }},{{ $item->zip }}</p>
                                                         </div>
                                                     </div>
                                                 </div>
