@@ -165,29 +165,43 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-body">
-                        <p>Do you want to add this work to invoice the client?</p>
 
-                        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                            <input type="radio" class="btn-check" name="is_commercial" value="yes" id="btnradio1" autocomplete="off">
-                            <label class="btn btn-outline-success" for="btnradio1">Yes</label>
+                        <div class="d-flex">
+                            <span class="text-sm"><small>Do you want to add this work to invoice the client?</small></span>
+                            <div class="btn-group col-3" role="group">
+                                <input type="radio" class="btn-check" name="is_commercial" value="yes" id="btnradio1" autocomplete="off">
+                                <label class="btn btn-outline-success" for="btnradio1">Yes</label>
 
-                            <input type="radio" class="btn-check" name="is_commercial" value="no" id="btnradio2" autocomplete="off" checked>
-                            <label class="btn btn-outline-success" for="btnradio2">No</label>
+                                <input type="radio" class="btn-check" name="is_commercial" value="no" id="btnradio2" autocomplete="off" checked>
+                                <label class="btn btn-outline-success" for="btnradio2">No</label>
+                            </div>
                         </div>
-
                         <div id="question" style="display: none;">
                             <div class="form-group">
                                 <label for="form-label"><b>Set Charges Type</b></label>
+                                <select name="charges" class="form-control">
+                                    @foreach (getChargesLimits() as $item)
+                                        <option value="{{$item->name}}">{{$item->name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
-                            <p></p>
-                            <p>How many words is in the document?</p>
-                            <p>How many articles do you want to add to the invoice?</p>
-                            <p>Retainer breakdown?</p>
-                            <p>How many hours did it take you to complete?</p>
+                            <div class="mt-3" id="more_question" style="display: none;">
+                                <div class="input-group">
+                                    <select name="currency" class="input-group-text">
+                                        @foreach(getCureencyList() as $item)
+                                            <option value="{{$item->id}}">{{$item->currency_symbol}}</option>
+                                        @endforeach
+                                    </select>
+                                    <input type="nuumber" class="form-control" placeholder="Count..." name="count">
+                                    <span class="input-group-text" id="charges_text"></span>
+                                </div>
+                                <br>
+                                <input type="nuumber" class="form-control" placeholder="Total count..." name="total_count">
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success">Save</button>
+                        <button type="button" class="btn btn-success" id="saveCompleteModal">Save</button>
                         <button type="button" class="btn btn-secondary" id="closeCompleteModal">Close</button>
                     </div>
                 </div>
@@ -238,6 +252,45 @@
                         }else{
                             $('#question').hide();
                         }
+
+                        $('select[name="charges"]').on('change', function(){
+                            $('#more_question').show();
+                            $('#charges_text').html($(this).val());
+                        });
+                    });
+
+                    $('#saveCompleteModal').click(function(){
+                        var currency = $('select[name="currency"]').val();
+                        var count = $('input[name="count"]').val();
+                        var total_count = $('input[name="total_count"]').val();
+                        var charges = $('#charges_text').html();
+
+                        if(url == 'http://127.0.0.1:8000/project/updatestatus'){
+                            var comurl = "{{route('front.project.updateCommercial')}}";
+                        }else{
+                            var comurl = "{{route('front.project.task.updateCommercial')}}";
+                        }
+
+                        $.ajax({
+                            type :"POST",
+                            url : comurl,
+                            data : {
+                                _token : "{{csrf_token()}}",
+                                charges: charges,
+                                count: count,
+                                total_count: total_count,
+                                currency: currency,
+                                id: content_id
+                            },
+                            success:function(response){
+                                toastFire("success", response.message);
+                                $('#completeModal').modal('hide');
+                            },
+                            error: function(response){
+                                toastFire("warning", response.message);
+                                $('#completeModal').modal('hide');
+                            }
+                        });
                     })
                     toastFire("success", response.message);
                 },
@@ -248,7 +301,8 @@
         }
         $('#closeCompleteModal').click(function(){
             $('#completeModal').modal('hide');
-        })
+        });
+
     </script>
     <script>
         // sweetalert fires | type = success, error, warning, info, question

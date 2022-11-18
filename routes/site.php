@@ -145,6 +145,7 @@ Route::name('front.')->group(function () {
             Route::get('/project/edit/{id}', 'Front\ProjectController@edit')->name('edit');
             Route::post('/project/update/{id}', 'Front\ProjectController@update')->name('update');
             Route::post('/project/updatestatus', 'Front\ProjectController@updateStatus')->name('updateStatus');
+            Route::post('/project/updateCommercial', 'Front\ProjectController@updateCommercial')->name('updateCommercial');
         });
 
         // project task
@@ -156,6 +157,7 @@ Route::name('front.')->group(function () {
             Route::get('/project/task/edit/{id}', 'Front\ProjectTaskController@edit')->name('edit');
             Route::post('/project/task/update/{id}', 'Front\ProjectTaskController@update')->name('update');
             Route::post('/project/task/updatestatus', 'Front\ProjectTaskController@updateStatus')->name('updateStatus');
+            Route::post('/project/task/updateCommercial', 'Front\ProjectTaskController@updateCommercial')->name('updateCommercial');
             Route::post('/project/task/comment/update/{id}', 'Front\ProjectTaskController@updateComment')->name('comment.update');
         });
 

@@ -2,6 +2,7 @@
 // use App\Models\Notification;
 
 use App\Models\Course;
+use App\Models\Currency;
 use App\Models\Deal;
 use App\Models\Order;
 use App\Models\JobUser;
@@ -327,6 +328,15 @@ function CheckIfUserBoughtTheDeal($courseid, $user_id){
     else
         return false;
 
+}
+
+function getChargesLimits()
+{
+    return DB::table('charges_limit')->get();
+}
+function getCureencyList()
+{
+    return Currency::all();
 }
 
 // show saved jobs only

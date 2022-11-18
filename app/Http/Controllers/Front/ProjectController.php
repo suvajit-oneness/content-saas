@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Project;
+use App\Models\ProjectCommercial;
 use App\Models\ProjectStatus;
 use App\Models\ProjectTask;
 
@@ -145,6 +146,29 @@ class ProjectController extends Controller
             return response()->json(array('message' => 'Project status has been successfully updated'));
         }else{
             return response()->json(array('message' => 'Error occoured!'));
+        }
+    }
+
+    public function updateCommercial(Request $request)
+    {
+        $project_commercial = ProjectCommercial::where('project_id',$request->id)->get();
+        if(count($project_commercial) > 0){
+            ProjectCommercial::where('project_id',$request->id)->update([
+                'charges_limit'=>$request->charges,
+                'currency_id'=>$request->currency,
+                'count'=>$request->count,
+                'total_count'=>$request->total_count,
+            ]);
+            return response()->json(array('message' => 'Project commercial updated!'));
+        }else{
+            ProjectCommercial::insert([
+                'project_id'=>$request->id,
+                'charges_limit'=>$request->charges,
+                'currency_id'=>$request->currency,
+                'count'=>$request->count,
+                'total_count'=>$request->total_count,
+            ]);
+            return response()->json(array('message' => 'Project commercial submitted!'));
         }
     }
 }

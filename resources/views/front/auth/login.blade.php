@@ -48,8 +48,8 @@
 
                         <div class="login-forgot-password">
                             <button type="submit" class="">Login</button>
-                            <a href="forgot-password.html" class="forgot-pass">forgot password?</a>
- 			    <a href="{{ route('front.user.register') }}" class="forgot-pass">New User? <span>Register</span></a>
+                            {{-- <a href="forgot-password.html" class="forgot-pass">forgot password?</a> --}}
+ 			                <a href="{{ route('front.user.register') }}" class="forgot-pass">New User? <span>Register</span></a>
                         </div>
 
                     </form>

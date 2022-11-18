@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Project;
 use App\Models\ProjectStatus;
 use App\Models\ProjectTask;
+use App\Models\ProjectTaskCommercial;
 use App\Models\TaskComment;
 use Auth;
 class ProjectTaskController extends Controller
@@ -201,6 +202,28 @@ class ProjectTaskController extends Controller
             return response()->json(array('message' => 'Task status has been successfully updated'));
         }else{
             return response()->json(array('message' => 'Error occoured!'));
+        }
+    }
+    public function updateCommercial(Request $request)
+    {
+        $project_commercial = ProjectTaskCommercial::where('project_id',$request->id)->get();
+        if(count($project_commercial) > 0){
+            ProjectTaskCommercial::where('project_id',$request->id)->update([
+                'charges_limit'=>$request->charges,
+                'currency_id'=>$request->currency,
+                'count'=>$request->count,
+                'total_count'=>$request->total_count,
+            ]);
+            return response()->json(array('message' => 'Project Task commercial updated!'));
+        }else{
+            ProjectTaskCommercial::insert([
+                'project_id'=>$request->id,
+                'charges_limit'=>$request->charges,
+                'currency_id'=>$request->currency,
+                'count'=>$request->count,
+                'total_count'=>$request->total_count,
+            ]);
+            return response()->json(array('message' => 'Project Task commercial submitted!'));
         }
     }
 }
