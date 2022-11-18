@@ -206,9 +206,9 @@ class ProjectTaskController extends Controller
     }
     public function updateCommercial(Request $request)
     {
-        $project_commercial = ProjectTaskCommercial::where('project_id',$request->id)->get();
+        $project_commercial = ProjectTaskCommercial::where('project_task_id',$request->id)->get();
         if(count($project_commercial) > 0){
-            ProjectTaskCommercial::where('project_id',$request->id)->update([
+            ProjectTaskCommercial::where('project_task_id',$request->id)->update([
                 'charges_limit'=>$request->charges,
                 'currency_id'=>$request->currency,
                 'count'=>$request->count,
@@ -217,7 +217,7 @@ class ProjectTaskController extends Controller
             return response()->json(array('message' => 'Project Task commercial updated!'));
         }else{
             ProjectTaskCommercial::insert([
-                'project_id'=>$request->id,
+                'project_task_id'=>$request->id,
                 'charges_limit'=>$request->charges,
                 'currency_id'=>$request->currency,
                 'count'=>$request->count,
