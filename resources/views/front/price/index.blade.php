@@ -94,10 +94,14 @@
                                         <input type="hidden" name="purchase_type" value="subscription">
                                         <input type="hidden" name="price" value="{{$item->price}}">
                                         @if(Auth::guard('web')->check())
-                                            @if(!CheckIfUserBoughtTheSubscription($item->planDet->id, Auth::guard()->user()->id))
-                                                <a href="javascript:void(0)" onclick="$(this).parent().submit()" type="submit" class="button">{{$item->planDet->button_text}}</a>
+                                            @if(CheckIfUserBoughtAnySubscription() != false)
+                                                @if(CheckIfUserBoughtAnySubscription() == $item->planDet->id)
+                                                    <a href="javascript:void(0)" type="submit" class="button">Already Purchased</a>
+                                                @else
+                                                    <a href="javascript:void(0)" onclick="$(this).parent().submit()" type="submit" class="button">{{$item->planDet->button_text}}</a>
+                                                @endif
                                             @else
-                                                <a href="javascript:void(0)" type="submit" class="button">Already Purchased</a>
+                                                <a href="javascript:void(0)" onclick="$(this).parent().submit()" type="submit" class="button">{{$item->planDet->button_text}}</a>
                                             @endif
                                         @else
                                             <a href="{{route('front.user.login')}}" class="button">{{$item->planDet->button_text}}</a>

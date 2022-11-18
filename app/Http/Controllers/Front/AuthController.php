@@ -80,7 +80,8 @@ class AuthController extends BaseController
         $user->save();
 
         if ($user) {
-            return redirect()->route('front.user.login')->with('success', 'Account created successfully');
+            Auth::guard('web')->loginUsingId($user->id);
+            return redirect()->route('front.price.index')->with('success', 'Account created successfully! ');
         } else {
             return redirect()->route('front.user.register')->withInput($request->all())->with('failure', 'Something happened');
         }
@@ -90,5 +91,4 @@ class AuthController extends BaseController
         Auth::guard('web')->logout();
         return redirect()->route('front.index')->with('success', 'Logout successfull');
     }
-
 }

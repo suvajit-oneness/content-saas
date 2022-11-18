@@ -32,10 +32,13 @@
                     <li><a href="{{route('front.course.details', getProductSlug($op->course_id)->slug)}}">{{getProductSlug($op->course_id)->title}}</a></li>
                 @endif
                 @if($op->type == 4)
-                    <li>{{getSubscriptionDetails($op->course_id)->name}} Subscription - {{getSubscriptionDetails($op->course_id)->description}}</li>
+                    <div class="d-flex justify-content-between align-item-center">
+                        <li>{{getSubscriptionDetails($op->course_id)->name}} Subscription - {{getSubscriptionDetails($op->course_id)->description}}</li> 
+                        <span><a href="{{route('front.user.cancel.subscription')}}"><i class="fa fa-times text-danger"></i> Cancel Subscription</a></span>
+                    </div>
                 @endif
                 @if($op->type == 5)
-                    <li>{{getDealDetails($op->course_id)->title}} Subscription - {{getDealDetails($op->course_id)->description}}</li>
+                    <li>{{getDealDetails($op->course_id)->title}} Deal - {{getDealDetails($op->course_id)->description}}</li>
                 @endif
                     @endforeach
                     </ul>

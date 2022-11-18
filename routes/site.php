@@ -97,17 +97,18 @@ Route::name('front.')->group(function () {
             Route::get('/my-courses/{slug}/{Lessonslug}','Front\UserCourseController@lessonDetails')->name('lesson');
             Route::get('/my-courses/{slug}/{Lessonslug}/{Topicslug}','Front\UserCourseController@topicDetails')->name('topic');
         });
-            //user events
-            Route::prefix('user')->name('user.events')->group(function () {
+
+        //user events
+        Route::prefix('user')->name('user.events')->group(function () {
             Route::get('/my-events','Front\EventController@showMyEvents');
         });
+
         //user orders
         Route::prefix('user')->name('user.orders')->group(function () {
             Route::get('/my-orders','Front\OrderController@index');
         });
 
-       
-
+        Route::get('user/cancel/subscription','Front\PortfolioController@cancelSubscription')->name('user.cancel.subscription');
 
         Route::prefix('user')->name('user.profile.edit')->group(function () {
             Route::get('/update/profile','Front\Portfolio\ProfileController@editProfile');
