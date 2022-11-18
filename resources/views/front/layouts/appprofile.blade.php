@@ -234,70 +234,102 @@
     <script>
         // x = This; Function to change project and task status
         function changeProjectAndTaskStatus(url,x,content_id){
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: {
-                    _token : "{{csrf_token()}}",
-                    status : x.value,
-                    id : content_id
-                },
-                success:function(response){
-                    if(x.value == 'completed' || x.value == 'approved'){
-                        $('#completeModal').modal('show')
-                    }
-                    $('input[name="is_commercial"]').on('click',function(){
-                        if($(this).val() == 'yes'){
-                            $('#question').show();
-                        }else{
-                            $('#question').hide();
+            var status_value = x.value;
+            if(x.value == 'spare'){
+                $(x).hide();
+                $('.spare_input' + content_id).show();
+                $('.spare_input' + content_id+' button').on('click',function(){
+                    status_value = $('input[name="spare'+content_id+'"]').val();
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: {
+                            _token : "{{csrf_token()}}",
+                            status : status_value,
+                            id : content_id,
+                            spare: true,
+                        },
+                        success:function(response){
+                            toastFire("success", response.message);
+                            $(x).prepend('<option value="" selected>'+status_value+'</option>');
+                            $(x).show();
+                            $('.spare_input'+ content_id).hide();
+                        },
+                        error: function(response){
+                            toastFire("warning", response.message);
                         }
-
-                        $('select[name="charges"]').on('change', function(){
-                            $('#more_question').show();
-                            $('#charges_text').html($(this).val());
-                        });
                     });
-
-                    $('#saveCompleteModal').click(function(){
-                        var currency = $('select[name="currency"]').val();
-                        var count = $('input[name="count"]').val();
-                        var total_count = $('input[name="total_count"]').val();
-                        var charges = $('#charges_text').html();
-
-                        if(url == 'http://127.0.0.1:8000/project/updatestatus'){
-                            var comurl = "{{route('front.project.updateCommercial')}}";
-                        }else{
-                            var comurl = "{{route('front.project.task.updateCommercial')}}";
+                });
+                $('.spare_input'+ content_id +' span').on('click',function(){
+                    $(x).show();
+                    $('.spare_input'+ content_id).hide();
+                });
+            }else{
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: {
+                        _token : "{{csrf_token()}}",
+                        status : status_value,
+                        id : content_id
+                    },
+                    success:function(response){
+                        if(x.value == 'completed' || x.value == 'approved'){
+                            $('#completeModal').modal('show')
                         }
-
-                        $.ajax({
-                            type :"POST",
-                            url : comurl,
-                            data : {
-                                _token : "{{csrf_token()}}",
-                                charges: charges,
-                                count: count,
-                                total_count: total_count,
-                                currency: currency,
-                                id: content_id
-                            },
-                            success:function(response){
-                                toastFire("success", response.message);
-                                $('#completeModal').modal('hide');
-                            },
-                            error: function(response){
-                                toastFire("warning", response.message);
-                                $('#completeModal').modal('hide');
+                        $('input[name="is_commercial"]').on('click',function(){
+                            if($(this).val() == 'yes'){
+                                $('#question').show();
+                            }else{
+                                $('#question').hide();
                             }
+
+                            $('select[name="charges"]').on('change', function(){
+                                $('#more_question').show();
+                                $('#charges_text').html($(this).val());
+                            });
                         });
-                    })
-                    toastFire("success", response.message);
-                },
-                error: function(response){
-                    toastFire("warning", response.message);
-                }
-            });
+
+                        $('#saveCompleteModal').click(function(){
+                            var currency = $('select[name="currency"]').val();
+                            var count = $('input[name="count"]').val();
+                            var total_count = $('input[name="total_count"]').val();
+                            var charges = $('#charges_text').html();
+
+                            if(url == 'http://127.0.0.1:8000/project/updatestatus'){
+                                var comurl = "{{route('front.project.updateCommercial')}}";
+                            }else{
+                                var comurl = "{{route('front.project.task.updateCommercial')}}";
+                            }
+
+                            $.ajax({
+                                type :"POST",
+                                url : comurl,
+                                data : {
+                                    _token : "{{csrf_token()}}",
+                                    charges: charges,
+                                    count: count,
+                                    total_count: total_count,
+                                    currency: currency,
+                                    id: content_id
+                                },
+                                success:function(response){
+                                    toastFire("success", response.message);
+                                    $('#completeModal').modal('hide');
+                                },
+                                error: function(response){
+                                    toastFire("warning", response.message);
+                                    $('#completeModal').modal('hide');
+                                }
+                            });
+                        })
+                        toastFire("success", response.message);
+                    },
+                    error: function(response){
+                        toastFire("warning", response.message);
+                    }
+                });
+            }
         }
         $('#closeCompleteModal').click(function(){
             $('#completeModal').modal('hide');

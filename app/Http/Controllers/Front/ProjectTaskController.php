@@ -10,7 +10,10 @@ use App\Models\ProjectStatus;
 use App\Models\ProjectTask;
 use App\Models\ProjectTaskCommercial;
 use App\Models\TaskComment;
-use Auth;
+use Illuminate\Support\Facades\Auth;
+
+// use Auth;
+// Auth
 class ProjectTaskController extends Controller
 {
     // public function index(Request $request)
@@ -103,7 +106,7 @@ class ProjectTaskController extends Controller
     public function edit(Request $request, $id)
     {
         $data = ProjectTask::findOrFail($id);
-        $status = ProjectStatus::orderBy('position', 'asc')->get();
+        $status = ProjectStatus::where('created_by',null)->orWhere('created_by',Auth::guard('web')->user()->id)->orderBy('position', 'asc')->get();
 
         return view('front.project-task.edit', compact('data', 'status'));
     }
@@ -178,7 +181,6 @@ class ProjectTaskController extends Controller
     {
          //dd($request->all());
         $request->validate([
-            
             'comment' => 'required',
         ]);
         $project = new TaskComment();
@@ -197,6 +199,18 @@ class ProjectTaskController extends Controller
 
     public function updateStatus(Request $request)
     {
+        if($request->spare){
+            $status_slug = slugGenerate($request->status,'project_statuses');
+            ProjectStatus::insert([
+                'title' => $request->status,
+                'slug' => $status_slug,
+                'icon' => '<i class="fas fa-check"></i>',
+                'short_desc' => 'New Status Added by user!',
+                'created_by' => Auth::guard('web')->user()->id,
+            ]);
+            $request->status = $status_slug;
+        }
+
         $update = ProjectTask::where('id',$request->id)->update(['status' => $request->status]);
         if($update){
             return response()->json(array('message' => 'Task status has been successfully updated'));
