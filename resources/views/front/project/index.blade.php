@@ -58,12 +58,16 @@
                                             <option value="{{ $s->slug }}" {{$item->status == $s->slug ? 'selected' : ''}}>{{ $s->title }}</option>
                                         @endforeach
                                     </select>
-                                    <input type="text" name="spare" class="form-control" width="155px" style="display: none">
+                                    <div class="input-group mb-3 spare_input{{$item->id}}" style="display: none;">
+                                        <input type="text" name="spare{{$item->id}}" class="form-control" placeholder="Name...">
+                                        <button class="btn btn-outline-secondary text-sm" type="button" id="button-addon2"><i class="fa fa-check"></i></button>
+                                        <span class="btn btn-outline-secondary text-sm" type="button" id="button-addon2"><i class="fa fa-times"></i></span>
+                                    </div>
                                 </td>
                                 <td class="text-end" width="120">
                                     <a href="{{ route('front.project.detail', $item->slug) }}" class="badge bg-dark"> <i class="fas fa-eye"></i> </a>
 
-                                    <a href="{{ route('front.project.edit', $item->id) }}" class="badge bg-dark"> <i class="fas fa-edit"></i> </a>
+                                    <a href="{{ route('front.project.edit', $item->id) }}" class="badge bg-dark"> <i class="fas fa-edit"></i></a>
 
                                     <a href="{{ route('front.project.delete', $item->id) }}" class="badge bg-danger" onclick="return confirm('Are you sure?')"> <i class="fas fa-trash"></i> </a>
                                 </td>

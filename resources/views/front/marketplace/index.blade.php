@@ -19,7 +19,9 @@
                         <form action="">
                             <select name="category" id="category">
                                 @forelse ($master_categories as $item)
-                                   <option value="{{$item}}" {{$item == trim(request()->input('category')) ? 'selected' : ''}}>{{ucwords($item)}}</option>
+                                    @if($item != '')
+                                        <option value="{{$item}}" {{$item == trim(request()->input('category')) ? 'selected' : ''}}>{{ucwords($item)}}</option>
+                                    @endif
                                 @empty
                                     <option value="">No user have any category!</option>
                                 @endforelse    
@@ -77,7 +79,9 @@
                             <ul class="list-unstyled p-0 m-0" id="showLessContent">
                                 @for($i=0; $i<count(explode(',',$data->categories)); $i++)
                                     @if($i<2)
-                                        <li>{{explode(',',$data->categories)[$i]}}</li>
+                                        @if(explode(',',$data->categories)[$i] != '')
+                                            <li>{{explode(',',$data->categories)[$i]}}</li>
+                                        @endif
                                     @endif
                                 @endfor
                                 @if(count(explode(',',$data->categories)) > 2)
@@ -86,7 +90,9 @@
                             </ul>
                             <ul class="list-unstyled p-0 m-0 d-none" style="flex-flow: wrap;" id="showMoreContent">
                                 @for($i=0; $i<count(explode(',',$data->categories)); $i++)
-                                    <li class="my-1">{{explode(',',$data->categories)[$i]}}</li>
+                                    @if(explode(',',$data->categories)[$i] != '')
+                                        <li class="my-1">{{explode(',',$data->categories)[$i]}}</li>
+                                    @endif
                                 @endfor
                             </ul>
                         </div>

@@ -9,6 +9,7 @@ use App\Models\Project;
 use App\Models\ProjectCommercial;
 use App\Models\ProjectStatus;
 use App\Models\ProjectTask;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
@@ -86,7 +87,7 @@ class ProjectController extends Controller
     public function edit(Request $request, $id)
     {
         $data = Project::findOrFail($id);
-        $status = ProjectStatus::orderBy('position', 'asc')->get();
+        $status = ProjectStatus::where('created_by',null)->orWhere('created_by',Auth::guard('web')->user()->id)->orderBy('position', 'asc')->get();
 
         return view('front.project.edit', compact('data', 'status'));
     }
@@ -141,6 +142,18 @@ class ProjectController extends Controller
 
     public function updateStatus(Request $request)
     {
+        if($request->spare){
+            $status_slug = slugGenerate($request->status,'project_statuses');
+            ProjectStatus::insert([
+                'title' => $request->status,
+                'slug' => slugGenerate($request->status,'project_statuses'),
+                'icon' => '<i class="fas fa-check"></i>',
+                'short_desc' => 'New Status Added by user!',
+                'created_by' => Auth::guard('web')->user()->id,
+            ]);
+            $request->status = $status_slug;
+        }
+
         $update = Project::where('id',$request->id)->update(['status' => $request->status]);
         if($update){
             return response()->json(array('message' => 'Project status has been successfully updated'));

@@ -10,7 +10,10 @@ use App\Models\ProjectStatus;
 use App\Models\ProjectTask;
 use App\Models\ProjectTaskCommercial;
 use App\Models\TaskComment;
-use Auth;
+use Illuminate\Support\Facades\Auth;
+
+// use Auth;
+// Auth
 class ProjectTaskController extends Controller
 {
     // public function index(Request $request)
@@ -103,7 +106,7 @@ class ProjectTaskController extends Controller
     public function edit(Request $request, $id)
     {
         $data = ProjectTask::findOrFail($id);
-        $status = ProjectStatus::orderBy('position', 'asc')->get();
+        $status = ProjectStatus::where('created_by',null)->orWhere('created_by',Auth::guard('web')->user()->id)->orderBy('position', 'asc')->get();
 
         return view('front.project-task.edit', compact('data', 'status'));
     }
@@ -178,7 +181,6 @@ class ProjectTaskController extends Controller
     {
          //dd($request->all());
         $request->validate([
-            
             'comment' => 'required',
         ]);
         $project = new TaskComment();
@@ -197,6 +199,18 @@ class ProjectTaskController extends Controller
 
     public function updateStatus(Request $request)
     {
+        if($request->spare){
+            $status_slug = slugGenerate($request->status,'project_statuses');
+            ProjectStatus::insert([
+                'title' => $request->status,
+                'slug' => $status_slug,
+                'icon' => '<i class="fas fa-check"></i>',
+                'short_desc' => 'New Status Added by user!',
+                'created_by' => Auth::guard('web')->user()->id,
+            ]);
+            $request->status = $status_slug;
+        }
+
         $update = ProjectTask::where('id',$request->id)->update(['status' => $request->status]);
         if($update){
             return response()->json(array('message' => 'Task status has been successfully updated'));
@@ -206,9 +220,9 @@ class ProjectTaskController extends Controller
     }
     public function updateCommercial(Request $request)
     {
-        $project_commercial = ProjectTaskCommercial::where('project_id',$request->id)->get();
+        $project_commercial = ProjectTaskCommercial::where('project_task_id',$request->id)->get();
         if(count($project_commercial) > 0){
-            ProjectTaskCommercial::where('project_id',$request->id)->update([
+            ProjectTaskCommercial::where('project_task_id',$request->id)->update([
                 'charges_limit'=>$request->charges,
                 'currency_id'=>$request->currency,
                 'count'=>$request->count,
@@ -217,7 +231,7 @@ class ProjectTaskController extends Controller
             return response()->json(array('message' => 'Project Task commercial updated!'));
         }else{
             ProjectTaskCommercial::insert([
-                'project_id'=>$request->id,
+                'project_task_id'=>$request->id,
                 'charges_limit'=>$request->charges,
                 'currency_id'=>$request->currency,
                 'count'=>$request->count,

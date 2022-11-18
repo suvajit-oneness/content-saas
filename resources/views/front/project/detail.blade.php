@@ -71,6 +71,11 @@
                                         <option value="{{$s->slug}}" {{ ($s->slug == $item->status) ? 'selected' : '' }}>{{$s->title}}</option>
                                     @endforeach
                                 </select>
+                                <div class="input-group mb-3 spare_input{{$item->id}}" style="display: none;">
+                                    <input type="text" name="spare{{$item->id}}" class="form-control" placeholder="Name...">
+                                    <button class="btn btn-outline-secondary text-sm" type="button" id="button-addon2"><i class="fa fa-check"></i></button>
+                                    <span class="btn btn-outline-secondary text-sm" type="button" id="button-addon2"><i class="fa fa-times"></i></span>
+                                </div>
                                 <button class="btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="fas fa-ellipsis-v"></i>
                                 </button>

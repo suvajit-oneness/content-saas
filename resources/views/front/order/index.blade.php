@@ -12,7 +12,7 @@
     </div> --}}
     <div class="course-content-accordions">
         <div class="course-content-accordions">
-        @foreach($orders as $o)
+        @forelse($orders as $o)
             <div class="course-content-accor">
                 <div class="accor-top">
                     <div class="accor-top-left">
@@ -44,7 +44,11 @@
                     </ul>
                 </div>
             </div>
-        @endforeach
+        @empty
+            <div class="course-content-accor">
+                <h3 class="text-center"> No Orders Yet! </h3>
+            </div>
+        @endforelse
         </div>
     </div>
 </section>
