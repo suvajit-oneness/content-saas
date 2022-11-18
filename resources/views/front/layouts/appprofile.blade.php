@@ -176,6 +176,10 @@
                         </div>
 
                         <div id="question" style="display: none;">
+                            <div class="form-group">
+                                <label for="form-label"><b>Set Charges Type</b></label>
+                            </div>
+                            <p></p>
                             <p>How many words is in the document?</p>
                             <p>How many articles do you want to add to the invoice?</p>
                             <p>Retainer breakdown?</p>
@@ -183,7 +187,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success">Save changes</button>
+                        <button type="button" class="btn btn-success">Save</button>
                         <button type="button" class="btn btn-secondary" id="closeCompleteModal">Close</button>
                     </div>
                 </div>
