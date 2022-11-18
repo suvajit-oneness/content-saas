@@ -369,7 +369,7 @@
                                                 <h5 class="card-title">{{ $data->title }}</h5>
                                             </a>
 
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+                                            <p>{!! $data->description !!}</p>
 
                                         </div>
                                     </div>
@@ -561,7 +561,7 @@
                                                 class="location_btn">
                                                 <h5 class="card-title">{{ $data->title }}</h5>
                                             </a>
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi reprehenderit, suscipit similique accusamus temporibus repellat earum nihil excepturi error modi dolorum ex molestiae ratione labore repellendus eius cupiditate exercitationem nesciunt!</p>
+                                            <p>{!! $data->description !!}</p>
 
                                             <a class="button" href="{{ route('front.event.details', $data->slug) }}">View Details</a>
 
