@@ -61,7 +61,7 @@
                                     @enderror
                                 </div><br>
                                 <div class="form-group">
-                                    <label class="control-label" for="short_desc">Short Description</label>
+                               22     <label class="control-label" for="short_desc">Short Description</label>
                                     <textarea type="text" class="form-control" rows="4" name="short_desc" id="short_desc">{{ old('short_desc') }}</textarea>
                                     @error('short_desc')
                                         <p class="small text-danger">{{ $message }}</p>
@@ -77,7 +77,7 @@
                             <div class="tile-footer">
                                 <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save</button>
 
-                                <a href="{{ route('front.portfolio.portfolio.index') }}" class="btn btn-secondary"><i class="fa fa-fw fa-lg fa-chevron-left"></i>Back</a>
+                                <a href="{{ route('front.portfolio.portfolio.index') }}" class="add-btn-edit d-inline-block secondary-btn"><i class="fa fa-chevron-left me-2"></i>Back</a>
 
                                 {{-- &nbsp;&nbsp;&nbsp; --}}
                             </div>

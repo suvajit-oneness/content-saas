@@ -100,7 +100,7 @@
                                 <td>
                                 </td>
                             </tr>
-                            <tr>
+                            <tr class="portfolio-social">
                                 <td>Social media profiles</td>
                                 <td>
                                 @foreach ($data->socialMedias as $socialMedia)

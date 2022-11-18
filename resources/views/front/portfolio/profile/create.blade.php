@@ -8,7 +8,7 @@
             <div class="col-12 text-center top-heading">
                 <div class="text-right" style="
                 text-align: right;">
-                <a class="btn btn-secondary" href="{{ route('front.user.portfolio.index') }}"><i class="fa fa-fw fa-lg fa-chevron-left"></i>Back</a>
+                <a class="add-btn-edit d-inline-block secondary-btn" href="{{ route('front.user.portfolio.index') }}"><i class="fa me-1 fa-chevron-left"></i>Back</a>
                 </div>
                 <h2>Add  Basic Details</h2>
             </div>
@@ -213,8 +213,10 @@
                         <br>
 
                         <div class="tile-footer">
-                            <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Update</button>
-                            <a class="btn btn-secondary" href="{{ route('front.user.portfolio.index') }}"><i class="fa fa-fw fa-lg fa-chevron-left"></i>Back</a>
+                            <button class="add-btn-edit d-inline-block " type="submit">
+                                <i class="fa me-1 fa-check-circle"></i>Update
+                            </button>
+                            <a class="add-btn-edit d-inline-block secondary-btn" href="{{ route('front.user.portfolio.index') }}"><i class="fa me-1 fa-chevron-left"></i>Back</a>
                         </div>
                     </form>
                 </div>

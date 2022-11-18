@@ -45,6 +45,15 @@
       .portfolio h2 {
          font-size: 56px;
       }
+      .courses-heading h4{
+        font-size: 18px;
+      }
+      .courses-desc p{
+        font-size: 14px;
+      }
+      .courses-content.purchased{
+        padding: 20px;
+      }
    }
 
    @media (max-width: 1360px) {
@@ -596,7 +605,7 @@
         }
         .dashboard-right {
           margin-left: 0px;
-         
+
         }
         .dashboard-sidebar.show-sidebar {
          left: -100%!important;
@@ -733,7 +742,7 @@
       }
 
       /* .portfoliov2-links ul {
-         
+
          flex-direction: column;
        } */
       .portfoliov2-links {
@@ -879,7 +888,7 @@
 
       /* .portfolio-v4-info-left .img {
          position: initial;
-         
+
        } */
       .portfolio-v4-info-right {
          margin-top: 0px;

@@ -46,24 +46,26 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <div class="row g-3 mt-1">
+                                    <div class="row mt-1">
                                     @foreach($data->portfolios as $key => $item)
                                         <div class="col-12 col-lg-6 col-md-12">
-                                            <div class="edit-card">
+                                            <div class="card userPortfolio">
+                                                <img src="{{ asset($item->image) }}" id="articleImage" class="img-fluid " alt="" height="50">
                                                 <div class="action">
                                                     <a href="{{ route('front.portfolio.portfolio.edit', $item->id) }}"><i class="fa-solid fa-pen edit table-icon"></i></a>
 
                                                     <a href="{{ route('front.portfolio.portfolio.delete', $item->id) }}" onclick="return confirm('Are you sure ?')"><i class="fa-solid fa-trash-can trash table-icon"></i></a>
                                                 </div>
-                                                <img src="{{ asset($item->image) }}" id="articleImage" class="img-fluid mb-3" alt="" height="50">
-                                                <div class="date">
-                                                    <span>{{ date('j F Y, g:i a', strtotime($item->created_at)) }}</span>
-                                                </div>
-                                                <div class="edit-heading">
-                                                    <h4>{{ $item->title }}</h4>
-                                                    <p>Category: <span class="text-dark">{{ $item->category }}</span></p>
-                                                    <p>{{ $item->tags }}</p>
-                                                    <p>{{ $item->short_desc }}</p>
+                                                <div class="edit-card">
+                                                    <div class="date">
+                                                        <span>{{ date('j F Y, g:i a', strtotime($item->created_at)) }}</span>
+                                                    </div>
+                                                    <div class="edit-heading">
+                                                        <h4>{{ $item->title }}</h4>
+                                                        <p>Category: <span class="text-dark">{{ $item->category }}</span></p>
+                                                        <p>{{ $item->tags }}</p>
+                                                        <p>{{ $item->short_desc }}</p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
