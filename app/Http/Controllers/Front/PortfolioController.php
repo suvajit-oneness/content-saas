@@ -141,4 +141,10 @@ class PortfolioController extends BaseController
         Auth::guard('web')->logout();
         return redirect()->back();
     }
+
+    public function cancelSubscription(Request $request)
+    {
+        $update = User::where('id',Auth::guard('web')->user()->id)->update(['subscription_id'=>null]);
+        return redirect()->back()->with('success', 'Subscription cancelled!', 'error', true, true);
+    }
 }
