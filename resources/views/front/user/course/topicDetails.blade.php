@@ -27,7 +27,7 @@
             <div class="tab-content details-tab">
                 
                 <div class="tab-pane" id="home" role="tabpanel" aria-labelledby="home-tab">
-                    <video width="640" height="320" controls id="contentVideo" style="" controlsList="{{$topic->is_download == 0 ? 'nodownload' : '' }}">
+                    <video width="640" height="320" controls id="contentVideo" style="" controlsList="{{$topic->video_downloadable == 0 ? 'nodownload' : '' }}">
                         <source src="{{ asset($topic->video) }}" type="video/mp4">
                     </video>
                 </div>
