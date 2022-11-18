@@ -44,7 +44,7 @@
                 <a class="app-menu__item {{ request()->is('admin/market*') ? 'active' : '' }} {{ sidebar_open(['admin.market']) }}"
                     href="{{ route('admin.market.index') }}">
                     <i class="app-menu__icon fa fa-file"></i>
-                    <span class="app-menu__label">Content Management</span>
+                    <span class="app-menu__label">Page Content</span>
                 </a>
             </li>
             <!--- Category management --->

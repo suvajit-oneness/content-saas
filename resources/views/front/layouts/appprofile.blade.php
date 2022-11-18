@@ -75,9 +75,9 @@
                         <li>
                             <a href="{{ route('front.deals.index') }}" class="{{ request()->is('deal*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Deals</a>
                         </li>
-                        {{-- <li>
-                            <a href="{{ route('front.user.post-content.index') }}" class="{{ request()->is('user/post-content*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Post Content</a>
-                        </li> --}}
+                        <li>
+                            <a class="{{ request()->is('course') ? 'active' : '' }}" href="{{ route('front.course') }}"><i class="fa-solid fa-house"></i>Writer Courses</a>
+                        </li>
                         <li>
                             <a href="{{ route('front.user.courses.index')}}"  class="{{ request()->is('user/my-courses') ? 'active' : '' }}"><i class="fa-solid fa-house"></i>My Courses</a>
                         </li>
