@@ -7,12 +7,9 @@ use App\Models\Order;
 use App\Models\JobUser;
 use App\Models\OrderProduct;
 use App\Models\PlansAndPricing;
-<<<<<<< HEAD
 use App\Models\NotInterestedJob;
 use App\Models\ReportJob;
-=======
 use App\Models\PlansWithPrice;
->>>>>>> 453d1e41ac465a2d2f0884a57b61fee47b16a165
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
