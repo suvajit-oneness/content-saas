@@ -93,9 +93,9 @@ Route::name('front.')->group(function () {
         // User purchased course
         Route::prefix('user')->name('user.courses.')->group(function () {
             Route::get('/my-courses','Front\UserCourseController@index')->name('index');
-            Route::get('/course/{slug}','Front\UserCourseController@details')->name('details');
-            Route::get('/course/{slug}/{Lessonslug}','Front\UserCourseController@lessonDetails')->name('lesson');
-            Route::get('/course/{slug}/{Lessonslug}/{Topicslug}','Front\UserCourseController@topicDetails')->name('topic');
+            Route::get('/my-courses/{slug}','Front\UserCourseController@details')->name('details');
+            Route::get('/my-courses/{slug}/{Lessonslug}','Front\UserCourseController@lessonDetails')->name('lesson');
+            Route::get('/my-courses/{slug}/{Lessonslug}/{Topicslug}','Front\UserCourseController@topicDetails')->name('topic');
         });
             //user events
             Route::prefix('user')->name('user.events')->group(function () {
