@@ -79,7 +79,7 @@
                                 @enderror
                             </div><br>
                             <h5>SET CHARGES</h5>
-                            <hr>                            
+                            <hr>
                             <div class="form-group">
                                 <label class="control-label" for="charge">Charge (in $USD) <span class="m-l-5 text-danger">*</span></label>
                                 <input class="form-control @error('charge') is-invalid @enderror" type="text" name="charge"
@@ -100,7 +100,7 @@
                                 @enderror
                             </div>
                             <div class="form-group my-3">
-                                <button type="submit" class="btn btn-success btn-sm">Update profile</button>
+                                <button type="submit" class="btn button sm-btn">Update profile</button>
                             </div>
                         </div>
                     </form>

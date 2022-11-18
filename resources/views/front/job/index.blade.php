@@ -233,7 +233,7 @@
                              @endif
                             <div class="col-12 col-lg-6 col-md-12">
                                 <div class="recommended-writers-content">
-                                    <div class="row">
+                                    <div class="row align-items-center">
                                         <div class="col-6">
                                             @if ($data->featured_flag)
                                             <div class="featured-jobs-badge">
@@ -247,8 +247,8 @@
                                                     <i class="fas fa-ellipsis-v"></i>
                                                 </button>
                                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                    <li>
-                                                        <a href="javascript:void(0)" class="wishlist_button" onclick="jobBookmark({{ $data->id }})">
+                                                    <li class="nav-item">
+                                                        <a href="javascript:void(0)" class="wishlist_button nav-link" onclick="jobBookmark({{ $data->id }})">
                                                         @php
                                                             if (
                                                                 auth()
@@ -273,7 +273,7 @@
                                                                     )
                                                                     ->first();
                                                             }
-            
+
                                                             if ($collectionExistsCheck != null) {
                                                                 // if found
                                                                 $heartColor = '#cae47f';
@@ -286,10 +286,10 @@
                                                           Save Job
                                                         </a>
                                                     </li>
-                                                    <li>
+                                                    <li class="nav-item">
                                                         {{-- <a href="javascript:void(0)" class="wishlist_button" onclick="jobInterest({{ $data->id }})"> --}}
                                                             <form id="form" action="{{route('front.job.interest',$data->id)}}" method="POST">@csrf</form>
-                                                            <a href="javascript:void(0)" onclick="document.getElementById('form').submit()">
+                                                            <a href="javascript:void(0)"  class="nav-link" onclick="document.getElementById('form').submit()">
                                                         @php
                                                             if (
                                                                 auth()
@@ -314,11 +314,11 @@
                                                                     )
                                                                     ->first();
                                                             }
-            
+
                                                             if ($collectionExistsCheck != null) {
                                                                 // if found
                                                                 $heartColor = '#cae47f';
-                                                                
+
                                                             } else {
                                                                 // if not found
                                                                 $heartColor = '#fff';
@@ -328,8 +328,8 @@
                                                            Not interested
                                                         </a>
                                                     </li>
-                                                    <li>
-                                                        <a type="button" class="wishlist_button" data-bs-toggle="modal" data-bs-target="#yourModal{{$data->id}}">
+                                                    <li class="nav-item">
+                                                        <a type="button" class="wishlist_button nav-link" data-bs-toggle="modal" data-bs-target="#yourModal{{$data->id}}">
                                                         @php
                                                             if (
                                                                 auth()
@@ -354,7 +354,7 @@
                                                                     )
                                                                     ->first();
                                                             }
-            
+
                                                             if ($collectionExistsCheck != null) {
                                                                 // if found
                                                                 $heartColor = '#cae47f';
@@ -363,7 +363,7 @@
                                                                 $heartColor = '#fff';
                                                             }
                                                         @endphp
-                                                       
+
                                                             <svg id="reportBtn_{{$data->id}}" width='24' height='24' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M3 3.5a.5.5 0 01.5-.5h9.191a.5.5 0 01.447.276l.724 1.448a.5.5 0 00.447.276H20.5a.5.5 0 01.5.5v10a.5.5 0 01-.5.5h-6.191a.5.5 0 01-.447-.276l-.724-1.448a.5.5 0 00-.447-.276H5v6.5a.5.5 0 01-.5.5h-1a.5.5 0 01-.5-.5v-17z' fill='#2D2D2D'/></svg>
                                                              Report job
                                                         </a>
@@ -419,9 +419,9 @@
                                             <input type="hidden" name="job_id" value="{{$data->id}}">
                                             <div class="modal-body">
                                                 <div class="form-group">
-                                                    
+
                                                     <textarea type="text" class="form-control" rows="4" name="comment" id="comment" placeholder="Describe your problem">{{ old('comment') }}</textarea>
-    
+
                                                     @error('comment')
                                                         <p class="small text-danger">{{ $message }}</p>
                                                     @enderror
@@ -446,11 +446,11 @@
             </div>
         </div>
     </div>
-   
+
 @endsection
 @section('script')
     <script>
        // job interest
-      
+
     </script>
 @endsection

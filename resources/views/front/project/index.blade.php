@@ -15,7 +15,7 @@
         <div class="row mt-0">
             <div class="col-12">
                 <div class="table-responsive table-tabs">
-                    <table class="table">
+                    <table class="table projectTable">
                         <thead>
                             <tr>
                                 <th>SR</th>
@@ -31,7 +31,9 @@
                             @forelse ($data as $index => $item)
                             <tr>
                                 <td>{{ $index + $data->firstItem() }}</td>
-                                <td>{{ $item->title }}</td>
+                                <td width="230">
+                                    <h3>{{ $item->title }}</h3>
+                                </td>
                                 <td>
                                     <p class="text-muted"><small>{{ $item->short_desc }}</small></p>
                                 </td>
@@ -58,7 +60,7 @@
                                     </select>
                                     <input type="text" name="spare" class="form-control" width="155px" style="display: none">
                                 </td>
-                                <td class="text-end" width="150">
+                                <td class="text-end" width="120">
                                     <a href="{{ route('front.project.detail', $item->slug) }}" class="badge bg-dark"> <i class="fas fa-eye"></i> </a>
 
                                     <a href="{{ route('front.project.edit', $item->id) }}" class="badge bg-dark"> <i class="fas fa-edit"></i> </a>

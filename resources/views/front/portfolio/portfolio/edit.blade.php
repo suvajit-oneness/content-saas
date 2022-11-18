@@ -8,7 +8,7 @@
             <div class="col-12 text-center top-heading">
                 <div class="text-right" style="
                     text-align: right;">
-                    <a class="btn btn-secondary" href="{{ route('front.portfolio.portfolio.index') }}"><i class="fa fa-fw fa-lg fa-chevron-left"></i>Back</a>
+                    <a class="add-btn-edit d-inline-block " href="{{ route('front.portfolio.portfolio.index') }}"><i class="fa fa-chevron-left me-1"></i>Back</a>
                     </div>
                 <h2>Update  Portfolio Details</h2>
             </div>

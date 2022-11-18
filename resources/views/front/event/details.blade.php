@@ -113,7 +113,7 @@
         </div>
     </section>
 
-    <section class="py-2 py-sm-4 art-dtls">
+    <section class="py-2 py-sm-4 art-dtls eventDetails">
         <div class="container">
             <div class="row">
                 @if ($event->start_date)
@@ -132,7 +132,7 @@
                             </figure>
                             <figcaption>
                                 <h5>Start Date:</h5>
-                                <div class="dateBox blog_date">
+                                <h3 class="dateBox blog_date">
                                     <span class="date">
                                         {{ date('d', strtotime($event->start_date)) }}
                                     </span>
@@ -142,7 +142,7 @@
                                     <span class="year">
                                         {{ date('Y', strtotime($event->start_date)) }}
                                     </span>
-                                </div>
+                                </h3>
                             </figcaption>
                         </div>
                     </div>
@@ -163,7 +163,7 @@
                             </figure>
                             <figcaption>
                                 <h5>End Date:</h5>
-                                <div class="dateBox blog_date">
+                                <h3 class="dateBox blog_date">
                                     <span class="date">
                                         {{ date('d', strtotime($event->end_date)) }}
                                     </span>
@@ -173,7 +173,7 @@
                                     <span class="year">
                                         {{ date('Y', strtotime($event->end_date)) }}
                                     </span>
-                                </div>
+                                </h3>
                             </figcaption>
                         </div>
                     </div>
@@ -346,7 +346,7 @@
             </div>
             <div class="row">
                 @foreach ($latestevents as $eventProductkey => $data)
-                    <div class="col-12 col-lg-4 col-md-6 mb-3 some-list-1">
+                    <div class="col-12 col-lg-4 col-md-6 mb-3 blog_list some-list-1">
                         {{-- <a href=""> --}}
                         <div class="card">
                             <a href="{{ route('front.event.details', $data->slug) }}">
@@ -382,7 +382,7 @@
                                 <a href="{{ route('front.event.details', $data->slug) }}" class="location_btn">
                                     <h5 class="card-title mt-3">{{ $data->title }}</h5>
                                 </a>
-                                <a href="{!! URL::to('event/' . $event->slug) !!}" class="readMoreBtn text-center">Read More</a>
+                                <a href="{!! URL::to('event/' . $event->slug) !!}" class=" button sm-btn text-center">Read More</a>
                             </div>
                         </div>
                         {{-- </a> --}}
