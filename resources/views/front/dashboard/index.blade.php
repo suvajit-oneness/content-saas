@@ -4,7 +4,7 @@
 @section('section')
 @php
 $project = App\Models\Project::all();
-$job = App\Models\Job::where('status','1')->get();
+$job = App\Models\JobUser::where('user_id', auth()->guard('web')->user()->id)->get();
 $orders = App\Models\Order::where('user_id', auth()->guard('web')->user()->id)->with('orderProducts')->get();
 
 @endphp
