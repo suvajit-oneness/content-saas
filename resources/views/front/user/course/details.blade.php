@@ -4,7 +4,6 @@
 @section('section')
 <section class="edit-sec edit-basic-detail">
     
-    <div class="course-content-accordions">
         <div class="course-content-accordions">
             <div class="col-12 mt-3 mb-3 text-end">
                 <a href="{!! URL::to('/user/my-courses') !!}" class="add-btn-edit d-inline-block secondary-btn"><i
@@ -14,9 +13,6 @@
                 @foreach ($lessons as $key => $data)
                     <div class="col-12 col-lg-4 col-md-6">
                         <div class="courses-content">
-                            <div class="courses-img">
-                                <img src="{{ asset($data->lesson->image) }}" alt="" class="img-fluid">
-                            </div>
                             <div class="courses-info">
                                 <div class="courses-heading">
                                     <h4>{{ $data->lesson->title }}</h4>
@@ -47,6 +43,5 @@
                 
             </div>
         </div>
-    </div>
 </section><br>
 @endsection

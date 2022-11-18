@@ -34,9 +34,7 @@
                                     {{-- <div><p id="all_text">{!! $job[0]->description !!}</p></div> --}}
                                     <div class="content-mid">
                                         <ul class="list-unstyled p-0 m-0">
-                                         @foreach($tag as $tagKey => $tagVal)
-                                          <li>{{ ucwords($tagVal->title) }} </li>
-                                          @endforeach
+                                            {!! jobTagsHtml($job[0]->id) !!}
                                         </ul>
                                       </div>
                                 </div>
