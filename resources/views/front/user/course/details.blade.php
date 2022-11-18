@@ -34,7 +34,7 @@
 
                                 <div class="courses-desc">
                                     <p>{!! $data->lesson->description !!}</p>
-                                    <a href="{!! URL::to('/user/course/'.$data->course->slug .'/'.$data->lesson->slug) !!}" class="course-btn">View</a>
+                                    <a href="{!! URL::to('/user/my-courses/'.$data->course->slug .'/'.$data->lesson->slug) !!}" class="course-btn">View</a>
                                 </div>
                             </div>
                         </div>
