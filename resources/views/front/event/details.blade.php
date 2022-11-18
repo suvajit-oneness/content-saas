@@ -8,7 +8,7 @@
         }
     </style>
 
-    <section class="artiledetails_banner">
+    <section class="artiledetails_banner eventDetails">
         <div class="container-fluid">
             <div class="artiledetails_banner_img">
                 @if ($event->image != '')

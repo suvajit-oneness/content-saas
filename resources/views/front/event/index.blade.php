@@ -58,9 +58,9 @@
                                                         {{ request()->input('code') == $item->title ? 'selected' : '' }}>
                                                         {{ ucwords($item->title) }}</option>
                                                 @endforeach
-                                               
+
                                             </select>
-                                            
+
                                         </div>
                                     </div>
                                 </div>
@@ -229,7 +229,7 @@
                 <div class="col-auto">
                     <div class="d-flex cafe-listing-nav">
                         <ul class="d-flex event-view-list" id="tabs-nav">
-                            <li>
+                            <li onClick="changeView('grid')">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
                             </li>
                             <li onClick="changeView('list')">
@@ -270,7 +270,6 @@
                                         d="M16,45.78564a3.00019,3.00019,0,0,0,.00009,6A3.00019,3.00019,0,0,0,16,45.78564Zm0,4a1.00019,1.00019,0,0,1,.00006-2A1.00019,1.00019,0,0,1,16,49.78564Z" />
                                 </svg>
                             </li>
-                            
                         </ul>
                     </div>
                 </div>
@@ -278,8 +277,8 @@
         </div>
         </div>
         <div class="container">
-            <div class="" id="op_list_view">
-                <div class="tab-content smallGapGrid" id="list">
+            <div class="" id="op_grid_view">
+                <div class="tab-content smallGapGrid" id="grid">
                     <div class="row">
                         @foreach ($cat as $eventCategorykey => $item)
                             @php
@@ -290,7 +289,7 @@
                             @foreach ($item->eventDetails as $eventProductkey => $data)
                             @if(CheckIfContentIsUnderSubscription($data->id, 'events'))
                                 <div
-                                    class="col-12 col-lg-4 col-md-6 mb-3 blog_list eventlist eventlist_{{ $data->category }}">
+                                    class="col-12 col-lg-4 col-md-6 mb-3 blog_list eventlist_{{ $data->category }}">
                                     {{-- <a href=""> --}}
                                     <div class="card">
                                         <a href="{{ route('front.event.details', $data->slug) }}">
@@ -325,7 +324,7 @@
                                                 </div>
                                                 <a href="javascript:void(0)"
                                                 class="location_btn ms-auto" onclick="eventBookmark({{ $data->id }})" title="Add event to you calender">
-                                             
+
                                                @php
                                                         if (
                                                             auth()
@@ -350,7 +349,7 @@
                                                                 )
                                                                 ->first();
                                                         }
-        
+
                                                         if ($collectionExistsCheck != null) {
                                                             // if found
                                                             $heartColor = '#cae47f';
@@ -360,19 +359,21 @@
                                                         }
                                                     @endphp
                                                         <svg id="saveBtn_{{$data->id}}" fill="{{ $heartColor }}" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 30 30" width="30px" height="30px" stroke="#000000" stroke-width="2px" >    <path d="M23,27l-8-7l-8,7V5c0-1.105,0.895-2,2-2h12c1.105,0,2,0.895,2,2V27z"/></svg>
-                                                            
-                                                        
+
+
                                             </a>
                                             </div>
-                                           
+
                                             <a href="{{ route('front.event.details', $data->slug) }}"
                                                 class="location_btn">
                                                 <h5 class="card-title">{{ $data->title }}</h5>
                                             </a>
-                                           
+
+                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+
                                         </div>
                                     </div>
-                                    
+
                                     {{-- </a> --}}
                                 </div>
                                 @else
@@ -412,7 +413,7 @@
                                                 </div>
                                                 <a href="javascript:void(0)"
                                                 class="location_btn ms-auto" onclick="eventBookmark({{ $data->id }})" title="Add event to you calender">
-                                             
+
                                                @php
                                                         if (
                                                             auth()
@@ -437,7 +438,7 @@
                                                                 )
                                                                 ->first();
                                                         }
-        
+
                                                         if ($collectionExistsCheck != null) {
                                                             // if found
                                                             $heartColor = '#cae47f';
@@ -447,16 +448,16 @@
                                                         }
                                                     @endphp
                                                         <svg id="saveBtn_{{$data->id}}" fill="{{ $heartColor }}" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 30 30" width="30px" height="30px" stroke="#000000" stroke-width="2px" >    <path d="M23,27l-8-7l-8,7V5c0-1.105,0.895-2,2-2h12c1.105,0,2,0.895,2,2V27z"/></svg>
-                                                            
-                                                        
+
+
                                             </a>
                                             </div>
-                                           
+
                                             <a href="{{ route('front.event.details', $data->slug) }}"
                                                 class="location_btn">
                                                 <h5 class="card-title">{{ $data->title }}</h5>
                                             </a>
-                                           
+
                                         </div>
                                         <div style="position: absolute; width: 100%; height: 100%; background-color: rgba(220,220,220,0.1); backdrop-filter: blur(4px);">
                                         </div>
@@ -469,7 +470,200 @@
                     </div>
                 </div>
             </div>
+            <div class="" id="op_list_view" style="display:none">
+                <div class="tab-content smallGapGrid" id="list">
+                    <div class="row">
+                        @foreach ($cat as $eventCategorykey => $item)
+                            @php
+                                if ($item->eventDetails->count() == 0) {
+                                    continue;
+                                }
+                            @endphp
+                            @foreach ($item->eventDetails as $eventProductkey => $data)
+                            @if(CheckIfContentIsUnderSubscription($data->id, 'events'))
+                                <div
+                                    class="col-12  mb-3 blog_list eventlist eventlist_{{ $data->category }}">
+                                    {{-- <a href=""> --}}
+                                    <div class="card">
+                                        <a href="{{ route('front.event.details', $data->slug) }}">
+                                            <img src="{{ asset($data->image) }}" class="card-img-top"
+                                                alt="Blog Picture">
+                                        </a>
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-center">
+                                                <span class="subHead_badge">{{ $data->eventCategory->title }}</span>
+                                                <div class="dateBox blog_date">
+                                                    <span class="date">
+                                                        {{ date('d', strtotime($data->start_date)) }}
+                                                    </span>
+                                                    <span class="month">
+                                                        {{ date('M', strtotime($data->start_date)) }}
+                                                    </span>
+                                                    <span class="year">
+                                                        {{ date('Y', strtotime($data->start_date)) }}
+                                                    </span>
+                                                </div>
+                                                <div class="ms-2">-</div>
+                                                <div class="dateBox blog_date ms-2">
+                                                    <span class="date">
+                                                        {{ date('d', strtotime($data->end_date)) }}
+                                                    </span>
+                                                    <span class="month">
+                                                        {{ date('M', strtotime($data->end_date)) }}
+                                                    </span>
+                                                    <span class="year">
+                                                        {{ date('Y', strtotime($data->end_date)) }}
+                                                    </span>
+                                                </div>
+                                                <a href="javascript:void(0)"
+                                                class="location_btn ms-auto" onclick="eventBookmark({{ $data->id }})" title="Add event to you calender">
 
+                                               @php
+                                                        if (
+                                                            auth()
+                                                                ->guard('user')
+                                                                ->check()
+                                                        ) {
+                                                            $collectionExistsCheck = \App\Models\EventUser::where('event_id', $data->id)
+                                                                ->where(
+                                                                    'user_id',
+                                                                    auth()
+                                                                        ->guard('web')
+                                                                        ->user()->id,
+                                                                )
+                                                                ->first();
+                                                        } else {
+                                                            $collectionExistsCheck = \App\Models\EventUser::where('event_id', $data->id)
+                                                                ->where(
+                                                                    'user_id',
+                                                                    auth()
+                                                                        ->guard('web')
+                                                                        ->user()->id,
+                                                                )
+                                                                ->first();
+                                                        }
+
+                                                        if ($collectionExistsCheck != null) {
+                                                            // if found
+                                                            $heartColor = '#cae47f';
+                                                        } else {
+                                                            // if not found
+                                                            $heartColor = '#fff';
+                                                        }
+                                                    @endphp
+                                                        <svg id="saveBtn_{{$data->id}}" fill="{{ $heartColor }}" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 30 30" width="30px" height="30px" stroke="#000000" stroke-width="2px" >    <path d="M23,27l-8-7l-8,7V5c0-1.105,0.895-2,2-2h12c1.105,0,2,0.895,2,2V27z"/></svg>
+
+
+                                            </a>
+                                            </div>
+
+                                            <a href="{{ route('front.event.details', $data->slug) }}"
+                                                class="location_btn">
+                                                <h5 class="card-title">{{ $data->title }}</h5>
+                                            </a>
+                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi reprehenderit, suscipit similique accusamus temporibus repellat earum nihil excepturi error modi dolorum ex molestiae ratione labore repellendus eius cupiditate exercitationem nesciunt!</p>
+
+                                            <a class="button" href="{{ route('front.event.details', $data->slug) }}">View Details</a>
+
+                                        </div>
+                                    </div>
+
+                                    {{-- </a> --}}
+                                </div>
+                                @else
+                                <div
+                                    class="col-12 col-lg-4 col-md-6 mb-3 blog_list eventlist eventlist_{{ $data->category }}">
+                                    {{-- <a href=""> --}}
+                                    <div class="card" style="position: relative;">
+                                        <a href="{{ route('front.event.details', $data->slug) }}">
+                                            <img src="{{ asset($data->image) }}" class="card-img-top"
+                                                alt="Blog Picture">
+                                        </a>
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-center">
+                                                <span class="subHead_badge">{{ $data->eventCategory->title }}</span>
+                                                <div class="dateBox blog_date">
+                                                    <span class="date">
+                                                        {{ date('d', strtotime($data->start_date)) }}
+                                                    </span>
+                                                    <span class="month">
+                                                        {{ date('M', strtotime($data->start_date)) }}
+                                                    </span>
+                                                    <span class="year">
+                                                        {{ date('Y', strtotime($data->start_date)) }}
+                                                    </span>
+                                                </div>
+                                                <div class="ms-2">-</div>
+                                                <div class="dateBox blog_date ms-2">
+                                                    <span class="date">
+                                                        {{ date('d', strtotime($data->end_date)) }}
+                                                    </span>
+                                                    <span class="month">
+                                                        {{ date('M', strtotime($data->end_date)) }}
+                                                    </span>
+                                                    <span class="year">
+                                                        {{ date('Y', strtotime($data->end_date)) }}
+                                                    </span>
+                                                </div>
+                                                <a href="javascript:void(0)"
+                                                class="location_btn ms-auto" onclick="eventBookmark({{ $data->id }})" title="Add event to you calender">
+
+                                               @php
+                                                        if (
+                                                            auth()
+                                                                ->guard('user')
+                                                                ->check()
+                                                        ) {
+                                                            $collectionExistsCheck = \App\Models\EventUser::where('event_id', $data->id)
+                                                                ->where(
+                                                                    'user_id',
+                                                                    auth()
+                                                                        ->guard('web')
+                                                                        ->user()->id,
+                                                                )
+                                                                ->first();
+                                                        } else {
+                                                            $collectionExistsCheck = \App\Models\EventUser::where('event_id', $data->id)
+                                                                ->where(
+                                                                    'user_id',
+                                                                    auth()
+                                                                        ->guard('web')
+                                                                        ->user()->id,
+                                                                )
+                                                                ->first();
+                                                        }
+
+                                                        if ($collectionExistsCheck != null) {
+                                                            // if found
+                                                            $heartColor = '#cae47f';
+                                                        } else {
+                                                            // if not found
+                                                            $heartColor = '#fff';
+                                                        }
+                                                    @endphp
+                                                        <svg id="saveBtn_{{$data->id}}" fill="{{ $heartColor }}" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 30 30" width="30px" height="30px" stroke="#000000" stroke-width="2px" >    <path d="M23,27l-8-7l-8,7V5c0-1.105,0.895-2,2-2h12c1.105,0,2,0.895,2,2V27z"/></svg>
+
+
+                                            </a>
+                                            </div>
+
+                                            <a href="{{ route('front.event.details', $data->slug) }}"
+                                                class="location_btn">
+                                                <h5 class="card-title">{{ $data->title }}</h5>
+                                            </a>
+
+                                        </div>
+                                        <div style="position: absolute; width: 100%; height: 100%; background-color: rgba(220,220,220,0.1); backdrop-filter: blur(4px);">
+                                        </div>
+                                    </div>
+                                    {{-- </a> --}}
+                                </div>
+                              @endif
+                            @endforeach
+                        @endforeach
+                    </div>
+                </div>
+            </div>
             <div class="" id="op_cal_view" style="display:none">
                 <div class="tab-content smallGapGrid" id="calender"></div>
             </div>
@@ -563,30 +757,36 @@
             if (id == 'cal') {
                 $('#op_list_view').fadeOut();
                 $('#op_cal_view').fadeIn();
+                $('#op_grid_view').fadeOut();
                 $('#calender').fullCalendar({
-            // put your options and callbacks here
-            events: [
-                @foreach ($cat as $eventCategorykey => $item)
-                            @php
-                                if ($item->eventDetails->count() == 0) {
-                                    continue;
-                                }
-                            @endphp
-                            @foreach ($item->eventDetails as $eventProductkey => $data)
-                            {
-                                title: '{{ $data->title }}',
-                                start: '{{ $data->start_date }}',
-                                end: '{{ $data->end_date }}',
-                                url: '{{ URL::to('event/' . $data->slug) }}'
-                    },
-                @endforeach
-                @endforeach
-               
-            ]
-        })
+                    // put your options and callbacks here
+                    events: [
+                        @foreach ($cat as $eventCategorykey => $item)
+                                    @php
+                                        if ($item->eventDetails->count() == 0) {
+                                            continue;
+                                        }
+                                    @endphp
+                                    @foreach ($item->eventDetails as $eventProductkey => $data)
+                                    {
+                                        title: '{{ $data->title }}',
+                                        start: '{{ $data->start_date }}',
+                                        end: '{{ $data->end_date }}',
+                                        url: '{{ URL::to('event/' . $data->slug) }}'
+                            },
+                        @endforeach
+                        @endforeach
+
+                    ]
+                })
             } else if (id == 'list') {
                 $('#op_cal_view').fadeOut();
                 $('#op_list_view').fadeIn();
+                $('#op_grid_view').fadeOut();
+            }else if (id == 'grid') {
+                $('#op_cal_view').fadeOut();
+                $('#op_list_view').fadeOut();
+                $('#op_grid_view').fadeIn();
             }
         }
     </script>
