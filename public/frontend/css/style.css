@@ -1065,14 +1065,14 @@ footer p small {
   font-weight: 500;
   /* font-size: 30px; */
   font-size: 1.25rem;
-  line-height: 37px;
+  line-height: 1.4;
   color: #000000;
   overflow: hidden;
   text-overflow: ellipsis;
   -webkit-line-clamp: 2;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  margin-top: 25px;
+  margin-top: 15px;
   transition: all ease-in-out 0.4s;
 }
 
@@ -1091,7 +1091,7 @@ footer p small {
   -webkit-line-clamp: 2;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  margin-top: 25px;
+  margin-top: 10px;
   transition: all ease-in-out 0.4s;
 }
 
@@ -3904,7 +3904,7 @@ tbody, td, tfoot, th, thead, tr {
 }
 
 .courses-heading {
-  
+
   border-bottom: 1px solid #ccc;
   padding-bottom: 25px;
 }
@@ -7006,11 +7006,11 @@ tbody, td, tfoot, th, thead, tr {
   object-fit: cover;
 }
 
-.eventlist .card>a {
+.blog_list .card>a {
   height: 196px;
 }
 
-.eventlist .card>a img {
+.blog_list .card>a img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -7414,4 +7414,42 @@ a.badge.bg-danger:hover {
 .event-view-list li svg{
   stroke: #fff;
   fill: #fff;
+}
+
+/* List View CSS  */
+.eventlist .card {
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.eventlist .card-body {
+  width: calc(100% - 250px);
+  padding: 15px 25px;
+}
+
+.eventlist .card-title {
+  font-size: 26px;
+  text-transform: capitalize;
+  margin-top: 12px;
+}
+
+.eventlist .card:hover .card-title {
+  font-size: 26px;
+}
+
+.eventlist .card>a {
+  width: 250px;
+  height: 250px;
+}
+.blog_list .button {
+    font-size: 14px;
+    height: auto;
+    width: auto;
+    min-width: unset;
+    line-height: 1;
+    padding: 10px 20px;
+}
+
+.eventDetails h1{
+    font-size: 50px;
 }
