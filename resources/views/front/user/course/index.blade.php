@@ -61,7 +61,9 @@
                     </div>
                     @endforeach
                 @empty
-                    <p class="text-muted">No Course found</p>
+                    <div class="course-content-accor">
+                        <h3 class="text-center"> No Courses found! </h3>
+                    </div>
                 @endforelse
             </div>
         </div>
