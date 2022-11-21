@@ -57,7 +57,7 @@
                                                     </div>
                                                     <div class="col-3">
                                                         <label>Duration</label>
-                                                        <p>{{ $item->year_from.' - '.$item->year_to }}</p>
+                                                        <p>{{date('M Y',strtotime($item->year_from))}} - {{$item->year_to == '' || strtotime($item->year_to) > strtotime(date('Y-m-d')) ? 'Present' : date('M Y',strtotime($item->year_to))}}</p>
                                                     </div>
                                                     <div class="col-3">
                                                         <label>Contact</label>
@@ -92,7 +92,8 @@
                                                     <div class="col-lg-6 col-12">
                                                         <div class="box">
                                                             <h4>Long Description</h4>
-                                                            <p>{{ $item->short_desc }}</p>
+                                                            <p>{{ substr($item->long_desc,0,300) }} @if(strlen($item->long_desc)>300)<small class="text-underline text-primary text-lowercase showMore" style="cursor: pointer">...more</small>@endif</p>
+                                                            <p style="display: none;">{{ $item->long_desc }} @if(strlen($item->long_desc)>300)<small class="text-underline text-primary text-lowercase showLess" style="cursor: pointer">...less</small>@endif</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -108,4 +109,16 @@
         </div>
     </div>
 </section>
+@endsection
+@section('script')
+    <script>
+        $('.showMore').click(function(){
+            $(this).parent().hide();
+            $(this).parent().next().show();
+        })    
+        $('.showLess').click(function(){
+            $(this).parent().hide();
+            $(this).parent().prev().show();
+        })    
+    </script>
 @endsection

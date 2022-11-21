@@ -55,7 +55,10 @@ class ExperienceController extends BaseController
         $this->validate($request, [
             'occupation' => 'required|string|min:1',
             'company_title' => 'required|string|min:1',
+            'year_from' => 'required|string|min:1',
+            'short_desc' => 'nullable|string|max:200'
         ]);
+
         $params = $request->except('_token');
 
         $experience = $this->WorkExperienceRepository->createExperience($params);
@@ -88,9 +91,9 @@ class ExperienceController extends BaseController
         $this->validate($request, [
             'occupation' => 'required|string|min:1',
             'company_title' => 'required|string|min:1',
-
-
+            'year_from' => 'required|string|min:1',
         ]);
+
         $params = $request->except('_token');
         $experience = $this->WorkExperienceRepository->updateExperience($params);
 

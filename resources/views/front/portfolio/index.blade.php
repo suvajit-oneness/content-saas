@@ -201,7 +201,12 @@
                         @foreach ($data->employments as $employment)
                         <div class="portfolio-v4-content-list">
                             <h4>{{$employment->occupation}} | {{$employment->company_title}}</h4>
-                            <span class="badge"> {{$employment->year_from}} - {{$employment->year_to ?? 'Present'}} </span>
+                            @if($employment->link == '')
+                                <p><small>No company url found</small></p>
+                            @else
+                                <p><a href="{{$employment->link}}"><small>{{$employment->link}}</small></a></p>
+                            @endif                            
+                            <span class="badge"> {{date('M Y',strtotime($employment->year_from))}} - {{$employment->year_to == '' || strtotime($employment->year_to) > strtotime(date('Y-m-d')) ? 'Present' : date('M Y',strtotime($employment->year_to))}} </span>
                             <p>{{$employment->short_desc}}</p>
                         </div>
                         @endforeach
