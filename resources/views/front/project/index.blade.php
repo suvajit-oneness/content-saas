@@ -6,10 +6,18 @@
     <div class="container">
         <div class="row my-3">
             <div class="col-md-8">
-                <div class="d-flex align-items-center">
+                <form class="d-flex align-items-center" action="" method="GET">
                     <p class="text-muted"><small>Displaying {{$data->firstItem()}} to {{$data->lastItem()}} of {{$data->total()}} records </small></p>
-                    <input type="search" class="form-control w-50 ms-4" placeholder="Search by keyword">
-                </div>
+                    <input type="search" name="keyword" value="{{request()->input('keyword')}}" class="form-control w-50 ms-4" placeholder="Search by title">
+                    <select name="search_status" class="form-control w-50 ms-4">
+                        <option value="" selected>All</option>
+                        @foreach ($status as $s)
+                            <option value="{{ $s->slug }}" {{request()->input('search_status') == $s->slug ? 'selected' : ''}}>{{ $s->title }}</option>
+                        @endforeach
+                    </select>
+                    <button class="btn btn-success btn-search mx-1"><i class="fa fa-search"></i></button>
+                    <a href="{{route('front.project.index')}}" class="btn btn-danger btn-search mx-1"><i class="fa fa-times"></i></a>
+                </form>
             </div>
             <div class="col-md-4 text-end">
                 <a href="{{ route('front.project.create') }}" class="add-btn-edit d-inline-block">Create new Project <i class="fa-solid fa-plus"></i></a>

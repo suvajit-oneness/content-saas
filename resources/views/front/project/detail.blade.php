@@ -29,12 +29,18 @@
             <div class="col-md-6"><p class="mb-3"></p></div>
 
             <div class="col-md-8">
-                <div class="d-flex align-items-center">
-                    <p class="text-muted">
-                        Task List
-                    </p>
-                    <input type="search" class="form-control w-50 ms-4" placeholder="Search by keyword">
-                </div>
+                <form class="d-flex align-items-center" action="" method="GET">
+                    <p class="text-muted">Task List</p>
+                    <input type="search" name="keyword" value="{{request()->input('keyword')}}" class="form-control w-50 ms-4" placeholder="Search by Title">
+                    <select name="search_status" class="form-control w-50 ms-4">
+                        <option value="" selected>All</option>
+                        @foreach ($status as $s)
+                            <option value="{{ $s->slug }}" {{request()->input('search_status') == $s->slug ? 'selected' : ''}}>{{ $s->title }}</option>
+                        @endforeach
+                    </select>
+                    <button class="btn btn-success btn-search mx-1"><i class="fa fa-search"></i></button>
+                    <a href="{{route('front.project.detail', $data->slug)}}" class="btn btn-danger btn-search mx-1"><i class="fa fa-times"></i></a>
+                </form>
             </div>
             <div class="col-md-4 text-end">
                 <a href="{{ route('front.project.task.create', $data->id) }}" class="add-btn-edit d-inline-block">Create new Task <i class="fa-solid fa-plus"></i></a>
@@ -42,77 +48,77 @@
         </div>
 
         <table class="table">
-            <tr>
-                <th class="task-title">
-                    Task Name
-                </th>
-                <th>
-                    Task Description
-                </th>
-                <th class="download-link">
-                    Download
-                </th>
-                <th class="d-flex align-items-center task-update">
-                    <div>
-                        Comments
-                    </div>
-                    <div>
-                        Status
-                    </div>
-                    <div>
-                        &nbsp;
-                    </div>
-                </th>
-            </tr>
-            @forelse ($tasks as $index => $item)
-                <tr class=" mb-3 task-row">
-                    <td class="task-title">
-                        <p>
-                            <a href="{{ route('front.project.task.detail', $item->slug) }}" class="text-success">
-                            {{ $index + $tasks->firstItem() }}. {{ ucwords($item->title) }}
-                            </a>
-                        </p>
-                    </td>
-                    <td>
-                        <p class="text-muted short-desc"><small>{{ $item->short_desc }}</small></p>
-                    </td>
-                    <td class="download-link">
-                        @if ($item->document)
-                            <a href="{{ asset($item->document) }}" class="badge bg-success download-badge d-inline-block" download>
-                                <i class="fas fa-download"></i>
-                                Download
-                            </a>
-                        @endif
-                    </td>
-                    {{-- <td>
-                        <a href="{{ route('front.project.task.detail', $item->slug) }}" class="text-success"><u><small>View task details</small></u></a>
-                    </td> --}}
-                    <td class="task-update position-static">
-                        <div class="dropdown">
-                            <a type="button" class="badge bg-success download-badge d-inline-block" data-bs-toggle="modal" data-bs-target="#exampleModal{{$item->id}}">
-                                @php
-                                $totalComments = totalComments($item->id);
-                                @endphp
-                                {{ $totalComments->comment_count }} Comments
-                            </a>
-                            <select onchange="changeProjectAndTaskStatus(`{{route('front.project.task.updateStatus')}}`,this,'{{$item->id}}')" name="status" id="status" height="24px" class="badge-sm badge bg-success download-badge d-inline-block">
-                                <option value="" selected disabled>Change Status</option>
-                                @foreach ($status as $s)
-                                    <option value="{{$s->slug}}" {{ ($s->slug == $item->status) ? 'selected' : '' }}>{{$s->title}}</option>
-                                @endforeach
-                            </select>
-                            <div class="input-group mb-3 spare_input{{$item->id}}" style="display: none;">
-                                <input type="text" name="spare{{$item->id}}" class="form-control" placeholder="Name...">
-                                <button class="btn btn-outline-secondary text-sm" type="button" id="button-addon2"><i class="fa fa-check"></i></button>
-                                <span class="btn btn-outline-secondary text-sm" type="button" id="button-addon2"><i class="fa fa-times"></i></span>
-                            </div>
-                            <button class="btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-ellipsis-v"></i>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a class="dropdown-item text-muted" href="{{ route('front.project.task.edit', $item->id) }}">Edit</a></li>
-                                <li><a class="dropdown-item text-muted" href="{{ route('front.project.task.delete', $item->id) }}" onclick="return confirm('Are you sure ?')">Delete</a></li>
-                            </ul>
+            <thead>
+                <tr>
+                    <th>SR</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Document</th>
+                    <th>Comments</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse ($tasks as $index => $item)
+                    <tr class=" mb-3 task-row">
+                        <td>
+                            {{ $index + $tasks->firstItem() }}.
+                        </td>
+                        <td class="task-title">
+                            <p>
+                                <a href="{{ route('front.project.task.detail', $item->slug) }}" class="text-success">
+                                {{ ucwords($item->title) }}
+                                </a>
+                            </p>
+                        </td>
+                        <td>
+                            <p class="text-muted short-desc"><small>{{ $item->short_desc }}</small></p>
+                        </td>
+                        <td class="download-link">
+                            @if ($item->document)
+                                <a href="{{ asset($item->document) }}" class="badge bg-success download-badge d-inline-block" download>
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                </a>
+                            @endif
+                        </td>
+                        {{-- <td>
+                            <a href="{{ route('front.project.task.detail', $item->slug) }}" class="text-success"><u><small>View task details</small></u></a>
+                        </td> --}}
+                        <div class="task-update position-static">
+                            {{-- <div class="dropdown"> --}}
+                            <td>
+                                <a type="button" class="badge bg-success download-badge d-inline-block" data-bs-toggle="modal" data-bs-target="#exampleModal{{$item->id}}">
+                                    @php
+                                    $totalComments = totalComments($item->id);
+                                    @endphp
+                                    {{ $totalComments->comment_count }} Comments
+                                </a>
+                            </td>
+                            <td>
+                                <select onchange="changeProjectAndTaskStatus(`{{route('front.project.task.updateStatus')}}`,this,'{{$item->id}}')" name="status" id="status" height="24px" class="badge-sm badge bg-success download-badge d-inline-block">
+                                    <option value="" selected disabled>Change Status</option>
+                                    @foreach ($status as $s)
+                                        <option value="{{$s->slug}}" {{ ($s->slug == $item->status) ? 'selected' : '' }}>{{$s->title}}</option>
+                                    @endforeach
+                                </select>
+                                <div class="input-group mb-3 spare_input{{$item->id}}" style="display: none;">
+                                    <input type="text" name="spare{{$item->id}}" class="form-control" placeholder="Name...">
+                                    <button class="btn btn-outline-secondary text-sm" type="button" id="button-addon2"><i class="fa fa-check"></i></button>
+                                    <span class="btn btn-outline-secondary text-sm" type="button" id="button-addon2"><i class="fa fa-times"></i></span>
+                                </div>
+                            </td>
+                            <td>
+                                <button class="btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <li><a class="dropdown-item text-muted" href="{{ route('front.project.task.edit', $item->id) }}">Edit</a></li>
+                                    <li><a class="dropdown-item text-muted" href="{{ route('front.project.task.delete', $item->id) }}" onclick="return confirm('Are you sure ?')">Delete</a></li>
+                                </ul>
+                            </td>
+                            {{-- </div> --}}
                         </div>
                         <div class="modal fade" id="exampleModal{{$item->id}}" tabindex="-1"
                             aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -175,13 +181,15 @@
                                 </div>
                             </div>
                         </div>
-                    </td>
-                </tr>
-            @empty
-                <div class="">
-                    <div class="col-12 text-muted">No records found</div>
-                </div>
-            @endforelse
+                    </tr>
+                @empty
+                    <tr width="100%">
+                        <td colspan="7" class="text-center">
+                            <div class="col-12 text-muted">No records found</div>
+                        </td>
+                    </tr>
+                @endforelse
+            </tbody>
         </table>
 
         @if (count($tasks) > 0)
