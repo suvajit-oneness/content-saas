@@ -60,23 +60,28 @@
                             </tr>
                             <tr>
                                 <td>Image</td>
+                                @if(auth()->guard('web')->user()->image)
                                 <td><img src="{{ asset(auth()->guard('web')->user()->image) }}" alt="" height="100"></td>
+                                @else
+                                <td>No data found</td>
+                                @endif
                                 <td></td>
                             </tr>
-                            @if(auth()->guard('web')->user()->intro_video)
-                                <tr>
-                                    <td>Intro Video</td>
-                                    <td><video src="{{ asset(auth()->guard('web')->user()->intro_video) }}" controls alt="" height="100"></video>
-                                    <td></td>
-                                </tr>
-                            @endif
+                            <tr>
+                                <td>Intro Video</td>
+                                @if(auth()->guard('web')->user()->intro_video)
+                                    <td><video src="{{ asset(auth()->guard('web')->user()->intro_video) }}" controls alt="" height="100"></video></td>
+                                @else
+                                <td>No data found</td>
+                                @endif
+                                <td></td>
+                            </tr>
                             <tr>
                                 <td>Banner Image</td>
                                 @if(auth()->guard('web')->user()->banner_image)
-                                    <td> <img src="{{ asset(auth()->guard('web')->user()->banner_image) }}" id="articleImage" class="img-fluid" alt="" width="100" height="100">
-                                    </td>
+                                    <td> <img src="{{ asset(auth()->guard('web')->user()->banner_image) }}" id="articleImage" class="img-fluid" alt="" width="100" height="100"></td>
                                 @else
-                                    <td></td>
+                                    <td>No data found</td>
                                 @endif
                                 <td></td>
                             </tr>
@@ -108,6 +113,15 @@
                                 </td>
                             </tr>
                             <tr class="portfolio-social">
+                                <td>Language</td>
+                                <td>
+                                @foreach ($data->languages as $language)
+                                    {!! $language->languageDetails ? $language->languageDetails->name : '' !!}
+                                @endforeach
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr class="portfolio-social">
                                 <td>Social media profiles</td>
                                 <td>
                                 @foreach ($data->socialMedias as $socialMedia)
@@ -120,9 +134,13 @@
                             </tr>
                             <tr>
                                 <td>Favorite Quote</td>
-                                <td><span class="quote-author">{{ auth()->guard('web')->user()->quote_by }}</span>
-                                    <p class="quote-desc">{!! auth()->guard('web')->user()->quote !!}</p>
+                                @if(auth()->guard('web')->user()->quote)
+                                <td><span class="quote-author">{{ auth()->guard('web')->user()->quote }}</span>
+                                    <p class="quote-desc">{!! auth()->guard('web')->user()->quote_by !!}</p>
                                 </td>
+                                @else
+                                    <td>No data found</td>
+                                @endif
                                 <td></td>
                             </tr>
                             <tr>
@@ -138,9 +156,6 @@
                                 <td></td>
                             </tr>
                         </tbody>
-
-
-
                         <tbody class="tbody-content tbody-content-edit" id="portfolio">
                             <tr>
                                 <td>

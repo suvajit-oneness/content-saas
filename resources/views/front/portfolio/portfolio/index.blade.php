@@ -49,7 +49,7 @@
                                     <div class="row mt-1">
                                     @foreach($data->portfolios as $key => $item)
                                         <div class="col-12 col-lg-6 col-md-12">
-                                            <div class="card userPortfolio">
+                                            <div class="card userPortfolio mb-4">
                                                 <img src="{{ asset($item->image) }}" id="articleImage" class="img-fluid " alt="" height="50">
                                                 <div class="action">
                                                     <a href="{{ route('front.portfolio.portfolio.edit', $item->id) }}"><i class="fa-solid fa-pen edit table-icon"></i></a>
@@ -57,14 +57,17 @@
                                                     <a href="{{ route('front.portfolio.portfolio.delete', $item->id) }}" onclick="return confirm('Are you sure ?')"><i class="fa-solid fa-trash-can trash table-icon"></i></a>
                                                 </div>
                                                 <div class="edit-card">
-                                                    <div class="date">
-                                                        <span>{{ date('j F Y, g:i a', strtotime($item->created_at)) }}</span>
+                                                    <div class="market-research-date">
+                                                        <div class="market-research-badge">
+                                                            <span>{{ $item->category }}</span>
+                                                        </div>
+                                                        <h6>{{ date('j M, Y', strtotime($item->created_at)) }}</h6>
                                                     </div>
                                                     <div class="edit-heading">
                                                         <h4>{{ $item->title }}</h4>
-                                                        <p>Category: <span class="text-dark">{{ $item->category }}</span></p>
-                                                        <p>{{ $item->tags }}</p>
+                                                        <p> {!! portfolioTagsHtml($item->id) !!}</p>
                                                         <p>{{ $item->short_desc }}</p>
+
                                                     </div>
                                                 </div>
                                             </div>

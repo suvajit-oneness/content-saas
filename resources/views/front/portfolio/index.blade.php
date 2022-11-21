@@ -28,6 +28,7 @@
                         <span>{{$data->user->country}}</span>
                     </div>
                 </div>
+                <p class="text-right"><i class="fa-solid fa-phone"></i><span class="ms-2">{{$data->user->mobile}}</span></p>
                 <p>
                     {{$data->user->short_desc}}
                 </p>
@@ -69,6 +70,17 @@
                 </div>
                 @else
                 <p class="small">No languages found</p>
+                @endif
+                @if($data->user->quote)
+                <div class="language">
+                    <span>Favourite Quote</span>
+                </div>
+                <div class="view-lang">
+                    <ul class="list-unstyled p-0 m-0 flex-column align-items-start">
+                        <h5>{{$data->user->quote}}</h5>
+                        <p class="w-100 text-right">- {{$data->user->quote_by}}</p>   
+                    </ul>
+                </div>
                 @endif
             </div>
 
@@ -112,7 +124,11 @@
                     </div>
                     <div class="marker-research-info">
                         <a href="{{ $portfolio->link }}" class="research-link">{{$portfolio->title}}</a>
-                        <p>{{$portfolio->short_desc}}</p>
+                         {!! portfolioTagsHtml($portfolio->id) !!}
+                        <p> {{ substr(strip_tags($portfolio->short_desc), 0, 500) }}
+                           
+                        </p>
+                       
                     </div>
                 </div>
             </div>
@@ -125,7 +141,7 @@
             @endforelse
 
             @forelse ($data->specialities as $speciality)
-            <div class="col-12 col-lg-4 col-md-6 portfolio-links-item" id="specialities">
+            <div class="col-12 col-lg-4 col-md-6 portfolio-links-item" id="specialities" style="height:290">
                 <div class="market-research-content">
                     {{-- <div class="img">
                         <a href="" class="research-link"><img src="{{ asset($speciality->image) }}" alt="" /></a>
@@ -680,4 +696,21 @@
 
 @section('script')
     <script src="{{ asset('frontend/dist/owl.carousel.min.js') }}"></script>
+<script>
+    function myFunction() {
+        var dots = document.getElementById("dots");
+        var moreText = document.getElementById("more");
+        var btnText = document.getElementById("myBtn");
+    
+        if (dots.style.display === "none") {
+            dots.style.display = "inline";
+            btnText.innerHTML = "Read more";
+            moreText.style.display = "none";
+        } else {
+            dots.style.display = "none";
+            btnText.innerHTML = "Read less";
+            moreText.style.display = "inline";
+        }
+    }
+</script>
 @endsection

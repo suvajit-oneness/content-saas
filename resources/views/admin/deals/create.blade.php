@@ -124,7 +124,7 @@
                         </div>
                     </div><br>
                     <div class="tile-footer">
-                        <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save</button>
+                        <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save Deal</button>
                         &nbsp;&nbsp;&nbsp;
                         <a class="btn btn-secondary" href="{{ route('admin.deals.index') }}"><i
                                 class="fa fa-fw fa-lg fa-times-circle"></i>Back</a>

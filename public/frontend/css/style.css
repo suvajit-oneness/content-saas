@@ -1984,11 +1984,11 @@ a.browse-writers:hover {
 }
 
 .content-mid ul li {
-  font-size: 12px;
+  font-size: 12px !important;
   background: #eeeeee;
-  color: #777;
+  color: #777 !important;
   font-weight: 500;
-  padding: 4px 10px;
+  padding: 4px 10px !important;
   margin: 0 4px;
   border-radius: 5px;
   text-align: center;

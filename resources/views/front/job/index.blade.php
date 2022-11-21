@@ -383,17 +383,7 @@
                                             </p> --}}
                                         </div>
                                     </div>
-
                                     {!! jobTagsHtml($data->id) !!}
-
-                                    {{-- <div class="content-mid">
-                                        <ul class="list-unstyled p-0 m-0">
-                                            @foreach ($tag as $tagKey => $tagVal)
-                                                <li>{{ ucwords($tagVal->title) }} </li>
-                                            @endforeach
-                                        </ul>
-                                    </div> --}}
-
                                     <div class="line"></div>
 
                                     <div class="content-btm">

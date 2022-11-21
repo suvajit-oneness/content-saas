@@ -107,7 +107,7 @@ class BlogController extends BaseController
      */
     public function update(Request $request)
     {
-       // dd($request->all());
+        //dd($request->all());
         $request->validate([
             'title' => 'required|string|min:1',
         ]);
