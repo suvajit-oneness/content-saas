@@ -59,26 +59,27 @@
                                 <p class="small text-danger">{{ $message }}</p>
                             @enderror
                         </div>
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <label class="control-label" for="discount_amount">Deal discount amount <span class="m-l-5 text-danger">*</span></label>
+                                <input type="number" name="discount_amount" id="discount_amount" value="{{ old('discount_amount') ?? $deal->discount_amount }}" class="form-control">
+                                @error('discount_amount')
+                                <p class="small text-danger">{{ $message }}</p>
+                                @enderror
+                            </div>
 
-                        <div class="form-group">
-                            <label class="control-label" for="discount_amount">Deal discount <span class="m-l-5 text-danger">*</span></label>
-                            <input type="number" name="discount_amount" id="discount_amount" value="{{ old('discount_amount') ?? $deal->discount_amount }}" class="form-control">
-                            @error('discount_amount')
-                            <p class="small text-danger">{{ $message }}</p>
-                            @enderror
+                            <div class="form-group col-6">
+                                <label class="control-label" for="discount_type">Deal discount <span class="m-l-5 text-danger">*</span></label>
+                                <select name="discount_type" class="form-control" id="discount_type">
+                                    <option value="flat" {{ old('discount_type') ?? $deal->discount_type ==  'flat' ? 'selected' : ''}}>Flat($)</option>
+                                    <option value="percentage" {{ old('discount_type') ?? $deal->discount_type ==  'percentage' ? 'selected' : ''}}>Percentage(%)</option>
+                                </select>
+                                @error('discount_type')
+                                <p class="small text-danger">{{ $message }}</p>
+                                @enderror
+                            </div>
                         </div>
-
-                        <div class="form-group">
-                            <label class="control-label" for="discount_type">Deal discount <span class="m-l-5 text-danger">*</span></label>
-                            <select name="discount_type" class="form-control" id="discount_type">
-                                <option value="flat" {{ old('discount_type') ?? $deal->discount_type ==  'flat' ? 'selected' : ''}}>Flat($)</option>
-                                <option value="percentage" {{ old('discount_type') ?? $deal->discount_type ==  'percentage' ? 'selected' : ''}}>Percentage(%)</option>
-                            </select>
-                            @error('discount_type')
-                            <p class="small text-danger">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        <div class="d-flex">
+                        <div class="row">
                             <div class="form-group col-6">
                                 <label class="control-label" for="expiry_date">Deal Expiry Date <span class="m-l-5 text-danger">*</span></label>
                                 <input type="date" name="expiry_date" id="expiry_date" value="{{date('Y-m-d', strtotime(old('expiry_date') ?? $deal->expiry_date))}}" class="form-control">
