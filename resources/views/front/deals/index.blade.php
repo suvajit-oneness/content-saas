@@ -1,7 +1,7 @@
 @php
     CheckIfContentIsUnderSubscription(1, 'deals')
 @endphp
-@extends('front.layouts.app')
+@extends('front.layouts.appprofile')
 @section('title', ' Deals')
 
 @section('section')
@@ -93,7 +93,7 @@
                 <div class="row">
                     @foreach ($deal as $dealProductkey => $data)
                         @if(CheckIfContentIsUnderSubscription($data->id, 'deals'))
-                            <div class="col-12 col-lg-4 col-md-6 mb-3 some-list-1">
+                            <div class="col-12 col-lg-4 col-md-6 mb-3 some-list-1 blog_list">
                                 <div class="card">
                                     <a href="{{$data->company_website_link}}" target="_blank">
                                         <img src="{{ asset($data->company_logo) }}" class="card-img-top">
@@ -108,13 +108,13 @@
                                             </div>
                                         </div>
                                         <div class="location_btn">
-                                            <a href="{{route('front.deals.detail',$data->slug)}}" class="btn btn-primary btn-sm">Get Coupon</a>
+                                            <a href="{{route('front.deals.detail',$data->slug)}}" class="btn button sm-btn">Get Coupon</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         @else
-                            <div class="col-12 col-lg-4 col-md-6 mb-3 some-list-1">
+                            <div class="col-12 col-lg-4 col-md-6 mb-3 some-list-1 blog_list">
                                 <div class="card" style="position: relative">
                                     <a href="{{$data->company_website_link}}" target="_blank">
                                         <img src="{{ asset($data->company_logo) }}" class="card-img-top">
@@ -129,7 +129,7 @@
                                             </div>
                                         </div>
                                         <div class="location_btn">
-                                            <a href="{{route('front.deals.detail',$data->slug)}}" class="btn btn-primary btn-sm">Get Coupon</a>
+                                            <a href="{{route('front.deals.detail',$data->slug)}}" class="btn button sm-btn">Get Coupon</a>
                                         </div>
                                     </div>
                                     <div style="position: absolute; width: 100%; height: 100%; background-color: rgba(220,220,220,0.1); backdrop-filter: blur(4px);">
@@ -161,7 +161,7 @@
         <div class="container">
             <div class="row">
                 @foreach ($deal as $dealProductkey => $data)
-                    <div class="col-12 col-lg-4 col-md-6 mb-3 some-list-1">
+                    <div class="col-12 col-lg-4 col-md-6 mb-3 some-list-1 blog_list">
                         <div class="card">
                             <a href="{{ route('front.event.details', $data->slug) }}">
                                 <img src="{{ asset($data->company_logo) }}" class="card-img-top">

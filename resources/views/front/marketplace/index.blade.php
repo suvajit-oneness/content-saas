@@ -2,6 +2,15 @@
 @section('title',' Freelancers Marketplace')
 
 @section('section')
+<style>
+    .recommended-products-top img {
+        max-height: none !important;
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+</style>
 <section class="freelance-market-banner">
     <div class="container">
         <div class="row">
@@ -24,7 +33,7 @@
                                     @endif
                                 @empty
                                     <option value="">No user have any category!</option>
-                                @endforelse    
+                                @endforelse
                             </select>
                             <div class="input">
                                 <input type="text" placeholder="What are you looking for?" value="{{request()->input('name')}}" name="name">
@@ -76,7 +85,7 @@
                         </div>
 
                         <div class="content-mid">
-                            <ul class="list-unstyled p-0 m-0" id="showLessContent">
+                            <ul class="list-unstyled p-0 m-0" id="showLessContent_{{$data->id}}">
                                 @for($i=0; $i<count(explode(',',$data->categories)); $i++)
                                     @if($i<2)
                                         @if(explode(',',$data->categories)[$i] != '')
@@ -85,10 +94,10 @@
                                     @endif
                                 @endfor
                                 @if(count(explode(',',$data->categories)) > 2)
-                                    <li id="showMore" style="cursor: pointer;">+ {{count(explode(',',$data->categories)) - 2}} more</li>
+                                    <li class="showMore" onclick="showMore({{$data->id}})" style="cursor: pointer;">+ {{count(explode(',',$data->categories)) - 2}} more</li>
                                 @endif
                             </ul>
-                            <ul class="list-unstyled p-0 m-0 d-none" style="flex-flow: wrap;" id="showMoreContent">
+                            <ul class="list-unstyled p-0 m-0 d-none" style="flex-flow: wrap;" id="showMoreContent_{{$data->id}}">
                                 @for($i=0; $i<count(explode(',',$data->categories)); $i++)
                                     @if(explode(',',$data->categories)[$i] != '')
                                         <li class="my-1">{{explode(',',$data->categories)[$i]}}</li>
@@ -298,7 +307,7 @@
                         <h6>{{$item->first_name . ' ' . $item->last_name}}</h6>
                     </div>
                     <div class="recommended-products-info">
-                        <h4><a href="{{route('front.portfolio.index', $item->slug)}}">{{substr($item->short_desc,0,15)}}...</a></h4>
+                        <h4><a href="{{route('front.portfolio.index', $item->slug)}}">{{substr($item->short_desc,0,15)}}</a></h4>
                         <p>{{$item->categories}}</p>
                     </div>
                     <div class="recommended-products-btm">
@@ -437,7 +446,7 @@
                 <div class="faq-tabs">
                     <ul class="p-0 m-0">
                         @foreach ($marketplacefaq as $key => $item)
-                            <li class="faq-tab {{$key == 0 ? 'active' : ''}}" data-tab="data_tab{{$item->header_id}}">{{$item->header}}  
+                            <li class="faq-tab {{$key == 0 ? 'active' : ''}}" data-tab="data_tab{{$item->header_id}}">{{$item->header}}
                                 <div class="fac-tab-check">
                                     <img src="{{ asset('frontend/img/check-normal.png')}}" alt="">
                                 </div>
@@ -946,9 +955,9 @@
 
 @section('script')
 <script>
-    $('#showMore').click(function(){
-        $('#showMoreContent').removeClass('d-none');
-        $('#showLessContent').addClass('d-none');
-    })
+    function showMore(id) {
+        $('#showMoreContent_'+id).removeClass('d-none');
+        $('#showLessContent_'+id).addClass('d-none');
+    }
 </script>
 @endsection

@@ -15,7 +15,7 @@
         <div class="row mt-0">
             <div class="col-12">
                 <div class="table-responsive table-tabs">
-                    <table class="table">
+                    <table class="table projectTable">
                         <thead>
                             <tr>
                                 <th>SR</th>
@@ -31,7 +31,9 @@
                             @forelse ($data as $index => $item)
                             <tr>
                                 <td>{{ $index + $data->firstItem() }}</td>
-                                <td>{{ $item->title }}</td>
+                                <td width="230">
+                                    <h3>{{ $item->title }}</h3>
+                                </td>
                                 <td>
                                     <p class="text-muted"><small>{{ $item->short_desc }}</small></p>
                                 </td>
@@ -51,7 +53,7 @@
                                 <td width="155px">
                                     {{-- <span class="badge text-success" data-toggle="tooltip" title="{{ $item->statusDetail->icon ?? ''}}">{!! $item->statusDetail->icon ?? ''.' '.ucwords($item->status) !!}</span> --}}
                                     <select onchange="changeProjectAndTaskStatus(`{{route('front.project.updateStatus')}}`,this,'{{$item->id}}')" name="status" id="status" class="form-control">
-                                        <option value="" selected>Change Status</option>
+                                        <option value="" selected disabled>Change Status</option>
                                         @foreach ($status as $s)
                                             <option value="{{ $s->slug }}" {{$item->status == $s->slug ? 'selected' : ''}}>{{ $s->title }}</option>
                                         @endforeach
@@ -62,7 +64,7 @@
                                         <span class="btn btn-outline-secondary text-sm" type="button" id="button-addon2"><i class="fa fa-times"></i></span>
                                     </div>
                                 </td>
-                                <td class="text-end" width="150">
+                                <td class="text-end" width="120">
                                     <a href="{{ route('front.project.detail', $item->slug) }}" class="badge bg-dark"> <i class="fas fa-eye"></i> </a>
 
                                     <a href="{{ route('front.project.edit', $item->id) }}" class="badge bg-dark"> <i class="fas fa-edit"></i></a>

@@ -24,11 +24,11 @@
                                         <div class="tile-body">
                                             <div class="form-group">
                                                 <div class="row">
-                                                    <div class="col-md-8">
+                                                    {{-- <div class="col-md-8">
                                                         <label class="control-label" for="title">Status :
                                                             <strong>{{ $data->status }}</strong>
                                                         </label>
-                                                    </div>
+                                                    </div> --}}
 
                                                     {{-- <div class="col-md-4">
                                                         <select name="status" id="status" class="form-control">
@@ -42,7 +42,7 @@
                                                     </div> --}}
                                                 </div>
                                                 
-                                                <div id="statusChange" class="row">
+                                                {{-- <div id="statusChange" class="row">
                                                     <div class="offset-8 col-md-4">
                                                         <label class="control-label" for="status">
                                                             <span
@@ -55,7 +55,7 @@
                                                             <p class="small text-danger">{{ $message }}</p>
                                                         @enderror
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                                     
                                             </div>
 

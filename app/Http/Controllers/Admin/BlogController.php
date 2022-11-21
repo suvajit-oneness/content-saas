@@ -71,6 +71,7 @@ class BlogController extends BaseController
      */
     public function store(Request $request)
     {
+        //dd($request->all());
         $request->validate([
             'title' => 'required|string|min:1',
             'article_category_id' => 'required|array|min:1',
@@ -106,7 +107,7 @@ class BlogController extends BaseController
      */
     public function update(Request $request)
     {
-        //dd($request->all());
+       // dd($request->all());
         $request->validate([
             'title' => 'required|string|min:1',
         ]);

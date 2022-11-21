@@ -66,7 +66,7 @@
                                     {{ $totalComments->comment_count }} Comments
                                 </a>
                                 <select onchange="changeProjectAndTaskStatus(`{{route('front.project.task.updateStatus')}}`,this,'{{$item->id}}')" name="status" id="status" height="24px" class="badge-sm badge bg-success download-badge d-inline-block">
-                                    <option value="" selected>Change Status</option>
+                                    <option value="" selected disabled>Change Status</option>
                                     @foreach ($status as $s)
                                         <option value="{{$s->slug}}" {{ ($s->slug == $item->status) ? 'selected' : '' }}>{{$s->title}}</option>
                                     @endforeach

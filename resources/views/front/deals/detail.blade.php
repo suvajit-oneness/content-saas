@@ -1,4 +1,4 @@
-@extends('front.layouts.app')
+@extends('front.layouts.appprofile')
 @section('title',$deal->title)
 @section('section')
     <style>
@@ -8,6 +8,10 @@
     </style>
     <div class="container artiledetails_banner">
         <div class="row pb-1">
+            <div class="col-12 mt-3 mb-3 text-end">
+                <a href="{{ route('front.deals.index') }}" class="add-btn-edit d-inline-block secondary-btn"><i
+                    class="fa-solid fa-chevron-left"></i> Back</a>
+            </div>
             <div class="col-md-7">
                 <section class="">
                     <div class="container-fluid">
@@ -19,7 +23,7 @@
                             @endif
                         </div>
                     </div>
-                    
+
                 </section>
             </div>
             <div class="col-md-5">

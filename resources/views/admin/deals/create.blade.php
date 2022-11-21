@@ -45,7 +45,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="short_description">Deal Short Description <span class="m-l-5 text-danger">*</span></label>
+                            <label class="control-label" for="short_description">Deal Short Description (Within 60 characters)<span class="m-l-5 text-danger">*</span></label>
                             <textarea type="text" class="form-control" rows="4" name="short_description" id="short_description">{{ old('short_description') }}</textarea>
                             @error('short_description')
                                 <p class="small text-danger">{{ $message }}</p>
@@ -124,8 +124,7 @@
                         </div>
                     </div><br>
                     <div class="tile-footer">
-                        <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save
-                            Course</button>
+                        <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save</button>
                         &nbsp;&nbsp;&nbsp;
                         <a class="btn btn-secondary" href="{{ route('admin.deals.index') }}"><i
                                 class="fa fa-fw fa-lg fa-times-circle"></i>Back</a>

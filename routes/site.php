@@ -23,14 +23,64 @@ Route::name('front.')->group(function () {
     Route::get('/', 'Front\HomeController@index')->name('index');
     Route::get('/blog', 'Front\ArticleController@index')->name('article');
     Route::get('/blog/{slug}', 'Front\ArticleController@details')->name('article.details');
-    // Route::get('/event',function(){
-    //     dd("hi");
-    // })->name('event');
-    Route::get('/event', 'Front\EventController@index')->name('event');
-    Route::get('/event/{slug}', 'Front\EventController@details')->name('event.details');
-    Route::post('/event/calender', 'Front\EventController@calender')->name('event.calender');
-    Route::get('/course', 'Front\CourseController@course')->name('course');
-    Route::get('/course/{slug}', 'Front\CourseController@coursedetails')->name('course.details');
+
+    Route::prefix('user')->group(function () {
+         // dashboard
+         Route::name('dashboard.')->group(function () {
+            Route::get('/dashboard', 'Front\DashboardController@index')->name('index');
+        });
+        Route::get('/event', 'Front\EventController@index')->name('event');
+        Route::get('/event/{slug}', 'Front\EventController@details')->name('event.details');
+        Route::post('/event/calender', 'Front\EventController@calender')->name('event.calender');
+        Route::get('/course', 'Front\CourseController@course')->name('course');
+        Route::get('/course/{slug}', 'Front\CourseController@coursedetails')->name('course.details');
+        Route::name('deals.')->group(function () {
+            Route::get('/deal', 'Front\DealController@index')->name('index');
+            Route::get('/deal/{slug}', 'Front\DealController@details')->name('detail');
+        });
+        // job
+        Route::name('job.')->group(function () {
+            Route::get('/job', 'Front\JobController@index')->name('index');
+            Route::get('/job/{slug}', 'Front\JobController@details')->name('details');
+            Route::post('/save/job', 'Front\JobController@store')->name('save');
+            Route::post('/apply/job', 'Front\JobController@jobapply')->name('apply');
+            Route::post('/job/interest/{id}', 'Front\JobController@jobinterest')->name('interest');
+            Route::post('/job/report', 'Front\JobController@jobreport')->name('report');
+        });
+
+        // template
+        Route::name('template.')->group(function () {
+        Route::get('/template', 'Front\TemplateController@index')->name('index');
+        Route::get('/template/{slug}', 'Front\TemplateController@details')->name('details');
+        Route::post('/save/template', 'Front\TemplateController@store')->name('save');
+        });
+
+        // project
+        Route::name('project.')->group(function () {
+        Route::get('/project', 'Front\ProjectController@index')->name('index');
+        Route::get('/project/create', 'Front\ProjectController@create')->name('create');
+        Route::post('/project/store', 'Front\ProjectController@store')->name('store');
+        Route::get('/project/{slug}', 'Front\ProjectController@detail')->name('detail');
+        Route::get('/project/delete/{id}', 'Front\ProjectController@delete')->name('delete');
+        Route::get('/project/edit/{id}', 'Front\ProjectController@edit')->name('edit');
+        Route::post('/project/update/{id}', 'Front\ProjectController@update')->name('update');
+        Route::post('/project/updatestatus', 'Front\ProjectController@updateStatus')->name('updateStatus');
+        Route::post('/project/updateCommercial', 'Front\ProjectController@updateCommercial')->name('updateCommercial');
+        });
+
+        // project task
+        Route::name('project.task.')->group(function () {
+        Route::get('/project/{projectId}/task/create', 'Front\ProjectTaskController@create')->name('create');
+        Route::post('/project/task/store', 'Front\ProjectTaskController@store')->name('store');
+        Route::get('/project/task/{slug}', 'Front\ProjectTaskController@detail')->name('detail');
+        Route::get('/project/task/delete/{id}', 'Front\ProjectTaskController@delete')->name('delete');
+        Route::get('/project/task/edit/{id}', 'Front\ProjectTaskController@edit')->name('edit');
+        Route::post('/project/task/update/{id}', 'Front\ProjectTaskController@update')->name('update');
+        Route::post('/project/task/updatestatus', 'Front\ProjectTaskController@updateStatus')->name('updateStatus');
+        Route::post('/project/task/updateCommercial', 'Front\ProjectTaskController@updateCommercial')->name('updateCommercial');
+        Route::post('/project/task/comment/update/{id}', 'Front\ProjectTaskController@updateComment')->name('comment.update');
+        });
+    });
 
     // cart
     Route::get('/cart', 'Front\CartController@index')->name('cart');
@@ -48,13 +98,6 @@ Route::name('front.')->group(function () {
     Route::name('market.')->group(function () {
         Route::get('/market', 'Front\MarketController@index')->name('index');
     });
-
-    // Deals
-    Route::name('deals.')->group(function () {
-        Route::get('/deals', 'Front\DealController@index')->name('index');
-        Route::get('/deals/{slug}', 'Front\DealController@details')->name('detail');
-    });
-
     //feature
     Route::name('feature.')->group(function () {
         Route::get('/tool', 'Front\FeatureController@index')->name('index');
@@ -113,55 +156,6 @@ Route::name('front.')->group(function () {
         Route::prefix('user')->name('user.profile.edit')->group(function () {
             Route::get('/update/profile','Front\Portfolio\ProfileController@editProfile');
         });
-
-        // dashboard
-        Route::name('dashboard.')->group(function () {
-            Route::get('/dashboard', 'Front\DashboardController@index')->name('index');
-        });
-
-        // job
-        Route::name('job.')->group(function () {
-            Route::get('/job', 'Front\JobController@index')->name('index');
-            Route::get('/job/{slug}', 'Front\JobController@details')->name('details');
-            Route::post('/save/job', 'Front\JobController@store')->name('save');
-            Route::post('/apply/job', 'Front\JobController@jobapply')->name('apply');
-            Route::post('/job/interest/{id}', 'Front\JobController@jobinterest')->name('interest');
-            Route::post('/job/report', 'Front\JobController@jobreport')->name('report');
-        });
-
-        // template
-        Route::name('template.')->group(function () {
-            Route::get('/template', 'Front\TemplateController@index')->name('index');
-            Route::get('/template/{slug}', 'Front\TemplateController@details')->name('details');
-            Route::post('/save/template', 'Front\TemplateController@store')->name('save');
-        });
-
-        // project
-        Route::name('project.')->group(function () {
-            Route::get('/project', 'Front\ProjectController@index')->name('index');
-            Route::get('/project/create', 'Front\ProjectController@create')->name('create');
-            Route::post('/project/store', 'Front\ProjectController@store')->name('store');
-            Route::get('/project/{slug}', 'Front\ProjectController@detail')->name('detail');
-            Route::get('/project/delete/{id}', 'Front\ProjectController@delete')->name('delete');
-            Route::get('/project/edit/{id}', 'Front\ProjectController@edit')->name('edit');
-            Route::post('/project/update/{id}', 'Front\ProjectController@update')->name('update');
-            Route::post('/project/updatestatus', 'Front\ProjectController@updateStatus')->name('updateStatus');
-            Route::post('/project/updateCommercial', 'Front\ProjectController@updateCommercial')->name('updateCommercial');
-        });
-
-        // project task
-        Route::name('project.task.')->group(function () {
-            Route::get('/project/{projectId}/task/create', 'Front\ProjectTaskController@create')->name('create');
-            Route::post('/project/task/store', 'Front\ProjectTaskController@store')->name('store');
-            Route::get('/project/task/{slug}', 'Front\ProjectTaskController@detail')->name('detail');
-            Route::get('/project/task/delete/{id}', 'Front\ProjectTaskController@delete')->name('delete');
-            Route::get('/project/task/edit/{id}', 'Front\ProjectTaskController@edit')->name('edit');
-            Route::post('/project/task/update/{id}', 'Front\ProjectTaskController@update')->name('update');
-            Route::post('/project/task/updatestatus', 'Front\ProjectTaskController@updateStatus')->name('updateStatus');
-            Route::post('/project/task/updateCommercial', 'Front\ProjectTaskController@updateCommercial')->name('updateCommercial');
-            Route::post('/project/task/comment/update/{id}', 'Front\ProjectTaskController@updateComment')->name('comment.update');
-        });
-
         Route::prefix('user/post-content')->name('user.post-content.')->group(function(){
             Route::get('', 'Front\UserPostController@index')->name('index');
             Route::get('/create', 'Front\UserPostController@create')->name('create');

@@ -55,11 +55,11 @@ class FeedbackController extends BaseController
     {
         $this->validate($request, [
             'date_from' => 'required',
-            'date_to' => 'required',
+           // 'date_to' => 'required',
             'title' => 'required',
             'rating' => 'required',
             'review' => 'required',
-            'description' => 'required|string|min:1',
+            'description' => 'required',
 
         ]);
         $params = $request->except('_token');
@@ -91,14 +91,14 @@ class FeedbackController extends BaseController
      */
     public function update(Request $request)
     {
-        dd($request->all());
+        //dd($request->all());
         $this->validate($request, [
             'date_from' => 'required',
-            'date_to' => 'required',
+          //  'date_to' => 'required',
             'title' => 'required',
             'rating' => 'required',
             'review' => 'required',
-            'description' => 'required|string|min:1',
+            'description' => 'required',
 
         ]);
         $params = $request->except('_token');

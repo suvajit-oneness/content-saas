@@ -1,10 +1,14 @@
-@extends('front.layouts.app')
+@extends('front.layouts.appprofile')
 @section('title',' Course')
 @section('section')
 
 <section class="course-details-section">
     <div class="container">
-        <div class="row">
+        <div class="row mt-0">
+        <div class="col-12 mt-3 mb-3 text-end">
+            <a href="{{ route('front.course') }}" class="add-btn-edit d-inline-block secondary-btn"><i
+                class="fa-solid fa-chevron-left"></i> Back</a>
+        </div>
             <div class="col-12 col-lg-8 col-md-12 mb-3 mb-lg-0">
                 <div class="course-details-left">
                     <div class="theiaStickySidebar">
@@ -14,7 +18,7 @@
                                 <p id="less_text">{!! substr($course->description,0,150) ?? '' !!}...<span style="font-size: 10px"><a onclick="$('#less_text').hide(); $('#all_text').show();" href="javascript:void(0)">See More</a></span></p>
                                 <p id="all_text" style="display: none;">{!! $course->description !!}</p>
                             </div>
-                          
+
                             <div class="learn">
                                 <h5>What you'll learn : </h5>
                                 @foreach (explode(',',$course->course_content) as $item)
@@ -105,10 +109,10 @@
 
                             <div class="course-certification">
                                 <h5>Course Certification : </h5>
-                                @if($course->certificate == 1) 
-                                    <p> &#x2611; Yes </p> 
-                                @else 
-                                    <p> &#8594; No </p> 
+                                @if($course->certificate == 1)
+                                    <p> &#x2611; Yes </p>
+                                @else
+                                    <p> &#8594; No </p>
                                 @endif
                             </div>
 
@@ -174,7 +178,7 @@
                         <h3 class="course-price">
                             <span>$</span>{{ $course->price }}
                         </h3>
-                       
+
 
                         <div class="course-include">
                             <h5>This course includes:</h5>

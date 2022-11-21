@@ -24,8 +24,6 @@
                                  <input type="hidden" name="id" value="{{ $targetarticle->id }}">
                                  @error('title') {{ $message }} @enderror
                             </div>
-                        </div>
-                        <div class="tile-body">
                             <div class="form-group">
                                 <label class="control-label" for="article_category_id"> Category <span class="m-l-5 text-danger"> *</span></label>
                                 {{-- <select class="form-control" name="article_category_id[]" multiple>
@@ -60,9 +58,6 @@
                                 @endif
                                 @error('article_category_id') <p class="small text-danger">{{ $message }}</p> @enderror
                             </div>
-
-                        </div>
-                        <div class="tile-body">
                             <div class="form-group">
                                 <label class="control-label" for="article_sub_category_id"> Sub Category </label>
                                 <select class="form-control form-control-sm" name="article_sub_category_id" disabled>
@@ -71,55 +66,54 @@
                                 </select>
                                 @error('article_sub_category_id') <p class="small text-danger">{{ $message }}</p> @enderror
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label" for="content">Content</label>
-                            <textarea class="form-control" rows="4" name="content" id="content">{{ old('content', $targetarticle->content) }}</textarea>
-                            <input type="hidden" name="id" value="{{ $targetarticle->id }}">
-                            @error('content') {{ $message }} @enderror
+                            <div class="form-group">
+                                <label class="control-label" for="content">Content</label>
+                                <textarea class="form-control" rows="4" name="content" id="content">{{ old('content', $targetarticle->content) }}</textarea>
+                                <input type="hidden" name="id" value="{{ $targetarticle->id }}">
+                                @error('content') {{ $message }} @enderror
 
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label" for="meta_title">Meta Title</label>
-                            <input class="form-control @error('meta_title') is-invalid @enderror" type="text" name="meta_title" id="meta_title" value="{{ old('meta_title', $targetarticle->meta_title) }}"/>
-                            <input type="hidden" name="id" value="{{ $targetarticle->id }}">
-                            @error('meta_title') {{ $message }} @enderror
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="meta_title">Meta Title</label>
+                                <input class="form-control @error('meta_title') is-invalid @enderror" type="text" name="meta_title" id="meta_title" value="{{ old('meta_title', $targetarticle->meta_title) }}"/>
+                                <input type="hidden" name="id" value="{{ $targetarticle->id }}">
+                                @error('meta_title') {{ $message }} @enderror
 
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label" for="meta_key">Meta Key</label>
-                            <input class="form-control @error('meta_key') is-invalid @enderror" type="text" name="meta_key" id="meta_key" value="{{ old('meta_key', $targetarticle->meta_key) }}"/>
-                            <input type="hidden" name="id" value="{{ $targetarticle->id }}">
-                            @error('meta_key') {{ $message }} @enderror
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label" for="meta_description">Description</label>
-                            <textarea class="form-control" rows="4" name="meta_description" id="meta_description">{{ old('meta_description', $targetarticle->meta_description) }}</textarea>
-                            <input type="hidden" name="id" value="{{ $targetarticle->id }}">
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label" for="tag">Tag</label>
-                            <input class="form-control @error('tag') is-invalid @enderror" type="text" name="tag" id="tag" value="{{ old('tag', $targetarticle->tag) }}" multiple/>
-                            <input type="hidden" name="id" value="{{ $targetarticle->id }}">
-                            @error('tag') {{ $message }} @enderror
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-2">
-                                    @if ($targetarticle->image != null)
-                                        <figure class="mt-2" style="width: 80px; height: auto;">
-                                            <img src="{{ asset($targetarticle->image) }}" id="articleImage" class="img-fluid" alt="img">
-                                        </figure>
-                                    @endif
-                                </div>
-                                <div class="col-md-10">
-                                    <label class="control-label">Article Image</label>
-                                    <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image"/>
-                                    @error('image') {{ $message }} @enderror
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="meta_key">Meta Key</label>
+                                <input class="form-control @error('meta_key') is-invalid @enderror" type="text" name="meta_key" id="meta_key" value="{{ old('meta_key', $targetarticle->meta_key) }}"/>
+                                <input type="hidden" name="id" value="{{ $targetarticle->id }}">
+                                @error('meta_key') {{ $message }} @enderror
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="meta_description">Description</label>
+                                <textarea class="form-control" rows="4" name="meta_description" id="meta_description">{{ old('meta_description', $targetarticle->meta_description) }}</textarea>
+                                <input type="hidden" name="id" value="{{ $targetarticle->id }}">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="tag">Tag</label>
+                                <input class="form-control @error('tag') is-invalid @enderror" type="text" name="tag" id="tag" value="{{ old('tag', $targetarticle->tag) }}" multiple/>
+                                <input type="hidden" name="id" value="{{ $targetarticle->id }}">
+                                @error('tag') {{ $message }} @enderror
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        @if ($targetarticle->image != null)
+                                            <figure class="mt-2" style="width: 80px; height: auto;">
+                                                <img src="{{ asset($targetarticle->image) }}" id="articleImage" class="img-fluid" alt="img">
+                                            </figure>
+                                        @endif
+                                    </div>
+                                    <div class="col-md-10">
+                                        <label class="control-label">Article Image</label>
+                                        <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image"/>
+                                        @error('image') {{ $message }} @enderror
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     <div class="tile-footer">
                         <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Update Article</button>
                         &nbsp;&nbsp;&nbsp;

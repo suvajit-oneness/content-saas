@@ -8,7 +8,7 @@
                 <div class="col-12 text-center top-heading">
                     <div class="text-right" style="
                     text-align: right;">
-                    <a class="btn btn-secondary" href="{{ route('front.portfolio.client.index') }}"><i class="fa fa-fw fa-lg fa-chevron-left"></i>Back</a>
+                    <a class="add-btn-edit d-inline-block secondary-btn" href="{{ route('front.portfolio.client.index') }}"><i class="fa fa-fw fa-lg fa-chevron-left"></i>Back</a>
                     </div>
                     <h2>Add  Client Details</h2>
                 </div>
@@ -28,6 +28,16 @@
                                         id="client_name" value="{{ old('client_name') }}" />
 
                                     @error('client_name')
+                                        <p class="small text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div><br>
+                                <div class="form-group">
+                                    <label class="control-label" for="occupation">Client Designation <span class="m-l-5 text-danger">
+                                            *</span></label>
+                                    <input class="form-control @error('occupation') is-invalid @enderror" type="text" name="occupation"
+                                        id="occupation" value="{{ old('occupation') }}" />
+
+                                    @error('occupation')
                                         <p class="small text-danger">{{ $message }}</p>
                                     @enderror
                                 </div><br>
@@ -153,7 +163,7 @@
                             <div class="tile-footer">
                                 <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save
                                     </button>
-                                    <a class="btn btn-secondary" href="{{ route('front.portfolio.client.index') }}"><i class="fa fa-fw fa-lg fa-chevron-left"></i>Back</a>
+                                    <a class="add-btn-edit d-inline-block secondary-btn" href="{{ route('front.portfolio.client.index') }}"><i class="fa fa-fw fa-lg fa-chevron-left"></i>Back</a>
                                 &nbsp;&nbsp;&nbsp;
                             </div>
                         </form>

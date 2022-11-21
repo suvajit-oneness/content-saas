@@ -105,7 +105,7 @@ class BlogRepository extends BaseRepository implements BlogContract
         $collection = collect($params)->except('_token');
         $article->title = $collection['title'];
         if(!empty($params['article_category_id'])) {
-        $article->article_category_id = implode(',',$collection['article_category_id']);
+        $article->article_category_id = implode(",",$collection['article_category_id']);
         }
         if(!empty($params['article_sub_category_id'])) {
         $article->article_sub_category_id = $collection['article_sub_category_id'] ?? '';
@@ -130,7 +130,7 @@ class BlogRepository extends BaseRepository implements BlogContract
             $article->image = imageUpload($params['image'], 'Blogs');
         }
         $article->save();
-
+       // dd($article);
         return $article;
     }
 

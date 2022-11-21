@@ -15,7 +15,7 @@
                         <span class="top-form-btn">
                             <form action="{{ route('front.project.task.update', $data->id) }}" method="POST" role="form" enctype="multipart/form-data">@csrf
                                 <div class="tile-body">
-                                    <div class="form-group">
+                                    {{-- <div class="form-group">
                                         <div class="row">
                                             <div class="col-md-8">
                                                 <label class="control-label" for="title">Status : 
@@ -34,7 +34,7 @@
                                         </div>
                                     </div>
 
-                                    <br>
+                                    <br> --}}
 
                                     <div class="form-group">
                                         <label class="control-label" for="title">Title <span class="m-l-5 text-danger">*</span></label>
