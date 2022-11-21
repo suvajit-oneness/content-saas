@@ -22,35 +22,24 @@
                                 <div class="tile-body">
                                     <div class="form-group">
                                         <div class="row">
-                                            <div class="col-md-8">
+                                            {{-- <div class="col-md-8">
                                                 <label class="control-label" for="title">Status : 
-                                                    {{-- <strong>{{ $data->status }}</strong> --}}
+                                                    <strong>{{ $data->status }}</strong>
                                                 </label>
-                                            </div>
+                                            </div> --}}
 
-                                            <div class="col-md-4">
+                                            {{-- <div class="col-md-4">
                                                 <select name="status" id="status" class="form-control">
                                                     <option value="" disabled>Change Status</option>
                                                     @foreach ($status as $item)
                                                         <option value="{{$item->slug}}" {{ ($item->slug == "icebox") ? 'checked' : '' }}>{{$item->title}}</option>
                                                     @endforeach
                                                 </select>
-                                            </div>
-                                            <div id="statusChange">
-                                                <div class="col-md-4">
-                                                    <label class="control-label" for="status">Type Status<span
-                                                            class="m-l-5 text-danger"></span></label>
-                                                    <input class="form-control @error('status') is-invalid @enderror" type="text"
-                                                        name="status" value="{{ old('status') }}" />
-                                                    @error('status')
-                                                        <p class="small text-danger">{{ $message }}</p>
-                                                    @enderror
-                                                </div>
-                                            </div>
+                                            </div> --}}
                                         
-                                        @error('status')
+                                        {{-- @error('status')
                                             <p class="small text-danger">{{ $message }}</p>
-                                        @enderror
+                                        @enderror --}}
                                     </div>
                                 </div>
 

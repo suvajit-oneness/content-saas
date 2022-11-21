@@ -15,10 +15,10 @@
                         <span class="top-form-btn">
                             <form action="{{ route('front.project.task.store') }}" method="POST" role="form" enctype="multipart/form-data">@csrf
                                 <div class="tile-body">
-                                    {{-- <p class="text-muted mb-0"><small>Project name</small></p>
-                                    <p>{{$project->title}}</p> --}}
+                                    <p class="text-muted mb-0"><small>Project name</small></p>
+                                    <p>{{$project->title}}</p>
 
-                                    <div class="row">
+                                    {{-- <div class="row">
                                         <div class="col-md-8">
                                             <p class="text-muted mb-0"><small>Project name</small></p>
                                             <p>{{$project->title}}</p>
@@ -34,7 +34,7 @@
                                         </div>
                                     </div>
                                     
-                                    <br>
+                                    <br> --}}
 
                                     <div class="form-group">
                                         <label class="control-label" for="title">Title <span class="m-l-5 text-danger">*</span></label>

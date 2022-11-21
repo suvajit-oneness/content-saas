@@ -23,7 +23,7 @@ Route::name('front.')->group(function () {
     Route::get('/', 'Front\HomeController@index')->name('index');
     Route::get('/blog', 'Front\ArticleController@index')->name('article');
     Route::get('/blog/{slug}', 'Front\ArticleController@details')->name('article.details');
-    
+
     Route::prefix('user')->group(function () {
          // dashboard
          Route::name('dashboard.')->group(function () {

@@ -59,6 +59,7 @@ class FeedbackRepository extends BaseRepository implements FeedbackContract
             $education->title = $collection['title'] ?? '';
             $education->rating = $collection['rating'] ?? '';
             $education->review = $collection['review'] ?? '';
+            $education->review_person = $collection['review_person'] ?? '';
             $education->description = $collection['description'] ?? '';
             $education->save();
 
@@ -83,6 +84,7 @@ class FeedbackRepository extends BaseRepository implements FeedbackContract
         $education->title = $collection['title'] ?? '';
         $education->rating = $collection['rating'] ?? '';
         $education->review = $collection['review'] ?? '';
+        $education->review_person = $collection['review_person'] ?? '';
         $education->description = $collection['description'] ?? '';
         $education->save();
 

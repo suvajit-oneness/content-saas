@@ -7,7 +7,7 @@
                 <div class="col-12 text-center top-heading">
                     <div class="text-right" style="
                     text-align: right;">
-                    <a class="btn btn-secondary" href="{{ route('front.job.index') }}"><i class="fa fa-fw fa-lg fa-chevron-left"></i>Back</a>
+                    <a class="add-btn-edit d-inline-block secondary-btn" href="{{ route('front.job.index') }}"><i class="fa fa-fw fa-lg fa-chevron-left"></i>Back</a>
                     </div>
                 </div>
             </div>

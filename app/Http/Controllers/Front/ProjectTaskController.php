@@ -51,7 +51,7 @@ class ProjectTaskController extends Controller
             'project_slug' => 'required|string|min:2|max:255',
             'title' => 'required|string|min:2|max:255',
             'short_desc' => 'required|string|min:2',
-            'status' => 'required|string|min:2',
+            // 'status' => 'required|string|min:2',
             'deadline' => 'required|string|min:2',
             'label' => 'required|string|min:2',
             'recurring' => 'required',
@@ -88,7 +88,7 @@ class ProjectTaskController extends Controller
             $project->external_links = '';
         }
 
-        $project->status = $request->status;
+        // $project->status = $request->status;
         $project->created_by = auth()->guard('web')->user()->id;
         $project->save();
 
@@ -120,7 +120,7 @@ class ProjectTaskController extends Controller
             'project_slug' => 'required|string|min:2|max:255',
             'title' => 'required|string|min:2|max:255',
             'short_desc' => 'required|string|min:2',
-            'status' => 'required|string|min:2',
+            // 'status' => 'required|string|min:2',
             'deadline' => 'required|string|min:2',
             'label' => 'required|string|min:2',
             'recurring' => 'required',
@@ -170,7 +170,7 @@ class ProjectTaskController extends Controller
             $project->external_links = '';
         }
 
-        $project->status = $request->status;
+        // $project->status = $request->status;
         $project->save();
 
         return redirect()->route('front.project.detail', $request->project_slug)->with('success', 'Task updated successfully');

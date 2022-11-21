@@ -8,7 +8,7 @@
                 <div class="col-12 text-center top-heading">
                     <div class="text-right" style="
                 text-align: right;">
-                <a class="btn btn-secondary" href="{{ route('front.portfolio.testimonial.index') }}"><i class="fa fa-fw fa-lg fa-chevron-left"></i>Back</a>
+                <a class="add-btn-edit d-inline-block secondary-btn" href="{{ route('front.portfolio.testimonial.index') }}"><i class="fa fa-fw fa-lg fa-chevron-left"></i>Back</a>
                 </div>
                     <h2>Add  Testimonial Details</h2>
                 </div>
@@ -88,7 +88,7 @@
                             <div class="tile-footer">
                                 <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save
                                     </button>
-                                    <a class="btn btn-secondary" href="{{ route('front.portfolio.testimonial.index') }}"><i class="fa fa-fw fa-lg fa-chevron-left"></i>Back</a>
+                                    <a class="add-btn-edit d-inline-block secondary-btn" href="{{ route('front.portfolio.testimonial.index') }}"><i class="fa fa-fw fa-lg fa-chevron-left"></i>Back</a>
                                 &nbsp;&nbsp;&nbsp;
                             </div>
                         </form>

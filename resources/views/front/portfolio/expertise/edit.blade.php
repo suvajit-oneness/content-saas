@@ -8,9 +8,9 @@
                 <div class="col-12 text-center top-heading">
                     <div class="text-right" style="
                     text-align: right;">
-                    <a class="btn btn-secondary" href="{{ route('front.portfolio.expertise.index') }}"><i class="fa fa-fw fa-lg fa-chevron-left"></i>Back</a>
+                    <a class="add-btn-edit d-inline-block secondary-btn" href="{{ route('front.portfolio.expertise.index') }}"><i class="fa fa-fw fa-lg fa-chevron-left"></i>Back</a>
                     </div>
-                    <h2>Add  Area of Expertise</h2>
+                    <h2>Add  Specialities</h2>
                 </div>
             </div>
             <div class="row">
@@ -48,7 +48,7 @@
                             <div class="tile-footer">
                                 <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Update
                                     </button>
-                                    <a class="btn btn-secondary" href="{{ route('front.portfolio.expertise.index') }}"><i class="fa fa-fw fa-lg fa-chevron-left"></i>Back</a>
+                                    <a class="add-btn-edit d-inline-block secondary-btn" href="{{ route('front.portfolio.expertise.index') }}"><i class="fa fa-fw fa-lg fa-chevron-left"></i>Back</a>
                                 &nbsp;&nbsp;&nbsp;
                             </div>
                         </form>

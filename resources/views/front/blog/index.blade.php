@@ -57,17 +57,62 @@
     <div class="container">
         <div class="row blog_list">
         @foreach($cat as $blogCategorykey => $blog)
-            @php
+            {{-- @php
                 if($blog->blogDetails->count() == 0) { continue; }
             @endphp
-           @foreach($blog->blogDetails as $blogProductkey => $data)
-            <div class="col-12 col-lg-4 col-md-6 mb-3 blog-list-panel bloglist_{{ $data->article_category_id }}">
+           @foreach($blog->blogDetails as $blogProductkey => $data) --}}
+           @php
+           // BOLGS UNDER CATEGORIES
+
+           $blogsUnderCategory = \DB::table('articles')->where('article_category_id', 'like', '%'.$blog->id.'%')->where('status', 1)->where('image','!=','')->orderby('id','desc')->limit(8)->get();
+
+           @endphp
+       {{-- SHOW THE CATEGORIES WHICH HAVE BLOGS IN THEM --}}
+            @if ($blogsUnderCategory->count() > 0)
+            @foreach($blogsUnderCategory as $blogProductkey => $data)
+            @php
+                                    $cat = $data->article_category_id ?? '';
+                                    //dd($cat);
+                                    $displayCategoryName = '';
+                                    foreach(explode(',', $cat) as $catKey => $catVal) {
+                                       //
+                                        $catDetails = DB::table('article_categories')->where('id', $catVal)->first();
+                                        //dd($catDetails);
+                                        if($catDetails == ''){
+                                        $displayCategoryName .=  '';}
+                                        else{
+                                        $displayCategoryName .= $catDetails->id ?? '';
+
+                                        //dd($displayCategoryName);
+                                        }
+                                        }
+
+                                   @endphp
+            <div class="col-12 col-lg-4 col-md-6 mb-3 blog-list-panel bloglist_{{ $displayCategoryName }}">
                 <a href="">
                     <div class="card">
                         <img src="{{ asset($data->image) }}" class="card-img-top" alt="">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
-                                <span class="subHead_badge">{{ $data->category->title }}</span></a>
+                                <span class="subHead_badge">@php
+                                    $cat = $data->article_category_id ?? '';
+                                    //dd($cat);
+                                    $displayCategoryName = '';
+                                    foreach(explode(',', $cat) as $catKey => $catVal) {
+                                       //
+                                        $catDetails = DB::table('article_categories')->where('id', $catVal)->first();
+                                        //dd($catDetails);
+                                        if($catDetails == ''){
+                                        $displayCategoryName .=  '';}
+                                        else{
+                                        $displayCategoryName .= $catDetails->title.' , ' ?? '';
+
+                                        //dd($displayCategoryName);
+                                        }
+                                        }
+
+                                   @endphp
+                                {{substr($displayCategoryName, 0, -2) ?? '' }}</span></a>
                                 <div class="dateBox blog_date">
                                     <span class="date">
                                         {{ date('d', strtotime($data->created_at)) }}
@@ -89,6 +134,7 @@
                 </a>
             </div>
             @endforeach
+            @endif
         @endforeach
         </div>
     </div>

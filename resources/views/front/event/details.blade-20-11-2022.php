@@ -113,7 +113,7 @@
         </div>
     </section>
 
-    <section class="py-2 py-sm-4 art-dtls eventDetails" style="margin-left: 315px;">
+    <section class="py-2 py-sm-4 art-dtls eventDetails">
         <div class="container">
             <div class="row">
                 @if ($event->start_date)
@@ -327,7 +327,7 @@
             </div>
         </div>
     </section>
-    <section class="py-2 py-sm-4 py-lg-5 bg-light" style="margin-left: 315px;">
+    <section class="py-2 py-sm-4 py-lg-5 bg-light">
         <div class="container">
             <div class="row justify-content-between">
                 <div class="col">

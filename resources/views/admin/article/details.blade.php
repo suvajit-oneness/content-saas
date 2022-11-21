@@ -37,7 +37,25 @@
                         </tr>
                         <tr>
                             <td>Article Category</td>
-                            <td>{{$article->category ? $article->category->title : '' }}</td>
+                            <td>@php
+                                $cat = $article->article_category_id ?? '';
+                                //dd($cat);
+                                $displayCategoryName = '';
+                                foreach(explode(',', $cat) as $catKey => $catVal) {
+                                   //
+                                    $catDetails = DB::table('article_categories')->where('id', $catVal)->first();
+                                    //dd($catDetails);
+                                    if($catDetails == ''){
+                                    $displayCategoryName .=  '';}
+                                    else{
+                                    $displayCategoryName .= $catDetails->title.' , ' ?? '';
+
+                                    //dd($displayCategoryName);
+                                    }
+                                    }
+
+                               @endphp
+                            {{substr($displayCategoryName, 0, -2) ?? '' }}</td>
                         </tr>
                         <tr>
                             <td>Article Sub Category</td>

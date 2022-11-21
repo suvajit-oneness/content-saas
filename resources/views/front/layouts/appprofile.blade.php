@@ -11,12 +11,13 @@
     <link href="{{ asset('frontend/css/bootstrap.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('frontend/css/swiper-bundle.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('frontend/css/aos.css')}}" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="{{ asset('frontend/css/style.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('frontend/css/responsive.css')}}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <style>
-        
+
         .scroll {
         border: none;
         padding: 5px;
@@ -29,7 +30,7 @@
         width: 5px;
         height: 5px;
         }
-        
+
         ::-webkit-scrollbar-thumb {
         background: yellowgreen;
         border-radius: 10px;
@@ -55,37 +56,37 @@
                 <div class="dashboard-lists scroll">
                     <ul class="list-unstyled p-0 m-0">
                         <li>
-                            <a href="{{ route('front.dashboard.index') }}" class="{{ request()->is('dashboard*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Dashboard</a>
+                            <a href="{{ route('front.dashboard.index') }}" class="{{ request()->is('*dashboard*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Dashboard</a>
                         </li>
                         <li>
                             <a href="{{ route('front.user.portfolio.index') }}" class="{{ request()->is('user/portfolio*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Portfolio</a>
                         </li>
                         <li>
-                            <a href="{{ route('front.job.index') }}" class="{{ request()->is('job*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Jobs</a>
+                            <a href="{{ route('front.job.index') }}" class="{{ request()->is('*job*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Jobs</a>
                         </li>
                         <li>
-                            <a href="{{ route('front.template.index') }}" class="{{ request()->is('template') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Template</a>
+                            <a href="{{ route('front.template.index') }}" class="{{ request()->is('*template*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Template</a>
                         </li>
                         <li>
-                            <a href="{{ route('front.project.index') }}" class="{{ request()->is('project*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Project</a>
+                            <a href="{{ route('front.project.index') }}" class="{{ request()->is('*project*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Project</a>
                         </li>
                         <li>
-                            <a href="{{ route('front.event') }}" class="{{ request()->is('event*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Events</a>
+                            <a href="{{ route('front.event') }}" class="{{ request()->is('user/event*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Events</a>
                         </li>
                         <li>
-                            <a href="{{ route('front.deals.index') }}" class="{{ request()->is('deal*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Deals</a>
+                            <a href="{{ route('front.deals.index') }}" class="{{ request()->is('user/deal*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Deals</a>
                         </li>
                         <li>
-                            <a class="{{ request()->is('course') ? 'active' : '' }}" href="{{ route('front.course') }}"><i class="fa-solid fa-house"></i>Writer Courses</a>
+                            <a class="{{ request()->is('user/course*') ? 'active' : '' }}" href="{{ route('front.course') }}"><i class="fa-solid fa-house"></i>Writer Courses</a>
                         </li>
                         <li>
-                            <a href="{{ route('front.user.courses.index')}}"  class="{{ request()->is('user/my-courses') ? 'active' : '' }}"><i class="fa-solid fa-house"></i>My Courses</a>
+                            <a href="{{ route('front.user.courses.index')}}"  class="{{ request()->is('user/my-courses*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i>My Courses</a>
                         </li>
                         <li>
-                            <a href="{{ route('front.user.events')}}"  class="{{ request()->is('user/my-events') ? 'active' : '' }}"><i class="fa-solid fa-house"></i>My Events</a>
+                            <a href="{{ route('front.user.events')}}"  class="{{ request()->is('user/my-events*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i>My Events</a>
                         </li>
                         <li>
-                            <a href="{{ route('front.user.orders')}}"  class="{{ request()->is('user/my-orders') ? 'active' : '' }}"><i class="fa-solid fa-house"></i>My Orders</a>
+                            <a href="{{ route('front.user.orders')}}"  class="{{ request()->is('user/my-orders*') ? 'active' : '' }}"><i class="fa-solid fa-house"></i>My Orders</a>
                         </li>
                         <li>
                             <a href="{{ route('front.user.profile.edit') }}" class="{{ request()->is('user/update/profile') ? 'active' : '' }}"><i class="fa-solid fa-house"></i> Profile</a>
@@ -291,12 +292,17 @@
                         });
 
                         $('#saveCompleteModal').click(function(){
+                            if($('input[name="is_commercial"]:checked').val() != 'yes'){
+                                $('#completeModal').modal('hide');
+                                toastFire("success", "No Commercial data saved!");
+                                return 0;
+                            }
                             var currency = $('select[name="currency"]').val();
                             var count = $('input[name="count"]').val();
                             var total_count = $('input[name="total_count"]').val();
                             var charges = $('#charges_text').html();
 
-                            if(url == 'http://127.0.0.1:8000/project/updatestatus'){
+                            if(url.includes("task") == false){
                                 var comurl = "{{route('front.project.updateCommercial')}}";
                             }else{
                                 var comurl = "{{route('front.project.task.updateCommercial')}}";
@@ -416,10 +422,18 @@
         // $('.filter_select').select2({
         //   width:"100%",
         // });
+    </script>
+        <script>
+        // $('.filter_select').select2({
+        //   width:"100%",
+        // });
+
 
         $('.filter_select').select2().on('select2:select', function(e) {
             var data = e.params.data;
+
         });
+
 
         $('.filter_select').select2().on('select2:open', (elm) => {
             const targetLabel = $(elm.target).prev('label');
@@ -433,9 +447,11 @@
             }
         });
 
+
         $(document).on('.filter_selectWrap select2:open', () => {
             document.querySelector('.select2-search__field').focus();
         });
+
 
     </script>
 

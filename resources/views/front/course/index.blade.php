@@ -1,4 +1,4 @@
-@extends('front.layouts.app')
+@extends('front.layouts.appprofile')
 @section('title', ' Course')
 @section('section')
 

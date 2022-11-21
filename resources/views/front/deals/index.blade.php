@@ -1,7 +1,7 @@
 @php
     CheckIfContentIsUnderSubscription(1, 'deals')
 @endphp
-@extends('front.layouts.app')
+@extends('front.layouts.appprofile')
 @section('title', ' Deals')
 
 @section('section')

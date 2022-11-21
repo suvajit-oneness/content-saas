@@ -46,7 +46,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="short_description">Deal Short Description <span class="m-l-5 text-danger">*</span></label>
+                            <label class="control-label" for="short_description">Deal Short Description (Within 60 characters) <span class="m-l-5 text-danger">*</span></label>
                             <textarea type="text" class="form-control" rows="4" name="short_description" id="short_description">{{ old('short_description') ?? $deal->short_description }}</textarea>
                             @error('short_description')
                                 <p class="small text-danger">{{ $message }}</p>

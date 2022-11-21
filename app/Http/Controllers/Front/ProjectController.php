@@ -44,7 +44,7 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'status' => 'required|string|min:2|max:255',
+            // 'status' => 'required|string|min:2|max:255',
             'title' => 'required|string|min:2|max:255',
             'short_desc' => 'nullable|string|min:2',
             'document' => 'nullable'
@@ -61,17 +61,17 @@ class ProjectController extends Controller
             $project->document = '';
         }
 
-        $project->status = $request->status;
+        // $project->status = $request->status;
         $project->created_by = auth()->guard('web')->user()->id;
 
         $project->save();
-        $status = new ProjectStatus();
-        $status->title = $project->status ?? '';
-        $status->slug = slugGenerate($project->status, 'project_statuses');
-        $status->icon = '<i class="fas fa-check"></i>';
-        $status->created_by = auth()->guard('web')->user()->id ?? '';
-        $status->position = count($status->position)+1 ?? '';
-        $status->save();
+        // $status = new ProjectStatus();
+        // $status->title = $project->status ?? '';
+        // $status->slug = slugGenerate($project->status, 'project_statuses');
+        // $status->icon = '<i class="fas fa-check"></i>';
+        // $status->created_by = auth()->guard('web')->user()->id ?? '';
+        // $status->position = count($status->position)+1 ?? '';
+        // $status->save();
 
         return redirect()->route('front.project.index')->with('success', 'Project created successfully');
     }
@@ -109,34 +109,32 @@ class ProjectController extends Controller
 
         if (!empty($request->document)) {
             $project->document = imageUpload($request->document, 'project-document');
-        } else {
-            $project->document = '';
         }
 
-        if (!empty($request->status)) {
-            if($request['status'] == 'spare'){
-                $status->title = $request['other_status'] ?? '';
-                }
-            else{
-            $project->status = $request->status;
-                }
-        }
+        // if (!empty($request->status)) {
+        //     if($request['status'] == 'spare'){
+        //         $status->title = $request['other_status'] ?? '';
+        //         }
+        //     else{
+        //     $project->status = $request->status;
+        //         }
+        // }
 
         // $project->created_by = auth()->guard('web')->user()->id;
 
         $project->save();
-        if($request['status'] == 'spare')
-        $status = new ProjectStatus();
-        if($request['status'] == 'spare'){
-            $status->title = $request['other_status'] ?? '';
-            }
+        // if($request['status'] == 'spare')
+        // $status = new ProjectStatus();
+        // if($request['status'] == 'spare'){
+        //     $status->title = $request['other_status'] ?? '';
+        //     }
            
-        //$status->title = $request->other_status;
-        $status->slug = slugGenerate($request->other_status, 'project_statuses');
-        $status->icon = '<i class="fas fa-check"></i>';
-        $status->created_by = auth()->guard('web')->user()->id ?? '';
-        //$status->position = $status->position ?? '';
-        $status->save();
+        // //$status->title = $request->other_status;
+        // $status->slug = slugGenerate($request->other_status, 'project_statuses');
+        // $status->icon = '<i class="fas fa-check"></i>';
+        // $status->created_by = auth()->guard('web')->user()->id ?? '';
+        // //$status->position = $status->position ?? '';
+        // $status->save();
         return redirect()->back()->with('success', 'Project updated successfully');
     }
 

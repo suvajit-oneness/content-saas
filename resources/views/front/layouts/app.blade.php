@@ -133,7 +133,7 @@
                 </div>
             </div>
             <div class="row justify-content-between bottom_footer">
-                <div class="col-12 col-sm-6">
+                {{-- <div class="col-12 col-sm-6">
                     <ul>
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is('event') ? 'active' : '' }}"
@@ -148,7 +148,7 @@
                                 href="{{ route('front.course') }}">Writer Courses</a>
                         </li>
                     </ul>
-                </div>
+                </div> --}}
                 <div class="col-6">
                     <ul class="justify-content-end">
                         <li><a href="{{ route('front.privacy') }}">Privacy Policy</a></li>

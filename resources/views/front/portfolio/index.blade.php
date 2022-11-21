@@ -49,13 +49,13 @@
                                 <path d="M5.25 5.5C3.45507 5.5 2 6.95508 2 8.75V19.25C2 21.0449 3.45507 22.5 5.25 22.5H14.75C16.5449 22.5 18 21.0449 18 19.25V8.75C18 6.95507 16.5449 5.5 14.75 5.5H5.25Z" fill="#212121"/>
                                 <path d="M23.1232 20.6431L19.5 17.0935V10.9989L23.1121 7.3706C23.8988 6.58044 25.248 7.13753 25.248 8.25251V19.7502C25.248 20.8577 23.9143 21.4181 23.1232 20.6431Z" fill="#212121"/>
                             </svg>
-                        </a> 
+                        </a>
                         <video width="640" height="320" controls id="contentVideo" style="display:none;">
                             <source src="{{ asset($data->user->intro_video) }}" type="video/mp4">
                         </video>
                     </div>
                     @endif
-                </div>    
+                </div>
                 <div class="language">
                     <span>Language</span>
                 </div>
@@ -71,7 +71,7 @@
                 <p class="small">No languages found</p>
                 @endif
             </div>
-           
+
         </div>
     </div>
 </section>
@@ -239,7 +239,7 @@
                         @foreach ($data->clients as $client)
                         <div class="portfolio-v4-content-list">
                             <div class="portfolio-v4-client-flex">
-                                <img src="{{ asset('uploads/client/'.$client->image) }}" alt="" width="100" height="100" />
+                                <img src="{{ asset($client->image) }}" alt="" width="100" height="100" />
                                 <div class="portfolio-v4-client-info">
                                     <h4>{{$client->client_name}}</h4>
                                     <span>{{$client->occupation}}</span>
@@ -324,13 +324,10 @@
                         <div class="portfolio-v4-rating-list">
 
                             <div class="portfolio-v4-rating-flex">
-                                <span>{{ $item->date_from.' - '.$item->date_to }}</span>
-                                <div class="rating-list-stars">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
+                                <span>{{ $item->date_from}}</span>
+                                <div class="edit-heading">
+                                <h4>  {!! RatingHtml($item->rating) !!}
+                                </h4>
                                 </div>
                             </div>
                             <h4>{{ $item->title }}</h4>

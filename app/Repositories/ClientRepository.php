@@ -53,6 +53,7 @@ class ClientRepository extends BaseRepository implements ClientContract
             $collection = collect($params);
             $client = new Client();
             $client->user_id = Auth::guard('web')->user()->id ?? '';
+            $client->occupation = $collection['occupation'] ?? '';
             $client->client_name = $collection['client_name'] ?? '';
             if($params['image']){
                 $client->image = imageUpload($collection['image'],'clients');
@@ -90,7 +91,9 @@ class ClientRepository extends BaseRepository implements ClientContract
 
         $client = $this->findOneOrFail($params['id']);
         $client->client_name = $collection['client_name'] ?? '';
-        if($params['image']){
+        $client->occupation = $collection['occupation'] ?? '';
+
+        if(in_array('image', $params)){
             $client->image = imageUpload($collection['image'],'clients');
         }
         $client->phone_number = $collection['phone_number'] ?? '';

@@ -93,7 +93,26 @@
                                                 }
                                                @endphp
                                                  {!! $desc !!}</td>
-                                                <td>{{$blog->category ? $blog->category->title : '' }}</td>
+                                                <td> @php
+                                                    $cat = $blog->article_category_id ?? '';
+                                                    //dd($cat);
+                                                    $displayCategoryName = '';
+                                                    foreach(explode(',', $cat) as $catKey => $catVal) {
+                                                       //
+                                                        $catDetails = DB::table('article_categories')->where('id', $catVal)->first();
+                                                        //dd($catDetails);
+                                                        if($catDetails == ''){
+                                                        $displayCategoryName .=  '';}
+                                                        else{
+                                                        $displayCategoryName .= $catDetails->title.' , ' ?? '';
+
+                                                        //dd($displayCategoryName);
+                                                        }
+                                                        }
+
+                                                   @endphp
+                                                {{substr($displayCategoryName, 0, -2) ?? '' }}</td>
+
                                                 <td>{{ $blog->subcategory ? $blog->subcategory->title : '' }}</td>
                                                 <td class="text-center">
                                                     <div class="toggle-button-cover margin-auto">
@@ -178,7 +197,7 @@
         },
         function(isConfirm){
           if (isConfirm) {
-            window.location.href = "article/"+id+"/delete";
+            window.location.href = "/"+id+"/delete";
             } else {
               swal("Cancelled", "Record is safe", "error");
             }

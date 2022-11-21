@@ -4,7 +4,7 @@
 @section('section')
 <section class="edit-sec">
     <div class="col-12 mt-3 mb-3 text-end">
-        <a href="{!! URL::to('/user/course'.'/'.$courseData->slug.'/'.$course->slug) !!}" class="add-btn-edit d-inline-block secondary-btn"><i
+        <a href="{!! URL::to('/user/my-courses'.'/'.$courseData->slug.'/'.$course->slug) !!}" class="add-btn-edit d-inline-block secondary-btn"><i
                 class="fa-solid fa-chevron-left"></i> Back</a>
     </div>
     <div class="course-content-accordions lession-details">
