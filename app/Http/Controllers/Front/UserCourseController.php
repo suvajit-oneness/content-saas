@@ -19,7 +19,7 @@ class UserCourseController extends Controller
 {
     public function index()
     {
-        $course = Order::where('user_id', auth()->guard('web')->user()->id)->with('orderProducts')->get();
+        $course = Order::where('user_id', auth()->guard('web')->user()->id)->with('orderProducts')->orderBy('id','desc')->get();
         //dd($course);
         return view('front.user.course.index', compact('course'));
     }

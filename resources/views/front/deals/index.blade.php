@@ -71,7 +71,7 @@
         </div>
         {{-- @if (request()->input('category') || request()->input('search')) --}}
             <div class="container">
-                <div class="row justify-content-between">
+                {{-- <div class="row justify-content-between">
                     <div class="col">
                         <div class="page-title best_deal">
                             <h2>
@@ -89,7 +89,7 @@
                             </h2>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <div class="row">
                     @foreach ($deal as $dealProductkey => $data)
                         @if(CheckIfContentIsUnderSubscription($data->id, 'deals'))

@@ -16,7 +16,15 @@ class ProjectController extends Controller
     public function index(Request $request)
     {
         if (!empty(auth()->guard()->user()->id)) {
-            $data = Project::where('created_by', auth()->guard()->user()->id)->latest('id')->where('deleted_at', null)->paginate(15);
+            $data = Project::where('created_by', auth()->guard()->user()->id)->latest('id')->where('deleted_at', null);
+
+            if(!empty($request->search_status))
+                $data = $data->where('status','=',$request->search_status);
+            
+            if(!empty($request->keyword))
+                $data = $data->where('title','like','%'.$request->keyword.'%');
+
+            $data = $data->paginate(15);
             $status = ProjectStatus::orderBy('position', 'asc')->get();
             return view('front.project.index', compact('data','status'));
         } else {
@@ -34,7 +42,15 @@ class ProjectController extends Controller
     {
         // $data = Project::where('slug', $slug)->first();
         $data = Project::where('slug', $slug)->where('created_by', auth()->guard('web')->user()->id)->first();
-        $tasks = ProjectTask::where('project_id', $data->id)->where('deleted_at', null)->latest('id')->paginate(15);
+        $tasks = ProjectTask::where('project_id', $data->id)->where('deleted_at', null)->latest('id');
+
+        if(!empty($request->search_status))
+            $tasks = $tasks->where('status','=',$request->search_status);
+            
+        if(!empty($request->keyword))
+            $tasks = $tasks->where('title','like','%'.$request->keyword.'%');
+        
+        $tasks = $tasks->paginate(15);
 
         $status = ProjectStatus::orderBy('position', 'asc')->get();
        

@@ -75,6 +75,19 @@ class ProfileController extends BaseController
     {
         // dd($request->all());
 
+        if($request->remove_profile){
+            User::where('id',Auth::guard('web')->user()->id)->update(['image' => null]);
+            return response()->json(array('message' => 'Profile picture has been successfully removed!'));
+        }
+        if($request->remove_intro){
+            User::where('id',Auth::guard('web')->user()->id)->update(['intro_video' => null]);
+            return response()->json(array('message' => 'Intro video has been successfully removed!'));
+        }
+        if($request->remove_banner){
+            User::where('id',Auth::guard('web')->user()->id)->update(['banner_image' => null]);
+            return response()->json(array('message' => 'Banner image has been successfully removed!'));
+        }
+
         $request->validate([
             'id'            => 'required|integer',
             'first_name'    => 'nullable|string',

@@ -63,6 +63,13 @@
                                 <td><img src="{{ asset(auth()->guard('web')->user()->image) }}" alt="" height="100"></td>
                                 <td></td>
                             </tr>
+                            @if(auth()->guard('web')->user()->intro_video)
+                                <tr>
+                                    <td>Intro Video</td>
+                                    <td><video src="{{ asset(auth()->guard('web')->user()->intro_video) }}" controls alt="" height="100"></video>
+                                    <td></td>
+                                </tr>
+                            @endif
                             <tr>
                                 <td>Banner Image</td>
                                 @if(auth()->guard('web')->user()->banner_image)
