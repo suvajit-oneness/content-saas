@@ -25,7 +25,7 @@ class DealController extends Controller
             }
 
             if(!empty($request->search)){
-                $deal = $deal->where('title','like','%'.$request->search.'%');
+                $deal = $deal->where('title','like','%'.$request->search.'%')->orWhere('short_description','like','%'.$request->search.'%');
             }
 
             $deal = $deal->get();
