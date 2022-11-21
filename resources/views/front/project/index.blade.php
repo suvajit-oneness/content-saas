@@ -2,7 +2,7 @@
 @section('title', 'Project')
 
 @section('section')
-<section class="edit-sec">
+<section class="edit-sec ">
     <div class="container">
         <div class="row my-3">
             <div class="col-md-8">
