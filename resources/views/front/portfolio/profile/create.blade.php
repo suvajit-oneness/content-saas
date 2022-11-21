@@ -45,7 +45,7 @@
                                             <figure class="mt-2" style="width: 80px; height: auto;">
                                                 <img src="{{ asset(auth()->guard('web')->user()->image) }}" id="articleImage" class="img-fluid" alt="">
                                             </figure>
-                                            <span onclick="removeContent('remove_profile')" title="Remove Profile Picture" style="position: absolute; top: 0px; right: 0px; cursor: pointer;"><i class="fa fa-times"></i></span>
+                                            <span onclick="removeContent('remove_profile',this)" title="Remove Profile Picture" style="position: absolute; top: 0px; right: 0px; cursor: pointer;"><i class="fa fa-times"></i></span>
                                         @endif
                                     </div>
                                     <div class="col-md-10">
@@ -63,7 +63,7 @@
                                             <figure class="mt-2" style="width: 160px; height: auto;">
                                                 <video src="{{ asset(auth()->guard('web')->user()->intro_video) }}" controls id="articleImage" class="img-fluid" alt=""></video>
                                             </figure>
-                                            <span onclick="removeContent('remove_intro')" title="Remove Intro video" style="position: absolute; top: 0px; right: 0px; cursor: pointer;"><i class="fa fa-times"></i></span>
+                                            <span onclick="removeContent('remove_intro',this)" title="Remove Intro video" style="position: absolute; top: 0px; right: 0px; cursor: pointer;"><i class="fa fa-times"></i></span>
                                         @endif
                                     </div>
                                     <div class="col-md-8">
@@ -181,7 +181,7 @@
                                         <figure class="mt-2" style="height: 50px;">
                                             <img src="{{ asset(auth()->guard('web')->user()->banner_image) }}" id="articleImage" class="img-fluid" alt="">
                                         </figure>
-                                        <span onclick="removeContent('remove_banner')" title="Remove banner image" style="position: absolute; top: 0px; right: 0px; cursor: pointer;"><i class="fa fa-times"></i></span>
+                                        <span onclick="removeContent('remove_banner',this)" title="Remove banner image" style="position: absolute; top: 0px; right: 0px; cursor: pointer;"><i class="fa fa-times"></i></span>
                                     @endif
                                 </div>
                                 <div class="col-md-10">
@@ -230,8 +230,9 @@
 @endsection
 @section('script')
     <script>
-        function removeContent(content){
+        function removeContent(content,x){
             if(confirm('Are you Sure?')){
+
                 const data = {"_token":"{{csrf_token()}}", [content]:true};
                 $.ajax({
                     type: "POST",
@@ -239,7 +240,7 @@
                     data: data,
                     success:function(response){
                         toastFire("success", response.message);
-                        $()
+                        $(x).parent().html('');
                     },
                     error: function(response){
                         toastFire("warning", response.message);

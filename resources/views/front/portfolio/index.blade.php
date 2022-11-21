@@ -201,7 +201,7 @@
                         @foreach ($data->employments as $employment)
                         <div class="portfolio-v4-content-list">
                             <h4>{{$employment->occupation}} | {{$employment->company_title}}</h4>
-                            <span class="badge"> {{$employment->year_from}} - {{$employment->year_to}} </span>
+                            <span class="badge"> {{$employment->year_from}} - {{$employment->year_to ?? 'Present'}} </span>
                             <p>{{$employment->short_desc}}</p>
                         </div>
                         @endforeach
