@@ -7383,7 +7383,8 @@ a.badge.bg-danger:hover {
 }
 .lession-details .media-tabs{
   border: 0;
-  margin: 25px 0;
+  margin: 0;
+  margin-bottom: 25px;
 }
 .lession-details .media-tabs .nav-link{
   border: 2px solid #95C800;
@@ -7545,6 +7546,28 @@ a.badge.bg-danger:hover {
   /* padding: 20px; */
   height: 100%;
   margin-top: 0;
+  transform: translateX(100%);
+  transition: all 300ms ease-in;
+}
+.lessionSidebar.active{
+  transform: translateX(0);
+}
+.lessionSidebar-btn{
+  border: 1px solid #000;
+  position: absolute;
+  left: 0;
+  top: 50px;
+  transform: translateX(-20%);
+  padding: 8px 12px;
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  transition: all 200ms ease-in;
+}
+.lessionSidebar-btn:hover{
+  transform: translateX(-100%);
+}
+.lessionSidebar-btn i{
+  margin-right: 8px;
 }
 .content{
   display: none;
@@ -7604,9 +7627,18 @@ a.badge.bg-danger:hover {
 .stamp i{
   font-size: 14px;
   color: #cae47f;
+  margin-right: 4px;
 }
 .lesstionItem > a{
   font-size: 16px;
   font-weight: 700;
+}
+.topic-video video{
+  width: 100%;
+  height: 600px;
+  object-fit: cover;
+}
+.topic-desc{
+  padding: 15px;
 }
 
