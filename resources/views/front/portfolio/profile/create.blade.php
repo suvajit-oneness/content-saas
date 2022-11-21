@@ -40,15 +40,16 @@
                             </div><br>
                             <div class="form-group">
                                 <div class="row">
-                                    <div class="col-md-2">
+                                    <div class="col-md-2" style="position: relative;">
                                         @if (Auth::guard('web')->user()->image != null)
                                             <figure class="mt-2" style="width: 80px; height: auto;">
                                                 <img src="{{ asset(auth()->guard('web')->user()->image) }}" id="articleImage" class="img-fluid" alt="">
                                             </figure>
+                                            <span onclick="removeContent('remove_profile')" title="Remove Profile Picture" style="position: absolute; top: 0px; right: 0px; cursor: pointer;"><i class="fa fa-times"></i></span>
                                         @endif
                                     </div>
                                     <div class="col-md-10">
-                                        <label class="control-label">Profile Image</label>
+                                        <label class="control-label">Profile Image <p><small>Profile image size must not exceeds 2MB</small></p></label>
                                         <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image"/>
                                         @error('image') {{ $message }} @enderror
                                     </div>
@@ -57,15 +58,16 @@
                             <br>
                             <div class="form-group">
                                 <div class="row">
-                                    <div class="col-md-2">
+                                    <div class="col-md-4" style="position: relative;">
                                         @if (Auth::guard('web')->user()->intro_video != null)
-                                            <figure class="mt-2" style="width: 80px; height: auto;">
-                                                <video src="{{ asset(auth()->guard('web')->user()->intro_video) }}" id="articleImage" class="img-fluid" alt=""></video>
+                                            <figure class="mt-2" style="width: 160px; height: auto;">
+                                                <video src="{{ asset(auth()->guard('web')->user()->intro_video) }}" controls id="articleImage" class="img-fluid" alt=""></video>
                                             </figure>
+                                            <span onclick="removeContent('remove_intro')" title="Remove Intro video" style="position: absolute; top: 0px; right: 0px; cursor: pointer;"><i class="fa fa-times"></i></span>
                                         @endif
                                     </div>
-                                    <div class="col-md-10">
-                                        <label class="control-label">Short Video</label>
+                                    <div class="col-md-8">
+                                        <label class="control-label">Short Video <p><small>Video size must not exceeds 2MB</small></p></label>
                                         <input class="form-control @error('intro_video') is-invalid @enderror" type="file" id="intro_video" name="intro_video"/>
                                         @error('intro_video') {{ $message }} @enderror
                                     </div>
@@ -174,15 +176,16 @@
                             <br>
                         <div class="form-group">
                             <div class="row">
-                                <div class="col-md-2">
+                                <div class="col-md-2" style="position: relative">
                                     @if (Auth::guard('web')->user()->banner_image != null)
                                         <figure class="mt-2" style="height: 50px;">
                                             <img src="{{ asset(auth()->guard('web')->user()->banner_image) }}" id="articleImage" class="img-fluid" alt="">
                                         </figure>
+                                        <span onclick="removeContent('remove_banner')" title="Remove banner image" style="position: absolute; top: 0px; right: 0px; cursor: pointer;"><i class="fa fa-times"></i></span>
                                     @endif
                                 </div>
                                 <div class="col-md-10">
-                                    <label class="control-label">Banner Image</label>
+                                    <label class="control-label">Banner Image <p><small>Banner image size must not exceeds 2MB</small></p></label>
                                     <input class="form-control @error('banner_image') is-invalid @enderror" type="file" id="banner_image" name="banner_image"/>
                                     @error('banner_image') {{ $message }} @enderror
                                 </div>
@@ -192,7 +195,7 @@
                         <br>
 
                         <div class="form-group">
-                            <label class="control-label" for="worked_for">Worked For <span class="m-l-5 text-danger">*</span></label>
+                            <label class="control-label" for="worked_for">Worked For <p><small>Comma separated values</small><span class="m-l-5 text-danger">*</span></p></label>
                             <textarea class="form-control" type="text" rows="4" name="worked_for"
                                 id="worked_for">{{ old('worked_for', Auth::guard('web')->user()->worked_for) }}</textarea>
                             @error('worked_for')
@@ -203,7 +206,7 @@
                         <br>
 
                         <div class="form-group">
-                            <label class="control-label" for="categories">Category <span class="m-l-5 text-danger">*</span></label>
+                            <label class="control-label" for="categories">Category <p><small>Comma separated values</small><span class="m-l-5 text-danger">*</span></p></label>
                             <textarea class="form-control" type="text" rows="4" name="categories" id="categories" >{{ old('categories',Auth::guard('web')->user()->categories) }}</textarea>
                             @error('categories')
                                 <p class="small text-danger">{{ $message }}</p>
@@ -224,4 +227,25 @@
         </div>
     </div>
 </section>
+@endsection
+@section('script')
+    <script>
+        function removeContent(content){
+            if(confirm('Are you Sure?')){
+                const data = {"_token":"{{csrf_token()}}", [content]:true};
+                $.ajax({
+                    type: "POST",
+                    url: "{{route('front.portfolio.profile.update')}}",
+                    data: data,
+                    success:function(response){
+                        toastFire("success", response.message);
+                        $()
+                    },
+                    error: function(response){
+                        toastFire("warning", response.message);
+                    }
+                })
+            }
+        }
+    </script>
 @endsection

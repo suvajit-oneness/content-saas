@@ -171,12 +171,12 @@ Route::name('front.')->group(function () {
             });
 
             Route::name('expertise.')->group(function () {
-                Route::get('/portfolio/expertise', 'Front\Portfolio\ExpertiseController@index')->name('index');
-                Route::get('/portfolio/expertise/create', 'Front\Portfolio\ExpertiseController@create')->name('create');
-                Route::post('/portfolio/expertise/store', 'Front\Portfolio\ExpertiseController@store')->name('store');
-                Route::get('/portfolio/expertise/edit/{id}', 'Front\Portfolio\ExpertiseController@edit')->name('edit');
-                Route::post('/portfolio/expertise/update', 'Front\Portfolio\ExpertiseController@update')->name('update');
-                Route::get('/portfolio/expertise/delete/{id}', 'Front\Portfolio\ExpertiseController@delete')->name('delete');
+                Route::get('/portfolio/specialities', 'Front\Portfolio\ExpertiseController@index')->name('index');
+                Route::get('/portfolio/specialities/create', 'Front\Portfolio\ExpertiseController@create')->name('create');
+                Route::post('/portfolio/specialities/store', 'Front\Portfolio\ExpertiseController@store')->name('store');
+                Route::get('/portfolio/specialities/edit/{id}', 'Front\Portfolio\ExpertiseController@edit')->name('edit');
+                Route::post('/portfolio/specialities/update', 'Front\Portfolio\ExpertiseController@update')->name('update');
+                Route::get('/portfolio/specialities/delete/{id}', 'Front\Portfolio\ExpertiseController@delete')->name('delete');
             });
 
             Route::name('education.')->group(function () {

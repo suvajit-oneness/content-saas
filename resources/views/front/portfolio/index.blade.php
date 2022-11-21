@@ -243,7 +243,8 @@
                                 <div class="portfolio-v4-client-info">
                                     <h4>{{$client->client_name}}</h4>
                                     <span>{{$client->occupation}}</span>
-                                    <p class="mb-0">{{$client->short_desc}}</p>
+                                    <p class="mb-0">{{$client->company_name}}</p>
+                                    <a href="{{$client->link}}" class="mb-0">{{$client->link}}</a>
                                 </div>
                             </div>
                         </div>

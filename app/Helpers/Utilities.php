@@ -391,89 +391,89 @@ function RatingHtml($rating = null) {
         $resp = '<p>No ratings available</p>';
     } elseif ($rating == 1) {
         $resp = '
-        <div class="rating-list-stars">
-            <span class="fa fa-star checked" style="color:#FFA701"></span>
-            <span class="fa-regular fa-star" style="color:#FFA701"></span>
-            <span class="fa-regular fa-star" style="color:#FFA701"></span>
-            <span class="fa-regular fa-star" style="color:#FFA701"></span>
-            <span class="fa-regular fa-star" style="color:#FFA701"></span>
+        <div class="rating-list-stars d-flex">
+            <i class="fa-solid fa-star text-warning"></i>
+            <i class="fa-regular fa-star text-warning"></i>
+            <i class="fa-regular fa-star text-warning"></i>
+            <i class="fa-regular fa-star text-warning"></i>
+            <i class="fa-regular fa-star text-warning"></i>
             <small>'.$rating.' Rating</small>
         </div>
         ';
     } elseif ($rating > 1 && $rating < 2) {
         $resp = '
-        <div class="rating-list-stars">
-            <span class="fa fa-star checked" style="color:#FFA701"></span>
-            <span class="fas fa-star-half-alt" style="color:#FFA701"></span>
-            <span class="fa-regular fa-star" style="color:#FFA701"></span>
-            <span class="fa-regular fa-star" style="color:#FFA701"></span>
-            <span class="fa-regular fa-star" style="color:#FFA701"></span>
+        <div class="rating-list-stars d-flex">
+            <i class="fa fa-star checked"></i>
+            <i class="fas fa-star-half-alt"></i>
+            <i class="fa-regular fa-star"></i>
+            <i class="fa-regular fa-star"></i>
+            <i class="fa-regular fa-star"></i>
             <small>'.$rating.' Ratings</small>
         </div>
         ';
     } elseif ($rating == 2) {
         $resp = '
-        <div class="rating-list-stars">
-            <span class="fa fa-star checked" style="color:#FFA701"></span>
-            <span class="fa fa-star checked" style="color:#FFA701"></span>
-            <span class="fa-regular fa-star" style="color:#FFA701"></span>
-            <span class="fa-regular fa-star" style="color:#FFA701"></span>
-            <span class="fa-regular fa-star" style="color:#FFA701"></span>
+        <div class="rating-list-stars d-flex">
+            <i class="fa fa-star checked"></i>
+            <i class="fa fa-star checked"></i>
+            <i class="fa-regular fa-star"></i>
+            <i class="fa-regular fa-star"></i>
+            <i class="fa-regular fa-star"></i>
             <small>'.$rating.' Ratings</small>
         </div>
         ';
     } elseif ($rating > 2 && $rating < 3) {
         $resp = '
-        <div class="rating-list-stars">
-            <span class="fa fa-star checked" style="color:#FFA701"></span>
-            <span class="fa fa-star checked" style="color:#FFA701"></span>
-            <span class="fas fa-star-half-alt" style="color:#FFA701"></span>
-            <span class="fa-regular fa-star" style="color:#FFA701"></span>
-            <span class="fa-regular fa-star" style="color:#FFA701"></span>
+        <div class="rating-list-stars d-flex">
+            <i class="fa fa-star checked"></i>
+            <i class="fa fa-star checked"></i>
+            <i class="fas fa-star-half-alt"></i>
+            <i class="fa-regular fa-star"></i>
+            <i class="fa-regular fa-star"></i>
             <small>'.$rating.' Ratings</small>
         </div>
         ';
     } elseif ($rating == 3) {
         $resp = '
-        <div class="rating-list-stars">
-            <span class="fa fa-star checked" style="color:#FFA701"></span>
-            <span class="fa fa-star checked" style="color:#FFA701"></span>
-            <span class="fa fa-star checked" style="color:#FFA701"></span>
-            <span class="fa-regular fa-star" style="color:#FFA701"></span>
-            <span class="fa-regular fa-star" style="color:#FFA701"></span>
+        <div class="rating-list-stars d-flex">
+            <i class="fa-solid fa-star text-warning"></i>
+            <i class="fa-solid fa-star text-warning"></i>
+            <i class="fa-solid fa-star text-warning"></i>
+            <i class="fa-regular fa-star"></i>
+            <i class="fa-regular fa-star"></i>
             <small>'.$rating.' Ratings</small>
         </div>
         ';
     } elseif ($rating > 3 && $rating < 4) {
         $resp = '
-        <div class="rating-list-stars">
-            <span class="fa fa-star checked" style="color:#FFA701"></span>
-            <span class="fa fa-star checked" style="color:#FFA701"></span>
-            <span class="fa fa-star checked" style="color:#FFA701"></span>
-            <span class="fa fa-star-half-alt" style="color:#FFA701"></span>
-            <span class="fa-regular fa-star" style="color:#FFA701"></span>
+        <div class="rating-list-stars d-flex">
+            <i class="fa-solid fa-star text-warning"></i>
+            <i class="fa-solid fa-star text-warning"></i>
+            <i class="fa-solid fa-star text-warning"></i>
+            <i class="fa fa-star-half-alt text-warning"></i>
+            <i class="fa-regular fa-star text-warning"></i>
             <small>'.$rating.' Ratings</small>
         </div>
         ';
     } elseif ($rating == 4) {
         $resp = '
-        <div class="rating-list-stars">
-            <span class="fa fa-star checked" style="color:#FFA701"></span>
-            <span class="fa fa-star checked" style="color:#FFA701"></span>
-            <span class="fa fa-star checked" style="color:#FFA701"></span>
-            <span class="fa fa-star checked" style="color:#FFA701"></span>
-            <span class="fa-regular fa-star" style="color:#FFA701"></span>
+        <div class="rating-list-stars d-flex">
+            <i class="fa fa-star checked"></i>
+            <i class="fa fa-star checked"></i>
+            <i class="fa fa-star checked"></i>
+            <i class="fa fa-star checked"></i>
+            <i class="fa-regular fa-star"></i>
             <small>'.$rating.' Ratings</small>
         </div>
         ';
     } elseif ($rating > 4 && $rating < 5) {
         $resp = '
-        <div class="rating-list-stars">
-            <span class="fa fa-star checked" style="color:#FFA701"></span>
-            <span class="fa fa-star checked" style="color:#FFA701"></span>
-            <span class="fa fa-star checked" style="color:#FFA701"></span>
-            <span class="fa fa-star checked" style="color:#FFA701"></span>
-            <span class="fa fa-star-half-alt" style="color:#FFA701"></span>
+        <div class="rating-list-stars d-flex">
+            <i class="fa fa-star checked"></i>
+            <i class="fa fa-star checked"></i>
+            <i class="fa fa-star checked"></i>
+            <i class="fa fa-star checked"></i>
+            <i class="fa fa-star-half-alt"></i>
             <small>'.$rating.' Ratings</small>
         </div>
         ';
