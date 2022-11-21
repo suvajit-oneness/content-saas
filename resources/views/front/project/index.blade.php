@@ -5,10 +5,13 @@
 <section class="edit-sec">
     <div class="container">
         <div class="row my-3">
-            <div class="col-md-6">
-                <p class="text-muted"><small>Displaying {{$data->firstItem()}} to {{$data->lastItem()}} of {{$data->total()}} records </small></p>
+            <div class="col-md-8">
+                <div class="d-flex align-items-center">
+                    <p class="text-muted"><small>Displaying {{$data->firstItem()}} to {{$data->lastItem()}} of {{$data->total()}} records </small></p>
+                    <input type="search" class="form-control w-50 ms-4" placeholder="Search by keyword">
+                </div>
             </div>
-            <div class="col-md-6 text-end">
+            <div class="col-md-4 text-end">
                 <a href="{{ route('front.project.create') }}" class="add-btn-edit d-inline-block">Create new Project <i class="fa-solid fa-plus"></i></a>
             </div>
         </div>
