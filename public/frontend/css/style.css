@@ -5451,6 +5451,7 @@ tbody, td, tfoot, th, thead, tr {
   background: #F4FAE6;
   padding: 20px;
   border-radius: 5px;
+  height: 100%
 }
 
 .portfolio-v4-category .market-research-content .img {
@@ -7538,6 +7539,7 @@ a.badge.bg-danger:hover {
 
 .userPortfolio {
   border: 0;
+  
 }
 
 .userPortfolio img {
@@ -7554,4 +7556,10 @@ a.badge.bg-danger:hover {
 
 .portfolio-social a {
   margin-right: 5px;
+}
+
+.employmentBox img{
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
 }

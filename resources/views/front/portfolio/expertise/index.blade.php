@@ -55,12 +55,13 @@
 
                                                         <a href="{{ route('front.portfolio.expertise.delete', $item->id) }}" onclick="return confirm('Are you sure ?')"><i class="fa-solid fa-trash-can trash table-icon"></i></a>
                                                     </div>
-                                                    <div class="date">
-                                                        <span>{{ date('j F Y, g:i a', strtotime($item->created_at)) }}</span>
+                                                    <div class="market-research-date">
+                                                        <h6>{{ date('j M, Y', strtotime($item->created_at)) }}</h6>
                                                     </div>
                                                     <div class="edit-heading">
                                                         <h4>{{ $item->specialityDetails->name }}</h4>
-                                                        <p>{{ $item->description }}</p>
+                                                        <p>{{ substr($item->description,0,100) }} @if(strlen($item->description)>100)<small class="text-underline text-primary text-lowercase showMore" style="cursor: pointer">more</small>@endif</p>
+                                                        <p style="display: none;">{{ $item->description }} @if(strlen($item->description)>100)<small class="text-underline text-primary text-lowercase showLess" style="cursor: pointer">less</small>@endif</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -76,4 +77,19 @@
         </div>
     </div>
 </section>
+@endsection
+@section('script')
+    <script src="{{ asset('frontend/dist/owl.carousel.min.js') }}"></script>
+
+     <script>
+        $('.showMore').click(function(){
+            $(this).parent().hide();
+            $(this).parent().next().show();
+        })    
+        $('.showLess').click(function(){
+            $(this).parent().hide();
+            $(this).parent().prev().show();
+        })    
+    </script>
+
 @endsection

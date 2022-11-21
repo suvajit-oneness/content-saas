@@ -125,9 +125,8 @@
                     <div class="marker-research-info">
                         <a href="{{ $portfolio->link }}" class="research-link">{{$portfolio->title}}</a>
                          {!! portfolioTagsHtml($portfolio->id) !!}
-                        <p> {{ substr(strip_tags($portfolio->short_desc), 0, 500) }}
-                           
-                        </p>
+                         <p>{{ substr($portfolio->short_desc,0,100) }} @if(strlen($portfolio->short_desc)>100)<small class="text-underline text-primary text-lowercase showMore" style="cursor: pointer">more</small>@endif</p>
+                         <p style="display: none;">{{ $portfolio->short_desc }} @if(strlen($portfolio->short_desc)>100)<small class="text-underline text-primary text-lowercase showLess" style="cursor: pointer">less</small>@endif</p>
                        
                     </div>
                 </div>
@@ -154,8 +153,8 @@
                     </div>
                     <div class="marker-research-info">
                         <a href="" class="research-link">{{ ucwords($speciality->specialityDetails->name) }}</a>
-                        <p>{{$speciality->description}}</p>
-                        {{-- <p>{{$speciality->specialityDetails->short_desc}}</p> --}}
+                        <p>{{ substr($speciality->description,0,100) }} @if(strlen($speciality->description)>100)<small class="text-underline text-primary text-lowercase showMore" style="cursor: pointer">more</small>@endif</p>
+                         <p style="display: none;">{{ $speciality->description }} @if(strlen($speciality->description)>100)<small class="text-underline text-primary text-lowercase showLess" style="cursor: pointer">less</small>@endif</p>
                     </div>
                 </div>
             </div>
@@ -260,7 +259,7 @@
                         @foreach ($data->clients as $client)
                         <div class="portfolio-v4-content-list">
                             <div class="portfolio-v4-client-flex">
-                                <img src="{{ asset($client->image) }}" alt="" width="100" height="100" />
+                                <img src="{{ asset($client->image) }}" alt="" width="100" height="100" style="border-radius:50%" />
                                 <div class="portfolio-v4-client-info">
                                     <h4>{{$client->client_name}}</h4>
                                     <span>{{$client->occupation}}</span>
@@ -307,7 +306,7 @@
                                 <div class="portfolio-v4-education-info">
                                     <h4> {{$education->college_name}} </h4>
                                     <span class="designation">{{$education->degree}}</span>
-                                    <span class="year">Year {{$education->year_from}} - {{$education->year_to}}</span>
+                                    <span class="year">Year {{ date('Y', strtotime($education->year_from))}} - {{date('Y', strtotime($education->year_to)) }}</span>
                                 </div>
                             </div>
                             @endforeach
@@ -346,7 +345,7 @@
                         <div class="portfolio-v4-rating-list">
 
                             <div class="portfolio-v4-rating-flex">
-                                <span>{{ $item->date_from}}</span>
+                                <span>{{ date('j M, Y', strtotime($item->date_from)) }}</span>
                                 <div class="edit-heading">
                                 <h4>  {!! RatingHtml($item->rating) !!}
                                 </h4>
@@ -433,7 +432,7 @@
                                     @foreach ($data->certificates as $certificate)
                                     <div class="item">
                                         <div class="port-v4-testi-content port-v4-certi-content">
-                                            <img src="{{ asset('uploads/certificate/'.$certificate->file) }}" alt="">
+                                            <img src="{{ asset($certificate->file) }}" alt="">
                                             <h4>{{$certificate->certificate_title}}</h4>
                                             <span>-{{$certificate->certificate_type}}</span>
                                             <p>{{$certificate->short_desc}}</p>
@@ -701,21 +700,16 @@
 
 @section('script')
     <script src="{{ asset('frontend/dist/owl.carousel.min.js') }}"></script>
-<script>
-    function myFunction() {
-        var dots = document.getElementById("dots");
-        var moreText = document.getElementById("more");
-        var btnText = document.getElementById("myBtn");
-    
-        if (dots.style.display === "none") {
-            dots.style.display = "inline";
-            btnText.innerHTML = "Read more";
-            moreText.style.display = "none";
-        } else {
-            dots.style.display = "none";
-            btnText.innerHTML = "Read less";
-            moreText.style.display = "inline";
-        }
-    }
-</script>
+
+     <script>
+        $('.showMore').click(function(){
+            $(this).parent().hide();
+            $(this).parent().next().show();
+        })    
+        $('.showLess').click(function(){
+            $(this).parent().hide();
+            $(this).parent().prev().show();
+        })    
+    </script>
+
 @endsection

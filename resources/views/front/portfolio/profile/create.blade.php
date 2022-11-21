@@ -216,7 +216,7 @@
                         <br>
 
                         <div class="tile-footer">
-                            <button class="add-btn-edit d-inline-block " type="submit">
+                            <button class="saveBTN d-inline-block secondary-btn" type="submit">
                                 <i class="fa me-1 fa-check-circle"></i>Update
                             </button>
                             <a class="add-btn-edit d-inline-block secondary-btn" href="{{ route('front.user.portfolio.index') }}"><i class="fa me-1 fa-chevron-left"></i>Back</a>

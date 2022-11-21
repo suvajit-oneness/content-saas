@@ -98,7 +98,7 @@ class PortfolioController extends BaseController
             'category' => 'required',
             'tags' => 'required',
             'short_desc' => 'required',
-            'image' => 'required',
+            'image' => 'nullable',
         ]);
         $params = $request->except('_token');
         $portfolio = $this->PortfolioRepository->updatePortfolio($params);

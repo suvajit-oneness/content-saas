@@ -45,7 +45,7 @@
                                 </div><br>
 
                             <div class="tile-footer">
-                                <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save
+                                <button class="saveBTN d-inline-block secondary-btn" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save
                                     </button>
                                     <a class="add-btn-edit d-inline-block secondary-btn" href="{{ route('front.portfolio.expertise.index') }}"><i class="fa fa-fw fa-lg fa-chevron-left"></i>Back</a>
                                 &nbsp;&nbsp;&nbsp;

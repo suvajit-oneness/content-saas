@@ -63,7 +63,7 @@
                                                     <div class="col-12 mb-3">
                                                         <label>Certificate</label>
                                                         @if($item->file)
-                                                        <img src="{{ asset('uploads/certificate/'.$item->file) }}" id="articleImage" class="img-fluid" alt="">
+                                                        <img src="{{ asset($item->file) }}" id="articleImage" class="img-fluid" alt="">
                                                         @else
                                                         <span></span>
                                                         @endif

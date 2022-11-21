@@ -68,7 +68,7 @@
                                         <div class="col-md-2">
                                             @if ($certificate->file != null)
                                                 <figure class="mt-2" style="width: 80px; height: auto;">
-                                                    <img src="{{ asset('uploads/certificate/'.$certificate->file) }}" id="articleImage" class="img-fluid" alt="">
+                                                    <img src="{{ asset($certificate->file) }}" id="articleImage" class="img-fluid" alt="">
                                                 </figure>
                                             @endif
                                         </div>
@@ -80,7 +80,7 @@
                                     @enderror
                                 </div></div></div><br>
                             <div class="tile-footer">
-                                <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Update
+                                <button class="saveBTN d-inline-block secondary-btn" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Update
                                     </button>
                                     <a class="add-btn-edit d-inline-block secondary-btn" href="{{ route('front.portfolio.certification.index') }}"><i class="fa fa-fw fa-lg fa-chevron-left"></i>Back</a>
                                 &nbsp;&nbsp;&nbsp;
