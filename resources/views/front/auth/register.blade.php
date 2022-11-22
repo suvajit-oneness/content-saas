@@ -12,50 +12,45 @@
 
                 <h2>User Register</h2>
 
-                <div class="login-content">
+                <div class="login-content shadow-sm">
 
                     <form action="{{ route('front.user.create') }}" method="post">@csrf
 
-                        <div class="input">
-
-                            <input type="text" name="first_name">
-                            <span>First Name</span>
+                        <div class="form-group">
+                            <label>First Name</label>
+                            <input type="text" name="first_name" class="form-control">
                             <div class="input-border"></div>
                             @error('first_name')
                             <p class="small text-danger">{{ $message }}</p>
                             @enderror
                         </div>
-                        <div class="input">
-
-                            <input type="text" name="last_name">
-                            <span>Last Name</span>
+                        <div class="form-group">
+                            <label>Last Name</label>
+                            <input type="text" name="last_name" class="form-control">
                             <div class="input-border"></div>
                             @error('last_name')
                             <p class="small text-danger">{{ $message }}</p>
                             @enderror
                         </div>
-                        <div class="input">
-
-                            <input type="text" name="email">
-
-                            <span>Email</span>
-
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="text" name="email" class="form-control">
                             <div class="input-border"></div>
                             @error('email')
                             <p class="small text-danger">{{ $message }}</p>
                             @enderror
                         </div>
-                        <div class="input">
-                            <input type="text" name="mobile">
-                            <span>Mobile</span>
+                        <div class="form-group">
+                            <label>Mobile</label>
+                            <input type="text" name="mobile" class="form-control">
                             <div class="input-border"></div>
                             @error('mobile')
                             <p class="small text-danger">{{ $message }}</p>
                             @enderror
                         </div>
-                        <div class="input">
-                            <input type="password" name="password">
-                            <span>Password</span>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" name="password" class="form-control">
                             <div class="input-border"></div>
                             @error('password')
                             <p class="small text-danger">{{ $message }}</p>
@@ -63,7 +58,7 @@
                         </div>
                         <div class="login-forgot-password">
                             <button type="submit" class="">Register</button>
-                            <a href="{{ route('front.user.login') }}" class="forgot-pass">Already have an account? </a>
+                            <span class="forgot-pass"><a href="{{ route('front.user.login') }}">Already have an account? </a></span>
                         </div>
                     </form>
                 </div>

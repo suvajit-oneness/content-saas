@@ -2292,24 +2292,28 @@ a.browse-writers:hover {
 
 .login-content {
   background: rgba(244, 250, 230, 1);
-  padding: 30px;
+  padding: 50px 40px;
   border-radius: 5px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); */
 }
 
-.login-content .input {
+.login-content .form-group {
   position: relative;
   margin-bottom: 20px;
 }
 
-.login-content .input input {
+.login-content label{
+  font-size: 18px;
+}
+.login-content .form-control {
   border: none;
-  background: none;
+  background: #fff;
   font-size: 16px;
   width: 100%;
+  padding: 12px 15px;
 }
 
-.login-content .input span {
+.login-content .form-group span {
   position: absolute;
   left: 0;
   top: -4px;
@@ -2359,11 +2363,14 @@ a.browse-writers:hover {
 
 .login h2 {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  font-size: 40px;
+  text-transform: capitalize;
+  color: #0f1400;
 }
 
 .login p {
-  text-align: center;
+  font-weight: 600;
   margin-bottom: 30px;
 }
 
@@ -2374,23 +2381,25 @@ a.browse-writers:hover {
   margin-top: 30px;
 }
 
-.login-forgot-password a.forgot-pass {
+.login-forgot-password .forgot-pass {
   text-transform: capitalize;
   font-weight: 500;
   color: #111;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  align-items: center;
 }
 
-.login-forgot-password a.forgot-pass i {
+.login-forgot-password .forgot-pass i {
   font-size: 30px;
   margin-left: 10px;
   font-size: 16px;
 }
-
-.login-forgot-password a.forgot-pass:hover {
+.login-forgot-password .forgot-pass a{
+  text-decoration: underline !important;
+  text-underline-offset: 2px;
+  font-size: 17px;
+  font-weight: 600;
+  margin-left: 6px;
+}
+.login-forgot-password .forgot-pass a:hover {
   color: #95C800;
 }
 
@@ -2810,7 +2819,7 @@ input[type="radio"] {
 .dashboard-footer {
   padding: 20px;
   background: #F4FAE6;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
   margin-top: 20px;
 }
 
@@ -7386,6 +7395,7 @@ a.badge.bg-danger:hover {
 
 .lession-details .media-tabs .nav-link {
   border: 2px solid #95C800;
+  text-transform: capitalize;
 }
 
 .lession-details .media-tabs .nav-link.active,
@@ -7401,6 +7411,15 @@ a.badge.bg-danger:hover {
 
 .lession-details .media-tabs .nav-item:last-child {
   margin: 0;
+}
+.review-star-group i{
+  font-size: 20px;
+  cursor: pointer;
+  color: #959595;
+  transition: all 200ms ease;
+}
+.review-star-group i:hover{
+  color: #95C800;
 }
 
 .details-tab p {
@@ -7559,6 +7578,11 @@ a.badge.bg-danger:hover {
   margin-right: 5px;
 }
 
+.crs-details.lession-details,
+.for_lession_details_footer + .dashboard-footer{
+  width: calc(100% - 500px);
+}
+
 .lessionSidebar {
   position: fixed;
   top: 0;
@@ -7569,13 +7593,13 @@ a.badge.bg-danger:hover {
   /* padding: 20px; */
   height: 100%;
   margin-top: 0;
-  transform: translateX(100%);
+  /* transform: translateX(100%); */
   transition: all 300ms ease-in;
 }
 
-.lessionSidebar.active {
+/* .lessionSidebar.active {
   transform: translateX(0);
-}
+} */
 
 .lessionSidebar-btn {
   border: 1px solid #000;
@@ -7679,13 +7703,40 @@ a.badge.bg-danger:hover {
   font-size: 16px;
   font-weight: 700;
 }
-
+.topic-video{
+  position: relative;
+}
 .topic-video video {
   width: 100%;
   height: 600px;
   object-fit: cover;
 }
 
+.lession_nav{
+  position: absolute;
+  top: 50%;
+  z-index: 3;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #fff;
+  color: #fff;
+  visibility: hidden;
+  opacity: 0;
+}
+.topic-video:hover .lession_nav{
+  opacity: 1;
+  visibility: visible;
+}
+.lession_nav.prev{
+  left: 0;
+}
+.lession_nav.next{
+  right: 0;
+}
 .topic-desc {
   padding: 15px;
 }
