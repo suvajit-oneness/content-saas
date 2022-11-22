@@ -30,7 +30,7 @@ $orders = App\Models\Order::where('user_id', auth()->guard('web')->user()->id)->
               </a>
             </div>
             <div class="col-12 col-lg-4 col-md-4 mb-4">
-              <a href="{{ url()->to('job?keyword=&address=&saved_jobs=1&filter=on') }}">
+              <a href="{{ url()->to('user/job?keyword=&address=&saved_jobs=1&filter=on') }}">
                 <div class="dashboard-stats-content dashboard-stats-content2">
                     <div class="typed">
                         <h4>{{count($job)}}</h4>

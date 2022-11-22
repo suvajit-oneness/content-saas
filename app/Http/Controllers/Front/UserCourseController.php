@@ -10,6 +10,7 @@ use App\Models\OrderProduct;
 use App\Models\CourseLesson;
 use App\Models\LessonTopic;
 use App\Models\Topic;
+use App\Models\CourseReview;
 use App\Models\Lesson;
 use App\Models\Course;
 use Illuminate\Http\Response;
@@ -35,7 +36,7 @@ class UserCourseController extends Controller
         // $topic=LessonTopic::where('course_id',$course->id)->orderby('topic')->get();
         $topic = (object)$topics;
         //$lessonDetails=Lesson::where('slug',$Lessonslug)->orderby('title')->first();
-        
+
         //dd($topic);
        // $topic= LessonTopic::where('lesson_id', $lessonDetails->id)->with('topic')->get();
         return view('front.user.course.details', compact('course','topic', 'lessons'));
@@ -62,6 +63,26 @@ class UserCourseController extends Controller
         $lessons = CourseLesson::where('course_id', $course->id)->get();
         $topic= Topic::where('slug', $Topicslug)->first();
         //dd($topic);
-        return view('front.user.course.topicDetails',compact('courseData','course','topic'));
+        return view('front.user.course.topicDetails',compact('courseData','course','topic','request'));
+    }
+    public function store(Request $request){
+        $review=new CourseReview();
+
+        $review->course_id = $request->course_id ?? '';
+        $review->topic_id = $request->topic_id ?? '';
+        $review->rating = $request->rating ?? '';
+        $review->review = $request->review;
+        $review->user_id = auth()->guard('web')->user()->id;
+
+        $review->save();
+        // $status = new ProjectStatus();
+        // $status->title = $project->status ?? '';
+        // $status->slug = slugGenerate($project->status, 'project_statuses');
+        // $status->icon = '<i class="fas fa-check"></i>';
+        // $status->created_by = auth()->guard('web')->user()->id ?? '';
+        // $status->position = count($status->position)+1 ?? '';
+        // $status->save();
+
+        return redirect()->back()->with('success', 'Comment added successfully');
     }
 }

@@ -1,10 +1,11 @@
 @extends('front.layouts.appprofile')
-@section('title', 'Lesson')
+@section('title')
 
 @section('section')
+
 <section class="edit-sec edit-basic-detail p-0">
-        
-    
+
+    <h3>{{ $course->title }}</h3>
     <div class="crs-details lession-details">
         <div class="topic-video">
             <video width="640" height="320" controls id="contentVideo" style="" controlsList="{{$course->video_downloadable == 0 ? 'nodownload' : '' }}">
@@ -27,10 +28,41 @@
                     <p>{!! $course->description !!}</p>
                 </div>
                 <div class="tab-pane" id="comment" role="tabpanel" aria-labelledby="comment-tab">
-                    <form action="#">
+                    <form action="{{ route('front.user.courses.rating.store') }}" method="POST" role="form"
+                            enctype="multipart/form-data">
+                            @csrf
+                            <input type="hidden" name="course_id" value="{{ $course->id }}">
+                        <div class="form-group">
+                            <label class="control-label" for="rating"> Rating</label>
+                            <div class="star-rating">
+                                <input id="star-5" type="radio" name="rating" value="5" />
+                                <label for="star-5" title="5 stars">
+                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                </label>
+                                <input id="star-4" type="radio" name="rating" value="4" />
+                                <label for="star-4" title="4 stars">
+                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                </label>
+                                <input id="star-3" type="radio" name="rating" value="3" />
+                                <label for="star-3" title="3 stars">
+                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                </label>
+                                <input id="star-2" type="radio" name="rating" value="2" />
+                                <label for="star-2" title="2 stars">
+                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                </label>
+                                <input id="star-1" type="radio" name="rating" value="1" />
+                                <label for="star-1" title="1 star">
+                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                </label>
+                            </div>
+                            @error('rating')
+                                <p class="small text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
                         <div class="form-group">
                             <label>Write a comment</label>
-                            <textarea rows="6" class="form-control"></textarea>
+                            <textarea rows="6" name="review" class="form-control"></textarea>
                         </div>
                         <div class="form-group text-left">
                         <button type="submit" class="btn add-btn-edit ms-0 mt-4">Submit</button>
@@ -43,7 +75,7 @@
         @php
              $totalLessonsAndTopics = totalLessonsAndTopics($course->id);
         @endphp
-    
+
     <div class="lessionSidebar">
         <div class="lessionSidebar-btn">
             <i class="fa-solid fa-arrow-left"></i>
@@ -59,6 +91,10 @@
         </div>
         <div class="accordion-container lessionSidebar-list">
             @foreach($totalLessonsAndTopics->lessons as $key => $lesson)
+            @php
+                $count=App\Models\LessonTopic::where('lesson_id',$lesson->id)->with('topic')->count();
+
+            @endphp
             <div class="set lesstionItem">
                 <a href="#">
                     {!! $lesson->lesson->title !!}
@@ -68,7 +104,7 @@
                     <ul class="topicList">
                         @foreach($totalLessonsAndTopics->topics[$key] as $data)
                         <li>
-                            <a href="#">
+                            <a href="{!! URL::to('/user/my-courses/'.$course->slug .'/'.$lesson->lesson->slug.'/'.$data->topic->slug) !!}">
                                 <input type="checkbox" class="topicCheck">
                                 <div class="stamp">
                                     <h5>{!! $data->topic->title  !!}</h5>
@@ -101,7 +137,7 @@
             $('.lessionSidebar').toggleClass('active')
             $(this).hide()
         })
-        
+
         $(".set > a").on("click", function () {
         console.log("abcd");
         if ($(this).hasClass("active")) {
@@ -132,7 +168,7 @@
                                 <h4>{{ $data->lesson->title }}</h4>
                                 <div class="courses-lession-time">
                                     <ul class="list-unstyled p-0 m-0">
-                                        
+
                                         @php
                                             $topic=App\Models\LessonTopic::where('lesson_id',$data->lesson_id)->with('topic')->get();
                                             //dd($topic);
@@ -142,7 +178,7 @@
                                             {{ count($topic) }} Topic
                                         </li>
                                     </ul>
-                                    
+
                                 </div>
                             </div>
 
@@ -154,7 +190,7 @@
                     </div>
                 </div>
             @endforeach
-            
+
         </div>
     </div> -->
 
