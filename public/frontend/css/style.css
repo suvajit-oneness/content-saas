@@ -109,7 +109,8 @@ button:focus,
 }
 
 .form-control {
-  font-size: 15px;
+  font-size: 16px;
+  padding: 12px;
 }
 
 .text-info {
@@ -1955,7 +1956,7 @@ a.browse-writers:hover {
 
 .content-top {
   display: flex;
-  align-items: center;
+  justify-content: space-between;
 }
 
 .content-top .content-top-info {
@@ -1964,8 +1965,12 @@ a.browse-writers:hover {
 
 .content-top h4 {
   font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 6px;
 }
-
+.content-top .short-desc{
+  font-size: 15px;
+}
 .content-top span {
   font-size: 15px;
   font-weight: 500;
@@ -2882,6 +2887,8 @@ input[type="radio"] {
 .jobs-filter-checkbox h4 {
   font-size: 16px;
   margin-bottom: 12px;
+  background: #eee;
+  padding: 12px;
 }
 
 .job-filter-save {
@@ -2929,10 +2936,10 @@ input[type="radio"] {
 }
 
 .checkbox-content label {
-  margin-bottom: 0;
+  margin-bottom: 6px;
   margin-left: 6px;
   line-height: 1;
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .job-filter-save .button {
@@ -7525,7 +7532,7 @@ a.badge.bg-danger:hover {
 }
 
 .jobs-filter-checkbox .checkbox-content {
-  padding-left: 10px;
+  padding-left: 20px;
   align-items: baseline;
 }
 
@@ -7926,6 +7933,9 @@ a.badge.bg-danger:hover {
   margin-left: 16px;
   font-size: 20px;
 }
-
+.form-control::file-selector-button {
+  font-weight: bold;
+  color: #111;
+}
 
 

@@ -3,19 +3,12 @@
 @section('section')
 
 <section class="login">
-
     <div class="container">
-
         <div class="row">
-
             <div class="col-12 col-lg-8 col-md-8 m-auto">
-
                 <h2>User Register</h2>
-
                 <div class="login-content shadow-sm">
-
                     <form action="{{ route('front.user.create') }}" method="post">@csrf
-
                         <div class="form-group">
                             <label>First Name</label>
                             <input type="text" name="first_name" class="form-control">
