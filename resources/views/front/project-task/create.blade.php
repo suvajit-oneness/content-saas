@@ -139,7 +139,7 @@
                                         @error('external_links')
                                             <p class="small text-danger">{{ $message }}</p>
                                         @enderror
-                                        <div class="form-group">
+                                        {{-- <div class="form-group">
                                             <label class="control-label" for="deadline">Notes and Comments <span class="m-l-5 text-danger">*</span></label>
     
                                             <input class="form-control @error('deadline') is-invalid @enderror" type="date" name="deadline" id="deadline" value="{{ old('deadline') ? old('deadline') : date('Y-m-d', strtotime('+1 day')) }}" />
@@ -148,7 +148,7 @@
                                                 <p class="small text-danger">{{ $message }}</p>
                                             @enderror
                                         </div>
-                                        <p class="mt-2 text-muted"><small>Upload any project related document, if any. You can also download it later.</small></p>
+                                        <p class="mt-2 text-muted"><small>Upload any project related document, if any. You can also download it later.</small></p> --}}
                                     </div>
 
                                     <br>
