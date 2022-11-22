@@ -6,7 +6,6 @@
 <section class="edit-sec edit-basic-detail p-0">
 
     <h3>{{ $course->title }}</h3>
-    <p>Course Preview</p>
     <div class="crs-details lession-details">
         <div class="topic-video">
             <video width="640" height="320" controls id="contentVideo" style="" controlsList="{{$course->video_downloadable == 0 ? 'nodownload' : '' }}">
