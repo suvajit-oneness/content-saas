@@ -81,6 +81,8 @@
                                     <i class="fas fa-download"></i>
                                     Download
                                 </a>
+                            @else
+                                <p><i class="fas fa-info-circle text-secondary"></i></p>
                             @endif
                         </td>
                         {{-- <td>
@@ -93,11 +95,11 @@
                                     @php
                                     $totalComments = totalComments($item->id);
                                     @endphp
-                                    {{ $totalComments->comment_count }} Comments
+                                    {{ $totalComments->comment_count <= 1 ? $totalComments->comment_count . ' Comment' : $totalComments->comment_count . ' Comments' }}
                                 </a>
                             </td>
                             <td>
-                                <select onchange="changeProjectAndTaskStatus(`{{route('front.project.task.updateStatus')}}`,this,'{{$item->id}}')" name="status" id="status" height="24px" class="badge-sm badge bg-success download-badge d-inline-block">
+                                <select onchange="changeProjectAndTaskStatus(`{{route('front.project.task.updateStatus')}}`,this,'{{$item->id}}')" data-original="{{$item->status}}" name="status" id="status" height="24px" class="form-control">
                                     <option value="" selected disabled>Change Status</option>
                                     @foreach ($status as $s)
                                         <option value="{{$s->slug}}" {{ ($s->slug == $item->status) ? 'selected' : '' }}>{{$s->title}}</option>
@@ -125,7 +127,7 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Notes for {{$item->title}}</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">Comments for {{$item->title}}</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <form action="{{ route('front.project.task.comment.update',$item->id) }}" method="POST" role="form" enctype="multipart/form-data">
@@ -133,10 +135,10 @@
                                         <input type="hidden" name="task_id" value="{{$item->id}}">
                                         <div class="modal-body">
                                             <div class="form-group">
-                                                <label class="control-label" for="comment">Notes</label>
+                                                <label class="control-label" for="comment">Comment</label>
                                                 <div class="row">
                                                     @php
-                                                    $comment= App\Models\TaskComment::where('task_id', $item->id)->where('user_id',Auth::guard('web')->user()->id)->with('task')->orderby('id','desc')->get();
+                                                        $comment= App\Models\TaskComment::where('task_id', $item->id)->where('user_id',Auth::guard('web')->user()->id)->with('task')->orderby('id','desc')->get();
                                                     @endphp
                                                     @foreach($comment as $key => $data)
                                                     {{-- {{dd($comment)}} --}}
@@ -165,7 +167,7 @@
                                                 @enderror
                                             </div>
                                             <div class="form-group">
-                                                <label class="control-label" for="doc">Upload Document</label>
+                                                <label class="control-label" for="doc">Upload Document (optional)</label>
 
                                                 <input type="file" class="form-control" rows="4" name="doc" id="doc" value="{{ old('doc') }}">
                                                 <input type="hidden" name="id" value="{{$item->id}}">
