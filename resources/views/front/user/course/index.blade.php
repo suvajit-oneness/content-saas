@@ -16,6 +16,7 @@
                             @endif
                         </div>
                         <div class="courses-info">
+                            
                             <div class="courses-badge">
                                 @if (!empty($courseProduct->courseName->category))
                                     @if(!empty($courseProduct->courseName->category->image))
