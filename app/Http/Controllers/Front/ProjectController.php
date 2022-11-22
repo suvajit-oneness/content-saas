@@ -74,8 +74,11 @@ class ProjectController extends Controller
             // 'status' => 'required|string|min:2|max:255',
             'title' => 'required|string|min:2|max:255',
             'short_desc' => 'nullable|string|min:2',
-            'document' => 'nullable'
+            'document' => 'nullable',
+            'deadline' => 'required',
         ]);
+
+        // dd($request->all());
 
         $project = new Project();
         $project->title = $request->title;
@@ -90,6 +93,7 @@ class ProjectController extends Controller
 
         // $project->status = $request->status;
         $project->created_by = auth()->guard('web')->user()->id;
+        $project->deadline = $request->deadline;
 
         $project->save();
         // $status = new ProjectStatus();
@@ -126,7 +130,8 @@ class ProjectController extends Controller
         $request->validate([
             'title' => 'required|string|min:2|max:255',
             'short_desc' => 'nullable|string|min:2',
-            'document' => 'nullable'
+            'document' => 'nullable',
+            'deadline' => 'required',
         ]);
 
         $project = Project::findOrFail($id);
@@ -137,6 +142,8 @@ class ProjectController extends Controller
         if (!empty($request->document)) {
             $project->document = imageUpload($request->document, 'project-document');
         }
+
+        $project->deadline = $request->deadline;
 
         // if (!empty($request->status)) {
         //     if($request['status'] == 'spare'){

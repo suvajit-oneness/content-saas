@@ -2,12 +2,6 @@
 @section('title', 'Dashboard')
 
 @section('section')
-@php
-$project = App\Models\Project::where('created_by', auth()->guard('web')->user()->id)->get();
-$job = App\Models\JobUser::where('user_id', auth()->guard('web')->user()->id)->get();
-$orders = App\Models\Order::where('user_id', auth()->guard('web')->user()->id)->with('orderProducts')->get();
-
-@endphp
 <div class="dashboard-content">
     <div class="dashboard-stats">
         {{-- <div class="top-info">
@@ -117,7 +111,7 @@ $orders = App\Models\Order::where('user_id', auth()->guard('web')->user()->id)->
                               <ul class="list-unstyled p-0 m-0">
                               @foreach($o->orderProducts as $op)
                                 @if($op->type == 1)
-                                <li><a href="{{route('front.course.details', getProductSlug($op->course_id)->slug)}}">{{getProductSlug($op->course_id)->title}}</a></li>
+                                    {{-- <li><a href="{{route('front.course.details', getProductSlug($op->course_id)->slug)}}">{{getProductSlug($op->course_id)->title}}</a></li> --}}
                                   @if(getProductSlug($op->course_id))
                                     <li><a href="{{route('front.course.details', getProductSlug($op->course_id)->slug)}}">{{getProductSlug($op->course_id)->title}}</a></li>
                                   @endif
