@@ -2,18 +2,15 @@
 @section('title')
 
 @section('section')
-<section class="edit-sec edit-basic-detail p-0 bg-white for_lession_details_footer">
+
+<section class="edit-sec edit-basic-detail p-0">
+
+    <h3>{{ $course->title }}</h3>
     <div class="crs-details lession-details">
         <div class="topic-video">
             <video width="640" height="320" controls id="contentVideo" style="" controlsList="{{$course->video_downloadable == 0 ? 'nodownload' : '' }}">
                 <source src="{{asset($course->preview_video)}}" type="video/mp4">
             </video>
-            <a href="#" class="lession_nav prev">
-                <i class="fas fa-angle-left"></i>
-            </a>
-            <a href="#" class="lession_nav next">
-                <i class="fas fa-angle-right"></i>
-            </a>
         </div>
         <div class="topic-desc">
             <!-- <h4>Installing Python</h4>
@@ -23,31 +20,52 @@
                     <a href="#" class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" role="tab" aria-controls="description" aria-selected="false">Description</a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a href="#" class="nav-link" id="review-tab" data-bs-toggle="tab" data-bs-target="#review" role="tab" aria-controls="review" aria-selected="true">review</a>
+                    <a href="#" class="nav-link" id="comment-tab" data-bs-toggle="tab" data-bs-target="#comment" role="tab" aria-controls="comment" aria-selected="true">Comment</a>
                 </li>
             </ul>
             <div class="tab-content details-tab">
                 <div class="tab-pane active" id="description" role="tabpanel" aria-labelledby="description-tab">
                     <p>{!! $course->description !!}</p>
                 </div>
-                <div class="tab-pane" id="review" role="tabpanel" aria-labelledby="review-tab">
+                <div class="tab-pane" id="comment" role="tabpanel" aria-labelledby="comment-tab">
                     <form action="{{ route('front.user.courses.rating.store') }}" method="POST" role="form"
-                    enctype="multipart/form-data">
-                    @csrf
-                    <input type="hidden" name="course_id" value="{{ $course->id }}">
-                        <div class="review-star-group mb-3">
-                            <input id="star-5" type="radio" name="rating" value="5" /><i class="fas fa-star"></i>
-                            <input id="star-4" type="radio" name="rating" value="4" /><i class="fas fa-star"></i>
-                            <input id="star-3" type="radio" name="rating" value="3" /><i class="fas fa-star"></i>
-                            <input id="star-2" type="radio" name="rating" value="2" /><i class="fas fa-star"></i>
-                            <input id="star-1" type="radio" name="rating" value="1" /><i class="fas fa-star"></i>
+                            enctype="multipart/form-data">
+                            @csrf
+                            <input type="hidden" name="course_id" value="{{ $course->id }}">
+                        <div class="form-group">
+                            <label class="control-label" for="rating"> Rating</label>
+                            <div class="star-rating">
+                                <input id="star-5" type="radio" name="rating" value="5" />
+                                <label for="star-5" title="5 stars">
+                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                </label>
+                                <input id="star-4" type="radio" name="rating" value="4" />
+                                <label for="star-4" title="4 stars">
+                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                </label>
+                                <input id="star-3" type="radio" name="rating" value="3" />
+                                <label for="star-3" title="3 stars">
+                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                </label>
+                                <input id="star-2" type="radio" name="rating" value="2" />
+                                <label for="star-2" title="2 stars">
+                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                </label>
+                                <input id="star-1" type="radio" name="rating" value="1" />
+                                <label for="star-1" title="1 star">
+                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                </label>
+                            </div>
+                            @error('rating')
+                                <p class="small text-danger">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div class="form-group">
-                            <label>Write a review</label>
+                            <label>Write a comment</label>
                             <textarea rows="6" name="review" class="form-control"></textarea>
                         </div>
                         <div class="form-group text-left">
-                            <button type="submit" class="btn add-btn-edit ms-0 mt-4">Submit</button>
+                        <button type="submit" class="btn add-btn-edit ms-0 mt-4">Submit</button>
                         </div>
                     </form>
                 </div>
@@ -59,10 +77,10 @@
         @endphp
 
     <div class="lessionSidebar">
-        {{--<div class="lessionSidebar-btn">
+        <div class="lessionSidebar-btn">
             <i class="fa-solid fa-arrow-left"></i>
             Course Content
-        </div> --}}
+        </div>
         <div class="lessionSidebar-header">
             <p>
                 Course Lessions
@@ -121,15 +139,16 @@
         })
 
         $(".set > a").on("click", function () {
-            if ($(this).hasClass("active")) {
-                $(this).removeClass("active");
-                $(this).siblings(".content").slideUp(200);
-            } else {
-                $(".set > a").removeClass("active");
-                $(this).addClass("active");
-                $(".content").slideUp(200);
-                $(this).siblings(".content").slideDown(200);
-            }
+        console.log("abcd");
+        if ($(this).hasClass("active")) {
+            $(this).removeClass("active");
+            $(this).siblings(".content").slideUp(200);
+        } else {
+            $(".set > a").removeClass("active");
+            $(this).addClass("active");
+            $(".content").slideUp(200);
+            $(this).siblings(".content").slideDown(200);
+        }
         });
 
     </script>
