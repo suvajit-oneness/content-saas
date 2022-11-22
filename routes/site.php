@@ -137,7 +137,7 @@ Route::name('front.')->group(function () {
         Route::prefix('user')->name('user.courses.')->group(function () {
             Route::get('/my-courses','Front\UserCourseController@index')->name('index');
             Route::get('/my-courses/{slug}','Front\UserCourseController@details')->name('details');
-            Route::get('/my-courses/{slug}/{Lessonslug}','Front\UserCourseController@lessonDetails')->name('lesson');
+            //Route::get('/my-courses/{slug}/{Lessonslug}','Front\UserCourseController@lessonDetails')->name('lesson');
             Route::get('/my-courses/{slug}/{Lessonslug}/{Topicslug}','Front\UserCourseController@topicDetails')->name('topic');
         });
 

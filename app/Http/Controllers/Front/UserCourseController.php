@@ -29,14 +29,16 @@ class UserCourseController extends Controller
         $course=$data[0];
         $topics = [];
         $lessons = CourseLesson::where('course_id', $course->id)->get();
-       
         foreach($lessons as $l){
             array_push($topics, LessonTopic::where('lesson_id', $l->id)->get());
         }
+        // $topic=LessonTopic::where('course_id',$course->id)->orderby('topic')->get();
+        $topic = (object)$topics;
+        //$lessonDetails=Lesson::where('slug',$Lessonslug)->orderby('title')->first();
         
         //dd($topic);
-        $topic = (object)$topics;
-        return view('front.user.course.details', compact('course','topic','lessons'));
+       // $topic= LessonTopic::where('lesson_id', $lessonDetails->id)->with('topic')->get();
+        return view('front.user.course.details', compact('course','topic', 'lessons'));
     }
     public function lessonDetails(Request $request,$slug,$Lessonslug)
     {
