@@ -50,6 +50,19 @@
                                 </ul>
                             </div>
 
+                            <div class="crs-desc">
+                                <h5>Description</h5>
+                                <p>
+                                    In this course we walk through all of the critical concepts within the Cloud Platform & Infrastructure domain. This domain is 17% of the test as of August 2022. I will guide you through all of the concepts that you need to know and advise you on the level of knowledge that you need to get comfortable with.
+                                </p>
+                                <p>
+                                    There are over four hours of video content plus course notes based on information from my book: Cloud Guardians.
+                                </p>
+                                <p>
+                                    We will explore the basics of Governance, Risk management and Compliance and how the cloud affects it in a business.
+                                </p>
+                            </div>
+
                             {{-- <div style="display: flex;align-items: flex-start;border:1px solid rgb(209, 212, 219);border-radius:10px;padding: 16px 20px 20px;margin-top: 20px;">
                                 <div style="margin-right: 20px;">
                                     <span style="display: flex;align-items: center;justify-content: center; width:32px;height:32px;border-radius: 50%;background-color: rgb(255, 100, 45);color: #ffffff;">1</span>
@@ -83,11 +96,15 @@
                                                     <i class="fa-solid fa-angle-down"></i>
                                                     <span>{!! $lesson->lesson->title !!}</span>
                                                 </div>
-                                                {{-- <div class="accor-top-right">
+                                                <div class="accor-top-right">
                                                     <div class="duraton">
-                                                        <span></span>
+                                                        <span>1 Lecture</span>
+                                                        <span>
+                                                            <i class="fas fa-circle"></i>
+                                                            17 Min
+                                                        </span>
                                                     </div>
-                                                </div> --}}
+                                                </div>
                                             </div>
                                             <div class="accor-content">
                                                 <ul class="list-unstyled p-0 m-0">
@@ -295,7 +312,9 @@
                             <small>Preview Course</small>
                         </div>
                         <h3 class="course-price">
-                            <span>$</span>{{ $course->price }}
+                            ${{ $course->price }}
+                            <span>$39</span>
+                            <small>36% off</small>
                         </h3>
 
 
