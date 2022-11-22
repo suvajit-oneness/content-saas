@@ -153,8 +153,6 @@ class ProjectTaskController extends Controller
 
         if (!empty($request->document)) {
             $project->document = imageUpload($request->document, 'project-task-document');
-        } else {
-            $project->document = '';
         }
 
         if (!empty($request->external_links)) {

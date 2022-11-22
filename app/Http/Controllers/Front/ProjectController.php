@@ -24,7 +24,13 @@ class ProjectController extends Controller
             if(!empty($request->keyword))
                 $data = $data->where('title','like','%'.$request->keyword.'%');
 
+            if(!empty($request->export)){
+                $data = $data->get()->toArray();
+                $this->csvProjectExport($data);
+            }
+            
             $data = $data->paginate(15);
+
             $status = ProjectStatus::orderBy('position', 'asc')->get();
             return view('front.project.index', compact('data','status'));
         } else {
@@ -49,6 +55,11 @@ class ProjectController extends Controller
             
         if(!empty($request->keyword))
             $tasks = $tasks->where('title','like','%'.$request->keyword.'%');
+
+        if(!empty($request->export)){
+            $tasks = $tasks->get()->toArray();
+            $this->csvProjectTaskExport($tasks, $data->title);
+        }
         
         $tasks = $tasks->paginate(15);
 
@@ -196,6 +207,98 @@ class ProjectController extends Controller
                 'total_count'=>$request->total_count,
             ]);
             return response()->json(array('message' => 'Project commercial submitted!'));
+        }
+    }
+    public function csvProjectExport($data)
+    {
+        if (count($data) > 0) {
+            $delimiter = ","; 
+            $filename = "Projects-". Auth::guard('web')->user()->first_name .'-'. Auth::guard('web')->user()->last_name  ."-".date('Y-m-d').".csv"; 
+
+            // Create a file pointer 
+            $f = fopen('php://memory', 'w'); 
+
+            // Set column headers 
+            $fields = array('SR', 'TITLE', 'STATUS', 'DESCRIPTION', 'START DATE'); 
+            fputcsv($f, $fields, $delimiter); 
+
+            $count = 1;
+
+            foreach($data as $row) {
+                $datetime = date('j F, Y h:i A', strtotime($row['created_at']));
+
+                $lineData = array(
+                    $count,
+                    $row['title'],
+                    $row['status'],
+                    $row['short_desc'],
+                    $datetime
+                );
+
+                fputcsv($f, $lineData, $delimiter);
+
+                $count++;
+            }
+
+            // Move back to beginning of file
+            fseek($f, 0);
+
+            // Set headers to download file rather than displayed
+            header('Content-Type: text/csv');
+            header('Content-Disposition: attachment; filename="' . $filename . '";');
+
+            //output all remaining data on a file pointer
+            fpassthru($f);
+            exit;
+        }
+    }
+
+    public function csvProjectTaskExport($data,$project_name)
+    {
+        if (count($data) > 0) {
+            $delimiter = ","; 
+            $filename = "Project-" . $project_name . '-' . Auth::guard('web')->user()->first_name .'-'. Auth::guard('web')->user()->last_name  ."-".date('Y-m-d').".csv"; 
+
+            // Create a file pointer 
+            $f = fopen('php://memory', 'w'); 
+
+            // Set column headers 
+            $fields = array('SR','TITLE','STATUS','DESCRIPTION','START DATE','DEADLINE','LABEL','RECURRING','STATUS'); 
+            fputcsv($f, $fields, $delimiter); 
+
+            $count = 1;
+
+            foreach($data as $row) {
+                $datetime = date('j F, Y h:i A', strtotime($row['created_at']));
+                $deadline = date('j F, Y h:i A', strtotime($row['deadline']));
+
+                $lineData = array(
+                    $count,
+                    $row['title'],
+                    $row['status'],
+                    $row['short_desc'],
+                    $datetime,
+                    $deadline,
+                    $row['label'],
+                    $row['recurring'] == 1 ? 'Yes' : 'No',
+                    $row['status'],
+                );
+
+                fputcsv($f, $lineData, $delimiter);
+
+                $count++;
+            }
+
+            // Move back to beginning of file
+            fseek($f, 0);
+
+            // Set headers to download file rather than displayed
+            header('Content-Type: text/csv');
+            header('Content-Disposition: attachment; filename="' . $filename . '";');
+
+            //output all remaining data on a file pointer
+            fpassthru($f);
+            exit;
         }
     }
 }
