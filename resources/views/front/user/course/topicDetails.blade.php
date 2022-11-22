@@ -31,7 +31,7 @@
                     <p>{!! $topic->description !!}</p>
                 </div>
                 <div class="tab-pane" id="comment" role="tabpanel" aria-labelledby="comment-tab">
-                    <form action="{{ route('front.user.course.rating.store') }}" method="POST" role="form"
+                    <form action="{{ route('front.user.courses.rating.store') }}" method="POST" role="form"
                     enctype="multipart/form-data">
                     @csrf
                         <input type="hidden" name="topic_id" value="{{ $topic->id }}">

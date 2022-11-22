@@ -150,20 +150,13 @@
 
 
                             <div id="crs_reviews" class="crs_reviews">
-                                @if(!empty($review))
+                                {{-- @if(!empty($review))
                                 @foreach($review as $data)
-                                <div class="crs-rating-lg">
-                                    {{-- @if(round($data->avg('rating'),2 == 1))
-                                    <div class="rating-list-stars d-flex">
-                                        <i class="fa-solid fa-star text-warning"></i>
-                                        <i class="fa-regular fa-star text-warning"></i>
-                                        <i class="fa-regular fa-star text-warning"></i>
-                                        <i class="fa-regular fa-star text-warning"></i>
-                                        <i class="fa-regular fa-star text-warning"></i>
-                                    </div>
-                                    @endif --}}
+                                <div class="crs-rating-all">
+                                    
                                     <span>
-                                            {{ round($data->avg('rating'),2) }} course rating
+                                        {!! RatingHtml($data->rating) !!}
+
                                     </span>
                                     <i class="fas fa-circle ms-2"></i>
                                     <span>
@@ -171,7 +164,7 @@
                                     </span>
                                 </div>
                                 @endforeach
-                                @endif
+                                @endif --}}
                                 <div class="row">
                                     @if(!empty($review))
                                     @foreach($review as $data)
