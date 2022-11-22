@@ -71,21 +71,25 @@
 
                                     <div class="form-group">
                                         <label class="control-label" for="document">Document (optional)</label>
-
                                         <input class="form-control @error('document') is-invalid @enderror" type="file" id="document" name="document"/>
-
                                         @error('document')
                                             <p class="small text-danger">{{ $message }}</p>
                                         @enderror
-
                                         <p class="mt-2 text-muted"><small>Upload any project related document, if any. You can also download it later.</small></p>
                                     </div>
+                                    <br>
 
+                                    <div class="form-group">
+                                        <label class="control-label" for="deadline">Deadline <span class="m-l-5 text-danger">*</span></label>
+                                        <input class="form-control @error('deadline') is-invalid @enderror" type="datetime-local" value="{{date('Y-m-d H:i',strtotime(old('deadline') ?? date('Y-m-d')))}}" id="deadline" name="deadline"/>
+                                        @error('deadline')
+                                            <p class="small text-danger">{{ $message }}</p>
+                                        @enderror
+                                    </div>
                                     <br>
 
                                     <div class="tile-footer">
                                         <button class="saveBTN d-inline-block" type="submit"><i class="fas fa-check-circle"></i> Save</button>
-
                                         <a class="saveBTN d-inline-block secondary-btn" href="{{ route('front.project.index') }}"><i class="fas fa-chevron-left"></i>Back</a>
                                     </div>
                                 </div>

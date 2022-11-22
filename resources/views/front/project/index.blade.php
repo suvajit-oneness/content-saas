@@ -79,7 +79,7 @@
                                 </td>
                                 <td class="text-end">
                                     @if($item->taskDetail->count() > 0)
-                                        <span class="badge bg-success download-badge">{{(CompletedTasks($item->id)/$item->taskDetail->count())*100}}% completed</span>
+                                        <span class="badge bg-success download-badge">{{(CompletedTasks($item->id)/$item->taskDetail->count())*100}}%</span>
                                     @else
                                         <span class="badge bg-success download-badge">0 Task</span>
                                     @endif

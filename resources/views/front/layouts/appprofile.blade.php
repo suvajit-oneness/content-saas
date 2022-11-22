@@ -159,6 +159,7 @@
                             <div class="form-group">
                                 <label for="form-label"><b>Set Charges Type</b></label>
                                 <select name="charges" class="form-control">
+                                    <option value="" disabled selected>Set Charges type</option>
                                     @foreach (getChargesLimits() as $item)
                                         <option value="{{$item->name}}">{{$item->name}}</option>
                                     @endforeach
