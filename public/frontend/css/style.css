@@ -7520,10 +7520,8 @@ a.badge.bg-danger:hover {
 .projectTable{
   border: 1px solid #ddd;
 }
-
-.userPortfolio {
-  border: 0;
-  
+.userPortfolio{
+    border: 0;
 }
 .userPortfolio img{
     width: 100%;
