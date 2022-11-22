@@ -75,7 +75,7 @@
                                     @enderror
                                 </div><br>
                             <div class="tile-footer">
-                                <button class="saveBTN d-inline-block secondary-btn" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save</button>
+                                <button class="saveBTN d-inline-block" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save</button>
 
                                 <a href="{{ route('front.portfolio.portfolio.index') }}" class="add-btn-edit d-inline-block secondary-btn"><i class="fa fa-chevron-left me-2"></i>Back</a>
 

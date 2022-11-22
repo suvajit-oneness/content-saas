@@ -67,7 +67,7 @@
                                                         <div class="edit-heading">
                                                             <h4>{{ $item->title }}</h4>
                                                             <p> {!! portfolioTagsHtml($item->id) !!}</p>
-                                                            <p>{{ substr($item->short_desc,0,100) }} @if(strlen($item->short_desc)>100)<small class="text-underline text-primary text-lowercase showMore" style="cursor: pointer">more</small>@endif</p>
+                                                            <p>{{ substr($item->short_desc,0,100) }} @if(strlen($item->short_desc)>100)<small class="text-underline text-primary text-lowercase showMore" style="cursor: pointer">more...</small>@endif</p>
                                                             <p style="display: none;">{{ $item->short_desc }} @if(strlen($item->short_desc)>100)<small class="text-underline text-primary text-lowercase showLess" style="cursor: pointer">less</small>@endif</p>
                                                         
 

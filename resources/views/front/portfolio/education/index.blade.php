@@ -76,7 +76,7 @@
                                                 </div>
                                                 <div class="col-lg-6 col-12 mb-3">
                                                     <label>Long Description</label>
-                                                    <p>{{ substr($item->long_desc,0,100) }} @if(strlen($item->long_desc)>100)<small class="text-underline text-primary text-lowercase showMore" style="cursor: pointer">more</small>@endif</p>
+                                                    <p>{{ substr($item->long_desc,0,100) }} @if(strlen($item->long_desc)>100)<small class="text-underline text-primary text-lowercase showMore" style="cursor: pointer">more...</small>@endif</p>
                                                     <p style="display: none;">{{ $item->long_desc }} @if(strlen($item->long_desc)>100)<small class="text-underline text-primary text-lowercase showLess" style="cursor: pointer">less</small>@endif</p>
                                                   
                                                 </div>

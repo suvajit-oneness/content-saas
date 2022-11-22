@@ -28,7 +28,7 @@
                         <span>{{$data->user->country}}</span>
                     </div>
                 </div>
-                <p class="text-right"><i class="fa-solid fa-phone"></i><span class="ms-2">{{$data->user->mobile}}</span></p>
+                <p class="text-right"> <a href="tel:{{$data->user->mobile}}" class="g_l_icon"><i class="fa-solid fa-phone"></i><span class="ms-2">{{$data->user->mobile}}</span></a></p>
                 <p>
                     {{$data->user->short_desc}}
                 </p>
@@ -71,14 +71,16 @@
                 @else
                 <p class="small">No languages found</p>
                 @endif
-                @if($data->user->quote)
+                @if(!empty($data->user->quote))
                 <div class="language">
                     <span>Favourite Quote</span>
                 </div>
                 <div class="view-lang">
                     <ul class="list-unstyled p-0 m-0 flex-column align-items-start">
                         <h5>{{$data->user->quote}}</h5>
-                        <p class="w-100 text-right">- {{$data->user->quote_by}}</p>   
+                         @if(!empty($data->user->quote_by))
+                        <p class="w-100 text-right">- {{$data->user->quote_by}}</p>
+                        @endif
                     </ul>
                 </div>
                 @endif
@@ -125,9 +127,9 @@
                     <div class="marker-research-info">
                         <a href="{{ $portfolio->link }}" class="research-link">{{$portfolio->title}}</a>
                          {!! portfolioTagsHtml($portfolio->id) !!}
-                         <p>{{ substr($portfolio->short_desc,0,100) }} @if(strlen($portfolio->short_desc)>100)<small class="text-underline text-primary text-lowercase showMore" style="cursor: pointer">more</small>@endif</p>
+                         <p>{{ substr($portfolio->short_desc,0,100) }} @if(strlen($portfolio->short_desc)>100)<small class="text-underline text-primary text-lowercase showMore" style="cursor: pointer">more...</small>@endif</p>
                          <p style="display: none;">{{ $portfolio->short_desc }} @if(strlen($portfolio->short_desc)>100)<small class="text-underline text-primary text-lowercase showLess" style="cursor: pointer">less</small>@endif</p>
-                       
+
                     </div>
                 </div>
             </div>
@@ -153,7 +155,7 @@
                     </div>
                     <div class="marker-research-info">
                         <a href="" class="research-link">{{ ucwords($speciality->specialityDetails->name) }}</a>
-                        <p>{{ substr($speciality->description,0,100) }} @if(strlen($speciality->description)>100)<small class="text-underline text-primary text-lowercase showMore" style="cursor: pointer">more</small>@endif</p>
+                        <p>{{ substr($speciality->description,0,100) }} @if(strlen($speciality->description)>100)<small class="text-underline text-primary text-lowercase showMore" style="cursor: pointer">more...</small>@endif</p>
                          <p style="display: none;">{{ $speciality->description }} @if(strlen($speciality->description)>100)<small class="text-underline text-primary text-lowercase showLess" style="cursor: pointer">less</small>@endif</p>
                     </div>
                 </div>
@@ -217,10 +219,10 @@
                         <div class="portfolio-v4-content-list">
                             <h4>{{$employment->occupation}} | {{$employment->company_title}}</h4>
                             @if($employment->link == '')
-                                <p><small>No company url found</small></p>
+                                <p></p>
                             @else
-                                <p><a href="{{$employment->link}}"><small>{{$employment->link}}</small></a></p>
-                            @endif                            
+                                <p><a href="{{$employment->link}}" target="_blank"><small>{{$employment->link}}</small></a></p>
+                            @endif
                             <span class="badge"> {{date('M Y',strtotime($employment->year_from))}} - {{$employment->year_to == '' || strtotime($employment->year_to) > strtotime(date('Y-m-d')) ? 'Present' : date('M Y',strtotime($employment->year_to))}} </span>
                             <p>{{$employment->short_desc}}</p>
                         </div>
@@ -264,7 +266,7 @@
                                     <h4>{{$client->client_name}}</h4>
                                     <span>{{$client->occupation}}</span>
                                     <p class="mb-0">{{$client->company_name}}</p>
-                                    <a href="{{$client->link}}" class="mb-0">{{$client->link}}</a>
+                                    <a href="{{$client->link}}" target="_blank" class="mb-0">{{$client->link}}</a>
                                 </div>
                             </div>
                         </div>
@@ -705,11 +707,11 @@
         $('.showMore').click(function(){
             $(this).parent().hide();
             $(this).parent().next().show();
-        })    
+        })
         $('.showLess').click(function(){
             $(this).parent().hide();
             $(this).parent().prev().show();
-        })    
+        })
     </script>
 
 @endsection
