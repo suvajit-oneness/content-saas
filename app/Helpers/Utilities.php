@@ -11,6 +11,7 @@ use App\Models\PlansAndPricing;
 use App\Models\NotInterestedJob;
 use App\Models\ReportJob;
 use App\Models\PlansWithPrice;
+use App\Models\ProjectTask;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -356,9 +357,16 @@ function getChargesLimits()
 {
     return DB::table('charges_limit')->get();
 }
+
+
 function getCureencyList()
 {
     return Currency::all();
+}
+
+function CompletedTasks($project_id)
+{
+    return count(ProjectTask::where('project_id',$project_id)->where('deleted_at',null)->where('status','like','%completed%')->get());
 }
 
 // show saved jobs only

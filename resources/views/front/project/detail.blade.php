@@ -40,6 +40,7 @@
                     </select>
                     <button class="btn btn-success btn-search mx-1"><i class="fa fa-search"></i></button>
                     <a href="{{route('front.project.detail', $data->slug)}}" class="btn btn-danger btn-search mx-1"><i class="fa fa-times"></i></a>
+                    <a href="{{request()->fullUrlWithQuery(['export' => 'true'])}}" class="add-btn-edit d-inline-block text-sm" style="padding: 6px 12px; font-size: 9px">Export as csv <i class="fa fa-file"></i></a>
                 </form>
             </div>
             <div class="col-md-4 text-end">
@@ -99,7 +100,7 @@
                                 </a>
                             </td>
                             <td>
-                                <select onchange="changeProjectAndTaskStatus(`{{route('front.project.task.updateStatus')}}`,this,'{{$item->id}}')" data-original="{{$item->status}}" name="status" id="status" height="24px" class="form-control">
+                                <select onchange="changeProjectAndTaskStatus(`{{route('front.project.task.updateStatus')}}`,this,'{{$item->id}}')" data-original="{{$item->status}}" name="status" id="status" height="24px" class="bg-success form-control">
                                     <option value="" selected disabled>Change Status</option>
                                     @foreach ($status as $s)
                                         <option value="{{$s->slug}}" {{ ($s->slug == $item->status) ? 'selected' : '' }}>{{$s->title}}</option>
