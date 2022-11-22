@@ -98,7 +98,7 @@ class FeedbackController extends BaseController
             'title' => 'required',
             'rating' => 'required',
             'review' => 'required',
-            'description' => 'required',
+            'description' => 'nullable',
 
         ]);
         $params = $request->except('_token');

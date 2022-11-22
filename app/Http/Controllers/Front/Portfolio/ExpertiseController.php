@@ -98,7 +98,7 @@ class ExpertiseController extends BaseController
     public function update(Request $request)
     {
         $this->validate($request, [
-            'speciality_id' => 'required',
+            'speciality_id' => 'nullable',
             'description' => 'required|string|min:1',
         ]);
         $params = $request->except('_token');

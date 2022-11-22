@@ -49,7 +49,7 @@
                                                 <div class="row">
                                                     <div class="col-3 mb-3">
                                                     @if($item->image)
-                                                    <img src="{{ asset($item->image) }}" id="articleImage" class="img-fluid" alt="" width="100" height="100">
+                                                    <img src="{{ asset($item->image) }}" id="articleImage" class="img-fluid" alt="" width="100" height="100" style="border-radius:50%">
                                                     @else
                                                     <span></span>
                                                     @endif
@@ -65,7 +65,7 @@
                                                         <label>Designation</label>
                                                         <p>{{ $item->occupation }}</p>
                                                     </div> --}}
-                                                    <div class="col-3 mb-3">
+                                                    <div class="col-4 mb-3">
                                                         <label>Email</label>
                                                         <p>{{ $item->email_id }}</p>
                                                     </div>

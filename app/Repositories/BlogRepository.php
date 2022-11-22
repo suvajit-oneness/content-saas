@@ -62,10 +62,11 @@ class BlogRepository extends BaseRepository implements BlogContract
     public function createArticle(array $params)
     {
         try {
+            foreach($params['article_category_id'] as $key =>$value){
             $collection = collect($params);
             $article = new Article;
             $article->title = $collection['title'];
-            $article->article_category_id = implode(',',$collection['article_category_id']) ?? '';
+            $article->article_category_id = $value ?? '';
             $article->article_sub_category_id = $collection['article_sub_category_id'] ?? '';
             $article->content = $collection['content'];
             $article->meta_title = $collection['meta_title'] ?? '';
@@ -77,19 +78,20 @@ class BlogRepository extends BaseRepository implements BlogContract
             $slugExistCount = Article::where('title', $collection['title'])->count();
             if ($slugExistCount > 0) $slug = $slug.'-'.($slugExistCount+1);
             $article->slug = $slug;
-            if(!empty($params['image'])){
-                $article->image = imageUpload($params['image'], 'Blogs');
-           /* $profile_image = $collection['image'];
-            $imageName = time().".".$profile_image->getClientOriginalName();
-            $profile_image->move("articles/",$imageName);
-            $uploadedImage = $imageName;
-            $article->image = $uploadedImage;*/
+        //     if(!empty($params['image'])){
+        //         $article->image = imageUpload($params['image'], 'blog');
+        //    /* $profile_image = $collection['image'];
+        //     $imageName = time().".".$profile_image->getClientOriginalName();
+        //     $profile_image->move("articles/",$imageName);
+        //     $uploadedImage = $imageName;
+        //     $article->image = $uploadedImage;*/
 
-            }
+        //     }
 
             $article->save();
+            }
             return $article;
-
+            
         } catch (QueryException $exception) {
             throw new InvalidArgumentException($exception->getMessage());
         }
@@ -101,11 +103,12 @@ class BlogRepository extends BaseRepository implements BlogContract
      */
     public function updateArticle(array $params)
     {
+        foreach($params['article_category_id'] as $key=>$value){
         $article = $this->findOneOrFail($params['id']);
         $collection = collect($params)->except('_token');
         $article->title = $collection['title'];
         if(!empty($params['article_category_id'])) {
-        $article->article_category_id = implode(",",$collection['article_category_id']);
+        $article->article_category_id = $value;
         }
         if(!empty($params['article_sub_category_id'])) {
         $article->article_sub_category_id = $collection['article_sub_category_id'] ?? '';
@@ -130,7 +133,8 @@ class BlogRepository extends BaseRepository implements BlogContract
             $article->image = imageUpload($params['image'], 'Blogs');
         }
         $article->save();
-       // dd($article);
+        }
+        //dd($article);
         return $article;
     }
 

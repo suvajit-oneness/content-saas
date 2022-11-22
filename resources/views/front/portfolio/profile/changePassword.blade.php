@@ -43,7 +43,7 @@
                             </div><br>
                         </div><br>
                         <div class="tile-footer">
-                            <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Update Password</button>
+                            <button class="saveBTN d-inline-block" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Update Password</button>
                             {{-- <a class="btn btn-secondary" href="{{ route('front.user.portfolio.index') }}"><i class="fa fa-fw fa-lg fa-chevron-left"></i>Back</a> --}}
                         </div>
                     </form>

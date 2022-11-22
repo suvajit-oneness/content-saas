@@ -73,7 +73,7 @@ class EventController extends BaseController
      */
     public function store(Request $request)
     {
-       // dd($request->all());
+        //dd($request->all());
 
         $this->validate($request, [
             'category' =>  'required|integer',
@@ -122,7 +122,7 @@ class EventController extends BaseController
      */
     public function update(Request $request)
     {
-        //dd($request->all());
+        dd($request->all());
         $this->validate($request, [
             'category' =>  'nullable',
             'title'      =>  'required|string|min:1|max:255',

@@ -60,11 +60,7 @@ class CertificationRepository extends BaseRepository implements CertificationCon
             $certificate->long_desc = $collection['long_desc'] ?? '';
 
             if(!empty($params['file'])){
-                $profile_image = $collection['file'];
-                $imageName = time().".".$profile_image->getClientOriginalName();
-                $profile_image->move("uploads/certificate/",$imageName);
-                $uploadedImage = $imageName;
-                $certificate->file = $uploadedImage;
+                $certificate->file = imageUpload($collection['file'],'certificate');
                 }
 
             $certificate->save();
@@ -91,11 +87,7 @@ class CertificationRepository extends BaseRepository implements CertificationCon
         $certificate->short_desc = $collection['short_desc'] ?? '';
         $certificate->long_desc = $collection['long_desc'] ?? '';
         if(!empty($params['file'])){
-            $profile_image = $collection['file'];
-            $imageName = time().".".$profile_image->getClientOriginalName();
-            $profile_image->move("uploads/certificate/",$imageName);
-            $uploadedImage = $imageName;
-            $certificate->file = $uploadedImage;
+            $certificate->file = imageUpload($collection['file'],'certificate');
             }
         $certificate->save();
 

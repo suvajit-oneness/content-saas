@@ -44,7 +44,7 @@
                                 <div class="form-group">
                                     <div class="d-flex">
                                         <div class="col-4">
-                                            <img src="{{ asset(old('image',$client->image)) }}" width="180px" height="100px">
+                                            <img src="{{ asset($client->image) }}" width="180px" height="100px" style="border-radius:50%">
                                         </div>
                                         <div class="col-8">
                                             <label class="control-label" for="image">Client Image <span class="m-l-5 text-danger">*</span></label>
@@ -167,7 +167,7 @@
                             </div>
                             <div class="tile-footer">
                                 <input type="hidden" name="id" value="{{$client->id}}">
-                                <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Update</button>
+                                <button class="saveBTN d-inline-block" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Update</button>
                                     <a class="add-btn-edit d-inline-block secondary-btn" href="{{ route('front.portfolio.client.index') }}"><i class="fa fa-fw fa-lg fa-chevron-left"></i>Back</a>
                                 &nbsp;&nbsp;&nbsp;
                             </div>

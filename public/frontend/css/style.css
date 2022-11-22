@@ -1984,11 +1984,11 @@ a.browse-writers:hover {
 }
 
 .content-mid ul li {
-  font-size: 12px;
+  font-size: 12px !important;
   background: #eeeeee;
-  color: #777;
+  color: #777 !important;
   font-weight: 500;
-  padding: 4px 10px;
+  padding: 4px 10px !important;
   margin: 0 4px;
   border-radius: 5px;
   text-align: center;
@@ -5451,6 +5451,7 @@ tbody, td, tfoot, th, thead, tr {
   background: #F4FAE6;
   padding: 20px;
   border-radius: 5px;
+  height: 100%
 }
 
 .portfolio-v4-category .market-research-content .img {
@@ -7519,8 +7520,15 @@ a.badge.bg-danger:hover {
 .projectTable{
   border: 1px solid #ddd;
 }
+<<<<<<< HEAD
+
+.userPortfolio {
+  border: 0;
+  
+=======
 .userPortfolio{
     border: 0;
+>>>>>>> e170dbcf0c1ae6fc1783e2f2c8ebc13b5a299eec
 }
 .userPortfolio img{
     width: 100%;
@@ -7642,3 +7650,12 @@ a.badge.bg-danger:hover {
   padding: 15px;
 }
 
+.portfolio-social a {
+  margin-right: 5px;
+}
+
+.employmentBox img{
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}

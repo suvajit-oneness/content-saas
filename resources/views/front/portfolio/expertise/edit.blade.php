@@ -10,7 +10,7 @@
                     text-align: right;">
                     <a class="add-btn-edit d-inline-block secondary-btn" href="{{ route('front.portfolio.expertise.index') }}"><i class="fa fa-fw fa-lg fa-chevron-left"></i>Back</a>
                     </div>
-                    <h2>Add  Specialities</h2>
+                    <h2>Edit  Specialities</h2>
                 </div>
             </div>
             <div class="row">
@@ -46,7 +46,7 @@
                                 </div><br>
 
                             <div class="tile-footer">
-                                <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Update
+                                <button class="saveBTN d-inline-block" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Update
                                     </button>
                                     <a class="add-btn-edit d-inline-block secondary-btn" href="{{ route('front.portfolio.expertise.index') }}"><i class="fa fa-fw fa-lg fa-chevron-left"></i>Back</a>
                                 &nbsp;&nbsp;&nbsp;
