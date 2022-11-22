@@ -7638,6 +7638,10 @@ a.badge.bg-danger:hover {
   padding: 10px;
   background-color: #fff;
 }
+.topicList li a:hover,
+.topicList li a.active{
+  background-color: #e7f2ff;
+}
 
 .topicList li a .stamp {
   width: calc(100% - 40px);
