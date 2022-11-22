@@ -66,16 +66,18 @@ class ArticleSubCategoryManagementController extends BaseController
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'title'      =>  'required|max:191',
-            'category_id'      =>  'required|max:191',
+        $request->validate([
+            'title' => 'required|max:191',
+            'category_id' => 'required|min:1',
         ]);
-        $slug = Str::slug($request->name, '-');
-        $slugExistCount = ArticleSubCategory::where('slug', $slug)->count();
-        if ($slugExistCount > 0) $slug = $slug.'-'.($slugExistCount+1);
 
-        // send slug
-        request()->merge(['slug' => $slug]);
+        $slug = Str::slug($request->name, '-');
+        
+        $slugExistCount = ArticleSubCategory::where('slug', $slug)->count();
+        
+        if ($slugExistCount > 0) $slug = $slug.'-'.($slugExistCount+1);
+            request()->merge(['slug' => $slug]);
+        
         $params = $request->except('_token');
 
         $targetsubCategory = $this->ArticleSubCategoryRepository->createSubCategory($params);
@@ -105,9 +107,9 @@ class ArticleSubCategoryManagementController extends BaseController
      */
     public function update(Request $request)
     {
-        $this->validate($request, [
-            'title'      =>  'required|max:191',
-            'category_id'      =>  'required|max:191',
+        $request->validate([
+            'title' => 'required|max:191',
+            'category_id' => 'required|max:191',
         ]);
         $slug = Str::slug($request->name, '-');
         $slugExistCount = ArticleSubCategory::where('slug', $slug)->count();
