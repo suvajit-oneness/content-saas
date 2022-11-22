@@ -63,7 +63,27 @@ class UserCourseController extends Controller
         $lessons = CourseLesson::where('course_id', $course->id)->get();
         $topic= Topic::where('slug', $Topicslug)->first();
         //dd($topic);
-        return view('front.user.course.topicDetails',compact('courseData','course','topic','request'));
+        $nextTopic=LessonTopic::where('lesson_id',$course->id)->where('topic_id',$topic->id)->with('topic')->get();
+        //dd($nextTopic);
+        $positon=($nextTopic[0]->position)+1;
+        //dd($positon);
+        $previousPosition=($nextTopic[0]->position)-1;
+        //dd($previousPosition);
+        if($previousPosition=='0'){
+         $topicpreviousLesson=LessonTopic::where('lesson_id',$course->id)->where('topic_id',$topic->id)->first();
+        }
+        else{
+            $topicpreviousLesson=LessonTopic::where('lesson_id',$course->id)->where('position',$previousPosition)->first();
+            //dd($topicpreviousLesson);
+        }
+       if(count($nextTopic) == $nextTopic[0]->position){
+        $topicLesson=LessonTopic::where('lesson_id',$course->id)->where('position',$positon)->first();
+       }
+       else{
+         $topicLesson=LessonTopic::where('lesson_id',$course->id)->where('topic_id',$topic->id)->first();
+       }
+
+        return view('front.user.course.topicDetails',compact('courseData','course','topic','request','topicLesson','topicpreviousLesson'));
     }
     public function store(Request $request){
         $review=new CourseReview();
