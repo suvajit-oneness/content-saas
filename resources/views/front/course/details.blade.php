@@ -2,34 +2,52 @@
 @section('title',' Course')
 @section('section')
 
-<section class="course-details-section">
+<section class="course-details-section crs-before-purchase pt-0">
+    <div class="course-details_header">
+        <div class="container position-relative">
+            <div class="course-details-main-info">
+                <h2>{{ $course->title ?? '' }}</h2>
+                <p id="less_text">{!! substr($course->description,0,150) ?? '' !!}...<span style="font-size: 10px"><a onclick="$('#less_text').hide(); $('#all_text').show();" href="javascript:void(0)">See More</a></span></p>
+                <p id="all_text" style="display: none;">{!! $course->description !!}</p>
+                <div class="crs-rating-all">
+                    <span>
+                        4.4
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </span>
+                    <a href="#crs_reviews">(17 ratings)</a>
+                    <small>84 Students</small>
+                </div>
+            </div>
+            <div class="crs-back-btn">
+                <a href="{{ route('front.course') }}" class="add-btn-edit d-inline-block">
+                    <i class="fa-solid fa-chevron-left"></i> Back
+                </a>
+            </div>
+        </div>
+    </div>
     <div class="container">
         <div class="row mt-0">
-        <div class="col-12 mt-3 mb-3 text-end">
-            <a href="{{ route('front.course') }}" class="add-btn-edit d-inline-block secondary-btn"><i
-                class="fa-solid fa-chevron-left"></i> Back</a>
-        </div>
             <div class="col-12 col-lg-8 col-md-12 mb-3 mb-lg-0">
                 <div class="course-details-left">
                     <div class="theiaStickySidebar">
                         <div class="course-details-left-content">
-                            <div class="course-details-main-info">
-                                <h2>{{ $course->title ?? '' }}</h2>
-                                <p id="less_text">{!! substr($course->description,0,150) ?? '' !!}...<span style="font-size: 10px"><a onclick="$('#less_text').hide(); $('#all_text').show();" href="javascript:void(0)">See More</a></span></p>
-                                <p id="all_text" style="display: none;">{!! $course->description !!}</p>
-                            </div>
 
                             <div class="learn">
                                 <h5>What you'll learn : </h5>
-                                @foreach (explode(',',$course->course_content) as $item)
-                                    <div class="row g-2">
-                                        <div class="col-12 col-md-6">
-                                            <span><i class="fa-solid fa-check"></i>
-                                                {{ $item }}
+                                <ul>
+                                    @foreach (explode(',',$course->course_content) as $item)
+                                        <li>
+                                            <span>
+                                                <i class="fa-solid fa-check"></i>
                                             </span>
-                                        </div>
-                                    </div>
-                                @endforeach
+                                            <p>{{ $item }}</p>
+                                        </li>
+                                    @endforeach
+                                </ul>
                             </div>
 
                             {{-- <div style="display: flex;align-items: flex-start;border:1px solid rgb(209, 212, 219);border-radius:10px;padding: 16px 20px 20px;margin-top: 20px;">
@@ -58,7 +76,6 @@
                                 </ul>
 
                                 <div class="course-content-accordions">
-                                    <div class="course-content-accordions">
                                     @foreach($totalLessonsAndTopics->lessons as $key => $lesson)
                                         <div class="course-content-accor">
                                             <div class="accor-top">
@@ -89,46 +106,9 @@
                                             </div>
                                         </div>
                                     @endforeach
-                                    </div>
                                 </div>
                             </div>
 
-                            <div class="requirements">
-                                <h5>Course Requirements : </h5>
-                                <ul class="list-unstyled p-0 m-0">
-                                    @foreach (explode(',',$course->requirements) as $item)
-                                        <li>{{ $item }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-
-                            <div class="target-market">
-                                <h5>Who is this course for :</h5>
-                                <p>{!! $course->target !!}</p>
-                            </div>
-
-                            <div class="course-certification">
-                                <h5>Course Certification : </h5>
-                                @if($course->certificate == 1)
-                                    <p> &#x2611; Yes </p>
-                                @else
-                                    <p> &#8594; No </p>
-                                @endif
-                            </div>
-
-                            <div class="course-languages">
-                                <h5>Language : </h5>
-                                <p>&#x2611; {{ $course->language }}</p>
-                            </div>
-
-                            <div class="about-company">
-                                <h5>Company Name : </h5>
-                                <span>{{ $course->company_name }}</span>
-                                <p>{{ $course->company_description }}</p>
-
-                                <p class="mb-0">Join us on our platform today! </p>
-                            </div>
-                            <hr>
                             @if(!empty($course->author_image))
                             <div class="row">
                                 <div class="col-md-3">
@@ -143,6 +123,145 @@
                             </div>
                             @endif
 
+
+                            <div id="crs_reviews" class="crs_reviews">
+                                <div class="crs-rating-lg">
+                                    <i class="fas fa-star rate-ico"></i>
+                                    <span>
+                                        4.4 course rating
+                                    </span>
+                                    <i class="fas fa-circle ms-2"></i>
+                                    <span>
+                                        84 Ratings
+                                    </span>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="crs-reviews">
+                                            <div class="r_head">
+                                                <div class="r_avatar">
+                                                    AG
+                                                </div>
+                                                <div class="r_meta">
+                                                    <h6>Artur G.</h6>
+                                                    <div>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star-half-alt"></i>
+                                                        <small>4 days ago</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="r_content">
+                                                <p>
+                                                    Thanks for the coursework. Easy to follow and on point in her explanation.
+                                                </p>
+                                                <div class="r_helpful">
+                                                    <small>Helpful? </small>
+                                                    <i class="far fa-thumbs-up"></i>
+                                                    <i class="far fa-thumbs-down"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="crs-reviews">
+                                            <div class="r_head">
+                                                <div class="r_avatar">
+                                                    AG
+                                                </div>
+                                                <div class="r_meta">
+                                                    <h6>Artur G.</h6>
+                                                    <div>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star-half-alt"></i>
+                                                        <small>4 days ago</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="r_content">
+                                                <p>
+                                                    Thanks for the coursework. Easy to follow and on point in her explanation.
+                                                </p>
+                                                <div class="r_helpful">
+                                                    <small>Helpful? </small>
+                                                    <i class="far fa-thumbs-up"></i>
+                                                    <i class="far fa-thumbs-down"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="crs-reviews">
+                                            <div class="r_head">
+                                                <div class="r_avatar">
+                                                    AG
+                                                </div>
+                                                <div class="r_meta">
+                                                    <h6>Artur G.</h6>
+                                                    <div>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star-half-alt"></i>
+                                                        <small>4 days ago</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="r_content">
+                                                <p>
+                                                    Thanks for the coursework. Easy to follow and on point in her explanation.
+                                                </p>
+                                                <div class="r_helpful">
+                                                    <small>Helpful? </small>
+                                                    <i class="far fa-thumbs-up"></i>
+                                                    <i class="far fa-thumbs-down"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="crs-reviews">
+                                            <div class="r_head">
+                                                <div class="r_avatar">
+                                                    AG
+                                                </div>
+                                                <div class="r_meta">
+                                                    <h6>Artur G.</h6>
+                                                    <div>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star-half-alt"></i>
+                                                        <small>4 days ago</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="r_content">
+                                                <p>
+                                                    Thanks for the coursework. Easy to follow and on point in her explanation.
+                                                </p>
+                                                <div class="r_helpful">
+                                                    <small>Helpful? </small>
+                                                    <i class="far fa-thumbs-up"></i>
+                                                    <i class="far fa-thumbs-down"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
                         </div>
                     </div>
                 </div>
@@ -150,7 +269,7 @@
 
             {{-- Modal to open video --}}
             <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="videoModal" aria-hidden="true">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5>Video</h5>
@@ -164,8 +283,8 @@
             </div>
             {{-- Video Modal Ends --}}
 
-            <div class="col-12 col-lg-4 col-md-12 sidebar">
-                <div class="theiaStickySidebar">
+            <div class="col-12 col-lg-4 col-md-12 sidebar position-relative">
+                <div class="theiaStickySidebar sticky-price-bar" id="barSticky">
                     <div class="course-details-right-content">
                         <div class="course-details-video" data-bs-toggle="modal" data-bs-target="#exampleModal">
                             <div class="course-details-video-img">
@@ -237,7 +356,23 @@
 @endsection
 
 @push('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script>
+    (function($){
+    
+    let stickyPriceBar = $("#barSticky");
+    
+    $(window).scroll(function () {
+      let scroll = $(window).scrollTop();
+      if (scroll >= 350) {
+        $("#barSticky").addClass("scrolled");
+        console.log(stickyPriceBar);
+        console.log('Yessssssssss');
+      } else {
+        $("#barSticky").removeClass("scrolled");
+      }
+    });
+    
     function playVideo(videoUrl) {
         event.preventDefault();
         $('#videoModal').modal('show');
@@ -286,4 +421,8 @@
 			},
 		});
 	});
+
+})(jQuery)
+
+
 </script>
