@@ -93,7 +93,7 @@ class ClientRepository extends BaseRepository implements ClientContract
         $client->client_name = $collection['client_name'] ?? '';
         $client->occupation = $collection['occupation'] ?? '';
 
-        if(in_array('image', $params)){
+        if(!empty($params['image'])){
             $client->image = imageUpload($collection['image'],'clients');
         }
         $client->phone_number = $collection['phone_number'] ?? '';

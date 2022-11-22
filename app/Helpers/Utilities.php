@@ -80,7 +80,29 @@ if (!function_exists('jobTagsHtml')) {
         }
     }
 }
+//portfolio tag
+if (!function_exists('portfolioTagsHtml')) {
+    function portfolioTagsHtml($id) {
+        $tag = \App\Models\Portfolio::where('id', $id)->orderby('title')->first();
+        //dd($tag);
+        if (!empty($tag->tags)) {
+            $content = '
+            <div class="content-mid">
+                <ul class="list-unstyled p-0 m-0">';
 
+                foreach(explode(',', $tag->tags) as $tagKey => $tagVal) {
+                    $content .= '<li>'.ucwords($tagVal).'</li>';
+                }
+                
+                $content .= '</ul>
+            </div>';
+
+            return $content;
+        } else {
+            return false;
+        }
+    }
+}
 if (!function_exists('imageResizeAndSave')) {
     function imageResizeAndSave($imageUrl, $type = 'categories', $filename)
     {

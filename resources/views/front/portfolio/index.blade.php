@@ -28,6 +28,7 @@
                         <span>{{$data->user->country}}</span>
                     </div>
                 </div>
+                <p class="text-right"> <a href="tel:{{$data->user->mobile}}" class="g_l_icon"><i class="fa-solid fa-phone"></i><span class="ms-2">{{$data->user->mobile}}</span></a></p>
                 <p>
                     {{$data->user->short_desc}}
                 </p>
@@ -69,6 +70,19 @@
                 </div>
                 @else
                 <p class="small">No languages found</p>
+                @endif
+                @if(!empty($data->user->quote))
+                <div class="language">
+                    <span>Favourite Quote</span>
+                </div>
+                <div class="view-lang">
+                    <ul class="list-unstyled p-0 m-0 flex-column align-items-start">
+                        <h5>{{$data->user->quote}}</h5>
+                         @if(!empty($data->user->quote_by))
+                        <p class="w-100 text-right">- {{$data->user->quote_by}}</p>
+                        @endif
+                    </ul>
+                </div>
                 @endif
             </div>
 
@@ -112,7 +126,10 @@
                     </div>
                     <div class="marker-research-info">
                         <a href="{{ $portfolio->link }}" class="research-link">{{$portfolio->title}}</a>
-                        <p>{{$portfolio->short_desc}}</p>
+                         {!! portfolioTagsHtml($portfolio->id) !!}
+                         <p>{{ substr($portfolio->short_desc,0,100) }} @if(strlen($portfolio->short_desc)>100)<small class="text-underline text-primary text-lowercase showMore" style="cursor: pointer">more...</small>@endif</p>
+                         <p style="display: none;">{{ $portfolio->short_desc }} @if(strlen($portfolio->short_desc)>100)<small class="text-underline text-primary text-lowercase showLess" style="cursor: pointer">less</small>@endif</p>
+
                     </div>
                 </div>
             </div>
@@ -125,7 +142,7 @@
             @endforelse
 
             @forelse ($data->specialities as $speciality)
-            <div class="col-12 col-lg-4 col-md-6 portfolio-links-item" id="specialities">
+            <div class="col-12 col-lg-4 col-md-6 portfolio-links-item" id="specialities" style="height:290">
                 <div class="market-research-content">
                     {{-- <div class="img">
                         <a href="" class="research-link"><img src="{{ asset($speciality->image) }}" alt="" /></a>
@@ -138,8 +155,8 @@
                     </div>
                     <div class="marker-research-info">
                         <a href="" class="research-link">{{ ucwords($speciality->specialityDetails->name) }}</a>
-                        <p>{{$speciality->description}}</p>
-                        {{-- <p>{{$speciality->specialityDetails->short_desc}}</p> --}}
+                        <p>{{ substr($speciality->description,0,100) }} @if(strlen($speciality->description)>100)<small class="text-underline text-primary text-lowercase showMore" style="cursor: pointer">more...</small>@endif</p>
+                         <p style="display: none;">{{ $speciality->description }} @if(strlen($speciality->description)>100)<small class="text-underline text-primary text-lowercase showLess" style="cursor: pointer">less</small>@endif</p>
                     </div>
                 </div>
             </div>
@@ -202,10 +219,10 @@
                         <div class="portfolio-v4-content-list">
                             <h4>{{$employment->occupation}} | {{$employment->company_title}}</h4>
                             @if($employment->link == '')
-                                <p><small>No company url found</small></p>
+                                <p></p>
                             @else
-                                <p><a href="{{$employment->link}}"><small>{{$employment->link}}</small></a></p>
-                            @endif                            
+                                <p><a href="{{$employment->link}}" target="_blank"><small>{{$employment->link}}</small></a></p>
+                            @endif
                             <span class="badge"> {{date('M Y',strtotime($employment->year_from))}} - {{$employment->year_to == '' || strtotime($employment->year_to) > strtotime(date('Y-m-d')) ? 'Present' : date('M Y',strtotime($employment->year_to))}} </span>
                             <p>{{$employment->short_desc}}</p>
                         </div>
@@ -244,12 +261,12 @@
                         @foreach ($data->clients as $client)
                         <div class="portfolio-v4-content-list">
                             <div class="portfolio-v4-client-flex">
-                                <img src="{{ asset($client->image) }}" alt="" width="100" height="100" />
+                                <img src="{{ asset($client->image) }}" alt="" width="100" height="100" style="border-radius:50%" />
                                 <div class="portfolio-v4-client-info">
                                     <h4>{{$client->client_name}}</h4>
                                     <span>{{$client->occupation}}</span>
                                     <p class="mb-0">{{$client->company_name}}</p>
-                                    <a href="{{$client->link}}" class="mb-0">{{$client->link}}</a>
+                                    <a href="{{$client->link}}" target="_blank" class="mb-0">{{$client->link}}</a>
                                 </div>
                             </div>
                         </div>
@@ -291,7 +308,7 @@
                                 <div class="portfolio-v4-education-info">
                                     <h4> {{$education->college_name}} </h4>
                                     <span class="designation">{{$education->degree}}</span>
-                                    <span class="year">Year {{$education->year_from}} - {{$education->year_to}}</span>
+                                    <span class="year">Year {{ date('Y', strtotime($education->year_from))}} - {{date('Y', strtotime($education->year_to)) }}</span>
                                 </div>
                             </div>
                             @endforeach
@@ -330,7 +347,7 @@
                         <div class="portfolio-v4-rating-list">
 
                             <div class="portfolio-v4-rating-flex">
-                                <span>{{ $item->date_from}}</span>
+                                <span>{{ date('j M, Y', strtotime($item->date_from)) }}</span>
                                 <div class="edit-heading">
                                 <h4>  {!! RatingHtml($item->rating) !!}
                                 </h4>
@@ -417,7 +434,7 @@
                                     @foreach ($data->certificates as $certificate)
                                     <div class="item">
                                         <div class="port-v4-testi-content port-v4-certi-content">
-                                            <img src="{{ asset('uploads/certificate/'.$certificate->file) }}" alt="">
+                                            <img src="{{ asset($certificate->file) }}" alt="">
                                             <h4>{{$certificate->certificate_title}}</h4>
                                             <span>-{{$certificate->certificate_type}}</span>
                                             <p>{{$certificate->short_desc}}</p>
@@ -685,4 +702,16 @@
 
 @section('script')
     <script src="{{ asset('frontend/dist/owl.carousel.min.js') }}"></script>
+
+     <script>
+        $('.showMore').click(function(){
+            $(this).parent().hide();
+            $(this).parent().next().show();
+        })
+        $('.showLess').click(function(){
+            $(this).parent().hide();
+            $(this).parent().prev().show();
+        })
+    </script>
+
 @endsection

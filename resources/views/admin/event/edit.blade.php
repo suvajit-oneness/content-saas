@@ -235,7 +235,7 @@
                                 <div class="col-4">
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" onClick="recurringCheck();"
-                                        id="recurring" name="recurring" value="yes" {{ $event->recurring != "no" ? 'checked' : '' }}>
+                                        id="recurring" name="recurring" value="yes" {{ $event->recurring == "yes" ? 'checked' : '' }}>
                                         <label class="form-check-label" for="recurring">
                                             Yes
                                         </label>
@@ -244,7 +244,7 @@
                                 <div class="col-8">
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" onClick="recurringCheck();"
-                                        id="norecurr" name="recurring" value="no" {{ $event->recurring == "no" ? 'checked' : '' }}>
+                                        id="norecurr" name="recurring" value="no" {{ $event->recurring != "yes" ? 'checked' : '' }}>
                                         <label class="form-check-label" for="norecurr">
                                             No
                                         </label>
