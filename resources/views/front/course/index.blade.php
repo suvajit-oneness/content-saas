@@ -17,10 +17,6 @@
                         <div class="courses-filter">
                             <div class="courses-filter-content">
                                 <label for="">Specialization - </label>
-                                {{-- <select name="" id="">
-                            <option value="">All</option>
-                            <option value="">Marketing</option>
-                        </select> --}}
                                 <select class="" name="category_id">
                                     <option value="" hidden selected>Select</option>
                                     @foreach ($cat as $index => $item)
@@ -30,11 +26,6 @@
                             </div>
                             <div class="courses-filter-content">
                                 <label for="">Language - </label>
-                                {{-- <select name="" id="">
-                            <option value="">All</option>
-                            <option value="">English</option>
-                            <option value="">Spanish</option>
-                        </select> --}}
                                 <select name="language" id="language" class="" value="{{ old('language') }}">
                                     <option value="" hidden selected>Select</option>
                                     @foreach ($languages as $l)
@@ -98,15 +89,15 @@
                                                 {{ $totalLessonsAndTopics->lesson_count }} Lessons
                                             </li>
                                         </ul>
-                                        <p style="bold">
-                                            {{ $data->price == 0 ? 'Free' : '$ ' . $data->price }}
-                                        </p>
                                     </div>
                                 </div>
 
                                 <div class="courses-desc">
                                     <p>{!! $data->short_description !!}</p>
-                                    <a href="{{ route('front.course.details', $data->slug) }}" class="course-btn">Enroll</a>
+                                    <div class="price-crs">
+                                        <span>{{ $data->price == 0 ? 'Free' : '$ ' . $data->price }}</span>
+                                        <a href="{{ route('front.course.details', $data->slug) }}" class="course-btn">Enroll</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
