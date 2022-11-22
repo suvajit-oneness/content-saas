@@ -76,7 +76,8 @@ class BlogController extends BaseController
             'title' => 'required|string|min:1',
             'article_category_id' => 'required|array|min:1',
             'content' => 'required|string|min:1',
-            'image' => 'required|mimes:jpg,jpeg,png|max:10000000',
+            'tag'=>'required',
+            'image' => 'required|mimes:jpg,jpeg,png|max:20000',
         ]);
 
         $article = $this->BlogRepository->createArticle($request->except('_token'));
@@ -107,7 +108,7 @@ class BlogController extends BaseController
      */
     public function update(Request $request)
     {
-        //dd($request->all());
+        // dd($request->all());
         $request->validate([
             'title' => 'required|string|min:1',
         ]);

@@ -59,83 +59,125 @@ class BlogRepository extends BaseRepository implements BlogContract
      * @param array $params
      * @return Blog|mixed
      */
-    public function createArticle(array $params)
-    {
-        try {
-            foreach($params['article_category_id'] as $key =>$value){
-            $collection = collect($params);
-            $article = new Article;
-            $article->title = $collection['title'];
-            $article->article_category_id = $value ?? '';
-            $article->article_sub_category_id = $collection['article_sub_category_id'] ?? '';
-            $article->content = $collection['content'];
-            $article->meta_title = $collection['meta_title'] ?? '';
-            $article->meta_key = $collection['meta_key'] ?? '';
-            $article->meta_description = $collection['meta_description'] ?? '';
-            $article->tag = $collection['tag'] ?? '';
-            // slug generate
-            $slug = Str::slug($collection['title'], '-');
-            $slugExistCount = Article::where('title', $collection['title'])->count();
-            if ($slugExistCount > 0) $slug = $slug.'-'.($slugExistCount+1);
-            $article->slug = $slug;
-        //     if(!empty($params['image'])){
-        //         $article->image = imageUpload($params['image'], 'blog');
-        //    /* $profile_image = $collection['image'];
-        //     $imageName = time().".".$profile_image->getClientOriginalName();
-        //     $profile_image->move("articles/",$imageName);
-        //     $uploadedImage = $imageName;
-        //     $article->image = $uploadedImage;*/
+    // public function createArticle(array $params)
+    // {
+    //     try {
+    //         foreach($params['article_category_id'] as $key =>$value){
+    //         $collection = collect($params);
+    //         $article = new Article;
+    //         $article->title = $collection['title'];
+    //         $article->article_category_id = $value ?? '';
+    //         $article->article_sub_category_id = $collection['article_sub_category_id'] ?? '';
+    //         $article->content = $collection['content'];
+    //         $article->meta_title = $collection['meta_title'] ?? '';
+    //         $article->meta_key = $collection['meta_key'] ?? '';
+    //         $article->meta_description = $collection['meta_description'] ?? '';
+    //         $article->tag = $collection['tag'] ?? '';
+    //         // slug generate
+    //         $slug = Str::slug($collection['title'], '-');
+    //         $slugExistCount = Article::where('title', $collection['title'])->count();
+    //         if ($slugExistCount > 0) $slug = $slug.'-'.($slugExistCount+1);
+    //         $article->slug = $slug;
+    //     //     if(!empty($params['image'])){
+    //     //         $article->image = imageUpload($params['image'], 'blog');
+    //     //    /* $profile_image = $collection['image'];
+    //     //     $imageName = time().".".$profile_image->getClientOriginalName();
+    //     //     $profile_image->move("articles/",$imageName);
+    //     //     $uploadedImage = $imageName;
+    //     //     $article->image = $uploadedImage;*/
 
-        //     }
+    //     //     }
 
-            $article->save();
-            }
-            return $article;
+    //         $article->save();
+    //         }
+    //         return $article;
             
-        } catch (QueryException $exception) {
-            throw new InvalidArgumentException($exception->getMessage());
-        }
+    //     } catch (QueryException $exception) {
+    //         throw new InvalidArgumentException($exception->getMessage());
+    //     }
+    // }
+    public function createArticle(array $params){
+        // dd($params);
+        $article = new Article();
+        $article->title = $params['title'];
+        $article->slug = slugGenerate($params['title'],'articles');
+        $article->article_category_id = implode(',',$params['article_category_id']);
+        $article->article_sub_category_id = $params['article_sub_category_id'];
+        $article->content = $params['content'];
+        $article->meta_title = $params['meta_title'] ?? '';
+        $article->meta_key = $params['meta_key'] ?? '';
+        $article->meta_description = $params['meta_description'] ?? '';
+        $article->tag = $params['tag'];
+        $article->image = imageUpload($params['image'],'article/image');
+        $article->save();
+        
+        return true;
     }
 
     /**
      * @param array $params
      * @return mixed
      */
+    // public function updateArticle(array $params)
+    // {
+    //     foreach($params['article_category_id'] as $key=>$value){
+    //     $article = $this->findOneOrFail($params['id']);
+    //     $collection = collect($params)->except('_token');
+    //     $article->title = $collection['title'];
+    //     if(!empty($params['article_category_id'])) {
+    //         $article->article_category_id = $value;
+    //     }
+    //     if(!empty($params['article_sub_category_id'])) {
+    //     $article->article_sub_category_id = $collection['article_sub_category_id'] ?? '';
+    //     }
+    //     $article->content = $collection['content'];
+    //     $article->meta_title = $collection['meta_title'] ?? '';
+    //     $article->meta_key = $collection['meta_key'] ?? '';
+    //     $article->meta_description = $collection['meta_description'] ?? '';
+    //     $article->tag = $collection['tag'] ?? '';
+    //     if($article->title != $collection['title']) {
+    //         $slug = Str::slug($collection['title'], '-');
+    //         $slugExistCount = Article::where('slug', $slug)->count();
+    //         if ($slugExistCount > 0) $slug = $slug.'-'.($slugExistCount+1);
+    //         $article->slug = $slug;
+    //     }
+    //     if(!empty($params['image'])) {
+    //         /*$profile_image = $collection['image'] ?? '';
+    //         $imageName = time().".".$profile_image->getClientOriginalName();
+    //         $profile_image->move("articles/",$imageName);
+    //         $uploadedImage = $imageName;
+    //         $article->image = $uploadedImage;*/
+    //         $article->image = imageUpload($params['image'], 'Blogs');
+    //     }
+    //     $article->save();
+    //     }
+    //     //dd($article);
+    //     return $article;
+    // }
     public function updateArticle(array $params)
     {
-        foreach($params['article_category_id'] as $key=>$value){
-        $article = $this->findOneOrFail($params['id']);
-        $collection = collect($params)->except('_token');
-        $article->title = $collection['title'];
-        if(!empty($params['article_category_id'])) {
-        $article->article_category_id = $value;
+        $article = Article::find($params['id']);
+        
+        if($article->title != $params['title']){
+            $article->slug = slugGenerate($params['title'],'articles');
         }
-        if(!empty($params['article_sub_category_id'])) {
-        $article->article_sub_category_id = $collection['article_sub_category_id'] ?? '';
+
+        $article->title = $params['title'];
+        $article->article_category_id = implode(',',$params['article_category_id']);
+        $article->article_sub_category_id = $params['article_sub_category_id'];
+        $article->content = $params['content'];
+        $article->meta_title = $params['meta_title'];
+        $article->meta_key = $params['meta_key'];
+        $article->meta_description = $params['meta_description'];
+        $article->tag = $params['tag'];
+
+        if(isset($params['image'])){
+            $article->image = imageUpload($params['image'],'article/image');
         }
-        $article->content = $collection['content'];
-        $article->meta_title = $collection['meta_title'] ?? '';
-        $article->meta_key = $collection['meta_key'] ?? '';
-        $article->meta_description = $collection['meta_description'] ?? '';
-        $article->tag = $collection['tag'] ?? '';
-        if($article->title != $collection['title']) {
-            $slug = Str::slug($collection['title'], '-');
-            $slugExistCount = Article::where('slug', $slug)->count();
-            if ($slugExistCount > 0) $slug = $slug.'-'.($slugExistCount+1);
-            $article->slug = $slug;
-        }
-        if(!empty($params['image'])) {
-            /*$profile_image = $collection['image'] ?? '';
-            $imageName = time().".".$profile_image->getClientOriginalName();
-            $profile_image->move("articles/",$imageName);
-            $uploadedImage = $imageName;
-            $article->image = $uploadedImage;*/
-            $article->image = imageUpload($params['image'], 'Blogs');
-        }
+
         $article->save();
-        }
-        //dd($article);
-        return $article;
+
+        return true;
     }
 
     /**

@@ -25,19 +25,21 @@
                             @error('title') {{ $message ?? '' }} @enderror
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="control-label" for="description">Description<span> (max 500 characters)</span></label>
-                        <textarea type="text" class="form-control" rows="4" name="description" id="description">{{ old('description') }}</textarea>
-                        @error('description')
-                            <p class="small text-danger">{{ $message }}</p>
-                        @enderror
+                    <div class="tile-body">
+                        <div class="form-group">
+                            <label class="control-label" for="description">Description<span> (max 500 characters)</span></label>
+                            <textarea type="text" class="form-control" rows="4" name="description" id="description">{{ old('description') }}</textarea>
+                            @error('description')
+                                <p class="small text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
                     </div>
                     <div class="tile-body">
                         <div class="form-group">
                             <label class="control-label" for="pin"> Category <span class="m-l-5 text-danger"> *</span></label>
                             <select class="form-control" name="category_id">
-                                <option hidden selected>Select Category...</option>
-                                @foreach ($categories as $index => $item)
+                                <option hidden selected value="">Select Category...</option>
+                                    @foreach ($categories as $index => $item)
                                 <option value="{{$item->id}}">{{ $item->title }}</option>
                             @endforeach
                             </select>

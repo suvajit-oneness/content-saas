@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Contracts\EventContract;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
+use App\Models\ArticleSubCategory;
 use App\Models\BlogCategory;
 use App\Models\SubCategory;
 use App\Models\SubCategoryLevel;
@@ -41,17 +42,19 @@ class ApiController extends BaseController
     {
 
         if ($id != "100000") {
-            $cat = DB::select("SELECT title AS cat_name FROM  article_categories WHERE id = ".$id);
+            // $cat = DB::select("SELECT title AS cat_name FROM  article_categories WHERE id = ".$id);
 
-            $cat_name = $cat[0]->cat_name;
-            $subCat = DB::select("SELECT id, title  FROM `article_subcategories` WHERE category_id = ".$id." ORDER BY title ASC");
+            // $cat_name = $cat[0]->cat_name;
+            // dd(explode(',',$id));
+            $subCat = ArticleSubCategory::whereIn('category_id',explode(',',$id))->get();
         } else {
             $cat_name = 'all';
+            // dd(explode(',',$id));
             $subCat = DB::select("SELECT p.id, p.title AS title FROM `article_subcategories` AS p INNER JOIN article_categories AS c ON p.category_id = c.id ORDER BY c.title ASC, p.title ASC;");
         }
 
 		$resp = [
-            'cat_name' => $cat_name,
+            // 'cat_name' => $cat_name,
             'subcategory' => [],
         ];
 
