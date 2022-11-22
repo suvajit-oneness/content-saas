@@ -11,7 +11,7 @@ class Course extends Model
     public function category() {
         return $this->belongsTo('App\Models\CourseCategory', 'category_id', 'id');
     }
-
+   
     public static function insertData($data, $count, $successArr, $failureArr) {
         $value = DB::table('courses')->where('course_name', $data['course_name'])->get();
         if($value->count() == 0) {

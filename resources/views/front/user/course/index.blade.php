@@ -8,6 +8,10 @@
         <div class="row mt-2 g-3">
             @forelse ($course as $data)
                 @foreach($data->orderProducts as $courseKey => $courseProduct)
+                 @php
+                     $lesson=App\Models\CourseLesson::where('course_id',$courseProduct->courseName->id)->get();
+                     //dd($lesson);
+                 @endphp
                 <div class="col-12 col-lg-4 col-md-6">
                     <div class="courses-content purchased">
                         <div class="courses-img">
