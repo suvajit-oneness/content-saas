@@ -2,16 +2,52 @@
 @section('title', 'Lesson')
 
 @section('section')
-<section class="edit-sec edit-basic-detail py-0">
-    <div class="crs-details">
-
+<section class="edit-sec edit-basic-detail p-0">
+    <div class="crs-details lession-details">
+        <div class="topic-video">
+            <video width="640" height="320" controls id="contentVideo" style="" controlsList="0">
+                <source src="http://127.0.0.1:8000/uploads/topic/video/636fd502a080d22-11-12-05-16-50.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="topic-desc">
+            <!-- <h4>Installing Python</h4>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type</p> -->
+            <ul class="nav nav-tabs media-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a href="#" class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" role="tab" aria-controls="description" aria-selected="false">Description</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a href="#" class="nav-link" id="comment-tab" data-bs-toggle="tab" data-bs-target="#comment" role="tab" aria-controls="comment" aria-selected="true">Comment</a>
+                </li>
+            </ul>
+            <div class="tab-content details-tab">
+                <div class="tab-pane active" id="description" role="tabpanel" aria-labelledby="description-tab">
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type</p>
+                </div>
+                <div class="tab-pane" id="comment" role="tabpanel" aria-labelledby="comment-tab">
+                    <form action="#">
+                        <div class="form-group">
+                            <label>Write a comment</label>
+                            <textarea rows="6" class="form-control"></textarea>
+                        </div>
+                        <div class="form-group text-left">
+                        <button type="submit" class="btn add-btn-edit ms-0 mt-4">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="course-content-accordions lessionSidebar">
+    <div class="lessionSidebar">
+        <div class="lessionSidebar-btn">
+            <i class="fa-solid fa-arrow-left"></i>
+            Course Content
+        </div>
         <div class="lessionSidebar-header">
             <p>
                 Course Lessions
             </p>
-            <a href="javascript:void(0)">
+            <a href="javascript:void(0)" class="lessionSidebar-close">
                 <i class="fas fa-times"></i>
             </a>
         </div>
@@ -29,7 +65,7 @@
                                 <div class="stamp">
                                     <h5>Topc 1</h5>
                                     <div class="duration">
-                                        <i class="fas fa-play"></i>
+                                        <i class="fas fa-circle-play"></i>
                                         <span>9 min</span>
                                     </div>
                                 </div>
@@ -41,7 +77,7 @@
                                 <div class="stamp">
                                     <h5>Topc 1</h5>
                                     <div class="duration">
-                                        <i class="fas fa-play"></i>
+                                        <i class="fas fa-file"></i>
                                         <span>9 min</span>
                                     </div>
                                 </div>
@@ -63,7 +99,7 @@
                                 <div class="stamp">
                                     <h5>Topc 1</h5>
                                     <div class="duration">
-                                        <i class="fas fa-play"></i>
+                                        <i class="fas fa-circle-play"></i>
                                         <span>9 min</span>
                                     </div>
                                 </div>
@@ -75,7 +111,7 @@
                                 <div class="stamp">
                                     <h5>Topc 1</h5>
                                     <div class="duration">
-                                        <i class="fas fa-play"></i>
+                                        <i class="fas fa-file"></i>
                                         <span>9 min</span>
                                     </div>
                                 </div>
@@ -90,6 +126,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
     <script>
+
+        $(".lessionSidebar-close").on('click', function(){
+            $('.lessionSidebar').toggleClass('active')
+            setTimeout(() => {
+                $('.lessionSidebar-btn').show()
+            }, 300);
+        })
+        $(".lessionSidebar-btn").on('click', function(){
+            $('.lessionSidebar').toggleClass('active')
+            $(this).hide()
+        })
         
         $(".set > a").on("click", function () {
         console.log("abcd");
@@ -103,6 +150,7 @@
             $(this).siblings(".content").slideDown(200);
         }
         });
+
     </script>
 
 
