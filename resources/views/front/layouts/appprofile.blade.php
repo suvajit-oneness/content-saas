@@ -162,7 +162,7 @@
                 </div>
             </div>
         </div>
-        <div class="modal" id="completeModal" tabindex="-1" role="dialog">
+        <div class="modal" id="completeModal" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-body">
@@ -203,7 +203,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-success" id="saveCompleteModal">Save</button>
-                        <button type="button" class="btn btn-secondary" id="closeCompleteModal">Close</button>
+                        {{-- <button type="button" class="btn btn-secondary" id="closeCompleteModal">Close</button> --}}
                     </div>
                 </div>
             </div>
@@ -252,7 +252,8 @@
                         },
                         success:function(response){
                             toastFire("success", response.message);
-                            $(x).prepend('<option value="" selected>'+status_value+'</option>');
+                            const status_val = status_value.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/[\s_-]+/g, '-').replace(/^-+|-+$/g, '');
+                            $(x).prepend('<option value="'+status_val+'" selected>'+status_value+'</option>');
                             $(x).show();
                             $('.spare_input'+ content_id).hide();
                         },
@@ -262,6 +263,9 @@
                     });
                 });
                 $('.spare_input'+ content_id +' span').on('click',function(){
+                    // $(x).val().change();
+                    
+                    $(x).val($(x).attr('data-original'));
                     $(x).show();
                     $('.spare_input'+ content_id).hide();
                 });

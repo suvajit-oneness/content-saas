@@ -194,7 +194,7 @@ class ProjectTaskController extends Controller
         }
         $project->save();
 
-        return redirect()->back()->with('success', 'Task updated successfully');
+        return redirect()->back()->with('success', 'Task comment updated successfully!');
     }
 
     public function updateStatus(Request $request)
