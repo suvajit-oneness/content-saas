@@ -3,10 +3,12 @@
 
 @section('section')
 <section class="edit-sec edit-basic-detail p-0">
+        
+    
     <div class="crs-details lession-details">
         <div class="topic-video">
-            <video width="640" height="320" controls id="contentVideo" style="" controlsList="0">
-                <source src="http://127.0.0.1:8000/uploads/topic/video/636fd502a080d22-11-12-05-16-50.mp4" type="video/mp4">
+            <video width="640" height="320" controls id="contentVideo" style="" controlsList="{{$course->video_downloadable == 0 ? 'nodownload' : '' }}">
+                <source src="{{asset($course->preview_video)}}" type="video/mp4">
             </video>
         </div>
         <div class="topic-desc">
@@ -22,7 +24,7 @@
             </ul>
             <div class="tab-content details-tab">
                 <div class="tab-pane active" id="description" role="tabpanel" aria-labelledby="description-tab">
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type</p>
+                    <p>{!! $course->description !!}</p>
                 </div>
                 <div class="tab-pane" id="comment" role="tabpanel" aria-labelledby="comment-tab">
                     <form action="#">
@@ -38,6 +40,10 @@
             </div>
         </div>
     </div>
+        @php
+             $totalLessonsAndTopics = totalLessonsAndTopics($course->id);
+        @endphp
+    
     <div class="lessionSidebar">
         <div class="lessionSidebar-btn">
             <i class="fa-solid fa-arrow-left"></i>
@@ -52,77 +58,35 @@
             </a>
         </div>
         <div class="accordion-container lessionSidebar-list">
+            @foreach($totalLessonsAndTopics->lessons as $key => $lesson)
             <div class="set lesstionItem">
                 <a href="#">
-                    Lession 1
+                    {!! $lesson->lesson->title !!}
                     <i class="fas fa-angle-down"></i>
                 </a>
                 <div class="content">
                     <ul class="topicList">
+                        @foreach($totalLessonsAndTopics->topics[$key] as $data)
                         <li>
                             <a href="#">
                                 <input type="checkbox" class="topicCheck">
                                 <div class="stamp">
-                                    <h5>Topc 1</h5>
+                                    <h5>{!! $data->topic->title  !!}</h5>
                                     <div class="duration">
                                         <i class="fas fa-circle-play"></i>
-                                        <span>9 min</span>
+                                        <span>{{ number_format((float)$data->topic->video_length, 2, ':', '') }} hours</span>
                                     </div>
                                 </div>
                             </a>
                         </li>
-                        <li>
-                            <a href="#">
-                                <input type="checkbox" class="topicCheck">
-                                <div class="stamp">
-                                    <h5>Topc 1</h5>
-                                    <div class="duration">
-                                        <i class="fas fa-file"></i>
-                                        <span>9 min</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
+                        @endforeach
                     </ul>
                 </div>
             </div>
-            <div class="set lesstionItem">
-                <a href="#">
-                    Lession 2
-                    <i class="fas fa-angle-down"></i>
-                </a>
-                <div class="content">
-                    <ul class="topicList">
-                        <li>
-                            <a href="#">
-                                <input type="checkbox" class="topicCheck">
-                                <div class="stamp">
-                                    <h5>Topc 1</h5>
-                                    <div class="duration">
-                                        <i class="fas fa-circle-play"></i>
-                                        <span>9 min</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <input type="checkbox" class="topicCheck">
-                                <div class="stamp">
-                                    <h5>Topc 1</h5>
-                                    <div class="duration">
-                                        <i class="fas fa-file"></i>
-                                        <span>9 min</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
-
+</section>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
     <script>
@@ -193,5 +157,5 @@
             
         </div>
     </div> -->
-</section>
+
 @endsection
