@@ -83,9 +83,11 @@
                     </a>
                 </div>
             @endforeach
+            <div class="col-lg-12 center-pagination">
+                {{$blogs->appends($_GET)->links()}}
+            </div>
         </div>
     </div>
-    <div class="container">{{$blogs->appends($_GET)->links()}}</div>
      {{-- <div class="container text-center mt-4 mt-lg-5">
         <a href="#" class="load_more">{{$blogs->appends('$_GET')->links()}}</a>
     </div> --}}
