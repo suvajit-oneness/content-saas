@@ -422,18 +422,18 @@ function RatingHtml($rating = null) {
     } elseif ($rating == 1) {
         $resp = '
         <div class="rating-list-stars d-flex">
-                    '.$rating.'
-            <i class="fa-solid fa-star text-warning"></i>
-            <i class="fa-regular fa-star text-warning"></i>
-            <i class="fa-regular fa-star text-warning"></i>
-            <i class="fa-regular fa-star text-warning"></i>
-            <i class="fa-regular fa-star text-warning"></i>
+            <small>'.$rating.'</small>
+            <i class="fa-solid fa-star "></i>
+            <i class="fa-regular fa-star "></i>
+            <i class="fa-regular fa-star "></i>
+            <i class="fa-regular fa-star "></i>
+            <i class="fa-regular fa-star "></i>
         </div>
         ';
     } elseif ($rating > 1 && $rating < 2) {
         $resp = '
         <div class="rating-list-stars d-flex">
-            '.$rating.'
+            <small>'.$rating.'</small>
             <i class="fa fa-star checked"></i>
             <i class="fas fa-star-half-alt"></i>
             <i class="fa-regular fa-star"></i>
@@ -444,7 +444,7 @@ function RatingHtml($rating = null) {
     } elseif ($rating == 2) {
         $resp = '
         <div class="rating-list-stars d-flex">
-            '.$rating.'
+            <small>'.$rating.'</small>
             <i class="fa fa-star checked"></i>
             <i class="fa fa-star checked"></i>
             <i class="fa-regular fa-star"></i>
@@ -455,7 +455,7 @@ function RatingHtml($rating = null) {
     } elseif ($rating > 2 && $rating < 3) {
         $resp = '
         <div class="rating-list-stars d-flex">
-            '.$rating.'
+            <small>'.$rating.'</small>
             <i class="fa fa-star checked"></i>
             <i class="fa fa-star checked"></i>
             <i class="fas fa-star-half-alt"></i>
@@ -466,10 +466,10 @@ function RatingHtml($rating = null) {
     } elseif ($rating == 3) {
         $resp = '
         <div class="rating-list-stars d-flex">
-            '.$rating.'
-            <i class="fa-solid fa-star text-warning"></i>
-            <i class="fa-solid fa-star text-warning"></i>
-            <i class="fa-solid fa-star text-warning"></i>
+            <small>'.$rating.'</small>
+            <i class="fa-solid fa-star "></i>
+            <i class="fa-solid fa-star "></i>
+            <i class="fa-solid fa-star "></i>
             <i class="fa-regular fa-star"></i>
             <i class="fa-regular fa-star"></i>
         </div>
@@ -477,18 +477,18 @@ function RatingHtml($rating = null) {
     } elseif ($rating > 3 && $rating < 4) {
         $resp = '
         <div class="rating-list-stars d-flex">
-            '.$rating.'
-            <i class="fa-solid fa-star text-warning"></i>
-            <i class="fa-solid fa-star text-warning"></i>
-            <i class="fa-solid fa-star text-warning"></i>
-            <i class="fa fa-star-half-alt text-warning"></i>
-            <i class="fa-regular fa-star text-warning"></i>
+            <small>'.$rating.'</small>
+            <i class="fa-solid fa-star "></i>
+            <i class="fa-solid fa-star "></i>
+            <i class="fa-solid fa-star "></i>
+            <i class="fa fa-star-half-alt "></i>
+            <i class="fa-regular fa-star "></i>
         </div>
         ';
     } elseif ($rating == 4) {
         $resp = '
         <div class="rating-list-stars d-flex">
-            '.$rating.' 
+            <small>'.$rating.'</small> 
             <i class="fa fa-star checked"></i>
             <i class="fa fa-star checked"></i>
             <i class="fa fa-star checked"></i>
@@ -499,7 +499,7 @@ function RatingHtml($rating = null) {
     } elseif ($rating > 4 && $rating < 5) {
         $resp = '
         <div class="rating-list-stars d-flex">
-            '.$rating.'
+            <small>'.$rating.'</small>
             <i class="fa fa-star checked"></i>
             <i class="fa fa-star checked"></i>
             <i class="fa fa-star checked"></i>
