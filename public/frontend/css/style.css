@@ -6561,6 +6561,8 @@ tbody, td, tfoot, th, thead, tr {
   font-size: 14px;
   line-height: 38px;
   color: #000000;
+  cursor: pointer;
+
 }
 
 .toolsFilter li label input[type="radio"] {
@@ -7439,6 +7441,17 @@ ul.review-star-group{
 .projectTable {
   border: 1px solid #ddd;
 }
+
+.projectTable select{
+  padding: 4px 13px;
+  font-size: 15px;
+}
+.com-task{
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  display: inline-block;
+}
 .userPortfolio{
     border: 0;
 }
@@ -8069,4 +8082,22 @@ ul.review-star-group{
 }
 .apply__job{
   top: 60px;
+}
+.export__search{
+  height: 100%;
+}
+.export__search button.btn-search{
+  background-color: #eee;
+  border-color: #eee;
+  color: #000 !important;
+}
+.export__search button.btn-search:hover{
+  background-color: #ccc;
+  border-color: #ccc;
+}
+.export__search button.btn-search:hover i{
+  color: #000 !important;
+}
+.export__search .btn{
+  height: 100%;
 }
