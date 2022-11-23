@@ -3720,7 +3720,6 @@ tbody, td, tfoot, th, thead, tr {
 }
 
 .courses-content {
-  padding: 35px;
   width: 100%;
   height: 100%;
   background: #fff;
@@ -3730,71 +3729,26 @@ tbody, td, tfoot, th, thead, tr {
   overflow: hidden;
   z-index: 1;
 }
-
-.courses-content::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(149, 200, 0, 0.7);
-  z-index: 1;
-  opacity: 0;
-  pointer-events: none;
-  transition: all .3s ease-in-out;
-}
-
 .courses-img {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
-  height: 100%;
-  opacity: 0;
-  pointer-events: none;
-  transition: all .5s ease-in-out;
+  height: 180px;
 }
-
 .courses-img img {
+  width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.courses-content:hover::before {
-  opacity: 1;
-  pointer-events: all;
+.courses-info {
+  position: relative;
+  z-index: 2;
+  padding: 20px;
 }
-
-.courses-content:hover .courses-img {
-  opacity: 1;
-  pointer-events: all;
-}
-
-.courses-content:hover .courses-heading h4 {
-  color: #fff;
-}
-
-.courses-content:hover .courses-lession-time ul li {
-  color: #fff;
-}
-
-.courses-content:hover .courses-desc p {
-  color: #fff;
-  text-shadow: 2px 2px 10px rgba(0, 0, 0, .3);
-}
-
-.courses-content:hover .courses-desc a.course-btn {
-  background: #111;
-  color: #fff;
-}
-
 .courses-badge {
   display: flex;
   align-items: center;
-  margin-bottom: 25px;
+  margin-bottom: 10px;
 }
-
 .courses-badge img {
   max-width: 18px;
   object-fit: cover;
@@ -3802,11 +3756,11 @@ tbody, td, tfoot, th, thead, tr {
 }
 
 .courses-badge span {
-  font-size: 13px;
+  font-size: 12px;
   display: block;
   font-weight: 500;
   background: #EAF4CC;
-  padding: 8px 12px;
+  padding: 4px 8px;
   border-radius: 50px;
   text-transform: uppercase;
   display: flex;
@@ -3814,15 +3768,20 @@ tbody, td, tfoot, th, thead, tr {
 }
 
 .courses-heading {
-
   border-bottom: 1px solid #ccc;
-  padding-bottom: 25px;
+  padding-bottom: 10px;
 }
 
 .courses-heading h4 {
-  font-size: 26px;
+  font-size: 20px;
   font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
   transition: all .3s ease-in-out;
+  min-height: 50px;
 }
 
 .courses-lession-time {
@@ -3848,12 +3807,18 @@ tbody, td, tfoot, th, thead, tr {
 }
 
 .courses-desc {
-  margin-top: 25px;
+  margin-top: 10px;
 }
 
 .courses-desc p {
   font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 4;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
   transition: all .3s ease-in-out;
+  min-height: 100px;
 }
 
 .courses-desc a.course-btn {
@@ -3871,11 +3836,6 @@ tbody, td, tfoot, th, thead, tr {
 .courses-desc a.course-btn:hover {
   background: #111;
   color: #fff;
-}
-
-.courses-info {
-  position: relative;
-  z-index: 2;
 }
 
 .course-details-section {
@@ -3998,7 +3958,8 @@ tbody, td, tfoot, th, thead, tr {
 }
 
 .course-details-main-info h2 {
-  font-size: 45px;
+  font-size: 40px;
+  font-weight: 700;
 }
 
 .course-details-main-info p {
@@ -7278,9 +7239,9 @@ a.badge.bg-danger:hover {
   background: #88ba1c;
 }
 
-.purchased.courses-content .courses-img {
+/* .purchased.courses-content .courses-img {
   display: none;
-}
+} */
 
 .lession-details h4 {
   font-size: 26px;
@@ -7321,6 +7282,25 @@ a.badge.bg-danger:hover {
 }
 .review-star-group i:hover{
   color: #95C800;
+}
+ul.review-star-group{
+  display: flex;
+  align-items: center;
+}
+.review-star-group li{
+  position: relative;
+}
+.review-star-group li input{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  /* visibility: hidden; */
+}
+.review-star-group li input:checked + i{
+  color: red;
 }
 
 .details-tab p {
@@ -7655,13 +7635,14 @@ a.badge.bg-danger:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 .price-crs a.course-btn{
   margin-top: 0;
 }
 .price-crs span{
   font-weight: 700;
+  font-size: 18px;
 }
 .crs-before-purchase{
   padding-top: 40px;
@@ -7847,14 +7828,30 @@ a.badge.bg-danger:hover {
   font-weight: bold;
   color: #111;
 }
-.wishlist .dropdown-menu{
+.wishlish .dropdown-menu{
   padding: 0;
+  border: 0;
+  box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
 }
 .wishlish .nav-item{
   padding: 0;
 }
 .wishlish .nav-link{
   color: #000;
+  padding: 12px 16px;
+}
+.wishlish .nav-link:hover{
+  background: #95C800;
+  color: #fff;
+}
+.wishlish .nav-link i{
+  color: #ddd;
+  margin-right: 6px;
+  font-size: 20px;
+  vertical-align: middle;
+}
+.wishlish .nav-link:hover i{
+  color: #fff;
 }
 .alert-warning {
   color: #fff;
@@ -8050,4 +8047,26 @@ a.badge.bg-danger:hover {
 }
 .login-forgot-password .forgot-pass a:hover {
   color: #95C800;
+}
+
+
+
+/* Job Details Page  */
+.tag-badge{
+  font-size: 12px !important;
+  background: #eeeeee;
+  color: #777 !important;
+  font-weight: 500;
+  padding: 4px 10px !important;
+  margin: 0 4px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.jobsearch-jobDescriptionText ul{
+  list-style-type: circle;
+  padding-left: 25px;
+}
+.apply__job{
+  top: 60px;
 }
