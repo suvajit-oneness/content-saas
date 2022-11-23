@@ -433,89 +433,90 @@ function RatingHtml($rating = null) {
     } elseif ($rating == 1) {
         $resp = '
         <div class="rating-list-stars d-flex">
-            <i class="fa-solid fa-star text-warning"></i>
-            <i class="fa-regular fa-star text-warning"></i>
-            <i class="fa-regular fa-star text-warning"></i>
-            <i class="fa-regular fa-star text-warning"></i>
-            <i class="fa-regular fa-star text-warning"></i>
-            <small>'.$rating.' Rating</small>
+            <small>'.$rating.'</small>
+            <i class="fa-solid fa-star "></i>
+            <i class="fa-regular fa-star "></i>
+            <i class="fa-regular fa-star "></i>
+            <i class="fa-regular fa-star "></i>
+            <i class="fa-regular fa-star "></i>
         </div>
         ';
     } elseif ($rating > 1 && $rating < 2) {
         $resp = '
         <div class="rating-list-stars d-flex">
+            <small>'.$rating.'</small>
             <i class="fa fa-star checked"></i>
             <i class="fas fa-star-half-alt"></i>
             <i class="fa-regular fa-star"></i>
             <i class="fa-regular fa-star"></i>
             <i class="fa-regular fa-star"></i>
-            <small>'.$rating.' Ratings</small>
         </div>
         ';
     } elseif ($rating == 2) {
         $resp = '
         <div class="rating-list-stars d-flex">
+            <small>'.$rating.'</small>
             <i class="fa fa-star checked"></i>
             <i class="fa fa-star checked"></i>
             <i class="fa-regular fa-star"></i>
             <i class="fa-regular fa-star"></i>
             <i class="fa-regular fa-star"></i>
-            <small>'.$rating.' Ratings</small>
         </div>
         ';
     } elseif ($rating > 2 && $rating < 3) {
         $resp = '
         <div class="rating-list-stars d-flex">
+            <small>'.$rating.'</small>
             <i class="fa fa-star checked"></i>
             <i class="fa fa-star checked"></i>
             <i class="fas fa-star-half-alt"></i>
             <i class="fa-regular fa-star"></i>
             <i class="fa-regular fa-star"></i>
-            <small>'.$rating.' Ratings</small>
         </div>
         ';
     } elseif ($rating == 3) {
         $resp = '
         <div class="rating-list-stars d-flex">
-            <i class="fa-solid fa-star text-warning"></i>
-            <i class="fa-solid fa-star text-warning"></i>
-            <i class="fa-solid fa-star text-warning"></i>
+            <small>'.$rating.'</small>
+            <i class="fa-solid fa-star "></i>
+            <i class="fa-solid fa-star "></i>
+            <i class="fa-solid fa-star "></i>
             <i class="fa-regular fa-star"></i>
             <i class="fa-regular fa-star"></i>
-            <small>'.$rating.' Ratings</small>
         </div>
         ';
     } elseif ($rating > 3 && $rating < 4) {
         $resp = '
         <div class="rating-list-stars d-flex">
-            <i class="fa-solid fa-star text-warning"></i>
-            <i class="fa-solid fa-star text-warning"></i>
-            <i class="fa-solid fa-star text-warning"></i>
-            <i class="fa fa-star-half-alt text-warning"></i>
-            <i class="fa-regular fa-star text-warning"></i>
-            <small>'.$rating.' Ratings</small>
+            <small>'.$rating.'</small>
+            <i class="fa-solid fa-star "></i>
+            <i class="fa-solid fa-star "></i>
+            <i class="fa-solid fa-star "></i>
+            <i class="fa fa-star-half-alt "></i>
+            <i class="fa-regular fa-star "></i>
         </div>
         ';
     } elseif ($rating == 4) {
         $resp = '
         <div class="rating-list-stars d-flex">
+            <small>'.$rating.'</small> 
             <i class="fa fa-star checked"></i>
             <i class="fa fa-star checked"></i>
             <i class="fa fa-star checked"></i>
             <i class="fa fa-star checked"></i>
             <i class="fa-regular fa-star"></i>
-            <small>'.$rating.' Ratings</small>
         </div>
         ';
     } elseif ($rating > 4 && $rating < 5) {
         $resp = '
         <div class="rating-list-stars d-flex">
+            <small>'.$rating.'</small>
             <i class="fa fa-star checked"></i>
             <i class="fa fa-star checked"></i>
             <i class="fa fa-star checked"></i>
             <i class="fa fa-star checked"></i>
             <i class="fa fa-star-half-alt"></i>
-            <small>'.$rating.' Ratings</small>
+            
         </div>
         ';
     } else {
@@ -524,4 +525,23 @@ function RatingHtml($rating = null) {
 
     return $resp;
 }
+//after purchase course count user
+
+function totalUser($courseid)
+{
+    $order= App\Models\OrderProduct::where('course_id', $courseid)->with('order')->get();
+   // dd($order);
+   $user_count=0;
+    foreach ($order as $l) {
+        $users = App\Models\order::where('order_no', $l->order_id)->get();
+        dd($users);
+        //array_push($all_topics, $users);
+        $user_count += count($users);
+        //dd($user_count);
+        
+    }
+    $data['user_count'] = $user_count;
+    return (object)$data;
+}
+
 // }

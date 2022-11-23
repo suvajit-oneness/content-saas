@@ -2593,20 +2593,27 @@ a.browse-writers:hover {
   text-align: center;
 }
 
+.dashboard-profile{
+  display: flex;
+  align-items: center;
+}
 .dashboard-profile a {
   width: 40px;
   height: 40px;
-  margin-top: 6px;
   border: 1px solid #ccc;
   border-radius: 50px;
-  display: inline-block;
+  display: flex;
   overflow: hidden;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  margin-left: 6px;
 }
 
 .dashboard-profile a img {
   object-fit: cover;
-  width: 40px;
-  height: 40px;
+  width: 100%;
+  height: 100%;
 }
 
 .dashboard-content {
@@ -3523,13 +3530,18 @@ input[type="radio"] {
 
 .rating-list-stars {
   margin-top: 0px;
+  align-items: center;
+  color: #f39c12;
 }
-
+.rating-list-stars small{
+  margin-right: 6px;
+  font-size: 16px;
+  font-weight: 700;
+}
 .rating-list-stars i {
   font-size: 16px;
-  color: #95C800;
+  color: #f39c12;
 }
-
 .rating-heading-flex {
   display: flex;
   align-items: center;
@@ -7797,6 +7809,9 @@ a.badge.bg-danger:hover {
   }
 }
 
+.course-details-main-info span a{
+  color: #f39c12;
+}
 .course-details_header{
   width: 100%;
   background: #111b23;
@@ -7815,8 +7830,8 @@ a.badge.bg-danger:hover {
   font-weight: 400;
 }
 .crs-rating-all span{
-  color: #95C800;
-  color: #f39c12;
+  /* color: #95C800; */
+  color: #f39c12 !important;
   margin-right: 4px;
   font-weight: 600;
 }
@@ -7914,17 +7929,30 @@ a.badge.bg-danger:hover {
 .r_head small{
   margin-left: 8px;
 }
+.r_head .rating-list-stars small{
+  display: none;
+}
 .r_avatar{
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  padding: 5px;
+  /* padding: 5px; */
   margin-right: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: #261d16;
   color: #fff;
+  overflow: hidden;
+}
+.r_avatar img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.singlecourseRating, .crs-rating-all{
+  display: flex;
+  align-items: center;
 }
 .r_content p{
   margin-bottom: 12px;
@@ -7937,5 +7965,29 @@ a.badge.bg-danger:hover {
   font-weight: bold;
   color: #111;
 }
+.wishlist .dropdown-menu{
+  padding: 0;
+}
+.wishlish .nav-item{
+  padding: 0;
+}
+.wishlish .nav-link{
+  color: #000;
+}
+.alert-warning {
+  color: #fff;
+  background: #ff3030;
+  margin-bottom: 0;
+  border: 1px solid #ff3030;
+  padding: 4px;
+  margin-right: 0;
+  font-size: 12px;
+}
+.alert-warning a{
+  text-decoration: underline !important;
+  font-size: 12px;
+  color: #fff;
+}
 
-
+/* ================== LOGIN ================== */
+.login_bg

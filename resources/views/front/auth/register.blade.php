@@ -9,21 +9,23 @@
                 <h2>User Register</h2>
                 <div class="login-content shadow-sm">
                     <form action="{{ route('front.user.create') }}" method="post">@csrf
-                        <div class="form-group">
-                            <label>First Name</label>
-                            <input type="text" name="first_name" class="form-control">
-                            <div class="input-border"></div>
-                            @error('first_name')
-                            <p class="small text-danger">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label>Last Name</label>
-                            <input type="text" name="last_name" class="form-control">
-                            <div class="input-border"></div>
-                            @error('last_name')
-                            <p class="small text-danger">{{ $message }}</p>
-                            @enderror
+                        <div class="row">
+                            <div class="form-group col-lg-6">
+                                <label>First Name</label>
+                                <input type="text" name="first_name" class="form-control">
+                                <div class="input-border"></div>
+                                @error('first_name')
+                                <p class="small text-danger">{{ $message }}</p>
+                                @enderror
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <label>Last Name</label>
+                                <input type="text" name="last_name" class="form-control">
+                                <div class="input-border"></div>
+                                @error('last_name')
+                                <p class="small text-danger">{{ $message }}</p>
+                                @enderror
+                            </div>
                         </div>
                         <div class="form-group">
                             <label>Email</label>
