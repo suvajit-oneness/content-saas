@@ -172,9 +172,10 @@
                                                 @endif
                                                 <div class="r_meta">
                                                     <h6>{{ $data->user->first_name.' '.$data->user->last_name }}</h6>
-                                                    <div>
+                                                    <div class="singlecourseRating">
+
                                                         {!! RatingHtml($data->rating) !!}
-                                                        <!-- <small>{{ date('j M, Y', strtotime($data->created_at)) }}</small> -->
+                                                        <small>{{ date('j M, Y', strtotime($data->created_at)) }}</small>
                                                     </div>
                                                 </div>
                                             </div>
