@@ -2488,7 +2488,7 @@ a.browse-writers:hover {
   overflow: hidden;
   align-items: center;
   justify-content: center;
-  padding: 6px;
+  /* padding: 6px; */
   margin-left: 6px;
 }
 

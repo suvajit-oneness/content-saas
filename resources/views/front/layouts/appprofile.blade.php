@@ -89,7 +89,7 @@
                         <div class="dashboard-menu">
                             <i class="fa-solid fa-bars"></i>
                         </div>
-                        <div class="dashboard-header">
+                        <div class="dashboard-header sticky-top bg-white">
                             <div class="dashboard-header-left">
                                 <div class="dashboard-page-name">
                                     <a href="">@yield('title')</a>
@@ -117,39 +117,42 @@
                                 {{-- <div class="dashboard-notification">
                                     <a href=""><i class="fa-solid fa-bell"></i> <span>0</span></a>
                                 </div> --}}
-                                <ul>
-                                <div class="dashboard-profile">
-                                    <a href="">
-                                        <img src="{{ asset(auth()->guard('web')->user()->image)}}" alt="" />
-                                    </a>
+                                <ul class="dashboard-profile">
+                                    <li>
+                                        <a href="">
+                                            <!-- <img src="{{ asset(auth()->guard('web')->user()->image)}}" alt="" /> -->
+                                            <img src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&w=1000&q=80" alt="">
+                                        </a>
+                                    </li>
                                     @php
-                            // cart count
-                            $ip = $_SERVER['REMOTE_ADDR'];
-                            $cartExists = Schema::hasTable('carts');
-                            if ($cartExists) {
-                                $cartCount = DB::table('carts')
-                                    ->where('ip', $ip)
-                                    ->get();
-                                $totalCartProducts = 0;
-                                foreach ($cartCount as $cartKey => $cartVal) {
-                                    $totalCartProducts += $cartVal->qty;
-                                }
-                            }
-                        @endphp
+                                        // cart count
+                                        $ip = $_SERVER['REMOTE_ADDR'];
+                                        $cartExists = Schema::hasTable('carts');
+                                        if ($cartExists) {
+                                            $cartCount = DB::table('carts')
+                                                ->where('ip', $ip)
+                                                ->get();
+                                            $totalCartProducts = 0;
+                                            foreach ($cartCount as $cartKey => $cartVal) {
+                                                $totalCartProducts += $cartVal->qty;
+                                            }
+                                        }
+                                    @endphp
 
-                        <a class="nav-link {{ request()->is('cart') ? 'active' : '' }}"
-                            href="{{ route('front.cart') }}">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="feather feather-shopping-cart">
-                                <circle cx="9" cy="21" r="1"></circle>
-                                <circle cx="20" cy="21" r="1"></circle>
-                                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                            </svg>
-                            {{ $totalCartProducts == 0 ? '' : $totalCartProducts }}
-                        </a>
-                                </div>
-                            </ul>
+                                   <li>
+                                        <a class="{{ request()->is('cart') ? 'active' : '' }}"
+                                            href="{{ route('front.cart') }}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                stroke-linejoin="round" class="feather feather-shopping-cart">
+                                                <circle cx="9" cy="21" r="1"></circle>
+                                                <circle cx="20" cy="21" r="1"></circle>
+                                                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                                            </svg>
+                                            {{ $totalCartProducts == 0 ? '' : $totalCartProducts }}
+                                        </a>
+                                   </li>
+                                </ul>
                             </div>
                         </div>
                         @yield('section')
