@@ -23,7 +23,7 @@
                     @php
                          $totalUser = totalUser($course->id);
                     @endphp
-                     <br><small>{!! $totalUser->user_count !!} Students</small> <br>
+                     <small>{!! $totalUser->user_count !!} Students</small> 
                  </div>
                 @endforeach
                 @else

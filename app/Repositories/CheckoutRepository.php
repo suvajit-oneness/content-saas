@@ -7,6 +7,9 @@ use App\Traits\UploadAble;
 use Illuminate\Http\UploadedFile;
 use App\Contracts\CheckoutContract;
 use App\Models\OrderProduct;
+use App\Models\CourseLesson;
+use App\Models\LessonTopic;
+use App\Models\Topic;
 use App\Models\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -72,7 +75,23 @@ class CheckoutRepository extends BaseRepository implements CheckoutContract
                 if($cartValue->purchase_type == 'subscription'){
                     User::where('id', Auth::guard('web')->user()->id)->update(['subscription_id'=>$cartValue->course_id]);
                 }
-            }
+                if($cartValue->purchase_type == 'course'){
+                    $lesson=CourseLesson::where('course_id',$cartValue->course_id)->get();
+                    foreach($lesson as $lessonKey =>$lessonValue){
+                        $topic=LessonTopic::where('lesson_id',$lessonValue)->get();
+                        foreach($topic as $topicKey =>$topicValue){
+                            $newOrderCourse = new SaveTopic();
+                            $newOrderCourse->user_id = Auth::guard('web')->user()->id;
+                            $newOrderCourse->course_id = $cartValue->course_id;
+                            $newOrderCourse->lesson_id = $lessonValue->lesson_id;
+                            $newOrderCourse->topic_id = $topicValue->topic_id;
+                            $newOrderCourse->is_view = 0;
+                            $newOrderCourse->save();
+                        }
+                    }
+                }
+            } 
+          
 
             $newEntry->amount = $subtotal;
             $newEntry->shipping_charges = 0;
@@ -87,8 +106,8 @@ class CheckoutRepository extends BaseRepository implements CheckoutContract
 
             return $order_no;
         } catch (\Throwable $th) {
-            // throw $th;
-             //dd($th);
+             throw $th;
+             dd($th);
             DB::rollback();
             return false;
         }
