@@ -61,20 +61,20 @@
                                 <img src="{{ asset($data->image) }}" alt="" class="img-fluid">
                             </div>
                             <div class="courses-info">
-                                <div class="courses-badge">
+                                <!-- <div class="courses-badge">
                                     @if ($data->category)
                                         <span><img src="{{ asset($data->category->image) }}" alt="">
                                             {{ $data->category->title }}</span>
                                     @else
                                         <span>No Category</span>
                                     @endif
-                                </div>
+                                </div> -->
                                 <div class="courses-heading">
                                     <h4>{{ $data->title }}</h4>
                                     <div class="courses-lession-time">
                                         <ul class="list-unstyled p-0 m-0">
                                             <li>
-                                                <i class="fa-solid fa-list"></i>
+                                                <i class="fas fa-language"></i>
                                                 {{ $data->language }}
                                             </li>
                                             <li>
@@ -94,6 +94,19 @@
 
                                 <div class="courses-desc">
                                     <p>{!! $data->short_description !!}</p>
+                                    <div class="crs-rating-all">
+                                        <span>
+                                            <div class="rating-list-stars d-flex">
+                                                <small>4.4</small>
+                                                <i class="fa fa-star checked"></i>
+                                                <i class="fa fa-star checked"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-half-alt"></i>
+                                            </div>
+                                        </span>
+                                        <a href="#crs_reviews">( 243 )</a>
+                                    </div>
                                     <div class="price-crs">
                                         <span>{{ $data->price == 0 ? 'Free' : '$ ' . $data->price }}</span>
                                         <a href="{{ route('front.course.details', $data->slug) }}" class="course-btn">Enroll</a>
