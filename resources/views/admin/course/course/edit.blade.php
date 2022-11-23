@@ -578,7 +578,7 @@
         recurringCheck();
 
         function recurringCheck() {
-            alert()
+           
             if (document.getElementById('presented_by').checked) {
                 document.getElementById('yes').style.display = 'block';
             } else document.getElementById('yes').style.display = 'none';
