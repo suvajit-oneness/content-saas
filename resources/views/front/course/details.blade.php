@@ -174,13 +174,13 @@
                                                     <h6>{{ $data->user->first_name.' '.$data->user->last_name }}</h6>
                                                     <div>
                                                         {!! RatingHtml($data->rating) !!}
-                                                        <small>{{ date('j M, Y', strtotime($data->created_at)) }}</small>
+                                                        <!-- <small>{{ date('j M, Y', strtotime($data->created_at)) }}</small> -->
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="r_content">
                                                 <p>
-                                                    {{ $data->review }}
+                                                    {{ $data->review }} Lorem ipsum, dolor sit amet consectetur adipisicing elit.
                                                 </p>
                                                 {{-- <div class="r_helpful">
                                                     <small>Helpful? </small>
