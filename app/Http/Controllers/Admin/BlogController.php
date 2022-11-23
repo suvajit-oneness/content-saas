@@ -76,6 +76,7 @@ class BlogController extends BaseController
             'title' => 'required|string|min:1',
             'article_category_id' => 'required|array|min:1',
             'content' => 'required|string|min:1',
+            'short_desc' => 'required|string|min:1|max:150',
             'tag'=>'required',
             'image' => 'required|mimes:jpg,jpeg,png|max:20000',
         ]);
@@ -111,6 +112,11 @@ class BlogController extends BaseController
         // dd($request->all());
         $request->validate([
             'title' => 'required|string|min:1',
+            'article_category_id' => 'required|array|min:1',
+            'content' => 'required|string|min:1',
+            'short_desc' => 'required|string|min:1|max:150',
+            'tag'=>'required',
+            'image' => 'nullable|mimes:jpg,jpeg,png|max:20000',
         ]);
         $params = $request->except('_token');
 

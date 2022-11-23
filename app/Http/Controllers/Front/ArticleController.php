@@ -13,9 +13,14 @@ class ArticleController extends Controller
     public function index(Request $request)
     {
         $cat=ArticleCategory::where('status',1)->orderby('title')->get();
-        $blog=Article::where('status',1)->orderby('title')->get();
+        if($request->category){
+            $cat_id = ArticleCategory::where('slug',$request->category)->first()->id;
+            $blogs=Article::where('status',1)->where('article_category_id','like','%'.$cat_id.'%')->orderby('title')->get();
+        }else{
+            $blogs=Article::where('status',1)->where('article_category_id','like','%'.$cat[0]->id.'%')->orderby('title')->get();
+        }
         $article_page_content = ArticlePage::all()[0];
-        return view('front.blog.index',compact('cat','blog','article_page_content'));
+        return view('front.blog.index',compact('cat','blogs','article_page_content'));
     }
     public function details(Request $request,$slug)
     {

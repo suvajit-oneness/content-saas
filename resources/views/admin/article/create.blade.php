@@ -60,11 +60,16 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="content">Content(Optional)<span class="m-l-5 text-danger">*</span></label>
+                            <label class="control-label" for="content">Content<span class="m-l-5 text-danger">*</span></label>
                             <textarea type="text" class="form-control" rows="4" name="content" id="content">{{ old('content') }}</textarea>
                             @error('content')
                                 <p class="small text-danger">{{ $message }}</p>
                             @enderror
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="short_desc">Short Content <span class="m-l-5 text-danger"> *</span></label>
+                            <textarea class="form-control" rows="4" name="short_desc" id="short_desc">{{ old('short_desc') }}</textarea>
+                            @error('short_desc') <p class="small text-danger">{{ $message }}</p> @enderror
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="meta_title">Meta Title(Optional)</label>

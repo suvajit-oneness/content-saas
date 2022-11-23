@@ -1,6 +1,7 @@
 <?php
 // use App\Models\Notification;
 
+use App\Models\ArticleCategory;
 use App\Models\Course;
 use App\Models\Currency;
 use App\Models\Deal;
@@ -367,6 +368,16 @@ function getCureencyList()
 function CompletedTasks($project_id)
 {
     return count(ProjectTask::where('project_id',$project_id)->where('deleted_at',null)->where('status','like','%completed%')->get());
+}
+
+function CategoryNames($category_string)
+{
+    $category = explode(',',$category_string);
+    $category_arr = [];
+    foreach ($category as $key => $value) {
+        array_push($category_arr,ArticleCategory::find($value)->title);
+    }
+    return $category_arr;
 }
 
 // show saved jobs only
