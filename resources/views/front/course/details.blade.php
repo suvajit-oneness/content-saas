@@ -23,7 +23,7 @@
                     @php
                          $totalUser = totalUser($course->id);
                     @endphp
-                     <small>{!! $totalUser->user_count !!} Students</small> 
+                     <br><small>{!! $totalUser->user_count !!} Students</small> <br>
                  </div>
                 @endforeach
                 @else
@@ -66,21 +66,6 @@
                                     {!! $course->description !!}
                                 </p>
                             </div>
-
-                            {{-- <div style="display: flex;align-items: flex-start;border:1px solid rgb(209, 212, 219);border-radius:10px;padding: 16px 20px 20px;margin-top: 20px;">
-                                <div style="margin-right: 20px;">
-                                    <span style="display: flex;align-items: center;justify-content: center; width:32px;height:32px;border-radius: 50%;background-color: rgb(255, 100, 45);color: #ffffff;">1</span>
-                                </div>
-                                <div style="width: 80%">
-                                    <h4>Introduction - Course Overview and What You’ll Learn</h4>
-                                    <p>In this lesson, you’ll gain a better understanding of GA4 and discover why migrating to Google Analytics’ new website tracking software should be a top priority.</p>
-                                </div>
-                                <div style="margin-left: auto">
-                                    <p>1 video</p>
-                                    <p>4 minues</p>
-                                </div>
-                            </div> --}}
-
                             <div class="course-content">
                                 <h5>Course content : </h5>
                                 @php
@@ -105,13 +90,13 @@
                                                     <span>{!! $lesson->lesson->title !!}</span>
                                                 </div>
                                                 <div class="accor-top-right">
-                                                    <div class="duraton">
+                                                    {{-- <div class="duraton">
                                                         <span>{{ $totalLessonsAndTopics->topic_count }} Lecture</span>
                                                         <span>
                                                             <i class="fas fa-circle"></i>
                                                             {{ countTotalTopicHours($lesson->id)}} 
                                                         </span>
-                                                    </div>
+                                                    </div> --}}
                                                 </div>
                                             </div>
                                             <div class="accor-content">

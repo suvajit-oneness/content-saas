@@ -543,7 +543,7 @@ function totalTopics($lesson_id)
         $topic = App\Models\Topic::where('id', $l->topic_id)->get();
        
         $topic_count += count($topic);
-        dd($topic_count);
+        //dd($topic_count);
     }
     $data['topic_count'] = $topic_count;
    
