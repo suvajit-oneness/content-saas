@@ -9,11 +9,11 @@
                 <source src="{{asset($topic->preview_video)}}" type="video/mp4">
             </video>
            
-            <a href="{!! URL::to('/user/my-courses/'.$courseData->slug .'/'.$course->slug.'/'.$topicpreviousLesson->topic->slug) !!}" class="lession_nav prev">
+            <a href="" class="lession_nav prev">
                 <i class="fas fa-angle-left"></i>
             </a>
 
-            <a href="{!! URL::to('/user/my-courses/'.$courseData->slug .'/'.$course->slug.'/'.$topicLesson->topic->slug) !!}" class="lession_nav next">
+            <a href="" class="lession_nav next">
                 <i class="fas fa-angle-right"></i>
             </a>
         </div>

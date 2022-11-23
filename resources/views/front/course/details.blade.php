@@ -21,7 +21,7 @@
                     </span>
                     <a href="#crs_reviews">( {{ $data->count() }} review)</a>
 
-                    {{-- <small>{{ $order->order }} Students</small> --}}
+                    {{-- <small>{!! totalUser($course->id) !!} Students</small> --}}
                  </div>
                 @endforeach
                 @else
@@ -61,13 +61,7 @@
                             <div class="crs-desc">
                                 <h5>Description</h5>
                                 <p>
-                                    In this course we walk through all of the critical concepts within the Cloud Platform & Infrastructure domain. This domain is 17% of the test as of August 2022. I will guide you through all of the concepts that you need to know and advise you on the level of knowledge that you need to get comfortable with.
-                                </p>
-                                <p>
-                                    There are over four hours of video content plus course notes based on information from my book: Cloud Guardians.
-                                </p>
-                                <p>
-                                    We will explore the basics of Governance, Risk management and Compliance and how the cloud affects it in a business.
+                                    {!! $course->description !!}
                                 </p>
                             </div>
 

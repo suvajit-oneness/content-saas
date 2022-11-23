@@ -513,4 +513,23 @@ function RatingHtml($rating = null) {
 
     return $resp;
 }
+//after purchase course count user
+
+function totalUser($courseid)
+{
+    $order= App\Models\OrderProduct::where('course_id', $courseid)->with('order')->get();
+   // dd($order);
+   $user_count=0;
+    foreach ($order as $l) {
+        $users = App\Models\order::where('order_no', $l->order_id)->get();
+        dd($users);
+        //array_push($all_topics, $users);
+        $user_count += count($users);
+        //dd($user_count);
+        
+    }
+    $data['user_count'] = $user_count;
+    return (object)$data;
+}
+
 // }
