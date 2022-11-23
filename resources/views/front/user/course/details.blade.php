@@ -65,7 +65,7 @@
         </div> --}}
         <div class="lessionSidebar-header">
             <p>
-                Course Lessions
+                Course Lessons
             </p>
             <a href="javascript:void(0)" class="lessionSidebar-close">
                 <i class="fas fa-times"></i>
@@ -78,7 +78,7 @@
 
             @endphp
             <div class="set lesstionItem">
-                <a href="#">
+                <a href="javascript:void(0)">
                     {!! $lesson->lesson->title !!}
                     <i class="fas fa-angle-down"></i>
                 </a>
@@ -86,7 +86,7 @@
                     <ul class="topicList">
                         @foreach($totalLessonsAndTopics->topics[$key] as $data)
                         <li>
-                            <a href="{!! URL::to('/user/my-courses/'.$course->slug .'/'.$lesson->lesson->slug.'/'.$data->topic->slug) !!}">
+                            <a href="javascript:void(0)" onclick="playTopicVideo()">
                                 <input type="checkbox" class="topicCheck">
                                 <div class="stamp">
                                     <h5>{!! $data->topic->title  !!}</h5>
