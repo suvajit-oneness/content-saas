@@ -18,19 +18,46 @@
                             <div class="course-details-left-content">
                                 <div class="course-details-main-info">
                                     <h2>{{ $job[0]->title ?? '' }}</h2>
-                                    <p>{{ $job[0]->category->title ?? '' }}</p>
-
-                                    {!! $job[0]->description !!}
-
-                                    <p>Skill : {{ $job[0]->skill ?? '' }}</p>
-                                    <p>Experience : {{ $job[0]->experience ?? '' }}</p>
-                                    <p>Scope : {{ $job[0]->scope ?? '' }}</p>
-                                    <p>Address : {{ $job[0]->address ?? '' }}</p>
-                                    <p>Postcode : {{ $job[0]->postcode ?? '' }}</p>
-                                    <p>City : {{ $job[0]->city ?? '' }}</p>
-                                    <p>State : {{ $job[0]->state ?? '' }}</p>
-                                    <p>Country : {{ $job[0]->country ?? '' }}</p>
-                                    <p>Salary : ${{ number_format($job[0]->payment) ?? '' }} per {{ $job[0]->salary ?? '' }}</p>
+                                    <p class="badge badge-secondary">{{ $job[0]->category->title ?? '' }}</p>
+                                    <p>
+                                        {!! $job[0]->description !!}
+                                    </p>
+                                    <p>
+                                        <b>Skill :</b>
+                                        {{ $job[0]->skill ?? '' }}
+                                    </p>
+                                    <p>
+                                        <b>Experience :</b>
+                                        {{ $job[0]->experience ?? '' }}
+                                    </p>
+                                    <p>
+                                        <b>Scope :</b>
+                                        {{ $job[0]->scope ?? '' }}
+                                    </p>
+                                    <p>
+                                        <b>Address :</b>
+                                        {{ $job[0]->address ?? '' }}
+                                    </p>
+                                    <p>
+                                        <b>Postcode :</b>
+                                        {{ $job[0]->postcode ?? '' }}
+                                    </p>
+                                    <p>
+                                        <b>City :</b>
+                                        {{ $job[0]->city ?? '' }}
+                                    </p>
+                                    <p>
+                                        <b>State :</b>
+                                        {{ $job[0]->state ?? '' }}
+                                    </p>
+                                    <p>
+                                        <b>Country :</b>
+                                        {{ $job[0]->country ?? '' }}
+                                    </p>
+                                    <p>
+                                        <b>Salary :</b>
+                                        ${{ number_format($job[0]->payment) ?? '' }} per {{ $job[0]->salary ?? '' }}
+                                    </p>
                                     {{-- <div><p id="all_text">{!! $job[0]->description !!}</p></div> --}}
                                     <div class="content-mid">
                                         <ul class="list-unstyled p-0 m-0">

@@ -7937,5 +7937,23 @@ a.badge.bg-danger:hover {
   font-weight: bold;
   color: #111;
 }
-
-
+.wishlist .dropdown-menu{
+  padding: 0;
+}
+.wishlish .nav-item{
+  padding: 0;
+}
+.wishlish .nav-link{
+  color: #000;
+}
+.alert-warning {
+  color: #ff3030;
+  background: none;
+  margin-bottom: 0;
+  border: 1px solid #ff3030;
+  padding: 12px;
+  margin-right: 12px;
+}
+.alert-warning a{
+  text-decoration: underline !important;
+}
