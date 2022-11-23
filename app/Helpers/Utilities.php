@@ -13,6 +13,8 @@ use App\Models\NotInterestedJob;
 use App\Models\ReportJob;
 use App\Models\PlansWithPrice;
 use App\Models\ProjectTask;
+use App\Models\SaveTopic;
+use App\Models\Topic;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -378,6 +380,14 @@ function CategoryNames($category_string)
         array_push($category_arr,ArticleCategory::find($value)->title);
     }
     return $category_arr;
+}
+
+function getPurchasedCourseTopics($courseid){
+    SaveTopic::where('course_id')
+}
+
+function getTopicVideo($topic_id){
+    return Topic::find($topic_id)->video;
 }
 
 // show saved jobs only
