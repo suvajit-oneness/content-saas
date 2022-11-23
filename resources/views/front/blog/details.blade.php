@@ -24,7 +24,8 @@
                         <ul class="breadcumb_list mb-2 mb-sm-4">
                             <li><a href="{!! URL::to('') !!}">Home</a></li>
                             <li>/</li>
-                            <li><a href="{!! URL::to('/article') !!}">Article</a></li>
+                            <li><a href="{!! URL::to('/blog') !!}">Blogs</a></li>
+                            <li>/</li>
                             <li>
                                 {{implode(' & ',CategoryNames($blog->article_category_id))}}
                             </li>
