@@ -382,8 +382,31 @@ function CategoryNames($category_string)
     return $category_arr;
 }
 
-function getPurchasedCourseTopics($courseid){
-    SaveTopic::where('course_id')
+function getalltopics($courseid){
+    $user_id = Auth::guard('web')->user()->id;
+    return SaveTopic::where('user_id',$user_id)->where('course_id',$courseid)->get();
+}
+
+function getlastviewedtopic($courseid){
+    $user_id = Auth::guard('web')->user()->id;
+    if (SaveTopic::where('user_id',$user_id)->where('course_id',$courseid)->where('is_view',1)->orderBy('id','DESC')->count() > 0)
+        return SaveTopic::where('user_id',$user_id)->where('course_id',$courseid)->where('is_view',1)->orderBy('id','DESC')->first();
+    else
+        return false;
+}
+function getnextviewedtopic($courseid){
+    $user_id = Auth::guard('web')->user()->id;
+    if(SaveTopic::where('user_id',$user_id)->where('course_id',$courseid)->where('is_view',0)->count() > 0)
+        return SaveTopic::where('user_id',$user_id)->where('course_id',$courseid)->where('is_view',0)->first();
+    else
+        return false;
+}
+
+function getViewedStatus($course_id,$lesson_id,$topic_id)
+{
+    $user_id = Auth::guard('web')->user()->id;
+    $savetopic = SaveTopic::where('user_id',$user_id)->where('course_id',$course_id)->where('lesson_id',$lesson_id)->where('topic_id',$topic_id)->first();
+    return $savetopic;
 }
 
 function getTopicVideo($topic_id){
