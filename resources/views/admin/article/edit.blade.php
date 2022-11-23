@@ -1,6 +1,8 @@
 @extends('admin.app')
 @section('title') {{ $pageTitle }} @endsection
 @section('content')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <div class="app-title">
         <div>
             <h1><i class="fa fa-tags"></i> {{ $pageTitle }}</h1>
@@ -24,45 +26,32 @@
                                  <input type="hidden" name="id" value="{{ $targetarticle->id }}">
                                  @error('title') {{ $message }} @enderror
                             </div>
+
+                            @php
+                                $article_arr = [];
+                                foreach ($articlecat as $key => $value) {
+                                    if(in_array($value->id, explode(',',$targetarticle->article_category_id)))
+                                        array_push($article_arr,$value->title);
+                                }
+                                
+                            @endphp
+
                             <div class="form-group">
-                                <label class="control-label" for="article_category_id"> Category <span class="m-l-5 text-danger"> *</span></label>
-                                {{-- <select class="form-control" name="article_category_id[]" multiple>
-                                    <option hidden selected></option>
-                                    @foreach ($articlecat as $index => $item)
-                                    <option value="{{$item->id}}" {{ ($item->id == $targetarticle->article_category_id) ? 'selected' : '' }}>{{ $item->title }}</option>
-                                    @endforeach
-                                </select> --}}
-                                @if(strpos($targetarticle->article_category_id, ','))
+                                <label class="control-label" for="article_category_id"> Category ({{implode(',',$article_arr)}})<span class="m-l-5 text-danger">*</span></label>
                                 <select class="form-control" name="article_category_id[]" multiple>
-                                    {{-- <option hidden selected></option> --}}
                                     @foreach ($articlecat as $index => $item)
-                                    @php
-                                        $cat = explode(",", $targetarticle->article_category_id);
-                                        $isSelected = in_array($item->id,$cat) ? "selected='selected'" : "";
-                                    @endphp
-                                    @endphp
-                                    <option  value="{{$item->id}}" {{ (in_array($item->id, $cat)) ? 'selected' : '' }} >{{ $item->title }}</option>
+                                        <option  value="{{$item->id}}">{{ $item->title }} </option>
                                     @endforeach
                                 </select>
-                                @else
-                                <select class="form-control" name="article_category_id[]" multiple>
-                                    {{-- <option hidden selected></option> --}}
-                                    @foreach ($articlecat as $index => $item)
-                                    @php
-                                        $isSelected = ($item->id == $targetarticle->article_category_id) ? "selected='selected'" : "";
-                                    @endphp
-                                    @endphp
-                                    <option  value="{{$item->id}}" {{($item->id == $targetarticle->article_category_id) ? 'selected' : '' }}>{{ $item->title }}</option>
-                                    @endforeach
-                                </select>
-                                @endif
                                 @error('article_category_id') <p class="small text-danger">{{ $message }}</p> @enderror
                             </div>
+
+
                             <div class="form-group">
                                 <label class="control-label" for="article_sub_category_id"> Sub Category </label>
                                 <select class="form-control form-control-sm" name="article_sub_category_id" disabled>
-                                        <option value="">None</option>
-                                        <option value="" {{ ($targetarticle->article_sub_category_id) ? 'selected' : '' }}>{{$targetarticle->subcategory->title ?? ''}}</option>
+                                    <option value="">None</option>
+                                    <option value="" {{ ($targetarticle->article_sub_category_id) ? 'selected' : '' }}>{{$targetarticle->subcategory->title ?? ''}}</option>
                                 </select>
                                 @error('article_sub_category_id') <p class="small text-danger">{{ $message }}</p> @enderror
                             </div>
@@ -136,6 +125,11 @@
      {{-- New Add --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.js"></script>
     <script type="text/javascript">
+
+    $('select[name="article_category_id[]"]').select2({
+        placeholder: "Select Category"
+    });
+
     $('.sa-remove').on("click",function(){
         var id = $(this).data('id');
         swal({
@@ -211,6 +205,7 @@
     @endif
 
     <script>
+        $('select[name="article_category_id[]"]').val("").change();
 		$('select[name="article_category_id[]"]').on('change', (event) => {
 			var value = $('select[name="article_category_id[]"]').val();
 

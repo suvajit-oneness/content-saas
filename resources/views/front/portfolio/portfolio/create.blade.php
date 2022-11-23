@@ -27,7 +27,7 @@
                                             <select class="form-control" name="category">
                                                 <option value="" hidden selected>Select...</option>
                                                 @foreach ($category as $index => $item)
-                                                    <option value="{{ $item->title }}">{{ $item->title }}</option>
+                                                    <option value="{{ $item->title }}" {{old('category') == $item->title ? 'selected' : ''}} >{{ $item->title }}</option>
                                                 @endforeach
                                         </select>
                                     @error('category')
@@ -45,7 +45,7 @@
                                     @enderror
                                 </div><br>
                                 <div class="form-group">
-                                    <label class="control-label" for="tags">Tags (comma , separated) </label>
+                                    <label class="control-label" for="tags">Tags (comma "," separated) </label>
                                     <input class="form-control @error('tags') is-invalid @enderror" type="text" name="tags"
                                         id="tags" value="{{ old('tags') }}" />
                                     @error('tags')
@@ -53,7 +53,7 @@
                                     @enderror
                                 </div><br>
                                 <div class="form-group">
-                                    <label class="control-label" for="link">Url </label>
+                                    <label class="control-label" for="link">Url (Optional)</label>
                                     <input class="form-control @error('link') is-invalid @enderror" type="text" name="link"
                                         id="link" value="{{ old('link') }}" />
                                     @error('link')

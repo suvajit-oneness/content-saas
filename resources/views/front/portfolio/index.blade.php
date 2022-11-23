@@ -125,7 +125,7 @@
                         <h6>{{ date('j M, Y', strtotime($portfolio->created_at)) }}</h6>
                     </div>
                     <div class="marker-research-info">
-                        <a href="{{ $portfolio->link }}" class="research-link">{{$portfolio->title}}</a>
+                        <a href="{{ $portfolio->link }}" target="_blank" class="research-link">{{$portfolio->title}}</a>
                          {!! portfolioTagsHtml($portfolio->id) !!}
                          <p>{{ substr($portfolio->short_desc,0,100) }} @if(strlen($portfolio->short_desc)>100)<small class="text-underline text-primary text-lowercase showMore" style="cursor: pointer">more...</small>@endif</p>
                          <p style="display: none;">{{ $portfolio->short_desc }} @if(strlen($portfolio->short_desc)>100)<small class="text-underline text-primary text-lowercase showLess" style="cursor: pointer">less</small>@endif</p>

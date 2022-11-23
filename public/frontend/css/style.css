@@ -3527,7 +3527,7 @@ input[type="radio"] {
 
 .rating-list-stars i {
   font-size: 16px;
-  color: #95C800;
+  color: #f39c12;
 }
 
 .rating-heading-flex {
@@ -7815,8 +7815,8 @@ a.badge.bg-danger:hover {
   font-weight: 400;
 }
 .crs-rating-all span{
-  color: #95C800;
-  color: #f39c12;
+  /* color: #95C800; */
+  color: #f39c12 !important;
   margin-right: 4px;
   font-weight: 600;
 }

@@ -108,7 +108,15 @@
                                                 <p class="mt-2 text-muted"><small>Upload any project related document, if
                                                         any. You can also download it later.</small></p>
                                             </div>
+                                            <br>
 
+                                            <div class="form-group">
+                                                <label class="control-label" for="deadline">Deadline <span class="m-l-5 text-danger">*</span></label>
+                                                <input class="form-control @error('deadline') is-invalid @enderror" type="datetime-local" value="{{date('Y-m-d H:i',strtotime(old('deadline') ?? $data->deadline))}}" id="deadline" name="deadline"/>
+                                                @error('deadline')
+                                                    <p class="small text-danger">{{ $message }}</p>
+                                                @enderror
+                                            </div>
                                             <br>
 
                                             <div class="tile-footer">

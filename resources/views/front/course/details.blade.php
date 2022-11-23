@@ -9,18 +9,26 @@
                 <h2>{{ $course->title ?? '' }}</h2>
                 <p id="less_text">{!! substr($course->description,0,150) ?? '' !!}...<span style="font-size: 10px"><a onclick="$('#less_text').hide(); $('#all_text').show();" href="javascript:void(0)">See More</a></span></p>
                 <p id="all_text" style="display: none;">{!! $course->description !!}</p>
+                @php
+                     $review=App\Models\CourseReview::where('course_id',$course->id)->get();
+                @endphp
+                @if(!empty($review))
+                @foreach($review as $data)
+
                 <div class="crs-rating-all">
                     <span>
-                        4.4
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
+                        {!! RatingHtml($data->rating) !!}
                     </span>
-                    <a href="#crs_reviews">(17 ratings)</a>
-                    <small>84 Students</small>
-                </div>
+                    <a href="#crs_reviews">( {{ $data->count() }} review)</a>
+
+                    {{-- <small>{{ $order->order }} Students</small> --}}
+                 </div>
+                @endforeach
+                @else
+                <h2>
+                    No review found
+                </h2>
+                @endif
             </div>
             <div class="crs-back-btn">
                 <a href="{{ route('front.course') }}" class="add-btn-edit d-inline-block">
@@ -96,7 +104,7 @@
                                                     <i class="fa-solid fa-angle-down"></i>
                                                     <span>{!! $lesson->lesson->title !!}</span>
                                                 </div>
-                                                <div class="accor-top-right">
+                                                {{-- <div class="accor-top-right">
                                                     <div class="duraton">
                                                         <span>1 Lecture</span>
                                                         <span>
@@ -104,7 +112,7 @@
                                                             17 Min
                                                         </span>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                             <div class="accor-content">
                                                 <ul class="list-unstyled p-0 m-0">
@@ -142,19 +150,53 @@
 
 
                             <div id="crs_reviews" class="crs_reviews">
-                                <div class="crs-rating-lg">
-                                    <i class="fas fa-star rate-ico"></i>
+                                {{-- @if(!empty($review))
+                                @foreach($review as $data)
+                                <div class="crs-rating-all">
+                                    
                                     <span>
-                                        4.4 course rating
+                                        {!! RatingHtml($data->rating) !!}
+
                                     </span>
                                     <i class="fas fa-circle ms-2"></i>
                                     <span>
-                                        84 Ratings
+                                        {{ $data->count() }} Review
                                     </span>
                                 </div>
-
+                                @endforeach
+                                @endif --}}
                                 <div class="row">
+                                    @if(!empty($review))
+                                    @foreach($review as $data)
                                     <div class="col-lg-6">
+                                        <div class="crs-reviews">
+                                            <div class="r_head">
+                                                @if(!empty($data->user->image))
+                                                <div class="r_avatar">
+                                                    <img src="{{asset($data->user->image)}}" alt="">
+                                                </div>
+                                                @endif
+                                                <div class="r_meta">
+                                                    <h6>{{ $data->user->first_name.' '.$data->user->last_name }}</h6>
+                                                    <div>
+                                                        {!! RatingHtml($data->rating) !!}
+                                                        <small>{{ date('j M, Y', strtotime($data->created_at)) }}</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="r_content">
+                                                <p>
+                                                    {{ $data->review }}
+                                                </p>
+                                                {{-- <div class="r_helpful">
+                                                    <small>Helpful? </small>
+                                                    <i class="far fa-thumbs-up"></i>
+                                                    <i class="far fa-thumbs-down"></i>
+                                                </div> --}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{-- <div class="col-lg-6">
                                         <div class="crs-reviews">
                                             <div class="r_head">
                                                 <div class="r_avatar">
@@ -243,37 +285,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="crs-reviews">
-                                            <div class="r_head">
-                                                <div class="r_avatar">
-                                                    AG
-                                                </div>
-                                                <div class="r_meta">
-                                                    <h6>Artur G.</h6>
-                                                    <div>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star-half-alt"></i>
-                                                        <small>4 days ago</small>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="r_content">
-                                                <p>
-                                                    Thanks for the coursework. Easy to follow and on point in her explanation.
-                                                </p>
-                                                <div class="r_helpful">
-                                                    <small>Helpful? </small>
-                                                    <i class="far fa-thumbs-up"></i>
-                                                    <i class="far fa-thumbs-down"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    </div>--}}
+                                    @endforeach
+                                    @endif
                                 </div>
 
                             </div>
@@ -378,9 +392,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script>
     (function($){
-    
+
     let stickyPriceBar = $("#barSticky");
-    
+
     $(window).scroll(function () {
       let scroll = $(window).scrollTop();
       if (scroll >= 350) {
@@ -391,7 +405,7 @@
         $("#barSticky").removeClass("scrolled");
       }
     });
-    
+
     function playVideo(videoUrl) {
         event.preventDefault();
         $('#videoModal').modal('show');

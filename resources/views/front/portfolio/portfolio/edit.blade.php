@@ -26,7 +26,7 @@
                                     <select class="form-control" name="category">
                                         <option value="" hidden selected>Select...</option>
                                         @foreach ($category as $index => $item)
-                                            <option value="{{ $item->title }}" {{ ($portfolio->category == $item->title) ? 'selected' : '' }}>{{ $item->title }}</option>
+                                            <option value="{{ $item->title }}" {{ (old('category',$portfolio->category) == $item->title) ? 'selected' : '' }}>{{ $item->title }}</option>
                                         @endforeach
                                     </select>
                                     <input type="hidden" name="id" value="{{ $portfolio->id }}">
@@ -53,7 +53,7 @@
                                 @enderror
                             </div><br>
                             <div class="form-group">
-                                <label class="control-label" for="link">Url </label>
+                                <label class="control-label" for="link">Url (Optional)</label>
                                 <input class="form-control @error('link') is-invalid @enderror" type="text" name="link"
                                     id="link" value="{{ old('link',$portfolio->link) }}" />
                                 @error('link')

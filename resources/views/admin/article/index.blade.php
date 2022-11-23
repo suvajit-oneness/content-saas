@@ -63,7 +63,7 @@
                                     <th>#</th>
                                     <th class="text-center"><i class="fi fi-br-picture"></i> Image</th>
                                     <th> Title </th>
-                                    <th> Description </th>
+                                    {{-- <th> Description </th> --}}
                                     <th> Primary Category </th>
                                     <th> Secondary Category </th>
                                     <th> Status </th>
@@ -82,7 +82,7 @@
                                             </td>
 
                                             <td>{{ $blog->title }}</td>
-                                            <td>@php
+                                            {{-- <td>@php
                                                 $desc = strip_tags($blog['content']);
                                                 $length = strlen($desc);
                                                 if($length>50)
@@ -92,8 +92,9 @@
                                                     $desc = substr($desc,0,50);
                                                 }
                                                @endphp
-                                                 {!! $desc !!}</td>
-                                                <td> @php
+                                                 {!! $desc !!}</td> --}}
+                                            <td> 
+                                                @php
                                                     $cat = $blog->article_category_id ?? '';
                                                     //dd($cat);
                                                     $displayCategoryName = '';
@@ -108,10 +109,11 @@
 
                                                         //dd($displayCategoryName);
                                                         }
-                                                        }
+                                                    }
 
-                                                   @endphp
-                                                {{substr($displayCategoryName, 0, -2) ?? '' }}</td>
+                                                @endphp
+                                                {{substr($displayCategoryName, 0, -2) ?? '' }}
+                                            </td>
 
                                                 <td>{{ $blog->subcategory ? $blog->subcategory->title : '' }}</td>
                                                 <td class="text-center">
