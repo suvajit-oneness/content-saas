@@ -5,7 +5,7 @@
     <meta name="viewport" content="target-densitydpi=device-dpi, initial-scale=1.0, user-scalable=no" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- <link rel="shortcut icon" href="./img/fav_icon.png"> -->
-    <title>{{ env('APP_NAME') }} @yield('title')</title>
+    <title>Login</title>
 
     <link href="{{ asset('frontend/css/bootstrap.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('frontend/css/swiper-bundle.min.css') }}" rel="stylesheet" type="text/css">
@@ -20,8 +20,8 @@
 
 
 
-    <div class="login-bg">
-        <div class="login-lg-box">
+    <div class="login_bg">
+        <div class="login_lg_box">
             <div class="login_left">
                 <div class="login_text_box">
                     <h2>
