@@ -25,30 +25,36 @@
             </div>
         </div>
 
-        <div class="row mt-4 mb-3">
-            <div class="col-md-6"><p class="mb-3"></p></div>
+        <div class="row mt-4 mb-3 justify-content-between">
 
-            <div class="col-md-8">
-                <form class="d-flex align-items-center" action="" method="GET">
-                    <p class="text-muted">Task List</p>
-                    <input type="search" name="keyword" value="{{request()->input('keyword')}}" class="form-control w-50 ms-4" placeholder="Search by Title">
-                    <select name="search_status" class="form-control w-50 ms-4">
-                        <option value="" selected>All</option>
-                        @foreach ($status as $s)
-                            <option value="{{ $s->slug }}" {{request()->input('search_status') == $s->slug ? 'selected' : ''}}>{{ $s->title }}</option>
-                        @endforeach
-                    </select>
-                    <button class="btn btn-success btn-search mx-1"><i class="fa fa-search"></i></button>
-                    <a href="{{route('front.project.detail', $data->slug)}}" class="btn btn-danger btn-search mx-1"><i class="fa fa-times"></i></a>
-                    <a href="{{request()->fullUrlWithQuery(['export' => 'true'])}}" class="add-btn-edit d-inline-block text-sm" style="padding: 6px 12px; font-size: 9px">Export as csv <i class="fa fa-file"></i></a>
-                </form>
-            </div>
-            <div class="col-md-4 text-end">
+            <div class="col-md-12 mb-4 text-end">
                 <a href="{{ route('front.project.task.create', $data->id) }}" class="add-btn-edit d-inline-block">Create new Task <i class="fa-solid fa-plus"></i></a>
+            </div>
+
+            <div class="col-md-1">
+                <p class="text-muted">Task List</p>
+            </div>
+            <div class="col-md-11">
+                <form action="" method="GET">
+                    <div class="d-flex align-items-center justify-content-end">
+                        <input type="search" name="keyword" value="{{request()->input('keyword')}}" class="form-control w-50 ms-4" placeholder="Search by Title">
+                        <select name="search_status" class="form-control w-50 ms-4">
+                            <option value="" selected>All</option>
+                            @foreach ($status as $s)
+                                <option value="{{ $s->slug }}" {{request()->input('search_status') == $s->slug ? 'selected' : ''}}>{{ $s->title }}</option>
+                            @endforeach
+                        </select>
+                        <div class="btn-group export__search ms-2">
+                            <button class="btn btn-success btn-search"><i class="fa fa-search"></i></button>
+                            <a href="{{route('front.project.detail', $data->slug)}}" class="btn btn-danger btn-search"><i class="fa fa-times"></i></a>
+                            <a href="{{request()->fullUrlWithQuery(['export' => 'true'])}}" class="btn bg-success btn-search">Export as csv <i class="fas fa-download ms-2"></i></a>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
 
-        <table class="table">
+        <table class="table projectTable">
             <thead>
                 <tr>
                     <th>SR</th>
@@ -100,7 +106,7 @@
                                 </a>
                             </td>
                             <td>
-                                <select onchange="changeProjectAndTaskStatus(`{{route('front.project.task.updateStatus')}}`,this,'{{$item->id}}')" data-original="{{$item->status}}" name="status" id="status" height="24px" class="bg-success form-control">
+                                <select onchange="changeProjectAndTaskStatus(`{{route('front.project.task.updateStatus')}}`,this,'{{$item->id}}')" data-original="{{$item->status}}" name="status" id="status" height="24px" class="form-control">
                                     <option value="" selected disabled>Change Status</option>
                                     @foreach ($status as $s)
                                         <option value="{{$s->slug}}" {{ ($s->slug == $item->status) ? 'selected' : '' }}>{{$s->title}}</option>
@@ -112,7 +118,7 @@
                                     <span class="btn btn-outline-secondary text-sm" type="button" id="button-addon2"><i class="fa fa-times"></i></span>
                                 </div>
                             </td>
-                            <td>
+                            <td class="text-center">
                                 <button class="btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="fas fa-ellipsis-v"></i>
                                 </button>
