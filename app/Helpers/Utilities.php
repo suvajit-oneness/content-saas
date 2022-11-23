@@ -1,6 +1,7 @@
 <?php
 // use App\Models\Notification;
 
+use App\Models\ArticleCategory;
 use App\Models\Course;
 use App\Models\Currency;
 use App\Models\Deal;
@@ -369,6 +370,16 @@ function CompletedTasks($project_id)
     return count(ProjectTask::where('project_id',$project_id)->where('deleted_at',null)->where('status','like','%completed%')->get());
 }
 
+function CategoryNames($category_string)
+{
+    $category = explode(',',$category_string);
+    $category_arr = [];
+    foreach ($category as $key => $value) {
+        array_push($category_arr,ArticleCategory::find($value)->title);
+    }
+    return $category_arr;
+}
+
 // show saved jobs only
 if(!function_exists('savedJobs')) {
     function savedJobs($job_id) {
@@ -522,15 +533,43 @@ function totalUser($courseid)
    // dd($order);
    $user_count=0;
     foreach ($order as $l) {
-        $users = App\Models\order::where('order_no', $l->order_id)->get();
-        dd($users);
-        //array_push($all_topics, $users);
+        $users = App\Models\order::where('order_no', $l->order_id)->with('users')->get();
         $user_count += count($users);
-        //dd($user_count);
         
     }
     $data['user_count'] = $user_count;
     return (object)$data;
 }
 
-// }
+//lesson wise topic count
+
+function totalTopics($lesson_id)
+{
+    $lessons= App\Models\LessonTopic::where('lesson_id', $lesson_id)->with('topic')->get();
+    //dd($lessons);
+    $all_topics = [];
+    $topic_count = 0;
+    $each_lesson_length = [];
+    foreach ($lessons as $l) {
+        $topic = App\Models\Topic::where('id', $l->topic_id)->get();
+       
+        $topic_count += count($topic);
+        //dd($topic_count);
+    }
+    $data['topic_count'] = $topic_count;
+   
+    return (object)$data;
+}
+function countTotalTopicHours($lessonid)
+{
+    $totalhrs = 0;
+    $lessons = App\Models\LessonTopic::where('lesson_id', $lessonid)->get();
+    //dd($lessons);
+    foreach($lessons as $l){
+        //$eachtopic = App\Models\Topic::where('id', $l->topic_id)->get();
+            $top = App\Models\Topic::find($l->topic_id);
+            $totalhrs += $top->video_length;
+       
+    }
+    return $totalhrs . ' hours';
+}

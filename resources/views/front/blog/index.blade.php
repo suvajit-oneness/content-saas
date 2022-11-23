@@ -35,11 +35,13 @@
         <div class="row">
             <div class="col">
                 <ul class="toolsFilter Blog_toolsFilter">
-                 @foreach($cat as $key=> $data)
+                 @foreach($cat as $key => $data)
                     <li>
                         <label>
-                            <input type="radio" name="blogcategory" value="bloglist_{{ $data->id }}" {{ ($key == 0) ? 'checked' : '' }}>
-                            <span>{{  $data->title }}</span>
+                            <form action="" method="GET">
+                                <input class="d-none" type="checkbox" onclick="$(this).parent().submit()" name="category" value="{{ $data->slug }}" {{ (request()->input('category') == $data->slug) ? 'checked' : '' }}>
+                            </form>
+                            <span class="{{ ((request()->input('category') ?? $cat[0]->slug) == $data->slug) ? 'bg-success' : '' }}">{{  $data->title }}</span>
                         </label>
                     </li>
                  @endforeach
@@ -50,82 +52,37 @@
 
     <div class="container">
         <div class="row blog_list">
-        @foreach($cat as $blogCategorykey => $blogCategory)
-            @php
-                $blogsUnderCategory = \DB::table('articles')
-                ->whereRaw("article_category_id LIKE '$blogCategory->id%' OR article_category_id LIKE '%,$blogCategory->id%' ")
-                ->where('status', 1)
-                ->orderby('id','desc')
-                ->get();
-
-                // $blogsUnderCategory = \DB::table('articles')->where('article_category_id', 'like', $blogCategory->id.',%')->where('status', 1)->orderby('id','desc')->limit(8)->get();
-            @endphp
-
-            @if ($blogsUnderCategory->count() > 0)
-                @foreach($blogsUnderCategory as $blogProductkey => $data)
-                    @php
-                        $cat = $data->article_category_id;
-                        //dd($cat);
-                        $displayCategoryName = '';
-                        foreach(explode(',' ,$cat) as $catKey => $catVal) {
-                            // dd($catVal);
-                            $catDetails = DB::table('article_categories')->where('id', $catVal)->first();
-                            if(!empty($catDetails)) {
-                                $displayCategoryName = $catDetails->id ;
-                                // dd('here', $displayCategoryName);
-                            }
-                        }
-                    @endphp
-
-                    <div class="col-12 col-lg-4 col-md-6 mb-3 blog-list-panel bloglist_{{ $displayCategoryName }}">
-                        <a href="">
-                            <div class="card">
-                                <img src="{{ asset($data->image) }}" class="card-img-top" alt="">
-                                <div class="card-body">
-                                    <div class="d-flex align-items-center">
-                                        <span class="subHead_badge">@php
-                                            $cat = $data->article_category_id ?? '';
-                                            //dd($cat);
-                                            $displayCategoryName = '';
-                                            foreach(explode(',', $cat) as $catKey => $catVal) {
-                                            //
-                                                $catDetails = DB::table('article_categories')->where('id', $catVal)->first();
-                                                //dd($catDetails);
-                                                if($catDetails == ''){
-                                                $displayCategoryName .=  '';}
-                                                else{
-                                                $displayCategoryName .= $catDetails->title.' , ' ?? '';
-
-                                                //dd($displayCategoryName);
-                                                }
-                                                }
-
-                                        @endphp
-                                        {{substr($displayCategoryName, 0, -2) ?? '' }}</span></a>
-                                        <div class="dateBox blog_date">
-                                            <span class="date">
-                                                {{ date('d', strtotime($data->created_at)) }}
-                                            </span>
-                                            <span class="month">
-                                                {{ date('M', strtotime($data->created_at)) }}
-                                            </span>
-                                            <span class="year">
-                                                {{ date('Y', strtotime($data->created_at)) }}
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <a href="{{ route('front.article.details',$data->slug) }}" class="location_btn"><h5 class="card-title">{{ $data->title }}</h5></a>
-                                    <div class="card-text">
-                                        {!! $data->content !!}
+            @foreach($blogs as $key => $blog)
+                <div class="col-12 col-lg-4 col-md-6 mb-3 blog-list-panel" id="blog{{implode('-',explode(',',$blog->article_category_id))}}">
+                    <a href="">
+                        <div class="card">
+                            <img src="{{ asset($blog->image) }}" class="card-img-top" alt="">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    @foreach (CategoryNames($blog->article_category_id) as $item)
+                                        <span class="subHead_badge mx-1">{{$item}}</span>
+                                    @endforeach
+                                    <div class="dateBox blog_date">
+                                        <span class="date">
+                                            {{ date('d', strtotime($blog->created_at)) }}
+                                        </span>
+                                        <span class="month">
+                                            {{ date('M', strtotime($blog->created_at)) }}
+                                        </span>
+                                        <span class="year">
+                                            {{ date('Y', strtotime($blog->created_at)) }}
+                                        </span>
                                     </div>
                                 </div>
+                                <a href="{{ route('front.article.details',$blog->slug) }}" class="location_btn"><h5 class="card-title">{{ $blog->title }}</h5></a>
+                                <div class="card-text">
+                                    {!! $blog->short_desc !!}
+                                </div>
                             </div>
-                        </a>
-                    </div>
-
-                @endforeach
-            @endif
-        @endforeach
+                        </div>
+                    </a>
+                </div>
+            @endforeach
         </div>
     </div>
     {{--  <div class="container text-center mt-4 mt-lg-5">

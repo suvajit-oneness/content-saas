@@ -19,11 +19,11 @@
 
                 <form action="{{ route('admin.article.update') }}" method="POST" role="form" enctype="multipart/form-data">
                     @csrf
+                        <input type="hidden" name="id" value="{{ $targetarticle->id }}">    
                         <div class="tile-body">
                             <div class="form-group">
                                 <label class="control-label" for="title">Article Title <span class="m-l-5 text-danger"> *</span></label>
                                  <input class="form-control @error('title') is-invalid @enderror" type="text" name="title" id="title" value="{{ old('title', $targetarticle->title) }}"/>
-                                 <input type="hidden" name="id" value="{{ $targetarticle->id }}">
                                  @error('title') {{ $message }} @enderror
                             </div>
 
@@ -48,7 +48,7 @@
 
 
                             <div class="form-group">
-                                <label class="control-label" for="article_sub_category_id"> Sub Category </label>
+                                <label class="control-label" for="article_sub_category_id"> Sub Category (Optional)</label>
                                 <select class="form-control form-control-sm" name="article_sub_category_id" disabled>
                                     <option value="">None</option>
                                     <option value="" {{ ($targetarticle->article_sub_category_id) ? 'selected' : '' }}>{{$targetarticle->subcategory->title ?? ''}}</option>
@@ -56,34 +56,33 @@
                                 @error('article_sub_category_id') <p class="small text-danger">{{ $message }}</p> @enderror
                             </div>
                             <div class="form-group">
-                                <label class="control-label" for="content">Content</label>
+                                <label class="control-label" for="content">Content <span class="m-l-5 text-danger"> *</span></label>
                                 <textarea class="form-control" rows="4" name="content" id="content">{{ old('content', $targetarticle->content) }}</textarea>
-                                <input type="hidden" name="id" value="{{ $targetarticle->id }}">
                                 @error('content') {{ $message }} @enderror
-
                             </div>
                             <div class="form-group">
-                                <label class="control-label" for="meta_title">Meta Title</label>
+                                <label class="control-label" for="short_desc">Short Content <span class="m-l-5 text-danger"> *</span></label>
+                                <textarea class="form-control" rows="4" name="short_desc" id="short_desc">{{ old('short_desc', $targetarticle->short_desc) }}</textarea>
+                                @error('short_desc') {{ $message }} @enderror
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="meta_title">Meta Title(Optional)</label>
                                 <input class="form-control @error('meta_title') is-invalid @enderror" type="text" name="meta_title" id="meta_title" value="{{ old('meta_title', $targetarticle->meta_title) }}"/>
-                                <input type="hidden" name="id" value="{{ $targetarticle->id }}">
                                 @error('meta_title') {{ $message }} @enderror
 
                             </div>
                             <div class="form-group">
-                                <label class="control-label" for="meta_key">Meta Key</label>
+                                <label class="control-label" for="meta_key">Meta Key(Optional)</label>
                                 <input class="form-control @error('meta_key') is-invalid @enderror" type="text" name="meta_key" id="meta_key" value="{{ old('meta_key', $targetarticle->meta_key) }}"/>
-                                <input type="hidden" name="id" value="{{ $targetarticle->id }}">
                                 @error('meta_key') {{ $message }} @enderror
                             </div>
                             <div class="form-group">
-                                <label class="control-label" for="meta_description">Description</label>
+                                <label class="control-label" for="meta_description">Meta Description (Optional)</label>
                                 <textarea class="form-control" rows="4" name="meta_description" id="meta_description">{{ old('meta_description', $targetarticle->meta_description) }}</textarea>
-                                <input type="hidden" name="id" value="{{ $targetarticle->id }}">
                             </div>
                             <div class="form-group">
-                                <label class="control-label" for="tag">Tag</label>
+                                <label class="control-label" for="tag">Tag <span class="m-l-5 text-danger"> *</span></label>
                                 <input class="form-control @error('tag') is-invalid @enderror" type="text" name="tag" id="tag" value="{{ old('tag', $targetarticle->tag) }}" multiple/>
-                                <input type="hidden" name="id" value="{{ $targetarticle->id }}">
                                 @error('tag') {{ $message }} @enderror
                             </div>
                             <div class="form-group">

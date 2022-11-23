@@ -104,6 +104,7 @@ class BlogRepository extends BaseRepository implements BlogContract
         $article->article_category_id = implode(',',$params['article_category_id']);
         $article->article_sub_category_id = $params['article_sub_category_id'];
         $article->content = $params['content'];
+        $article->short_desc = $params['short_desc'];
         $article->meta_title = $params['meta_title'] ?? '';
         $article->meta_key = $params['meta_key'] ?? '';
         $article->meta_description = $params['meta_description'] ?? '';
@@ -166,6 +167,7 @@ class BlogRepository extends BaseRepository implements BlogContract
         $article->article_category_id = implode(',',$params['article_category_id']);
         $article->article_sub_category_id = $params['article_sub_category_id'];
         $article->content = $params['content'];
+        $article->short_desc = $params['short_desc'];
         $article->meta_title = $params['meta_title'];
         $article->meta_key = $params['meta_key'];
         $article->meta_description = $params['meta_description'];
