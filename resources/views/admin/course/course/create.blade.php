@@ -162,7 +162,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="name">Cost <span class="m-l-5 text-danger">*</span></label>
+                            <label class="control-label" for="name">Price <span class="m-l-5 text-danger">*</span></label>
                             <div class="row">
                                 <div class="col-4">
                                     <div class="form-check">
@@ -188,6 +188,14 @@
                                 <input type="number" name="price" id="price" value="{{ old('price') }}"
                                     class="form-control">
                                 @error('price')
+                                    <p class="small text-danger">{{ $message }}</p>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="offer_price">Offer Price ($)</label>
+                                <input type="number" name="offer_price" id="offer_price" value="{{ old('offer_price') }}"
+                                    class="form-control">
+                                @error('offer_price')
                                     <p class="small text-danger">{{ $message }}</p>
                                 @enderror
                             </div>

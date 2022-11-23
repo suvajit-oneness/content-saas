@@ -313,8 +313,9 @@
                         </div>
                         <h3 class="course-price">
                             ${{ $course->price }}
-                            <span>$39</span>
-                            <small>36% off</small>
+                            {{-- <span>${{ $course->price }}</span>
+
+                            <small>36% off</small> --}}
                         </h3>
 
 

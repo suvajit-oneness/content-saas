@@ -13,6 +13,7 @@ use App\Models\Topic;
 use App\Models\CourseReview;
 use App\Models\Lesson;
 use App\Models\Course;
+use App\Models\SaveTopic;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -58,5 +59,21 @@ class UserCourseController extends Controller
         $review->user_id = auth()->guard('web')->user()->id;
         $review->save();
         return redirect()->back()->with('success', 'Comment added successfully');
+    }
+
+    public function savetopic(Request $request)
+    {
+        $saved = SaveTopic::where('id',$request->id)->update(['is_view'=>1]);
+        if($saved){
+            // dd(getnextviewedtopic($request->course_id));
+            if(getnextviewedtopic($request->course_id) != false){
+                $data = [
+                    'video_url' => asset(getTopicVideo(getnextviewedtopic($request->course_id)->topic_id)),
+                    'topic_id' => getnextviewedtopic($request->course_id)->topic_id
+                ];
+            }
+            return response()->json(['status' => 200, 'message' => 'Topic Completed', 'data' => $data]);
+        }
+
     }
 }

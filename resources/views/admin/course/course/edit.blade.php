@@ -185,7 +185,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="name">Cost <span class="m-l-5 text-danger">*</span></label>
+                            <label class="control-label" for="name">Price <span class="m-l-5 text-danger">*</span></label>
                             <div class="row">
                                 <div class="col-4">
                                     <div class="form-check">
@@ -211,6 +211,14 @@
                                 name="price" id="event_cost" value="{{ old('price',$course->price) }}"
                                 placeholder="Enter Amount" />
                                 @error('cost') <p class="small text-danger">{{ $message }}</p> @enderror
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="offer_price">Offer Price ($)</label>
+                                <input type="number" name="offer_price" id="offer_price" value="{{ old('offer_price',$course->offer_price) }}"
+                                    class="form-control">
+                                @error('offer_price')
+                                    <p class="small text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
                         {{-- <div class="form-group">
@@ -475,14 +483,13 @@
         function deleteLessonTopic(x, y) {
             window.location.href = '{{ url('/') }}' + '/admin/course/' + y + '/delete/lesson/' + x;
         }
-    </script>
-    <script>
+
         if ($('#relatedtopics').children().length > 0) {
             $('#setTopic').removeClass('d-none');
             $('#setTopic').css('margin', '3px');
         }
-    </script>
-    <script>
+
+        /*
         $.event.props.push('dataTransfer');
         $(function() {
             var $sources = $('div[data-dd="source"]');
@@ -566,14 +573,19 @@
                 }
             });
         });
+        */
+
         recurringCheck();
 
         function recurringCheck() {
+           
             if (document.getElementById('presented_by').checked) {
                 document.getElementById('yes').style.display = 'block';
             } else document.getElementById('yes').style.display = 'none';
         }
+
         CostCheck();
+
         function CostCheck() {
             if (document.getElementById('premium').checked) {
                 document.getElementById('Eventcost').style.display = 'block';

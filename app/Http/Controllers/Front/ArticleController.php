@@ -15,9 +15,9 @@ class ArticleController extends Controller
         $cat=ArticleCategory::where('status',1)->orderby('title')->get();
         if($request->category){
             $cat_id = ArticleCategory::where('slug',$request->category)->first()->id;
-            $blogs=Article::where('status',1)->where('article_category_id','like','%'.$cat_id.'%')->orderby('title')->get();
+            $blogs=Article::where('status',1)->where('article_category_id','like','%'.$cat_id.'%')->orderby('title')->paginate(1);
         }else{
-            $blogs=Article::where('status',1)->where('article_category_id','like','%'.$cat[0]->id.'%')->orderby('title')->get();
+            $blogs=Article::where('status',1)->where('article_category_id','like','%'.$cat[0]->id.'%')->orderby('title')->paginate(1);
         }
         $article_page_content = ArticlePage::all()[0];
         return view('front.blog.index',compact('cat','blogs','article_page_content'));

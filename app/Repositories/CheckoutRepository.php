@@ -9,13 +9,14 @@ use App\Contracts\CheckoutContract;
 use App\Models\OrderProduct;
 use App\Models\CourseLesson;
 use App\Models\LessonTopic;
+use App\Models\SaveTopic;
 use App\Models\Topic;
 use App\Models\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Doctrine\Instantiator\Exception\InvalidArgumentException;
 use DB;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 /**
  * Class CheckoutRepository
  *
@@ -61,6 +62,7 @@ class CheckoutRepository extends BaseRepository implements CheckoutContract
            
             $cartData = Cart::where('ip', $this->ip)->get();
             $subtotal = 0;
+
             foreach($cartData as $cartValue) {
 
                 $newOrderProduct = new OrderProduct();
@@ -75,18 +77,19 @@ class CheckoutRepository extends BaseRepository implements CheckoutContract
                 if($cartValue->purchase_type == 'subscription'){
                     User::where('id', Auth::guard('web')->user()->id)->update(['subscription_id'=>$cartValue->course_id]);
                 }
+
                 if($cartValue->purchase_type == 'course'){
-                    $lesson=CourseLesson::where('course_id',$cartValue->course_id)->get();
-                    foreach($lesson as $lessonKey =>$lessonValue){
-                        $topic=LessonTopic::where('lesson_id',$lessonValue)->get();
-                        foreach($topic as $topicKey =>$topicValue){
-                            $newOrderCourse = new SaveTopic();
-                            $newOrderCourse->user_id = Auth::guard('web')->user()->id;
-                            $newOrderCourse->course_id = $cartValue->course_id;
-                            $newOrderCourse->lesson_id = $lessonValue->lesson_id;
-                            $newOrderCourse->topic_id = $topicValue->topic_id;
-                            $newOrderCourse->is_view = 0;
-                            $newOrderCourse->save();
+                    $courselesson=CourseLesson::where('course_id',$cartValue->course_id)->get();
+                    foreach($courselesson as $cl){
+                        $lessonTopic=LessonTopic::where('lesson_id',$cl->lesson_id)->get();
+                        foreach($lessonTopic as $lt){
+                            $SaveTopic = new SaveTopic();
+                            $SaveTopic->user_id = Auth::guard('web')->user()->id;
+                            $SaveTopic->course_id = $cartValue->course_id;
+                            $SaveTopic->lesson_id = $cl->lesson_id;
+                            $SaveTopic->topic_id = $lt->topic_id;
+                            $SaveTopic->is_view = 0;
+                            $SaveTopic->save();
                         }
                     }
                 }
