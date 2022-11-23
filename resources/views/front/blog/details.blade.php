@@ -24,26 +24,11 @@
                         <ul class="breadcumb_list mb-2 mb-sm-4">
                             <li><a href="{!! URL::to('') !!}">Home</a></li>
                             <li>/</li>
-                            <li><a href="{!! URL::to('article') !!}">Article</a></li>
-
+                            <li><a href="{!! URL::to('/article') !!}">Article</a></li>
+                            <li>
+                                {{implode(' & ',CategoryNames($blog->article_category_id))}}
+                            </li>
                             <li>/</li>
-                            @if(is_array($blog->category) && count($blog->category)>0)
-                            <li> <a href="{!! URL::to('category/'.$blog->category->slug) !!}">
-                            @endif
-                            @php
-                                $cat = $blog->article_category_id ?? '';
-                                $displayCategoryName = '';
-                                foreach(explode(',', $cat) as $catKey => $catVal) {
-                                    $catDetails = DB::table('article_categories')->where('id', $catVal)->first();
-                                    if($catDetails!=''){
-                                        $displayCategoryName .= ''.$catDetails->title.' > ';
-                                    }
-                                }
-                                echo substr($displayCategoryName, 0, -2);
-                            @endphp
-                            </a></li>
-                            <li>/</li>
-
                             <li>{{ $blog->title }}</li>
                         </ul>
                         {{-- <div class="article_badge_wrap">
@@ -67,22 +52,11 @@
 
                                     @if($blog->tag!='')
                                         <li>
-                                            {{-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg><a href=""> --}}
-                                             @php
-                                                $cat =$blog->tag;
-                                               // dd($cat);
-                                                $displayCategoryName = '';
-                                                foreach(explode(',' , $cat) as $catKey => $catVal) {
-                                                    //dd($catVal);
-                                                     $displayCategoryName .= '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>'.$catVal.' ';
-                                                }
-                                                echo $displayCategoryName;
-                                            @endphp
-                                            {{-- <span class="tag_text">{{ trim($catVal) }}</span> --}}
-                                        </a>
+                                            @foreach(explode(',' , $blog->tag) as $catVal) 
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>{{$catVal}}
+                                            @endforeach
                                         </li>
-                                        @endif
-
+                                    @endif
                                     <li>
                                         <div class="share-btns">
                                             <div class="dropdown">
@@ -147,29 +121,19 @@
                             <div class="card blogCart border-0">
                                 <div class="bst_dimg">
                                      @if($blog->image)
-                                   <img src="{{ asset($blog->image) }}" class="card-img-top" alt="ltItem">
+                                        <img src="{{ asset($blog->image) }}" class="card-img-top" alt="ltItem">
                                      @else
-                                    <img class="w-100" src="{{URL::to('/').'/Demo/'}}{{placeholder-image.png}}" class="card-img-top" style="height: 350px;object-fit: cover;">
+                                        <img class="w-100" src="{{URL::to('/').'/Demo/'}}{{placeholder-image.png}}" class="card-img-top" style="height: 350px;object-fit: cover;">
                                     @endif
                                 </div>
                                 <div class="card-body">
                                     <div class="card-body-top">
                                         <h5 class="card-title m-0"><a href="{!! URL::to('article/'.$blog->slug) !!}" class="location_btn">{{ $blog->title }}</a></h5>
-                                        @if($blog->article_category_id)
-                                        <div class="article_badge_wrap mt-3 mb-1">
-                                            @php
-                                                $cat = $blog->article_category_id;
-                                                $displayCategoryName = '';
-                                                foreach(explode(',', $cat) as $catKey => $catVal) {
-                                                    $catDetails = DB::table('article_categories')->where('id', $catVal)->first();
-                                                    if($catDetails!=''){
-                                                        $displayCategoryName .= ''.'<span class="badge p-1" style="font-size: 10px;">'.$catDetails->title.'</span>'.'  ';
-                                                    }
-                                                }
-                                                echo $displayCategoryName;
-                                            @endphp
+                                        <div class="article_badge_wrap d-flex my-1">
+                                            @foreach(CategoryNames($blog->article_category_id) as $item)
+                                                <span class="subHead_badge mx-1">{{$item}}</span>
+                                            @endforeach
                                         </div>
-                                        @endif
                                     </div>
                                     <div class="card-body-bottom">
                                         <span class="tag_text">{{ $blog->tag }}</span>
