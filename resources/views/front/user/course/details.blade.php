@@ -5,15 +5,19 @@
 <section class="edit-sec edit-basic-detail p-0 bg-white for_lession_details_footer">
     <div class="crs-details lession-details">
         <div class="topic-video">
-            <video width="640" height="320" controls id="contentVideo" style="" controlsList="{{$course->video_downloadable == 0 ? 'nodownload' : '' }}">
-                <source src="{{asset($course->preview_video)}}" type="video/mp4">
+            <video width="640" height="320" controls id="contentVideo" class="contentVideo" data-id="{{getnextviewedtopic($course->id)->topic_id ?? getlastviewedtopic($course->id)->topic_id}}" style="" controlsList="{{$course->video_downloadable == 0 ? 'nodownload' : '' }}">
+                <source src="{{asset(getTopicVideo(getnextviewedtopic($course->id)->topic_id ?? getlastviewedtopic($course->id)->topic_id))}}" type="video/mp4">
             </video>
-            <a href="#" class="lession_nav prev">
-                <i class="fas fa-angle-left"></i>
-            </a>
-            <a href="#" class="lession_nav next">
-                <i class="fas fa-angle-right"></i>
-            </a>
+            @if(getlastviewedtopic($course->id) != false)
+                <a href="javascript:void(0)" onclick="showPrevious(this)" data-id="{{getlastviewedtopic($course->id)->id}}" class="lession_nav prev">
+                    <i class="fas fa-angle-left"></i>
+                </a>
+            @endif
+            @if(getnextviewedtopic($course->id) != false)
+                <a href="javascript:void(0)" onclick="saveAndWatchNext(this)" data-id="{{getnextviewedtopic($course->id)->id}}" class="lession_nav next">
+                    <i class="fas fa-angle-right"></i>
+                </a>
+            @endif
         </div>
         <div class="topic-desc">
             <!-- <h4>Installing Python</h4>
@@ -65,7 +69,7 @@
         </div> --}}
         <div class="lessionSidebar-header">
             <p>
-                Course Lessions
+                Course Lessons
             </p>
             <a href="javascript:void(0)" class="lessionSidebar-close">
                 <i class="fas fa-times"></i>
@@ -73,12 +77,8 @@
         </div>
         <div class="accordion-container lessionSidebar-list">
             @foreach($totalLessonsAndTopics->lessons as $key => $lesson)
-            @php
-                $count=App\Models\LessonTopic::where('lesson_id',$lesson->id)->with('topic')->count();
-
-            @endphp
             <div class="set lesstionItem">
-                <a href="#">
+                <a href="javascript:void(0)">
                     {!! $lesson->lesson->title !!}
                     <i class="fas fa-angle-down"></i>
                 </a>
@@ -86,8 +86,10 @@
                     <ul class="topicList">
                         @foreach($totalLessonsAndTopics->topics[$key] as $data)
                         <li>
-                            <a href="{!! URL::to('/user/my-courses/'.$course->slug .'/'.$lesson->lesson->slug.'/'.$data->topic->slug) !!}">
-                                <input type="checkbox" class="topicCheck">
+                            <a href="javascript:void(0)" id="topic_div_id{{$data->topic->id}}" class="topic_div_id" data-id="{{$data->topic->id}}">
+                                @if(getViewedStatus($course->id,$lesson->lesson->id,$data->topic->id) != null)
+                                    <input type="checkbox" class="topicCheck" onclick="return false" {{getViewedStatus($course->id,$lesson->lesson->id,$data->topic->id)->is_view == 1 ? 'checked' : ''}}>
+                                @endif
                                 <div class="stamp">
                                     <h5>{!! $data->topic->title  !!}</h5>
                                     <div class="duration">
@@ -108,6 +110,39 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
     <script>
+        function setActiveClassForTopic() {
+            for (let index = 0; index < $('.topic_div_id').length; index++) {
+                if($('.topic_div_id').eq(index).data('id') == $('.contentVideo').data('id')){
+                    $('#topic_div_id'+$('.contentVideo').data('id')).addClass('active');
+                }
+            }
+        }
+        setActiveClassForTopic();
+
+        function saveAndWatchNext(x){
+            // alert($(x).data('id'));
+            $.ajax({
+                method: "POST",
+                url: "{{route('front.user.courses.savetopic')}}",
+                data: {
+                    _token: "{{csrf_token()}}",
+                    id: $(x).data('id'),
+                    course_id: "{{$course->id}}",
+                },
+                success: function(response){
+                    alert(response.message);
+                    $('#contentVideo source').attr('src',response.data.video_url);
+                    $('#contentVideo').play();
+                    $('#contentVideo').data('id',response.data.topic_id); 
+                    setActiveClassForTopic();
+                }
+            })
+        }
+
+        function showPrevious(x){
+
+        }
+
 
         $(".lessionSidebar-close").on('click', function(){
             $('.lessionSidebar').toggleClass('active')
