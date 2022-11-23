@@ -77,8 +77,10 @@ class CheckoutRepository extends BaseRepository implements CheckoutContract
                 }
                 if($cartValue->purchase_type == 'course'){
                     $lesson=CourseLesson::where('course_id',$cartValue->course_id)->get();
+                     //dd($lesson);
                     foreach($lesson as $lessonKey =>$lessonValue){
-                        $topic=LessonTopic::where('lesson_id',$lessonValue)->get();
+                        $topic=LessonTopic::where('lesson_id',$lessonValue->lesson_id)->get();
+                        dd($topic);
                         foreach($topic as $topicKey =>$topicValue){
                             $newOrderCourse = new SaveTopic();
                             $newOrderCourse->user_id = Auth::guard('web')->user()->id;

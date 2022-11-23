@@ -58,9 +58,7 @@ class CourseController extends Controller
     public function coursedetails(Request $request,$slug)
     {
         $cat=CourseCategory::where('status',1)->orderby('title')->get();
-        $blog=Course::where('slug',$slug)->orderby('title')->with('review')->get();
-        $course=$blog[0];
-       // dd($course);
+        $course=Course::where('slug',$slug)->orderby('title')->with('review')->first();
         $topics = [];
         $lessons = CourseLesson::where('course_id', $course->id)->get();
         foreach($lessons as $l){

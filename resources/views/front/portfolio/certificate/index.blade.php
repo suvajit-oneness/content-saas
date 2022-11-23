@@ -1,6 +1,6 @@
 @extends('front.layouts.appprofile')
-
 @section('title', 'Manage Portfolio')
+
 @section('section')
 <section class="edit-sec">
     <div class="container">
@@ -42,7 +42,32 @@
                                             <a type="button" href="{{ route('front.portfolio.certification.create') }}" class="add-btn-edit d-inline-block"  title="Create">Create <i class="fa-solid fa-plus-circle"></i></a>
                                         </div>
                                         @foreach($data->certificates as $key=> $item)
-                                            <div class="employmentBox">
+                                            <div class="portfolio-v4-content-list">
+                                                <div class="action justify-content-end">
+                                                    <a href="{{ route('front.portfolio.certification.edit', $item->id) }}" title="Edit Profile"><i class="fa-solid fa-pen edit table-icon"></i></a>
+                                                    <a href="{{ route('front.portfolio.certification.delete', $item->id) }}" title="Delete" onclick="return confirm('Are you sure ?')"><i class="fa-solid fa-trash-can trash table-icon"></i></a>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-2">
+                                                        <img src="{{ asset($item->file) }}" alt="" class="w-100">
+                                                    </div>
+                                                    <div class="col">
+                                                        <h4>{{ $item->certificate_title }}</h4>
+                                                        <p class="text-muted">- {{ $item->certificate_type }}</p>
+                                                        @if($item->link == '')
+                                                            <p></p>
+                                                        @else
+                                                            <p><a href="{{$item->link}}" target="_blank"><small>{{$item->link}}</small></a></p>
+                                                        @endif
+                                                        {{-- <span class="badge"> {{ date('Y', strtotime($item->year_from))}} - {{date('Y', strtotime($item->year_to)) }} </span> --}}
+                                                        <p>{{ $item->short_desc }}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            {{-- <div class="employmentBox">
                                                 <div class="action">
                                                     <a href="{{ route('front.portfolio.certification.edit', $item->id) }}" title="Edit Profile"><i class="fa-solid fa-pen edit table-icon"></i></a>
                                                     <a href="{{ route('front.portfolio.certification.delete', $item->id) }}" title="Delete" onclick="return confirm('Are you sure ?')"><i class="fa-solid fa-trash-can trash table-icon"></i></a>
@@ -77,7 +102,8 @@
                                                         <p>{{ $item->long_desc }}</p>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> --}}
+    
                                         @endforeach
                                     </td>
                                 </tr>
