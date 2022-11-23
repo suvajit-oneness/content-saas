@@ -21,17 +21,21 @@
 
 
     <div class="login_bg">
-        <div class="login_lg_box">
+        <div class="login_lg_box shadow-sm">
             <div class="login_left">
                 <div class="login_text_box">
                     <h2>
-                        <i class="fas fa-pencil-alt"></i>
-                        Digital platform for content <span>writing</span>
+                        <!-- <i class="fas fa-pencil-alt"></i> -->
+                        Digital platform <br> for content <span>writing</span>
                     </h2>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio, eligendi?
+                    </p>
                 </div>
             </div>
             <div class="login_right">
                 <div class="login-content">
+                    <h3>Log in</h3>
                     <form action="{{ route('front.user.login.check') }}" method="post">@csrf
                         <input type="hidden" name="back_url" value="{{$back_url}}">
                         <div class="form-group">
@@ -51,56 +55,21 @@
                             @enderror
                         </div>
                         <div class="login-forgot-password">
-                            <button type="submit" class="">Login</button>
+                            <label>
+                                <input type="checkbox" class="form-check">
+                                <span>Keep me logged in</span>
+                            </label>
                             <span class="forgot-pass">
                                 New User?
                                 <a href="{{ route('front.user.register') }}">Register</a>
                             </span>
                         </div>
+                        <button type="submit" class="login__btn">Login</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-
-
-    <!-- <section class="login">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-lg-8 col-md-8 m-auto">
-                    <h2>User login</h2>
-                    <div class="login-content shadow-sm">
-                        <form action="{{ route('front.user.login.check') }}" method="post">@csrf
-                            <input type="hidden" name="back_url" value="{{$back_url}}">
-                            <div class="form-group">
-                                <label>Email</label>
-                                <input type="email" name="email" class="form-control">
-                                <div class="input-border"></div>
-                                @error('email')
-                                <p class="small text-danger">{{ $message }}</p>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label>Password</label>
-                                <input type="password" name="password" class="form-control">
-                                <div class="input-border"></div>
-                                @error('password')
-                                <p class="small text-danger">{{ $message }}</p>
-                                @enderror
-                            </div>
-                            <div class="login-forgot-password">
-                                <button type="submit" class="">Login</button>
-                                <span class="forgot-pass">
-                                    New User?
-                                    <a href="{{ route('front.user.register') }}">Register</a>
-                                </span>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> -->
 
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
