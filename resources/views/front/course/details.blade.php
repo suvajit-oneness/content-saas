@@ -20,8 +20,10 @@
                         {!! RatingHtml($data->rating) !!}
                     </span>
                     <a href="#crs_reviews">( {{ $data->count() }} review)</a>
-
-                    {{-- <small>{!! totalUser($course->id) !!} Students</small> --}}
+                    @php
+                         $totalUser = totalUser($course->id);
+                    @endphp
+                     <small>{!! $totalUser->user_count !!} Students</small> 
                  </div>
                 @endforeach
                 @else
@@ -83,6 +85,7 @@
                                 <h5>Course content : </h5>
                                 @php
                                     $totalLessonsAndTopics = totalLessonsAndTopics($course->id);
+                                   
                                 @endphp
                                 <ul class="list-unstyled p-0 m-0 course-content-details">
                                     <li>{{ $totalLessonsAndTopics->lesson_count }} Lessons</li>
@@ -92,21 +95,24 @@
 
                                 <div class="course-content-accordions">
                                     @foreach($totalLessonsAndTopics->lessons as $key => $lesson)
+                                    @php
+                                       $totalTopics=totalTopics($lesson->id);
+                                    @endphp
                                         <div class="course-content-accor">
                                             <div class="accor-top">
                                                 <div class="accor-top-left">
                                                     <i class="fa-solid fa-angle-down"></i>
                                                     <span>{!! $lesson->lesson->title !!}</span>
                                                 </div>
-                                                {{-- <div class="accor-top-right">
+                                                <div class="accor-top-right">
                                                     <div class="duraton">
-                                                        <span>1 Lecture</span>
+                                                        <span>{{ $totalLessonsAndTopics->topic_count }} Lecture</span>
                                                         <span>
                                                             <i class="fas fa-circle"></i>
-                                                            17 Min
+                                                            {{ countTotalHours($lesson->id)}} 
                                                         </span>
                                                     </div>
-                                                </div> --}}
+                                                </div>
                                             </div>
                                             <div class="accor-content">
                                                 <ul class="list-unstyled p-0 m-0">
