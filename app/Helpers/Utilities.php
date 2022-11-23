@@ -535,25 +535,25 @@ function totalUser($courseid)
 function totalTopics($lesson_id)
 {
     $lessons= App\Models\LessonTopic::where('lesson_id', $lesson_id)->with('topic')->get();
+    //dd($lessons);
     $all_topics = [];
     $topic_count = 0;
     $each_lesson_length = [];
     foreach ($lessons as $l) {
         $topic = App\Models\Topic::where('id', $l->topic_id)->get();
-        array_push($all_topics, $topic);
+       
         $topic_count += count($topic);
-        
+        dd($topic_count);
     }
     $data['topic_count'] = $topic_count;
-    $data['topics'] = $all_topics;
-    $data['total_downloadable_contents'] = $total_downloadable_contents;
-
+   
     return (object)$data;
 }
 function countTotalTopicHours($lessonid)
 {
     $totalhrs = 0;
     $lessons = App\Models\LessonTopic::where('lesson_id', $lessonid)->get();
+    //dd($lessons);
     foreach($lessons as $l){
         //$eachtopic = App\Models\Topic::where('id', $l->topic_id)->get();
             $top = App\Models\Topic::find($l->topic_id);

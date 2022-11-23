@@ -109,7 +109,7 @@
                                                         <span>{{ $totalLessonsAndTopics->topic_count }} Lecture</span>
                                                         <span>
                                                             <i class="fas fa-circle"></i>
-                                                            {{ countTotalHours($lesson->id)}} 
+                                                            {{ countTotalTopicHours($lesson->id)}} 
                                                         </span>
                                                     </div>
                                                 </div>
