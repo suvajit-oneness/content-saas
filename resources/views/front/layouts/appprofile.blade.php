@@ -89,7 +89,7 @@
                         <div class="dashboard-menu">
                             <i class="fa-solid fa-bars"></i>
                         </div>
-                        <div class="dashboard-header sticky-top bg-white">
+                        <div class="dashboard-header bg-white">
                             <div class="dashboard-header-left">
                                 <div class="dashboard-page-name">
                                     <a href="">@yield('title')</a>
@@ -118,11 +118,16 @@
                                     <a href=""><i class="fa-solid fa-bell"></i> <span>0</span></a>
                                 </div> --}}
                                 <ul class="dashboard-profile">
-                                    <li>
-                                        <a href="">
+                                    <li class="dropdown">
+                                        <a href="#" class="profileCircle" data-bs-toggle="dropdown" id="profileDrop">
                                             <!-- <img src="{{ asset(auth()->guard('web')->user()->image)}}" alt="" /> -->
                                             <img src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&w=1000&q=80" alt="">
                                         </a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#">My Profile</a></li>
+                                            <li><a class="dropdown-item" href="#">Change Password</a></li>
+                                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                                        </ul>
                                     </li>
                                     @php
                                         // cart count
@@ -140,7 +145,7 @@
                                     @endphp
 
                                    <li>
-                                        <a class="{{ request()->is('cart') ? 'active' : '' }}"
+                                        <a class="profileCircle {{ request()->is('cart') ? 'active' : '' }}"
                                             href="{{ route('front.cart') }}">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -464,6 +469,18 @@
             document.querySelector('.select2-search__field').focus();
         });
 
+        $(window).on('scroll', function () {
+            if ($(this).scrollTop() > 1) {
+                $('.dashboard-header').addClass("sticky-header");
+            }
+            else {
+                $('.dashboard-header').removeClass("sticky-header");
+            }
+        });
+
+        $('.dropdown').hover(function(){ 
+            $('#profileDrop', this).trigger('click'); 
+        });
 
     </script>
 

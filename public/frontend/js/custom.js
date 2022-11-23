@@ -591,7 +591,3 @@ $('.Blog_toolsFilter li a').on('click', function (e) {
   $('.blog-list-panel').hide();
   $('#' + tab_id).show();
 });
-
-
-
-

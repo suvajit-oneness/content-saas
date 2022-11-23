@@ -2419,6 +2419,23 @@ a.browse-writers:hover {
   border-bottom: 1px solid #eee;
 }
 
+.dashboard-header.sticky-header{
+  position: fixed;
+  top: 0;
+  left: 290px;
+  right: 0;
+  z-index: 999;
+  animation: stickyHeader 300ms linear;
+}
+@keyframes stickyHeader{
+  0%{
+    top: -140px;
+  }
+  100%{
+    top: 0;
+  }
+}
+
 .dashboard-page-name a {
   font-weight: 600;
   text-transform: capitalize;
@@ -2479,7 +2496,7 @@ a.browse-writers:hover {
   display: flex;
   align-items: center;
 }
-.dashboard-profile a {
+.dashboard-profile a.profileCircle {
   width: 40px;
   height: 40px;
   border: 1px solid #ccc;
@@ -2488,7 +2505,6 @@ a.browse-writers:hover {
   overflow: hidden;
   align-items: center;
   justify-content: center;
-  /* padding: 6px; */
   margin-left: 6px;
 }
 
@@ -8100,4 +8116,7 @@ ul.review-star-group{
 }
 .export__search .btn{
   height: 100%;
+}
+.portfolio-v4-content-list p a small{
+  text-transform: lowercase;
 }
