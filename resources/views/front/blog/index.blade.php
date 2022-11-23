@@ -38,7 +38,7 @@
                  @foreach($cat as $key => $data)
                     <li>
                         <label>
-                            <form action="" method="GET">
+                            <form action="{{request()->fullUrl()}}" method="GET">
                                 <input class="d-none" type="checkbox" onclick="$(this).parent().submit()" name="category" value="{{ $data->slug }}" {{ (request()->input('category') == $data->slug) ? 'checked' : '' }}>
                             </form>
                             <span class="{{ ((request()->input('category') ?? $cat[0]->slug) == $data->slug) ? 'bg-success' : '' }}">{{  $data->title }}</span>
@@ -85,9 +85,10 @@
             @endforeach
         </div>
     </div>
-    {{--  <div class="container text-center mt-4 mt-lg-5">
-        <a href="#" class="load_more">Load more tools..</a>
-    </div>--}}
+    <div class="container">{{$blogs->appends($_GET)->links()}}</div>
+     {{-- <div class="container text-center mt-4 mt-lg-5">
+        <a href="#" class="load_more">{{$blogs->appends('$_GET')->links()}}</a>
+    </div> --}}
 </section>
 @endsection
 
