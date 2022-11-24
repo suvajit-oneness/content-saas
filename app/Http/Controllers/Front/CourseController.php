@@ -23,7 +23,7 @@ class CourseController extends Controller
             if (!empty($request->category_id) || !empty($request->language)||!empty($request->is_paid)){
                 $category = $request->category_id;
                 $language = $request->language;
-                $price = $request->is_paid;
+                $price = $request->is_paid == 'free' ? 0 : 1;
                // dd($price);
                 DB::enableQueryLog();
 
@@ -36,17 +36,12 @@ class CourseController extends Controller
                 })
                 ->when($price, function($query, $price) {
                     return $query->where('is_paid',$price);
-                })
+                })->paginate(12);
 
-                ->paginate(12);
-
-                // dd(DB::getQueryLog());
-
-                // dd($request->all(), $job);
             } else {
-
-            $course=Course::where('status',1)->orderby('title')->get();
+                $course=Course::where('status',1)->orderby('title')->paginate(12);
             }
+            $review = [];
             foreach($course as $data){
                 $review=CourseReview::where('course_id',$data->id)->with('user')->get();
                 //dd($review);

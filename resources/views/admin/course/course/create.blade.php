@@ -191,14 +191,14 @@
                                     <p class="small text-danger">{{ $message }}</p>
                                 @enderror
                             </div>
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label class="control-label" for="offer_price">Offer Price ($)</label>
                                 <input type="number" name="offer_price" id="offer_price" value="{{ old('offer_price') }}"
                                     class="form-control">
                                 @error('offer_price')
                                     <p class="small text-danger">{{ $message }}</p>
                                 @enderror
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="form-group">
                             <label class="control-label">Preview Video</label>
@@ -258,10 +258,10 @@
                         </div>
                         <div id="writer">
                             <div class="form-group">
-                                <input class="form-control @error('author_name') is-invalid @enderror" type="text"
-                                    name="author_name" id="author_name" value="{{ old('author_name') }}"
+                                <input class="form-control @error('other_author_name') is-invalid @enderror" type="text"
+                                    name="other_author_name" id="other_author_name" value="{{ old('other_author_name') }}"
                                     placeholder="Type here" />
-                                @error('author_name')
+                                @error('other_author_name')
                                     <p class="small text-danger">{{ $message }}</p>
                                 @enderror
                             </div>
