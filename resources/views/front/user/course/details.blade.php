@@ -39,7 +39,7 @@
                     enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="course_id" value="{{ $course->id }}">
-                        <ul class="review-star-group mb-3" id="stars">
+                        {{-- <ul class="star-rating" style="text-align: left;">
                             <li class="star">
                                 <input id="star-5" type="radio" name="rating" value="5" />
                                 <i class="fas fa-star"></i>
@@ -60,7 +60,35 @@
                                 <input id="star-1" type="radio" name="rating" value="1" />
                                 <i class="fas fa-star"></i>
                             </li>
-                        </ul>
+                        </ul> --}}
+                        <div class="form-group">
+                            <label class="control-label" for="rating"> Rating</label>
+                            <div class="star-rating" style="text-align: left;">
+                                <input id="star-5" type="radio" name="rating" value="5" />
+                                <label for="star-5" title="5 stars">
+                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                </label>
+                                <input id="star-4" type="radio" name="rating" value="4" />
+                                <label for="star-4" title="4 stars">
+                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                </label>
+                                <input id="star-3" type="radio" name="rating" value="3" />
+                                <label for="star-3" title="3 stars">
+                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                </label>
+                                <input id="star-2" type="radio" name="rating" value="2" />
+                                <label for="star-2" title="2 stars">
+                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                </label>
+                                <input id="star-1" type="radio" name="rating" value="1"/>
+                                <label for="star-1" title="1 star">
+                                    <i class="active fa fa-star" aria-hidden="true"></i>
+                                </label>
+                            </div>
+                            @error('rating')
+                                <p class="small text-danger">{{ $message }}</p>
+                            @enderror
+                        </div><br>
                         <div class="form-group">
                             <label>Write a review</label>
                             <textarea rows="6" name="review" class="form-control"></textarea>

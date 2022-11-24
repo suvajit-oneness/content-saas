@@ -71,8 +71,8 @@ class CourseController extends Controller
         // $topic=LessonTopic::where('course_id',$course->id)->orderby('topic')->get();
         $topic = (object)$topics;
         $module=CourseModule::where('course_id',$course->id)->orderby('title')->get();
-        $review=CourseReview::where('course_id',$course->id)->with('user')->get();
-       // dd($review);
+        $review=CourseReview::where('course_id',$course->id)->get();
+       //dd($review);
         $order = OrderProduct::where('course_id', $course->id)->with('order')->get();
 
         return view('front.course.details',compact('cat','course','topic','module', 'lessons','review','order'));
