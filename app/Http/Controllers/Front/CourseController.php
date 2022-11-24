@@ -20,35 +20,33 @@ class CourseController extends Controller
     public function index(Request $request)
     {
         if (auth()->guard('web')->check()) {
-            if (!empty($request->category_id) || !empty($request->language)||!empty($request->is_paid)){
-                $category = $request->category_id;
+            $course = Course::where('status', 1);
+            
+            if(!empty($request->category)){
+                $category = CourseCategory::where('slug',$request->category)->first()->id;
+                $course = $course->where('category_id',$category);
+            }
+            
+            if(!empty($request->language)){
                 $language = $request->language;
-                $price = $request->is_paid == 'free' ? 0 : 1;
-               // dd($price);
-                DB::enableQueryLog();
-
-                $course = Course::where('status', 1)
-                ->when($category, function ($query, $category) {
-                    return $query->where('category_id', 'like', '%'.$category.'%');
-                })
-                ->when($language, function($query, $language) {
-                    return $query->where('language', $language);
-                })
-                ->when($price, function($query, $price) {
-                    return $query->where('is_paid',$price);
-                })->paginate(12);
-
-            } else {
-                $course=Course::where('status',1)->orderby('title')->paginate(12);
+                $course = $course->where('language','like','%'.$language.'%');
             }
-            $review = [];
-            foreach($course as $data){
-                $review=CourseReview::where('course_id',$data->id)->with('user')->get();
-                //dd($review);
+            
+            if(!empty($request->type)){
+                $price = $request->type == 'free' ? 0 : 1;
+                $course = $course->where('is_paid',$price);
             }
+
+            $course = $course->orderby('title')->paginate(12);
+
+            // $review = [];
+
+            // foreach($course as $data){
+            //     $review=CourseReview::where('course_id',$data->id)->with('user')->get();
+            // }
             $cat=CourseCategory::where('status',1)->orderby('title')->get();
             $languages = Language::orderBy('name')->get();
-            return view('front.course.index',compact('cat','course','languages','review'));
+            return view('front.course.index',compact('cat','course','languages'));
         } else {
             return redirect()->route('front.user.login');
         }

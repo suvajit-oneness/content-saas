@@ -19,10 +19,10 @@
                                 <div class="col-3">
                                     <div class="courses-filter-content">
                                         <label for="">Specialization - </label>
-                                        <select class="" name="category_id">
-                                            <option value="" hidden selected>Select</option>
+                                        <select class="" name="category">
+                                            <option value="" selected>All</option>
                                             @foreach ($cat as $index => $item)
-                                                <option value="{{ $item->id }}">{{ $item->title }}</option>
+                                                <option value="{{$item->slug}}" {{ $item->slug == request()->input('category') ? 'selected' : '' }}>{{ $item->title }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -31,9 +31,9 @@
                                     <div class="courses-filter-content">
                                         <label for="">Language - </label>
                                         <select name="language" id="language" class="" value="{{ old('language') }}">
-                                            <option value="" hidden selected>Select</option>
+                                            <option value="" selected>All</option>
                                             @foreach ($languages as $l)
-                                                <option value="{{ $l->name }}">{{ $l->name }}</option>
+                                                <option value="{{ $l->name }}" {{ $l->name == request()->input('language') ? 'selected' : '' }}>{{ $l->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -41,18 +41,17 @@
                                 <div class="col-3">
                                     <div class="courses-filter-content">
                                         <label for="">Course - </label>
-                                        <select name="is_paid" id="">
-                                            <option value="" hidden selected>Select</option>
-                                            <option value="free">Free</option>
-                                            <option value="paid">Paid</option>
+                                        <select name="type" id="">
+                                            <option value="" selected>All</option>
+                                            <option value="free" {{request()->input('type') == 'free' ? 'selected' : ''}}>Free</option>
+                                            <option value="paid" {{request()->input('type') == 'paid' ? 'selected' : ''}}>Paid</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-3">
-                                    <div class="text-right">
+                                    <div class="text-right d-flex">
                                         <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
-                                        {{-- <a type="button" href="{{ url()->current() }}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Remove filter"><i class="fa fa-times"></i>
-                                </a> --}}
+                                        {{-- <button type="button" onclick="window.location.href = '{{ url()->current() }}'" class="btn btn-primary mx-1" title="Remove filter"><i class="fa fa-times"></i></a> --}}
                                     </div>
                                 </div>
                             </div>
@@ -102,14 +101,14 @@
 
                                 <div class="courses-desc">
                                     <p>{!! $data->short_description !!}</p>
-                                     @foreach($data->review as $reviews)
+                                    {{-- @foreach($data->review as $reviews)
                                         <div class="crs-rating-all">
                                             <span>
                                                 {!! RatingHtml($reviews->rating) !!}
                                             </span>
                                             <a href="{{ route('front.course.details', $data->slug) }}">( {{ $reviews->count() }} )</a>
                                         </div>
-                                    @endforeach
+                                    @endforeach --}}
                                     <div class="price-crs">
                                         <span>{{ $data->price == 0 ? 'Free' : '$ ' . $data->price }}</span>
                                         <a href="{{ route('front.course.details', $data->slug) }}" class="course-btn">Enroll</a>
