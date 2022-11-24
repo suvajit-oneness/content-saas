@@ -50,7 +50,7 @@
                                         <p class="small text-danger">{{ $message }}</p>
                                     @enderror
                                 </div><br>
-                                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                                <div class="btn-group statusButton" role="group" aria-label="Basic radio toggle button group">
                                     <input type="radio" class="btn-check" name="is_present" value="yes" id="btnradio1" {{old('year_from', $experience->year_to) == '' ? 'checked' : ''}}>
                                     <label class="btn btn-outline-primary" for="btnradio1">Present</label>
                                   
@@ -112,7 +112,8 @@
                                     @enderror
                                 </div><br>
                                 <div class="form-group">
-                                    <label class="control-label" for="short_desc">Short Description <p><small>Maximum 200 characters is applicable*</small></p></label>
+                                    <label class="control-label" for="short_desc">Short Description <span class="m-l-5 text-danger">
+                                        *</span><p class="m-l-5 text-danger"><small>(Max 200 characters)</small></p></label>
                                     <textarea type="text" class="form-control" rows="4" name="short_desc" id="short_desc">{{ old('short_desc',$experience->short_desc) }}</textarea>
                                     @error('short_desc')
                                         <p class="small text-danger">{{ $message }}</p>

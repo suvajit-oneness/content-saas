@@ -23,7 +23,7 @@
                             <div class="tile-body">
                                 <div class="form-group">
                                     <label class="control-label" for="occupation">Designation <span class="m-l-5 text-danger">*</span></label>
-                                    <input class="form-control @error('occupation') is-invalid @enderror" type="text" name="occupation"
+                                    <input class="form-control @error('occupation') is-invalid @enderror" placeholder="eg: developer" type="text" name="occupation"
                                         id="occupation" value="{{ old('occupation') }}" />
                                         <input type="hidden" name="id" value="{{Auth::guard('web')->user()->id }}">
                                     @error('occupation')
@@ -47,7 +47,7 @@
                                         <p class="small text-danger">{{ $message }}</p>
                                     @enderror
                                 </div><br>
-                                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                                <div class="btn-group statusButton" role="group" aria-label="Basic radio toggle button group">
                                     <input type="radio" class="btn-check" name="is_present" value="yes" id="btnradio1" {{old('year_from') == '' ? 'checked' : ''}}>
                                     <label class="btn btn-outline-primary" for="btnradio1">Present</label>
                                   
@@ -63,7 +63,8 @@
                                     @enderror
                                 </div><br>
                                 <div class="form-group">
-                                    <label class="control-label" for="phone_number">Contact </label>
+                                    <label class="control-label" for="phone_number">Contact <span class="m-l-5 text-danger">
+                                        *</span></label>
                                     <input class="form-control @error('phone_number') is-invalid @enderror" type="text" name="phone_number"
                                         id="phone_number" value="{{ old('phone_number') }}" />
                                     @error('phone_number')
@@ -71,7 +72,8 @@
                                     @enderror
                                 </div><br>
                                 <div class="form-group">
-                                    <label class="control-label" for="email_id">Email </label>
+                                    <label class="control-label" for="email_id">Email <span class="m-l-5 text-danger">
+                                        *</span></label>
                                     <input class="form-control @error('email_id') is-invalid @enderror" type="text" name="email_id"
                                         id="email_id" value="{{ old('email_id') }}" />
                                     @error('email_id')
@@ -79,7 +81,8 @@
                                     @enderror
                                 </div><br>
                                 <div class="form-group">
-                                    <label class="control-label" for="owner_name">Owner Name </label>
+                                    <label class="control-label" for="owner_name">Owner Name <span class="m-l-5 text-danger">
+                                        *</span></label>
                                     <input class="form-control @error('owner_name') is-invalid @enderror" type="text" name="owner_name"
                                         id="owner_name" value="{{ old('owner_name') }}" />
                                     @error('owner_name')
@@ -87,7 +90,8 @@
                                     @enderror
                                 </div><br>
                                 <div class="form-group">
-                                    <label class="control-label" for="manager_name">Manager Name </label>
+                                    <label class="control-label" for="manager_name">Manager Name <span class="m-l-5 text-danger">
+                                        *</span></label>
                                     <input class="form-control @error('manager_name') is-invalid @enderror" type="text" name="manager_name"
                                         id="manager_name" value="{{ old('manager_name') }}" />
                                     @error('manager_name')
@@ -95,15 +99,17 @@
                                     @enderror
                                 </div><br>
                                 <div class="form-group">
-                                    <label class="control-label" for="link">Url </label>
+                                    <label class="control-label" for="link">Url <span class="m-l-5 text-danger">
+                                        *</span></label>
                                     <input class="form-control @error('link') is-invalid @enderror" type="text" name="link"
-                                        id="link" value="{{ old('link') }}" />
+                                        id="link" placeholder="eg: https://www.google.com/" value="{{ old('link') }}" />
                                     @error('link')
                                         <p class="small text-danger">{{ $message }}</p>
                                     @enderror
                                 </div><br>
                                 <div class="form-group">
-                                    <label class="control-label" for="short_desc">Short Description<p><small>Maximum 200 characters is applicable*</small></p></label>
+                                    <label class="control-label" for="short_desc">Short Description <span class="m-l-5 text-danger">
+                                        *</span><p class="m-l-5 text-danger"><small>(Max 200 characters)</small></p></label>
                                     <textarea type="text" class="form-control" rows="4" name="short_desc" id="short_desc">{{ old('short_desc') }}</textarea>
                                     @error('short_desc')
                                         <p class="small text-danger">{{ $message }}</p>

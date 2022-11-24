@@ -172,7 +172,7 @@
                                             </div>
                                             <div class="r_content">
                                                 <p>
-                                                    {{ $data->review }} Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                                                    {{ $data->review }} 
                                                 </p>
                                                 {{-- <div class="r_helpful">
                                                     <small>Helpful? </small>

@@ -100,7 +100,7 @@
                                 @enderror
                             </div>
                             <div class="form-group my-3">
-                                <button type="submit" class="btn button sm-btn">Update profile</button>
+                                <button type="submit" class="saveBTN d-inline-block">Update profile</button>
                             </div>
                         </div>
                     </form>

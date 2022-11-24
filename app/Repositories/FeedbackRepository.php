@@ -46,24 +46,21 @@ class FeedbackRepository extends BaseRepository implements FeedbackContract
 
     /**
      * @param array $params
-     * @return Education|mixed
+     * @return feedback|mixed
      */
     public function createFeedback(array $params)
     {
         try {
             $collection = collect($params);
-            $education = new Feedback();
-            $education->user_id = Auth::guard('web')->user()->id ?? '';
-            $education->date_from = $collection['date_from'] ?? '';
-            $education->date_to = $collection['date_to'] ?? '';
-            $education->title = $collection['title'] ?? '';
-            $education->rating = $collection['rating'] ?? '';
-            $education->review = $collection['review'] ?? '';
-            $education->review_person = $collection['review_person'] ?? '';
-            $education->description = $collection['description'] ?? '';
-            $education->save();
-
-            return $education;
+            $feedback = new Feedback();
+            $feedback->user_id = Auth::guard('web')->user()->id ?? '';
+            $feedback->date_to = $collection['date_to'] ?? '';
+            $feedback->title = $collection['title'] ?? '';
+            $feedback->rating = $collection['rating'] ?? '';
+            $feedback->review = $collection['review'] ?? '';
+            $feedback->review_person = $collection['review_person'] ?? '';
+            $feedback->save();
+            return $feedback;
 
         } catch (QueryException $exception) {
             throw new InvalidArgumentException($exception->getMessage());
@@ -76,19 +73,16 @@ class FeedbackRepository extends BaseRepository implements FeedbackContract
      */
     public function updateFeedback(array $params)
     {
-        $education = $this->findOneOrFail($params['id']);
+        $feedback = $this->findOneOrFail($params['id']);
         $collection = collect($params)->except('_token');
-        $education->user_id = Auth::guard('web')->user()->id ?? '';
-        $education->date_from = $collection['date_from'] ?? '';
-        $education->date_to = $collection['date_to'] ?? '';
-        $education->title = $collection['title'] ?? '';
-        $education->rating = $collection['rating'] ?? '';
-        $education->review = $collection['review'] ?? '';
-        $education->review_person = $collection['review_person'] ?? '';
-        $education->description = $collection['description'] ?? '';
-        $education->save();
-
-        return $education;
+        $feedback->user_id = Auth::guard('web')->user()->id ?? '';
+        $feedback->date_to = $collection['date_to'] ?? '';
+        $feedback->title = $collection['title'] ?? '';
+        $feedback->rating = $collection['rating'] ?? '';
+        $feedback->review = $collection['review'] ?? '';
+        $feedback->review_person = $collection['review_person'] ?? '';
+        $feedback->save();
+        return $feedback;
     }
 
     /**
@@ -97,8 +91,8 @@ class FeedbackRepository extends BaseRepository implements FeedbackContract
      */
     public function deleteFeedback($id)
     {
-        $education = $this->findOneOrFail($id);
-        $education->delete();
-        return $education;
+        $feedback = $this->findOneOrFail($id);
+        $feedback->delete();
+        return $feedback;
     }
 }

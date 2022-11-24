@@ -17,7 +17,7 @@ use App\Models\OrderProduct;
 use App\Models\CourseReview;
 class CourseController extends Controller
 {
-    public function course(Request $request)
+    public function index(Request $request)
     {
         if (auth()->guard('web')->check()) {
             if (!empty($request->category_id) || !empty($request->language)||!empty($request->is_paid)){
@@ -47,15 +47,19 @@ class CourseController extends Controller
 
             $course=Course::where('status',1)->orderby('title')->get();
             }
+            foreach($course as $data){
+                $review=CourseReview::where('course_id',$data->id)->with('user')->get();
+                //dd($review);
+            }
             $cat=CourseCategory::where('status',1)->orderby('title')->get();
             $languages = Language::orderBy('name')->get();
-            return view('front.course.index',compact('cat','course','languages'));
+            return view('front.course.index',compact('cat','course','languages','review'));
         } else {
             return redirect()->route('front.user.login');
         }
     }
 
-    public function coursedetails(Request $request,$slug)
+    public function details(Request $request,$slug)
     {
         $cat=CourseCategory::where('status',1)->orderby('title')->get();
         $course=Course::where('slug',$slug)->orderby('title')->with('review')->first();

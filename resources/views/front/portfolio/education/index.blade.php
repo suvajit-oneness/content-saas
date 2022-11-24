@@ -19,7 +19,6 @@
                         <thead>
                             <tr>
                                 <th class="table-tab" onclick="location.href='{{ route('front.user.portfolio.index')}}'">Basic Details</th>
-                                {{-- <th class="table-tab" data-tab-table="portfolio">Portfolio</th> --}}
                                 <th class="table-tab " onclick="location.href='{{ route('front.portfolio.portfolio.index')}}'">Portfolio</th>
                                 <th class="table-tab" onclick="location.href='{{ route('front.portfolio.expertise.index')}}'">Specialities</th>
                                 <th class="table-tab " onclick="location.href='{{ route('front.portfolio.work-experience.index')}}'">Employment History</th>
@@ -41,47 +40,6 @@
                                             <a type="button" href="{{ route('front.portfolio.education.create') }}" class="add-btn-edit d-inline-block"  title="Create">Create <i class="fa-solid fa-plus-circle"></i></a>
                                         </div>
                                         @foreach($data->educations as $key=> $item)
-                                        {{-- <div class="employmentBox">
-                                            <div class="action">
-                                                <a href="{{ route('front.portfolio.education.edit', $item->id) }}" title="Edit Profile"><i class="fa-solid fa-pen edit table-icon"></i></a>
-                                                <a href="{{ route('front.portfolio.education.delete', $item->id) }}" title="Delete" onclick="return confirm('Are you sure ?')"><i class="fa-solid fa-trash-can trash table-icon"></i></a>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-4 mb-3">
-                                                    <label>Degree</label>
-                                                    <p>{{ $item->degree }}</p>
-                                                </div>
-                                                <div class="col-4 mb-3">
-                                                    <label>Institution Name</label>
-                                                    <p>{{ $item->college_name }}</p>
-                                                </div>
-                                                <div class="col-4 mb-3">
-                                                    <label>
-                                                        Duration
-                                                    </label>
-                                                    <p>{{ date('Y', strtotime($item->year_from))}} - {{date('Y', strtotime($item->year_to)) }}</p>
-                                                </div>
-                                                <div class="col-6 mb-3">
-                                                    <label>Percentage</label>
-                                                    <p>{{ $item->score }}</p>
-                                                </div>
-                                                <div class="col-6 mb-3">
-                                                    <label>Url</label>
-                                                    <p>{{ $item->link }}</p>
-                                                </div>
-
-                                                <div class="col-lg-6 col-12 mb-3">
-                                                    <label>Short Description</label>
-                                                    <p>{{ $item->short_desc }}</p>
-                                                </div>
-                                                <div class="col-lg-6 col-12 mb-3">
-                                                    <label>Long Description</label>
-                                                    <p>{{ substr($item->long_desc,0,100) }} @if(strlen($item->long_desc)>100)<small class="text-underline text-primary text-lowercase showMore" style="cursor: pointer">more...</small>@endif</p>
-                                                    <p style="display: none;">{{ $item->long_desc }} @if(strlen($item->long_desc)>100)<small class="text-underline text-primary text-lowercase showLess" style="cursor: pointer">less</small>@endif</p>
-                                                  
-                                                </div>
-                                            </div>
-                                        </div> --}}
                                         <div class="portfolio-v4-content-list">
                                             <div class="action justify-content-end">
                                                 <a href="{{ route('front.portfolio.education.edit', $item->id) }}" title="Edit Profile"><i class="fa-solid fa-pen edit table-icon"></i></a>
@@ -94,7 +52,7 @@
                                             @else
                                                 <p><a href="{{$item->link}}" target="_blank"><small>{{$item->link}}</small></a></p>
                                             @endif
-                                            <span class="badge"> {{ date('Y', strtotime($item->year_from))}} - {{date('Y', strtotime($item->year_to)) }} </span>
+                                            <span class="badge"> {{date('M Y',strtotime($item->year_from))}} - {{$item->year_to == '' || strtotime($item->year_to) > strtotime(date('Y-m-d')) ? 'Present' : date('M Y',strtotime($item->year_to))}} </span>
                                             <p>{{ $item->short_desc }}</p>
                                         </div>
 

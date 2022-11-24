@@ -25,7 +25,7 @@
                                     <label class="control-label" for="degree">Degree <span class="m-l-5 text-danger">
                                             *</span></label>
                                             <select class="form-control" name="speciality_id">
-                                                <option value="" hidden selected>Select...</option>
+                                                <option value="" hidden selected>Select</option>
                                                 @foreach ($expertise as $index => $item)
                                                     <option value="{{ $item->id }}">{{ucwords( $item->name) }}</option>
                                                 @endforeach
@@ -37,7 +37,8 @@
                                 </div><br>
 
                                 <div class="form-group">
-                                    <label class="control-label" for="description"> Description</label>
+                                    <label class="control-label" for="description"> Description <span class="m-l-5 text-danger">
+                                        *</span></label>
                                     <textarea type="text" class="form-control" rows="4" name="description" id="description">{{ old('description') }}</textarea>
                                     @error('description')
                                         <p class="small text-danger">{{ $message }}</p>

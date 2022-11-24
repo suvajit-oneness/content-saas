@@ -37,7 +37,7 @@
                                 </div><br>
                                 <div class="form-group">
                                     <label class="control-label" for="rating"> Rating</label>
-                                    <div class="star-rating">
+                                    <div class="star-rating" style="text-align: left;">
                                         <input id="star-5" type="radio" name="rating" value="5" />
                                         <label for="star-5" title="5 stars">
                                             <i class="active fa fa-star" aria-hidden="true"></i>
@@ -72,25 +72,17 @@
                                 </div><br>
                                 <div class="form-group">
                                     <label class="control-label" for="review_person"> Review By</label>
-                                    <textarea type="text" class="form-control" rows="4" name="review_person" id="review_person">{{ old('review_person') }}</textarea>
+                                    <input type="text" class="form-control" rows="4" name="review_person" id="review_person" value="{{ old('review_person') }}">
                                     @error('review_person')
                                         <p class="small text-danger">{{ $message }}</p>
                                     @enderror
                                 </div><br>
-                                <div class="form-group">
-                                    <label class="control-label" for="description"> Description</label>
-                                    <textarea type="text" class="form-control" rows="4" name="description" id="description">{{ old('description') }}</textarea>
-                                    @error('description')
-                                        <p class="small text-danger">{{ $message }}</p>
-                                    @enderror
-                                </div><br>
-
-                            <div class="tile-footer">
-                                <button class="saveBTN d-inline-block" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save
-                                    </button>
-                                    <a class="add-btn-edit d-inline-block secondary-btn" href="{{ route('front.portfolio.feedback.index') }}"><i class="fa fa-fw fa-lg fa-chevron-left"></i>Back</a>
-                                &nbsp;&nbsp;&nbsp;
-                            </div>
+                                <div class="tile-footer">
+                                    <button class="saveBTN d-inline-block" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save
+                                        </button>
+                                        <a class="add-btn-edit d-inline-block secondary-btn" href="{{ route('front.portfolio.feedback.index') }}"><i class="fa fa-fw fa-lg fa-chevron-left"></i>Back</a>
+                                    &nbsp;&nbsp;&nbsp;
+                                </div>
                         </form>
                     </div>
                 </div>

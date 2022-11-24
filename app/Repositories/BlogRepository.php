@@ -109,7 +109,7 @@ class BlogRepository extends BaseRepository implements BlogContract
         $article->meta_key = $params['meta_key'] ?? '';
         $article->meta_description = $params['meta_description'] ?? '';
         $article->tag = $params['tag'];
-        $article->image = imageUpload($params['image'],'article/image');
+        $article->image = imageUpload($params['image'],'Blogs');
         $article->save();
         
         return true;
@@ -158,13 +158,11 @@ class BlogRepository extends BaseRepository implements BlogContract
     public function updateArticle(array $params)
     {
         $article = Article::find($params['id']);
-        
         if($article->title != $params['title']){
             $article->slug = slugGenerate($params['title'],'articles');
         }
-
         $article->title = $params['title'];
-        $article->article_category_id = implode(',',$params['article_category_id']);
+        $article->article_category_id = implode(',',$params['article_category_id']) ?? '';
         $article->article_sub_category_id = $params['article_sub_category_id'];
         $article->content = $params['content'];
         $article->short_desc = $params['short_desc'];
@@ -174,7 +172,7 @@ class BlogRepository extends BaseRepository implements BlogContract
         $article->tag = $params['tag'];
 
         if(isset($params['image'])){
-            $article->image = imageUpload($params['image'],'article/image');
+            $article->image = imageUpload($params['image'],'Blogs');
         }
 
         $article->save();

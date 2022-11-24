@@ -82,7 +82,7 @@
                         <div class="form-group">
                             <label class="control-label" for="meta_key">Meta Key(Optional)</label>
                             <input class="form-control" rows="4" name="meta_key"
-                                id="meta_key"{{ old('meta_key') }} />
+                                id="meta_key" value="{{ old('meta_key') }}" />
                             @error('meta_key')
                                 <p class="small text-danger">{{ $message }}</p>
                             @enderror
@@ -98,7 +98,7 @@
                         <div class="form-group">
                             <label class="control-label" for="meta_key">Tag<span class="m-l-5 text-danger">*</span></label>
                             <input class="form-control" rows="4" name="tag" multiple
-                                id="tag"{{ old('tag') }} />
+                                id="tag" value="{{ old('tag') }}" />
                             @error('tag')
                                 <p class="small text-danger">{{ $message }}</p>
                             @enderror

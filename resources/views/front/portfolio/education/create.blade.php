@@ -42,15 +42,22 @@
                                 </div><br>
 
                                 <div class="form-group">
-                                    <label class="control-label" for="year_from">Start Date</label>
+                                    <label class="control-label" for="year_from">From</label>
                                     <input class="form-control @error('year_from') is-invalid @enderror" type="date" name="year_from"
                                         id="year_from" value="{{ old('year_from') }}" />
                                     @error('year_from')
                                         <p class="small text-danger">{{ $message }}</p>
                                     @enderror
                                 </div><br>
-                                <div class="form-group">
-                                    <label class="control-label" for="year_to">End Date </label>
+                                <div class="btn-group statusButton" role="group" aria-label="Basic radio toggle button group">
+                                    <input type="radio" class="btn-check" name="is_present" value="yes" id="btnradio1" {{old('year_from') == '' ? 'checked' : ''}}>
+                                    <label class="btn btn-outline-primary" for="btnradio1">Present</label>
+                                  
+                                    <input type="radio" class="btn-check" name="is_present" value="no" id="btnradio3" {{old('year_from') != '' ? 'checked' : ''}}>
+                                    <label class="btn btn-outline-primary" for="btnradio3">Past</label>
+                                </div>
+                                <div class="form-group" style="display: {{old('year_from') == '' ? 'none' : 'block'}}">
+                                    <label class="control-label" for="year_to">To</label>
                                     <input class="form-control @error('year_to') is-invalid @enderror" type="date" name="year_to"
                                         id="year_to" value="{{ old('year_to') }}" />
                                     @error('year_to')
@@ -113,4 +120,17 @@
                     </div>
                 </div>
             </div>
+@endsection
+@section('script')    
+    <script>
+        $('input[name="is_present"]').on('click', function(){
+            if($('input[name="is_present"]:checked').val() == 'yes'){
+                $(this).parent().next().hide();
+                $(this).parent().next().children().eq(1).val('');
+            }
+            else{
+                $(this).parent().next().show();
+            }
+        })
+    </script>
 @endsection

@@ -37,7 +37,8 @@
                                 </div><br>
 
                                 <div class="form-group">
-                                    <label class="control-label" for="description"> Description</label>
+                                    <label class="control-label" for="description"> Description <span class="m-l-5 text-danger">
+                                        *</span></label>
                                     <textarea type="text" class="form-control" rows="4" name="description" id="description">{{ old('description',$expertise->description) }}</textarea>
                                     <input type="hidden" name="id" value="{{ $expertise->id }}">
                                     @error('description')

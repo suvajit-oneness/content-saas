@@ -140,42 +140,12 @@
             request()->input('address') ||
             request()->input('keyword'))
             <div class="container">
-                {{-- <div class="row justify-content-between">
-                    <div class="col">
-                        <div class="page-title best_deal">
-                            <h2>
-                                @if (request()->input('code') ||
-                                    request()->input('type') ||
-                                    request()->input('price') ||
-                                    request()->input('address') ||
-                                    request()->input('keyword'))
-                                    @if ($event->count() > 0)
-                                        Result found for
-                                        {{ request()->input('category') ? 'category "' . request()->input('category') . '"' : '' }}
-                                        {{ !empty(request()->input('category')) && !empty(request()->input('type')) && !empty(request()->input('price')) ? ' & ' : '' }}
-                                        {{ request()->input('address') ? 'location "' . request()->input('address') . '"' : '' }}
-                                        {{ request()->input('type') ? 'type "' . request()->input('type') . '"' : '' }}
-                                        {{ request()->input('price') ? 'price "' . request()->input('price') . '"' : '' }}
-                                        {{ request()->input('keyword') ? 'keyword "' . request()->input('keyword') . '"' : '' }}
-                                    @else
-                                        No Result found for
-                                        {{ request()->input('category') ? 'category "' . request()->input('category') . '"' : '' }}
-                                        {{ !empty(request()->input('category')) && !empty(request()->input('type')) && !empty(request()->input('price')) ? ' & ' : '' }}
-                                        {{ request()->input('address') ? 'location "' . request()->input('address') . '"' : '' }}
-                                        {{ request()->input('type') ? 'type "' . request()->input('type') . '"' : '' }}
-                                        {{ request()->input('price') ? 'price "' . request()->input('price') . '"' : '' }}
-                                        {{ request()->input('keyword') ? 'keyword "' . request()->input('keyword') . '"' : '' }}
-                                    @endif
-                                @endif
-                            </h2>
-                        </div>
-                    </div>
-                </div> --}}
-                <div class="row">
+               
+                {{-- <div class="row">
                     @foreach ($event as $eventProductkey => $data)
                         @if (CheckIfContentIsUnderSubscription($data->id, 'events'))
                             <div class="col-12 col-lg-4 col-md-6 mb-3 some-list-1">
-                                {{-- <a href=""> --}}
+                               
                                 <div class="card">
                                     <a href="{{ route('front.event.details', $data->slug) }}">
                                         <img src="{{ asset($data->image) }}" class="card-img-top">
@@ -212,11 +182,11 @@
                                         </a>
                                     </div>
                                 </div>
-                                {{-- </a> --}}
+                               
                             </div>
                         @else
                             <div class="col-12 col-lg-4 col-md-6 mb-3 some-list-1 ">
-                                {{-- <a href=""> --}}
+                               
                                 <div class="card" style="position: relative">
                                     <a href="{{ route('front.event.details', $data->slug) }}">
                                         <img src="{{ asset($data->image) }}" class="card-img-top">
@@ -260,7 +230,7 @@
                         @endif
                     @endforeach
                 </div>
-            </div>
+            </div> --}}
         @endif
         <div class="container mb-2 mb-sm-5">
             <div class="row">
@@ -269,70 +239,17 @@
                         @foreach ($cat as $key => $data)
                             <li>
                                 <label>
-                                    <input type="radio" name="blogcategory" value="eventlist_{{ $data->id }}"
-                                        {{ $key == 0 ? 'checked' : '' }}>
-                                    <span>{{ ucwords($data->title) }}</span>
+                                    <form action="{{request()->fullUrl()}}" method="GET">
+                                        <input class="d-none" type="checkbox" onclick="$(this).parent().submit()" name="category" value="{{ $data->slug }}" {{ (request()->input('category') == $data->slug) ? 'checked' : '' }}>
+                                    </form>
+                                    <span class="{{ ((request()->input('category') ?? $cat[0]->slug) == $data->slug) ? 'bg-success' : '' }}">{{  $data->title }}</span>
                                 </label>
                             </li>
                         @endforeach
 
                     </ul>
                 </div>
-                {{-- <div class="col-auto">
-                    <div class="d-flex cafe-listing-nav">
-                        <ul class="d-flex event-view-list" id="tabs-nav">
-                            <li onClick="changeView('grid')">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid">
-                                    <rect x="3" y="3" width="7" height="7"></rect>
-                                    <rect x="14" y="3" width="7" height="7"></rect>
-                                    <rect x="14" y="14" width="7" height="7"></rect>
-                                    <rect x="3" y="14" width="7" height="7"></rect>
-                                </svg>
-                            </li>
-                            <li onClick="changeView('list')">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2"stroke-linecap="round" stroke-linejoin="round"
-                                    class="feather feather-list">
-                                    <line x1="8" y1="6" x2="21" y2="6"></line>
-                                    <line x1="8" y1="12" x2="21" y2="12"></line>
-                                    <line x1="8" y1="18" x2="21" y2="18"></line>
-                                    <line x1="3" y1="6" x2="3.01" y2="6"></line>
-                                    <line x1="3" y1="12" x2="3.01" y2="12"></line>
-                                    <line x1="3" y1="18" x2="3.01" y2="18"></line>
-                                </svg>
-                            </li>
-                            <li onClick="changeView('cal')">
-                                <svg id="Line" xmlns="http://www.w3.org/2000/svg" width="30" height="30"
-                                    viewBox="0 0 64 64">
-                                    <title>1</title>
-                                    <path
-                                        d="M54,11.19482H47.57129a4.00016,4.00016,0,0,0-8-.00577c.00625.00511-15.14873.00583-15.14258-.00007a4,4,0,1,0-8,.00584H10a6.00657,6.00657,0,0,0-6,6V50.80811a6.00657,6.00657,0,0,0,6,6H54a6.00657,6.00657,0,0,0,6-6V17.19482A6.00657,6.00657,0,0,0,54,11.19482Zm-44,2h6.42871a4.0015,4.0015,0,0,0,4,3.99707,1.00016,1.00016,0,0,0-.003-2,1.99917,1.99917,0,0,1-1.997-1.99708V11.189a2,2,0,0,1,4,.00293H20.95508a1.0002,1.0002,0,0,0,.00007,2H39.57129a4.00149,4.00149,0,0,0,3.99707,4,1.00016,1.00016,0,0,0-.00007-2,1.99916,1.99916,0,0,1-1.997-1.99708V11.189a2,2,0,0,1,4,.00586H44.09961a1.00018,1.00018,0,0,0,.00005,2H54a4.00428,4.00428,0,0,1,4,4v5.56836H6V17.19482A4.00428,4.00428,0,0,1,10,13.19482ZM54,54.80811H10a4.00428,4.00428,0,0,1-4-4V24.76318H58V50.80811A4.00428,4.00428,0,0,1,54,54.80811Z" />
-                                    <path
-                                        d="M48,27.78564a3.00019,3.00019,0,0,0,.00009,6A3.00019,3.00019,0,0,0,48,27.78564Zm0,4a1.00019,1.00019,0,0,1,.00006-2A1.00019,1.00019,0,0,1,48,31.78564Z" />
-                                    <path
-                                        d="M48,36.78564a3.00019,3.00019,0,0,0,.00009,6A3.00019,3.00019,0,0,0,48,36.78564Zm0,4a1.00019,1.00019,0,0,1,.00006-2A1.00019,1.00019,0,0,1,48,40.78564Z" />
-                                    <path
-                                        d="M48,45.78564a3.00019,3.00019,0,0,0,.00009,6A3.00019,3.00019,0,0,0,48,45.78564Zm0,4a1.00019,1.00019,0,0,1,.00006-2A1.00019,1.00019,0,0,1,48,49.78564Z" />
-                                    <path
-                                        d="M32,27.78564a3.00019,3.00019,0,0,0,.00009,6A3.00019,3.00019,0,0,0,32,27.78564Zm0,4a1.00019,1.00019,0,0,1,.00006-2A1.00019,1.00019,0,0,1,32,31.78564Z" />
-                                    <path
-                                        d="M32,36.78564a3.00019,3.00019,0,0,0,.00009,6A3.00019,3.00019,0,0,0,32,36.78564Zm0,4a1.00019,1.00019,0,0,1,.00006-2A1.00019,1.00019,0,0,1,32,40.78564Z" />
-                                    <path
-                                        d="M32,45.78564a3.00019,3.00019,0,0,0,.00009,6A3.00019,3.00019,0,0,0,32,45.78564Zm0,4a1.00019,1.00019,0,0,1,.00006-2A1.00019,1.00019,0,0,1,32,49.78564Z" />
-                                    <path
-                                        d="M16,27.78564a3.00019,3.00019,0,0,0,.00009,6A3.00019,3.00019,0,0,0,16,27.78564Zm0,4a1.00019,1.00019,0,0,1,.00006-2A1.00019,1.00019,0,0,1,16,31.78564Z" />
-                                    <path
-                                        d="M16,36.78564a3.00019,3.00019,0,0,0,.00009,6A3.00019,3.00019,0,0,0,16,36.78564Zm0,4a1.00019,1.00019,0,0,1,.00006-2A1.00019,1.00019,0,0,1,16,40.78564Z" />
-                                    <path
-                                        d="M16,45.78564a3.00019,3.00019,0,0,0,.00009,6A3.00019,3.00019,0,0,0,16,45.78564Zm0,4a1.00019,1.00019,0,0,1,.00006-2A1.00019,1.00019,0,0,1,16,49.78564Z" />
-                                </svg>
-                            </li>
-                        </ul>
-                    </div>
-                </div> --}}
+               
             </div>
         </div>
         </div>
@@ -340,15 +257,9 @@
             <div class="" id="op_grid_view">
                 <div class="tab-content smallGapGrid" id="grid">
                     <div class="row">
-                        @foreach ($cat as $eventCategorykey => $item)
-                            @php
-                                if ($item->eventDetails->count() == 0) {
-                                    continue;
-                                }
-                            @endphp
-                            @foreach ($item->eventDetails as $eventProductkey => $data)
+                            @foreach ($event as $eventProductkey => $data)
                                 @if (CheckIfContentIsUnderSubscription($data->id, 'events'))
-                                    <div class="col-12 col-lg-4 col-md-6 mb-3 blog_list eventlist_{{ $data->category }}">
+                                    <div class="col-12 col-lg-4 col-md-6 mb-3 blog_list event{{ $data->category }}">
                                         {{-- <a href=""> --}}
                                         <div class="card">
                                             <a href="{{ route('front.event.details', $data->slug) }}">
@@ -443,7 +354,7 @@
                                         {{-- </a> --}}
                                     </div>
                                 @else
-                                    <div class="col-12 col-lg-4 col-md-6 mb-3 blog_list eventlist_{{ $data->category }}">
+                                    <div class="col-12 col-lg-4 col-md-6 mb-3 blog_list event{{ $data->category }}">
                                         {{-- <a href=""> --}}
                                         <div class="card" style="position: relative;">
                                             <a href="{{ route('front.event.details', $data->slug) }}">
@@ -541,22 +452,17 @@
                                     </div>
                                 @endif
                             @endforeach
-                        @endforeach
+                       
                     </div>
                 </div>
             </div>
             <div class="" id="op_list_view" style="display:none">
                 <div class="tab-content smallGapGrid" id="list">
                     <div class="row">
-                        @foreach ($cat as $eventCategorykey => $item)
-                            @php
-                                if ($item->eventDetails->count() == 0) {
-                                    continue;
-                                }
-                            @endphp
-                            @foreach ($item->eventDetails as $eventProductkey => $data)
+                        
+                            @foreach ($event as $eventProductkey => $data)
                                 @if (CheckIfContentIsUnderSubscription($data->id, 'events'))
-                                    <div class="col-12  mb-3 blog_list eventlist eventlist_{{ $data->category }}">
+                                    <div class="col-12  mb-3 blog_list eventlist event{{ $data->category }}">
                                         {{-- <a href=""> --}}
                                         <div class="card">
                                             <a href="{{ route('front.event.details', $data->slug) }}">
@@ -654,7 +560,7 @@
                                         {{-- </a> --}}
                                     </div>
                                 @else
-                                    <div class="col-12  mb-3 blog_list eventlist eventlist_{{ $data->category }}">
+                                    <div class="col-12  mb-3 blog_list eventlist event{{ $data->category }}">
                                         {{-- <a href=""> --}}
                                         <div class="card" style="position: relative;">
                                             <a href="{{ route('front.event.details', $data->slug) }}">
@@ -755,7 +661,6 @@
                                     </div>
                                 @endif
                             @endforeach
-                        @endforeach
                     </div>
                 </div>
             </div>

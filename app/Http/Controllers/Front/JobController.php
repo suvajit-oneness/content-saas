@@ -72,57 +72,12 @@ class JobController extends Controller {
             })
             ->latest('id')
             ->paginate(10);
-
-            // dd(DB::getQueryLog());
-
-            // dd($request->all(), $job);
         } else {
             $job = Job::where('status', 1)->orWhere('featured_flag', 1)->latest('id')->paginate(10);
         }
-
         $category = JobCategory::where('status',1)->orderby('title')->get();
         $tag = JobTag::orderby('title')->get();
-
         return view('front.job.index',compact('job','category','tag'));
-
-
-
-
-
-
-
-        /*
-
-        if (isset($request->keyword) || isset($request->employment_type) || isset($request->address)||isset($request->salary) || isset($request->source)||isset($request->featured_flag)||isset($request->beginner_friendly)){
-
-                   //dd($request->employment_type);
-            $keyword = (isset($request->keyword) && $request->keyword!='')?$request->keyword:'';
-
-            foreach ($request->employment_type as $value) {
-
-            $employment_type = (isset($request->employment_type) && $request->employment_type!='')? $value:'';
-            }
-
-            $address = (isset($request->address) && $request->address!='')?$request->address:'';
-
-            $salary = (isset($request->salary) && $request->salary!='')?$request->salary:'';
-
-            $source = (isset($request->source) && $request->source!='') ? $request->source : '';
-            $featured_flag = (isset($request->featured_flag) && $request->featured_flag!='') ? $request->featured_flag : '';
-            $beginner_friendly = (isset($request->beginner_friendly) && $request->beginner_friendly!='') ? $request->beginner_friendly : '';
-
-            $job = $this->JobRepository->searchJobfrontData($keyword,$employment_type,$address,$salary,$source,$featured_flag,$beginner_friendly);
-
-
-        }
-            else{
-            $job=Job::where('featured_flag',1)->orderby('title')->get();
-            }
-        $category=JobCategory::where('status',1)->orderby('title')->get();
-        $tag=JobTag::orderby('title')->get();
-        return view('front.job.index',compact('job','category','tag'));
-
-        */
     }
 
     public function details(Request $request,$slug)
@@ -130,25 +85,13 @@ class JobController extends Controller {
         $job = Job::where('slug',$slug)->get();
         $category = JobCategory::where('status',1)->orderby('title')->get();
         $tag = JobTag::orderby('title')->get();
-
         // check if job is already applied
         if (auth()->guard('web')->user()->id) {
             $jobApplied = ApplyJob::where('job_id', $job[0]->id)->where('user_id', auth()->guard('web')->user()->id,)->first();
         }
-        // else {
-        //     $collectionExistsCheck = \App\Models\ApplyJob::where('job_id', $job[0]->id)
-        //         ->where(
-        //             'user_id',
-        //             auth()
-        //                 ->guard('web')
-        //                 ->user()->id,
-        //         )
-        //         ->first();
-        // }
-
         return view('front.job.details',compact('job', 'category', 'tag', 'jobApplied'));
     }
-
+    //**  save job     **//
     public function store(Request $request){
 	    // check if collection already exists
         if(auth()->guard('user')->check()) {
@@ -169,7 +112,7 @@ class JobController extends Controller {
             return response()->json(['status' => 200, 'type' => 'add', 'message' => 'Job saved']);
         }
 	}
-
+    //** Job Apply **//
     public function jobapply(Request $request){
         // dd($request->all());
 
@@ -210,7 +153,7 @@ class JobController extends Controller {
             $data->status = 1;
             $data->save();
             
-            return redirect()->back()->with('success','Job Removed');
+            return redirect()->back()->with('success','Thank you for your feedback');
         }
 	}
        /* report job */
@@ -232,8 +175,7 @@ class JobController extends Controller {
             $data->job_id = $request->job_id;
             $data->comment = $request->comment;
             $data->save();
-            //dd($data);
-            return redirect()->back()->with('success','Job Reported');
+            return redirect()->back()->with('success','Thank you for your feedback');
         }
     }
 
