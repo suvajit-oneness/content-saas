@@ -58,7 +58,15 @@
 
                             <div class="courses-desc">
                                 <p>{!! $courseProduct->courseName->short_description ?? ''!!}</p>
-                                <a href="{{route('front.user.courses.details',$courseProduct->courseName->slug)}}" class="course-btn">Start Course</a>
+                                <a href="{{route('front.user.courses.details',$courseProduct->courseName->slug)}}" class="course-btn">
+                                    @if(completedTopicPerCourse($courseProduct->courseName->id)->total_topic == completedTopicPerCourse($courseProduct->courseName->id)->total_viewed_topic)
+                                        Course Comlpeted! Watch all videos again
+                                    @elseif(completedTopicPerCourse($courseProduct->courseName->id)->total_topic > completedTopicPerCourse($courseProduct->courseName->id)->total_viewed_topic)
+                                        Continue where you left...
+                                    @else
+                                        Start Course
+                                    @endif
+                                </a>
                             </div>
                         </div>
                     </div>
