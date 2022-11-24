@@ -23,7 +23,9 @@
                     @php
                          $totalUser = totalUser($course->id);
                     @endphp
-                     <small>{!! $totalUser->user_count !!} Students</small> 
+                    @if($totalUser->user_count != 0)
+                        <small>{!! $totalUser->user_count !!} Students</small>
+                    @endif 
                  </div>
                 @endforeach
                 @else
@@ -120,13 +122,11 @@
                             </div>
 
                             @if(!empty($course->author_image))
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div style="border-radius:10px;background-color:rgb(69, 224, 168);overflow:hidden;">
-                                        <img src="{{asset($course->author_image)}}" alt="" style="width:100%;height:100%;object-fit:cover;">
-                                    </div>
+                            <div class="row p-4">
+                                <div class="col-md-2 d-flex justify-content-center py-3">
+                                    <img src="{{asset($course->author_image)}}" alt="" style="width:100%; height:100%; object-fit:cover; border-radius: 10px;">
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-10">
                                     <h4>{{$course->author_name}}</h4>
                                     <p>{!!$course->author_description !!}</p>
                                 </div>
@@ -284,22 +284,6 @@
                 </div>
             </div>
 
-            {{-- Modal to open video --}}
-            <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="videoModal" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5>Video</h5>
-                            <p class="close btn btn-success" style="float:right" onclick="$('#videoModal').modal('hide')">&times;</p>
-                        </div>
-                        <div class="modal-body">
-                            <video id="videoplace" autoplay muted controls width="100%" height="350" src=""></video>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {{-- Video Modal Ends --}}
-
             <div class="col-12 col-lg-4 col-md-12 sidebar position-relative">
                 <div class="theiaStickySidebar sticky-price-bar" id="barSticky">
                     <div class="course-details-right-content">
@@ -370,6 +354,22 @@
                     </div>
                 </div>
             </div>
+            
+            {{-- Modal to open video --}}
+            <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="videoModal" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5>Video</h5>
+                            <p class="close btn btn-success" style="float:right" onclick="$('#videoModal').modal('hide')">&times;</p>
+                        </div>
+                        <div class="modal-body">
+                            <video id="videoplace" autoplay muted controls width="100%" height="350" src=""></video>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{-- Video Modal Ends --}}
         </div>
     </div>
 </section>
@@ -378,6 +378,15 @@
 @push('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script>
+
+    function playVideo(videoUrl) {
+        // alert(videoUrl);
+        event.preventDefault();
+        $('#videoModal').modal('show');
+        // $('#videoplace').attr('src', window.location.origin + '/' + videoUrl);
+        $('#videoplace').attr('src', videoUrl);
+    }
+
     (function($){
 
     let stickyPriceBar = $("#barSticky");
@@ -392,13 +401,6 @@
         $("#barSticky").removeClass("scrolled");
       }
     });
-
-    function playVideo(videoUrl) {
-        event.preventDefault();
-        $('#videoModal').modal('show');
-        // $('#videoplace').attr('src', window.location.origin + '/' + videoUrl);
-        $('#videoplace').attr('src', videoUrl);
-    }
 
     // add to cart ajax
 	$('#addToCartForm').on('submit', function(e) {
