@@ -13,13 +13,13 @@
                      $review=App\Models\CourseReview::where('course_id',$course->id)->get();
                 @endphp
                 @if(!empty($review))
-                @foreach($review as $data)
-
+                @foreach($review as $value)
+               
                 <div class="crs-rating-all">
                     <span>
-                        {!! RatingHtml($data->rating) !!}
+                        {!! RatingHtml($value->rating) !!}
                     </span>
-                    <a href="#crs_reviews">( {{ $data->count() }} review)</a>
+                    <a href="#crs_reviews">( {{ $value->count() }} review)</a>
                     @php
                          $totalUser = totalUser($course->id);
                     @endphp
@@ -172,7 +172,7 @@
                                             </div>
                                             <div class="r_content">
                                                 <p>
-                                                    {{ $data->review }} Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                                                    {{ $data->review }} 
                                                 </p>
                                                 {{-- <div class="r_helpful">
                                                     <small>Helpful? </small>

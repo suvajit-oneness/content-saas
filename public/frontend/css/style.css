@@ -8127,3 +8127,44 @@ ul.review-star-group{
 .portfolio-v4-content-list p a small{
   text-transform: lowercase;
 }
+.star-rating {
+    direction: rtl;
+    display: block;
+    padding: 0;
+    cursor: default;
+}
+.star-rating label:hover, .star-rating label:hover~label, .star-rating input[type="radio"]:checked~label {
+    color: #FFA701;
+}
+.star-rating input[type="radio"] {
+    display: none;
+}
+.statusButton .btn-outline-primary {
+  border-color: #95C800;
+  color: #95C800;
+  box-shadow: none;
+  outline: none;
+}
+.statusButton .btn-check:checked+.btn-outline-primary {
+  background-color: #95C800;
+  border-color: #95C800;
+  box-shadow: none;
+  outline: none;
+}
+.dashboard-profile .profileCircle {
+  position: relative;
+}
+.dashboard-profile .profileCircle span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 14px;
+  height: 14px;
+  background-color: #95C800;
+  font-size: 8px;
+  font-weight: bold;
+  color: #ffffff;
+}

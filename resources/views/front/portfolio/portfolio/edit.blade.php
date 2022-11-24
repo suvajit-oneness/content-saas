@@ -45,7 +45,8 @@
                                 @enderror
                             </div><br>
                             <div class="form-group">
-                                <label class="control-label" for="tags">Tags (comma , separated) </label>
+                                <label class="control-label" for="tags">Tags (comma , separated) <span class="m-l-5 text-danger">
+                                    *</span></label>
                                 <input class="form-control @error('tags') is-invalid @enderror" type="text" name="tags"
                                     id="tags" value="{{ old('tags',$portfolio->tags) }}" />
                                 @error('tags')
@@ -54,14 +55,15 @@
                             </div><br>
                             <div class="form-group">
                                 <label class="control-label" for="link">Url (Optional)</label>
-                                <input class="form-control @error('link') is-invalid @enderror" type="text" name="link"
+                                <input class="form-control @error('link') is-invalid @enderror" type="text" name="link" placeholder="eg: https://www.google.com/"
                                     id="link" value="{{ old('link',$portfolio->link) }}" />
                                 @error('link')
                                     <p class="small text-danger">{{ $message }}</p>
                                 @enderror
                             </div><br>
                             <div class="form-group">
-                                <label class="control-label" for="short_desc">Short Description</label>
+                                <label class="control-label" for="short_desc">Short Description <span class="m-l-5 text-danger">
+                                    *</span></label>
                                 <textarea type="text" class="form-control" rows="4" name="short_desc" id="short_desc">{{ old('short_desc',$portfolio->short_desc) }}</textarea>
                                 @error('short_desc')
                                     <p class="small text-danger">{{ $message }}</p>
@@ -77,7 +79,8 @@
                                         @endif
                                     </div>
                                 <div class="col-md-10">
-                                <label class="control-label" for="image">Image</label>
+                                <label class="control-label" for="image">Image <span class="m-l-5 text-danger">
+                                    *</span></label>
                                 <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image"/>
                                 @error('image')
                                     <p class="small text-danger">{{ $message }}</p>

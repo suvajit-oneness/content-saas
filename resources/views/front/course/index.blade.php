@@ -94,19 +94,14 @@
 
                                 <div class="courses-desc">
                                     <p>{!! $data->short_description !!}</p>
-                                    <div class="crs-rating-all">
-                                        <span>
-                                            <div class="rating-list-stars d-flex">
-                                                <small>4.4</small>
-                                                <i class="fa fa-star checked"></i>
-                                                <i class="fa fa-star checked"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star-half-alt"></i>
-                                            </div>
-                                        </span>
-                                        <a href="#crs_reviews">( 243 )</a>
-                                    </div>
+                                     @foreach($data->review as $reviews)
+                                        <div class="crs-rating-all">
+                                            <span>
+                                                {!! RatingHtml($reviews->rating) !!}
+                                            </span>
+                                            <a href="{{ route('front.course.details', $data->slug) }}">( {{ $reviews->count() }} )</a>
+                                        </div>
+                                    @endforeach
                                     <div class="price-crs">
                                         <span>{{ $data->price == 0 ? 'Free' : '$ ' . $data->price }}</span>
                                         <a href="{{ route('front.course.details', $data->slug) }}" class="course-btn">Enroll</a>

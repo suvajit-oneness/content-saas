@@ -49,7 +49,7 @@ class BlogController extends BaseController
         }
         $articlecat = $this->BlogRepository->getArticlecategories();
         $articlesubcat = $this->BlogRepository->getArticlesubcategories();
-        $this->setPageTitle('Article', 'List of all Article');
+        $this->setPageTitle('Blog', 'List of all Blog');
         return view('admin.article.index', compact('article','articlecat', 'articlesubcat'));
     }
 
@@ -58,7 +58,7 @@ class BlogController extends BaseController
      */
     public function create()
     {
-        $this->setPageTitle('Article', 'Create Article');
+        $this->setPageTitle('Blog', 'Create Blog');
          $articlecat = $this->BlogRepository->getArticlecategories();
          $articlesubcat = $this->BlogRepository->getArticlesubcategories();
         return view('admin.article.create', compact('articlecat', 'articlesubcat'));
@@ -84,9 +84,9 @@ class BlogController extends BaseController
         $article = $this->BlogRepository->createArticle($request->except('_token'));
 
         if (!$article) {
-            return $this->responseRedirectBack('Error occurred while creating Article.', 'error', true, true);
+            return $this->responseRedirectBack('Error occurred while creating Blog.', 'error', true, true);
         }
-        return $this->responseRedirect('admin.article.index', 'Article has been created successfully', 'success', false, false);
+        return $this->responseRedirect('admin.article.index', 'Blog has been created successfully', 'success', false, false);
     }
 
     /**
@@ -98,7 +98,7 @@ class BlogController extends BaseController
         $targetarticle = $this->BlogRepository->findArticleById($id);
         $articlecat = $this->BlogRepository->getArticlecategories();
         $articlesubcat = $this->BlogRepository->getArticlesubcategories();
-        $this->setPageTitle('Article', 'Edit Article : ' . $targetarticle->title);
+        $this->setPageTitle('Blog', 'Edit Blog : ' . $targetarticle->title);
         return view('admin.article.edit', compact('targetarticle', 'articlecat', 'articlesubcat'));
     }
 
@@ -123,9 +123,9 @@ class BlogController extends BaseController
         $targetblog = $this->BlogRepository->updateArticle($params);
 
         if (!$targetblog) {
-            return $this->responseRedirectBack('Error occurred while updating Article.', 'error', true, true);
+            return $this->responseRedirectBack('Error occurred while updating Blog.', 'error', true, true);
         }
-        return $this->responseRedirectBack('Article has been updated successfully', 'success', false, false);
+        return $this->responseRedirectBack('Blog has been updated successfully', 'success', false, false);
     }
 
     /**
@@ -137,7 +137,7 @@ class BlogController extends BaseController
         $targetblog = $this->BlogRepository->deleteArticle($id);
 
         if (!$targetblog) {
-            return $this->responseRedirectBack('Error occurred while deleting Article.', 'error', true, true);
+            return $this->responseRedirectBack('Error occurred while deleting Blog.', 'error', true, true);
         }
         return $this->responseRedirect('admin.article.index', 'Article has been deleted successfully', 'success', false, false);
     }
@@ -155,7 +155,7 @@ class BlogController extends BaseController
         $targetblog = $this->BlogRepository->updateArticleStatus($params);
 
         if ($targetblog) {
-            return response()->json(array('message' => 'Article status has been successfully updated'));
+            return response()->json(array('message' => 'Blog status has been successfully updated'));
         }
     }
 
@@ -167,7 +167,7 @@ class BlogController extends BaseController
         $targetblog = $this->BlogRepository->updateLatestArticleStatus($params);
 
         if ($targetblog) {
-            return response()->json(array('message' => 'Article status has been successfully updated'));
+            return response()->json(array('message' => 'Blog status has been successfully updated'));
         }
     }
 
@@ -182,7 +182,7 @@ class BlogController extends BaseController
         $targetarticle = $this->BlogRepository->Articledetails($id);
         $article = $targetarticle[0];
 
-        $this->setPageTitle('Article', 'Article Details : ' . $article->title);
+        $this->setPageTitle('Blog', 'Blog Details : ' . $article->title);
         return view('admin.article.details', compact('article'));
     }
 

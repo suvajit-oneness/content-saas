@@ -29,24 +29,28 @@ class EventController extends Controller
     public function index(Request $request)
     {  
          if (auth()->guard('web')->check()) {
+            $cat=EventType::where('status',1)->orderby('title')->get(); 
+            $event_page_content = EventPage::all()[0];
             if (isset($request->code) || isset($request->keyword) || isset($request->price)||isset($request->type) || isset($request->location)){
-            $categoryId = (isset($request->code) && $request->code!='')?$request->code:'';
-
-            $keyword = (isset($request->keyword) && $request->keyword!='')? $request->keyword:'';
-
-            $price = (isset($request->price) && $request->price!='')?$request->price:'';
-
-            $type = (isset($request->type) && $request->type!='')?$request->type:'';
-
-            $location = (isset($request->address) && $request->address!='') ? $request->address : '';
-
-            $event = $this->eventRepository->searchEventsfrontData($categoryId,$keyword,$price,$type,$location);
+                $categoryId = (isset($request->code) && $request->code!='')?$request->code:'';
+                $keyword = (isset($request->keyword) && $request->keyword!='')? $request->keyword:'';
+                $price = (isset($request->price) && $request->price!='')?$request->price:'';
+                $type = (isset($request->type) && $request->type!='')?$request->type:'';
+                $location = (isset($request->address) && $request->address!='') ? $request->address : '';
+                $event = $this->eventRepository->searchEventsfrontData($categoryId,$keyword,$price,$type,$location);
             }
             else{
-                $event=Event::where('status',1)->orderby('title')->paginate(15);
+               // $event=Event::where('status',1)->orderby('title')->paginate(15);
+             
+               if($request->category){
+                $cat_id = EventType::where('slug','like','%'.$request->category.'%')->first()->id;
+                $event=Event::where('category','like','%'.$cat_id.'%')->where('status',1)->orderby('title')->paginate(12);
+                //dd($event);
+                }else{
+                    $event=Event::where('status',1)->where('category','like','%'.$cat[0]->id.'%')->orderby('title')->paginate(12);
+                }
             }
-            $cat=EventType::where('status',1)->orderby('title')->get();
-            $event_page_content = EventPage::all()[0];
+           
             return view('front.event.index',compact('cat','event','event_page_content'));
         } else {
             return redirect()->route('front.user.login');

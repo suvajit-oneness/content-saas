@@ -499,7 +499,7 @@ if(!function_exists('reportJobs')) {
 function RatingHtml($rating = null) {
     // return $rating;
     if ($rating == 0) {
-        $resp = '<p>No ratings available</p>';
+        $resp = '<span>No ratings</span>';
     } elseif ($rating == 1) {
         $resp = '
         <div class="rating-list-stars d-flex">
@@ -589,12 +589,25 @@ function RatingHtml($rating = null) {
             
         </div>
         ';
+    } elseif ($rating == 5) {
+        $resp = '
+        <div class="rating-list-stars d-flex">
+            <small>'.$rating.'</small> 
+            <i class="fa fa-star checked"></i>
+            <i class="fa fa-star checked"></i>
+            <i class="fa fa-star checked"></i>
+            <i class="fa fa-star checked"></i>
+            <i class="fa fa-star checked"></i>
+        </div>
+        ';
     } else {
         $resp = false;
     }
 
     return $resp;
 }
+//average rating
+
 //after purchase course count user
 
 function totalUser($courseid)

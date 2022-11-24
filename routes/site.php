@@ -32,8 +32,8 @@ Route::name('front.')->group(function () {
         Route::get('/event', 'Front\EventController@index')->name('event');
         Route::get('/event/{slug}', 'Front\EventController@details')->name('event.details');
         Route::post('/event/calender', 'Front\EventController@calender')->name('event.calender');
-        Route::get('/course', 'Front\CourseController@course')->name('course');
-        Route::get('/course/{slug}', 'Front\CourseController@coursedetails')->name('course.details');
+        Route::get('/course', 'Front\CourseController@index')->name('course');
+        Route::get('/course/{slug}', 'Front\CourseController@details')->name('course.details');
         Route::name('deals.')->group(function () {
             Route::get('/deal', 'Front\DealController@index')->name('index');
             Route::get('/deal/{slug}', 'Front\DealController@details')->name('detail');

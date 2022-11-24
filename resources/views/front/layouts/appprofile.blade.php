@@ -108,25 +108,19 @@
                                         <div class="alert alert-warning alert-sm">
                                             No Subscription Purchased! <a href="{{url('/pricing')}}">Click Here to Purchase</a>
                                         </div>
-                                    {{-- @else
-                                        <div class="alert alert-success alert-sm">
-                                            Subscription Purchased! - {{getSubscriptionDetails(CheckIfUserBoughtAnySubscription())->name}}
-                                        </div> --}}
+                                   
                                     @endif
                                 </div>
-                                {{-- <div class="dashboard-notification">
-                                    <a href=""><i class="fa-solid fa-bell"></i> <span>0</span></a>
-                                </div> --}}
+                              
                                 <ul class="dashboard-profile">
                                     <li class="dropdown">
                                         <a href="#" class="profileCircle" data-bs-toggle="dropdown" id="profileDrop">
-                                            <!-- <img src="{{ asset(auth()->guard('web')->user()->image)}}" alt="" /> -->
-                                            <img src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&w=1000&q=80" alt="">
+                                            <img src="{{ asset(auth()->guard('web')->user()->image)}}" alt="">
                                         </a>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">My Profile</a></li>
-                                            <li><a class="dropdown-item" href="#">Change Password</a></li>
-                                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                                            <li><a class="dropdown-item" href="{{ route('front.user.profile.edit') }}">My Profile</a></li>
+                                            <li><a class="dropdown-item" href="{{ route('front.user.portfolio.changePassword') }}">Change Password</a></li>
+                                            <li><a class="dropdown-item" href="{{ route('front.user.logout') }}">Logout</a></li>
                                         </ul>
                                     </li>
                                     @php
@@ -154,7 +148,7 @@
                                                 <circle cx="20" cy="21" r="1"></circle>
                                                 <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
                                             </svg>
-                                            {{ $totalCartProducts == 0 ? '' : $totalCartProducts }}
+                                            <span>{{ $totalCartProducts == 0 ? '' : $totalCartProducts }}</span>
                                         </a>
                                    </li>
                                 </ul>
@@ -357,9 +351,6 @@
         $('#closeCompleteModal').click(function(){
             $('#completeModal').modal('hide');
         });
-
-    </script>
-    <script>
         // sweetalert fires | type = success, error, warning, info, question
         function toastFire(type, title, body = '') {
             const Toast = Swal.mixin({
@@ -435,17 +426,7 @@
                 }
             });
         }
-
-        // $('.filter_select').select2({
-        //   width:"100%",
-        // });
-    </script>
-        <script>
-        // $('.filter_select').select2({
-        //   width:"100%",
-        // });
-
-
+    
         $('.filter_select').select2().on('select2:select', function(e) {
             var data = e.params.data;
 
