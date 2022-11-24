@@ -61,8 +61,8 @@
                                 <a href="{{route('front.user.courses.details',$courseProduct->courseName->slug)}}" class="course-btn">
                                     @if(completedTopicPerCourse($courseProduct->courseName->id)->total_topic == completedTopicPerCourse($courseProduct->courseName->id)->total_viewed_topic)
                                         Course Comlpeted! Watch all videos again
-                                    @elseif(completedTopicPerCourse($courseProduct->courseName->id)->total_topic > completedTopicPerCourse($courseProduct->courseName->id)->total_viewed_topic)
-                                        Continue where you left...
+                                    @elseif(completedTopicPerCourse($courseProduct->courseName->id)->total_topic > completedTopicPerCourse($courseProduct->courseName->id)->total_viewed_topic && completedTopicPerCourse($courseProduct->courseName->id)->total_viewed_topic > 0)
+                                        Continue where you left... ({{(int)(completedTopicPerCourse($courseProduct->courseName->id)->total_viewed_topic/completedTopicPerCourse($courseProduct->courseName->id)->total_topic * 100)}}% completed)
                                     @else
                                         Start Course
                                     @endif
