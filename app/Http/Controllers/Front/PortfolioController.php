@@ -97,6 +97,11 @@ class PortfolioController extends BaseController
         //dd($request->all());
         $request->validate([
             'first_name' => 'required|string|min:1',
+            'last_name' => 'required|string|min:1',
+            'email' => 'required|string|min:1',
+            'mobile' => 'required|integer|min:1',
+            'country' => 'required|string|min:1',
+            'image' =>   'required|mimes:jpeg,jpg,png,gif|required|max:50'
         ]);
         $params = $request->except('_token');
 

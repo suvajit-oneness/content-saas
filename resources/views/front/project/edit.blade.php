@@ -91,7 +91,7 @@
 
                                             <div class="form-group">
                                                 <div class="d-flex justify-content-between">
-                                                    <label class="control-label" for="document">Document (optional)</label>
+                                                    <label class="control-label" for="document">Document (optional)<p class="m-l-5 text-danger"><small>size must not exceeds 2MB</small></p></label>
                                                     @if ($data->document)
                                                         <a href="{{ asset($data->document) }}" class="text-success"
                                                             download>View Previous Document</a>

@@ -58,20 +58,8 @@ class ClientController extends BaseController
     {
         $this->validate($request, [
             'client_name' => 'required',
-            'phone_number' => 'required|string|min:8',
-            'email_id' => 'required|email',
-            'link' => 'required',
-            'company_name' => 'required',
-            'address' => 'required',
-            'city' => 'required',
-            'state' => 'required',
-            'zip' => 'required',
-            'country' => 'required',
-            'vat_no' => 'required',
-            'client_group' => 'required',
-            'currency' => 'required',
-            'rate' => 'required',
-            'commercials' => 'required'
+            'occupation' => 'required',
+            'image' => 'required|mimes:jpeg,jpg,png,gif|required|max:50'
         ]);
         $params = $request->except('_token');
 
@@ -106,20 +94,8 @@ class ClientController extends BaseController
     {
         $this->validate($request, [
             'client_name' => 'required',
-            'phone_number' => 'required|string|min:8',
-            'email_id' => 'required|email',
-            'link' => 'required',
-            'company_name' => 'required',
-            'address' => 'required',
-            'city' => 'required',
-            'state' => 'required',
-            'zip' => 'required',
-            'country' => 'required',
-            'vat_no' => 'required',
-            'client_group' => 'required',
-            'currency' => 'required',
-            'rate' => 'required',
-            'commercials' => 'required'
+            'occupation' => 'required',
+            'image' => 'required|mimes:jpeg,jpg,png,gif|required|max:50'
         ]);
         $params = $request->except('_token');
         $client = $this->ClientRepository->updateClient($params);

@@ -45,7 +45,7 @@
                                 @enderror
                             </div><br>
                             <div class="form-group">
-                                <label class="control-label" for="tags">Tags (comma , separated) <span class="m-l-5 text-danger">
+                                <label class="control-label" for="tags">Tags (Comma separated values) <span class="m-l-5 text-danger">
                                     *</span></label>
                                 <input class="form-control @error('tags') is-invalid @enderror" type="text" name="tags"
                                     id="tags" value="{{ old('tags',$portfolio->tags) }}" />
@@ -63,7 +63,7 @@
                             </div><br>
                             <div class="form-group">
                                 <label class="control-label" for="short_desc">Short Description <span class="m-l-5 text-danger">
-                                    *</span></label>
+                                    *</span><p class="m-l-5 text-danger"><small>(Max 200 characters)</small></p></label>
                                 <textarea type="text" class="form-control" rows="4" name="short_desc" id="short_desc">{{ old('short_desc',$portfolio->short_desc) }}</textarea>
                                 @error('short_desc')
                                     <p class="small text-danger">{{ $message }}</p>
@@ -80,7 +80,7 @@
                                     </div>
                                 <div class="col-md-10">
                                 <label class="control-label" for="image">Image <span class="m-l-5 text-danger">
-                                    *</span></label>
+                                    *</span><p class="m-l-5 text-danger"><small>size must not exceeds 50KB</small></p></label>
                                 <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image"/>
                                 @error('image')
                                     <p class="small text-danger">{{ $message }}</p>

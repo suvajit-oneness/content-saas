@@ -41,7 +41,7 @@
                                     @enderror
                                 </div><br>
                                 <div class="form-group">
-                                    <label class="control-label" for="phone_number">Contact </label>
+                                    <label class="control-label" for="phone_number">Contact (optional)</label>
                                     <input class="form-control @error('phone_number') is-invalid @enderror" type="text" name="phone_number"
                                         id="phone_number" value="{{ old('phone_number') }}" />
                                     @error('phone_number')
@@ -49,7 +49,7 @@
                                     @enderror
                                 </div><br>
                                 <div class="form-group">
-                                    <label class="control-label" for="email_id">Email </label>
+                                    <label class="control-label" for="email_id">Email (optional)</label>
                                     <input class="form-control @error('email_id') is-invalid @enderror" type="text" name="email_id"
                                         id="email_id" value="{{ old('email_id') }}" />
                                     @error('email_id')
@@ -57,29 +57,30 @@
                                     @enderror
                                 </div><br>
                                 <div class="form-group">
-                                    <label class="control-label" for="link">Url </label>
+                                    <label class="control-label" for="link">Url (optional)</label>
                                     <input class="form-control @error('link') is-invalid @enderror" type="text" name="link"
-                                        id="link" value="{{ old('link') }}" />
+                                        id="link" placeholder="eg: https://www.google.com/" value="{{ old('link') }}" />
                                     @error('link')
                                         <p class="small text-danger">{{ $message }}</p>
                                     @enderror
                                 </div><br>
                                 <div class="form-group">
-                                    <label class="control-label" for="short_testimonial">Short Description</label>
+                                    <label class="control-label" for="short_testimonial">Short Description (optional) <p class="m-l-5 text-danger"><small>(Max 200 characters)</small></p></label>
                                     <textarea type="text" class="form-control" rows="4" name="short_testimonial" id="short_testimonial">{{ old('short_testimonial') }}</textarea>
                                     @error('short_testimonial')
                                         <p class="small text-danger">{{ $message }}</p>
                                     @enderror
                                 </div><br>
                                 <div class="form-group">
-                                    <label class="control-label" for="long_testimonial">Long Description</label>
+                                    <label class="control-label" for="long_testimonial">Long Description (optional)</label>
                                     <textarea type="text" class="form-control" rows="4" name="long_testimonial" id="long_testimonial">{{ old('long_testimonial') }}</textarea>
                                     @error('long_testimonial')
                                         <p class="small text-danger">{{ $message }}</p>
                                     @enderror
                                 </div><br>
                                 <div class="form-group">
-                                    <label class="control-label" for="image">Image</label>
+                                    <label class="control-label" for="image">Image <span class="m-l-5 text-danger">
+                                        *</span><p class="m-l-5 text-danger"><small>size must not exceeds 50KB</small></p></label>
                                     <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image"/>
                                     @error('image')
                                         <p class="small text-danger">{{ $message }}</p>

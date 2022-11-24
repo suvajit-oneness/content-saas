@@ -70,7 +70,7 @@
                                     <br>
 
                                     <div class="form-group">
-                                        <label class="control-label" for="document">Document (optional)</label>
+                                        <label class="control-label" for="document">Document (optional)<p class="m-l-5 text-danger"><small>size must not exceeds 2MB</small></p></label>
                                         <input class="form-control @error('document') is-invalid @enderror" type="file" id="document" name="document"/>
                                         @error('document')
                                             <p class="small text-danger">{{ $message }}</p>

@@ -55,10 +55,10 @@ class FeedbackController extends BaseController
     {
         $this->validate($request, [
             'date_from' => 'required',
-           // 'date_to' => 'required',
             'title' => 'required',
             'rating' => 'required',
             'review' => 'required',
+            'review_person' => 'required',
 
         ]);
         $params = $request->except('_token');
@@ -92,11 +92,11 @@ class FeedbackController extends BaseController
     {
         //dd($request->all());
         $this->validate($request, [
-        //     'date_from' => 'required',
-        //   //  'date_to' => 'required',
-        //     'title' => 'required',
-        //     'rating' => 'required',
-        //     'review' => 'required',
+            'date_from' => 'required',
+            'title' => 'required',
+            'rating' => 'required',
+            'review' => 'required',
+            'review_person' => 'required',
         ]);
         $params = $request->except('_token');
         $feedback = $this->FeedbackRepository->updateFeedback($params);
@@ -104,7 +104,6 @@ class FeedbackController extends BaseController
         if (!$feedback) {
             return $this->responseRedirectBack('Error occurred while updating Feedback.', 'error', true, true);
         }
-        // return $this->responseRedirectBack('feedback has been updated successfully', 'success', false, false);
         return redirect()->back()->with('success', 'Feedback has been updated successfully', 'success', false, false);
     }
 

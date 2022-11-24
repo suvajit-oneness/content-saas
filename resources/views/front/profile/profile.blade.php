@@ -59,7 +59,8 @@
                                         @endif
                                     </div>
                                     <div class="col-md-10">
-                                        <label class="control-label">Profile Image</label>
+                                        <label class="control-label">Profile Image <span class="m-l-5 text-danger">
+                                            *</span><p class="m-l-5 text-danger"><small>size must not exceeds 50KB</small></p></label>
                                         <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image"/>
                                         @error('image') {{ $message }} @enderror
                                     </div>
@@ -81,7 +82,7 @@
                             <h5>SET CHARGES</h5>
                             <hr>
                             <div class="form-group">
-                                <label class="control-label" for="charge">Charge (in $USD) <span class="m-l-5 text-danger">*</span></label>
+                                <label class="control-label" for="charge">Charge (in $USD) (optional)</label>
                                 <input class="form-control @error('charge') is-invalid @enderror" type="text" name="charge"
                                     id="charge" value="{{ old('charge',Auth::guard('web')->user()->charge) }}">
                                 @error('charge')
@@ -89,7 +90,7 @@
                                 @enderror
                             </div><br>
                             <div class="form-group">
-                                <label class="control-label" for="duration">Per<span class="m-l-5 text-danger">*</span></label>
+                                <label class="control-label" for="duration">Per (optional)</label>
                                 <select name="duration" class="form-control" id="duration">
                                     @foreach ($charges_limit as $item)
                                         <option {{$item->name == old('duration',Auth::guard('web')->user()->duration) ? 'selected' : '' }} value="{{$item->name}}">{{$item->name}}</option>

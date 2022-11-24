@@ -62,7 +62,7 @@ class PortfolioController extends BaseController
             'category' => 'required',
             'tags' => 'required',
             'short_desc' => 'required',
-            'image' => 'required',
+            'image' => 'required|mimes:jpeg,jpg,png,gif|required|max:50'
         ]);
         $params = $request->except('_token');
 
@@ -98,7 +98,7 @@ class PortfolioController extends BaseController
             'category' => 'required',
             'tags' => 'required',
             'short_desc' => 'required',
-            'image' => 'nullable',
+            'image' => 'required|mimes:jpeg,jpg,png,gif|required|max:50'
         ]);
         $params = $request->except('_token');
         $portfolio = $this->PortfolioRepository->updatePortfolio($params);

@@ -49,7 +49,7 @@
                                         </div>
                                     @endif
                                     <div class="col-md-10">
-                                        <label class="control-label">Profile Image <span class="m-l-5 text-danger">*</span><p class="m-l-5 text-danger"><small>Profile image size must not exceeds 2KB</small></p></label>
+                                        <label class="control-label">Profile Image <span class="m-l-5 text-danger">*</span><p class="m-l-5 text-danger"><small>Profile image size must not exceeds 50KB</small></p></label>
                                         <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image"/>
                                         @error('image') <p class="m-l-5 text-danger">{{ $message }} </p>@enderror
                                     </div>
@@ -67,7 +67,7 @@
                                         </div>
                                     @endif
                                     <div class="col-md-8">
-                                        <label class="control-label">Short Video <span>(optional)</span><p class="m-l-5 text-danger"><small>Video size must not exceeds 500KB</small></p></label>
+                                        <label class="control-label">Short Video <span>(optional)</span><p class="m-l-5 text-danger"><small>Video size must not exceeds 2MB</small></p></label>
                                         <input class="form-control @error('intro_video') is-invalid @enderror" type="file" id="intro_video" name="intro_video"/>
                                         @error('intro_video') <p class="m-l-5 text-danger">{{ $message }} </p>@enderror
                                     </div>
@@ -185,7 +185,7 @@
                                     </div>
                                 @endif
                                 <div class="col-md-10">
-                                    <label class="control-label">Banner Image <span>(optional)</span><p class="m-l-5 text-danger"><small>Banner image size must not exceeds 500KB</small></p></label>
+                                    <label class="control-label">Banner Image <span>(optional)</span><p class="m-l-5 text-danger"><small>Banner image size must not exceeds 50KB</small></p></label>
                                     <input class="form-control @error('banner_image') is-invalid @enderror" type="file" id="banner_image" name="banner_image"/>
                                     @error('banner_image') <p class="m-l-5 text-danger">{{ $message }} </p>@enderror
                                 </div>

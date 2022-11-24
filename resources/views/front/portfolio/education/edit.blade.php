@@ -42,7 +42,8 @@
                                 </div><br>
 
                                 <div class="form-group">
-                                    <label class="control-label" for="year_from">From</label>
+                                    <label class="control-label" for="year_from">From <span class="m-l-5 text-danger">
+                                        *</span></label>
                                     <input class="form-control @error('year_from') is-invalid @enderror" type="date" name="year_from"
                                         id="year_from" value="{{ old('year_from',$education->year_from) }}" />
                                     @error('degree')
@@ -66,7 +67,7 @@
                                     @enderror
                                 </div><br>
                                 <div class="form-group">
-                                    <label class="control-label" for="score">Percentage </label>
+                                    <label class="control-label" for="score">Percentage (optional)</label>
                                     <input class="form-control @error('score') is-invalid @enderror" type="text" name="score"
                                         id="score" value="{{ old('score',$education->score) }}" />
                                     @error('score')
@@ -74,7 +75,7 @@
                                     @enderror
                                 </div><br>
                                 <div class="form-group">
-                                    <label class="control-label" for="email_id">Email </label>
+                                    <label class="control-label" for="email_id">Email (optional)</label>
                                     <input class="form-control @error('email_id') is-invalid @enderror" type="text" name="email_id"
                                         id="email_id" value="{{ old('email_id',$education->email_id) }}" />
                                     @error('email_id')
@@ -83,7 +84,7 @@
                                 </div><br>
 
                                 <div class="form-group">
-                                    <label class="control-label" for="link">Url </label>
+                                    <label class="control-label" for="link">Url (optional)</label>
                                     <input class="form-control @error('link') is-invalid @enderror" type="text" name="link"
                                         id="link" value="{{ old('link',$education->link) }}" />
                                     @error('link')
@@ -91,21 +92,22 @@
                                     @enderror
                                 </div><br>
                                 <div class="form-group">
-                                    <label class="control-label" for="short_desc">Short Description</label>
+                                    <label class="control-label" for="short_desc">Short Description (optional)<p class="m-l-5 text-danger"><small>(Max 200 characters)</small></p></label>
                                     <textarea type="text" class="form-control" rows="4" name="short_desc" id="short_desc">{{ old('short_desc',$education->short_desc) }}</textarea>
                                     @error('short_desc')
                                         <p class="small text-danger">{{ $message }}</p>
                                     @enderror
                                 </div><br>
                                 <div class="form-group">
-                                    <label class="control-label" for="long_desc">Long Description</label>
+                                    <label class="control-label" for="long_desc">Long Description (optional)</label>
                                     <textarea type="text" class="form-control" rows="4" name="long_desc" id="long_desc">{{ old('long_desc',$education->long_desc) }}</textarea>
                                     @error('long_desc')
                                         <p class="small text-danger">{{ $message }}</p>
                                     @enderror
                                 </div><br>
                                 <div class="form-group">
-                                    <label class="control-label" for="position">Position(Like school,college,university,mark it 1 or 2 or 3)</label>
+                                    <label class="control-label" for="position">Position(Like school,college,university,mark it 1 or 2 or 3) <span class="m-l-5 text-danger">
+                                        *</span></label>
                                     <input type="text" class="form-control"  name="position" id="position" value="{{ old('position',$education->position) }}">
                                     @error('position')
                                         <p class="small text-danger">{{ $message }}</p>

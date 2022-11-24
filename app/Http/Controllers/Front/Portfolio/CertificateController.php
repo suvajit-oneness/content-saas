@@ -56,7 +56,7 @@ class CertificateController extends BaseController
         $this->validate($request, [
             'certificate_title' => 'required',
             'certificate_type' => 'required|string|min:1',
-            'file' => 'required|image'
+            'file' => 'required|mimes:jpeg,jpg,png,gif|required|max:50'
         ]);
         $params = $request->except('_token');
 
@@ -90,6 +90,7 @@ class CertificateController extends BaseController
         $this->validate($request, [
             'certificate_title' => 'required',
             'certificate_type' => 'required|string|min:1',
+            'file' => 'required|mimes:jpeg,jpg,png,gif|required|max:50'
         ]);
         $params = $request->except('_token');
         $certificate = $this->CertificationRepository->updateCertification($params);

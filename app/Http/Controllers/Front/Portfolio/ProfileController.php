@@ -89,21 +89,23 @@ class ProfileController extends BaseController
         }
 
         $request->validate([
-            'id'            => 'required|integer',
+           
             'first_name'    => 'required|string',
             'last_name'     => 'required|string',
             'mobile'        => 'required|integer',
             'country'       => 'required|string',
             'occupation'    => 'required|string',
             'short_desc'    => 'nullable|string',
+            'intro_video'    => 'nullable|mimes:mp4,mov,ogg | max:20000',
             'language_id'   => 'required|array',
             'quote'         => 'nullable|string',
             'quote_by'      => 'nullable|string',
             'link'          => 'nullable|array',
             'color_scheme'  => 'nullable|string',
-            'worked_for'    => 'nullable|string',
-            'categories'    => 'nullable|string',
-            'image'         => 'required',
+            'worked_for'    => 'required|string',
+            'categories'    => 'required|string',
+            'banner_image'         => 'required|mimes:jpeg,jpg,png,gif|required|max:50',
+            'image'         => 'required|mimes:jpeg,jpg,png,gif|required|max:50',
             'charge'       => 'nullable',
             'duration'      => 'nullable',
         ]);

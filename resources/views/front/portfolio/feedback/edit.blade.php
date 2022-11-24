@@ -24,8 +24,8 @@
                             <div class="tile-body">
                                 <div class="form-group">
                                     <label class="control-label" for="date_to"> Date</label>
-                                    <input type="date" class="form-control" rows="4" name="date_to" id="date_to" value="{{ old('date_to',$feedback->date_to) }}">
-                                    @error('date_to')
+                                    <input type="date" class="form-control" rows="4" name="date_from" id="date_to" value="{{ old('date_from',$feedback->date_from) }}">
+                                    @error('date_from')
                                         <p class="small text-danger">{{ $message }}</p>
                                     @enderror
                                 </div><br>

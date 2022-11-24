@@ -34,7 +34,7 @@
                                 <div class="form-group">
                                     <label class="control-label" for="occupation">Client Designation <span class="m-l-5 text-danger">
                                             *</span></label>
-                                    <input class="form-control @error('occupation') is-invalid @enderror" type="text" name="occupation"
+                                    <input class="form-control @error('occupation') is-invalid @enderror" type="text" placeholder="eg: developer" name="occupation"
                                         id="occupation" value="{{ old('occupation') }}" />
 
                                     @error('occupation')
@@ -42,7 +42,7 @@
                                     @enderror
                                 </div><br>
                                 <div class="form-group">
-                                    <label class="control-label" for="image">Client Image <span class="m-l-5 text-danger">*</span></label>
+                                    <label class="control-label" for="image">Client Image <span class="m-l-5 text-danger">*</span><p class="m-l-5 text-danger"><small>size must not exceeds 50KB</small></p></label>
                                     <input class="form-control @error('image') is-invalid @enderror" type="file" name="image"
                                         id="image" value="{{ old('image') }}"/>
 
@@ -51,7 +51,7 @@
                                     @enderror
                                 </div><br>
                                 <div class="form-group">
-                                    <label class="control-label" for="phone_number">Contact </label>
+                                    <label class="control-label" for="phone_number">Contact (optional)</label>
                                     <input class="form-control @error('phone_number') is-invalid @enderror" type="text" name="phone_number"
                                         id="phone_number" value="{{ old('phone_number') }}" />
                                     @error('phone_number')
@@ -59,7 +59,7 @@
                                     @enderror
                                 </div><br>
                                 <div class="form-group">
-                                    <label class="control-label" for="email_id">Email </label>
+                                    <label class="control-label" for="email_id">Email (optional)</label>
                                     <input class="form-control @error('email_id') is-invalid @enderror" type="text" name="email_id"
                                         id="email_id" value="{{ old('email_id') }}" />
                                     @error('email_id')
@@ -68,15 +68,15 @@
                                 </div><br>
 
                                 <div class="form-group">
-                                    <label class="control-label" for="link">Website </label>
+                                    <label class="control-label" for="link">Website (optional)</label>
                                     <input class="form-control @error('link') is-invalid @enderror" type="text" name="link"
-                                        id="link" value="{{ old('link') }}" />
+                                        id="link" placeholder="eg: https://www.google.com/" value="{{ old('link') }}" />
                                     @error('link')
                                         <p class="small text-danger">{{ $message }}</p>
                                     @enderror
                                 </div><br>
                                 <div class="form-group">
-                                    <label class="control-label" for="company_name">Company Name </label>
+                                    <label class="control-label" for="company_name">Company Name (optional)</label>
                                     <input class="form-control @error('company_name') is-invalid @enderror" type="text" name="company_name"
                                         id="company_name" value="{{ old('company_name') }}" />
                                     @error('company_name')
@@ -84,7 +84,7 @@
                                     @enderror
                                 </div><br>
                                 <div class="form-group">
-                                    <label class="control-label" for="address">Address </label>
+                                    <label class="control-label" for="address">Address (optional)</label>
                                     <input class="form-control @error('address') is-invalid @enderror" type="text" name="address"
                                         id="address" value="{{ old('address') }}" />
                                     @error('address')
@@ -92,7 +92,7 @@
                                     @enderror
                                 </div><br>
                                 <div class="form-group">
-                                    <label class="control-label" for="city">City </label>
+                                    <label class="control-label" for="city">City (optional)</label>
                                     <input class="form-control @error('city') is-invalid @enderror" type="text" name="city"
                                         id="city" value="{{ old('city') }}" />
                                     @error('city')
@@ -100,7 +100,7 @@
                                     @enderror
                                 </div><br>
                                 <div class="form-group">
-                                    <label class="control-label" for="state">State </label>
+                                    <label class="control-label" for="state">State (optional)</label>
                                     <input class="form-control @error('state') is-invalid @enderror" type="text" name="state"
                                         id="state" value="{{ old('state') }}" />
                                     @error('state')
@@ -108,7 +108,7 @@
                                     @enderror
                                 </div><br>
                                 <div class="form-group">
-                                    <label class="control-label" for="zip">Zip code </label>
+                                    <label class="control-label" for="zip">Zip code (optional)</label>
                                     <input class="form-control @error('zip') is-invalid @enderror" type="text" name="zip"
                                         id="zip" value="{{ old('zip') }}" />
                                     @error('zip')
@@ -116,7 +116,7 @@
                                     @enderror
                                 </div><br>
                                 <div class="form-group">
-                                    <label class="control-label" for="country">Country </label>
+                                    <label class="control-label" for="country">Country (optional)</label>
                                     <input class="form-control @error('country') is-invalid @enderror" type="text" name="country"
                                         id="country" value="{{ old('country') }}" />
                                     @error('country')
@@ -124,7 +124,7 @@
                                     @enderror
                                 </div><br>
                                 <div class="form-group">
-                                    <label class="control-label" for="vat_no">VAT number </label>
+                                    <label class="control-label" for="vat_no">VAT number (optional)</label>
                                     <input class="form-control @error('vat_no') is-invalid @enderror" type="text" name="vat_no"
                                         id="vat_no" value="{{ old('vat_no') }}" />
                                     @error('vat_no')
@@ -132,7 +132,7 @@
                                     @enderror
                                 </div><br>
                                 <div class="form-group">
-                                    <label class="control-label" for="client_group">Client Group </label>
+                                    <label class="control-label" for="client_group">Client Group (optional)</label>
                                     <input class="form-control @error('client_group') is-invalid @enderror" type="text" name="client_group"
                                         id="client_group" value="{{ old('client_group') }}"/>
                                     @error('client_group')
@@ -140,7 +140,7 @@
                                     @enderror
                                 </div><br>
                                 <div class="form-group">
-                                    <label class="control-label" for="link">Commercial</label>
+                                    <label class="control-label" for="link">Commercial(optional)</label>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
                                             <select class="form-control" name="currency">

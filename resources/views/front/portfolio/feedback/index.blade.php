@@ -56,7 +56,7 @@
                                                         <a href="{{ route('front.portfolio.feedback.delete', $item->id) }}" onclick="return confirm('Are you sure ?')"><i class="fa-solid fa-trash-can trash table-icon"></i></a>
                                                     </div>
                                                     <div class="date">
-                                                        <span>{{ date('j F Y, g:i a', strtotime($item->date_to)) }}</span>
+                                                        <span>{{ date('j M, Y', strtotime($item->date_from)) }}</span>
                                                     </div>
                                                     <div class="edit-heading">
                                                         <h4>{{ $item->title }}</h4>

@@ -57,7 +57,8 @@ class EducationController extends BaseController
         $this->validate($request, [
             'degree' => 'required',
             'college_name' => 'required|string|min:1',
-
+            'year_from' => 'required',
+            'position' => 'required',
         ]);
         $params = $request->except('_token');
 
@@ -91,7 +92,8 @@ class EducationController extends BaseController
         $this->validate($request, [
             'degree' => 'required',
             'college_name' => 'required|string|min:1',
-
+            'year_from' => 'required',
+            'position' => 'required',
         ]);
         $params = $request->except('_token');
         $education = $this->EducationRepository->updateEducation($params);

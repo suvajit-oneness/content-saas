@@ -41,7 +41,7 @@
                             <form action="{{request()->fullUrl()}}" method="GET">
                                 <input class="d-none" type="checkbox" onclick="$(this).parent().submit()" name="category" value="{{ $data->slug }}" {{ (request()->input('category') == $data->slug) ? 'checked' : '' }}>
                             </form>
-                            <span class="{{ ((request()->input('category') ?? $cat[0]->slug) == $data->slug) ? 'bg-success' : '' }}">{{  $data->title }}</span>
+                            <span class="{{ ((request()->input('category') ?? $cat[0]->slug) == $data->slug) ? 'bg-success' : '' }}">{{  ucwords($data->title) }}</span>
                         </label>
                     </li>
                  @endforeach

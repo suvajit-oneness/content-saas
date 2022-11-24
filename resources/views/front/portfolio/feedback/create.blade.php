@@ -22,21 +22,24 @@
                             @csrf
                             <div class="tile-body">
                                 <div class="form-group">
-                                    <label class="control-label" for="date_from"> Date</label>
+                                    <label class="control-label" for="date_from"> Date <span class="m-l-5 text-danger">
+                                        *</span></label>
                                     <input type="date" class="form-control" rows="4" name="date_from" id="date_from" value="{{ old('date_from') }}">
                                     @error('date_from')
                                         <p class="small text-danger">{{ $message }}</p>
                                     @enderror
                                 </div><br>
                                 <div class="form-group">
-                                    <label class="control-label" for="title"> Title</label>
+                                    <label class="control-label" for="title"> Title <span class="m-l-5 text-danger">
+                                        *</span></label>
                                     <input type="text" class="form-control" rows="4" name="title" id="title" value="{{ old('title') }}">
                                     @error('title')
                                         <p class="small text-danger">{{ $message }}</p>
                                     @enderror
                                 </div><br>
                                 <div class="form-group">
-                                    <label class="control-label" for="rating"> Rating</label>
+                                    <label class="control-label" for="rating"> Rating <span class="m-l-5 text-danger">
+                                        *</span></label>
                                     <div class="star-rating" style="text-align: left;">
                                         <input id="star-5" type="radio" name="rating" value="5" />
                                         <label for="star-5" title="5 stars">
@@ -64,14 +67,16 @@
                                     @enderror
                                 </div><br>
                                 <div class="form-group">
-                                    <label class="control-label" for="review"> Review</label>
+                                    <label class="control-label" for="review"> Review <span class="m-l-5 text-danger">
+                                        *</span></label>
                                     <textarea type="text" class="form-control" rows="4" name="review" id="review">{{ old('review') }}</textarea>
                                     @error('review')
                                         <p class="small text-danger">{{ $message }}</p>
                                     @enderror
                                 </div><br>
                                 <div class="form-group">
-                                    <label class="control-label" for="review_person"> Review By</label>
+                                    <label class="control-label" for="review_person"> Review By <span class="m-l-5 text-danger">
+                                        *</span></label>
                                     <input type="text" class="form-control" rows="4" name="review_person" id="review_person" value="{{ old('review_person') }}">
                                     @error('review_person')
                                         <p class="small text-danger">{{ $message }}</p>
