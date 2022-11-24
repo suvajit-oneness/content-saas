@@ -41,7 +41,23 @@
                                             <a type="button" href="{{ route('front.portfolio.work-experience.create') }}" class="add-btn-edit d-inline-block"  title="Create">Create <i class="fa-solid fa-plus-circle"></i></a>
                                         </div>
                                         @foreach($data->employments as $key=> $item)
-                                            <div class="employmentBox">
+                                            <div class="portfolio-v4-content-list">
+                                                <div class="action justify-content-end">
+                                                    <a href="{{ route('front.portfolio.work-experience.edit', $item->id) }}" title="Edit Profile"><i class="fa-solid fa-pen edit table-icon"></i></a>
+                                                    <a href="{{ route('front.portfolio.work-experience.delete', $item->id) }}" title="Delete" onclick="return confirm('Are you sure ?')"><i class="fa-solid fa-trash-can trash table-icon"></i></a>
+                                                </div>
+
+                                                <h4>{{$item->occupation}} | {{$item->company_title}}</h4>
+                                                @if($item->link == '')
+                                                    <p></p>
+                                                @else
+                                                    <p><a href="{{$item->link}}" target="_blank"><small>{{$item->link}}</small></a></p>
+                                                @endif
+                                                <span class="badge"> {{date('M Y',strtotime($item->year_from))}} - {{$item->year_to == '' || strtotime($item->year_to) > strtotime(date('Y-m-d')) ? 'Present' : date('M Y',strtotime($item->year_to))}} </span>
+                                                <p>{{$item->short_desc}}</p>
+                                            </div>
+
+                                            {{-- <div class="employmentBox">
                                                 <div class="action">
                                                     <a href="{{ route('front.portfolio.work-experience.edit', $item->id) }}" title="Edit Profile"><i class="fa-solid fa-pen edit table-icon"></i></a>
                                                     <a href="{{ route('front.portfolio.work-experience.delete', $item->id) }}" title="Delete" onclick="return confirm('Are you sure ?')"><i class="fa-solid fa-trash-can trash table-icon"></i></a>
@@ -97,7 +113,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                         @endforeach
                                     </td>
                                 </tr>

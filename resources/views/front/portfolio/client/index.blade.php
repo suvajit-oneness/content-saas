@@ -39,13 +39,10 @@
                                     <td>
                                         <div class="action">
                                             <a type="button" href="{{ route('front.portfolio.client.create') }}" class="add-btn-edit d-inline-block"  title="Create">Create <i class="fa-solid fa-plus-circle"></i></a>
-                                        </div>
+                                        </div><br>
                                         @foreach($data->clients as $key=> $item)
-                                            <div class="employmentBox">
-                                                <div class="action">
-                                                    <a href="{{ route('front.portfolio.client.edit', $item->id) }}" title="Edit Profile"><i class="fa-solid fa-pen edit table-icon"></i></a>
-                                                    <a href="{{ route('front.portfolio.client.delete', $item->id) }}" title="Delete" onclick="return confirm('Are you sure ?')"><i class="fa-solid fa-trash-can trash table-icon"></i></a>
-                                                </div>
+                                            {{-- <div class="employmentBox">
+                                                
                                                 <div class="row">
                                                     <div class="col-3 mb-3">
                                                     @if($item->image)
@@ -60,11 +57,6 @@
                                                     </div>
                                                 </div>
                                                 <div class="row">
-
-                                                    {{-- <div class="col-3 mb-3">
-                                                        <label>Designation</label>
-                                                        <p>{{ $item->occupation }}</p>
-                                                    </div> --}}
                                                     <div class="col-4 mb-3">
                                                         <label>Email</label>
                                                         <p>{{ $item->email_id }}</p>
@@ -92,6 +84,22 @@
                                                             <p>{{ $item->address }}, {{ $item->city }}, {{ $item->state }},{{ $item->country }},{{ $item->zip }}</p>
                                                         </div>
                                                     </div>
+                                                </div>
+                                            </div> --}}
+                                            
+                                            <div class="portfolio-v4-content-list">
+                                                <div class="portfolio-v4-client-flex">
+                                                    <img src="{{ asset($item->image) }}" alt="" width="100" height="100" style="border-radius:50%" />
+                                                    <div class="portfolio-v4-client-info">
+                                                        <h4>{{$item->client_name}}</h4>
+                                                        <span>{{$item->occupation}}</span>
+                                                        <p class="mb-0">{{$item->company_name}}</p>
+                                                        <a href="{{$item->link}}" target="_blank" class="mb-0">{{$item->link}}</a>
+                                                    </div>
+                                                </div>
+                                                <div class="action justify-content-end">
+                                                    <a href="{{ route('front.portfolio.client.edit', $item->id) }}" title="Edit Profile"><i class="fa-solid fa-pen edit table-icon"></i></a>
+                                                    <a href="{{ route('front.portfolio.client.delete', $item->id) }}" title="Delete" onclick="return confirm('Are you sure ?')"><i class="fa-solid fa-trash-can trash table-icon"></i></a>
                                                 </div>
                                             </div>
                                         @endforeach

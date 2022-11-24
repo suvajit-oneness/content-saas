@@ -27,7 +27,7 @@
                                             <select class="form-control" name="speciality_id">
                                                 <option value="" hidden selected>Select...</option>
                                                 @foreach ($expertise as $index => $item)
-                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                    <option value="{{ $item->id }}">{{ucwords( $item->name) }}</option>
                                                 @endforeach
                                         </select>
 

@@ -61,7 +61,7 @@ class CourseRepository extends BaseRepository implements CourseContract
 
     /**
      * @param array $params
-     * @return Event|mixed
+     * @return Course|mixed
      */
     public function createCourse(array $params)
     {
@@ -69,40 +69,41 @@ class CourseRepository extends BaseRepository implements CourseContract
 
             $collection = collect($params);
 
-            $event = new Course;
-            $event->course_name = $collection['course_name'] ?? '';
+            $course = new Course;
+            $course->course_name = $collection['course_name'] ?? '';
             $slug = Str::slug($collection['course_name'], '-');
             $slugExistCount = Course::where('slug', $slug)->count();
             if ($slugExistCount > 0) $slug = $slug.'-'.($slugExistCount+1);
-            $event->slug = $slug;
-            $event->short_description = $collection['short_description'] ?? '';
-            $event->description = $collection['description'] ?? '';
-            $event->company_name = $collection['company_name'] ?? '';
-            $event->company_description = $collection['company_description'] ?? '';
-            $event->author_name = $collection['author_name'] ?? '';
-            $event->author_description = $collection['author_description'] ?? '';
-            $event->category_id = $collection['category_id'] ?? '';
-            $event->target = $collection['target'] ?? '';
-            $event->requirements = $collection['requirements'] ?? '';
-            $event->language = $collection['language'] ?? '';
-            $event->type = $collection['type'] ?? '';
-            $event->price = $collection['price'] ?? '';
+            $course->slug = $slug;
+            $course->short_description = $collection['short_description'] ?? '';
+            $course->description = $collection['description'] ?? '';
+            $course->company_name = $collection['company_name'] ?? '';
+            $course->company_description = $collection['company_description'] ?? '';
+            $course->author_name = $collection['author_name'] ?? '';
+            $course->author_description = $collection['author_description'] ?? '';
+            $course->category_id = $collection['category_id'] ?? '';
+            $course->target = $collection['target'] ?? '';
+            $course->requirements = $collection['requirements'] ?? '';
+            $course->language = $collection['language'] ?? '';
+            $course->type = $collection['type'] ?? '';
+            $course->price = $collection['price'] ?? '';
+            $course->offer_price = $collection['offer_price'] ?? '';
             if(!empty($params['image'])){
                 $profile_image = $collection['image'];
                 $imageName = time().".".$profile_image->getClientOriginalName();
                 $profile_image->move("course/",$imageName);
                 $uploadedImage = $imageName;
-                $event->image = $uploadedImage;
+                $course->image = $uploadedImage;
                 }
             if(!empty($params['author_image'])){
             $profile_image = $collection['author_image'];
             $imageName = time().".".$profile_image->getClientOriginalName();
             $profile_image->move("course/",$imageName);
             $uploadedImage = $imageName;
-            $event->author_image = $uploadedImage;
+            $course->author_image = $uploadedImage;
             }
-            $event->save();
-            return $event;
+            $course->save();
+            return $course;
 
         } catch (QueryException $exception) {
             throw new InvalidArgumentException($exception->getMessage());
@@ -115,44 +116,45 @@ class CourseRepository extends BaseRepository implements CourseContract
      */
     public function updateCourse(array $params)
     {
-        $event = $this->findOneOrFail($params['id']);
+        $course = $this->findOneOrFail($params['id']);
         $collection = collect($params)->except('_token');
-        $event->course_name = $collection['course_name'] ?? '';
-        if($event->course_name != $collection['course_name']) {
+        $course->course_name = $collection['course_name'] ?? '';
+        if($course->course_name != $collection['course_name']) {
             $slug = Str::slug($collection['course_name'], '-');
             $slugExistCount = Course::where('slug', $slug)->count();
             if ($slugExistCount > 0) $slug = $slug.'-'.($slugExistCount+1);
-            $event->slug = $slug;
+            $course->slug = $slug;
             }
-            $event->short_description = $collection['short_description'] ?? '';
-            $event->description = $collection['description'] ?? '';
-            $event->company_name = $collection['company_name'] ?? '';
-            $event->company_description = $collection['company_description'] ?? '';
-            $event->author_name = $collection['author_name'] ?? '';
-            $event->author_description = $collection['author_description'] ?? '';
-            $event->category_id = $collection['category_id'] ?? '';
-            $event->target = $collection['target'] ?? '';
-            $event->requirements = $collection['requirements'] ?? '';
-            $event->language = $collection['language'] ?? '';
-            $event->type = $collection['type'] ?? '';
-            $event->price = $collection['price'] ?? '';
+            $course->short_description = $collection['short_description'] ?? '';
+            $course->description = $collection['description'] ?? '';
+            $course->company_name = $collection['company_name'] ?? '';
+            $course->company_description = $collection['company_description'] ?? '';
+            $course->author_name = $collection['author_name'] ?? '';
+            $course->author_description = $collection['author_description'] ?? '';
+            $course->category_id = $collection['category_id'] ?? '';
+            $course->target = $collection['target'] ?? '';
+            $course->requirements = $collection['requirements'] ?? '';
+            $course->language = $collection['language'] ?? '';
+            $course->type = $collection['type'] ?? '';
+            $course->price = $collection['price'] ?? '';
+            $course->offer_price = $collection['offer_price'] ?? '';
         if(!empty($params['image'])){
             $profile_image = $collection['image'];
             $imageName = time().".".$profile_image->getClientOriginalName();
             $profile_image->move("course/",$imageName);
             $uploadedImage = $imageName;
-            $event->author_image = $uploadedImage;
+            $course->author_image = $uploadedImage;
         }
         if(!empty($params['author_image'])){
             $profile_image = $collection['author_image'];
             $imageName = time().".".$profile_image->getClientOriginalName();
             $profile_image->move("course/",$imageName);
             $uploadedImage = $imageName;
-            $event->author_image = $uploadedImage;
+            $course->author_image = $uploadedImage;
             }
-        $event->save();
+        $course->save();
 
-        return $event;
+        return $course;
     }
 
     /**
@@ -161,9 +163,9 @@ class CourseRepository extends BaseRepository implements CourseContract
      */
     public function deleteCourse($id)
     {
-        $event = $this->findOneOrFail($id);
-        $event->delete();
-        return $event;
+        $course = $this->findOneOrFail($id);
+        $course->delete();
+        return $course;
     }
 
     /**
@@ -171,12 +173,12 @@ class CourseRepository extends BaseRepository implements CourseContract
      * @return mixed
      */
     public function updateCourseStatus(array $params){
-        $event = $this->findOneOrFail($params['id']);
+        $course = $this->findOneOrFail($params['id']);
         $collection = collect($params)->except('_token');
-        $event->status = $collection['check_status'];
-        $event->save();
+        $course->status = $collection['check_status'];
+        $course->save();
 
-        return $event;
+        return $course;
     }
 
      /**
@@ -185,9 +187,9 @@ class CourseRepository extends BaseRepository implements CourseContract
      */
     public function detailsCourse($id)
     {
-        $events = Course::where('id',$id)->get();
+        $courses = Course::where('id',$id)->get();
 
-        return $events;
+        return $courses;
     }
      /**
      *
@@ -205,7 +207,7 @@ class CourseRepository extends BaseRepository implements CourseContract
      * @return mixed
      */
     public function searchCoursesData($category,$author,$type,$keyword){
-            $events = Course::when($category, function($query) use ($category){
+            $course = Course::when($category, function($query) use ($category){
                             $query->where('category_id', 'like' , '%' . $category .'%');
                         })
                         ->when($author, function($query) use ($author){
@@ -219,7 +221,7 @@ class CourseRepository extends BaseRepository implements CourseContract
                         })
                         ->paginate(25);
 
-        return $events;
+        return $course;
     }
 
 }

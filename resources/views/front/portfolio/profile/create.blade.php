@@ -49,7 +49,7 @@
                                         </div>
                                     @endif
                                     <div class="col-md-10">
-                                        <label class="control-label">Profile Image <p><small>Profile image size must not exceeds 2MB</small></p></label>
+                                        <label class="control-label">Profile Image <p><small>Profile image size must not exceeds 2KB</small></p></label>
                                         <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image"/>
                                         @error('image') {{ $message }} @enderror
                                     </div>
@@ -67,7 +67,7 @@
                                         </div>
                                     @endif
                                     <div class="col-md-8">
-                                        <label class="control-label">Short Video <p><small>Video size must not exceeds 2MB</small></p></label>
+                                        <label class="control-label">Short Video <p><small>Video size must not exceeds 500KB</small></p></label>
                                         <input class="form-control @error('intro_video') is-invalid @enderror" type="file" id="intro_video" name="intro_video"/>
                                         @error('intro_video') {{ $message }} @enderror
                                     </div>
@@ -185,7 +185,7 @@
                                     </div>
                                 @endif
                                 <div class="col-md-10">
-                                    <label class="control-label">Banner Image <p><small>Banner image size must not exceeds 2MB</small></p></label>
+                                    <label class="control-label">Banner Image <p><small>Banner image size must not exceeds 500KB</small></p></label>
                                     <input class="form-control @error('banner_image') is-invalid @enderror" type="file" id="banner_image" name="banner_image"/>
                                     @error('banner_image') {{ $message }} @enderror
                                 </div>

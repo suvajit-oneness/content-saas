@@ -46,6 +46,10 @@
                             <td>$ {!! number_format($courses->price) !!}</td>
                         </tr>
                         <tr>
+                            <td>Offer Price</td>
+                            <td>$ {!! number_format($courses->offer_price) !!}</td>
+                        </tr>
+                        <tr>
                             <td>Certification</td>
                             <td> @if($courses->certificate == 1) <div class="badge badge-success">Yes</div> @else <div class="badge badge-warning">No</div> @endif </td>
                         </tr>

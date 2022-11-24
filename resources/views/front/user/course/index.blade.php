@@ -21,7 +21,7 @@
                         </div>
                         <div class="courses-info">
                             
-                            <div class="courses-badge">
+                            <!-- <div class="courses-badge">
                                 @if (!empty($courseProduct->courseName->category))
                                     @if(!empty($courseProduct->courseName->category->image))
                                         <span>
@@ -32,7 +32,7 @@
                                         <span>No Category</span>
                                     @endif
                                 @endif
-                            </div>
+                            </div> -->
                             <div class="courses-heading">
                                 <h4>{{ $courseProduct->courseName->title ?? ''}}</h4>
                                 <div class="courses-lession-time">

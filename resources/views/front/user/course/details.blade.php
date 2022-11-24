@@ -39,13 +39,28 @@
                     enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="course_id" value="{{ $course->id }}">
-                        <div class="review-star-group mb-3">
-                            <input id="star-5" type="radio" name="rating" value="5" /><i class="fas fa-star"></i>
-                            <input id="star-4" type="radio" name="rating" value="4" /><i class="fas fa-star"></i>
-                            <input id="star-3" type="radio" name="rating" value="3" /><i class="fas fa-star"></i>
-                            <input id="star-2" type="radio" name="rating" value="2" /><i class="fas fa-star"></i>
-                            <input id="star-1" type="radio" name="rating" value="1" /><i class="fas fa-star"></i>
-                        </div>
+                        <ul class="review-star-group mb-3" id="stars">
+                            <li class="star">
+                                <input id="star-5" type="radio" name="rating" value="5" />
+                                <i class="fas fa-star"></i>
+                            </li>
+                            <li class="star">
+                                <input id="star-4" type="radio" name="rating" value="4" />
+                                <i class="fas fa-star"></i>
+                            </li>
+                            <li class="star">
+                                <input id="star-3" type="radio" name="rating" value="3" />
+                                <i class="fas fa-star"></i>
+                            </li>
+                            <li class="star">
+                                <input id="star-2" type="radio" name="rating" value="2" />
+                                <i class="fas fa-star"></i>
+                            </li>
+                            <li class="star">
+                                <input id="star-1" type="radio" name="rating" value="1" />
+                                <i class="fas fa-star"></i>
+                            </li>
+                        </ul>
                         <div class="form-group">
                             <label>Write a review</label>
                             <textarea rows="6" name="review" class="form-control"></textarea>
@@ -187,6 +202,7 @@
                 $(this).siblings(".content").slideDown(200);
             }
         });
+        
 
     </script>
 @endsection

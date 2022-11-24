@@ -41,7 +41,8 @@
                                         <a type="button" href="{{ route('front.portfolio.testimonial.create') }}" class="add-btn-edit d-inline-block"  title="Create">Create <i class="fa-solid fa-plus-circle"></i></a>
                                     </div>
                                     @foreach($data->testimonials as $key=> $item)
-                                    <div class="employmentBox">
+                                    
+                                    {{-- <div class="employmentBox">
                                         <div class="action">
                                             <a href="{{ route('front.portfolio.testimonial.edit', $item->id) }}" title="Edit Profile"><i class="fa-solid fa-pen edit table-icon"></i></a>
                                             <a href="{{ route('front.portfolio.testimonial.delete', $item->id) }}" title="Delete" onclick="return confirm('Are you sure ?')"><i class="fa-solid fa-trash-can trash table-icon"></i></a>
@@ -50,11 +51,7 @@
                                         <div class="row">
                                             <div class="col-6 mb-3">
                                                 <label>Image</label>
-                                                {{-- @if($item->file) --}}
                                                 <img src="{{ asset($item->image) }}" id="articleImage" class="img-fluid" alt="" style="height: 100px">
-                                                {{-- @else
-                                                <span></span>
-                                                @endif --}}
                                             </div>
                                             <div class="col-6 mb-3">
                                                 <label>Client Name</label>
@@ -85,7 +82,30 @@
                                                 <p>{{ $item->long_desc }}</p>
                                             </div>
                                         </div>
+                                    </div> --}}
+                                    <div class="portfolio-v4-content-list">
+                                        <div class="action justify-content-end">
+                                            <a href="{{ route('front.portfolio.testimonial.edit', $item->id) }}" title="Edit Profile"><i class="fa-solid fa-pen edit table-icon"></i></a>
+                                            <a href="{{ route('front.portfolio.testimonial.delete', $item->id) }}" title="Delete" onclick="return confirm('Are you sure ?')"><i class="fa-solid fa-trash-can trash table-icon"></i></a>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-2 mb-3">
+                                                <img src="{{ asset($item->image) }}" alt="" class="w-100">
+                                            </div>
+                                            <div class="col-8 mb-3">
+                                                <h4>{{ $item->client_name }} | {{ $item->occupation }}</h4>
+                                            
+                                                {{-- @if($item->link == '')
+                                            <p></p>
+                                        @else
+                                            <p><a href="{{$item->link}}" target="_blank"><small>{{$item->link}}</small></a></p>
+                                        @endif --}}
+                                        {{-- <span class="badge"> {{ $item->phone_number }} </span> --}}
+                                            <p>{{ $item->short_testimonial }}</p>
+                                           </div>
+                                        </div>
                                     </div>
+
                                     @endforeach
                                 </td>
                             </tr>
