@@ -656,3 +656,20 @@ function countTotalTopicHours($lessonid)
     }
     return $totalhrs . ' hours';
 }
+
+function CountTotalReview($courseid){
+    $totalreview = 0;
+    $review = App\Models\CourseReview::where('course_id', $courseid)->get();
+    //dd($lessons);
+    $data['review_count'] = count($review);
+    $data['rating_count'] = count($review);
+    if( $data['review_count'] == '')
+    {
+        $data = '<span></span>';
+    }
+    else{
+
+    }
+    return (object)$data;
+   
+}
