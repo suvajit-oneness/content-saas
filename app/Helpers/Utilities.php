@@ -382,22 +382,59 @@ function CategoryNames($category_string)
     return $category_arr;
 }
 
-function getalltopics($courseid){
+function completedTopicPerCourse($courseid){
     $user_id = Auth::guard('web')->user()->id;
-    return SaveTopic::where('user_id',$user_id)->where('course_id',$courseid)->get();
+    $data = [];
+    $data['total_topic'] = SaveTopic::where('user_id',$user_id)->where('course_id',$courseid)->count();
+    $data['total_viewed_topic'] = SaveTopic::where('user_id',$user_id)->where('course_id',$courseid)->where('is_view',1)->count();
+    return (object)$data;
 }
 
-function getlastviewedtopic($courseid){
+function completedTopicPerLesson($courseid, $lesson_id){
     $user_id = Auth::guard('web')->user()->id;
-    if (SaveTopic::where('user_id',$user_id)->where('course_id',$courseid)->where('is_view',1)->orderBy('id','DESC')->count() > 0)
-        return SaveTopic::where('user_id',$user_id)->where('course_id',$courseid)->where('is_view',1)->orderBy('id','DESC')->first();
-    else
-        return false;
+    return SaveTopic::where('user_id',$user_id)->where('course_id',$courseid)->where('lesson_id',$lesson_id)->where('is_view',1)->count();
 }
-function getnextviewedtopic($courseid){
+
+
+function getPrevVideoTopic($id)
+{
+    $savetopic = SaveTopic::find($id);
+    $user_id = $savetopic->user_id;
+    $course_id = $savetopic->course_id;
+
+    $prev_row = SaveTopic::where('id','<',$id)->where('user_id',$user_id)->where('course_id',$course_id)->orderBy('id','DESC')->get();
+    if(count($prev_row)>0){
+        return $prev_row[0];
+    }else{
+        return false;
+    }
+}
+function getNextVideoTopic($id)
+{
+    $savetopic = SaveTopic::find($id);
+    $user_id = $savetopic->user_id;
+    $course_id = $savetopic->course_id;
+
+    $prev_row = SaveTopic::where('id','>',$id)->where('user_id',$user_id)->where('course_id',$course_id)->orderBy('id','ASC')->get();
+    if(count($prev_row)>0){
+        return $prev_row[0];
+    }else{
+        return false;
+    }
+}
+
+function getCountervideotopic($courseid){
     $user_id = Auth::guard('web')->user()->id;
-    if(SaveTopic::where('user_id',$user_id)->where('course_id',$courseid)->where('is_view',0)->count() > 0)
-        return SaveTopic::where('user_id',$user_id)->where('course_id',$courseid)->where('is_view',0)->first();
+    if(SaveTopic::where('user_id',$user_id)->where('course_id',$courseid)->count() > 0){
+        $data = SaveTopic::where('user_id',$user_id)->where('course_id',$courseid)->where('counter',1)->first(); 
+        $last_topic = SaveTopic::where('user_id',$user_id)->where('course_id',$courseid)->orderBy('id','DESC')->first()->id;
+        if($data->id == $last_topic){
+            if(count(SaveTopic::where('id' ,$data->id)->where('is_view',1)->get()) <= 0){
+                SaveTopic::where('id' ,$data->id)->update(['is_view'=>1]);
+            }
+        }
+        return $data;
+    }
     else
         return false;
 }

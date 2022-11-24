@@ -7539,6 +7539,13 @@ ul.review-star-group{
   height: 100%;
   overflow: auto;
 }
+.lesstionItem.active > a{
+  background: #7ea801;
+  color: #fff;
+}
+.lesstionItem.active .content{
+  display: block;
+}
 
 .lesstionItem a {
   background-color: #f4fae6;

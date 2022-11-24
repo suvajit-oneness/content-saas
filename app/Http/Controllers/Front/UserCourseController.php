@@ -60,20 +60,38 @@ class UserCourseController extends Controller
         $review->save();
         return redirect()->back()->with('success', 'Comment added successfully');
     }
-
-    public function savetopic(Request $request)
+    
+    public function savetopicAndSetCounter(Request $request)
     {
-        $saved = SaveTopic::where('id',$request->id)->update(['is_view'=>1]);
-        if($saved){
-            // dd(getnextviewedtopic($request->course_id));
-            if(getnextviewedtopic($request->course_id) != false){
-                $data = [
-                    'video_url' => asset(getTopicVideo(getnextviewedtopic($request->course_id)->topic_id)),
-                    'topic_id' => getnextviewedtopic($request->course_id)->topic_id
-                ];
-            }
-            return response()->json(['status' => 200, 'message' => 'Topic Completed', 'data' => $data]);
+        $user_id = Auth::guard('web')->user()->id;
+        $viewed = SaveTopic::where('id',$request->current_counter_id)->where('is_view',1)->get();
+        if(count($viewed)<=0){
+            $saved = SaveTopic::where('id',$request->current_counter_id)->update(['is_view'=>1]);
+            $message = "New Topic Completed!";
+        }else{
+            $message = "Next topic loaded!";
+        }
+        $remove_previous_counter = SaveTopic::where('user_id',$user_id)->where('course_id',$request->course_id)->update(['counter'=>0]); 
+        $counter_on = SaveTopic::where('id',$request->id)->update(['counter'=>1]);
+        
+        return response()->json(['status' => 200, 'message' => $message]);
+
+    }
+
+    public function loadIndividualTopic(Request $request)
+    {
+        $user_id = Auth::guard('web')->user()->id;
+        $viewed = SaveTopic::where('user_id',$user_id)->where('course_id',$request->course_id)->where('lesson_id',$request->lesson_id)->where('topic_id',$request->topic_id)->where('is_view',1)->count();
+        SaveTopic::where('user_id',$user_id)->where('course_id',$request->course_id)->update(['counter'=>0]);
+        
+        if($viewed <= 0){
+            SaveTopic::where('user_id',$user_id)->where('course_id',$request->course_id)->where('lesson_id',$request->lesson_id)->where('topic_id',$request->topic_id)->update(['is_view'=>1,'counter'=>1]);
+            $message = "New Topic Completed!";
+        }else{
+            SaveTopic::where('user_id',$user_id)->where('course_id',$request->course_id)->where('lesson_id',$request->lesson_id)->where('topic_id',$request->topic_id)->update(['counter'=>1]);
+            $message = "Next topic loaded!";
         }
 
+        return response()->json(['status' => 200, 'message' => $message]);
     }
 }
