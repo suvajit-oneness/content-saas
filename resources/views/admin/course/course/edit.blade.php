@@ -212,14 +212,14 @@
                                 placeholder="Enter Amount" />
                                 @error('cost') <p class="small text-danger">{{ $message }}</p> @enderror
                             </div>
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label class="control-label" for="offer_price">Offer Price ($)</label>
                                 <input type="number" name="offer_price" id="offer_price" value="{{ old('offer_price',$course->offer_price) }}"
                                     class="form-control">
                                 @error('offer_price')
                                     <p class="small text-danger">{{ $message }}</p>
                                 @enderror
-                            </div>
+                            </div> --}}
                         </div>
                         {{-- <div class="form-group">
                             <label class="control-label" for="price">Price ($)</label>
@@ -277,28 +277,36 @@
                                 <p class="small text-danger">{{ $message }}</p>
                             @enderror
                         </div>
+                        @php
+                            $other_author = true;
+                            foreach ($writer as $index => $item){
+                                if($item->first_name . ' ' . $item->last_name == $course->author_name){
+                                    $other_author = false;
+                                    break;
+                                }
+                            }
+                        @endphp
                         <div class="form-group">
-                            <label class="control-label" for="author_name"> Writer <span class="m-l-5 text-danger">
-                                    *</span></label>
+                            <label class="control-label" for="author_name"> Writer <span class="m-l-5 text-danger">*</span></label>
                             <select class="filter_select form-control" name="author_name" id="writerName">
                                 <option value="" hidden selected>Select</option>
                                 @foreach ($writer as $index => $item)
                                     <option value="{{ $item->first_name . ' ' . $item->last_name }}"
-                                        {{ $course->author_name == $item->first_name . ' ' . $item->last_name ? 'selected' : '' }}>
+                                        {{ $other_author == false && $course->author_name == $item->first_name . ' ' . $item->last_name ? 'selected' : '' }}>
                                         {{ $item->first_name . ' ' . $item->last_name }}</option>
                                 @endforeach
-                                <option value="other" {{ $course->author_name == 'other' ? 'selected' : '' }}>Other
+                                <option value="other" {{ $other_author == true ? 'selected' : '' }}>Other
                                 </option>
                             </select>
                             @error('author_name')
                                 <p class="small text-danger">{{ $message }}</p>
                             @enderror
                         </div>
-                        <div id="writer">
+                        <div id="writer" style="display: {{$other_author == true ? 'block;' : 'none;'}}">
                             <div class="form-group">
                                 <input class="form-control @error('other_author_name') is-invalid @enderror"
                                     type="text" name="other_author_name" id="author_name"
-                                    value="{{ old('other_author_name') }}" placeholder="Type here" />
+                                    value="{{ old('author_name',$course->author_name) }}" placeholder="Type here" />
                                 @error('other_author_name')
                                     <p class="small text-danger">{{ $message }}</p>
                                 @enderror
@@ -433,18 +441,8 @@
         $('#author_description').summernote({
             height: 400
         });
+        
         $(function() {
-            $('#writer').hide();
-            $('#writerName').change(function() {
-                if ($('#writerName').val() == 'other') {
-                    $('#writer').show();
-                } else {
-                    $('#writer').hide();
-                }
-            });
-        });
-        $(function() {
-            $('#writer').hide();
             $('#writerName').change(function() {
                 if ($('#writerName').val() == 'other') {
                     $('#writer').show();

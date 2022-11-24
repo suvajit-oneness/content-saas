@@ -84,7 +84,7 @@ class CourseManagementController extends BaseController
         $course->description = $params['description'];
 
         $course->price = $params['price'];
-        $course->offer_price = $params['offer_price'];
+        // $course->offer_price = $params['offer_price'];
         $course->course_content = $params['course_content'];
         $course->requirements = $params['requirements'];
         $course->target = $params['target'];
@@ -176,7 +176,7 @@ class CourseManagementController extends BaseController
 
         $course->short_description = $request->short_description;
         $course->price = $request->price;
-        $course->offer_price = $request->offer_price;
+        // $course->offer_price = $request->offer_price;
         $course->course_content = $request->course_content;
         $course->requirements = $request->requirements;
         $course->target = $request->target;
