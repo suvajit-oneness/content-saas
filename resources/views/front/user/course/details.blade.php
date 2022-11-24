@@ -5,16 +5,16 @@
 <section class="edit-sec edit-basic-detail p-0 bg-white for_lession_details_footer">
     <div class="crs-details lession-details">
         <div class="topic-video">
-            <video width="640" height="320" controls id="contentVideo" class="contentVideo" data-id="{{getnextviewedtopic($course->id)->topic_id ?? getlastviewedtopic($course->id)->topic_id}}" style="" controlsList="{{$course->video_downloadable == 0 ? 'nodownload' : '' }}">
-                <source src="{{asset(getTopicVideo(getnextviewedtopic($course->id)->topic_id ?? getlastviewedtopic($course->id)->topic_id))}}" type="video/mp4">
+            <video width="640" height="320" controls id="contentVideo" class="contentVideo" data-id="{{getCountervideotopic($course->id)->id}}" data-topic_id="{{getCountervideotopic($course->id)->topic_id}}" style="" controlsList="{{$course->video_downloadable == 0 ? 'nodownload' : '' }}">
+                <source src="{{asset(getTopicVideo(getCountervideotopic($course->id)->topic_id))}}" type="video/mp4">
             </video>
-            @if(getlastviewedtopic($course->id) != false)
-                <a href="javascript:void(0)" onclick="showPrevious(this)" data-id="{{getlastviewedtopic($course->id)->id}}" class="lession_nav prev">
+            @if(getPrevVideoTopic(getCountervideotopic($course->id)->id) != false)
+                <a href="javascript:void(0)" onclick="savetopicAndSetCounter(this)" data-id="{{getPrevVideoTopic(getCountervideotopic($course->id)->id)->id}}" class="lession_nav prev">
                     <i class="fas fa-angle-left"></i>
                 </a>
             @endif
-            @if(getnextviewedtopic($course->id) != false)
-                <a href="javascript:void(0)" onclick="saveAndWatchNext(this)" data-id="{{getnextviewedtopic($course->id)->id}}" class="lession_nav next">
+            @if(getNextVideoTopic(getCountervideotopic($course->id)->id) != false)
+                <a href="javascript:void(0)" onclick="savetopicAndSetCounter(this)" data-id="{{getNextVideoTopic(getCountervideotopic($course->id)->id)->id}}" class="lession_nav next">
                     <i class="fas fa-angle-right"></i>
                 </a>
             @endif
@@ -69,7 +69,7 @@
         </div> --}}
         <div class="lessionSidebar-header">
             <p>
-                Course Lessons
+                {{$course->title}} ({{completedTopicPerCourse($course->id)->total_viewed_topic/completedTopicPerCourse($course->id)->total_topic * 100}}% Completed)
             </p>
             <a href="javascript:void(0)" class="lessionSidebar-close">
                 <i class="fas fa-times"></i>
@@ -77,16 +77,16 @@
         </div>
         <div class="accordion-container lessionSidebar-list">
             @foreach($totalLessonsAndTopics->lessons as $key => $lesson)
-            <div class="set lesstionItem">
+            <div class="set lesstionItem {{getCountervideotopic($course->id)->lesson_id == $lesson->lesson->id ? 'active' : ''}}">
                 <a href="javascript:void(0)">
-                    {!! $lesson->lesson->title !!}
+                    {!! $lesson->lesson->title !!}  ({{completedTopicPerLesson($course->id, $lesson->lesson->id).'/'.count($totalLessonsAndTopics->topics[$key])}} Completed)
                     <i class="fas fa-angle-down"></i>
                 </a>
                 <div class="content">
                     <ul class="topicList">
                         @foreach($totalLessonsAndTopics->topics[$key] as $data)
                         <li>
-                            <a href="javascript:void(0)" id="topic_div_id{{$data->topic->id}}" class="topic_div_id" data-id="{{$data->topic->id}}">
+                            <a href="javascript:void(0)" onclick="loadIndividualTopic(this,'{{$lesson->lesson->id}}')" id="topic_div_id{{$data->topic->id}}" class="topic_div_id" data-id="{{$data->topic->id}}">
                                 @if(getViewedStatus($course->id,$lesson->lesson->id,$data->topic->id) != null)
                                     <input type="checkbox" class="topicCheck" onclick="return false" {{getViewedStatus($course->id,$lesson->lesson->id,$data->topic->id)->is_view == 1 ? 'checked' : ''}}>
                                 @endif
@@ -107,40 +107,61 @@
         </div>
     </div>
 </section>
+@endsection
+@section('script')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
     <script>
         function setActiveClassForTopic() {
             for (let index = 0; index < $('.topic_div_id').length; index++) {
-                if($('.topic_div_id').eq(index).data('id') == $('.contentVideo').data('id')){
-                    $('#topic_div_id'+$('.contentVideo').data('id')).addClass('active');
+                if($('.topic_div_id').eq(index).data('id') == $('.contentVideo').data('topic_id')){
+                    $('.topic_div_id').removeClass('active');
+                    $('#topic_div_id'+$('.contentVideo').data('topic_id')).addClass('active');
+
                 }
             }
         }
         setActiveClassForTopic();
 
-        function saveAndWatchNext(x){
+        function savetopicAndSetCounter(x){
             // alert($(x).data('id'));
+            console.log($(x).data('id'));
+            const current_counter_id = $('#contentVideo').data('id');
             $.ajax({
                 method: "POST",
-                url: "{{route('front.user.courses.savetopic')}}",
+                url: "{{route('front.user.courses.savetopicAndSetCounter')}}",
                 data: {
                     _token: "{{csrf_token()}}",
                     id: $(x).data('id'),
+                    current_counter_id: current_counter_id,
                     course_id: "{{$course->id}}",
                 },
                 success: function(response){
-                    alert(response.message);
-                    $('#contentVideo source').attr('src',response.data.video_url);
-                    $('#contentVideo').play();
-                    $('#contentVideo').data('id',response.data.topic_id); 
-                    setActiveClassForTopic();
+                    if(response.message == "New Topic Completed!"){
+                        toastFire('success', response.message);
+                    }
+                    location.reload();
                 }
             })
         }
 
-        function showPrevious(x){
-
+        function loadIndividualTopic(x,lesson_id){
+            $.ajax({
+                method: "POST",
+                url: "{{route('front.user.courses.loadIndividualTopic')}}",
+                data: {
+                    _token: "{{csrf_token()}}",
+                    topic_id: $(x).data('id'),
+                    lesson_id: lesson_id,
+                    course_id: "{{$course->id}}",
+                },
+                success: function(response){
+                    if(response.message == "New Topic Completed!"){
+                        toastFire('success', response.message);
+                    }
+                    location.reload();
+                }
+            })
         }
 
 
@@ -168,46 +189,4 @@
         });
 
     </script>
-
-
-    <!-- <div class="course-content-accordions lessionSidebar">
-        <div class="col-12 mt-3 mb-3 text-end">
-            <a href="{!! URL::to('/user/my-courses') !!}" class="add-btn-edit d-inline-block secondary-btn"><i
-                    class="fa-solid fa-chevron-left"></i> Back</a>
-        </div>
-        <div class="row mt-2 g-3">
-            @foreach ($lessons as $key => $data)
-                <div class="col-12 col-lg-4 col-md-6">
-                    <div class="courses-content">
-                        <div class="courses-info">
-                            <div class="courses-heading">
-                                <h4>{{ $data->lesson->title }}</h4>
-                                <div class="courses-lession-time">
-                                    <ul class="list-unstyled p-0 m-0">
-
-                                        @php
-                                            $topic=App\Models\LessonTopic::where('lesson_id',$data->lesson_id)->with('topic')->get();
-                                            //dd($topic);
-                                        @endphp
-                                        <li>
-                                            <i class="fa-solid fa-book"></i>
-                                            {{ count($topic) }} Topic
-                                        </li>
-                                    </ul>
-
-                                </div>
-                            </div>
-
-                            <div class="courses-desc">
-                                <p>{!! $data->lesson->description !!}</p>
-                                <a href="{!! URL::to('/user/my-courses/'.$data->course->slug .'/'.$data->lesson->slug) !!}" class="course-btn">View</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-
-        </div>
-    </div> -->
-
 @endsection
