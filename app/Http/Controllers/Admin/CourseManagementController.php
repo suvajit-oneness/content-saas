@@ -32,9 +32,9 @@ class CourseManagementController extends BaseController
     {
         $pageTitle = "Course";
         if (!empty($request->term))
-            $courses = Course::where('title', 'like', '%' . $request->term . '%')->paginate(25);
+            $courses = Course::where('title', 'like', '%' . $request->term . '%')->orderBy('title')->paginate(25);
         else
-            $courses = Course::paginate(25);
+            $courses = Course::orderBy('title')->paginate(25);
         return view('admin.course.course.index', compact('courses', 'pageTitle'));
     }
 
@@ -49,65 +49,67 @@ class CourseManagementController extends BaseController
 
     public function store(Request $request)
     {
-         //dd($request->all());
+        // dd($request->all());
         $this->validate($request, [
+            'presented_by' => 'required',
             'category_id' => 'required',
             'title' => 'required|max:191',
+            'short_description' => 'required|string|max:200',
+            'description' => 'required|string',
+            'certificate' => 'required',
+            'is_paid' => 'required|integer',
+            'price' => 'required_if:price,1|integer',
+            'course_content' => 'required|string',
+            'requirements' => 'required|string',
+            'target' => 'required|string',
+            'company_name' => 'nullable',
+            'author_name' => 'required|string',
+            'other_author_name' => 'required_if:author_name,other',
+            'other_author_description' => 'required_if:author_name,other',
+            'other_author_image' => 'required_if:author_name,other|file|mimes:png,jpg',
             'image' => 'required|file|mimes:png,jpg',
-            'short_description' => 'required',
-            'description' => 'required',
-            'price' => 'required',
-            'preview_video' => 'required|file|mimes:mp4',
-            'course_content' => 'required',
-            'requirements' => 'required',
-            'target' => 'required',
-            'company_name' => 'required',
+            'preview_video' => 'required|mimes:mp4',
             'language' => 'required',
         ]);
+        // dd($request->all());
 
         $params = $request->except('_token');
 
         $course = new Course();
-        $course->title = $params['title'];
-
+        $course->presented_by = $params['presented_by'];
         $course->category_id = $params['category_id'];
 
-        // slug
-        $course->slug = slugGenerate($params['title'], 'courses');
-
-        // image
-        $course->image = imageUpload($params['image'], 'courses');
-        $course->preview_video = imageUpload($params['preview_video'], 'courses/video');
-        if (!empty($request->author_image))
-        $course->author_image = imageUpload($request->author_image, 'courses');
+        $course->title = $params['title'];
+        $course->slug = slugGenerate($params['title'],'courses');
+        
         $course->short_description = $params['short_description'];
         $course->description = $params['description'];
-
+        $course->certificate = $params['certificate'];
+        $course->is_paid = $params['is_paid'];
         $course->price = $params['price'];
-        // $course->offer_price = $params['offer_price'];
         $course->course_content = $params['course_content'];
         $course->requirements = $params['requirements'];
-        $course->target = $params['target'];
-        $course->company_name = $params['company_name'];
-        if($params['author_name'] == 'other'){
-            $course->author_name = $request->other_author_name;
+        $course->target	 = $params['target'];
+        $course->company_name = $params['company_name'] ?? '';
+        
+        if($params['author_name'] != 'other'){
+            $author = User::find($params['author_name']);
+            $course->author_name = $author->first_name . ' ' . $author->last_name;
+            $course->author_description = $author->short_desc;
+            $course->author_image = $author->image;
         }else{
-            $course->author_name = $request->author_name;
+            $course->author_name = $params['other_author_name'];
+            $course->author_description = $params['other_author_description'];
+            $course->author_image = imageUpload($params['other_author_image'],'course');
         }
-        $course->author_description = $request->author_description;
+
+        $course->image = imageUpload($params['image'],'course');
+        $course->preview_video = imageUpload($params['preview_video'],'courses');
         $course->language = $params['language'];
-        if($params['presented_by'] == 'other'){
-            $course->presented_by = $request->other_presented_by ?? '';
-        }else{
-            $course->presented_by = $request->presented_by ?? '';
-        }
-        $course->certificate = isset($request->certificate) ? 1 : 0;
-        $course->presented_by_logo = $request->presented_by_logo ?? '';
-        $course->status = 0;
 
-        $course->save();
+        // $course->save();
 
-        if (!$course) {
+        if (!$course->save()) {
             return $this->responseRedirectBack('Error occurred while creating course.', 'error', true, true);
         }
 
@@ -147,63 +149,71 @@ class CourseManagementController extends BaseController
      */
     public function update(Request $request)
     {
-        //dd($request->all());
+        // dd($request->all());
         $this->validate($request, [
+            'presented_by' => 'required',
             'category_id' => 'required',
             'title' => 'required|max:191',
+            'short_description' => 'required|string|max:200',
+            'description' => 'required|string',
+            'certificate' => 'required',
+            'is_paid' => 'required|integer',
+            'price' => 'required_if:price,1|integer',
+            'course_content' => 'required|string',
+            'requirements' => 'required|string',
+            'target' => 'required|string',
+            'company_name' => 'nullable',
+            'author_name' => 'required|string',
+            'other_author_name' => 'required_if:author_name,other',
+            'other_author_description' => 'required_if:author_name,other',
+            'other_author_image' => 'nullable|file|mimes:png,jpg',
             'image' => 'nullable|file|mimes:png,jpg',
-            'short_description' => 'required',
-            'description' => 'required',
-            'price' => 'required',
-            'preview_video' => 'nullable|file|mimes:mp4',
-            'course_content' => 'required',
-            'requirements' => 'required',
-            'target' => 'required',
-            'company_name' => 'required',
+            'preview_video' => 'nullable|mimes:mp4',
             'language' => 'required',
         ]);
 
+        $params = $request->except('_token');
+
         $course = Course::find($request->id);
 
-        $course->category_id = $request->category_id;
+        $course->presented_by = $params['presented_by'];
+        $course->category_id = $params['category_id'];
 
-        if ($course->title != $request->title) {
-            $course->title = $request->title;
-            $course->slug = slugGenerate($request->title, 'courses');
+        if($course->title != $params['title']){
+            $course->title = $params['title'];
+            $course->slug = slugGenerate($params['title'],'courses');
         }
-
-        $course->description = $request->description;
-
-        $course->short_description = $request->short_description;
-        $course->price = $request->price;
-        // $course->offer_price = $request->offer_price;
-        $course->course_content = $request->course_content;
-        $course->requirements = $request->requirements;
-        $course->target = $request->target;
-        $course->company_name = $request->company_name;
-        if($request['author_name'] == 'other'){
-            $course->author_name = $request->other_author_name;
+        
+        $course->short_description = $params['short_description'];
+        $course->description = $params['description'];
+        $course->certificate = $params['certificate'];
+        $course->is_paid = $params['is_paid'];
+        $course->price = $params['price'];
+        $course->course_content = $params['course_content'];
+        $course->requirements = $params['requirements'];
+        $course->target	 = $params['target'];
+        $course->company_name = $params['company_name'] ?? '';
+        
+        if($params['author_name'] != 'other'){
+            $author = User::find($params['author_name']);
+            $course->author_name = $author->first_name . ' ' . $author->last_name;
+            $course->author_description = $author->short_desc;
+            $course->author_image = $author->image;
         }else{
-            $course->author_name = $request->author_name;
+            $course->author_name = $params['other_author_name'];
+            $course->author_description = $params['other_author_description'];
+            
+            if(isset($params['other_author_image']))
+                $course->author_image = imageUpload($params['other_author_image'],'course');
         }
-        $course->author_description = $request->author_description;
-        $course->language = $request->language;
-        if($request['presented_by'] == 'other'){
-            $course->presented_by = $request->other_presented_by ?? '';
-        }else{
-            $course->presented_by = auth()->guard('admin')->user()->name;
-        }
-        $course->certificate = isset($request->certificate) ? 1 : 0;
-        $course->presented_by_logo = $request->presented_by_logo ?? '';
 
+        if(isset($params['image']))
+            $course->image = imageUpload($params['image'],'course');
 
-        if (!empty($request->image))
-            $course->image = imageUpload($request->image, 'courses');
-
-        if (!empty($request->preview_video))
-            $course->preview_video = imageUpload($request->preview_video, 'courses/video');
-        if (!empty($request->author_image))
-            $course->author_image = imageUpload($request->author_image, 'courses');
+        if(isset($params['preview_video']))
+            $course->preview_video = imageUpload($params['preview_video'],'courses');
+        
+        $course->language = $params['language'];
 
         if (!$course->save()) {
             return $this->responseRedirectBack('Error occurred while updating.', 'error', true, true);

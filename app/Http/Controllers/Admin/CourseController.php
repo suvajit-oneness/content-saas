@@ -47,7 +47,7 @@ class CourseController extends BaseController
 
     public function store(Request $request)
     {
-        // dd($request->all());
+        dd($request->all());
         $this->validate($request, [
             'category_id' => 'required',
             'title' => 'required|max:191',

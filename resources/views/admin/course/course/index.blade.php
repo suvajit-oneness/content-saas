@@ -60,7 +60,7 @@
                                     </td>
                                     <td>{{ $data->title }}</td>
                                     <td>
-                                        {!! $data->description !!}
+                                        {!! $data->short_description !!}
                                     </td>
                                     <td class="text-center">
                                         <div class="toggle-button-cover margin-auto">

@@ -40,26 +40,27 @@
                 <form action="{{ route('admin.course.update') }}" method="POST" role="form"
                     enctype="multipart/form-data">@csrf
                     <div class="tile-body">
+
+                        {{-- Internal course field --}}
                         <div class="form-group">
-                            <label class="control-label" for="presented_by">Internal Courses</label>
-                            {{-- <input type="checkbox" {{$course->certificate == 1 ? 'checked' : ''}} name="certificate" id="certificate" class="form-control"> --}}
+                            <label class="control-label">Internal Courses (Course created by Content-Saas) <span class="m-l-5 text-danger">*</span></label>
                             <div class="row">
                                 <div class="col-4">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" onClick="recurringCheck();"
-                                            id="recurring" name="presented_by" value="yes"
-                                            {{ $course->presented_by != 'other' ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="presented_by">
+                                        <input class="form-check-input" type="radio"
+                                            id="presented_by_yes" name="presented_by" value="content-saas"
+                                            {{ old('presented_by',$course->presented_by) != 'other' ? 'checked' : '' }} style="width:16px;height: 16px;margin-top:0.25rem;">
+                                        <label class="form-check-label" for="presented_by_yes">
                                             Yes
                                         </label>
                                     </div>
                                 </div>
                                 <div class="col-8">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" onClick="recurringCheck();"
-                                            id="presented_by" name="presented_by" value="no"
-                                            {{ $course->presented_by == 'other' ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="presented_by">
+                                        <input class="form-check-input" type="radio"
+                                            id="presented_by_no" name="presented_by" value="other"
+                                            {{ old('presented_by',$course->presented_by) == 'other' ? 'checked' : '' }} style="width:16px;height: 16px;margin-top:0.25rem;">
+                                        <label class="form-check-label" for="presented_by_no">
                                             No
                                         </label>
                                     </div>
@@ -70,36 +71,14 @@
                                 <p class="small text-danger">{{ $message }}</p>
                             @enderror
                         </div>
-                        <div id="yes">
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <label class="control-label" for="presented_by">Presented by</label>
-                                        <input class="form-control @error('other_presented_by') is-invalid @enderror"
-                                            type="text" name="other_presented_by" id="presented_by"
-                                            value="{{ old('other_presented_by') }}"
-                                            placeholder="Presented by " />
-                                    </div>
-                                    <div class="col-6">
-                                        <label class="control-label" for="presented_by">Logo</label>
-                                        <input class="form-control @error('presented_by_logo') is-invalid @enderror"
-                                            type="file" name="presented_by_logo" id="presented_by_logo"
-                                            value="{{ old('presented_by_logo') }}" placeholder="Presented by " />
-                                    </div>
-                                    @error('presented_by')
-                                        <p class="small text-danger">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
+                        
+                        {{-- Category field --}}
                         <div class="form-group">
-                            <label class="control-label" for="category_id"> Category <span class="m-l-5 text-danger">
-                                    *</span></label>
+                            <label class="control-label" for="category_id"> Category <span class="m-l-5 text-danger">*</span></label>
                             <select class="filter_select form-control" name="category_id">
                                 <option value="" hidden selected>Select Categoy...</option>
                                 @foreach ($course_category as $index => $item)
-                                    <option {{ $course->category_id == $item->id ? 'selected' : '' }}
-                                        value="{{ $item->id }}">{{ $item->title }}</option>
+                                    <option value="{{ $item->id }}" {{old('category_id',$course->category_id) == $item->id ? 'selected' : '' }}>{{ $item->title }}</option>
                                 @endforeach
                             </select>
                             @error('category_id')
@@ -107,26 +86,25 @@
                             @enderror
                         </div>
 
+                        {{-- Course Name --}}
                         <div class="form-group">
-                            <label class="control-label" for="name">Title <span class="m-l-5 text-danger">
-                                    *</span></label>
+                            <label class="control-label" for="title">Course Name <span class="m-l-5 text-danger">*</span></label>
                             <input class="form-control @error('title') is-invalid @enderror" type="text" name="title"
-                                id="title" value="{{ old('title') ? old('title') : $course->title }}" />
-
+                                id="title" value="{{ old('title',$course->title) }}" />
                             @error('title')
                                 <p class="small text-danger">{{ $message }}</p>
                             @enderror
                         </div>
 
+                        {{-- Course Image Field --}}
                         <div class="form-group">
+                            <label class="control-label">Course Image <span class="m-l-5 text-danger">*</span></label>
                             <div class="row">
-                                <div class="col-md-2">
-                                    <img src="{{ asset($course->image) }}" alt="" class="w-100 mt-2">
+                                <div class="col-md-3">
+                                    <img src="{{asset($course->image)}}" width="100px" height="100px">
                                 </div>
-                                <div class="col-md-10">
-                                    <label class="control-label">Image</label>
-                                    <input class="form-control @error('image') is-invalid @enderror" type="file"
-                                        id="image" name="image" />
+                                <div class="col-md-9">
+                                    <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image" />
                                 </div>
                             </div>
                             @error('image')
@@ -134,46 +112,46 @@
                             @enderror
                         </div>
 
+                        {{-- Course Short Description field --}}
                         <div class="form-group">
-                            <label class="control-label" for="name">Short description <span class="m-l-5 text-danger">
-                                    *</span></label>
-                            <textarea name="short_description" id="short_description" class="form-control @error('title') is-invalid @enderror">{{ old('short_description') ?? $course->short_description }}</textarea>
-
+                            <label class="control-label" for="short_description">Short Description (200 characters max) <span class="m-l-5 text-danger">*</span></label>
+                            <textarea type="text" class="form-control" rows="4" name="short_description" id="short_description">{{ old('short_description',$course->short_description) }}</textarea>
                             @error('short_description')
                                 <p class="small text-danger">{{ $message }}</p>
                             @enderror
                         </div>
 
+                        {{-- Description --}}
                         <div class="form-group">
-                            <label class="control-label" for="description">Description</label>
-                            <textarea type="text" class="form-control" rows="4" name="description" id="description">{{ old('description') ?? $course->description }}</textarea>
+                            <label class="control-label" for="description">Description <span class="m-l-5 text-danger">*</span></label></label>
+                            <textarea type="text" class="form-control" rows="4" name="description" id="description">{{ old('description',$course->description) }}</textarea>
                             @error('description')
                                 <p class="small text-danger">{{ $message }}</p>
                             @enderror
                         </div>
 
-                        <h4>Additional Course description</h4>
+                        <h4>Additional Course description </h4>
                         <hr>
 
+                        {{-- Course certification --}}
                         <div class="form-group">
-                            <label class="control-label" for="certificate">Course certification</label>
-                            {{-- <input type="checkbox" {{$course->certificate == 1 ? 'checked' : ''}} name="certificate" id="certificate" class="form-control"> --}}
+                            <label class="control-label">Course certification <span class="m-l-5 text-danger">*</span></label>
                             <div class="row">
                                 <div class="col-4">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" onClick="recurringCheck();"
-                                            id="recurring" name="certificate" value="yes"
-                                            {{ $course->certificate != 1 ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="certificate">
+                                        <input class="form-check-input" type="radio"
+                                            id="certificate_yes" name="certificate" value="1"
+                                            {{ old('certificate', $course->certificate) == 1 ? 'checked' : '' }} style="width:16px;height: 16px;margin-top:0.25rem;">
+                                        <label class="form-check-label" for="certificate_yes">
                                             Yes
                                         </label>
                                     </div>
                                 </div>
                                 <div class="col-8">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" onClick="recurringCheck();"
-                                            id="certificate" name="certificate" value="no"
-                                            {{ $course->certificate == 1 ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="radio"
+                                            id="certificate" name="certificate" value="0"
+                                            {{ old('certificate', $course->certificate) == 0 ? 'checked' : '' }} style="width:16px;height: 16px;margin-top:0.25rem;">
                                         <label class="form-check-label" for="certificate">
                                             No
                                         </label>
@@ -184,177 +162,184 @@
                                 <p class="small text-danger">{{ $message }}</p>
                             @enderror
                         </div>
+
+                        {{-- Cost --}}
                         <div class="form-group">
-                            <label class="control-label" for="name">Price <span class="m-l-5 text-danger">*</span></label>
+                            <label class="control-label">Price <span class="m-l-5 text-danger">*</span></label>
                             <div class="row">
                                 <div class="col-4">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" onClick="CostCheck();" id="free" name="is_paid" value="0" {{ $course->price == "" ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="free">
-                                            Free
-                                        </label>
+                                        <input class="form-check-input form control" type="radio" onclick="$('#priceother').val('0')"  id="free" name="is_paid" value='0' {{ old('is_paid',$course->is_paid) == 0 ? 'checked' : '' }} style="width:16px;height: 16px;margin-top:0.25rem;">
+                                        <label class="form-label mb-0" for="free">Free</label>
                                     </div>
                                 </div>
                                 <div class="col-8">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" onClick="CostCheck();" id="premium" name="is_paid" value="1" {{ $course->price != "" ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="premium">
-                                            Paid
-                                        </label>
+                                        <input class="form-check-input" type="radio"  id="premium" name="is_paid" value="1" {{ old('is_paid',$course->is_paid) == 1  ? 'checked' : '' }} style="width:16px;height: 16px;margin-top:0.25rem;">
+                                        <label class="form-label mb-0" for="premium">Paid</label>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div id="Eventcost">
+                        <div id="cost" style="display: {{old('is_paid', $course->is_paid) > 0 ? 'block;' : 'none;'}}">
                             <div class="form-group">
-                                <input class="form-control @error('cost') is-invalid @enderror" type="number"
-                                name="price" id="event_cost" value="{{ old('price',$course->price) }}"
-                                placeholder="Enter Amount" />
-                                @error('cost') <p class="small text-danger">{{ $message }}</p> @enderror
+                                <label class="control-label" for="price">Price($) <span class="m-l-5 text-danger">*</span></label>
+                                <input type="number" name="price" id="priceother" value="{{ old('price',$course->price) }}"
+                                    class="form-control">
+                                @error('price')
+                                    <p class="small text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
                             {{-- <div class="form-group">
                                 <label class="control-label" for="offer_price">Offer Price ($)</label>
-                                <input type="number" name="offer_price" id="offer_price" value="{{ old('offer_price',$course->offer_price) }}"
+                                <input type="number" name="offer_price" id="offer_price" value="{{ old('offer_price') }}"
                                     class="form-control">
                                 @error('offer_price')
                                     <p class="small text-danger">{{ $message }}</p>
                                 @enderror
                             </div> --}}
                         </div>
-                        {{-- <div class="form-group">
-                            <label class="control-label" for="price">Price ($)</label>
-                            <input type="number" name="price" id="price"
-                                value="{{ old('price') ?? $course->price }}" class="form-control">
-                            @error('price')
-                                <p class="small text-danger">{{ $message }}</p>
-                            @enderror
-                        </div> --}}
+
+                        {{-- Course preview video --}}
                         <div class="form-group">
+                            <label class="control-label">Preview Video <span class="m-l-5 text-danger">*</span></label>
                             <div class="row">
-                                <div class="col-md-4">
-                                    <video src="{{ asset($course->preview_video) }}" alt="" width="150px"
-                                        height="150px" controls></video>
+                                <div class="col-md-3">
+                                    <video src="{{asset($course->preview_video)}}" width="100%" height="100%" controls></video>
                                 </div>
-                                <div class="col-md-8">
-                                    <label class="control-label">Preview Video</label>
-                                    <input class="form-control @error('preview_video') is-invalid @enderror"
-                                        type="file" id="preview_video" name="preview_video" />
+                                <div class="col-md-9">
+                                    <input class="form-control @error('preview_video') is-invalid @enderror" type="file"
+                                    id="preview_video" name="preview_video" />
                                 </div>
                             </div>
                             @error('preview_video')
                                 <p class="small text-danger">{{ $message }}</p>
                             @enderror
                         </div>
+
+                        {{-- Course Content --}}
                         <div class="form-group">
                             <label class="control-label" for="course_content">What you will learn (comma
-                                seperated)</label>
-                            <textarea name="course_content" id="course_content" class="form-control">{{ old('course_content') ?? $course->course_content }}</textarea>
+                                seperated)<span class="m-l-5 text-danger">*</span></label>
+                            <textarea name="course_content" id="course_content" class="form-control">{{ old('course_content',$course->course_content) }}</textarea>
                             @error('course_content')
                                 <p class="small text-danger">{{ $message }}</p>
                             @enderror
                         </div>
+
+                        {{-- Requirments --}}
                         <div class="form-group">
-                            <label class="control-label" for="requirements">Requirments</label>
+                            <label class="control-label" for="requirements">Course Requirments <span class="m-l-5 text-danger">*</span></label>
                             <input type="text" name="requirements" id="requirements"
-                                value="{{ old('requirements') ?? $course->requirements }}" class="form-control">
+                                value="{{ old('requirements', $course->requirements) }}" class="form-control">
                             @error('requirements')
                                 <p class="small text-danger">{{ $message }}</p>
                             @enderror
                         </div>
+
+                        {{-- Target Audience --}}
                         <div class="form-group">
-                            <label class="control-label" for="target">Target Audience</label>
-                            <input type="text" name="target" id="target"
-                                value="{{ old('target') ?? $course->target }}" class="form-control">
+                            <label class="control-label" for="target">Target Audience <span class="m-l-5 text-danger">*</span></label>
+                            <input type="text" name="target" id="target" value="{{ old('target',$course->target) }}"
+                                class="form-control">
                             @error('target')
                                 <p class="small text-danger">{{ $message }}</p>
                             @enderror
                         </div>
+
+                        {{-- Company Name --}}
                         <div class="form-group">
-                            <label class="control-label" for="company_name">Company Name</label>
+                            <label class="control-label" for="company_name">Company Name (Optional)</label>
                             <input type="text" name="company_name" id="company_name"
-                                value="{{ old('company_name') ?? $course->company_name }}" class="form-control">
+                                value="{{ old('company_name',$course->company_name) }}" class="form-control">
                             @error('company_name')
                                 <p class="small text-danger">{{ $message }}</p>
                             @enderror
                         </div>
+
                         @php
-                            $other_author = true;
-                            foreach ($writer as $index => $item){
-                                if($item->first_name . ' ' . $item->last_name == $course->author_name){
-                                    $other_author = false;
+                            $other_writer = true;
+                            foreach ($writer as $key => $value) {
+                                if($value->first_name.' '.$value->last_name == $course->author_name){
+                                    $other_writer = false;
                                     break;
                                 }
-                            }
+                            }   
                         @endphp
+                        
+                        {{-- Writer --}}
                         <div class="form-group">
-                            <label class="control-label" for="author_name"> Writer <span class="m-l-5 text-danger">*</span></label>
+                            <label class="control-label" for="category_id"> Writer <span class="m-l-5 text-danger">*</span></label>
                             <select class="filter_select form-control" name="author_name" id="writerName">
-                                <option value="" hidden selected>Select</option>
+                                <option value="" hidden selected>Select...</option>
                                 @foreach ($writer as $index => $item)
-                                    <option value="{{ $item->first_name . ' ' . $item->last_name }}"
-                                        {{ $other_author == false && $course->author_name == $item->first_name . ' ' . $item->last_name ? 'selected' : '' }}>
-                                        {{ $item->first_name . ' ' . $item->last_name }}</option>
+                                    <option value="{{$item->id}}" {{$other_writer==false && $course->author_name == $item->first_name . ' ' . $item->last_name ? 'selected' : ''}}>{{ $item->first_name . ' ' . $item->last_name }}</option>
                                 @endforeach
-                                <option value="other" {{ $other_author == true ? 'selected' : '' }}>Other
+                                <option value="other" {{ old('author_name') == 'other' || $other_writer == true ? 'selected' : '' }}>Other
                                 </option>
                             </select>
                             @error('author_name')
                                 <p class="small text-danger">{{ $message }}</p>
                             @enderror
                         </div>
-                        <div id="writer" style="display: {{$other_author == true ? 'block;' : 'none;'}}">
+
+                        <div id="writer"  style="display:{{ old('author_name') == 'other' || $other_writer == true ? 'block;' : 'none;' }}">
                             <div class="form-group">
-                                <input class="form-control @error('other_author_name') is-invalid @enderror"
-                                    type="text" name="other_author_name" id="author_name"
-                                    value="{{ old('author_name',$course->author_name) }}" placeholder="Type here" />
+                                <label class="control-label" for="other_author_name">Writer Name <span class="m-l-5 text-danger">*</span></label>
+                                <input class="form-control @error('other_author_name') is-invalid @enderror" type="text"
+                                    name="other_author_name" id="other_author_name" value="{{ old('other_author_name',$course->author_name) }}"
+                                    placeholder="Type here" />
                                 @error('other_author_name')
                                     <p class="small text-danger">{{ $message }}</p>
                                 @enderror
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label" for="author_description">Writer Description</label>
-                            <textarea type="text" class="form-control" rows="4" name="author_description" id="author_description">{{ old('author_description', $course->author_description) }}</textarea>
-                            @error('author_description')
-                                <p class="small text-danger">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <img src="{{ asset($course->author_image) }}" alt="" class="w-100 mt-2">
-                                </div>
-                                <div class="col-md-10">
-                                    <label class="control-label">Writer Image</label>
-                                    <input class="form-control @error('author_image') is-invalid @enderror" type="file"
-                                        id="image" name="author_image" />
-                                </div>
+                        
+                            <div class="form-group">
+                                <label class="control-label" for="other_author_description">Writer Description <span class="m-l-5 text-danger">*</span></label>
+                                <textarea type="text" class="form-control" rows="4" name="other_author_description" id="other_author_description">{{ old('other_author_description',$course->author_description) }}</textarea>
+                                @error('other_author_description')
+                                    <p class="small text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
-                            @error('author_image')
-                                <p class="small text-danger">{{ $message }}</p>
-                            @enderror
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <img src="{{asset($course->author_image)}}" alt="" width="100%" height="100%">
+                                    </div>
+                                    <div class="col-md-9">
+                                        <label class="control-label">Writer Image <span class="m-l-5 text-danger">*</span></label>
+                                        <input class="form-control @error('other_author_image') is-invalid @enderror" type="file"
+                                            id="image" name="other_author_image" />
+                                    </div>
+                                </div>
+                                @error('other_author_image')
+                                    <p class="small text-danger">{{ $message }}</p>
+                                @enderror
+                            </div>
                         </div>
+
+                        {{-- Language --}}
                         <div class="form-group">
-                            <label class="control-label" for="language">Language</label>
+                            <label class="control-label" for="language">Language <span class="m-l-5 text-danger">*</span></label>
                             <select name="language" id="language" class="form-control" value="{{ old('language') }}">
-                                @foreach ($languages as $item)
-                                    <option {{ $course->language == $item->name ? 'selected' : '' }}
-                                        value="{{ $item->name }}">{{ $item->name }}</option>
+                                @foreach ($languages as $l)
+                                    <option value="{{ $l->name }}" {{$l->name == old('language',$course->language) ? 'selected' : ''}}>{{ $l->name }}</option>
                                 @endforeach
                             </select>
                             @error('language')
                                 <p class="small text-danger">{{ $message }}</p>
                             @enderror
                         </div>
+                    </div><br>
 
-                        <div class="tile-footer">
-                            <input type="hidden" name="id" value="{{ $course->id }}">
-                            <button class="btn btn-primary" type="submit"><i
-                                    class="fa fa-fw fa-lg fa-check-circle"></i>Update</button>
+                    <div class="tile-footer">
+                        <input type="hidden" name="id" value="{{ $course->id }}">
+                        <button class="btn btn-primary" type="submit"><i
+                                class="fa fa-fw fa-lg fa-check-circle"></i>Update</button>
 
-                            <a class="btn btn-secondary" href="{{ route('admin.course.index') }}"><i
-                                    class="fa fa-fw fa-lg fa-times-circle"></i>Back</a>
-                        </div>
+                        <a class="btn btn-secondary" href="{{ route('admin.course.index') }}"><i
+                                class="fa fa-fw fa-lg fa-times-circle"></i>Back</a>
                     </div>
                 </form>
             </div>
@@ -435,21 +420,25 @@
         $('#description').summernote({
             height: 400
         });
-        $('#short_description').summernote({
-            height: 400
-        });
         $('#author_description').summernote({
             height: 400
         });
         
-        $(function() {
-            $('#writerName').change(function() {
-                if ($('#writerName').val() == 'other') {
-                    $('#writer').show();
-                } else {
-                    $('#writer').hide();
-                }
-            });
+        $('input[name="is_paid"]').on('change',function(){
+            // alert($(this).val());
+            if($(this).val() != 0){
+                $('#cost').show();
+            }else{
+                $('#cost').hide();
+            }
+        });
+
+        $('select[name="author_name"]').on('change',function(){
+            if($(this).val() == 'other'){
+                $('#writer').show();
+            }else{
+                $('#writer').hide();
+            }
         });
     </script>
     <script>
