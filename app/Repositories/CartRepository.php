@@ -8,7 +8,10 @@ use App\Contracts\CartContract;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Doctrine\Instantiator\Exception\InvalidArgumentException;
-use Auth;
+use Illuminate\Support\Facades\Auth;
+
+use function PHPSTORM_META\elementType;
+
 /**
  * Class ArticleCategoryRepository
  *
@@ -33,14 +36,22 @@ class CartRepository  implements CartContract
     {
         $collectedData = collect($data);
 
+            $cartExist = [];
+
             if($collectedData['purchase_type'] != 'subscription'){
-                $cartExist = Cart::where('purchase_type',$collectedData['purchase_type'])->where('course_id',$collectedData['course_id'])->where('course_name',$collectedData['course_name'])->get();
+                if(Auth::guard('web')->check()){
+                    $cartExist = Cart::where('user_id' , Auth::guard('web')->user()->id)->where('purchase_type',$collectedData['purchase_type'])->where('course_id',$collectedData['course_id'])->where('course_name',$collectedData['course_name'])->get();
+                }else{
+                    $cartExist = Cart::where('ip',$this->ip)->where('purchase_type',$collectedData['purchase_type'])->where('course_id',$collectedData['course_id'])->where('course_name',$collectedData['course_name'])->get();
+                }
             }
-            elseif($collectedData['purchase_type'] == 'subscription'){
-                $cartExist = Cart::where('purchase_type',$collectedData['purchase_type'])->get();
-            }
-            else{
-                $cartExist = [];
+            
+            if($collectedData['purchase_type'] == 'subscription'){
+                if(Auth::guard('web')->check()){
+                    $cartExist = Cart::where('user_id' , Auth::guard('web')->user()->id)->where('purchase_type',$collectedData['purchase_type'])->get();
+                }else{
+                    $cartExist = Cart::where('ip',$this->ip)->where('purchase_type',$collectedData['purchase_type'])->get();
+                }
             }
 
             if(count($cartExist) <= 0){
@@ -73,7 +84,10 @@ class CartRepository  implements CartContract
     public function viewByIp()
     {
         $data = Cart::where('ip', $this->ip)->get();
-
+        
+        if(Auth::guard('web')->check()){
+            $data = Cart::where('ip', $this->ip)->orWhere('user_id',Auth::guard('web')->user()->id)->get();
+        }
             // coupon code usage check
         return $data;
     }

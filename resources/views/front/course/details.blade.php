@@ -129,7 +129,7 @@
 
                             <div id="crs_reviews" class="crs_reviews">
                                 <div class="row">
-                                    @foreach (getAllReviewsTopicWise(getCountervideotopic($course->id)->topic_id) as $item)
+                                    @foreach (getAllReviewsCourseWise($course->id) as $item)
                                         <div class="col-lg-6">
                                             <div class="crs-reviews">
                                                 <div class="r_head">
@@ -151,7 +151,7 @@
                                         </div>    
                                     @endforeach
                                 </div>
-                                {{getAllReviewsTopicWise(getCountervideotopic($course->id)->topic_id)->links()}}
+                                {{getAllReviewsCourseWise($course->id)->links()}}
                             </div>
                         </div>
                     </div>
