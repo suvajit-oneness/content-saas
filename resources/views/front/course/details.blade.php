@@ -151,7 +151,7 @@
                                         </div>    
                                     @endforeach
                                 </div>
-                                {{getAllReviewsTopicWise(getCountervideotopic($course->id)->topic_id)->links()}}
+                                {{getAllReviewsCourseWise($course->id)->links()}}
                             </div>
                         </div>
                     </div>
