@@ -101,19 +101,15 @@
 
                                 <div class="courses-desc">
                                     <p>{!! $data->short_description !!}</p>
-                                    {{-- @foreach($data->review as $reviews)
-                                        <div class="crs-rating-all">
-                                            @php
-                                                $CountTotalReview = CountTotalReview($data->id);
-                                            @endphp
-                                            @foreach($data->review as $reviews)
-                                            <span>
-                                                {!! RatingHtml($reviews->id) !!}
-                                            </span>
-                                            @endforeach
-                                            {{-- <a href="javascript::void()">  {{ $CountTotalReview->review_count }} </a> --}}
-                                        {{--</div>
-                                    @endforeach --}}
+                                    
+                                    <div class="crs-rating-all">
+                                        <span>
+                                            {!! RatingHtml(getReviewDetails($data->id)['average_star_count']) !!}
+                                        </span>
+                                        @if(getReviewDetails($data->id)['total_reviews'] > 0)
+                                            <a href="javascript::void()">  {{ getReviewDetails($data->id)['total_reviews'] }} </a>
+                                        @endif
+                                    </div>
                                     <div class="price-crs">
                                         <span>{{ $data->price == 0 ? 'Free' : '$ ' . $data->price }}</span>
                                         <a href="{{ route('front.course.details', $data->slug) }}" class="course-btn">Enroll</a>
