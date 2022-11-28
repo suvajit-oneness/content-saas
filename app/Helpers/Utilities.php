@@ -3,6 +3,7 @@
 
 use App\Models\ArticleCategory;
 use App\Models\Course;
+use App\Models\CourseReview;
 use App\Models\Currency;
 use App\Models\Deal;
 use App\Models\Order;
@@ -15,6 +16,7 @@ use App\Models\PlansWithPrice;
 use App\Models\ProjectTask;
 use App\Models\SaveTopic;
 use App\Models\Topic;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -439,6 +441,38 @@ function getCountervideotopic($courseid){
         return false;
 }
 
+function getTopicDetail($topic_id)
+{
+    return Topic::find($topic_id);
+}
+
+function getUserDet($user_id)
+{
+    return User::find($user_id);
+}
+
+function getAllReviewsTopicWise($topic_id)
+{
+    return CourseReview::where('topic_id',$topic_id)->orderBy('id','DESC')->paginate(10);
+}
+
+function getAllReviewsCourseWise($course_id)
+{
+    return CourseReview::where('course_id',$course_id)->orderBy('id','DESC')->paginate(10);
+}
+
+function getReviewDetails($course_id)
+{
+    $all_review = CourseReview::where('course_id',$course_id);
+    
+    $data = [];
+    $data['total_reviews'] = $all_review->count();
+    $data['total_person_reviewed'] = $all_review->groupBy('user_id')->get()->count();
+    $data['average_star_count'] = $all_review->avg('rating');
+
+    return $data;
+}
+
 function getViewedStatus($course_id,$lesson_id,$topic_id)
 {
     $user_id = Auth::guard('web')->user()->id;
@@ -503,7 +537,7 @@ function RatingHtml($rating = null) {
     } elseif ($rating == 1) {
         $resp = '
         <div class="rating-list-stars d-flex">
-            <small>'.$rating.'</small>
+            <small>'. round($rating,1) .'</small>
             <i class="fa-solid fa-star "></i>
             <i class="fa-regular fa-star "></i>
             <i class="fa-regular fa-star "></i>
@@ -514,7 +548,7 @@ function RatingHtml($rating = null) {
     } elseif ($rating > 1 && $rating < 2) {
         $resp = '
         <div class="rating-list-stars d-flex">
-            <small>'.$rating.'</small>
+            <small>'. round($rating,1) .'</small>
             <i class="fa fa-star checked"></i>
             <i class="fas fa-star-half-alt"></i>
             <i class="fa-regular fa-star"></i>
@@ -525,7 +559,7 @@ function RatingHtml($rating = null) {
     } elseif ($rating == 2) {
         $resp = '
         <div class="rating-list-stars d-flex">
-            <small>'.$rating.'</small>
+            <small>'. round($rating,1) .'</small>
             <i class="fa fa-star checked"></i>
             <i class="fa fa-star checked"></i>
             <i class="fa-regular fa-star"></i>
@@ -536,7 +570,7 @@ function RatingHtml($rating = null) {
     } elseif ($rating > 2 && $rating < 3) {
         $resp = '
         <div class="rating-list-stars d-flex">
-            <small>'.$rating.'</small>
+            <small>'. round($rating,1) .'</small>
             <i class="fa fa-star checked"></i>
             <i class="fa fa-star checked"></i>
             <i class="fas fa-star-half-alt"></i>
@@ -547,7 +581,7 @@ function RatingHtml($rating = null) {
     } elseif ($rating == 3) {
         $resp = '
         <div class="rating-list-stars d-flex">
-            <small>'.$rating.'</small>
+            <small>'. round($rating,1) .'</small>
             <i class="fa-solid fa-star "></i>
             <i class="fa-solid fa-star "></i>
             <i class="fa-solid fa-star "></i>
@@ -558,7 +592,7 @@ function RatingHtml($rating = null) {
     } elseif ($rating > 3 && $rating < 4) {
         $resp = '
         <div class="rating-list-stars d-flex">
-            <small>'.$rating.'</small>
+            <small>'. round($rating,1) .'</small>
             <i class="fa-solid fa-star "></i>
             <i class="fa-solid fa-star "></i>
             <i class="fa-solid fa-star "></i>
@@ -569,7 +603,7 @@ function RatingHtml($rating = null) {
     } elseif ($rating == 4) {
         $resp = '
         <div class="rating-list-stars d-flex">
-            <small>'.$rating.'</small> 
+            <small>'. round($rating,1) .'</small> 
             <i class="fa fa-star checked"></i>
             <i class="fa fa-star checked"></i>
             <i class="fa fa-star checked"></i>
@@ -580,7 +614,7 @@ function RatingHtml($rating = null) {
     } elseif ($rating > 4 && $rating < 5) {
         $resp = '
         <div class="rating-list-stars d-flex">
-            <small>'.$rating.'</small>
+            <small>'. round($rating,1) .'</small>
             <i class="fa fa-star checked"></i>
             <i class="fa fa-star checked"></i>
             <i class="fa fa-star checked"></i>
@@ -592,7 +626,7 @@ function RatingHtml($rating = null) {
     } elseif ($rating == 5) {
         $resp = '
         <div class="rating-list-stars d-flex">
-            <small>'.$rating.'</small> 
+            <small>'. round($rating,1) .'</small> 
             <i class="fa fa-star checked"></i>
             <i class="fa fa-star checked"></i>
             <i class="fa fa-star checked"></i>

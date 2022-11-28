@@ -19,48 +19,27 @@
                 </a>
             @endif
         </div>
-        <div class="topic-desc">
+        <div class="topic-desc" id="description_and_reviews">
             <!-- <h4>Installing Python</h4>
             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type</p> -->
             <ul class="nav nav-tabs media-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <a href="#" class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" role="tab" aria-controls="description" aria-selected="false">Description</a>
+                    <a href="#description" class="nav-link {{request()->input('page') ? '' : 'active'}}" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" role="tab" aria-controls="description" aria-selected="false">Description</a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a href="#" class="nav-link" id="review-tab" data-bs-toggle="tab" data-bs-target="#review" role="tab" aria-controls="review" aria-selected="true">review</a>
+                    <a href="#review" class="nav-link {{request()->input('page') ? 'active' : ''}}" id="review-tab" data-bs-toggle="tab" data-bs-target="#review" role="tab" aria-controls="review" aria-selected="true">review</a>
                 </li>
             </ul>
             <div class="tab-content details-tab">
-                <div class="tab-pane active" id="description" role="tabpanel" aria-labelledby="description-tab">
+                <div class="tab-pane {{request()->input('page') ? '' : 'active'}}" id="description" role="tabpanel" aria-labelledby="description-tab">
                     <p>{!! $course->description !!}</p>
                 </div>
-                <div class="tab-pane" id="review" role="tabpanel" aria-labelledby="review-tab">
+                <div class="tab-pane {{request()->input('page') ? 'active' : ''}}" id="review" role="tabpanel" aria-labelledby="review-tab">
                     <form action="{{ route('front.user.courses.rating.store') }}" method="POST" role="form"
                     enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="course_id" value="{{ $course->id }}">
-                        {{-- <ul class="star-rating" style="text-align: left;">
-                            <li class="star">
-                                <input id="star-5" type="radio" name="rating" value="5" />
-                                <i class="fas fa-star"></i>
-                            </li>
-                            <li class="star">
-                                <input id="star-4" type="radio" name="rating" value="4" />
-                                <i class="fas fa-star"></i>
-                            </li>
-                            <li class="star">
-                                <input id="star-3" type="radio" name="rating" value="3" />
-                                <i class="fas fa-star"></i>
-                            </li>
-                            <li class="star">
-                                <input id="star-2" type="radio" name="rating" value="2" />
-                                <i class="fas fa-star"></i>
-                            </li>
-                            <li class="star">
-                                <input id="star-1" type="radio" name="rating" value="1" />
-                                <i class="fas fa-star"></i>
-                            </li>
-                        </ul> --}}
+                    <input type="hidden" name="topic_id" value="{{ getCountervideotopic($course->id)->topic_id }}">
                         <div class="form-group">
                             <label class="control-label" for="rating"> Rating</label>
                             <div class="star-rating" style="text-align: left;">
@@ -90,13 +69,37 @@
                             @enderror
                         </div><br>
                         <div class="form-group">
-                            <label>Write a review</label>
+                            <label>Write a review on - {{getTopicDetail(getCountervideotopic($course->id)->topic_id)->title}}</label>
                             <textarea rows="6" name="review" class="form-control"></textarea>
                         </div>
                         <div class="form-group text-left">
                             <button type="submit" class="btn add-btn-edit ms-0 mt-4">Submit</button>
                         </div>
                     </form>
+                    <div class="row">
+                        @foreach (getAllReviewsTopicWise(getCountervideotopic($course->id)->topic_id) as $item)
+                            <div class="col-lg-6">
+                                <div class="crs-reviews">
+                                    <div class="r_head">
+                                        <div class="r_avatar">
+                                            <img src="{{asset(getUserDet($item->user_id)->image)}}" alt="">
+                                        </div>
+                                        <div class="r_meta">
+                                            <h6>{{getUserDet($item->user_id)->first_name}} {{getUserDet($item->user_id)->last_name}}</h6>
+                                            <div class="singlecourseRating">
+                                                <div class="rating-list-stars d-flex">{!! RatingHtml($item->rating) !!}</div>
+                                                <small>{{date('d, M Y',strtotime($item->created_at))}}</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="r_content">
+                                        <div class="text-sm">{{$item->review}}</div>
+                                    </div>
+                                </div>
+                            </div>    
+                        @endforeach
+                    </div>
+                    {{getAllReviewsTopicWise(getCountervideotopic($course->id)->topic_id)->links()}}
                 </div>
             </div>
         </div>
@@ -227,7 +230,5 @@
                 $(this).siblings(".content").slideDown(200);
             }
         });
-        
-
     </script>
 @endsection

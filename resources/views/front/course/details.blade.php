@@ -7,32 +7,25 @@
         <div class="container position-relative">
             <div class="course-details-main-info">
                 <h2>{{ $course->title ?? '' }}</h2>
-                <p id="less_text">{!! substr($course->description,0,150) ?? '' !!}...<span style="font-size: 10px"><a onclick="$('#less_text').hide(); $('#all_text').show();" href="javascript:void(0)">See More</a></span></p>
-                <p id="all_text" style="display: none;">{!! $course->description !!}</p>
+                <div id="less_text">{!! substr($course->short_description,0,150) ?? '' !!}
+                    @if(strlen($course->short_description) > 150)
+                        <span style="font-size: 10px"><a onclick="$('#less_text').hide(); $('#all_text').show();" href="javascript:void(0)">...See More</a></span>
+                    @endif
+                </div>
+                <div id="all_text" style="display: none;">{!! $course->short_description !!}</div>
                 @php
                      $review=App\Models\CourseReview::where('course_id',$course->id)->get();
                 @endphp
-                @if(!empty($review))
-                @foreach($review as $value)
-               
-                <div class="crs-rating-all">
-                    <span>
-                        {!! RatingHtml($value->rating) !!}
-                    </span>
-                    <a href="#crs_reviews">( {{ $value->count() }} review)</a>
-                    @php
-                         $totalUser = totalUser($course->id);
-                    @endphp
-                    @if($totalUser->user_count != 0)
-                        <small>{!! $totalUser->user_count !!} Students</small>
-                    @endif 
-                 </div>
-                @endforeach
-                @else
-                <h2>
-                    No review found
-                </h2>
+                @if(getReviewDetails($course->id)['total_reviews'] > 0)               
+                    <div class="crs-rating-all">
+                        <span>
+                            {!! RatingHtml(getReviewDetails($course->id)['average_star_count']) !!}
+                        </span>
+                        <a href="#crs_reviews">( {{ getReviewDetails($course->id)['total_reviews'] }} review)</a>
+                        <small>{!! getReviewDetails($course->id)['total_person_reviewed'] !!} Students</small>
+                    </div>
                 @endif
+                
             </div>
             <div class="crs-back-btn">
                 <a href="{{ route('front.course') }}" class="add-btn-edit d-inline-block">
@@ -135,150 +128,31 @@
 
 
                             <div id="crs_reviews" class="crs_reviews">
-                                {{-- @if(!empty($review))
-                                @foreach($review as $data)
-                                <div class="crs-rating-all">
-                                    
-                                    <span>
-                                        {!! RatingHtml($data->rating) !!}
-
-                                    </span>
-                                    <i class="fas fa-circle ms-2"></i>
-                                    <span>
-                                        {{ $data->count() }} Review
-                                    </span>
-                                </div>
-                                @endforeach
-                                @endif --}}
                                 <div class="row">
-                                    @if(!empty($review))
-                                    @foreach($review as $data)
-                                    <div class="col-lg-6">
-                                        <div class="crs-reviews">
-                                            <div class="r_head">
-                                                @if(!empty($data->user->image))
-                                                <div class="r_avatar">
-                                                    <img src="{{asset($data->user->image)}}" alt="">
-                                                </div>
-                                                @endif
-                                                <div class="r_meta">
-                                                    <h6>{{ $data->user->first_name.' '.$data->user->last_name }}</h6>
-                                                    <div class="singlecourseRating">
-
-                                                        {!! RatingHtml($data->rating) !!}
-                                                        <small>{{ date('j M, Y', strtotime($data->created_at)) }}</small>
+                                    @foreach (getAllReviewsTopicWise(getCountervideotopic($course->id)->topic_id) as $item)
+                                        <div class="col-lg-6">
+                                            <div class="crs-reviews">
+                                                <div class="r_head">
+                                                    <div class="r_avatar">
+                                                        <img src="{{asset(getUserDet($item->user_id)->image)}}" alt="">
+                                                    </div>
+                                                    <div class="r_meta">
+                                                        <h6>{{getUserDet($item->user_id)->first_name}} {{getUserDet($item->user_id)->last_name}}</h6>
+                                                        <div class="singlecourseRating">
+                                                            <div class="rating-list-stars d-flex">{!! RatingHtml($item->rating) !!}</div>
+                                                            <small>{{date('d, M Y',strtotime($item->created_at))}}</small>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="r_content">
-                                                <p>
-                                                    {{ $data->review }} 
-                                                </p>
-                                                {{-- <div class="r_helpful">
-                                                    <small>Helpful? </small>
-                                                    <i class="far fa-thumbs-up"></i>
-                                                    <i class="far fa-thumbs-down"></i>
-                                                </div> --}}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {{-- <div class="col-lg-6">
-                                        <div class="crs-reviews">
-                                            <div class="r_head">
-                                                <div class="r_avatar">
-                                                    AG
-                                                </div>
-                                                <div class="r_meta">
-                                                    <h6>Artur G.</h6>
-                                                    <div>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star-half-alt"></i>
-                                                        <small>4 days ago</small>
-                                                    </div>
+                                                <div class="r_content">
+                                                    <div class="text-sm">{{$item->review}}</div>
                                                 </div>
                                             </div>
-                                            <div class="r_content">
-                                                <p>
-                                                    Thanks for the coursework. Easy to follow and on point in her explanation.
-                                                </p>
-                                                <div class="r_helpful">
-                                                    <small>Helpful? </small>
-                                                    <i class="far fa-thumbs-up"></i>
-                                                    <i class="far fa-thumbs-down"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="crs-reviews">
-                                            <div class="r_head">
-                                                <div class="r_avatar">
-                                                    AG
-                                                </div>
-                                                <div class="r_meta">
-                                                    <h6>Artur G.</h6>
-                                                    <div>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star-half-alt"></i>
-                                                        <small>4 days ago</small>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="r_content">
-                                                <p>
-                                                    Thanks for the coursework. Easy to follow and on point in her explanation.
-                                                </p>
-                                                <div class="r_helpful">
-                                                    <small>Helpful? </small>
-                                                    <i class="far fa-thumbs-up"></i>
-                                                    <i class="far fa-thumbs-down"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="crs-reviews">
-                                            <div class="r_head">
-                                                <div class="r_avatar">
-                                                    AG
-                                                </div>
-                                                <div class="r_meta">
-                                                    <h6>Artur G.</h6>
-                                                    <div>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star-half-alt"></i>
-                                                        <small>4 days ago</small>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="r_content">
-                                                <p>
-                                                    Thanks for the coursework. Easy to follow and on point in her explanation.
-                                                </p>
-                                                <div class="r_helpful">
-                                                    <small>Helpful? </small>
-                                                    <i class="far fa-thumbs-up"></i>
-                                                    <i class="far fa-thumbs-down"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>--}}
+                                        </div>    
                                     @endforeach
-                                    @endif
                                 </div>
-
+                                {{getAllReviewsTopicWise(getCountervideotopic($course->id)->topic_id)->links()}}
                             </div>
-
-
                         </div>
                     </div>
                 </div>

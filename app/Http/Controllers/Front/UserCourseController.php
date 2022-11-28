@@ -49,7 +49,8 @@ class UserCourseController extends Controller
         $topic= Topic::where('slug', $Topicslug)->first();
         return view('front.user.course.topicDetails',compact('courseData','course','topic','request'));
     }
-    //** Store Review **//
+
+    //** Store Topic Wise Review **//
     public function store(Request $request){
         $review=new CourseReview();
         $review->course_id = $request->course_id ?? '';
@@ -58,7 +59,8 @@ class UserCourseController extends Controller
         $review->review = $request->review;
         $review->user_id = auth()->guard('web')->user()->id;
         $review->save();
-        return redirect()->back()->with('success', 'Comment added successfully');
+        $prev_url = url()->previous().'#review';
+        return redirect()->to($prev_url)->with('success', 'Comment added successfully');
     }
     
     public function savetopicAndSetCounter(Request $request)
