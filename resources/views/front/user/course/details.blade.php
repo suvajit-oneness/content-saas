@@ -2,7 +2,7 @@
 @section('title')
 
 @section('section')
-<section class="edit-sec edit-basic-detail p-0 bg-white for_lession_details_footer">
+<section class="edit-sec edit-basic-detail p-0 pt-2 bg-white for_lession_details_footer">
     <div class="crs-details lession-details">
         <div class="topic-video">
             <video width="640" height="320" controls id="contentVideo" class="contentVideo" data-id="{{getCountervideotopic($course->id)->id}}" data-topic_id="{{getCountervideotopic($course->id)->topic_id}}" style="" controlsList="{{$course->video_downloadable == 0 ? 'nodownload' : '' }}">
@@ -108,7 +108,7 @@
              $totalLessonsAndTopics = totalLessonsAndTopics($course->id);
         @endphp
 
-    <div class="lessionSidebar">
+    <div class="lessionSidebar" style="margin-top: 102px;">
         {{--<div class="lessionSidebar-btn">
             <i class="fa-solid fa-arrow-left"></i>
             Course Content

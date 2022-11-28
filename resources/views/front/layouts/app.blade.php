@@ -78,21 +78,6 @@
                         </li>
                     @endif
                     <li class="nav-item">
-                        @php
-                            // cart count
-                            $ip = $_SERVER['REMOTE_ADDR'];
-                            $cartExists = Schema::hasTable('carts');
-                            if ($cartExists) {
-                                $cartCount = DB::table('carts')
-                                    ->where('ip', $ip)
-                                    ->get();
-                                $totalCartProducts = 0;
-                                foreach ($cartCount as $cartKey => $cartVal) {
-                                    $totalCartProducts += $cartVal->qty;
-                                }
-                            }
-                        @endphp
-
                         <a class="nav-link {{ request()->is('cart') ? 'active' : '' }}"
                             href="{{ route('front.cart') }}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -102,7 +87,7 @@
                                 <circle cx="20" cy="21" r="1"></circle>
                                 <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
                             </svg>
-                            <span>{{ $totalCartProducts == 0 ? '' : $totalCartProducts }}</span>
+                            <span>{{ getCartCount() == 0 ? '' : getCartCount() }}</span>
                         </a>
                     </li>
                 </ul>

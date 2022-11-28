@@ -2,6 +2,7 @@
 // use App\Models\Notification;
 
 use App\Models\ArticleCategory;
+use App\Models\Cart;
 use App\Models\Course;
 use App\Models\CourseReview;
 use App\Models\Currency;
@@ -439,6 +440,17 @@ function getCountervideotopic($courseid){
     }
     else
         return false;
+}
+
+function getCartCount()
+{
+    $data = Cart::where('ip', $_SERVER['REMOTE_ADDR'])->get()->count();
+        
+    if(Auth::guard('web')->check()){
+        $data = Cart::where('ip', $_SERVER['REMOTE_ADDR'])->orWhere('user_id',Auth::guard('web')->user()->id)->get()->count();
+    }
+        // coupon code usage check
+    return $data;
 }
 
 function getTopicDetail($topic_id)

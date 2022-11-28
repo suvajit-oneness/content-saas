@@ -9,6 +9,8 @@ use App\Models\CourseModule;
 use App\Http\Controllers\BaseController;
 use App\Models\Cart;
 use DB;
+use Symfony\Contracts\Service\Attribute\Required;
+
 class CartController extends BaseController
 {
     
@@ -46,8 +48,8 @@ class CartController extends BaseController
             "course_image" => "required|string|max:255",
             "course_slug" => "required|string|max:255",
             "price" => "required|string",
-            
         ]);
+
         $params = $request->except('_token');
 
         $cartStore = $this->CartRepository->addToCart($params);

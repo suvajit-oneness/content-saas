@@ -59,7 +59,7 @@
                         <input type="hidden" name="course_name" value="{{$deal->title}}">
                         <input type="hidden" name="course_image" value="{{$deal->company_logo}}">
                         <input type="hidden" name="author_name" value="None">
-                        <input type="hidden" name="course_slug" value="None">
+                        <input type="hidden" name="course_slug" value="{{$deal->slug}}">
                         <input type="hidden" name="purchase_type" value="deal">
                         <input type="hidden" name="price" value="{{'15'}}">
                         @if(Auth::guard('web')->check())
