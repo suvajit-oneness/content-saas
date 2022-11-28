@@ -37,8 +37,8 @@
             <div class="col-md-11">
                 <form action="" method="GET">
                     <div class="d-flex align-items-center justify-content-end">
-                        <input type="search" name="keyword" value="{{request()->input('keyword')}}" class="form-control w-50 ms-4" placeholder="Search by Title">
-                        <select name="search_status" class="form-control w-50 ms-4">
+                        <input type="search" name="keyword" value="{{request()->input('keyword')}}" class="form-control w-25 ms-4" placeholder="Search by Title">
+                        <select name="search_status" class="form-control w-25 ms-4">
                             <option value="" selected>All</option>
                             @foreach ($status as $s)
                                 <option value="{{ $s->slug }}" {{request()->input('search_status') == $s->slug ? 'selected' : ''}}>{{ $s->title }}</option>
@@ -106,16 +106,18 @@
                                 </a>
                             </td>
                             <td>
-                                <select onchange="changeProjectAndTaskStatus(`{{route('front.project.task.updateStatus')}}`,this,'{{$item->id}}')" data-original="{{$item->status}}" name="status" id="status" height="24px" class="form-control">
-                                    <option value="" selected disabled>Change Status</option>
-                                    @foreach ($status as $s)
-                                        <option value="{{$s->slug}}" {{ ($s->slug == $item->status) ? 'selected' : '' }}>{{$s->title}}</option>
-                                    @endforeach
-                                </select>
-                                <div class="input-group mb-3 spare_input{{$item->id}}" style="display: none;">
-                                    <input type="text" name="spare{{$item->id}}" class="form-control" placeholder="Name...">
-                                    <button class="btn btn-outline-secondary text-sm" type="button" id="button-addon2"><i class="fa fa-check"></i></button>
-                                    <span class="btn btn-outline-secondary text-sm" type="button" id="button-addon2"><i class="fa fa-times"></i></span>
+                                <div class="position-relative">
+                                    <select onchange="changeProjectAndTaskStatus(`{{route('front.project.task.updateStatus')}}`,this,'{{$item->id}}')" data-original="{{$item->status}}" name="status" id="status" height="24px" class="form-control">
+                                        <option value="" selected disabled>Change Status</option>
+                                        @foreach ($status as $s)
+                                            <option value="{{$s->slug}}" {{ ($s->slug == $item->status) ? 'selected' : '' }}>{{$s->title}}</option>
+                                        @endforeach
+                                    </select>
+                                    <div class="input-group mb-3 spare__input__group spare_input{{$item->id}}" style="display: none;">
+                                        <input type="text" name="spare{{$item->id}}" class="form-control " placeholder="Name...">
+                                        <button class="btn btn-outline-secondary text-sm" type="button" id="button-addon2"><i class="fa fa-check"></i></button>
+                                        <button class="btn btn-outline-secondary text-sm" type="button" id="button-addon2"><i class="fa fa-times"></i></button>
+                                    </div>
                                 </div>
                             </td>
                             <td class="text-center">

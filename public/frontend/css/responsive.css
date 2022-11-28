@@ -18,589 +18,594 @@
    }
 
    .pricing-pay small {
-
       font-size: 18px;
    }
 
    .content-mid ul li {
       font-size: 13px;
+   }
+
+   .course-details-main-info {
+      max-width: 630px;
+   }
+}
+
+@media (max-width: 1366px) {
+   .resp_image {
+      width: 100%;
+   }
+
+   .grammar_help h2 {
+      font-size: 57px;
+      line-height: 66px;
+   }
+
+   .grammer_text {
+      padding-right: 0px;
+   }
+
+   .portfolio h2 {
+      font-size: 56px;
+   }
+
+   .courses-heading h4 {
+      font-size: 18px;
+   }
+
+   .courses-desc p {
+      font-size: 14px;
+   }
+
+   .courses-content.purchased {
+      padding: 20px;
+   }
+}
+
+@media (max-width: 1360px) {
+   .resp_image {
+      width: 100%;
+   }
+
+   .portfolio h2 {
+      font-size: 56px;
+   }
+
+   .content-top h4 {
+      font-size: 20px;
+      line-height: 1.2;
+   }
+}
+
+@media(max-width: 1200px) {
+   .portv3-client-info h5 {
+      font-size: 16px !important;
+   }
+
+   .client-social a {
+      font-size: 10px;
+   }
+
+   h1 {
+      font-size: 54px;
+   }
+
+   .portfolio {
+      padding: 100px 0;
+   }
+
+   .banner p {
+      font-size: 20px;
+      margin: 25px auto;
+   }
+
+   h3,
+   h5 {
+      font-size: 30px !important;
+   }
+
+   p {
+      font-size: 14px !important;
+      line-height: 24px !important;
+   }
+
+   .grammar_help h2 {
+      font-size: 36px;
+      line-height: 44px;
+   }
+
+   .grammer_text {
+      margin-bottom: 30px;
+   }
+
+   .portfolio {
+      position: relative;
+   }
+
+   .portfolio::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background: rgb(255 255 255 / 75%);
+   }
+
+   .pe-lg-6 {
+      padding-right: 0;
+   }
+
+   .add_sec {
+      padding: 15px;
+   }
+
+   .add_sec h3 {
+      width: 100%;
+      margin-bottom: 20px;
+      line-height: 40px;
+   }
+
+   .add_sec .d-flex {
+      flex-wrap: wrap;
+   }
+
+   .add_sec .button {
+      padding: 0 20px;
+   }
+
+   .portfolio p {
+      font-size: 16px !important;
+      font-weight: 600;
+   }
+
+   .portfolio .row {
+      position: relative;
+      z-index: 1;
+   }
+
+   .blog_header {
+      padding: 60px 0;
+   }
+
+   .fixed-top {
+      background: #F4FAE6 !important;
+   }
+
+   .navbar-light .navbar-toggler {
+      color: rgba(0, 0, 0, .55);
+      border-color: transparent;
+   }
+
+   .navbar-light .navbar-toggler:focus {
+      box-shadow: none;
+   }
+
+   .tools_list li {
+      width: calc((100% - 90px) / 2);
+   }
+
+   .tools_banner {
+      padding: 123px 0 60px 0;
+      overflow: hidden;
+   }
+
+   .toolsBannerText h2 {
+      font-size: 36px;
+   }
+
+   .content-mid ul li {
+      font-size: 14px;
 
 
    }
 
-   @media (max-width: 1366px) {
-      .resp_image {
-         width: 100%;
-      }
-
-      .grammar_help h2 {
-         font-size: 57px;
-         line-height: 66px;
-      }
-
-      .grammer_text {
-         padding-right: 0px;
-      }
-
-      .portfolio h2 {
-         font-size: 56px;
-      }
-      .courses-heading h4{
-        font-size: 18px;
-      }
-      .courses-desc p{
-        font-size: 14px;
-      }
-      .courses-content.purchased{
-        padding: 20px;
-      }
+   .pricing-content a.button {
+      font-size: 14px;
+      min-width: 100%;
    }
 
-   @media (max-width: 1360px) {
-      .resp_image {
-         width: 100%;
-      }
+   .market-info-sec2 ul {
 
-      .portfolio h2 {
-         font-size: 56px;
-      }
-
-      .content-top h4 {
-         font-size: 20px;
-         line-height: 1.2;
-      }
+      flex-wrap: wrap;
    }
 
-   @media(max-width: 1200px) {
-      .portv3-client-info h5 {
-         font-size: 16px !important;
-      }
-
-      .client-social a {
-         font-size: 10px;
-      }
-
-      h1 {
-         font-size: 54px;
-      }
-
-      .portfolio {
-         padding: 100px 0;
-      }
-
-      .banner p {
-         font-size: 20px;
-         margin: 25px auto;
-      }
-
-      h3,
-      h5 {
-         font-size: 30px !important;
-      }
-
-      p {
-         font-size: 14px !important;
-         line-height: 24px !important;
-      }
-
-      .grammar_help h2 {
-         font-size: 36px;
-         line-height: 44px;
-      }
-
-      .grammer_text {
-         margin-bottom: 30px;
-      }
-
-      .portfolio {
-         position: relative;
-      }
-
-      .portfolio::before {
-         content: '';
-         position: absolute;
-         width: 100%;
-         height: 100%;
-         top: 0;
-         left: 0;
-         background: rgb(255 255 255 / 75%);
-      }
-
-      .pe-lg-6 {
-         padding-right: 0;
-      }
-
-      .add_sec {
-         padding: 15px;
-      }
-
-      .add_sec h3 {
-         width: 100%;
-         margin-bottom: 20px;
-         line-height: 40px;
-      }
-
-      .add_sec .d-flex {
-         flex-wrap: wrap;
-      }
-
-      .add_sec .button {
-         padding: 0 20px;
-      }
-
-      .portfolio p {
-         font-size: 16px !important;
-         font-weight: 600;
-      }
-
-      .portfolio .row {
-         position: relative;
-         z-index: 1;
-      }
-
-      .blog_header {
-         padding: 60px 0;
-      }
-
-      .fixed-top {
-         background: #F4FAE6 !important;
-      }
-
-      .navbar-light .navbar-toggler {
-         color: rgba(0, 0, 0, .55);
-         border-color: transparent;
-      }
-
-      .navbar-light .navbar-toggler:focus {
-         box-shadow: none;
-      }
-
-      .tools_list li {
-         width: calc((100% - 90px) / 2);
-      }
-
-      .tools_banner {
-         padding: 123px 0 60px 0;
-         overflow: hidden;
-      }
-
-      .toolsBannerText h2 {
-         font-size: 36px;
-      }
-
-      .content-mid ul li {
-         font-size: 14px;
-
-
-      }
-
-      .pricing-content a.button {
-         font-size: 14px;
-         min-width: 100%;
-      }
-
-      .market-info-sec2 ul {
-
-         flex-wrap: wrap;
-      }
-
-      .market-info-sec2 ul li {
-         flex: 50%
-      }
-
-      .market-info-sec2 ul li:not(:last-child) {
-         margin-bottom: 40px;
-      }
-
-      .market-content-audience h2 {
-         font-size: 36px;
-      }
-
-      .market-content-audience a.button {
-         font-size: 14px;
-         min-width: 200px;
-         height: 40px;
-         line-height: 40px;
-      }
-
-      .portfolio-client-info h5 {
-         font-size: 20px !important;
-         color: #444;
-      }
-
-      .portfoliov2-info-content h5 {
-
-         font-size: 20px !important;
-      }
-
-      .portfolio-v5-content-header h3 {
-         font-size: 25px !important;
-      }
+   .market-info-sec2 ul li {
+      flex: 50%
    }
 
-   @media(max-width: 992px) {
-      .portfoliov2-info-content h5 {
-         text-align: center;
-         font-size: 18px !important;
-      }
-
-      .employment-history {
-         margin-top: 0;
-      }
-
-      h1 {
-         font-size: 40px;
-      }
-
-      h2 {
-         font-size: 30px;
-      }
-
-      h5 {
-         font-size: 20px;
-      }
-
-      .pricing-pay small {
-         font-size: 16px;
-      }
-
-      .markets-banner-content h1 {
-         color: #fff;
-         text-shadow: 2px 2px 10px rgba(0, 0, 0, .3);
-      }
-
-      .markets-banner-content p {
-         color: #fff;
-         text-shadow: 2px 2px 10px rgba(0, 0, 0, .3);
-      }
-
-      .freelance-market-banner-content h1 {
-         color: initial;
-         text-shadow: initial;
-
-      }
-
-      .freelance-market-banner-content p {
-         color: initial;
-         text-shadow: initial;
-
-      }
-
-      .market-content-audience h2 {
-         font-size: 36px;
-      }
-
-      .market-content-audience a.button {
-         font-size: 14px;
-         min-width: 200px;
-         height: 40px;
-         line-height: 40px;
-      }
-
-      .tool-details-img-right {
-         text-align: right;
-      }
-
-      .tool-details-info1 h2 {
-         font-size: 40px;
-      }
-
-      .portfolio-v4-info-right {
-         margin-top: 140px;
-      }
-
-      .portfolio-v4-info-right {
-         text-align: center;
-      }
-
-      .portfolio-v4-info-right {
-         margin-left: 0px;
-      }
-
-      .portfolio-v4-info-right h5 {
-         font-size: 20px !important;
-         margin-top: 10px;
-      }
-
-      .portfolio-v4-category ul li {
-         font-size: 16px !important;
-      }
+   .market-info-sec2 ul li:not(:last-child) {
+      margin-bottom: 40px;
    }
 
-   @media (max-width: 860px) {
+   .market-content-audience h2 {
+      font-size: 36px;
+   }
 
-      .career_block {
-         margin-top: 30px;
-      }
+   .market-content-audience a.button {
+      font-size: 14px;
+      min-width: 200px;
+      height: 40px;
+      line-height: 40px;
+   }
 
-      .blog_header p {
-         margin-top: 20px;
-      }
+   .portfolio-client-info h5 {
+      font-size: 20px !important;
+      color: #444;
+   }
 
-      .toolSearch {
-         margin-top: 15px;
-      }
+   .portfoliov2-info-content h5 {
 
-      .pricing-banner {
-         padding: 140px 0px 120px;
-         background-color: #F4FAE6;
-      }
+      font-size: 20px !important;
+   }
 
-      .market-faq-img {
-         display: block;
+   .portfolio-v5-content-header h3 {
+      font-size: 25px !important;
+   }
+}
 
-      }
+@media(max-width: 992px) {
+   .portfoliov2-info-content h5 {
+      text-align: center;
+      font-size: 18px !important;
+   }
 
-      .market-faq-sec {
-         background-color: #0F1400;
-         background-image: initial;
-         padding: 40px 0 0;
-      }
+   .employment-history {
+      margin-top: 0;
+   }
+
+   h1 {
+      font-size: 40px;
+   }
+
+   h2 {
+      font-size: 30px;
+   }
+
+   h5 {
+      font-size: 20px;
+   }
+
+   .pricing-pay small {
+      font-size: 16px;
+   }
+
+   .markets-banner-content h1 {
+      color: #fff;
+      text-shadow: 2px 2px 10px rgba(0, 0, 0, .3);
+   }
+
+   .markets-banner-content p {
+      color: #fff;
+      text-shadow: 2px 2px 10px rgba(0, 0, 0, .3);
+   }
+
+   .freelance-market-banner-content h1 {
+      color: initial;
+      text-shadow: initial;
 
    }
 
-   @media (max-width: 768px) {
-      .tools_list li {
-         width: 100%;
-         margin: 0 0 20px 0;
-      }
+   .freelance-market-banner-content p {
+      color: initial;
+      text-shadow: initial;
 
-      .pricing-card-sec {
-         padding-bottom: 20px;
-      }
+   }
 
-      .faq-sec {
-         padding: 40px 0;
-      }
+   .market-content-audience h2 {
+      font-size: 36px;
+   }
 
-      .faq-sec p {
-         max-width: 100%;
+   .market-content-audience a.button {
+      font-size: 14px;
+      min-width: 200px;
+      height: 40px;
+      line-height: 40px;
+   }
 
-      }
+   .tool-details-img-right {
+      text-align: right;
+   }
 
-      .accordion-button {
-         font-size: 16px;
-         font-weight: 600;
-      }
+   .tool-details-info1 h2 {
+      font-size: 40px;
+   }
 
-      .market-badge {
-         margin: auto;
-      }
+   .portfolio-v4-info-right {
+      margin-top: 140px;
+   }
 
-      .markets-banner {
-         padding: 160px 0 60px;
-         text-align: center;
-      }
+   .portfolio-v4-info-right {
+      text-align: center;
+   }
 
-      .markets-banner-content h1 {
-         color: #fff;
-         text-shadow: 2px 2px 10px rgba(0, 0, 0, .3);
-      }
+   .portfolio-v4-info-right {
+      margin-left: 0px;
+   }
 
-      .markets-banner-content p {
-         color: #fff;
-         text-shadow: 2px 2px 10px rgba(0, 0, 0, .3);
-      }
+   .portfolio-v4-info-right h5 {
+      font-size: 20px !important;
+      margin-top: 10px;
+   }
 
-      .market-info-sec1 {
-         padding: 40px 0;
-      }
+   .portfolio-v4-category ul li {
+      font-size: 16px !important;
+   }
+}
 
-      .writing-career-content {
-         text-align: center;
-      }
+@media (max-width: 860px) {
 
-      .writing-career-bg {
-         padding-bottom: 60px;
-      }
+   .career_block {
+      margin-top: 30px;
+   }
+
+   .blog_header p {
+      margin-top: 20px;
+   }
+
+   .toolSearch {
+      margin-top: 15px;
+   }
+
+   .pricing-banner {
+      padding: 140px 0px 120px;
+      background-color: #F4FAE6;
+   }
+
+   .market-faq-img {
+      display: block;
+
+   }
+
+   .market-faq-sec {
+      background-color: #0F1400;
+      background-image: initial;
+      padding: 40px 0 0;
+   }
+
+}
+
+@media (max-width: 768px) {
+   .tools_list li {
+      width: 100%;
+      margin: 0 0 20px 0;
+   }
+
+   .pricing-card-sec {
+      padding-bottom: 20px;
+   }
+
+   .faq-sec {
+      padding: 40px 0;
+   }
+
+   .faq-sec p {
+      max-width: 100%;
+
+   }
+
+   .accordion-button {
+      font-size: 16px;
+      font-weight: 600;
+   }
+
+   .market-badge {
+      margin: auto;
+   }
+
+   .markets-banner {
+      padding: 160px 0 60px;
+      text-align: center;
+   }
+
+   .markets-banner-content h1 {
+      color: #fff;
+      text-shadow: 2px 2px 10px rgba(0, 0, 0, .3);
+   }
+
+   .markets-banner-content p {
+      color: #fff;
+      text-shadow: 2px 2px 10px rgba(0, 0, 0, .3);
+   }
+
+   .market-info-sec1 {
+      padding: 40px 0;
+   }
+
+   .writing-career-content {
+      text-align: center;
+   }
+
+   .writing-career-bg {
+      padding-bottom: 60px;
+   }
 
 
-      .market-content-inner-info {
-         padding: 20px;
-         text-align: center;
-         align-items: center;
-      }
+   .market-content-inner-info {
+      padding: 20px;
+      text-align: center;
+      align-items: center;
+   }
 
-      .market-content-inner-info a.button {
-         text-align: center;
-      }
+   .market-content-inner-info a.button {
+      text-align: center;
+   }
 
-      .market-content {
-         padding: 20px 0;
-      }
+   .market-content {
+      padding: 20px 0;
+   }
 
-      .market-content-audience {
-         padding: 40px 0;
-         text-align: center;
-      }
+   .market-content-audience {
+      padding: 40px 0;
+      text-align: center;
+   }
 
-      .market-content-info {
-         padding: 40px 0;
-      }
+   .market-content-info {
+      padding: 40px 0;
+   }
 
-      .market-blog-sec {
-         padding: 40px 0;
-      }
+   .market-blog-sec {
+      padding: 40px 0;
+   }
 
-      .freelance-market-banner {
-         padding-bottom: 0;
-         padding-top: 120px;
-         background-image: initial;
-         background-color: #F4FAE6;
-      }
+   .freelance-market-banner {
+      padding-bottom: 0;
+      padding-top: 120px;
+      background-image: initial;
+      background-color: #F4FAE6;
+   }
 
-      .freelance-img {
-         display: block;
-      }
+   .freelance-img {
+      display: block;
+   }
 
 
 
-      .content-top h4 {
-         font-size: 16px;
-         line-height: 0;
-      }
+   .content-top h4 {
+      font-size: 16px;
+      line-height: 0;
+   }
 
-      .content-top span {
-         font-size: 14px;
-         font-weight: 500;
-         color: #777;
-         line-height: 1.4;
-         display: inline-block;
-      }
+   .content-top span {
+      font-size: 14px;
+      font-weight: 500;
+      color: #777;
+      line-height: 1.4;
+      display: inline-block;
+   }
 
-      /* .content-mid ul {
+   /* .content-mid ul {
 
          flex-direction: column;
       } */
 
-      .content-mid ul li {
-         width: 100%;
-         margin-bottom: 10px;
-         font-size: 11px;
-         padding: 6px;
-      }
+   .content-mid ul li {
+      width: 100%;
+      margin-bottom: 10px;
+      font-size: 11px;
+      padding: 6px;
+   }
 
-      .recommended-writers {
-         padding-bottom: 40px;
-      }
+   .recommended-writers {
+      padding-bottom: 40px;
+   }
 
-      .recommended-writers-left {
-         display: flex;
-         align-items: center;
-         justify-content: center;
-      }
+   .recommended-writers-left {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+   }
 
-      .recommeded-products {
+   .recommeded-products {
 
-         padding: 40px 0;
-      }
+      padding: 40px 0;
+   }
 
-      .recommeded-products .br {
-         border-right: none;
-      }
+   .recommeded-products .br {
+      border-right: none;
+   }
 
-      .recommeded-products .line {
-         width: 100%;
-         height: 1px;
-         background: #ddd;
-         margin-top: 30px;
-         margin-bottom: 30px;
-      }
+   .recommeded-products .line {
+      width: 100%;
+      height: 1px;
+      background: #ddd;
+      margin-top: 30px;
+      margin-bottom: 30px;
+   }
 
-      .pricing-banner {
-         padding: 140px 0px 40px;
-         background-color: #F4FAE6;
-      }
+   .pricing-banner {
+      padding: 140px 0px 40px;
+      background-color: #F4FAE6;
+   }
 
-      .market-info-sec2 ul {
-         flex-direction: column;
-         flex-wrap: wrap;
-      }
+   .market-info-sec2 ul {
+      flex-direction: column;
+      flex-wrap: wrap;
+   }
 
-      .freelance-market-banner-content h1 {
-         color: initial;
-         text-shadow: initial;
-         text-align: center;
-      }
+   .freelance-market-banner-content h1 {
+      color: initial;
+      text-shadow: initial;
+      text-align: center;
+   }
 
-      .freelance-market-banner-content p {
-         color: initial;
-         text-shadow: initial;
-         text-align: center;
-      }
+   .freelance-market-banner-content p {
+      color: initial;
+      text-shadow: initial;
+      text-align: center;
+   }
 
-      .banner-input .input button img {
-         max-width: 20px;
-         margin-left: 10px;
-      }
+   .banner-input .input button img {
+      max-width: 20px;
+      margin-left: 10px;
+   }
 
-      .tool-details-content p {
+   .tool-details-content p {
 
-         max-width: 100%;
+      max-width: 100%;
 
-      }
+   }
 
-      .tool-details-content a.button {
-         margin-top: 30px;
-      }
+   .tool-details-content a.button {
+      margin-top: 30px;
+   }
 
-      .tool-details-content span {
+   .tool-details-content span {
 
-         font-size: 25px;
-      }
+      font-size: 25px;
+   }
 
-      .tool-details-img {
-         max-width: 240px;
-      }
+   .tool-details-img {
+      max-width: 240px;
+   }
 
-      .tool-details-info1 h2 {
-         font-size: 30px;
-      }
+   .tool-details-info1 h2 {
+      font-size: 30px;
+   }
 
-      .tool-details-info1 {
+   .tool-details-info1 {
 
-         padding: 40px 0;
-      }
+      padding: 40px 0;
+   }
 
-      .tool-details-two-col-info1 {
-         padding: 40px 0;
-      }
+   .tool-details-two-col-info1 {
+      padding: 40px 0;
+   }
 
-      .tool-details-two-col-content h2 {
-         font-size: 30px;
-         font-weight: 700;
-      }
+   .tool-details-two-col-content h2 {
+      font-size: 30px;
+      font-weight: 700;
+   }
 
-      .tools-testimonials {
-         padding: 40px 0;
-      }
+   .tools-testimonials {
+      padding: 40px 0;
+   }
 
-      .tool-details-content h1 {
+   .tool-details-content h1 {
 
-         margin-top: 0px;
+      margin-top: 0px;
 
-      }
+   }
 
-      .tool-details-content a.button {
-         margin-top: 10px;
-      }
+   .tool-details-content a.button {
+      margin-top: 10px;
+   }
 
-      .tools-testimonials-content::before {
+   .tools-testimonials-content::before {
 
-         width: 80px;
-         height: 80px;
+      width: 80px;
+      height: 80px;
 
-      }
+   }
 
-      .tools-testimonials-info span {
-         font-size: 16px;
-         font-weight: 500;
-         line-height: 1.2;
-         display: inline-block;
+   .tools-testimonials-info span {
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 1.2;
+      display: inline-block;
 
-      }
+   }
 
-      /* .dashboard-sidebar {
+   /* .dashboard-sidebar {
          left: -100%;
         }
         .dashboard-right {
@@ -610,838 +615,850 @@
         .dashboard-sidebar.show-sidebar {
          left: -100%!important;
        } */
-      /* .dashboard-right {
+   /* .dashboard-right {
 
          padding: 0 0 20px;
       } */
-      .featured-job-tags {
+   .featured-job-tags {
 
-         flex-direction: column;
-         align-items: flex-start;
-      }
+      flex-direction: column;
+      align-items: flex-start;
+   }
 
-      .featured-job-tags li {
-         margin-bottom: 10px;
-         width: 100%;
-         text-align: center;
-      }
+   .featured-job-tags li {
+      margin-bottom: 10px;
+      width: 100%;
+      text-align: center;
+   }
 
-      .featured-job-tags li a {
-         font-size: 14px;
-      }
+   .featured-job-tags li a {
+      font-size: 14px;
+   }
 
-      .card-title {
-         font-size: 18px !important;
-      }
+   .card-title {
+      font-size: 18px !important;
+   }
 
-      .add-edit-employment-list {
-         display: flex;
-      }
+   .add-edit-employment-list {
+      display: flex;
+   }
 
-      .add-edit-employment-list i {
-         margin: 0 4px;
-      }
+   .add-edit-employment-list i {
+      margin: 0 4px;
+   }
 
-      /* .portfolio-client-info h2 {
+   /* .portfolio-client-info h2 {
          font-size: 30px!important;
       } */
-      .add-client h4 {
-         font-size: 22px;
-      }
+   .add-client h4 {
+      font-size: 22px;
+   }
 
-      .rating-heading-flex {
-         flex-direction: column;
-         align-items: flex-start;
-      }
+   .rating-heading-flex {
+      flex-direction: column;
+      align-items: flex-start;
+   }
 
-      .table-tabs ul li {
-         margin-bottom: 14px;
-         border-right: none;
-      }
+   .table-tabs ul li {
+      margin-bottom: 14px;
+      border-right: none;
+   }
 
-      .courses {
-         padding: 40px 0;
-      }
+   .courses {
+      padding: 40px 0;
+   }
 
-      .accor-top-left {
-         margin-right: 20px;
-      }
+   .accor-top-left {
+      margin-right: 20px;
+   }
 
-      .accor-top-left i {
-         font-size: 12px;
-         margin-right: 10px;
-      }
+   .accor-top-left i {
+      font-size: 12px;
+      margin-right: 10px;
+   }
 
-      .accor-top-left span {
-         font-size: 15px;
+   .accor-top-left span {
+      font-size: 15px;
 
-      }
+   }
 
-      .accor-top-right span {
-         font-size: 12px;
+   .accor-top-right span {
+      font-size: 12px;
 
-      }
+   }
 
-      .accor-top {
-         padding: 10px 20px;
-      }
+   .accor-top {
+      padding: 10px 20px;
+   }
 
-      .course-details-main-info h2 {
-         font-size: 28px;
-      }
+   .course-details-main-info h2 {
+      font-size: 28px;
+   }
 
-      .learn h5 {
-         font-size: 20px !important;
-      }
+   .learn h5 {
+      font-size: 20px !important;
+   }
 
-      .course-content h5 {
-         font-size: 20px !important;
-      }
+   .course-content h5 {
+      font-size: 20px !important;
+   }
 
-      .requirements h5 {
-         font-size: 20px !important;
-      }
+   .requirements h5 {
+      font-size: 20px !important;
+   }
 
-      .target-market h5 {
-         font-size: 20px !important;
-      }
+   .target-market h5 {
+      font-size: 20px !important;
+   }
 
-      .course-certification h5 {
-         font-size: 20px !important;
-      }
+   .course-certification h5 {
+      font-size: 20px !important;
+   }
 
-      .course-languages h5 {
-         font-size: 20px !important;
-      }
+   .course-languages h5 {
+      font-size: 20px !important;
+   }
 
-      .about-company h5 {
-         font-size: 20px !important;
-      }
+   .about-company h5 {
+      font-size: 20px !important;
+   }
 
-      .courses-content {
-         padding: 30px 20px;
-      }
+   .courses-content {
+      padding: 30px 20px;
+   }
 
-      .portfoliov2-info-content .flex-content {
-         flex-direction: column;
-      }
+   .portfoliov2-info-content .flex-content {
+      flex-direction: column;
+   }
 
-      .portfoliov2-info-content .flex-content span {
+   .portfoliov2-info-content .flex-content span {
 
-         margin-left: 0px;
-         margin-top: 12px;
-      }
+      margin-left: 0px;
+      margin-top: 12px;
+   }
 
-      .portfoliov2-info-content h5 {
+   .portfoliov2-info-content h5 {
 
-         font-size: 16px !important;
-      }
+      font-size: 16px !important;
+   }
 
-      .portfoliov2-info-content h2 {
-         margin-top: 10px;
-      }
+   .portfoliov2-info-content h2 {
+      margin-top: 10px;
+   }
 
-      /* .portfoliov2-links ul {
+   /* .portfoliov2-links ul {
 
          flex-direction: column;
        } */
-      .portfoliov2-links {
-         padding: 40px 0px;
-      }
+   .portfoliov2-links {
+      padding: 40px 0px;
+   }
 
-      .portv2-employment-heading h4 {
-         font-size: 22px !important;
-      }
+   .portv2-employment-heading h4 {
+      font-size: 22px !important;
+   }
 
-      .portv2-employment-list-heading h5 {
-         font-size: 18px !important;
-      }
+   .portv2-employment-list-heading h5 {
+      font-size: 18px !important;
+   }
 
-      .portv2-employment {
-         padding: 40px 0;
-      }
+   .portv2-employment {
+      padding: 40px 0;
+   }
 
-      .portfoliov2-education {
-         padding: 40px 0;
-      }
+   .portfoliov2-education {
+      padding: 40px 0;
+   }
 
-      .portv2-testimonial-heading {
-         flex-direction: column;
-      }
+   .portv2-testimonial-heading {
+      flex-direction: column;
+   }
 
-      .portv2-testimonials-info {
-         margin-left: 0px;
+   .portv2-testimonials-info {
+      margin-left: 0px;
 
-         padding-left: 0px;
-      }
+      padding-left: 0px;
+   }
 
-      .portv2-testimonials-info::before {
-         display: none;
-      }
+   .portv2-testimonials-info::before {
+      display: none;
+   }
 
-      .portv2-testimonials-info {
-         text-align: center;
-         margin-top: 20px;
-      }
+   .portv2-testimonials-info {
+      text-align: center;
+      margin-top: 20px;
+   }
 
-      .newsletter-right {
-         display: none;
-         margin-left: 0s;
-      }
+   .newsletter-right {
+      display: none;
+      margin-left: 0s;
+   }
 
-      .portv2-newsletter-content {
-         padding: 30px;
-      }
+   .portv2-newsletter-content {
+      padding: 30px;
+   }
 
-      .newsletter-left h4 {
-         font-size: 25px;
-      }
+   .newsletter-left h4 {
+      font-size: 25px;
+   }
 
-      .portv2-client-heading {
-         flex-direction: column;
-      }
+   .portv2-client-heading {
+      flex-direction: column;
+   }
 
-      .portv2-client-heading .heading-inner {
-         margin-top: 20px;
-      }
+   .portv2-client-heading .heading-inner {
+      margin-top: 20px;
+   }
 
-      .portv2-client-list p {
-         text-align: center;
-      }
+   .portv2-client-list p {
+      text-align: center;
+   }
 
-      .client-management-right {
-         margin-left: 15px;
-         max-width: 700px;
-      }
+   .client-management-right {
+      margin-left: 15px;
+      max-width: 700px;
+   }
 
-      .client-management-list {
-         flex-direction: column;
-         align-items: center;
-         text-align: center;
-      }
+   .client-management-list {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+   }
 
-      .client-management-right {
-         margin-top: 20px;
-      }
+   .client-management-right {
+      margin-top: 20px;
+   }
 
-      .portv3-employment-list .portv2-employment-info span {
-         margin-top: 16px;
-         font-size: 14px;
-      }
+   .portv3-employment-list .portv2-employment-info span {
+      margin-top: 16px;
+      font-size: 14px;
+   }
 
-      .client-management-right {
-         max-width: 100%;
-         margin-right: initial;
-      }
+   .client-management-right {
+      max-width: 100%;
+      margin-right: initial;
+   }
 
-      .portv2-employment-list {
-         padding: 20px;
-      }
+   .portv2-employment-list {
+      padding: 20px;
+   }
 
-      .employment-history {
-         padding: 20px;
-         margin-top: 40px;
-      }
+   .employment-history {
+      padding: 20px;
+      margin-top: 40px;
+   }
 
-      .portv3-education-content-top h4 {
-         font-size: 20px;
-      }
+   .portv3-education-content-top h4 {
+      font-size: 20px;
+   }
 
-      .portv3-education-content {
-         padding: 20px;
-      }
+   .portv3-education-content {
+      padding: 20px;
+   }
 
-      .portv3-testi-content {
-         padding: 20px;
-      }
+   .portv3-testi-content {
+      padding: 20px;
+   }
 
-      .portv3-newsletter-content {
-         padding: 20px;
+   .portv3-newsletter-content {
+      padding: 20px;
 
-      }
+   }
 
-      .portv3-newsletter-content h4 {
-         font-size: 22px;
+   .portv3-newsletter-content h4 {
+      font-size: 22px;
 
-      }
+   }
 
-      .portv3-newsletter-content button {
+   .portv3-newsletter-content button {
 
-         padding: 10px 20px;
+      padding: 10px 20px;
 
-      }
+   }
 
-      .portv3-newsletter-content form {
+   .portv3-newsletter-content form {
 
-         padding: 10px 10px;
+      padding: 10px 10px;
 
-      }
+   }
 
-      .add-client-btn i {
-         margin: 0 0px 0 0px;
-         font-size: 16px;
-      }
+   .add-client-btn i {
+      margin: 0 0px 0 0px;
+      font-size: 16px;
+   }
 
-      .portv3-newsletter {
-         padding: 40px 0;
-      }
+   .portv3-newsletter {
+      padding: 40px 0;
+   }
 
-      /* .portfolio-v4-info-left .img {
+   /* .portfolio-v4-info-left .img {
          position: initial;
 
        } */
-      .portfolio-v4-info-right {
-         margin-top: 0px;
-      }
+   .portfolio-v4-info-right {
+      margin-top: 0px;
+   }
 
-      /* .portfolio-v4-info-right {
+   /* .portfolio-v4-info-right {
          text-align: center;
       } */
-      .portfolio-v4-info-right h2 {
-         font-size: 30px;
-      }
-
-      .portfolio-v4-info-flex {
-         flex-direction: column;
-      }
-
-      .portfolio-v4-info-right h5 {
-         font-size: 20px !important;
-         margin-top: 10px;
-      }
-
-      .portfolio-v4-info-left .img {
-         position: initial;
-         left: initial;
-         transform: translateX(0);
-         margin-top: -120px;
-      }
-
-      .portfolio-v4-info-left {
-         text-align: center;
-      }
-
-      .portfolio-v4-info-right p {
-         margin-top: 10px;
-      }
-
-      .portfolio-v4-info-right .country span {
-         font-size: 16px;
-         font-weight: 500;
-      }
-
-      .portfolio-v4-info-right .language span {
-         font-weight: 500;
-         font-size: 20px;
-      }
-
-      .portfolio-v4-category ul {
-
-         flex-direction: column;
-      }
-
-      .portfolio-v4-content-header h4 {
-         font-size: 25px;
-      }
-
-      .add-edit-employment-list i {
-         margin-bottom: 10px;
-      }
-
-      .portfolio-v4-client-flex {
-         flex-direction: column;
-         align-items: center;
-         text-align: center;
-      }
-
-      .portfolio-v4-client-info {
-         margin-left: 0px;
-      }
-
-      .portfolio-v4-client-info h4 {
-         font-weight: 600;
-         margin-top: 20px;
-      }
-
-      .portfolio-v4-rating-flex {
-         flex-direction: column;
-      }
-
-      .portfolio-v4-rating-list {
-         text-align: center;
-      }
-
-      .portfolio-v4-newsletter-content h4 {
-         font-weight: 700;
-         text-transform: capitalize;
-         font-size: 30px;
-      }
-
-      .portfolio-v5-info-content h2 {
-         font-size: 26px;
-
-      }
-
-      .portfolio-v5-info-content h5 {
-         font-size: 18px !important;
-         margin-top: 10px;
-      }
-
-      .career-form-left {
-         padding: 20px;
-      }
-
-      .career-form-right {
-         padding: 20px;
-      }
-
-      .career-form-right h4 {
-         font-size: 26px;
-      }
-
-      .portfolio-v5-content-header {
-         flex-direction: column;
-         align-items: flex-start;
-      }
-
-      .portfolio-v5-content-header .add-btn {
-         margin-left: 0;
-         margin-top: 10px;
-      }
-
-      .portfolio-v5-content-header h3 {
-         font-size: 22px !important;
-      }
-
-      .portfolio-v5-emp-content-top {
-         flex-direction: column;
-         align-items: flex-start;
-      }
-
-      .portfolio-v5-emp-content-top h4 {
-         margin-bottom: 10px;
-      }
-
-      .porfolio-v5-employement {
-         padding: 0 0 40px;
-      }
-
-      .portfolio-v5-client-list-flex {
-         flex-direction: column;
-         align-items: center;
-         text-align: center;
-      }
-
-      .portfolio-v5-client-info {
-         margin-left: 0px;
-      }
-
-      .portfolio-v5-client-info h4 {
-         margin-top: 20px;
-      }
-
-      .porfolio-v5-client {
-         padding-bottom: 0;
-      }
-
-      .porfolio-v5-education {
-         padding-bottom: 0;
-      }
-
-      .portfolio-v5-education-list h4 {
-         font-size: 20px !important;
-      }
-
-      .newsletter {
-         padding: 0px 0 40px;
-      }
-
-      .porfolio-v5-certification {
-         padding: 0 0 20px;
-      }
-
-      .porfolio-v5-testimonial {
-         padding-top: 0;
-      }
-
-      .portfolio-v5-padding {
-         padding: 0 0 40px;
-      }
-
-      .tbody-content td {
-         font-size: 14px !important;
-      }
-      .support-faq h2 {
-         font-size: 25px;
-         line-height: 1.2;
-       }
-       .support-getting-started-content {
-         flex-direction: column;
-       }
-       .support-getting-started-content .info h4 {
-         margin-top: 20px;
-         font-size: 18px;
-       }
-       .page-title h2 {
-         font-size: 32px;
-      }
+   .portfolio-v4-info-right h2 {
+      font-size: 30px;
    }
 
+   .portfolio-v4-info-flex {
+      flex-direction: column;
+   }
 
-   @media (max-width: 640px) {
-      .dashboard-header-search form {
+   .portfolio-v4-info-right h5 {
+      font-size: 20px !important;
+      margin-top: 10px;
+   }
 
-         justify-content: space-between;
-         width: 200px;
-      }
+   .portfolio-v4-info-left .img {
+      position: initial;
+      left: initial;
+      transform: translateX(0);
+      margin-top: -120px;
+   }
 
-      .dashboard-header-search form input {
-         width: 100%;
-         margin-right: 10px;
-         font-size: 15px;
-      }
+   .portfolio-v4-info-left {
+      text-align: center;
+   }
 
-      .dashboard-page-name a {
-         font-size: 16px;
-         position: relative;
-         top: -6px;
-      }
+   .portfolio-v4-info-right p {
+      margin-top: 10px;
+   }
 
-      .dashboard-notification a {
-         font-size: 20px;
-         position: relative;
-         padding: 0 14px;
-      }
+   .portfolio-v4-info-right .country span {
+      font-size: 16px;
+      font-weight: 500;
+   }
 
-      .dashboard-notification a span {
+   .portfolio-v4-info-right .language span {
+      font-weight: 500;
+      font-size: 20px;
+   }
 
-         top: -.2rem;
-         right: .5rem;
+   .portfolio-v4-category ul {
 
-         min-width: 18px;
-         height: 18px;
-         line-height: 20px;
-      }
+      flex-direction: column;
+   }
 
-      .dashboard-profile a {
-         width: 30px;
-         height: 30px;
-         margin-top: 10px;
+   .portfolio-v4-content-header h4 {
+      font-size: 25px;
+   }
 
-      }
+   .add-edit-employment-list i {
+      margin-bottom: 10px;
+   }
 
-      .dashboard-profile a img {
+   .portfolio-v4-client-flex {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+   }
 
-         width: 30px;
-         height: 30px;
-      }
+   .portfolio-v4-client-info {
+      margin-left: 0px;
+   }
 
-      /* .recent-documents li {
+   .portfolio-v4-client-info h4 {
+      font-weight: 600;
+      margin-top: 20px;
+   }
+
+   .portfolio-v4-rating-flex {
+      flex-direction: column;
+   }
+
+   .portfolio-v4-rating-list {
+      text-align: center;
+   }
+
+   .portfolio-v4-newsletter-content h4 {
+      font-weight: 700;
+      text-transform: capitalize;
+      font-size: 30px;
+   }
+
+   .portfolio-v5-info-content h2 {
+      font-size: 26px;
+
+   }
+
+   .portfolio-v5-info-content h5 {
+      font-size: 18px !important;
+      margin-top: 10px;
+   }
+
+   .career-form-left {
+      padding: 20px;
+   }
+
+   .career-form-right {
+      padding: 20px;
+   }
+
+   .career-form-right h4 {
+      font-size: 26px;
+   }
+
+   .portfolio-v5-content-header {
+      flex-direction: column;
+      align-items: flex-start;
+   }
+
+   .portfolio-v5-content-header .add-btn {
+      margin-left: 0;
+      margin-top: 10px;
+   }
+
+   .portfolio-v5-content-header h3 {
+      font-size: 22px !important;
+   }
+
+   .portfolio-v5-emp-content-top {
+      flex-direction: column;
+      align-items: flex-start;
+   }
+
+   .portfolio-v5-emp-content-top h4 {
+      margin-bottom: 10px;
+   }
+
+   .porfolio-v5-employement {
+      padding: 0 0 40px;
+   }
+
+   .portfolio-v5-client-list-flex {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+   }
+
+   .portfolio-v5-client-info {
+      margin-left: 0px;
+   }
+
+   .portfolio-v5-client-info h4 {
+      margin-top: 20px;
+   }
+
+   .porfolio-v5-client {
+      padding-bottom: 0;
+   }
+
+   .porfolio-v5-education {
+      padding-bottom: 0;
+   }
+
+   .portfolio-v5-education-list h4 {
+      font-size: 20px !important;
+   }
+
+   .newsletter {
+      padding: 0px 0 40px;
+   }
+
+   .porfolio-v5-certification {
+      padding: 0 0 20px;
+   }
+
+   .porfolio-v5-testimonial {
+      padding-top: 0;
+   }
+
+   .portfolio-v5-padding {
+      padding: 0 0 40px;
+   }
+
+   .tbody-content td {
+      font-size: 14px !important;
+   }
+
+   .support-faq h2 {
+      font-size: 25px;
+      line-height: 1.2;
+   }
+
+   .support-getting-started-content {
+      flex-direction: column;
+   }
+
+   .support-getting-started-content .info h4 {
+      margin-top: 20px;
+      font-size: 18px;
+   }
+
+   .page-title h2 {
+      font-size: 32px;
+   }
+}
+
+
+@media (max-width: 640px) {
+   .dashboard-header-search form {
+
+      justify-content: space-between;
+      width: 200px;
+   }
+
+   .dashboard-header-search form input {
+      width: 100%;
+      margin-right: 10px;
+      font-size: 15px;
+   }
+
+   .dashboard-page-name a {
+      font-size: 16px;
+      position: relative;
+      top: -6px;
+   }
+
+   .dashboard-notification a {
+      font-size: 20px;
+      position: relative;
+      padding: 0 14px;
+   }
+
+   .dashboard-notification a span {
+
+      top: -.2rem;
+      right: .5rem;
+
+      min-width: 18px;
+      height: 18px;
+      line-height: 20px;
+   }
+
+   .dashboard-profile a {
+      width: 30px;
+      height: 30px;
+      margin-top: 10px;
+
+   }
+
+   .dashboard-profile a img {
+
+      width: 30px;
+      height: 30px;
+   }
+
+   /* .recent-documents li {
          flex-direction: column;
        } */
-      .recent-documents li h6 {
-         font-size: 15px;
-      }
-
-      .recent-documents li span {
-
-
-         font-size: 14px !important;
-      }
-
-      .certification-btns {
-         flex-direction: column;
-      }
-
-      .certification-btn {
-         margin-top: 14px;
-      }
-
-      .portfolio-infos-flex {
-         display: flex;
-         flex-direction: column;
-      }
-
-      .portfolio-infos-img {
-         margin-bottom: 14px;
-      }
-
-      .employment-list-heading h5 {
-         font-size: 18px !important;
-      }
-
-      .rating-heading h5 {
-         font-size: 25px !important;
-      }
-
-      .testimonial-info h5 {
-         font-size: 25px !important;
-      }
-
-      .testimonial-list {
-         flex-direction: column;
-      }
-
-      .testimonial-info {
-         margin-left: 0;
-         margin-top: 20px;
-      }
-
-      .modal-title {
-         font-size: 22px !important;
-      }
-
-      .table-tabs thead tr th {
-         font-size: 14px;
-      }
-
-      .courses-filter {
-         align-items: flex-start;
-         flex-direction: column;
-      }
-
-      .add-client-btn span {
-         display: none;
-      }
-
-      .portv2-employment-heading i.add-employee {
-
-         margin-left: 0px;
-      }
-
-      .feedback-list-heading h5 {
-         font-size: 22px !important;
-      }
-
-      .portv3-feedback-rating-heading h4 {
-         font-size: 18px;
-         font-weight: 500;
-      }
+   .recent-documents li h6 {
+      font-size: 15px;
    }
 
-   @media(max-width: 575px) {
-      h1 {
-         font-size: 30px;
-      }
-
-      h2 {
-         font-size: 26px;
-      }
-
-      .market-info-sec1 h2 {
-         font-size: 26px;
-      }
-
-      .market-research-sec h2 {
-         font-size: 26px;
-      }
-
-      .banner p {
-         width: 100%;
-         font-size: 15px;
-         line-height: 1.5;
-      }
-
-      .video_section {
-         padding-bottom: 30px;
-      }
-
-      .video_dive img {
-         border-radius: 20px;
-      }
-
-      .video_dive a {
-         width: 80px;
-         height: 80px;
-      }
-
-      .video_dive a img {
-         max-width: 30px;
-      }
-
-      .video_dive p {
-         padding: 0;
-         font-size: 15px;
-         line-height: 1.6;
-      }
-
-      .job_part .job_icon {
-         max-width: 50px;
-      }
-
-      .button {
-         font-size: 16px;
-         height: 48px;
-         line-height: 48px;
-         min-width: 240px;
-      }
-
-      footer {
-         background-size: 160px 160px;
-      }
-
-      .bottom_footer ul {
-         justify-content: center;
-         margin-bottom: 20px;
-      }
-
-      .pricing-pay {
-
-         flex-direction: column;
-      }
-
-      .pricing-pay small {
-         margin-bottom: 10px;
-      }
-
-      .pricing-pay .select {
-
-         width: 10em;
-
-      }
-
-      .pricing-content {
-         padding: 20px;
-
-      }
-
-      .limited-access span {
-         font-size: 40px;
-
-      }
-
-      .markets-banner {
-         background: url(../img/market-content-sm.png) no-repeat;
-         background-size: cover;
-         background-position: center;
-
-      }
-
-      .content-top h4 {
-         font-size: 16px;
-         line-height: 1.4;
-      }
-
-      .portfolio-client-info h5 {
-         font-size: 16px !important;
-         color: #444;
-      }
-
-      .portfolio-client-info h2 {
-         font-size: 32px;
-      }
-
-      .portfolio-infos-img {
-         margin-right: 14px;
-      }
+   .recent-documents li span {
 
 
-      .rating-info li .star-name span {
-         font-size: 14px;
-
-      }
-
-      .rating-info li .stars i {
-         font-size: 16px;
-      }
-
-      .rating-info h5 {
-         font-size: 22px !important;
-      }
-
-      .feedback-list-flex {
-
-         flex-direction: column;
-      }
-      .artiledetails_banner_text {
-         padding: 8px 0 0;
-     }
-     .breadcumb_list {
-         margin: 0;
-         justify-content: center;
-      }
-      .breadcumb_list li {
-         font-size: 10px !important;
-         line-height: 1.2;
-         margin-right: 6px !important;
-      }
-      .breadcumb_list li a {
-         font-size: 10px;
-      }
-      .artiledetails_banner_text h1 {
-         font-size: 20px;
-         margin-bottom: 8px;
-      }
-      .articlecat li {
-         font-size: 12px;
-      }
-      .articlecat li svg {
-         width: 16px;
-      }
-      .page-title h2 {
-         font-size: 22px;
-         margin-bottom: 16px;
-      }
+      font-size: 14px !important;
    }
 
-   @media (max-width: 480px) {
-      .login-content button {
-
-         padding: 6px 20px;
-         font-size: 15px;
-      }
-
-      .recent-documents li h6 {
-         font-size: 14px;
-      }
-
-      .recent-documents li span {
-
-
-         font-size: 12px !important;
-         margin-left: 6px;
-      }
-
-      .education-name h4 {
-         font-size: 18px;
-      }
-
-      a.request-testimonials {
-         padding: 12px 20px;
-
-         font-size: 15px;
-
-      }
-
-      .request-testimonials-btn {
-         padding: 12px 30px;
-      }
-
-      .rating-feedback-form h4 {
-         font-size: 16px;
-         margin-bottom: 10px;
-      }
-
-      .course-content ul.course-content-details li {
-
-         padding: 0 12px;
-         font-size: 12px;
-
-      }
-
-      .feedback-list-heading h5 {
-         font-size: 20px !important;
-      }
-
-      .rating-list-stars i {
-         font-size: 12px;
-      }
+   .certification-btns {
+      flex-direction: column;
    }
 
-   @media (max-width: 360px) {
-      .dashboard-header {
-         flex-direction: column;
-      }
+   .certification-btn {
+      margin-top: 14px;
    }
 
-   @media (max-width: 320px) {}
+   .portfolio-infos-flex {
+      display: flex;
+      flex-direction: column;
+   }
+
+   .portfolio-infos-img {
+      margin-bottom: 14px;
+   }
+
+   .employment-list-heading h5 {
+      font-size: 18px !important;
+   }
+
+   .rating-heading h5 {
+      font-size: 25px !important;
+   }
+
+   .testimonial-info h5 {
+      font-size: 25px !important;
+   }
+
+   .testimonial-list {
+      flex-direction: column;
+   }
+
+   .testimonial-info {
+      margin-left: 0;
+      margin-top: 20px;
+   }
+
+   .modal-title {
+      font-size: 22px !important;
+   }
+
+   .table-tabs thead tr th {
+      font-size: 14px;
+   }
+
+   .courses-filter {
+      align-items: flex-start;
+      flex-direction: column;
+   }
+
+   .add-client-btn span {
+      display: none;
+   }
+
+   .portv2-employment-heading i.add-employee {
+
+      margin-left: 0px;
+   }
+
+   .feedback-list-heading h5 {
+      font-size: 22px !important;
+   }
+
+   .portv3-feedback-rating-heading h4 {
+      font-size: 18px;
+      font-weight: 500;
+   }
+}
+
+@media(max-width: 575px) {
+   h1 {
+      font-size: 30px;
+   }
+
+   h2 {
+      font-size: 26px;
+   }
+
+   .market-info-sec1 h2 {
+      font-size: 26px;
+   }
+
+   .market-research-sec h2 {
+      font-size: 26px;
+   }
+
+   .banner p {
+      width: 100%;
+      font-size: 15px;
+      line-height: 1.5;
+   }
+
+   .video_section {
+      padding-bottom: 30px;
+   }
+
+   .video_dive img {
+      border-radius: 20px;
+   }
+
+   .video_dive a {
+      width: 80px;
+      height: 80px;
+   }
+
+   .video_dive a img {
+      max-width: 30px;
+   }
+
+   .video_dive p {
+      padding: 0;
+      font-size: 15px;
+      line-height: 1.6;
+   }
+
+   .job_part .job_icon {
+      max-width: 50px;
+   }
+
+   .button {
+      font-size: 16px;
+      height: 48px;
+      line-height: 48px;
+      min-width: 240px;
+   }
+
+   footer {
+      background-size: 160px 160px;
+   }
+
+   .bottom_footer ul {
+      justify-content: center;
+      margin-bottom: 20px;
+   }
+
+   .pricing-pay {
+
+      flex-direction: column;
+   }
+
+   .pricing-pay small {
+      margin-bottom: 10px;
+   }
+
+   .pricing-pay .select {
+
+      width: 10em;
+
+   }
+
+   .pricing-content {
+      padding: 20px;
+
+   }
+
+   .limited-access span {
+      font-size: 40px;
+
+   }
+
+   .markets-banner {
+      background: url(../img/market-content-sm.png) no-repeat;
+      background-size: cover;
+      background-position: center;
+
+   }
+
+   .content-top h4 {
+      font-size: 16px;
+      line-height: 1.4;
+   }
+
+   .portfolio-client-info h5 {
+      font-size: 16px !important;
+      color: #444;
+   }
+
+   .portfolio-client-info h2 {
+      font-size: 32px;
+   }
+
+   .portfolio-infos-img {
+      margin-right: 14px;
+   }
+
+
+   .rating-info li .star-name span {
+      font-size: 14px;
+
+   }
+
+   .rating-info li .stars i {
+      font-size: 16px;
+   }
+
+   .rating-info h5 {
+      font-size: 22px !important;
+   }
+
+   .feedback-list-flex {
+
+      flex-direction: column;
+   }
+
+   .artiledetails_banner_text {
+      padding: 8px 0 0;
+   }
+
+   .breadcumb_list {
+      margin: 0;
+      justify-content: center;
+   }
+
+   .breadcumb_list li {
+      font-size: 10px !important;
+      line-height: 1.2;
+      margin-right: 6px !important;
+   }
+
+   .breadcumb_list li a {
+      font-size: 10px;
+   }
+
+   .artiledetails_banner_text h1 {
+      font-size: 20px;
+      margin-bottom: 8px;
+   }
+
+   .articlecat li {
+      font-size: 12px;
+   }
+
+   .articlecat li svg {
+      width: 16px;
+   }
+
+   .page-title h2 {
+      font-size: 22px;
+      margin-bottom: 16px;
+   }
+}
+
+@media (max-width: 480px) {
+   .login-content button {
+
+      padding: 6px 20px;
+      font-size: 15px;
+   }
+
+   .recent-documents li h6 {
+      font-size: 14px;
+   }
+
+   .recent-documents li span {
+
+
+      font-size: 12px !important;
+      margin-left: 6px;
+   }
+
+   .education-name h4 {
+      font-size: 18px;
+   }
+
+   a.request-testimonials {
+      padding: 12px 20px;
+
+      font-size: 15px;
+
+   }
+
+   .request-testimonials-btn {
+      padding: 12px 30px;
+   }
+
+   .rating-feedback-form h4 {
+      font-size: 16px;
+      margin-bottom: 10px;
+   }
+
+   .course-content ul.course-content-details li {
+
+      padding: 0 12px;
+      font-size: 12px;
+
+   }
+
+   .feedback-list-heading h5 {
+      font-size: 20px !important;
+   }
+
+   .rating-list-stars i {
+      font-size: 12px;
+   }
+}
+
+@media (max-width: 360px) {
+   .dashboard-header {
+      flex-direction: column;
+   }
+}
+
+@media (max-width: 320px) {}

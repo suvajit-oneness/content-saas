@@ -117,9 +117,6 @@
             <p>
                 {{$course->title}} ({{(int)(completedTopicPerCourse($course->id)->total_viewed_topic/completedTopicPerCourse($course->id)->total_topic * 100)}}% Completed)
             </p>
-            <a href="javascript:void(0)" class="lessionSidebar-close">
-                <i class="fas fa-times"></i>
-            </a>
         </div>
         <div class="accordion-container lessionSidebar-list">
             @foreach($totalLessonsAndTopics->lessons as $key => $lesson)

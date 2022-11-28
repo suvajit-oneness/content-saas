@@ -6469,13 +6469,9 @@ tbody, td, tfoot, th, thead, tr {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  border: 1px solid #000;
+  /* border: 1px solid #000; */
   border-bottom: 0;
   padding: 10px 15px;
-}
-
-.cart-total:last-child {
-  border-bottom: 1px solid #000;
 }
 
 .cart-total-label {
@@ -7490,14 +7486,14 @@ ul.review-star-group{
 
 .crs-details.lession-details,
 .for_lession_details_footer + .dashboard-footer{
-  width: calc(100% - 500px);
+  width: calc(100% - 400px);
 }
 
 .lessionSidebar {
   position: fixed;
   top: 0;
   right: 0;
-  width: 500px;
+  width: 400px;
   background: #fff;
   z-index: 99;
   /* padding: 20px; */
@@ -7716,6 +7712,7 @@ ul.review-star-group{
   background: #111b23;
   color: #fff;
   padding: 30px 15px;
+  min-height: 250px;
 }
 .course-details_header h2{
   color: #fff;
@@ -8210,3 +8207,34 @@ ul.review-star-group{
   border-radius: 50%;
   margin-left: auto;
 }
+
+.spare__input__group{
+  position: absolute;
+  right: 0;
+  width: 400px;
+}
+
+
+.item__image{
+  margin-right: 15px;
+}
+.item__image img{
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin: 0;
+}
+.item__content{
+  flex-grow: 1;
+}
+.checkout-btn{  
+  border-radius: 0;
+  width: 100%;
+  font-size: 16px;
+  height: 45px;
+  line-height: 45px;
+}
+.cart__item{
+  margin-bottom: 25px;
+}
+
