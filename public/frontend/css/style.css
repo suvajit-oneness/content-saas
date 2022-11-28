@@ -7490,14 +7490,14 @@ ul.review-star-group{
 
 .crs-details.lession-details,
 .for_lession_details_footer + .dashboard-footer{
-  width: calc(100% - 500px);
+  width: calc(100% - 400px);
 }
 
 .lessionSidebar {
   position: fixed;
   top: 0;
   right: 0;
-  width: 500px;
+  width: 400px;
   background: #fff;
   z-index: 99;
   /* padding: 20px; */
@@ -7716,6 +7716,7 @@ ul.review-star-group{
   background: #111b23;
   color: #fff;
   padding: 30px 15px;
+  min-height: 250px;
 }
 .course-details_header h2{
   color: #fff;
@@ -8210,3 +8211,11 @@ ul.review-star-group{
   border-radius: 50%;
   margin-left: auto;
 }
+
+.spare__input__group{
+  position: absolute;
+  right: 0;
+  width: 400px;
+}
+
+
