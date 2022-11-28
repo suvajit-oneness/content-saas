@@ -24,10 +24,10 @@
             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type</p> -->
             <ul class="nav nav-tabs media-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <a href="#description" class="nav-link {{request()->input('page') ? '' : 'active'}}" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" role="tab" aria-controls="description" aria-selected="false">Description</a>
+                    <a href="#description" data-toggle="tab" class="nav-link {{request()->input('page') ? '' : 'active'}}" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" role="tab" aria-controls="description" aria-selected="false">Description</a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a href="#review" class="nav-link {{request()->input('page') ? 'active' : ''}}" id="review-tab" data-bs-toggle="tab" data-bs-target="#review" role="tab" aria-controls="review" aria-selected="true">review</a>
+                    <a href="#review" data-toggle="tab" class="nav-link {{request()->input('page') ? 'active' : ''}}" id="review-tab" data-bs-toggle="tab" data-bs-target="#review" role="tab" aria-controls="review" aria-selected="true">review</a>
                 </li>
             </ul>
             <div class="tab-content details-tab">
@@ -35,11 +35,11 @@
                     <p>{!! $course->description !!}</p>
                 </div>
                 <div class="tab-pane {{request()->input('page') ? 'active' : ''}}" id="review" role="tabpanel" aria-labelledby="review-tab">
-                    <form action="{{ route('front.user.courses.rating.store') }}" method="POST" role="form"
-                    enctype="multipart/form-data">
-                    @csrf
-                    <input type="hidden" name="course_id" value="{{ $course->id }}">
-                    <input type="hidden" name="topic_id" value="{{ getCountervideotopic($course->id)->topic_id }}">
+                    <form action="{{ route('front.user.courses.rating.store') }}" method="POST" role="form" 
+                            enctype="multipart/form-data">
+                        @csrf
+                        <input type="hidden" name="course_id" value="{{ $course->id }}">
+                        <input type="hidden" name="topic_id" value="{{ getCountervideotopic($course->id)->topic_id }}">
                         <div class="form-group">
                             <label class="control-label" for="rating"> Rating</label>
                             <div class="star-rating" style="text-align: left;">
@@ -73,7 +73,7 @@
                             <textarea rows="6" name="review" class="form-control"></textarea>
                         </div>
                         <div class="form-group text-left">
-                            <button type="submit" class="btn add-btn-edit ms-0 mt-4">Submit</button>
+                            <button type="submit" class="btn add-btn-edit ms-0 my-4">Submit</button>
                         </div>
                     </form>
                     <div class="row">
@@ -153,6 +153,7 @@
 @endsection
 @section('script')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     <script>
         function setActiveClassForTopic() {
@@ -230,5 +231,20 @@
                 $(this).siblings(".content").slideDown(200);
             }
         });
+
+
+        // Make the tab stay activated while the page loads
+        $(document).ready(function(){
+            $('.media-tabs a[data-toggle="tab"]').on('click', function(e) {
+                window.localStorage.setItem('active__tab', $(e.target).attr('href'));
+            });
+            let active__tab = window.localStorage.getItem('active__tab');
+            if (active__tab) {
+                $('.media-tabs a[href="' + active__tab + '"]').tab('show');
+                window.localStorage.removeItem("active__tab");
+            }
+        })
+
+
     </script>
 @endsection
