@@ -126,7 +126,7 @@
                                         
                                         <p><b>Benefits:</b></p>
                                         <ul>
-                                            @foreach (explode(',',$jobs[0]->benifits) as $item)
+                                            @foreach (explode(',',$job[0]->benifits) as $item)
                                                 {{$item}}
                                             @endforeach
                                             {{-- <li>Health insurance</li>
@@ -136,8 +136,8 @@
 
                                         <p><b>Schedule:</b></p>
                                         <ul>
-                                            @foreach (explode(',',$jobs[0]->schedule) as $item)
-                                                {{$item}}
+                                            @foreach (explode(',',$job[0]->schedule) as $item)
+                                                <li>{{$item}}</li>
                                             @endforeach
                                             {{-- <li>Day shift</li>
                                             <li>Monday to Friday</li> --}}
