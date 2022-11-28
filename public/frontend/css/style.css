@@ -6494,7 +6494,7 @@ tbody, td, tfoot, th, thead, tr {
 }
 
 .checkout-form .cart-summary {
-  border: 1px solid #dbdbdb;
+  /* border: 1px solid #dbdbdb; */
   padding: 20px;
 }
 
@@ -6505,7 +6505,9 @@ tbody, td, tfoot, th, thead, tr {
 }
 
 .checkout-form .cart-summary .cart-info h6 {
-  font-size: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 12px;
 }
 
 .checkout-form .cart-summary .cart-info p {
@@ -8236,5 +8238,18 @@ ul.review-star-group{
 }
 .cart__item{
   margin-bottom: 25px;
+}
+.cart-info h5{
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.cart__item figcaption{
+  flex-grow: 1;
+  display: flex;
+  justify-content: space-between;
+}
+.cart__item .cart-info{
+  flex-grow: 1;
 }
 

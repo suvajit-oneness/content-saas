@@ -52,8 +52,8 @@
         @endif --}}
 
         <div class="row justify-content-between">
-            <div class="col-lg-7">
-                <div class="cart__item">
+            <div class="col-lg-8">
+                <div class="">
                     {{-- <div class="cart-row cart-row--header">
                         <div class="cart-item item-thumb">Image</div>
                         <div class="cart-item item-title">Name</div>
@@ -66,10 +66,9 @@
                         $subTotal = $grandTotal = $couponCodeDiscount = $shippingCharges = $taxPercent = 0;
                     @endphp
                     @foreach($data as $cartKey => $cartValue)
-                    <div class="d-flex">
+                    <div class="d-flex cart__item">
                         <div class="item__image">
-                            {{--<img src="{{asset($cartValue->course_image)}}">--}}
-                            <img src="https://cdn.pixabay.com/photo/2018/02/27/10/49/training-3185170__480.jpg" alt="">
+                            <img src="{{asset($cartValue->course_image)}}">
                         </div>
                         <div class="item__content">
                             <div class="item-title">
@@ -89,7 +88,6 @@
                                 {{-- @else
                                     <h6>-- Subscription --</h6> --}}
                                 @endif
-                                <small>Suvajit Bardhan</small>
                             </div>
                             <div class="item-author text-muted">
                                 @if($cartValue->purchase_type == 'course')
@@ -121,7 +119,7 @@
                     @endforeach
                 </div>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-3">
                 <div class="cart-summary">
                     <div class="cart-total">
                         <div class="cart-total-label">

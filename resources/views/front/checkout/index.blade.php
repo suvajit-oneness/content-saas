@@ -4,9 +4,9 @@
 
 @section('section')
 <style>
-.cart-flow li:before {
-    width: calc(1200px / 3);
-}
+    .cart-flow li:before {
+        width: calc(1200px / 3);
+    }
 </style>
 
 <section class="cart-header mb-3 mb-sm-5">
@@ -31,34 +31,34 @@
                         @endphp
 
                         @foreach ($cartData as $cartKey => $cartValue)
-                        <li class="d-flex border p-2 m-2">
-                            <figure class="w-25">
+                        <li class="d-flex p-2 cart__item">
+                            <div class="item__image">
                                 @if($cartValue->purchase_type != 'subscription')
-                                    <img src="{{$cartValue->course_image}}" class="w-75"/>
+                                    <img src="{{$cartValue->course_image}}"/>
                                 @else
-                                    <img src="{{$cartValue->course_image}}" class="w-75"/>
+                                    <img src="{{$cartValue->course_image}}"/>
                                 @endif
-                            </figure>
+                            </div>
                             <figcaption>
                                 <div class="cart-info">
                                     @if($cartValue->purchase_type == 'course')
-                                        <h4>{{$cartValue->course_name}}</h4>
+                                        <h5>{{$cartValue->course_name}}</h5>
                                         <h6>By {{$cartValue->author_name}}</h6>
-                                        <p class="m-0">QTY : {{$cartValue->qty}}</p>
+                                        <small class="m-0">QTY : {{$cartValue->qty}}</small>
                                     @endif
                                     @if($cartValue->purchase_type == 'subscription')
-                                        <h4>{{$cartValue->course_name}} Subscription</h4>
+                                        <h5>{{$cartValue->course_name}} Subscription</h5>
                                         <h6>-- Subscription --</h6>
-                                        <p class="m-0">QTY : {{$cartValue->qty}}</p>
+                                        <small class="m-0">QTY : {{$cartValue->qty}}</small>
                                     @endif
                                     @if($cartValue->purchase_type == 'deal')
-                                        <h4>{{$cartValue->course_name}}</h4>
+                                        <h5>{{$cartValue->course_name}}</h5>
                                         <h6>-- Deal --</h6>
-                                        <p class="m-0">QTY : {{$cartValue->qty}}</p>
+                                        <small class="m-0">QTY : {{$cartValue->qty}}</small>
                                     @endif
                                 </div>
                                 <div class="card-meta">
-                                    <h4>${{$cartValue->price}}</h4>
+                                    <h5>${{$cartValue->price}}</h5>
                                 </div>
                             </figcaption>
                         </li>
@@ -105,6 +105,10 @@
                             </div>
                         </div>
                     </div>
+                    <div class="">
+                        <button type="submit" class="btn checkout-btn button">Complete Order</button>
+                        <a href="{{route('front.cart')}}" class="btn checkout-btn button secondary-btn mt-3">Return to Cart</a>
+                    </div>
                 </div>
                 <div class="col-md-7 col-lg-7">
                     <h4 class="cart-heading">Contact Information</h4>
@@ -139,14 +143,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-sm-auto col-md-6 mt-3 mt-sm-0">
-                        <a href="{{route('front.cart')}}" class="btn checkout-btn button">Return to Cart</a>
-                    </div>
-                    <div class="col-sm-auto col-md-6 text-sm-end">
-                        <button type="submit" class="btn checkout-btn button m-2">Complete Order</button>
-                    </div>
-                </div>
+                
             </div>
         </form>
     </div>

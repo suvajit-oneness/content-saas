@@ -455,7 +455,7 @@
         });
 
         $(window).on('scroll', function () {
-            if ($(this).scrollTop() > 1) {
+            if ($(this).scrollTop() > 250) {
                 $('.dashboard-header').addClass("sticky-header");
             }
             else {
