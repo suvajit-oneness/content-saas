@@ -69,24 +69,36 @@ class JobController extends BaseController
      */
     public function store(Request $request)
     {
-       // dd($request->all());
+    //    dd($request->all());
 
         $this->validate($request, [
             'category_id' =>  'required',
             'title'      =>  'required',
+            'short_description' =>  'required',
             'description' =>  'required',
             'employment_type' =>  'required',
+            'skill' =>  'required',
+            'responsibility' =>  'required',
+            'experience' =>  'required',
+            'notice_period' =>  'nullable',
+            'scope' =>  'nullable',
             'address' =>  'required',
             'postcode' =>  'required',
             'city' =>  'required',
             'state' =>  'required',
             'country' =>  'required',
-            'skill' =>  'required',
-            'experience' =>  'required',
-            'scope' =>  'required',
             'start_date' =>  'required',
             'end_date' =>  'required',
+            'source' =>  'nullable',
             'salary' =>  'nullable',
+            'payment' =>  'nullable',
+            'schedule' =>  'nullable',
+            'tag' =>  'nullable',
+            'company_name' =>  'required',
+            'contact_number' =>  'nullable',
+            'contact_information' =>  'nullable',
+            'company_website' =>  'required',
+            'company_desc' =>  'required',
         ]);
 
         $params = $request->except('_token');
@@ -123,8 +135,14 @@ class JobController extends BaseController
         $this->validate($request, [
             'category_id' =>  'required',
             'title'      =>  'required',
+            'short_description' =>  'required',
             'description' =>  'required',
             'employment_type' =>  'required',
+            'skill' =>  'required',
+            'responsibility' =>  'required',
+            'experience' =>  'required',
+            'notice_period' =>  'nullable',
+            'scope' =>  'nullable',
             'address' =>  'required',
             'postcode' =>  'required',
             'city' =>  'required',
@@ -132,13 +150,16 @@ class JobController extends BaseController
             'country' =>  'required',
             'start_date' =>  'required',
             'end_date' =>  'required',
+            'source' =>  'nullable',
             'salary' =>  'nullable',
-            'skill' =>  'required',
-            'experience' =>  'required',
-            'scope' =>  'required',
-          //  'link' =>  'nullable|url',
-           // 'location' =>  'nullable|url',
-            //'image'     =>  'nullable|image|mimes:jpg,jpeg,png|max:1000',
+            'payment' =>  'nullable',
+            'schedule' =>  'nullable',
+            'tag' =>  'nullable',
+            'company_name' =>  'required',
+            'contact_number' =>  'nullable',
+            'contact_information' =>  'nullable',
+            'company_website' =>  'required',
+            'company_desc' =>  'required',
         ]);
 
         $params = $request->except('_token');

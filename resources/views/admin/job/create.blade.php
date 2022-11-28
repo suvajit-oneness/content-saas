@@ -86,42 +86,18 @@
                                         class="m-l-5 text-danger">
                                         *</span></label><br>
 
-                                <select id="employment_type" name="employment_type"
-                                    class="filter_select form-control @error('skim') is-invalid @enderror">
+                                <select id="employment_type" name="employment_type" class="filter_select form-control @error('skim') is-invalid @enderror">
                                     <option value="">Select an option</option>
-                                    <option value="fulltime" {{ old('employment_type') == 'fulltime' ? 'selected' : '' }}>
-                                        Full
-                                        time
-                                    </option>
-                                    <option value="parttime" {{ old('employment_type') == 'parttime' ? 'parttime' : '' }}>
-                                        Part
-                                        time
-                                    </option>
-                                    <option value="remote" {{ old('employment_type') == 'remote' ? 'selected' : '' }}>
-                                        Remote
-                                    </option>
-                                    <option value="telecommute"
-                                        {{ old('employment_type') == 'telecommute' ? 'selected' : '' }}>
-                                        Telecommute</option>
-                                    <option value="contract" {{ old('employment_type') == 'contract' ? 'selected' : '' }}>
-                                        Contract
-                                    </option>
-                                    <option value="freelance"
-                                        {{ old('employment_type') == 'freelance' ? 'selected' : '' }}>
-                                        Freelance
-                                    </option>
-                                    <option value="temporary"
-                                        {{ old('employment_type') == 'temporary' ? 'selected' : '' }}>
-                                        Temporary
-                                    </option>
-                                    <option value="unpaid" {{ old('employment_type') == 'unpaid' ? 'selected' : '' }}>
-                                        Unpaid
-                                    </option>
-                                    <option value="internship"
-                                        {{ old('employment_type') == 'internship' ? 'selected' : '' }}>
-                                        Internship</option>
-                                    <option value="other" {{ old('employment_type') == 'other' ? 'selected' : '' }}>Other
-                                    </option>
+                                    <option value="fulltime" {{ old('employment_type') == 'fulltime' ? 'selected' : '' }}>Fulltime</option>
+                                    <option value="parttime" {{ old('employment_type') == 'parttime' ? 'parttime' : '' }}>Part time</option>
+                                    <option value="remote" {{ old('employment_type') == 'remote' ? 'selected' : '' }}>Remote</option>
+                                    <option value="telecommute" {{ old('employment_type') == 'telecommute' ? 'selected' : '' }}>Telecommute</option>
+                                    <option value="contract" {{ old('employment_type') == 'contract' ? 'selected' : '' }}>Contract</option>
+                                    <option value="freelance"{{ old('employment_type') == 'freelance' ? 'selected' : '' }}>Freelance</option>
+                                    <option value="temporary" {{ old('employment_type') == 'temporary' ? 'selected' : '' }}>Temporary</option>
+                                    <option value="unpaid" {{ old('employment_type') == 'unpaid' ? 'selected' : '' }}>Unpaid</option>
+                                    <option value="internship" {{ old('employment_type') == 'internship' ? 'selected' : '' }}>Internship</option>
+                                    <option value="other" {{ old('employment_type') == 'other' ? 'selected' : '' }}>Other</option>
                                 </select>
                             </div>
                         </div>
@@ -136,17 +112,34 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="location">Skill <span class="m-l-5 text-danger">*</span>
-                                (Comma separated)
-                            </label>
-                            <input class="form-control @error('skill') is-invalid @enderror" type="text" name="skill"
-                                id="skill" value="{{ old('skill') }}" />
+                            <label class="control-label" for="skill">Skill Required<span class="m-l-5 text-danger">*</span>(Comma separated)</label>
+                            <textarea class="form-control @error('skill') is-invalid @enderror" type="text" name="skill"
+                                id="skill"> {{ old('skill') }} </textarea>
                             @error('skill')
                                 <p class="small text-danger">{{ $message }}</p>
                             @enderror
                         </div>
+                        
                         <div class="form-group">
-                            <label class="control-label" for="experience">Experience <span
+                            <label class="control-label" for="responsibility">Jobs Responsibilities <span class="m-l-5 text-danger">*</span>(Comma separated)</label>
+                            <textarea class="form-control @error('responsibility') is-invalid @enderror" type="text" name="responsibility"
+                                id="responsibility">{{ old('responsibility') }}</textarea>
+                            @error('responsibility')
+                                <p class="small text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label" for="benifits">Perks And Benifits (Comma separated)</label>
+                            <textarea class="form-control @error('benifits') is-invalid @enderror" type="text" name="benifits"
+                                id="benifits">{{ old('benifits') }}</textarea>
+                            @error('benifits')
+                                <p class="small text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label" for="experience">Experience Required<span
                                     class="m-l-5 text-danger">*</span>
                                 (eg: 1-2 years/ 6 months minimum)
                             </label>
@@ -156,6 +149,18 @@
                                 <p class="small text-danger">{{ $message }}</p>
                             @enderror
                         </div>
+
+                        <div class="form-group">
+                            <label class="control-label" for="notice_period">Notice Period<span
+                                    class="m-l-5 text-danger">*</span>(e.g 1 month/immediate joinee, etc)
+                            </label>
+                            <input class="form-control @error('notice_period') is-invalid @enderror" type="text"
+                                name="notice_period" id="notice_period" value="{{ old('notice_period') }}" />
+                            @error('notice_period')
+                                <p class="small text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+
                         <div class="form-group">
                             <label class="control-label" for="scope">Scope <span class="m-l-5 text-danger">*</span>
                             </label>
@@ -234,22 +239,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <!-- <div id="typePerson">
-                                                                            <div class="form-group">
-                                                                                <label class="control-label" for="address">Address <span class="m-l-5 text-danger">*</span></label>
-                                                                                <input class="form-control @error('address') is-invalid @enderror" type="text" name="address" id="address" value="{{ old('address') }}" />
-                                                                                @error('address')
-        <p class="small text-danger">{{ $message }}</p>
-    @enderror
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label class="control-label" for="pin">Postcode <span class="m-l-5 text-danger">*</span></label>
-                                                                                <input class="form-control @error('pin') is-invalid @enderror" type="text" name="pin" id="pin" value="{{ old('pin') }}" />
-                                                                                @error('pin')
-        <p class="small text-danger">{{ $message }}</p>
-    @enderror
-                                                                            </div>
-                                                                        </div> -->
+                        
 
                         <div class="row">
                             <div class="col-12">
@@ -279,6 +269,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group">
@@ -292,6 +283,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group">
@@ -320,6 +312,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div id="salary">
                             <div class="form-group">
                                 <label class="control-label" for="payment">Amount<span
@@ -331,6 +324,19 @@
                                 @enderror
                             </div>
                         </div>
+
+                        <div id="salary">
+                            <div class="form-group">
+                                <label class="control-label" for="schedule">Schedule<span
+                                        class="m-l-5 text-danger"></span></label>
+                                <input class="form-control @error('schedule') is-invalid @enderror" type="text"
+                                    name="schedule" value="{{ old('schedule') }}" />
+                                @error('schedule')
+                                    <p class="small text-danger">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <label class="control-label" for="tag">Tag <span
                                     class="m-l-5 text-danger"></span></label>
@@ -350,6 +356,37 @@
                                 <p class="small text-danger">{{ $message }}</p>
                             @enderror
                         </div>
+
+                        <div class="form-group">
+                            <label class="control-label" for="contact_number">Company contact number<span
+                                    class="m-l-5 text-danger"></span>(Optional)</label>
+                            <input class="form-control @error('contact_number') is-invalid @enderror" type="text" name="contact_number"
+                                id="contact_number" value="{{ old('contact_number') }}" />
+                            @error('contact_number')
+                                <p class="small text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label" for="contact_information">Company contact information <span
+                                    class="m-l-5 text-danger"></span>(Optional)</label>
+                            <input class="form-control @error('contact_information') is-invalid @enderror" type="text" name="contact_information"
+                                id="contact_information" value="{{ old('contact_information') }}" />
+                            @error('contact_information')
+                                <p class="small text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label" for="company_website">Company website link<span
+                                    class="m-l-5 text-danger">*</span></label>
+                            <input class="form-control @error('company_website') is-invalid @enderror" type="text" name="company_website"
+                                id="company_website" value="{{ old('company_website') }}" />
+                            @error('company_website')
+                                <p class="small text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+
                         <div class="form-group">
                             <label class="control-label" for="company_desc">Company Description <span
                                     class="m-l-5 text-danger"></span></label>

@@ -69,49 +69,63 @@ class JobRepository extends BaseRepository implements JobContract
         try {
 
             $collection = collect($params);
-            $job = new Job;
+
+            $job = new Job();
+            
             $job->category_id = $collection['category_id'] ?? '';
             $job->title = $collection['title'] ?? '';
             // slug
             $job->slug = slugGenerate($collection['title'], 'jobs');
+
+            $job->short_description = $collection['short_description'] ?? '';
+            $job->description = $collection['description'] ?? '';
+
             if($params['employment_type'] == 'other'){
-            $job->employment_type = $collection['other_employment_type'] ?? '';
+                $job->employment_type = $collection['other_employment_type'] ?? '';
             }
             else{
-            $job->employment_type = $collection['employment_type'] ?? '';
+                $job->employment_type = $collection['employment_type'] ?? '';
             }
+
+            $job->skill = $collection['skill'] ?? '';
+            $job->responsibility = $collection['responsibility'] ?? '';
+            $job->experience = $collection['experience'] ?? '';
+            $job->notice_period = $collection['notice_period'] ?? '';
+            $job->scope = $collection['scope'] ?? '';
+
             $job->address = $collection['address'] ?? '';
             $job->postcode = $collection['postcode'] ?? '';
             $job->city = $collection['city'] ?? '';
             $job->state = $collection['state'] ?? '';
             $job->country = $collection['country'] ?? '';
-            if(!empty($params['image'])){
-                // image, folder name only
-                $job->image = imageUpload($params['image'], 'job');
-            }
-            $job->skill = $collection['skill'] ?? '';
-            $job->experience = $collection['experience'] ?? '';
-            $job->scope = $collection['scope'] ?? '';
+
             $job->source = $collection['source'] ?? '';
             $job->salary = $collection['salary'] ?? '';
             $job->payment = $collection['payment'] ?? '';
+
             $job->start_date = $collection['start_date'] ?? '';
             $job->end_date = $collection['end_date'] ?? '';
-            $job->short_description = $collection['short_description'] ?? '';
-            $job->description = $collection['description'] ?? '';
-            // $job->tag = $collection['tag'] ?? '';
+
+            $job->schedule = $collection['schedule'] ?? '';
+            $job->company_name = $collection['company_name'] ?? '';
+            $job->contact_number = $collection['contact_number'] ?? '';
+            $job->contact_information = $collection['contact_information'] ?? '';
+            $job->company_website = $collection['company_website'] ?? '';
+            $job->company_desc = $collection['company_desc'] ?? '';
+
+            // dd($job);
+
             $job->save();
 
             foreach (explode(',',$params['tag']) as $value) {
-                $blogTag=new JobTag();
-                $blogTag->job_id = $job->id ?? '';
-                $blogTag->title = $value ?? '';
-                $slug = Str::slug($value, '-');
-                $slugExistCount = JobTag::where('title', $collection['tag'])->count();
-                if ($slugExistCount > 0) $slug = $slug.'-'.($slugExistCount+1);
-                $blogTag->slug = $slug;
-                $blogTag->save();
+                if($value != ''){
+                    $blogTag=new JobTag();
+                    $blogTag->job_id = $job->id ?? '';
+                    $blogTag->title = $value ?? '';
+                    $blogTag->slug = slugGenerate($value, 'job_tags');
+                    $blogTag->save();
                 }
+            }
             return $job;
 
         } catch (QueryException $exception) {
@@ -126,48 +140,65 @@ class JobRepository extends BaseRepository implements JobContract
     public function updateJob(array $params)
     {
         $job = $this->findOneOrFail($params['id']);
-        $collection = collect($params)->except('_token');
+
+        $collection = collect($params);
+
         $job->category_id = $collection['category_id'] ?? '';
-        $job->title = $collection['title'] ?? '';
-        // slug
-        $job->slug = slugGenerate($collection['title'], 'jobs');
+        
+        if($job->title != $collection['title']){
+            
+            $job->title = $collection['title'] ?? '';
+            // slug
+            $job->slug = slugGenerate($collection['title'], 'jobs');
+        }
+
+        $job->short_description = $collection['short_description'] ?? '';
+        $job->description = $collection['description'] ?? '';
+
         if($params['employment_type'] == 'other'){
-        $job->employment_type = $collection['other_employment_type'] ?? '';
+            $job->employment_type = $collection['other_employment_type'] ?? '';
         }
         else{
-        $job->employment_type = $collection['employment_type'] ?? '';
+            $job->employment_type = $collection['employment_type'] ?? '';
         }
+
+        $job->skill = $collection['skill'] ?? '';
+        $job->responsibility = $collection['responsibility'] ?? '';
+        $job->experience = $collection['experience'] ?? '';
+        $job->notice_period = $collection['notice_period'] ?? '';
+        $job->scope = $collection['scope'] ?? '';
+
         $job->address = $collection['address'] ?? '';
         $job->postcode = $collection['postcode'] ?? '';
         $job->city = $collection['city'] ?? '';
         $job->state = $collection['state'] ?? '';
         $job->country = $collection['country'] ?? '';
-        if(!empty($params['image'])){
-            // image, folder name only
-            $job->image = imageUpload($params['image'], 'job');
-        }
-        $job->skill = $collection['skill'] ?? '';
-            $job->experience = $collection['experience'] ?? '';
-            $job->scope = $collection['scope'] ?? '';
+
         $job->source = $collection['source'] ?? '';
         $job->salary = $collection['salary'] ?? '';
         $job->payment = $collection['payment'] ?? '';
+
         $job->start_date = $collection['start_date'] ?? '';
         $job->end_date = $collection['end_date'] ?? '';
-        $job->short_description = $collection['short_description'] ?? '';
-        $job->description = $collection['description'] ?? '';
-       // $job->tag = $collection['tag'] ?? '';
-            $job->save();
-            foreach (explode(',',$params['tag']) as $value) {
+
+        $job->schedule = $collection['schedule'] ?? '';
+        $job->company_name = $collection['company_name'] ?? '';
+        $job->contact_number = $collection['contact_number'] ?? '';
+        $job->contact_information = $collection['contact_information'] ?? '';
+        $job->company_website = $collection['company_website'] ?? '';
+        $job->company_desc = $collection['company_desc'] ?? '';
+        
+        $job->save();
+
+        foreach (explode(',',$params['tag']) as $value) {
+            if($value != ''){
                 $blogTag=new JobTag();
                 $blogTag->job_id = $job->id ?? '';
                 $blogTag->title = $value ?? '';
-                $slug = Str::slug($value, '-');
-                $slugExistCount = JobTag::where('title', $collection['tag'])->count();
-                if ($slugExistCount > 0) $slug = $slug.'-'.($slugExistCount+1);
-                $blogTag->slug = $slug;
+                $blogTag->slug = slugGenerate($value, 'job_tags');
                 $blogTag->save();
-                }
+            }
+        }
         return $job;
     }
 
