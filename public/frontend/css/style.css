@@ -6469,13 +6469,9 @@ tbody, td, tfoot, th, thead, tr {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  border: 1px solid #000;
+  /* border: 1px solid #000; */
   border-bottom: 0;
   padding: 10px 15px;
-}
-
-.cart-total:last-child {
-  border-bottom: 1px solid #000;
 }
 
 .cart-total-label {
@@ -8218,4 +8214,27 @@ ul.review-star-group{
   width: 400px;
 }
 
+
+.item__image{
+  margin-right: 15px;
+}
+.item__image img{
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin: 0;
+}
+.item__content{
+  flex-grow: 1;
+}
+.checkout-btn{  
+  border-radius: 0;
+  width: 100%;
+  font-size: 16px;
+  height: 45px;
+  line-height: 45px;
+}
+.cart__item{
+  margin-bottom: 25px;
+}
 
