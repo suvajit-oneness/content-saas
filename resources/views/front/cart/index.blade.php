@@ -91,22 +91,30 @@
                             </div>
                             <div class="item-author text-muted">
                                 @if($cartValue->purchase_type == 'course')
-                                <p><li>{{totalLessonsAndTopics($cartValue->course_id)->lesson_count}} Lessons</li></p>
-                                <p><li>{{totalLessonsAndTopics($cartValue->course_id)->topic_count}} Topics</li></p>
-                                {{-- @else
-                                    @if($cartValue->purchase_type != 'deal')    
-                                        <h6>-- Subscription --</h6>
-                                    @else
-                                        <h6>-- Deal --</h6>
-                                    @endif --}}
+                                    <ul>
+                                        <li>
+                                            <i class="fas fa-circle"></i>
+                                            {{totalLessonsAndTopics($cartValue->course_id)->lesson_count}} Lessons
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-circle"></i>
+                                            {{totalLessonsAndTopics($cartValue->course_id)->topic_count}} Topics
+                                        </li>
+                                    </ul>
+                                    {{-- @else
+                                        @if($cartValue->purchase_type != 'deal')    
+                                            <h6>-- Subscription --</h6>
+                                        @else
+                                            <h6>-- Deal --</h6>
+                                        @endif --}}
                                 @endif
-                            </div>
-                            <div class="item__btn">
-                                <a href="javascript:void(0)" data-link="{{route('front.cart.delete', $cartValue->id)}}" class="delete_cart_item"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg><!--<span>Remove</span>--></a>                                
                             </div>
                         </div>
                         <div class="item__price">
                             <h5>${{$cartValue->price * $cartValue->qty}} (${{$cartValue->price}} x {{$cartValue->qty}})</h5>
+                            <div class="item__btn">
+                                <a href="javascript:void(0)" data-link="{{route('front.cart.delete', $cartValue->id)}}" class="delete_cart_item"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg><!--<span>Remove</span>--></a>                                
+                            </div>
                         </div>
                     </div>
                     @php

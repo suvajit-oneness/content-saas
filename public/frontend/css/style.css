@@ -6469,9 +6469,8 @@ tbody, td, tfoot, th, thead, tr {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  /* border: 1px solid #000; */
   border-bottom: 0;
-  padding: 10px 15px;
+  padding: 15px 0;
 }
 
 .cart-total-label {
@@ -8251,5 +8250,52 @@ ul.review-star-group{
 }
 .cart__item .cart-info{
   flex-grow: 1;
+}
+.item__price {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.item-author small{
+  font-size: 15px;
+  display: block;
+  margin: 8px 0;
+}
+.item-author ul{
+  display: flex;
+  align-items: center;
+}
+.item-author ul li{
+  margin-right: 10px;
+  font-size: 14px;
+  color: #1a1a1a;
+}
+.item-author ul li i{
+  font-size: 8px;
+  vertical-align: middle;
+  color: #ccc;
+  margin-right: 4px;
+}
+.item-title h5{
+  color: #14212a;
+  font-weight: 600;
+  font-size: 20px;
+}
+.item__price h5{
+  color: #95C800;
+  font-weight: 600;
+  font-size: 20px;
+}
+.sweet-alert h2{
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+.sweet-alert p{
+  margin-bottom: 30px;
+}
+.sa-confirm-button-container .confirm{
+  border: 0;
+  background: red;
 }
 

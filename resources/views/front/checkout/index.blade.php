@@ -57,7 +57,7 @@
                                         <small class="m-0">QTY : {{$cartValue->qty}}</small>
                                     @endif
                                 </div>
-                                <div class="card-meta">
+                                <div class="card-meta item__price">
                                     <h5>${{$cartValue->price}}</h5>
                                 </div>
                             </figcaption>
