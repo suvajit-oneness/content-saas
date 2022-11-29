@@ -89,6 +89,7 @@ class JobRepository extends BaseRepository implements JobContract
 
             $job->skill = $collection['skill'] ?? '';
             $job->responsibility = $collection['responsibility'] ?? '';
+            $job->benifits = $collection['benifits'] ?? '';
             $job->experience = $collection['experience'] ?? '';
             $job->notice_period = $collection['notice_period'] ?? '';
             $job->scope = $collection['scope'] ?? '';
@@ -164,6 +165,7 @@ class JobRepository extends BaseRepository implements JobContract
 
         $job->skill = $collection['skill'] ?? '';
         $job->responsibility = $collection['responsibility'] ?? '';
+        $job->benifits = $collection['benifits'] ?? '';
         $job->experience = $collection['experience'] ?? '';
         $job->notice_period = $collection['notice_period'] ?? '';
         $job->scope = $collection['scope'] ?? '';
@@ -190,13 +192,16 @@ class JobRepository extends BaseRepository implements JobContract
         
         $job->save();
 
-        foreach (explode(',',$params['tag']) as $value) {
-            if($value != ''){
-                $blogTag=new JobTag();
-                $blogTag->job_id = $job->id ?? '';
-                $blogTag->title = $value ?? '';
-                $blogTag->slug = slugGenerate($value, 'job_tags');
-                $blogTag->save();
+        if($params['tag'] != ''){
+            JobTag::where('job_id',$params['id'])->delete();
+            foreach (explode(',',$params['tag']) as $value) {
+                if($value != ''){
+                    $blogTag = new JobTag();
+                    $blogTag->job_id = $params['id'] ?? '';
+                    $blogTag->title = $value ?? '';
+                    $blogTag->slug = slugGenerate($value, 'job_tags');
+                    $blogTag->save();
+                }
             }
         }
         return $job;

@@ -46,8 +46,7 @@
                         <div class="form-group">
                             <div class="form-group">
                                 <div class="select-floating-admin">
-                                    <label class="control-label" for="category">Category <span
-                                            class="m-l-5 text-danger">*</span></label>
+                                    <label class="control-label" for="category">Category <span class="m-l-5 text-danger">*</span></label>
                                     <select name="category_id" id="category"
                                         class="filter_select form-control @error('category') is-invalid @enderror">
                                         <option value="" hidden selected>Select a Category</option>
@@ -64,8 +63,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="name">Title <span
-                                    class="m-l-5 text-danger">*</span></label>
+                            <label class="control-label" for="name">Title <span class="m-l-5 text-danger">*</span></label>
                             <input class="form-control @error('title') is-invalid @enderror" type="text" name="title"
                                 id="title" value="{{ old('title') }}" />
                             @error('title')
@@ -73,18 +71,18 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="short_description">Short Description</label>
+                            <label class="control-label" for="short_description">Short Description <span class="m-l-5 text-danger">*</span></label>
                             <textarea class="form-control" rows="4" name="short_description" id="short_description">{{ old('short_description') }}</textarea>
+                            @error('short_description')<p class="small text-danger">{{ $message }}</p>@enderror
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="description">Description</label>
+                            <label class="control-label" for="description">Description <span class="m-l-5 text-danger">*</span></label>
                             <textarea class="form-control summernote" rows="4" name="description" id="description">{{ old('description') }}</textarea>
+                            @error('description')<p class="small text-danger">{{ $message }}</p>@enderror
                         </div>
                         <div class="form-group">
                             <div class="select-floating-admin">
-                                <label class="control-label" for="employment_type">Employment Type <span
-                                        class="m-l-5 text-danger">
-                                        *</span></label><br>
+                                <label class="control-label" for="employment_type">Employment Type <span class="m-l-5 text-danger">*</span></label><br>
 
                                 <select id="employment_type" name="employment_type" class="filter_select form-control @error('skim') is-invalid @enderror">
                                     <option value="">Select an option</option>
@@ -101,18 +99,18 @@
                                 </select>
                             </div>
                         </div>
-                        <div id="employment">
+                        <div id="employment" style="{{old('employment_type') == 'other' ? 'display:block;' : 'display:none;'}}">
                             <div class="form-group">
-                                <input class="form-control @error('employment_type') is-invalid @enderror" type="text"
-                                    name="other_employment_type" id="employment_type" value="{{ old('employment_type') }}"
-                                    placeholder="Type here" />
-                                @error('employment_type')
+                                <input class="form-control @error('other_employment_type') is-invalid @enderror" type="text"
+                                    name="other_employment_type" id="employment_type" value="{{ old('other_employment_type') }}"
+                                    placeholder="Write Employment type" />
+                                @error('other_employment_type')
                                     <p class="small text-danger">{{ $message }}</p>
                                 @enderror
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="skill">Skill Required<span class="m-l-5 text-danger">*</span>(Comma separated)</label>
+                            <label class="control-label" for="skill">Skill Required<span class="m-l-5 text-danger">*</span>(Colon ';' - separated)</label>
                             <textarea class="form-control @error('skill') is-invalid @enderror" type="text" name="skill"
                                 id="skill"> {{ old('skill') }} </textarea>
                             @error('skill')
@@ -121,7 +119,7 @@
                         </div>
                         
                         <div class="form-group">
-                            <label class="control-label" for="responsibility">Jobs Responsibilities <span class="m-l-5 text-danger">*</span>(Comma separated)</label>
+                            <label class="control-label" for="responsibility">Jobs Responsibilities <span class="m-l-5 text-danger">*</span>(Colon ';' - separated)</label>
                             <textarea class="form-control @error('responsibility') is-invalid @enderror" type="text" name="responsibility"
                                 id="responsibility">{{ old('responsibility') }}</textarea>
                             @error('responsibility')
@@ -130,7 +128,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label" for="benifits">Perks And Benifits (Comma separated)</label>
+                            <label class="control-label" for="benifits">Perks And Benifits <span class="m-l-5 text-danger">*</span>(Comma separated)</label>
                             <textarea class="form-control @error('benifits') is-invalid @enderror" type="text" name="benifits"
                                 id="benifits">{{ old('benifits') }}</textarea>
                             @error('benifits')
@@ -139,7 +137,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label" for="experience">Experience Required<span
+                            <label class="control-label" for="experience">Required Experience<span
                                     class="m-l-5 text-danger">*</span>
                                 (eg: 1-2 years/ 6 months minimum)
                             </label>
@@ -151,8 +149,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label" for="notice_period">Notice Period<span
-                                    class="m-l-5 text-danger">*</span>(e.g 1 month/immediate joinee, etc)
+                            <label class="control-label" for="notice_period">Notice Period (optional, e.g 1 month/immediate joinee, etc)
                             </label>
                             <input class="form-control @error('notice_period') is-invalid @enderror" type="text"
                                 name="notice_period" id="notice_period" value="{{ old('notice_period') }}" />
@@ -162,8 +159,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label" for="scope">Scope <span class="m-l-5 text-danger">*</span>
-                            </label>
+                            <label class="control-label" for="scope">Scope (optional)</label>
                             <input class="form-control @error('scope') is-invalid @enderror" type="text" name="scope"
                                 id="scope" value="{{ old('scope') }}" />
                             @error('scope')
@@ -273,8 +269,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label class="control-label" for="source">Source <span class="m-l-5 text-danger">
-                                            *</span></label>
+                                    <label class="control-label" for="source">Source (Comma seperated, Optional)</label>
                                     <input class="form-control @error('source') is-invalid @enderror" type="text"
                                         name="source" id="source" value="{{ old('source') }}" />
                                     @error('source')
@@ -288,9 +283,7 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <div class="select-floating-admin">
-                                        <label class="control-label" for="salary">Salary Per<span
-                                                class="m-l-5 text-danger">
-                                                *</span></label>
+                                        <label class="control-label" for="salary">Salary Per (Optional)</label>
                                         <select class="filter_select form-control" name="salary" id="yesCheck">
                                             <option value="">Select an option</option>
                                             <option value="year" {{ old('salary') == 'year' ? 'selected' : '' }}>Year
@@ -315,8 +308,7 @@
 
                         <div id="salary">
                             <div class="form-group">
-                                <label class="control-label" for="payment">Amount<span
-                                        class="m-l-5 text-danger"></span></label>
+                                <label class="control-label" for="payment">Amount (optional,in '$')</label>
                                 <input class="form-control @error('payment') is-invalid @enderror" type="text"
                                     name="payment" value="{{ old('payment') }}" />
                                 @error('payment')
@@ -327,8 +319,7 @@
 
                         <div id="salary">
                             <div class="form-group">
-                                <label class="control-label" for="schedule">Schedule<span
-                                        class="m-l-5 text-danger"></span></label>
+                                <label class="control-label" for="schedule">Schedule (optional, Comma seperated)</label>
                                 <input class="form-control @error('schedule') is-invalid @enderror" type="text"
                                     name="schedule" value="{{ old('schedule') }}" />
                                 @error('schedule')
@@ -338,9 +329,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label" for="tag">Tag <span
-                                    class="m-l-5 text-danger"></span></label>
-                            <p class="small text-danger mb-2">(comma separated)</p>
+                            <label class="control-label" for="tag">Tag (optional, Comma separated)</label>
                             <input class="form-control @error('tag') is-invalid @enderror" type="text" name="tag"
                                 id="tag" value="{{ old('tag') }}" />
                             @error('tag')
@@ -349,7 +338,7 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="company_name">Company Name <span
-                                    class="m-l-5 text-danger"></span></label>
+                                    class="m-l-5 text-danger">*</span></label>
                             <input class="form-control @error('company_name') is-invalid @enderror" type="text" name="company_name"
                                 id="company_name" value="{{ old('company_name') }}" />
                             @error('company_name')
@@ -389,7 +378,7 @@
 
                         <div class="form-group">
                             <label class="control-label" for="company_desc">Company Description <span
-                                    class="m-l-5 text-danger"></span></label>
+                                    class="m-l-5 text-danger">*</span></label>
                             <input class="form-control @error('company_desc') is-invalid @enderror" type="text" name="company_desc"
                                 id="company_desc" value="{{ old('company_desc') }}" />
                             @error('company_desc')
@@ -444,7 +433,6 @@
             });
         });
         $(function() {
-            $('#employment').hide();
             $('#employment_type').change(function() {
                 if ($('#employment_type').val() == 'other') {
                     $('#employment').show();
