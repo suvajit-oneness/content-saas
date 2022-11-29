@@ -7501,14 +7501,14 @@ ul.review-star-group{
 
 .crs-details.lession-details,
 .for_lession_details_footer + .dashboard-footer{
-  width: calc(100% - 400px);
+  width: calc(100% - 350px);
 }
 
 .lessionSidebar {
   position: fixed;
   top: 0;
   right: 0;
-  width: 400px;
+  width: 350px;
   background: #fff;
   z-index: 99;
   /* padding: 20px; */
@@ -7947,12 +7947,14 @@ ul.review-star-group{
   background: #95C800;
   background: linear-gradient(240deg, #e0ff88 0%, #95C800 27%);
   filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#6EEE87", endColorstr="#5FC52E", GradientType=1 );
-  padding: 120px 100px;
+  padding: 80px 0;
   display: flex;
   align-items: center;
 }
 
 .login_text_box {
+  width: 75%;
+  margin: 0 auto;
   padding: 60px;
   background: #ffffff29;
 }
@@ -8317,4 +8319,6 @@ ul.review-star-group{
   border: 0;
   background: red;
 }
-
+.crsContent_showHide{
+  display: none;
+}

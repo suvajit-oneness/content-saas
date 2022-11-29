@@ -2,6 +2,10 @@
 @section('title')
 
 @section('section')
+
+@php
+    $totalLessonsAndTopics = totalLessonsAndTopics($course->id);
+@endphp
 <section class="edit-sec edit-basic-detail p-0 pt-2 bg-white for_lession_details_footer">
     <div class="crs-details lession-details">
         <div class="topic-video">
@@ -23,14 +27,54 @@
             <!-- <h4>Installing Python</h4>
             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type</p> -->
             <ul class="nav nav-tabs media-tabs" id="myTab" role="tablist">
+                <li class="nav-item crsContent_showHide" role="presentation">
+                    <a href="#course-content" data-toggle="tab" class="nav-link {{request()->input('page') ? 'active' : ''}}" id="course-content-tab" data-bs-toggle="tab" data-bs-target="#course-content" role="tab" aria-controls="course-content" aria-selected="false">Course Content</a>
+                </li>
                 <li class="nav-item" role="presentation">
-                    <a href="#description" data-toggle="tab" class="nav-link {{request()->input('page') ? '' : 'active'}}" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" role="tab" aria-controls="description" aria-selected="false">Description</a>
+                    <a href="#description" data-toggle="tab" class="nav-link {{request()->input('page') ? '' : 'active'}}" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" role="tab" aria-controls="description" aria-selected="true">Description</a>
                 </li>
                 <li class="nav-item" role="presentation">
                     <a href="#review" data-toggle="tab" class="nav-link {{request()->input('page') ? 'active' : ''}}" id="review-tab" data-bs-toggle="tab" data-bs-target="#review" role="tab" aria-controls="review" aria-selected="true">review</a>
                 </li>
             </ul>
             <div class="tab-content details-tab">
+                <div class="tab-pane crsContent_showHide {{request()->input('page') ? 'active' : ''}}" id="course-content" role="tabpanel" aria-labelledby="course-content-tab">
+                    <div class="lessionSidebar-header">
+                        <p>
+                            {{$course->title}} ({{(int)(completedTopicPerCourse($course->id)->total_viewed_topic/completedTopicPerCourse($course->id)->total_topic * 100)}}% Completed)
+                        </p>
+                    </div>
+                    <div class="accordion-container lessionSidebar-list">
+                        @foreach($totalLessonsAndTopics->lessons as $key => $lesson)
+                        <div class="set lesstionItem {{getCountervideotopic($course->id)->lesson_id == $lesson->lesson->id ? 'active' : ''}}">
+                            <a href="javascript:void(0)">
+                                {!! $lesson->lesson->title !!}  ({{completedTopicPerLesson($course->id, $lesson->lesson->id).'/'.count($totalLessonsAndTopics->topics[$key])}} Completed)
+                                <i class="fas fa-angle-down"></i>
+                            </a>
+                            <div class="content">
+                                <ul class="topicList">
+                                    @foreach($totalLessonsAndTopics->topics[$key] as $data)
+                                    <li>
+                                        <a href="javascript:void(0)" onclick="loadIndividualTopic(this,'{{$lesson->lesson->id}}')" id="topic_div_id{{$data->topic->id}}" class="topic_div_id" data-id="{{$data->topic->id}}">
+                                            @if(getViewedStatus($course->id,$lesson->lesson->id,$data->topic->id) != null)
+                                                <input type="checkbox" class="topicCheck" onclick="return false" {{getViewedStatus($course->id,$lesson->lesson->id,$data->topic->id)->is_view == 1 ? 'checked' : ''}}>
+                                            @endif
+                                            <div class="stamp">
+                                                <h5>{!! $data->topic->title  !!}</h5>
+                                                <div class="duration">
+                                                    <i class="fas fa-circle-play"></i>
+                                                    <span>{{ number_format((float)$data->topic->video_length, 2, ':', '') }} hours</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
                 <div class="tab-pane {{request()->input('page') ? '' : 'active'}}" id="description" role="tabpanel" aria-labelledby="description-tab">
                     <p>{!! $course->description !!}</p>
                 </div>
@@ -104,9 +148,7 @@
             </div>
         </div>
     </div>
-        @php
-             $totalLessonsAndTopics = totalLessonsAndTopics($course->id);
-        @endphp
+
 
     <div class="lessionSidebar" style="margin-top: 102px;">
         {{--<div class="lessionSidebar-btn">

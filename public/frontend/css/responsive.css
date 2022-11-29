@@ -12,7 +12,19 @@
 
 }
 
+@media(max-width: 1600px){
+   .login_lg_box h2{
+      font-size: 45px;
+   }
+}
+
 @media(max-width: 1400px) {
+   .login_text_box{
+      padding: 45px;
+   }
+   .login_right {
+      padding: 100px 60px;
+   }
    .portfolio {
       padding: 150px 0;
    }
@@ -59,6 +71,12 @@
    .courses-content.purchased {
       padding: 20px;
    }
+   .login_lg_box h2{
+      font-size: 40px;
+   }
+   .login_left{
+      padding: 60px 0;
+   }
 }
 
 @media (max-width: 1360px) {
@@ -86,6 +104,9 @@
 }
 
 @media(max-width: 1200px) {
+   .login_lg_box{
+      width: 90%;
+   }
    .portv3-client-info h5 {
       font-size: 16px !important;
    }
@@ -109,12 +130,12 @@
 
    h3,
    h5 {
-      font-size: 30px !important;
+      font-size: 30px ;
    }
 
    p {
-      font-size: 14px !important;
-      line-height: 24px !important;
+      font-size: 14px ;
+      line-height: 24px ;
    }
 
    .grammar_help h2 {
@@ -253,6 +274,17 @@
 }
 
 @media(max-width: 991px) {
+   .login_left, .login_right{
+      width: 100%;
+      padding: 40px;
+   }
+   .login_text_box{
+      width: 100%;
+   }
+   .login_lg_box {
+      width: 100%;
+      flex-wrap: wrap;
+   }
    .portfoliov2-info-content h5 {
       text-align: center;
       font-size: 18px !important;
@@ -367,6 +399,15 @@
    .crs-back-btn{
       position: static;
       margin-bottom: 15px;
+   }
+   .crsContent_showHide{
+      display: block;
+   }
+   .lessionSidebar{
+      display: none;
+   }
+   .crs-details.lession-details, .for_lession_details_footer + .dashboard-footer{
+      width: 100%;
    }
 }
 
@@ -1132,6 +1173,11 @@
    .page-title h2 {
       font-size: 32px;
    }
+
+   .login_lg_box h2{
+      font-size: 30px;
+   }
+
 }
 
 
@@ -1333,7 +1379,6 @@
    }
 
    .pricing-pay {
-
       flex-direction: column;
    }
 
@@ -1342,9 +1387,7 @@
    }
 
    .pricing-pay .select {
-
       width: 10em;
-
    }
 
    .pricing-content {
@@ -1441,12 +1484,25 @@
       font-size: 22px;
       margin-bottom: 12px;
    }
+   .login_lg_box h2 {
+      font-size: 24px;
+      margin-bottom: 15px;
+   }
+   .login_lg_box p{
+      font-size: 16px;
+   }
+   .login_text_box, .login_left, .login_right{
+      padding: 25px;
+   }
+   .login-content h3{
+      text-align: center;
+      font-size: 25px;
+   }
 }
 
 @media (max-width: 480px) {
    .login-content button {
-
-      padding: 6px 20px;
+      padding: 10px 20px;
       font-size: 15px;
    }
 
@@ -1494,6 +1550,15 @@
 
    .rating-list-stars i {
       font-size: 12px;
+   }
+   .login-forgot-password {
+      flex-direction: column;
+   }
+   .login-forgot-password label{
+      margin-bottom: 15px;
+   }
+   .login_lg_box h2{
+      font-size: 20px;
    }
 }
 
