@@ -5,38 +5,45 @@
 <section class="course-details-section crs-before-purchase pt-0">
     <div class="course-details_header">
         <div class="container position-relative">
-            <div class="course-details-main-info">
-                <h2>{{ $course->title ?? '' }}</h2>
-                <div id="less_text">{!! substr($course->short_description,0,150) ?? '' !!}
-                    @if(strlen($course->short_description) > 150)
-                        <span style="font-size: 10px"><a onclick="$('#less_text').hide(); $('#all_text').show();" href="javascript:void(0)">...See More</a></span>
-                    @endif
-                </div>
-                <div id="all_text" style="display: none;">{!! $course->short_description !!}</div>
-                @php
-                     $review=App\Models\CourseReview::where('course_id',$course->id)->get();
-                @endphp
-                @if(getReviewDetails($course->id)['total_reviews'] > 0)               
-                    <div class="crs-rating-all">
-                        <span>
-                            {!! RatingHtml(getReviewDetails($course->id)['average_star_count']) !!}
-                        </span>
-                        <a href="#crs_reviews">( {{ getReviewDetails($course->id)['total_reviews'] }} review)</a>
-                        <small>{!! getReviewDetails($course->id)['total_person_reviewed'] !!} Students</small>
+            <div class="course__heading_flex">
+                <div class="course-details-main-info">
+                    <h2>{{ $course->title ?? '' }}</h2>
+                    <div id="less_text">
+                        <p>{!! substr($course->short_description,0,150) ?? '' !!}</p>
+                        @if(strlen($course->short_description) > 150)
+                            <span style="font-size: 10px">
+                                <a onclick="$('#less_text').hide(); $('#all_text').show();" href="javascript:void(0)">...See More</a>
+                            </span>
+                        @endif
                     </div>
-                @endif
-                
-            </div>
-            <div class="crs-back-btn">
-                <a href="{{ route('front.course') }}" class="add-btn-edit d-inline-block">
-                    <i class="fa-solid fa-chevron-left"></i> Back
-                </a>
+                    <div id="all_text" style="display: none;">
+                        <p>{!! $course->short_description !!}</p>
+                    </div>
+                    @php
+                        $review=App\Models\CourseReview::where('course_id',$course->id)->get();
+                    @endphp
+                    @if(getReviewDetails($course->id)['total_reviews'] > 0)               
+                        <div class="crs-rating-all">
+                            <span>
+                                {!! RatingHtml(getReviewDetails($course->id)['average_star_count']) !!}
+                            </span>
+                            <a href="#crs_reviews">( {{ getReviewDetails($course->id)['total_reviews'] }} review)</a>
+                            <small>{!! getReviewDetails($course->id)['total_person_reviewed'] !!} Students</small>
+                        </div>
+                    @endif
+                    
+                </div>
+                <div class="crs-back-btn">
+                    <a href="{{ route('front.course') }}" class="add-btn-edit d-inline-block">
+                        <i class="fa-solid fa-chevron-left"></i> Back
+                    </a>
+                </div>
             </div>
         </div>
     </div>
     <div class="container">
         <div class="row mt-0">
-            <div class="col-12 col-lg-8 col-md-12 mb-3 mb-lg-0">
+            <div class="col-12 col-lg-8 col-md-12 mb-3 mb-lg-0 course__details__bar">
                 <div class="course-details-left">
                     <div class="theiaStickySidebar">
                         <div class="course-details-left-content">
@@ -158,7 +165,7 @@
                 </div>
             </div>
 
-            <div class="col-12 col-lg-4 col-md-12 sidebar position-relative">
+            <div class="col-12 col-lg-4 col-md-12 courseSidebar position-relative">
                 <div class="theiaStickySidebar sticky-price-bar" id="barSticky">
                     <div class="course-details-right-content">
                         <div class="course-details-video" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -269,8 +276,6 @@
       let scroll = $(window).scrollTop();
       if (scroll >= 350) {
         $("#barSticky").addClass("scrolled");
-        console.log(stickyPriceBar);
-        console.log('Yessssssssss');
       } else {
         $("#barSticky").removeClass("scrolled");
       }

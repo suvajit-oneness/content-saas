@@ -85,16 +85,17 @@
                         <div class="job-dashboard"></div>
                     </div> -->
                     <div class="col-12">
-
-                        <div class="dashboard-menu">
-                            <i class="fa-solid fa-bars"></i>
-                        </div>
                         <div class="dashboard-header bg-white">
                             <div class="dashboard-header-left">
+                                <div class="dashboard-menu">
+                                    <i class="fa-solid fa-bars"></i>
+                                </div>
                                 <div class="dashboard-page-name">
                                     <a href="">@yield('title')</a>
+                                    <p>
+                                        {{auth()->guard('web')->user()->first_name}} {{auth()->guard('web')->user()->last_name}}
+                                    </p>
                                 </div>
-                                {{auth()->guard('web')->user()->first_name}} {{auth()->guard('web')->user()->last_name}}
                             </div>
                             <div class="dashboard-header-right">
                                 <div class="dashboard-header-search">
@@ -440,7 +441,7 @@
         });
 
         $(window).on('scroll', function () {
-            if ($(this).scrollTop() > 250) {
+            if ($(this).scrollTop() > 0) {
                 $('.dashboard-header').addClass("sticky-header");
             }
             else {

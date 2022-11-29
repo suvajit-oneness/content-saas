@@ -526,6 +526,7 @@ sidebarClose.addEventListener("click", () => {
 dashboardMenu.addEventListener("click", () => {
   dashboardSidebar.classList.remove("show-sidebar");
   dashBoardRight.classList.remove("margin-init");
+  $(this).hide()
 });
 
 // document.addEventListener('mouseup', function (event) {
@@ -546,7 +547,7 @@ function myFunction(x) {
   }
 }
 
-var x = window.matchMedia("(max-width: 990px)");
+var x = window.matchMedia("(max-width: 1260px)");
 myFunction(x); // Call listener function at run time
 //x.addListener(myFunction); // Attach listener function on state changes
 x.addEventListener("change", myFunction);

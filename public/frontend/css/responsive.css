@@ -76,6 +76,15 @@
    }
 }
 
+@media (max-width: 1260px) {
+   .dashboard-header.sticky-header{
+      left: 0;
+   }
+   .dashboard-right{
+      margin-left: 0;
+   }
+}
+
 @media(max-width: 1200px) {
    .portv3-client-info h5 {
       font-size: 16px !important;
@@ -243,7 +252,7 @@
    }
 }
 
-@media(max-width: 992px) {
+@media(max-width: 991px) {
    .portfoliov2-info-content h5 {
       text-align: center;
       font-size: 18px !important;
@@ -329,6 +338,35 @@
 
    .portfolio-v4-category ul li {
       font-size: 16px !important;
+   }
+   .courseSidebar{
+      order: 1;
+   }
+   .course__details__bar{
+      order: 2;
+   }
+   .sticky-price-bar{
+      position: static;
+      transform: unset;
+      margin-top: 25px;
+   }
+   .sticky-price-bar.scrolled{
+      animation: unset;
+      opacity: 1;
+   }
+   .course-details_header{
+      min-height: unset;
+   }
+   .course-details-main-info{
+      max-width: 100%;
+   }
+   .course__heading_flex{
+      display: flex;
+      flex-direction: column-reverse;
+   }
+   .crs-back-btn{
+      position: static;
+      margin-bottom: 15px;
    }
 }
 
@@ -1398,6 +1436,10 @@
    .page-title h2 {
       font-size: 22px;
       margin-bottom: 16px;
+   }
+   .course-details-main-info h2{
+      font-size: 22px;
+      margin-bottom: 12px;
    }
 }
 
