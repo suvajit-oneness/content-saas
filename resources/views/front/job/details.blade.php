@@ -82,6 +82,9 @@
                                             <li>Coordinate with co-developers and keeps project manager well informed of the status of development effort and serves as liaison between development staff and project manager.</li>
                                             <li>Keep abreast of new trends and best practices in web development.</li> --}}
                                         </ul>
+                                        @if($job[0]->scope != '')
+                                        <p><b>Scope: {{$job[0]->scope}}</b></p>
+                                        @endif
 
                                         <p><b>Requirements and qualifications</b></p>
                                         <ul>
@@ -113,7 +116,7 @@
                                         <p>5) Paid Vacation Leave</p>
                                         <p>6) Five days work in a Week (Monday to Friday).</p> --}}
 
-                                        <p><b>Contact Number: </b> <span class="jobsearch-JobDescription-phone-number"><a href="#MosaicProviderCallToApplyFeedback">{{$job[0]->contact_number}}</a></span> {{$job[0]->contact_information}}</p>
+                                        <p><b>Contact Number: </b> <span class="jobsearch-JobDescription-phone-number"><a href="tel:{{$job[0]->contact_number}}">{{$job[0]->contact_number}}</a></span> ({{$job[0]->contact_information}})</p>
                                         <p><b>Company Website: </b> <a href="{{$job[0]->company_website}}">{{$job[0]->company_website}}</a></p>
                                         
                                         <p><b>About {{$job[0]->company_name}}: </b></p>
@@ -122,17 +125,21 @@
                                         </div>
                                         
                                         <p>Job Types: {{$job[0]->employment_type}}</p>
-                                        <p>Salary: ${{$job[0]->payment}} {{$job[0]->salary}}</p>
+                                        @if($job[0]->payment != '' && $job[0]->salary != '')
+                                            <p>Salary: ${{$job[0]->payment}} {{$job[0]->salary}}</p>
+                                        @endif
                                         
-                                        <p><b>Benefits:</b></p>
-                                        <ul>
-                                            @foreach (explode(',',$job[0]->benifits) as $item)
-                                                {{$item}}
-                                            @endforeach
-                                            {{-- <li>Health insurance</li>
-                                            <li>Paid sick time</li>
-                                            <li>Provident Fund</li> --}}
-                                        </ul>
+                                        @if($job[0]->benifits)
+                                            <p><b>Benefits:</b></p>
+                                            <ul>
+                                                @foreach (explode(',',$job[0]->benifits) as $item)
+                                                    <li>{{$item}}</li>
+                                                @endforeach
+                                                {{-- <li>Health insurance</li>
+                                                <li>Paid sick time</li>
+                                                <li>Provident Fund</li> --}}
+                                            </ul>
+                                        @endif
 
                                         <p><b>Schedule:</b></p>
                                         <ul>
