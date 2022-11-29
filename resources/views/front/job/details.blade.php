@@ -69,7 +69,9 @@
                                         <p><b>Responsibilities</b></p>
                                         <ul>
                                             @foreach (explode(';',$job[0]->responsibility) as $item)
-                                                <li>{{$item}}</li>
+                                                @if($item != '')
+                                                    <li>{{$item}}</li>
+                                                @endif
                                             @endforeach
                                             {{-- <li>Develop, record and maintain cutting edge web-based PHP applications on portal plus premium service platforms.</li>
                                             <li>Build innovative, state-of-the-art applications and collaborate with the User Experience (UX) team.</li>
@@ -89,7 +91,9 @@
                                         <p><b>Requirements and qualifications</b></p>
                                         <ul>
                                             @foreach (explode(';',$job[0]->skill) as $item)
-                                                <li>{{$item}}</li>
+                                                @if($item != '')
+                                                    <li>{{$item}}</li>
+                                                @endif
                                             @endforeach
                                             {{-- <li>Previous working experience as a PHP / Laravel developer for 2-3 years.</li>
                                             <li>Degree in Computer Science, Engineering, MIS or similar relevant field.</li>
@@ -115,8 +119,10 @@
                                         <p>4) Early Joining Bonus</p>
                                         <p>5) Paid Vacation Leave</p>
                                         <p>6) Five days work in a Week (Monday to Friday).</p> --}}
-
+                                        
+                                        @if($job[0]->contact_number != '' && $job[0]->contact_information)
                                         <p><b>Contact Number: </b> <span class="jobsearch-JobDescription-phone-number"><a href="tel:{{$job[0]->contact_number}}">{{$job[0]->contact_number}}</a></span> ({{$job[0]->contact_information}})</p>
+                                        @endif
                                         <p><b>Company Website: </b> <a href="{{$job[0]->company_website}}">{{$job[0]->company_website}}</a></p>
                                         
                                         <p><b>About {{$job[0]->company_name}}: </b></p>
@@ -125,15 +131,18 @@
                                         </div>
                                         
                                         <p>Job Types: {{$job[0]->employment_type}}</p>
+
                                         @if($job[0]->payment != '' && $job[0]->salary != '')
-                                            <p>Salary: ${{$job[0]->payment}} {{$job[0]->salary}}</p>
+                                            <p>Salary: ${{$job[0]->payment}} {{'per ' . $job[0]->salary}}</p>
                                         @endif
                                         
                                         @if($job[0]->benifits)
                                             <p><b>Benefits:</b></p>
                                             <ul>
                                                 @foreach (explode(',',$job[0]->benifits) as $item)
-                                                    <li>{{$item}}</li>
+                                                    @if($item != '')
+                                                        <li>{{$item}}</li>
+                                                    @endif
                                                 @endforeach
                                                 {{-- <li>Health insurance</li>
                                                 <li>Paid sick time</li>
@@ -144,7 +153,9 @@
                                         <p><b>Schedule:</b></p>
                                         <ul>
                                             @foreach (explode(',',$job[0]->schedule) as $item)
-                                                <li>{{$item}}</li>
+                                                @if($item != '')
+                                                    <li>{{$item}}</li>
+                                                @endif
                                             @endforeach
                                             {{-- <li>Day shift</li>
                                             <li>Monday to Friday</li> --}}
