@@ -22,6 +22,12 @@
     #yes {
         display: none;
     }
+    .tags-group label, .tags-group ul{
+        display: flex
+    }
+    .tags-group ul li:after{
+        content: ', '
+    }
 </style>
 @section('content')
     <div class="app-title">
@@ -338,7 +344,7 @@
                             </div>
                         </div>
 
-                        <div id="salary">
+                        <div>
                             <div class="form-group">
                                 <label class="control-label" for="schedule">Schedule (optional, Comma seperated)</label>
                                 <input class="form-control @error('schedule') is-invalid @enderror" type="text"
@@ -349,7 +355,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group tags-group">
                             <label class="control-label" for="tag">Tags (<div class="d-flex">{!!jobTagsHtml($Job->id)!!}</div>) (optional, Comma separated)</label>
                             <input class="form-control @error('tag') is-invalid @enderror" type="text" name="tag"
                                 id="tag" value="{{ old('tag', $Job->tag) }}" />
