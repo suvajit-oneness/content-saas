@@ -125,7 +125,7 @@
                                         </ul>
                                     </li>
                                    <li>
-                                        <a class="profileCircle {{ request()->is('cart') ? 'active' : '' }}"
+                                        <a class="profileCircle border-0 {{ request()->is('cart') ? 'active' : '' }}"
                                             href="{{ route('front.cart') }}">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"

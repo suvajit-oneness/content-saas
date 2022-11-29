@@ -77,6 +77,9 @@
    .login_left{
       padding: 60px 0;
    }
+   .topic-video video{
+      height: 450px;
+   }
 }
 
 @media (max-width: 1360px) {
@@ -1498,6 +1501,9 @@
       text-align: center;
       font-size: 25px;
    }
+   .topic-video video {
+      height: 300px;
+   }
 }
 
 @media (max-width: 480px) {
@@ -1560,11 +1566,17 @@
    .login_lg_box h2{
       font-size: 20px;
    }
+   .topic-video video {
+      height: 250px;
+   }
 }
 
 @media (max-width: 360px) {
    .dashboard-header {
       flex-direction: column;
+   }
+   .dashboard-header-left{
+      width: 100%;
    }
 }
 

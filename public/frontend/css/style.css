@@ -7231,6 +7231,10 @@ a.badge.bg-danger:hover {
   width: 300px;
 }
 
+.media-tabs{
+  flex-wrap: nowrap;
+  overflow: scroll;
+}
 .media-tabs .nav-item .nav-link {
   color: #95C800;
   border: none;
@@ -7298,6 +7302,8 @@ a.badge.bg-danger:hover {
 .lession-details .media-tabs .nav-item {
   padding: 0;
   margin-right: 15px;
+  min-width: 160px;
+  text-align: center;
 }
 
 .lession-details .media-tabs .nav-item:last-child {
