@@ -110,7 +110,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div id="employment" style="display: {{$other_employment_type == true ? 'block;' : 'none;'}}">
+                        {{-- <div id="employment" style="display: {{$other_employment_type == true ? 'block;' : 'none;'}}">
                             <div class="form-group">
                                 <input class="form-control @error('employment_type') is-invalid @enderror" type="text"
                                     name="other_employment_type" id="employment_type" value="{{ old('other_employment_type',$Job->employment_type) }}"
@@ -119,7 +119,7 @@
                                     <p class="small text-danger">{{ $message }}</p>
                                 @enderror
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="form-group">
                             <label class="control-label" for="skill">Skill<span class="m-l-5 text-danger">*</span></label>
                             </label>
@@ -176,7 +176,7 @@
                             <div class="multi-responsibility-links">
                                 <div class="input-group mb-3">
                                     <input type="text" class="form-control"  aria-label="Username" name="responsibility[]" id="responsibility" value="{{$data}}">
-                                    <a href="javascript: void(0)" class="input-group-text {{ ($key == 0) ? 'add-ext-link' : 'remove-ext-link' }}" id="basic-addon2">
+                                    <a href="javascript: void(0)" class="input-group-text {{ ($key == 0) ? 'add-responsibility-link' : 'remove-responsibility-link' }}" id="basic-addon2">
                                         <i class="fas fa-{{ ($key == 0) ? 'plus' : 'times' }}"></i>
                                     </a>
                                 </div>
@@ -216,7 +216,7 @@
                                 $explodedbenifits = explode('||', $Job->benifits);
                             @endphp
 
-                            @foreach($explodedresponsibility as $key => $data)
+                            @foreach($explodedbenifits as $key => $data)
                             <div class="multi-benifits-links">
                                 <div class="input-group mb-3">
                                     <input type="text" class="form-control"  aria-label="Username" name="benifits[]" id="benifits" value="{{$data}}">
@@ -437,7 +437,7 @@
                         </div>
 
                         <div class="form-group tags-group">
-                            <label class="control-label" for="tag">Tags (<div class="d-flex">{!!jobTagsHtml($Job->id)!!}</div>) (optional, Comma separated)</label>
+                            <label class="control-label" for="tag">Tags @if($Job->tag)(<div class="d-flex">{!!jobTagsHtml($Job->id)!!}</div>)@endif  <p>(optional, Comma separated)</p></label>
                             <input class="form-control @error('tag') is-invalid @enderror" type="text" name="tag"
                                 id="tag" value="{{ old('tag', $Job->tag) }}" />
                             @error('tag')

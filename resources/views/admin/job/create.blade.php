@@ -98,7 +98,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div id="employment" style="{{old('employment_type') == 'other' ? 'display:block;' : 'display:none;'}}">
+                        {{-- <div id="employment" style="{{old('employment_type') == 'other' ? 'display:block;' : 'display:none;'}}">
                             <div class="form-group">
                                 <input class="form-control @error('other_employment_type') is-invalid @enderror" type="text"
                                     name="other_employment_type" id="employment_type" value="{{ old('other_employment_type') }}"
@@ -107,7 +107,7 @@
                                     <p class="small text-danger">{{ $message }}</p>
                                 @enderror
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="form-group">
                             <label class="control-label" for="skill">Skill<span class="m-l-5 text-danger">*</span></label>
                             </label>
