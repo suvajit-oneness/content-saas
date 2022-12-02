@@ -13,7 +13,10 @@ use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\JobExport;
 use App\Models\ApplyJob;
+use App\Models\NotInterestedJob;
+use App\Models\ReportJob;
 use App\Models\JobCategory;
+use App\Models\JobUser;
 use DB;
 use Illuminate\Support\Facades\Session as FacadesSession;
 class JobController extends BaseController
@@ -59,7 +62,8 @@ class JobController extends BaseController
         $categories = $this->JobRepository->listCategory();
         $country=DB::table('countries')->orderby('country_name')->get();
         $this->setPageTitle('Job', 'Create Job');
-        return view('admin.job.create', compact('categories','country'));
+        $type = $this->JobRepository->listType();
+        return view('admin.job.create', compact('categories','country','type'));
     }
 
     /**
@@ -69,7 +73,7 @@ class JobController extends BaseController
      */
     public function store(Request $request)
     {
-    //    dd($request->all());
+        //dd($request->all());
 
         $this->validate($request, [
             'category_id' =>  'required',
@@ -123,7 +127,8 @@ class JobController extends BaseController
         $country=DB::table('countries')->orderby('country_name')->get();
         $categories = $this->JobRepository->listCategory();
         $this->setPageTitle('Job', 'Edit Job : '.$Job->title);
-        return view('admin.job.edit', compact('Job','categories','country'));
+        $type = $this->JobRepository->listType();
+        return view('admin.job.edit', compact('Job','categories','country','type'));
     }
 
     /**
@@ -257,7 +262,36 @@ class JobController extends BaseController
         $this->setPageTitle('Job', 'Job Details : '.$job[0]->job->title);
         return view('admin.job.application', compact('job'));
     }
-
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function save($id)
+    {
+        $job = JobUser::where('job_id',$id)->get();
+        $this->setPageTitle('Job', 'Job Details : '.$job[0]->job->title);
+        return view('admin.job.save', compact('job'));
+    }
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function interest($id)
+    {
+        $job = NotInterestedJob::where('job_id',$id)->get();
+        $this->setPageTitle('Job', 'Job Details : '.$job[0]->job->title);
+        return view('admin.job.interest', compact('job'));
+    }
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function report($id)
+    {
+        $job = ReportJob::where('job_id',$id)->get();
+        $this->setPageTitle('Job', 'Job Details : '.$job[0]->job->title);
+        return view('admin.job.report', compact('job'));
+    }
     public function csvStore(Request $request)
     {
         if (!empty($request->file)) {

@@ -52,8 +52,8 @@
                     <div class="tile-body">
                         <div class="form-group">
                             <div class="select-floating-admin">
-                                <label class="control-label" for="category">Category <span class="m-l-5 text-danger">*</span></label>
-                                <select name="category_id" id="category" class="filter_select form-control @error('category') is-invalid @enderror">
+                                <label class="control-label" for="category_id">Category <span class="m-l-5 text-danger">*</span></label>
+                                <select name="category_id" id="category" class="filter_select form-control @error('category_id') is-invalid @enderror">
                                     <option value="" hidden selected>Select a Category</option>
                                     @foreach ($categories as $category)
                                         <option value="{{ $category->id }}"
@@ -61,7 +61,7 @@
                                             {{ ucwords($category->title) }}</option>
                                     @endforeach
                                 </select>
-                                @error('category')
+                                @error('category_id')
                                     <p class="small text-danger">{{ $message }}</p>
                                 @enderror
                             </div>
@@ -96,32 +96,18 @@
                             <div class="select-floating-admin">
                                 <label class="control-label" for="employment_type">Employment Type <span class="m-l-5 text-danger">*</span></label><br>
 
-                                <select id="employment_type" name="employment_type"
-                                    class="filter_select form-control @error('skim') is-invalid @enderror">
-                                    <option value="">Select an option</option>
-                                    <option value="fulltime" {{ old('employment_type',$Job->employment_type) == 'fulltime' ? 'selected' : '' }}>
-                                        Full time</option>
-                                    <option value="parttime" {{ old('employment_type',$Job->employment_type) == 'parttime' ? 'selected' : '' }}>
-                                        Part time</option>
-                                    <option value="remote" {{ old('employment_type',$Job->employment_type) == 'remote' ? 'selected' : '' }}>Remote
-                                    </option>
-                                    <option value="telecommute"
-                                        {{ old('employment_type',$Job->employment_type) == 'telecommute' ? 'selected' : '' }}>
-                                        Telecommute</option>
-                                    <option value="contract" {{ old('employment_type',$Job->employment_type) == 'contract' ? 'selected' : '' }}>
-                                        Contract</option>
-                                    <option value="freelance" {{ old('employment_type',$Job->employment_type) == 'freelance' ? 'selected' : '' }}>
-                                        Freelance</option>
-                                    <option value="temporary" {{ old('employment_type',$Job->employment_type) == 'temporary' ? 'selected' : '' }}>
-                                        Temporary</option>
-                                    <option value="unpaid" {{ old('employment_type',$Job->employment_type) == 'unpaid' ? 'selected' : '' }}>Unpaid
-                                    </option>
-                                    <option value="internship"
-                                        {{ old('employment_type',$Job->employment_type) == 'internship' ? 'selected' : '' }}>
-                                        Internship</option>
-                                    <option value="other" {{ $other_employment_type == true || old('employment_type') == 'other' ? 'selected' : '' }}>Other
-                                    </option>
+                                <select name="employment_type" id="category"
+                                    class="filter_select form-control @error('employment_type') is-invalid @enderror">
+                                    <option value="" hidden selected>Select</option>
+                                    @foreach ($type as $data)
+                                        <option value="{{ $data->title }}"
+                                            {{ $Job->employment_type == $data->title ? 'selected' : '' }}>
+                                            {{ ucwords($data->title) }}</option>
+                                    @endforeach
                                 </select>
+                                @error('employment_type')
+                                    <p class="small text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
                         <div id="employment" style="display: {{$other_employment_type == true ? 'block;' : 'none;'}}">
@@ -135,28 +121,123 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="skill">Skill Required<span class="m-l-5 text-danger">*</span>(Colon ';' - separated)</label>
+                            <label class="control-label" for="skill">Skill<span class="m-l-5 text-danger">*</span></label>
                             </label>
-                            <textarea class="form-control @error('skill') is-invalid @enderror" type="text" name="skill"
-                                id="skill"> {{ old('skill', $Job->skill) }} </textarea>
+                            @if ($Job->skill)
+                            @php
+                                $explodedskill = explode('||', $Job->skill);
+                            @endphp
+
+                            @foreach($explodedskill as $key => $data)
+                            <div class="multi-ext-links">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control"  aria-label="Username" name="skill[]" id="skill" value="{{$data}}">
+                                    <a href="javascript: void(0)" class="input-group-text {{ ($key == 0) ? 'add-ext-link' : 'remove-ext-link' }}" id="basic-addon1">
+                                        <i class="fas fa-{{ ($key == 0) ? 'plus' : 'times' }}"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            @endforeach
+                        @else
+                        <div class="multi-ext-links">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control"  aria-label="Username" name="skill[]" id="skill">
+                                <a href="javascript: void(0)" class="input-group-text add-ext-link" id="basic-addon1">
+                                    <i class="fas fa-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                        @endif
+
+                        <div id="other-skill"></div>
                             @error('skill')
                                 <p class="small text-danger">{{ $message }}</p>
                             @enderror
                         </div>
 
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <label class="control-label" for="responsibility">Jobs Responsibilities <span class="m-l-5 text-danger">*</span>(Colon ';' - separated)</label>
                             <textarea class="form-control @error('responsibility') is-invalid @enderror" type="text" name="responsibility"
                                 id="responsibility">{{ old('responsibility', $Job->responsibility) }}</textarea>
                             @error('responsibility')
                                 <p class="small text-danger">{{ $message }}</p>
                             @enderror
-                        </div>
+                        </div> --}}
 
                         <div class="form-group">
+                            <label class="control-label" for="responsibility"> Responsibilities<span class="m-l-5 text-danger">*</span></label>
+                            </label>
+                            @if ($Job->responsibility)
+                            @php
+                                $explodedresponsibility = explode('||', $Job->responsibility);
+                            @endphp
+
+                            @foreach($explodedresponsibility as $key => $data)
+                            <div class="multi-responsibility-links">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control"  aria-label="Username" name="responsibility[]" id="responsibility" value="{{$data}}">
+                                    <a href="javascript: void(0)" class="input-group-text {{ ($key == 0) ? 'add-ext-link' : 'remove-ext-link' }}" id="basic-addon2">
+                                        <i class="fas fa-{{ ($key == 0) ? 'plus' : 'times' }}"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            @endforeach
+                        @else
+                        <div class="multi-responsibility-links">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control"  aria-label="Username" name="responsibility[]" id="responsibility">
+                                <a href="javascript: void(0)" class="input-group-text add-responsibility-link" id="basic-addon2">
+                                    <i class="fas fa-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                        @endif
+
+                        <div id="other-responsibility"></div>
+                            @error('responsibility')
+                                <p class="small text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        {{-- <div class="form-group">
                             <label class="control-label" for="benifits">Perks And Benifits <span class="m-l-5 text-danger">*</span>(Comma separated)</label>
                             <textarea class="form-control @error('benifits') is-invalid @enderror" type="text" name="benifits"
                                 id="benifits">{{ old('benifits',$Job->benifits) }}</textarea>
+                            @error('benifits')
+                                <p class="small text-danger">{{ $message }}</p>
+                            @enderror
+                        </div> --}}
+
+                        <div class="form-group">
+                            <label class="control-label" for="responsibility">Perks And Benifits<span class="m-l-5 text-danger">*</span></label>
+                            </label>
+                            @if ($Job->benifits)
+                            @php
+                                $explodedbenifits = explode('||', $Job->benifits);
+                            @endphp
+
+                            @foreach($explodedresponsibility as $key => $data)
+                            <div class="multi-benifits-links">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control"  aria-label="Username" name="benifits[]" id="benifits" value="{{$data}}">
+                                    <a href="javascript: void(0)" class="input-group-text {{ ($key == 0) ? 'add-benifits-link' : 'remove-benifits-link' }}" id="basic-addon3">
+                                        <i class="fas fa-{{ ($key == 0) ? 'plus' : 'times' }}"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            @endforeach
+                        @else
+                        <div class="multi-benifits-links">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control"  aria-label="Username" name="benifits[]" id="benifits">
+                                <a href="javascript: void(0)" class="input-group-text add-benifits-link" id="basic-addon3">
+                                    <i class="fas fa-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                        @endif
+
+                        <div id="other-benifits"></div>
                             @error('benifits')
                                 <p class="small text-danger">{{ $message }}</p>
                             @enderror
@@ -337,7 +418,7 @@
                             <div class="form-group">
                                 <label class="control-label" for="payment">Amount (optional,in '$')</label>
                                 <input class="form-control @error('payment') is-invalid @enderror" type="text"
-                                    name="payment" value="{{ old('payment',$Job->payment) }}" />
+                                    name="payment" value="{{ old('payment',$Job->payment) }}" placeholder="eg :10 - 20"/>
                                 @error('payment')
                                     <p class="small text-danger">{{ $message }}</p>
                                 @enderror
@@ -472,6 +553,66 @@
                     $('#employment').hide();
                 }
             });
+        });
+    </script>
+     <script>
+        $('.add-ext-link').on('click', function() {
+            var content = `
+            <div class="multi-ext-links">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control"  name="skill[]">
+                    <a href="javascript: void(0)" class="input-group-text remove-ext-link" id="basic-addon1">
+                        <i class="fas fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            `;
+
+            $('#other-skill').append(content);
+        });
+
+        $(document).on('click', '.remove-ext-link', function() {
+            $(this).closest(".multi-ext-links").remove();
+        });
+    </script>
+     <script>
+        $('.add-responsibility-link').on('click', function() {
+            var content = `
+            <div class="multi-responsibility-links">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control"  name="responsibility[]">
+                    <a href="javascript: void(0)" class="input-group-text remove-responsibility-link" id="basic-addon2">
+                        <i class="fas fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            `;
+
+            $('#other-responsibility').append(content);
+        });
+
+        $(document).on('click', '.remove-responsibility-link', function() {
+            $(this).closest(".multi-responsibility-links").remove();
+        });
+    </script>
+    <script>
+        $('.add-benifits-link').on('click', function() {
+            var content = `
+            <div class="multi-benifits-links">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control"  name="benifits[]">
+                    <a href="javascript: void(0)" class="input-group-text remove-benifits-link" id="basic-addon3">
+                        <i class="fas fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            `;
+
+            $('#other-benifits').append(content);
+        });
+
+        $(document).on('click', '.remove-benifits-link', function() {
+            $(this).closest(".multi-benifits-links").remove();
         });
     </script>
 @endpush

@@ -4,11 +4,6 @@
 @section('section')
 <section class="edit-sec">
     <div class="container">
-        {{-- <div class="row">
-            <div class="col-12 text-center top-heading">
-                <h2>Manage Portfolio</h2>
-            </div>
-        </div> --}}
         <div class="row mt-0">
             <div class="col-12 mt-3 mb-3 text-end">
                 <a href="{{ route('front.portfolio.index', auth()->guard('web')->user()->slug) }}" class="add-btn-edit d-inline-block" target="_blank">View Public Portfolio <i class="fa-solid fa-eye"></i></a>
@@ -19,7 +14,6 @@
                         <thead>
                             <tr>
                                 <th class="table-tab active" data-tab-table="basic-details">Basic Details</th>
-                                {{-- <th class="table-tab" data-tab-table="portfolio">Portfolio</th> --}}
                                 <th class="table-tab" onclick="location.href='{{ route('front.portfolio.portfolio.index')}}'">Portfolio</th>
                                 <th class="table-tab" onclick="location.href='{{ route('front.portfolio.expertise.index')}}'">Specialities</th>
                                 <th class="table-tab" onclick="location.href='{{ route('front.portfolio.work-experience.index')}}'">Employment History</th>
@@ -35,15 +29,6 @@
                 <div class="table-responsive table-content">
                     <table class="table table-hovered table-striped">
                         <tbody class="tbody-content active tbody-content-edit" id="basic-details">
-                            {{-- <tr>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    <div class="action">
-                                        <a type="button" href="{{ route('front.user.portfolio.manage.basic-details.edit', auth()->guard('web')->user()->slug) }}" class="btn btn-primary" title="Edit Profile">Edit</a>
-                                    </div>
-                                </td>
-                            </tr> --}}
                             <tr>
                                 <td class="col">
                                     <div class="row mt-2">
@@ -51,19 +36,14 @@
                                             <a href="{{ route('front.user.portfolio.edit') }}" class="add-btn-edit d-inline-block">Edit <i class="fa-solid fa-edit"></i></a>
                                         </div>
                                     </div>
-                                    {{-- <div class="row mt-2">
-                                        <div class="col-12 text-end">
-                                            <a href="{{ route('front.user.portfolio.changePassword') }}" class="add-btn-edit d-inline-block">Change Password <i class="fa-solid fa-edit"></i></a>
-                                        </div>
-                                    </div> --}}
                                 </td>
                             </tr>
                             <tr>
                                 <td>Image</td>
                                 @if(auth()->guard('web')->user()->image)
-                                <td><img src="{{ asset(auth()->guard('web')->user()->image) }}" alt="" height="100"></td>
+                                    <td><img src="{{ asset(auth()->guard('web')->user()->image) }}" alt="" height="100"></td>
                                 @else
-                                <td>No data found</td>
+                                    <td class="text-muted"><small>No data found</small></td>
                                 @endif
                                 <td></td>
                             </tr>
@@ -72,7 +52,7 @@
                                 @if(auth()->guard('web')->user()->intro_video)
                                     <td><video src="{{ asset(auth()->guard('web')->user()->intro_video) }}" controls alt="" height="100"></video></td>
                                 @else
-                                <td>No data found</td>
+                                    <td class="text-muted"><small>No data found</small></td>
                                 @endif
                                 <td></td>
                             </tr>
@@ -81,7 +61,7 @@
                                 @if(auth()->guard('web')->user()->banner_image)
                                     <td> <img src="{{ asset(auth()->guard('web')->user()->banner_image) }}" id="articleImage" class="img-fluid" alt="" width="100" height="100"></td>
                                 @else
-                                    <td>No data found</td>
+                                    <td class="text-muted"><small>No data found</small></td>
                                 @endif
                                 <td></td>
                             </tr>
@@ -98,61 +78,89 @@
                             </tr>
                             <tr>
                                 <td>Headline</td>
-                                <td>{{ auth()->guard('web')->user()->occupation }}</td>
+                                @if(auth()->guard('web')->user()->occupation)
+                                    <td>{{ auth()->guard('web')->user()->occupation }}</td>
+                                @else
+                                    <td class="text-muted"><small>No data found</small></td>
+                                @endif
                                 <td></td>
                             </tr>
                             <tr>
                                 <td>Description</td>
-
-                                <td>{{ auth()->guard('web')->user()->short_desc	 }}</td>
+                                @if(auth()->guard('web')->user()->short_desc)
+                                    <td>{{ auth()->guard('web')->user()->short_desc }}</td>
+                                @else
+                                    <td class="text-muted"><small>No data found</small></td>
+                                @endif
+                                <td></td>
+                                {{-- <td>{{ auth()->guard('web')->user()->short_desc	 }}</td> --}}
                             </tr>
                             <tr>
                                 <td>Country</td>
-                                <td><span class="country-name">{{ auth()->guard('web')->user()->country }}</span></td>
-                                <td>
-                                </td>
+                                @if(auth()->guard('web')->user()->country)
+                                    <td><span class="country-name">{{ auth()->guard('web')->user()->country }}</span></td>
+                                @else
+                                    <td class="text-muted"><small>No data found</small></td>
+                                @endif
+                                <td></td>
                             </tr>
                             <tr class="portfolio-social">
                                 <td>Language</td>
-                                <td>
-                                @foreach ($data->languages as $language)
-                                    {!! $language->languageDetails ? $language->languageDetails->name : '' !!}
-                                @endforeach
-                                </td>
+                                @if (count($data->languages) > 0)
+                                    <td>
+                                        @foreach ($data->languages as $language)
+                                            {!! $language->languageDetails ? $language->languageDetails->name : '' !!}
+                                        @endforeach
+                                    </td>
+                                @else
+                                    <td class="text-muted"><small>No data found</small></td>
+                                @endif
                                 <td></td>
                             </tr>
                             <tr class="portfolio-social">
                                 <td>Social media profiles</td>
-                                <td>
-                                @foreach ($data->socialMedias as $socialMedia)
-                                <a href="{{ $socialMedia->link }}" target="_blank">
-                                    {!! $socialMedia->socialMediaDetails ? $socialMedia->socialMediaDetails->icon : '' !!}
-                                </a>
-                                @endforeach
-                                </td>
+                                @if (count($data->languages) > 0)
+                                    <td>
+                                        @foreach ($data->socialMedias as $socialMedia)
+                                            <a href="{{ $socialMedia->link }}" target="_blank">
+                                                {!! $socialMedia->socialMediaDetails ? $socialMedia->socialMediaDetails->icon : '' !!}
+                                            </a>
+                                        @endforeach
+                                    </td>
+                                @else
+                                    <td class="text-muted"><small>No data found</small></td>
+                                @endif
                                 <td></td>
                             </tr>
                             <tr>
                                 <td>Favorite Quote</td>
                                 @if(auth()->guard('web')->user()->quote)
-                                <td><span class="quote-author">{{ auth()->guard('web')->user()->quote }}</span>
-                                    <p class="quote-desc">{!! auth()->guard('web')->user()->quote_by !!}</p>
-                                </td>
+                                    <td><span class="quote-author">{{ auth()->guard('web')->user()->quote }}</span>
+                                        <p class="quote-desc">{!! auth()->guard('web')->user()->quote_by !!}</p>
+                                    </td>
                                 @else
-                                    <td>No data found</td>
+                                    <td class="text-muted"><small>No data found</small></td>
                                 @endif
                                 <td></td>
                             </tr>
                             <tr>
                                 <td>Worked For</td>
-                                <td>{{ auth()->guard('web')->user()->worked_for }}
-                                </td>
+                                @if(auth()->guard('web')->user()->worked_for)
+                                    <td>{{ auth()->guard('web')->user()->worked_for }}</td>
+                                @else
+                                    <td class="text-muted"><small>No data found</small></td>
+                                @endif
+                                {{-- <td>{{ auth()->guard('web')->user()->worked_for }}</td> --}}
                                 <td></td>
                             </tr>
                             <tr>
                                 <td>Category</td>
-                                <td>{{ auth()->guard('web')->user()->categories }}
-                                </td>
+                                @if(auth()->guard('web')->user()->categories)
+                                    <td>{{ auth()->guard('web')->user()->categories }}</td>
+                                @else
+                                    <td class="text-muted"><small>No data found</small></td>
+                                @endif
+                                {{-- <td>{{ auth()->guard('web')->user()->categories }}</td> --}}
                                 <td></td>
                             </tr>
                         </tbody>
@@ -641,26 +649,4 @@
         </div>
     </div>
 </section>
-
-<!-- Modal -->
-{{-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            ...
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-        </div>
-    </div>
-</div> --}}
 @endsection
-

@@ -37,52 +37,20 @@
                         <tbody class="tbody-content tbody-content-edit" id="testimonial" style="display:block;">
                             <tr>
                                 <td>
-                                    <div class="action">
-                                        <a type="button" href="{{ route('front.portfolio.testimonial.create') }}" class="add-btn-edit d-inline-block"  title="Create">Create <i class="fa-solid fa-plus-circle"></i></a>
+                                    <div class="row mt-2">
+                                        <div class="col-12 text-end">
+                                            <a type="button" href="{{ route('front.portfolio.testimonial.create') }}" class="add-btn-edit d-inline-block"  title="Create">Create <i class="fa-solid fa-plus-circle"></i></a>
+                                        </div>
                                     </div>
-                                    @foreach($data->testimonials as $key=> $item)
-                                    
-                                    {{-- <div class="employmentBox">
-                                        <div class="action">
-                                            <a href="{{ route('front.portfolio.testimonial.edit', $item->id) }}" title="Edit Profile"><i class="fa-solid fa-pen edit table-icon"></i></a>
-                                            <a href="{{ route('front.portfolio.testimonial.delete', $item->id) }}" title="Delete" onclick="return confirm('Are you sure ?')"><i class="fa-solid fa-trash-can trash table-icon"></i></a>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-6 mb-3">
-                                                <label>Image</label>
-                                                <img src="{{ asset($item->image) }}" id="articleImage" class="img-fluid" alt="" style="height: 100px">
-                                            </div>
-                                            <div class="col-6 mb-3">
-                                                <label>Client Name</label>
-                                                <p>{{ $item->client_name }}</p>
-                                            </div>
-                                            <div class="col-3 mb-3">
-                                                <label>Designation</label>
-                                                <p>{{ $item->occupation }}</p>
-                                            </div>
-                                            <div class="col-3 mb-3">
-                                                <label>Contact</label>
-                                                <p>{{ $item->phone_number }}</p>
-                                            </div>
-                                            <div class="col-3 mb-3">
-                                                <label>Email</label>
-                                                <p>{{ $item->email_id }}</p>
-                                            </div>
-                                            <div class="col-3 mb-3">
-                                                <label>Url</label>
-                                                <p>{{ $item->link }}</p>
-                                            </div>
-                                            <div class="col-lg-6 col-12 mb-3">
-                                                <label>Short Description</label>
-                                                <p>{{ $item->short_desc }}</p>
-                                            </div>
-                                            <div class="col-lg-6 col-12 mb-3">
-                                                <label>Long Description</label>
-                                                <p>{{ $item->long_desc }}</p>
-                                            </div>
-                                        </div>
+                                </td>
+                            </tr>
+                            @if (count($data->testimonials) > 0)
+                            <tr>
+                                <td>
+                                    {{-- <div class="action">
+                                        <a type="button" href="{{ route('front.portfolio.testimonial.create') }}" class="add-btn-edit d-inline-block"  title="Create">Create <i class="fa-solid fa-plus-circle"></i></a>
                                     </div> --}}
+                                    @foreach($data->testimonials as $key=> $item)
                                     <div class="portfolio-v4-content-list">
                                         <div class="action justify-content-end">
                                             <a href="{{ route('front.portfolio.testimonial.edit', $item->id) }}" title="Edit Profile"><i class="fa-solid fa-pen edit table-icon"></i></a>
@@ -109,6 +77,17 @@
                                     @endforeach
                                 </td>
                             </tr>
+                            @else
+                                <tr class="d-flex justify-content-center">
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-md-12 text-center">
+                                                <p class="text-muted">No data found</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endif
                         </tbody>
                     </table>
                 </div>

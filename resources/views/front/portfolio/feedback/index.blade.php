@@ -35,44 +35,56 @@
                 <div class="table-responsive table-content">
                     <table class="table table-hovered table-striped">
                         <tbody class="tbody-content tbody-content-edit" id="speciality" style="display:block;">
-                                <tr>
-                                    <td>
-                                        <div class="row mt-2">
-                                            <div class="col-12 text-end">
-                                                <a href="{{ route('front.portfolio.feedback.create') }}" class="add-btn-edit d-inline-block">Create <i class="fa-solid fa-plus-circle"></i></a>
-                                            </div>
+                            <tr>
+                                <td>
+                                    <div class="row mt-2">
+                                        <div class="col-12 text-end">
+                                            <a href="{{ route('front.portfolio.feedback.create') }}" class="add-btn-edit d-inline-block">Create <i class="fa-solid fa-plus-circle"></i></a>
                                         </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="row g-3 mt-1">
-                                        @foreach($data->feedback as $key=> $item)
-                                            <div class="col-12 col-lg-6 col-md-12">
-                                                <div class="edit-card">
-                                                    <div class="action">
-                                                        <a href="{{ route('front.portfolio.feedback.edit', $item->id) }}"><i class="fa-solid fa-pen edit table-icon"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            @if (count($data->feedback) > 0)
+                            <tr>
+                                <td>
+                                    <div class="row g-3 mt-1">
+                                    @foreach($data->feedback as $key=> $item)
+                                        <div class="col-12 col-lg-6 col-md-12">
+                                            <div class="edit-card">
+                                                <div class="action">
+                                                    <a href="{{ route('front.portfolio.feedback.edit', $item->id) }}"><i class="fa-solid fa-pen edit table-icon"></i></a>
 
-                                                        <a href="{{ route('front.portfolio.feedback.delete', $item->id) }}" onclick="return confirm('Are you sure ?')"><i class="fa-solid fa-trash-can trash table-icon"></i></a>
-                                                    </div>
-                                                    <div class="date">
-                                                        <span>{{ date('j M, Y', strtotime($item->date_from)) }}</span>
-                                                    </div>
-                                                    <div class="edit-heading">
-                                                        <h4>{{ $item->title }}</h4>
-                                                        <h4>  {!! RatingHtml($item->rating) !!}
-                                                        </h4>
-                                                        <h4>  {{$item->review_person}}
-                                                        </h4>
-                                                        <p>{{ $item->review }}</p>
-                                                    </div>
+                                                    <a href="{{ route('front.portfolio.feedback.delete', $item->id) }}" onclick="return confirm('Are you sure ?')"><i class="fa-solid fa-trash-can trash table-icon"></i></a>
+                                                </div>
+                                                <div class="date">
+                                                    <span>{{ date('j M, Y', strtotime($item->date_from)) }}</span>
+                                                </div>
+                                                <div class="edit-heading">
+                                                    <h4>{{ $item->title }}</h4>
+                                                    <h4>  {!! RatingHtml($item->rating) !!}
+                                                    </h4>
+                                                    <h4>  {{$item->review_person}}
+                                                    </h4>
+                                                    <p>{{ $item->review }}</p>
                                                 </div>
                                             </div>
-                                            @endforeach
                                         </div>
-                                    </td>
-                                </tr>
-                            </tbody>
+                                    @endforeach
+                                    </div>
+                                </td>
+                            </tr>
+                            @else
+                            <tr class="d-flex justify-content-center">
+                                <td>
+                                    <div class="row">
+                                        <div class="col-md-12 text-center">
+                                            <p class="text-muted">No data found</p>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endif
+                        </tbody>
 
                     </table>
                 </div>

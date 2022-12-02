@@ -7,4 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class NotInterestedJob extends Model
 {
     protected $table='not_interested_jobs';
+    public function job() {
+        return $this->belongsTo('App\Models\Job', 'job_id', 'id');
+    }
+    public function users() {
+        return $this->belongsTo('App\Models\User', 'user_id', 'id');
+    }
 }

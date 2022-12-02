@@ -9,6 +9,7 @@ use Illuminate\Http\UploadedFile;
 use App\Contracts\JobContract;
 use App\Models\ApplyJob;
 use App\Models\JobCategory;
+use App\Models\JobEmploymentType;
 use App\Models\JobTag;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -87,9 +88,9 @@ class JobRepository extends BaseRepository implements JobContract
                 $job->employment_type = $collection['employment_type'] ?? '';
             }
 
-            $job->skill = $collection['skill'] ?? '';
-            $job->responsibility = $collection['responsibility'] ?? '';
-            $job->benifits = $collection['benifits'] ?? '';
+            $job->skill = implode('||',$collection['skill']) ?? '';
+            $job->responsibility = implode('||',$collection['responsibility']) ?? '';
+            $job->benifits = implode('||',$collection['benifits']) ?? '';
             $job->experience = $collection['experience'] ?? '';
             $job->notice_period = $collection['notice_period'] ?? '';
             $job->scope = $collection['scope'] ?? '';
@@ -152,7 +153,6 @@ class JobRepository extends BaseRepository implements JobContract
             // slug
             $job->slug = slugGenerate($collection['title'], 'jobs');
         }
-
         $job->short_description = $collection['short_description'] ?? '';
         $job->description = $collection['description'] ?? '';
 
@@ -162,10 +162,9 @@ class JobRepository extends BaseRepository implements JobContract
         else{
             $job->employment_type = $collection['employment_type'] ?? '';
         }
-
-        $job->skill = $collection['skill'] ?? '';
-        $job->responsibility = $collection['responsibility'] ?? '';
-        $job->benifits = $collection['benifits'] ?? '';
+        $job->skill = implode('||',$collection['skill']) ?? '';
+        $job->responsibility = implode('||',$collection['responsibility']) ?? '';
+        $job->benifits = implode('||',$collection['benifits']) ?? '';
         $job->experience = $collection['experience'] ?? '';
         $job->notice_period = $collection['notice_period'] ?? '';
         $job->scope = $collection['scope'] ?? '';
@@ -346,6 +345,15 @@ class JobRepository extends BaseRepository implements JobContract
         } catch (QueryException $exception) {
             throw new InvalidArgumentException($exception->getMessage());
         }
+    }
+    /**
+     *
+     * @return mixed
+     */
+    public function listType(){
+        $job= JobEmploymentType::orderby('title')->where('status',1)->get();
+
+        return $job;
     }
 
 }

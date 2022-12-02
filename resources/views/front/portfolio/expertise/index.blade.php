@@ -35,15 +35,16 @@
                 <div class="table-responsive table-content">
                     <table class="table table-hovered table-striped">
                         <tbody class="tbody-content tbody-content-edit" id="speciality" style="display:block;">
-                                <tr>
-                                    <td>
-                                        <div class="row mt-2">
-                                            <div class="col-12 text-end">
-                                                <a href="{{ route('front.portfolio.expertise.create') }}" class="add-btn-edit d-inline-block">Create <i class="fa-solid fa-plus-circle"></i></a>
-                                            </div>
+                            <tr>
+                                <td>
+                                    <div class="row mt-2">
+                                        <div class="col-12 text-end">
+                                            <a href="{{ route('front.portfolio.expertise.create') }}" class="add-btn-edit d-inline-block">Create <i class="fa-solid fa-plus-circle"></i></a>
                                         </div>
-                                    </td>
-                                </tr>
+                                    </div>
+                                </td>
+                            </tr>
+                            @if (count($data->specialities) > 0)
                                 <tr>
                                     <td>
                                         <div class="row g-3 mt-1">
@@ -69,8 +70,18 @@
                                         </div>
                                     </td>
                                 </tr>
-                            </tbody>
-
+                            @else
+                                <tr class="d-flex justify-content-center">
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-md-12 text-center">
+                                                <p class="text-muted">No data found</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endif
+                        </tbody>
                     </table>
                 </div>
             </div>

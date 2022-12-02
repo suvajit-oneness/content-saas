@@ -35,11 +35,21 @@
                 <div class="table-responsive table-content">
                     <table class="table table-hovered table-striped">
                         <tbody class="tbody-content tbody-content-edit" id="employment-history" style="display:block;">
-                                <tr>
-                                    <td>
-                                        <div class="action">
+                            <tr>
+                                <td>
+                                    <div class="row mt-2">
+                                        <div class="col-12 text-end">
                                             <a type="button" href="{{ route('front.portfolio.work-experience.create') }}" class="add-btn-edit d-inline-block"  title="Create">Create <i class="fa-solid fa-plus-circle"></i></a>
                                         </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            @if (count($data->employments) > 0)
+                                <tr>
+                                    <td>
+                                        {{-- <div class="action">
+                                            <a type="button" href="{{ route('front.portfolio.work-experience.create') }}" class="add-btn-edit d-inline-block"  title="Create">Create <i class="fa-solid fa-plus-circle"></i></a>
+                                        </div> --}}
                                         @foreach($data->employments as $key=> $item)
                                             <div class="portfolio-v4-content-list">
                                                 <div class="action justify-content-end">
@@ -56,69 +66,21 @@
                                                 <span class="badge"> {{date('M Y',strtotime($item->year_from))}} - {{$item->year_to == '' || strtotime($item->year_to) > strtotime(date('Y-m-d')) ? 'Present' : date('M Y',strtotime($item->year_to))}} </span>
                                                 <p>{{$item->short_desc}}</p>
                                             </div>
-
-                                            {{-- <div class="employmentBox">
-                                                <div class="action">
-                                                    <a href="{{ route('front.portfolio.work-experience.edit', $item->id) }}" title="Edit Profile"><i class="fa-solid fa-pen edit table-icon"></i></a>
-                                                    <a href="{{ route('front.portfolio.work-experience.delete', $item->id) }}" title="Delete" onclick="return confirm('Are you sure ?')"><i class="fa-solid fa-trash-can trash table-icon"></i></a>
-                                                </div>
-                                                <div class="row mb-3">
-                                                    <div class="col-3">
-                                                        <label>Designation</label>
-                                                        <p>{{ $item->occupation }}</p>
-                                                    </div>
-                                                    <div class="col-3">
-                                                        <label>Company Name</label>
-                                                        <p>{{ $item->company_title }}</p>
-                                                    </div>
-                                                    <div class="col-3">
-                                                        <label>Duration</label>
-                                                        <p>{{date('M Y',strtotime($item->year_from))}} - {{$item->year_to == '' || strtotime($item->year_to) > strtotime(date('Y-m-d')) ? 'Present' : date('M Y',strtotime($item->year_to))}}</p>
-                                                    </div>
-                                                    <div class="col-3">
-                                                        <label>Contact</label>
-                                                        <p>{{ $item->phone_number }}</p>
-                                                    </div>
-                                                </div>
-                                                <div class="row mb-3">
-                                                    <div class="col-3">
-                                                        <label>Email</label>
-                                                        <p>{{ $item->email_id }}</p>
-                                                    </div>
-                                                    <div class="col-3">
-                                                        <label>Owner Name</label>
-                                                        <p>{{ $item->owner_name }}</p>
-                                                    </div>
-                                                    <div class="col-3">
-                                                        <label>Manager Name</label>
-                                                        <p>{{ $item->manager_name }}</p>
-                                                    </div>
-                                                    <div class="col-3">
-                                                        <label>Url</label>
-                                                        <p>{{ $item->link }}</p>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-6 col-12">
-                                                        <div class="box">
-                                                            <h4>Short Description</h4>
-                                                            <p>{{ $item->short_desc }}</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 col-12">
-                                                        <div class="box">
-                                                            <h4>Long Description</h4>
-                                                            <p>{{ substr($item->long_desc,0,300) }} @if(strlen($item->long_desc)>300)<small class="text-underline text-primary text-lowercase showMore" style="cursor: pointer">more...</small>@endif</p>
-                                                            <p style="display: none;">{{ $item->long_desc }} @if(strlen($item->long_desc)>300)<small class="text-underline text-primary text-lowercase showLess" style="cursor: pointer">less</small>@endif</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div> --}}
                                         @endforeach
                                     </td>
                                 </tr>
-                            </tbody>
-
+                            @else
+                                <tr class="d-flex justify-content-center">
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-md-12 text-center">
+                                                <p class="text-muted">No data found</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endif
+                        </tbody>
                     </table>
                 </div>
             </div>

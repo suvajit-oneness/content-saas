@@ -52,6 +52,10 @@
                                     <th> Featured </th>
                                     <th> Beginner Friendly </th>
                                     <th> Applicant </th>
+                                    <th> Saved </th>
+                                    <th> Not interest </th>
+                                    <th> Reported </th>
+                                    
                                     <th style="width:100px; min-width:100px;" class="text-center">Action</th>
                                 </tr>
                             </thead>
@@ -107,18 +111,18 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        @php
-                                        $application = \App\Models\ApplyJob::where('job_id',$data->id)->with('job')->get();
-                                        $item=$application->count();
-                                      @endphp
-                                        <td><a href="{{ route('admin.job.application',$data->id) }}">{{ $item }}</a></td>
-                                    <td class="text-center">
-                                        <div class="btn-group" role="group" aria-label="Second group">
-                                            <a href="{{ route('admin.job.edit', $data['id']) }}" class="btn btn-sm btn-primary edit-btn"><i class="fa fa-edit"></i></a>
-                                            <a href="{{ route('admin.job.details', $data['id']) }}" class="btn btn-sm btn-primary edit-btn"><i class="fa fa-eye"></i></a>
-                                            <a href="#" data-id="{{$data['id']}}" class="sa-remove btn btn-sm btn-danger edit-btn"><i class="fa fa-trash"></i></a>
-                                        </div>
-                                    </td>
+                                       
+                                        <td><a href="{{ route('admin.job.application',$data->id) }}">{!! CountJobapplicant($data->id) !!}</a></td>
+                                        <td><a href="{{ route('admin.job.save',$data->id) }}">{!! CountJobsave($data->id) !!}</a></td>
+                                        <td><a href="{{ route('admin.job.interest',$data->id) }}">{!! CountJobinterest($data->id) !!}</a></td>
+                                        <td><a href="{{ route('admin.job.report',$data->id) }}">{!! CountJobreport($data->id) !!}</a></td>
+                                        <td class="text-center">
+                                            <div class="btn-group" role="group" aria-label="Second group">
+                                                <a href="{{ route('admin.job.edit', $data['id']) }}" class="btn btn-sm btn-primary edit-btn"><i class="fa fa-edit"></i></a>
+                                                <a href="{{ route('admin.job.details', $data['id']) }}" class="btn btn-sm btn-primary edit-btn"><i class="fa fa-eye"></i></a>
+                                                <a href="#" data-id="{{$data['id']}}" class="sa-remove btn btn-sm btn-danger edit-btn"><i class="fa fa-trash"></i></a>
+                                            </div>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

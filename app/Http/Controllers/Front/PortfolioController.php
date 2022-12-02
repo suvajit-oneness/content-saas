@@ -101,7 +101,7 @@ class PortfolioController extends BaseController
             'email' => 'required|string|min:1',
             'mobile' => 'required|integer|min:1',
             'country' => 'required|string|min:1',
-            'image' =>   'required|mimes:jpeg,jpg,png,gif|required|max:50'
+            'image' =>   'required'
         ]);
         $params = $request->except('_token');
 

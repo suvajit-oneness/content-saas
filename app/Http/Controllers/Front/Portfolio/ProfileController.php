@@ -104,8 +104,8 @@ class ProfileController extends BaseController
             'color_scheme'  => 'nullable|string',
             'worked_for'    => 'required|string',
             'categories'    => 'required|string',
-            'banner_image'         => 'required|mimes:jpeg,jpg,png,gif|required|max:50',
-            'image'         => 'required|mimes:jpeg,jpg,png,gif|required|max:50',
+            'banner_image'         => 'required',
+            'image'         => 'required',
             'charge'       => 'nullable',
             'duration'      => 'nullable',
         ]);

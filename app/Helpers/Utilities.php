@@ -22,6 +22,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Stripe\Plan;
+use App\Models\ApplyJob;
+
+use App\Models\NotInterestJob;
 
 if (!function_exists('sidebar_open')) {
     function sidebar_open($routes = []) {
@@ -718,4 +721,24 @@ function CountTotalReview($courseid){
     }
     return (object)$data;
    
+}
+//total job applicant count
+function CountJobapplicant($job_id)
+{
+    return ApplyJob::where('job_id',$job_id)->with('job')->count();
+}
+//total job save count
+function CountJobsave($job_id)
+{
+    return JobUser::where('job_id',$job_id)->with('job')->count();
+}
+//total job not interest count
+function CountJobinterest($job_id)
+{
+    return NotInterestedJob::where('job_id',$job_id)->with('job')->count();
+}
+//total job report count
+function CountJobreport($job_id)
+{
+    return ReportJob::where('job_id',$job_id)->with('job')->count();
 }

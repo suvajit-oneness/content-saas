@@ -490,6 +490,23 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/csv-store', 'Admin\JobController@csvStore')->name('admin.job.data.csv.store');
         Route::get('/export', 'Admin\JobController@export')->name('admin.job.data.csv.export');
         Route::get('/job/application/{id}', 'Admin\JobController@application')->name('admin.job.application');
+        Route::get('/job/save/{id}', 'Admin\JobController@save')->name('admin.job.save');
+        Route::get('/job/notInterest/{id}', 'Admin\JobController@interest')->name('admin.job.interest');
+        Route::get('/job/report/{id}', 'Admin\JobController@report')->name('admin.job.report');
+    
+        //**  employment type  **//
+        Route::group(['prefix' => 'employmentType'], function () {
+            Route::get('/', 'Admin\JobEmploymentTypeController@index')->name('admin.job.type.index');
+            Route::get('/create', 'Admin\JobEmploymentTypeController@create')->name('admin.job.type.create');
+            Route::post('/store', 'Admin\JobEmploymentTypeController@store')->name('admin.job.type.store');
+            Route::get('/{id}/edit', 'Admin\JobEmploymentTypeController@edit')->name('admin.job.type.edit');
+            Route::post('/update', 'Admin\JobEmploymentTypeController@update')->name('admin.job.type.update');
+            Route::get('/{id}/delete', 'Admin\JobEmploymentTypeController@delete')->name('admin.job.type.delete');
+            Route::post('updateStatus', 'Admin\JobEmploymentTypeController@updateStatus')->name('admin.job.type.updateStatus');
+            Route::get('/{id}/details', 'Admin\JobEmploymentTypeController@details')->name('admin.job.type.details');
+            Route::post('/csv-store', 'Admin\JobEmploymentTypeController@csvStore')->name('admin.job.type.data.csv.store');
+            Route::get('/export', 'Admin\JobEmploymentTypeController@export')->name('admin.job.type.data.csv.export');
+        });
     });
           //template management
             //** Category management **/

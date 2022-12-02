@@ -463,6 +463,13 @@
                 </a>
             </li>
             <li>
+                <a class="app-menu__item {{ request()->is('admin/job/employmentType*') ? 'active' : '' }}"
+                    href="{{ route('admin.job.type.index') }}">
+                    <i class="app-menu__icon fa fa-archive"></i>
+                    <span class="app-menu__label">Employment Type Management</span>
+                </a>
+            </li>
+            <li>
                 <a class="app-menu__item {{ request()->is('admin/job*') ? 'active' : '' }}"
                     href="{{ route('admin.job.index') }}">
                     <i class="app-menu__icon fas fa-briefcase"></i>
